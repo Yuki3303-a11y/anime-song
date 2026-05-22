@@ -67,7 +67,7 @@ const audio = $('audioEl');
 // =====================================================================
 // Filter State
 // =====================================================================
-const filterState = { years: new Set(), type: null };
+const filterState = { years: new Set(), type: null, source: null };
 
 function updateFilterCount() {
     const count = getFilteredSongs().length;
@@ -151,10 +151,13 @@ function getAllSongs() {
 }
 
 function getFilteredSongs() {
+    const customSet = new Set(getCustomSongs().map(s => s.title + '|' + s.anime));
     const all = getAllSongs();
     return all.filter(s => {
         if (filterState.years.size > 0 && !filterState.years.has(s.year)) return false;
         if (filterState.type && s.type !== filterState.type) return false;
+        if (filterState.source === 'builtin' && customSet.has(s.title + '|' + s.anime)) return false;
+        if (filterState.source === 'custom' && !customSet.has(s.title + '|' + s.anime)) return false;
         return true;
     });
 }
@@ -1280,6 +1283,27 @@ function initFilters() {
     updateFilterCount();
 }
 
+function initSourceFilter() {
+    const options = [
+        { label: '全部', value: null },
+        { label: '内置曲库', value: 'builtin' },
+        { label: '自定义曲库', value: 'custom' },
+    ];
+    const container = $('sourceChips');
+    options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'settings-chip' + (i === 0 ? ' active' : '');
+        btn.textContent = opt.label;
+        btn.addEventListener('click', () => {
+            container.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            filterState.source = opt.value;
+            updateFilterCount();
+        });
+        container.appendChild(btn);
+    });
+}
+
 // =====================================================================
 // Settings Modal
 // =====================================================================
@@ -1404,5 +1428,6 @@ document.addEventListener('click', (e) => {
 // =====================================================================
 initSakura();
 initFilters();
+initSourceFilter();
 initQuestionCount();
 updateCustomSongsUI();
