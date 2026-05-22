@@ -1400,6 +1400,26 @@ input[type="range"]::-webkit-slider-thumb:hover {
     font-weight: 500;
 }
 
+/* ===== Question Count ===== */
+.qcount-section {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.qcount-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.qcount-chips {
+    display: flex;
+    gap: 8px;
+}
+
 /* ===== Anime Detail Modal ===== */
 .detail-modal-bg {
     position: fixed;

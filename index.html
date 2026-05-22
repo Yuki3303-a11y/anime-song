@@ -56,6 +56,12 @@
                         </div>
                     </div>
 
+                    <!-- Question Count -->
+                    <div class="qcount-section">
+                        <div class="qcount-label">题目数量</div>
+                        <div class="qcount-chips" id="qcountChips"></div>
+                    </div>
+
                     <div class="btn-group">
                         <button class="btn btn-primary" data-action="startSingle">
                             <span>🎮</span> 单人挑战
@@ -125,7 +131,7 @@
                 <div id="v-game" class="hidden">
                     <button class="back-btn" data-action="showView" data-value="menu">← 退出挑战</button>
                     <div id="singleHeader" class="game-header">
-                        <div class="q-num"><span id="qNum">1</span><span>/10</span></div>
+                        <div class="q-num"><span id="qNum">1</span><span>/</span><span id="totalQ">10</span></div>
                         <div class="score" id="scoreText">0</div>
                     </div>
 

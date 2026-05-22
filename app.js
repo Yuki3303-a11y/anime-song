@@ -43,6 +43,7 @@ const gameState = {
     mode: 'single',
     playlist: [],
     questionIndex: 0,
+    questionCount: 10,
     score: 0,
     opponentScore: 0,
     correctAnime: '',
@@ -53,6 +54,12 @@ const gameState = {
     maxCombo: 0,
     correctCount: 0,
 };
+
+function getMaxScore(n) {
+    let s = 0;
+    for (let i = 1; i <= n; i++) s += 10 + Math.min(i, 5);
+    return s;
+}
 
 const $ = id => document.getElementById(id);
 const audio = $('audioEl');
@@ -77,52 +84,44 @@ function updateFilterCount() {
 }
 
 // =====================================================================
-// Audio Cache (localStorage)
+// In-Memory Cache Layer (reads localStorage once, fast access after)
 // =====================================================================
-const AUDIO_CACHE_KEY = 'audio_cache_v1';
-
-function getCachedAudio(title) {
-    try {
-        const cache = JSON.parse(localStorage.getItem(AUDIO_CACHE_KEY) || '{}');
-        return cache[title] || null;
-    } catch { return null; }
-}
-
-function setCachedAudio(title, url) {
-    try {
-        const cache = JSON.parse(localStorage.getItem(AUDIO_CACHE_KEY) || '{}');
-        cache[title] = url;
-        const keys = Object.keys(cache);
-        if (keys.length > 500) {
-            keys.slice(0, keys.length - 500).forEach(k => delete cache[k]);
+class MemCache {
+    constructor(key, maxEntries) {
+        this._key = key;
+        this._max = maxEntries;
+        this._data = null;
+        this._dirty = false;
+    }
+    _load() {
+        if (this._data) return;
+        try { this._data = JSON.parse(localStorage.getItem(this._key) || '{}'); }
+        catch { this._data = {}; }
+    }
+    get(k) {
+        this._load();
+        return this._data[k] || null;
+    }
+    set(k, v) {
+        this._load();
+        this._data[k] = v;
+        this._dirty = true;
+        const keys = Object.keys(this._data);
+        if (keys.length > this._max) {
+            keys.slice(0, keys.length - this._max).forEach(k => delete this._data[k]);
         }
-        localStorage.setItem(AUDIO_CACHE_KEY, JSON.stringify(cache));
-    } catch {}
+        this._flush();
+    }
+    _flush() {
+        if (!this._dirty) return;
+        try { localStorage.setItem(this._key, JSON.stringify(this._data)); }
+        catch {}
+        this._dirty = false;
+    }
 }
 
-// =====================================================================
-// Anime Detail & Bangumi Integration
-// =====================================================================
-const ANIME_DETAIL_CACHE = 'anime_detail_cache_v1';
-
-function getCachedAnimeDetail(animeName) {
-    try {
-        const cache = JSON.parse(localStorage.getItem(ANIME_DETAIL_CACHE) || '{}');
-        return cache[animeName] || null;
-    } catch { return null; }
-}
-
-function setCachedAnimeDetail(animeName, detail) {
-    try {
-        const cache = JSON.parse(localStorage.getItem(ANIME_DETAIL_CACHE) || '{}');
-        cache[animeName] = detail;
-        const keys = Object.keys(cache);
-        if (keys.length > 300) {
-            keys.slice(0, keys.length - 300).forEach(k => delete cache[k]);
-        }
-        localStorage.setItem(ANIME_DETAIL_CACHE, JSON.stringify(cache));
-    } catch {}
-}
+const audioCache = new MemCache('audio_cache_v1', 500);
+const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 
 // Best-match logic for Bangumi search results
 function pickBestBGMResult(list, animeName) {
@@ -247,7 +246,7 @@ function isHighConfidenceMatch(result, animeName) {
 
 // Fetch anime detail: image + bangumi ID, guaranteed useful result
 async function fetchAnimeDetail(animeName) {
-    const cached = getCachedAnimeDetail(animeName);
+    const cached = animeDetailCache.get(animeName);
     if (cached) return cached;
 
     let result = { image: '', bangumiId: null, titleRomaji: '' };
@@ -301,7 +300,7 @@ async function fetchAnimeDetail(animeName) {
         if (!result.image && bgmFallback.images?.large) result.image = bgmFallback.images.large;
     }
 
-    setCachedAnimeDetail(animeName, result);
+    animeDetailCache.set(animeName, result);
     return result;
 }
 
@@ -506,6 +505,11 @@ function spawnCelebration() {
 function showView(viewName) {
     if (roomUnsub) { roomUnsub(); roomUnsub = null; }
     audio.pause();
+    gameState.isPlaying = false;
+    $('visualizer')?.classList.add('hidden');
+    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+    // Clean up celebration emojis
+    document.querySelectorAll('.celebration-emoji').forEach(el => el.remove());
     document.querySelectorAll('.content > div').forEach(d => d.classList.add('hidden'));
     const target = $('v-' + viewName);
     if (target) target.classList.remove('hidden');
@@ -524,11 +528,13 @@ function startSingle() {
     gameState.correctCount = 0;
     const pool = getFilteredSongs();
     if (pool.length < 4) { notify('曲库太少，请放宽筛选条件'); return; }
-    gameState.playlist = shuffle([...pool]).slice(0, 10);
+    const n = Math.min(gameState.questionCount, pool.length);
+    gameState.playlist = shuffle([...pool]).slice(0, n);
     $('singleHeader').classList.remove('hidden');
     $('pkHeader').classList.add('hidden');
     $('comboArea').innerHTML = '';
     $('songInfo').classList.remove('show');
+    $('totalQ').textContent = n;
     showView('game');
     loadQuestion();
 }
@@ -675,8 +681,9 @@ function loadQuestion() {
     $('scoreText').textContent = gameState.score;
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="spinner"></div></div>';
 
-    fetchAudio(q.title, q.artist).then(url => {
+    fetchAudio(q.title, q.artist, q.anime).then(url => {
         if (!url) {
+            notify('⚠️ 该歌曲音频获取失败，已跳过');
             gameState.questionIndex++;
             loadQuestion();
             return;
@@ -688,9 +695,9 @@ function loadQuestion() {
     });
 }
 
-async function fetchAudio(title, artist) {
-    // Check cache first
-    const cached = getCachedAudio(title);
+async function fetchAudio(title, artist, anime) {
+    const cacheKey = `${title}|${anime}`;
+    const cached = audioCache.get(cacheKey);
     if (cached) return cached;
 
     async function searchItunes(term) {
@@ -704,7 +711,6 @@ async function fetchAudio(title, artist) {
             clearTimeout(timeoutId);
             const data = await response.json();
             if (data.resultCount > 0) {
-                // Try to find best match by checking if title appears in result
                 const lowerTitle = title.toLowerCase();
                 const match = data.results.find(r =>
                     r.trackName?.toLowerCase().includes(lowerTitle) ||
@@ -720,19 +726,19 @@ async function fetchAudio(title, artist) {
     // Try 1: artist + title
     if (artist) {
         const url = await searchItunes(`${artist} ${title}`);
-        if (url) { setCachedAudio(title, url); return url; }
+        if (url) { audioCache.set(cacheKey, url); return url; }
     }
 
     // Try 2: just title
     {
         const url = await searchItunes(title);
-        if (url) { setCachedAudio(title, url); return url; }
+        if (url) { audioCache.set(cacheKey, url); return url; }
     }
 
-    // Try 3: title with "anime" appended for better matching
+    // Try 3: title with "anime" appended
     {
         const url = await searchItunes(`${title} anime`);
-        if (url) { setCachedAudio(title, url); return url; }
+        if (url) { audioCache.set(cacheKey, url); return url; }
     }
 
     return null;
@@ -830,7 +836,7 @@ function togglePlay() {
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     } else {
         if (audioContext) audioContext.resume();
-        audio.play();
+        audio.play().catch(() => notify('播放失败，请重试'));
         gameState.isPlaying = true;
         $('visualizer').classList.remove('hidden');
         $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
@@ -863,14 +869,15 @@ function endGame() {
         $('endDesc').textContent = win ? '二次元之神就是你！' : '再接再厉！';
         if (win) spawnCelebration();
     } else {
-        const pct = gameState.score / 135 * 100;
+        const maxScore = getMaxScore(gameState.playlist.length);
+        const pct = maxScore > 0 ? gameState.score / maxScore * 100 : 0;
         $('endEmoji').textContent = pct >= 80 ? '🏆' : pct >= 50 ? '🎉' : '💪';
         $('endTitle').textContent = '挑战完成';
         $('endScore').textContent = gameState.score;
         $('endDesc').textContent = pct >= 80 ? '太强了！二次元之神！' : pct >= 50 ? '不错哦！继续加油！' : '加油！多听几首番剧曲吧~';
         if (pct >= 50) spawnCelebration();
     }
-    $('endDetail').textContent = `连击 ${gameState.maxCombo} · 答对 ${gameState.correctCount}/10`;
+    $('endDetail').textContent = `连击 ${gameState.maxCombo} · 答对 ${gameState.correctCount}/${gameState.playlist.length}`;
 
     const recs = JSON.parse(localStorage.getItem('aq_rec') || '[]');
     recs.push({
@@ -1012,6 +1019,52 @@ function toggleFilters() {
 }
 
 // =====================================================================
+// Question Count Selector
+// =====================================================================
+function initQuestionCount() {
+    const container = $('qcountChips');
+    const options = [10, 20, 30];
+    options.forEach((n, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-chip' + (i === 0 ? ' active' : '');
+        btn.textContent = n + '题';
+        btn.addEventListener('click', () => {
+            container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            gameState.questionCount = n;
+        });
+        container.appendChild(btn);
+    });
+}
+
+// =====================================================================
+// Keyboard Shortcuts
+// =====================================================================
+document.addEventListener('keydown', (e) => {
+    // 1-4 keys for answer selection during gameplay
+    if (!gameState.isLocked && !$('v-game').classList.contains('hidden')) {
+        const key = parseInt(e.key);
+        if (key >= 1 && key <= 4) {
+            const btns = document.querySelectorAll('.opt-btn');
+            if (btns[key - 1]) btns[key - 1].click();
+        }
+        // Space to toggle play
+        if (e.key === ' ' || e.code === 'Space') {
+            e.preventDefault();
+            if (!$('playBtn').disabled) togglePlay();
+        }
+    }
+    // Escape to close modals
+    if (e.key === 'Escape') {
+        if ($('animeDetailModal').classList.contains('show')) {
+            nextQuestion();
+        } else if ($('endModal').classList.contains('show')) {
+            // don't close end modal with escape
+        }
+    }
+});
+
+// =====================================================================
 // Event Delegation
 // =====================================================================
 document.addEventListener('click', (e) => {
@@ -1029,7 +1082,7 @@ document.addEventListener('click', (e) => {
         case 'togglePlay': togglePlay(); break;
         case 'restartGame': restartGame(); break;
         case 'clearRecords': clearRecords(); break;
-        case 'goHome': location.reload(); break;
+        case 'goHome': $('endModal').classList.remove('show'); showView('menu'); break;
         case 'toggleFilters': toggleFilters(); break;
         case 'closeDetail': $('animeDetailModal').classList.remove('show'); break;
         case 'nextQuestion': nextQuestion(); break;
@@ -1041,3 +1094,4 @@ document.addEventListener('click', (e) => {
 // =====================================================================
 initSakura();
 initFilters();
+initQuestionCount();
