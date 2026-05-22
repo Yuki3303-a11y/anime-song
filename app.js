@@ -1311,6 +1311,10 @@ function initQuestionCount() {
 // Keyboard Shortcuts
 // =====================================================================
 document.addEventListener('keydown', (e) => {
+    // Don't intercept when user is typing in an input/textarea
+    const tag = document.activeElement?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
     const gameVisible = !$('v-game').classList.contains('hidden');
     const detailOpen = $('animeDetailModal').classList.contains('show');
     const settingsOpen = $('settingsModal').classList.contains('show');
@@ -1322,7 +1326,7 @@ document.addEventListener('keydown', (e) => {
     }
 
     // 1-4 keys for answer selection during gameplay
-    if (gameVisible && !gameState.isLocked && !detailOpen) {
+    if (gameVisible && !gameState.isLocked && !detailOpen && !settingsOpen) {
         const key = parseInt(e.key);
         if (key >= 1 && key <= 4) {
             const btns = document.querySelectorAll('.opt-btn');
