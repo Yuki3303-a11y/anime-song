@@ -211,16 +211,24 @@ async function importFromBangumi(indexId) {
     if (statusEl) statusEl.textContent = '获取目录中...';
     if (progressEl) progressEl.style.width = '0%';
 
-    // Step 1: Fetch all subjects from the index
+    // Step 1: Try local JSON file first (no CORS issues)
     let allSubjects = [];
-    let offset = 0;
-    // Try API via CORS proxy first
-    const apiOk = await fetchIndexViaProxy(indexId, allSubjects);
-    if (!apiOk) {
-        // Fallback: parse the HTML index page via proxy
-        await fetchIndexViaHtml(indexId, allSubjects);
+    try {
+        const localRes = await fetch(`index_${indexId}.json`);
+        if (localRes.ok) {
+            const localData = await localRes.json();
+            allSubjects = (localData.items || []).map(x => ({ ...x, type: 2 }));
+        }
+    } catch {}
+
+    // Step 2: If no local file, try CORS proxy
+    if (allSubjects.length === 0) {
+        const apiOk = await fetchIndexViaProxy(indexId, allSubjects);
+        if (!apiOk) {
+            await fetchIndexViaHtml(indexId, allSubjects);
+        }
     }
-    if (allSubjects.length === 0) { notify('目录获取失败，请检查目录号'); return; }
+    if (allSubjects.length === 0) { notify('目录获取失败，请检查目录号或联系开发者添加'); return; }
 
     // Filter to anime only (type=2)
     const animeList = allSubjects.filter(s => s.type === 2);
