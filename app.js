@@ -1,3 +1,15 @@
+// Debug: show errors on page
+window.onerror = function(msg, url, line, col, err) {
+    const el = document.getElementById('uidText');
+    if (el) el.textContent = 'ERR:' + msg + ' L' + line;
+    console.error(msg, url, line, col, err);
+};
+window.addEventListener('unhandledrejection', e => {
+    const el = document.getElementById('uidText');
+    if (el) el.textContent = 'REJ:' + e.reason;
+    console.error('Unhandled rejection:', e.reason);
+});
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, onSnapshot, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";

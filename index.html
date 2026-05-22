@@ -56,6 +56,13 @@
                         </button>
                     </div>
 
+                    <!-- Debug test input -->
+                    <div style="background:#ffe;padding:10px;margin:10px 0;border:2px solid red;">
+                        <b>调试输入框:</b>
+                        <input type="text" id="debugInput" placeholder="能在这里输入吗？" style="padding:8px;font-size:14px;width:200px;" oninput="document.getElementById('debugOut').textContent=this.value">
+                        <span id="debugOut" style="color:green;font-weight:bold;"></span>
+                    </div>
+
                     <!-- Bangumi Import (direct on page) -->
                     <div class="card" style="margin-top: 16px;">
                         <div class="card-title">📚 导入Bangumi目录</div>
