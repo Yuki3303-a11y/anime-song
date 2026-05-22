@@ -38,30 +38,6 @@
                         <div class="hero-sub">收录 <strong id="songCount">150+</strong> 首经典动漫神曲</div>
                     </div>
 
-                    <!-- Filters -->
-                    <div class="filter-section">
-                        <button class="filter-toggle" data-action="toggleFilters">
-                            🎛️ 筛选曲库 <span id="filterArrow">▾</span>
-                        </button>
-                        <div class="filter-panel hidden" id="filterPanel">
-                            <div class="filter-group">
-                                <div class="filter-label">年份范围</div>
-                                <div class="filter-chips" id="yearChips"></div>
-                            </div>
-                            <div class="filter-group">
-                                <div class="filter-label">歌曲类型</div>
-                                <div class="filter-chips" id="typeChips"></div>
-                            </div>
-                            <div class="filter-count" id="filterCount"></div>
-                        </div>
-                    </div>
-
-                    <!-- Question Count -->
-                    <div class="qcount-section">
-                        <div class="qcount-label">题目数量</div>
-                        <div class="qcount-chips" id="qcountChips"></div>
-                    </div>
-
                     <div class="btn-group">
                         <button class="btn btn-primary" data-action="startSingle">
                             <span>🎮</span> 单人挑战
@@ -71,9 +47,14 @@
                         </button>
                     </div>
 
-                    <button class="btn-ghost" data-action="showView" data-value="leaderboard">
-                        🏆 查看排行榜 →
-                    </button>
+                    <div class="menu-footer">
+                        <button class="btn-ghost" data-action="openSettings">
+                            ⚙️ 设置
+                        </button>
+                        <button class="btn-ghost" data-action="showView" data-value="leaderboard">
+                            🏆 排行榜
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Lobby -->
@@ -207,6 +188,31 @@
                 </div>
 
             </main>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal-bg">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <div class="settings-title">⚙️ 设置</div>
+                <button class="settings-close" data-action="closeSettings" aria-label="关闭">✕</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-group">
+                    <div class="settings-label">题目数量</div>
+                    <div class="settings-chips" id="qcountChips"></div>
+                </div>
+                <div class="settings-group">
+                    <div class="settings-label">歌曲类型</div>
+                    <div class="settings-chips" id="typeChips"></div>
+                </div>
+                <div class="settings-group">
+                    <div class="settings-label">年份范围</div>
+                    <div class="settings-chips settings-chips-wrap" id="yearChips"></div>
+                </div>
+                <div class="settings-count" id="filterCount"></div>
+            </div>
         </div>
     </div>
 

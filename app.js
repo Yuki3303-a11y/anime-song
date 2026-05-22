@@ -752,6 +752,7 @@ function renderOptions(answer) {
         const btn = document.createElement('button');
         btn.className = 'opt-btn';
         btn.textContent = opt;
+        btn.dataset.key = i + 1;
         btn.style.animationDelay = (i * 0.06) + 's';
         btn.onclick = () => handleAnswer(btn, opt);
         $('optionsGrid').appendChild(btn);
@@ -951,10 +952,10 @@ function initFilters() {
 
     // "全部" button
     const allBtn = document.createElement('button');
-    allBtn.className = 'filter-chip active';
+    allBtn.className = 'settings-chip active';
     allBtn.textContent = '全部';
     allBtn.addEventListener('click', () => {
-        yearChips.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        yearChips.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
         allBtn.classList.add('active');
         filterState.years.clear();
         updateFilterCount();
@@ -965,7 +966,7 @@ function initFilters() {
     const years = AVAILABLE_YEARS.slice().reverse();
     years.forEach(y => {
         const btn = document.createElement('button');
-        btn.className = 'filter-chip';
+        btn.className = 'settings-chip';
         btn.textContent = y;
         btn.dataset.year = y;
         btn.addEventListener('click', () => {
@@ -976,7 +977,6 @@ function initFilters() {
                 filterState.years.add(y);
                 btn.classList.add('active');
             }
-            // Update "全部" button state
             if (filterState.years.size === 0) {
                 allBtn.classList.add('active');
             } else {
@@ -997,10 +997,10 @@ function initFilters() {
     const typeChips = $('typeChips');
     typeOptions.forEach((t, i) => {
         const btn = document.createElement('button');
-        btn.className = 'filter-chip' + (i === 0 ? ' active' : '');
+        btn.className = 'settings-chip' + (i === 0 ? ' active' : '');
         btn.textContent = t.label;
         btn.addEventListener('click', () => {
-            typeChips.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            typeChips.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
             btn.classList.add('active');
             filterState.type = t.value;
             updateFilterCount();
@@ -1011,11 +1011,14 @@ function initFilters() {
     updateFilterCount();
 }
 
-function toggleFilters() {
-    const panel = $('filterPanel');
-    const arrow = $('filterArrow');
-    panel.classList.toggle('hidden');
-    arrow.classList.toggle('open');
+// =====================================================================
+// Settings Modal
+// =====================================================================
+function openSettings() {
+    $('settingsModal').classList.add('show');
+}
+function closeSettings() {
+    $('settingsModal').classList.remove('show');
 }
 
 // =====================================================================
@@ -1026,10 +1029,10 @@ function initQuestionCount() {
     const options = [10, 20, 30];
     options.forEach((n, i) => {
         const btn = document.createElement('button');
-        btn.className = 'filter-chip' + (i === 0 ? ' active' : '');
+        btn.className = 'settings-chip' + (i === 0 ? ' active' : '');
         btn.textContent = n + '题';
         btn.addEventListener('click', () => {
-            container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            container.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
             btn.classList.add('active');
             gameState.questionCount = n;
         });
@@ -1041,25 +1044,26 @@ function initQuestionCount() {
 // Keyboard Shortcuts
 // =====================================================================
 document.addEventListener('keydown', (e) => {
+    const gameVisible = !$('v-game').classList.contains('hidden');
+    const detailOpen = $('animeDetailModal').classList.contains('show');
+    const settingsOpen = $('settingsModal').classList.contains('show');
+
+    // Escape to close modals
+    if (e.key === 'Escape') {
+        if (settingsOpen) { closeSettings(); return; }
+        if (detailOpen) { nextQuestion(); return; }
+    }
+
     // 1-4 keys for answer selection during gameplay
-    if (!gameState.isLocked && !$('v-game').classList.contains('hidden')) {
+    if (gameVisible && !gameState.isLocked && !detailOpen) {
         const key = parseInt(e.key);
         if (key >= 1 && key <= 4) {
             const btns = document.querySelectorAll('.opt-btn');
             if (btns[key - 1]) btns[key - 1].click();
         }
-        // Space to toggle play
         if (e.key === ' ' || e.code === 'Space') {
             e.preventDefault();
             if (!$('playBtn').disabled) togglePlay();
-        }
-    }
-    // Escape to close modals
-    if (e.key === 'Escape') {
-        if ($('animeDetailModal').classList.contains('show')) {
-            nextQuestion();
-        } else if ($('endModal').classList.contains('show')) {
-            // don't close end modal with escape
         }
     }
 });
@@ -1083,7 +1087,8 @@ document.addEventListener('click', (e) => {
         case 'restartGame': restartGame(); break;
         case 'clearRecords': clearRecords(); break;
         case 'goHome': $('endModal').classList.remove('show'); showView('menu'); break;
-        case 'toggleFilters': toggleFilters(); break;
+        case 'openSettings': openSettings(); break;
+        case 'closeSettings': closeSettings(); break;
         case 'closeDetail': $('animeDetailModal').classList.remove('show'); break;
         case 'nextQuestion': nextQuestion(); break;
     }
