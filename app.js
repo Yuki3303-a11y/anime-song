@@ -169,11 +169,13 @@ async function importFromBangumi(indexId) {
     // Step 1: Fetch all subjects from the index
     let allSubjects = [];
     let offset = 0;
+    const PROXY = 'https://cors-anywhere.fly.dev/';
     while (true) {
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 8000);
+        const tid = setTimeout(() => controller.abort(), 15000);
         try {
-            const res = await fetch(`https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`, {
+            const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
+            const res = await fetch(PROXY + apiUrl, {
                 headers: { 'User-Agent': 'AnimeQuiz/1.0' },
                 signal: controller.signal
             });
@@ -184,7 +186,7 @@ async function importFromBangumi(indexId) {
             allSubjects.push(...batch);
             if (batch.length < 100) break;
             offset += 100;
-        } catch { clearTimeout(tid); notify('网络错误，请重试'); return; }
+        } catch { clearTimeout(tid); notify('网络错误，请检查网络后重试'); return; }
     }
 
     // Filter to anime only (type=2)
