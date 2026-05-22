@@ -27,6 +27,30 @@
                 </div>
             </header>
 
+            <!-- Floating Bangumi Panel -->
+            <div id="bangumiFAB" style="position:fixed;bottom:20px;right:20px;z-index:9999;">
+                <button id="bangumiToggle" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(236,72,153,0.3);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;">📚</button>
+                <div id="bangumiPanel" style="display:none;position:absolute;bottom:52px;right:0;width:300px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.15);padding:14px;border:1px solid #eee;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <span style="font-weight:700;font-size:14px;color:#333;">📚 自定义曲库</span>
+                        <button id="bangumiClose" style="width:24px;height:24px;border-radius:50%;border:none;background:#f0f0f0;cursor:pointer;font-size:12px;color:#666;">✕</button>
+                    </div>
+                    <div style="display:flex;gap:6px;margin-bottom:8px;">
+                        <input type="text" id="bangumiIndexInput" placeholder="目录号 如 75323" autocomplete="off" spellcheck="false" style="flex:1;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;font-family:inherit;outline:none;color:#333;background:#fff;min-width:0;">
+                        <button data-action="importBangumi" style="padding:8px 14px;background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">导入</button>
+                    </div>
+                    <div id="importStatus" style="font-size:11px;color:#ec4899;min-height:16px;margin-bottom:4px;"></div>
+                    <div id="importProgressWrapper" style="height:3px;background:#eee;border-radius:2px;display:none;margin-bottom:8px;"><div id="importProgress" style="height:100%;width:0;background:linear-gradient(135deg,#ec4899,#8b5cf6);border-radius:2px;transition:width 0.3s;"></div></div>
+                    <div id="customSongsList" style="max-height:150px;overflow-y:auto;margin-bottom:8px;"></div>
+                    <div style="display:flex;gap:4px;">
+                        <button data-action="exportCustom" style="padding:4px 10px;font-size:11px;background:#f8f8f8;border:1px solid #ddd;border-radius:4px;cursor:pointer;color:#666;">📤 导出</button>
+                        <button data-action="importCustom" style="padding:4px 10px;font-size:11px;background:#f8f8f8;border:1px solid #ddd;border-radius:4px;cursor:pointer;color:#666;">📥 导入</button>
+                        <button data-action="clearCustom" style="padding:4px 10px;font-size:11px;background:#f8f8f8;border:1px solid #ddd;border-radius:4px;cursor:pointer;color:#666;">🗑️ 清空</button>
+                    </div>
+                </div>
+            </div>
+            <input type="file" id="importFileInput" accept=".json" style="position:fixed;top:-100px;left:-100px;">
+
             <!-- Content -->
             <main class="content">
 
@@ -56,22 +80,6 @@
                         </button>
                     </div>
 
-                    <div class="card" style="margin-top:16px;">
-                        <div class="card-title">📚 自定义曲库</div>
-                        <div class="custom-import-row">
-                            <input type="text" id="bangumiIndexInput" class="bangumi-input" placeholder="Bangumi目录号 如 75323" autocomplete="off" spellcheck="false">
-                            <button class="btn btn-primary btn-sm" data-action="importBangumi">导入</button>
-                        </div>
-                        <div id="importStatus" class="import-status"></div>
-                        <div class="import-progress-bar"><div id="importProgress" class="import-progress-fill"></div></div>
-                        <div id="customSongsList" class="custom-songs-list"></div>
-                        <div class="custom-actions">
-                            <button class="btn-ghost btn-sm" data-action="exportCustom">📤 导出</button>
-                            <button class="btn-ghost btn-sm" data-action="importCustom">📥 导入JSON</button>
-                            <button class="btn-ghost btn-sm" data-action="clearCustom">🗑️ 清空</button>
-                            <input type="file" id="importFileInput" accept=".json" style="display:none">
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Lobby -->

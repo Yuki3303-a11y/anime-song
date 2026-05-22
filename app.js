@@ -65,6 +65,17 @@ const $ = id => document.getElementById(id);
 const audio = $('audioEl');
 
 // =====================================================================
+// Timeout Constants
+// =====================================================================
+const ITUNES_TIMEOUT = 5000;       // iTunes API fetch timeout (ms)
+const ANILIST_TIMEOUT = 4000;      // AniList GraphQL timeout (ms)
+const BANGUMI_TIMEOUT = 4000;      // Bangumi search timeout (ms)
+const BANGUMI_PAGE_TIMEOUT = 20000; // Bangumi subject page fetch timeout (ms)
+const NOTIFY_DURATION = 2500;      // Toast auto-dismiss duration (ms)
+const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
+const PK_RETRY_COUNT = 3;          // PK max retry attempts
+
+// =====================================================================
 // Filter State
 // =====================================================================
 const filterState = { years: new Set(), type: null, source: null };
@@ -88,7 +99,7 @@ class MemCache {
     _load() {
         if (this._data) return;
         try { this._data = JSON.parse(localStorage.getItem(this._key) || '{}'); }
-        catch { this._data = {}; }
+        catch (e) { console.error('[Cache] _load:', e); this._data = {}; }
     }
     get(k) {
         this._load();
@@ -107,7 +118,7 @@ class MemCache {
     _flush() {
         if (!this._dirty) return;
         try { localStorage.setItem(this._key, JSON.stringify(this._data)); }
-        catch {}
+        catch (e) { console.error('[Cache] _flush:', e); }
         this._dirty = false;
     }
 }
@@ -122,7 +133,7 @@ const CUSTOM_SONGS_KEY = 'custom_songs_v1';
 
 function getCustomSongs() {
     try { return JSON.parse(localStorage.getItem(CUSTOM_SONGS_KEY) || '[]'); }
-    catch { return []; }
+    catch (e) { console.error('[CustomSongs] getCustomSongs:', e); return []; }
 }
 
 function setCustomSongs(songs) {
@@ -169,7 +180,7 @@ async function fetchIndexViaProxy(indexId, allSubjects) {
     while (true) {
         const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 20000);
+        const tid = setTimeout(() => controller.abort(), BANGUMI_PAGE_TIMEOUT);
         try {
             const res = await fetch(CORS_PROXY + apiUrl, { signal: controller.signal });
             clearTimeout(tid);
@@ -179,7 +190,7 @@ async function fetchIndexViaProxy(indexId, allSubjects) {
             allSubjects.push(...batch);
             if (batch.length < 100) break;
             offset += 100;
-        } catch { clearTimeout(tid); return false; }
+        } catch (e) { clearTimeout(tid); console.error('[Bangumi] fetchSubjects:', e); return false; }
     }
     return true;
 }
@@ -188,7 +199,7 @@ async function fetchIndexViaProxy(indexId, allSubjects) {
 async function fetchIndexViaHtml(indexId, allSubjects) {
     const pageUrl = `https://bgm.tv/index/${indexId}`;
     const controller = new AbortController();
-    const tid = setTimeout(() => controller.abort(), 20000);
+    const tid = setTimeout(() => controller.abort(), BANGUMI_PAGE_TIMEOUT);
     try {
         const res = await fetch(CORS_PROXY + pageUrl, { signal: controller.signal });
         clearTimeout(tid);
@@ -203,7 +214,7 @@ async function fetchIndexViaHtml(indexId, allSubjects) {
             const type = typeMatch ? parseInt(typeMatch[1]) : 0;
             allSubjects.push({ id, name, name_cn: '', type });
         }
-    } catch { clearTimeout(tid); }
+    } catch (e) { clearTimeout(tid); console.error('[Bangumi] parseSubjectResponse:', e); }
 }
 
 // Import anime from Bangumi index and search for songs
@@ -223,7 +234,7 @@ async function importFromBangumi(indexId) {
             const localData = await localRes.json();
             allSubjects = (localData.items || []).map(x => ({ ...x, type: 2 }));
         }
-    } catch {}
+    } catch (e) { console.error('[Bangumi] loadLocal:', e); }
 
     // Step 2: If no local file, try CORS proxy
     if (allSubjects.length === 0) {
@@ -270,7 +281,7 @@ async function importFromBangumi(indexId) {
             if (adata.data?.Media?.title?.romaji) {
                 searchTitle = adata.data.Media.title.romaji;
             }
-        } catch {}
+        } catch (e) { console.error('[Bangumi] AniList search:', e); }
 
         // Search iTunes for songs
         const songs = await searchItunesForAnime(searchTitle, animeName, year);
@@ -296,7 +307,7 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
     // Search with romaji + anime
     for (const term of [`${romajiTitle} anime`, romajiTitle]) {
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 5000);
+        const tid = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
             const res = await fetch(
                 `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=5&country=JP`,
@@ -318,7 +329,7 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
                 });
             }
             if (results.length > 0) break;
-        } catch { clearTimeout(tid); }
+        } catch (e) { clearTimeout(tid); console.error('[iTunes] searchItunesForAnime:', e); }
     }
     return results.slice(0, 2); // Max 2 songs per anime
 }
@@ -372,7 +383,7 @@ function importCustomSongsFile(file) {
             }
             setCustomSongs(existing);
             notify(`🎵 导入 ${added} 首新歌曲`);
-        } catch { notify('文件解析失败'); }
+        } catch (e) { console.error('[Import] importCustomSongsFile:', e); notify('文件解析失败'); }
     };
     reader.readAsText(file);
 }
@@ -436,7 +447,7 @@ function pickBestBGMResult(list, animeName) {
 // Search Bangumi for anime
 async function searchBangumi(keyword) {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), BANGUMI_TIMEOUT);
     try {
         const res = await fetch(`https://api.bgm.tv/search/subject/${encodeURIComponent(keyword)}?limit=10&type=2`, {
             headers: { 'User-Agent': 'AnimeQuiz/1.0' },
@@ -445,7 +456,7 @@ async function searchBangumi(keyword) {
         clearTimeout(timeoutId);
         const data = await res.json();
         return data.list || [];
-    } catch { clearTimeout(timeoutId); return []; }
+    } catch (e) { clearTimeout(timeoutId); console.error('[Bangumi] searchBangumiTV:', e); return []; }
 }
 
 // Search AniList for anime
@@ -458,7 +469,7 @@ async function searchAniList(animeName) {
         }
     }`;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), ANILIST_TIMEOUT);
     try {
         const res = await fetch('https://graphql.anilist.co', {
             method: 'POST',
@@ -469,7 +480,7 @@ async function searchAniList(animeName) {
         clearTimeout(timeoutId);
         const data = await res.json();
         return data.data?.Media || null;
-    } catch { clearTimeout(timeoutId); return null; }
+    } catch (e) { clearTimeout(timeoutId); console.error('[AniList] searchAniList:', e); return null; }
 }
 
 // Known alternative names for Bangumi search (animeName → better search term)
@@ -726,19 +737,19 @@ function notify(text) {
     const n = $('notif');
     n.textContent = text;
     n.classList.add('show');
-    setTimeout(() => n.classList.remove('show'), 2500);
+    setTimeout(() => n.classList.remove('show'), NOTIFY_DURATION);
 }
 
 // =====================================================================
 // PK retry helper — 3 attempts, 1s fixed backoff, network-only retry
 // =====================================================================
 async function retryPK(fn, label) {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < PK_RETRY_COUNT; i++) {
         try {
             return await fn();
         } catch (e) {
             console.error(`[PK] ${label} attempt ${i + 1}:`, e);
-            if (i < 2) await new Promise(r => setTimeout(r, 1000));
+            if (i < 2) await new Promise(r => setTimeout(r, PK_RETRY_DELAY));
         }
     }
     throw new Error('NetworkError');
@@ -1008,7 +1019,7 @@ async function fetchAudio(title, artist, anime) {
 
     async function searchItunes(term) {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const timeoutId = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
             const response = await fetch(
                 `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=5&country=JP`,
@@ -1025,7 +1036,7 @@ async function fetchAudio(title, artist, anime) {
                 );
                 return match ? match.previewUrl : data.results[0].previewUrl;
             }
-        } catch { clearTimeout(timeoutId); }
+        } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
         return null;
     }
 
@@ -1143,7 +1154,7 @@ function togglePlay() {
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     } else {
         if (audioContext) audioContext.resume();
-        audio.play().catch(() => notify('播放失败，请重试'));
+        audio.play().catch(() => notify('音频播放失败，请重试'));
         gameState.isPlaying = true;
         $('visualizer').classList.remove('hidden');
         $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
@@ -1403,6 +1414,15 @@ document.addEventListener('keydown', (e) => {
 // Event Delegation
 // =====================================================================
 document.addEventListener('click', (e) => {
+    // Custom song deletion (event delegation with confirmation)
+    const delBtn = e.target.closest('[data-del-custom]');
+    if (delBtn) {
+        if (!confirm('确定要删除这首自定义歌曲吗？')) return;
+        const index = parseInt(delBtn.dataset.delCustom);
+        if (!isNaN(index)) removeCustomSong(index);
+        return;
+    }
+
     const actionEl = e.target.closest('[data-action]');
     if (!actionEl) return;
     const action = actionEl.dataset.action;
@@ -1433,6 +1453,7 @@ document.addEventListener('click', (e) => {
         case 'importCustom': $('importFileInput')?.click(); break;
         case 'clearCustom': {
             if (getCustomSongs().length === 0) { notify('没有自定义歌曲'); return; }
+            if (!confirm('确定要清空所有自定义歌曲吗？此操作不可撤销。')) return;
             setCustomSongs([]);
             notify('已清空自定义曲库');
             break;
@@ -1448,14 +1469,7 @@ document.addEventListener('change', (e) => {
     }
 });
 
-// Handle delete buttons for individual custom songs (event delegation)
-document.addEventListener('click', (e) => {
-    const delBtn = e.target.closest('[data-del-custom]');
-    if (delBtn) {
-        const index = parseInt(delBtn.dataset.delCustom);
-        if (!isNaN(index)) removeCustomSong(index);
-    }
-});
+/* merged into main listener above */
 
 // =====================================================================
 // Init
