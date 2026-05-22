@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, onSnapshot, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getDatabase, ref, set, get, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 import { SONGS, ALL_ANIME, AVAILABLE_YEARS, AVAILABLE_TYPES } from './songs.js';
 
 // =====================================================================
@@ -20,7 +20,7 @@ let db, auth, user, roomId, roomUnsub;
 try {
     const app = initializeApp(firebaseConfig);
     auth = getAuth(app);
-    db = getFirestore(app);
+    db = getDatabase(app);
     signInAnonymously(auth).catch(() => {
         document.getElementById('uidText').textContent = '离线';
     });
@@ -847,10 +847,9 @@ async function pkCreate() {
     if (!navigator.onLine) { notify('当前无网络连接，请检查网络'); return; }
     const rid = String(Math.floor(1000 + Math.random() * 9000));
     roomId = rid;
-    const ref = doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', rid);
     try {
         await retryPK(
-            () => setDoc(ref, {
+            () => set(ref(db, 'rooms/' + rid), {
                 host: user.uid,
                 guest: null,
                 status: 'waiting',
@@ -872,18 +871,20 @@ async function pkJoin() {
     if (!navigator.onLine) { notify('当前无网络连接，请检查网络'); return; }
     const rid = $('roomIdInput').value.trim();
     if (rid.length !== 4) { notify('请输入4位房间号'); return; }
-    const ref = doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', rid);
     try {
-        const snap = await retryPK(() => getDoc(ref), 'pkJoin.getDoc');
+        const snap = await retryPK(() => get(ref(db, 'rooms/' + rid)), 'pkJoin.getDoc');
         if (!snap.exists()) { notify('房间号不存在或已过期'); return; }
-        const d = snap.data();
+        const d = snap.val();
         if (d.status !== 'waiting' && d.guest !== user.uid) {
             notify('该房间已满，请尝试其他房间');
             return;
         }
         if (!d.guest) {
             await retryPK(
-                () => updateDoc(ref, { guest: user.uid, [`scores.${user.uid}`]: 0 }),
+                () => update(ref(db, 'rooms/' + rid), {
+                    guest: user.uid,
+                    [`scores/${user.uid}`]: 0
+                }),
                 'pkJoin.updateDoc'
             );
         }
@@ -911,16 +912,16 @@ function pkShare() {
 
 async function pkStart() {
     if (!roomId) return;
-    await updateDoc(doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', roomId), { status: 'playing' });
+    await update(ref(db, 'rooms/' + roomId), { status: 'playing' });
 }
 
 function enterRoom(rid) {
     showView('room');
     $('roomIdDisplay').textContent = rid;
-    const ref = doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', rid);
-    roomUnsub = onSnapshot(ref, snap => {
+    const roomRef = ref(db, 'rooms/' + rid);
+    roomUnsub = onValue(roomRef, snap => {
         if (!snap.exists()) return;
-        const d = snap.data();
+        const d = snap.val();
         const p2 = $('p2Card');
         const btn = $('btnStartPk');
         if (d.guest) {
@@ -1099,8 +1100,8 @@ function handleAnswer(btn, selected) {
             spawnSparkles($('comboArea'));
         }
         if (gameState.mode === 'pk' && roomId) {
-            updateDoc(doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', roomId), {
-                [`scores.${user.uid}`]: gameState.score
+            update(ref(db, 'rooms/' + roomId), {
+                [`scores/${user.uid}`]: gameState.score
             });
         }
     } else {
