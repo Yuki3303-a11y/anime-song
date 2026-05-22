@@ -163,15 +163,15 @@ function getFilteredSongs() {
 }
 
 // Fetch Bangumi index via CORS proxy
+const CORS_PROXY = 'https://cors-anywhere.fly.dev/';
 async function fetchIndexViaProxy(indexId, allSubjects) {
     let offset = 0;
     while (true) {
         const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
-        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
         const controller = new AbortController();
         const tid = setTimeout(() => controller.abort(), 20000);
         try {
-            const res = await fetch(proxyUrl, { signal: controller.signal });
+            const res = await fetch(CORS_PROXY + apiUrl, { signal: controller.signal });
             clearTimeout(tid);
             if (!res.ok) return false;
             const data = await res.json();
@@ -187,11 +187,10 @@ async function fetchIndexViaProxy(indexId, allSubjects) {
 // Fallback: parse Bangumi index HTML page via proxy
 async function fetchIndexViaHtml(indexId, allSubjects) {
     const pageUrl = `https://bgm.tv/index/${indexId}`;
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(pageUrl)}`;
     const controller = new AbortController();
     const tid = setTimeout(() => controller.abort(), 20000);
     try {
-        const res = await fetch(proxyUrl, { signal: controller.signal });
+        const res = await fetch(CORS_PROXY + pageUrl, { signal: controller.signal });
         clearTimeout(tid);
         if (!res.ok) return;
         const html = await res.text();
@@ -211,8 +210,10 @@ async function fetchIndexViaHtml(indexId, allSubjects) {
 async function importFromBangumi(indexId) {
     const statusEl = $('importStatus');
     const progressEl = $('importProgress');
+    const progressWrapper = $('importProgressWrapper');
     if (statusEl) statusEl.textContent = '获取目录中...';
     if (progressEl) progressEl.style.width = '0%';
+    if (progressWrapper) progressWrapper.style.display = 'block';
 
     // Step 1: Try local JSON file first (no CORS issues)
     let allSubjects = [];
@@ -283,6 +284,7 @@ async function importFromBangumi(indexId) {
 
     if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
     if (progressEl) progressEl.style.width = '100%';
+    if (progressWrapper) setTimeout(() => { progressWrapper.style.display = 'none'; }, 2000);
     notify(`🎵 导入完成，新增 ${addedCount} 首歌曲`);
 }
 
@@ -381,16 +383,16 @@ function updateCustomSongsUI() {
     if (!list) return;
     const songs = getCustomSongs();
     if (songs.length === 0) {
-        list.innerHTML = '<div class="custom-empty">暂无自定义歌曲</div>';
+        list.innerHTML = '<div style="font-size:11px;color:#999;text-align:center;padding:10px;">暂无自定义歌曲</div>';
         return;
     }
-    list.innerHTML = songs.map((s, i) => `
-        <div class="custom-song-item">
-            <div class="custom-song-info">
-                <div class="custom-song-title">${s.titleCN || s.title}</div>
-                <div class="custom-song-anime">${s.anime}</div>
+    list.innerHTML = '<div style="font-size:11px;color:#999;margin-bottom:4px;">共 ' + songs.length + ' 首</div>' + songs.map((s, i) => `
+        <div style="display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:4px;margin-bottom:2px;background:#fafafa;">
+            <div style="flex:1;min-width:0;">
+                <div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333;">${s.titleCN || s.title}</div>
+                <div style="font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.anime}</div>
             </div>
-            <button class="custom-song-del" data-del-custom="${i}" aria-label="删除">✕</button>
+            <button data-del-custom="${i}" style="width:18px;height:18px;border-radius:50%;border:1px solid #ddd;background:none;color:#999;font-size:10px;cursor:pointer;flex-shrink:0;line-height:1;">✕</button>
         </div>
     `).join('');
 }
@@ -728,6 +730,21 @@ function notify(text) {
 }
 
 // =====================================================================
+// PK retry helper — 3 attempts, 1s fixed backoff, network-only retry
+// =====================================================================
+async function retryPK(fn, label) {
+    for (let i = 0; i < 3; i++) {
+        try {
+            return await fn();
+        } catch (e) {
+            console.error(`[PK] ${label} attempt ${i + 1}:`, e);
+            if (i < 2) await new Promise(r => setTimeout(r, 1000));
+        }
+    }
+    throw new Error('NetworkError');
+}
+
+// =====================================================================
 // Sparkle Effects
 // =====================================================================
 function spawnSparkles(element, count = 4) {
@@ -816,39 +833,54 @@ function startSingle() {
 // =====================================================================
 async function pkCreate() {
     if (!user) { notify('正在连接服务器...'); return; }
+    if (!navigator.onLine) { notify('当前无网络连接，请检查网络'); return; }
     const rid = String(Math.floor(1000 + Math.random() * 9000));
     roomId = rid;
     const ref = doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', rid);
     try {
-        await setDoc(ref, {
-            host: user.uid,
-            guest: null,
-            status: 'waiting',
-            timestamp: serverTimestamp(),
-            scores: { [user.uid]: 0 },
-            questions: shuffle([...Array(SONGS.length).keys()]).slice(0, 10),
-        });
+        await retryPK(
+            () => setDoc(ref, {
+                host: user.uid,
+                guest: null,
+                status: 'waiting',
+                timestamp: serverTimestamp(),
+                scores: { [user.uid]: 0 },
+                questions: shuffle([...Array(SONGS.length).keys()]).slice(0, 10),
+            }),
+            'pkCreate'
+        );
         enterRoom(rid);
     } catch (e) {
-        notify('创建房间失败，请重试');
+        console.error('[PK] pkCreate:', e);
+        notify('网络连接超时，请检查网络后重试');
     }
 }
 
 async function pkJoin() {
     if (!user) { notify('正在连接服务器...'); return; }
+    if (!navigator.onLine) { notify('当前无网络连接，请检查网络'); return; }
     const rid = $('roomIdInput').value.trim();
     if (rid.length !== 4) { notify('请输入4位房间号'); return; }
     const ref = doc(db, 'artifacts', projectId, 'public', 'data', 'rooms', rid);
     try {
-        const snap = await getDoc(ref);
-        if (!snap.exists()) { notify('房间不存在'); return; }
+        const snap = await retryPK(() => getDoc(ref), 'pkJoin.getDoc');
+        if (!snap.exists()) { notify('房间号不存在或已过期'); return; }
         const d = snap.data();
-        if (d.status !== 'waiting' && d.guest !== user.uid) { notify('房间已满'); return; }
-        if (!d.guest) await updateDoc(ref, { guest: user.uid, [`scores.${user.uid}`]: 0 });
+        if (d.status !== 'waiting' && d.guest !== user.uid) {
+            notify('该房间已满，请尝试其他房间');
+            return;
+        }
+        if (!d.guest) {
+            await retryPK(
+                () => updateDoc(ref, { guest: user.uid, [`scores.${user.uid}`]: 0 }),
+                'pkJoin.updateDoc'
+            );
+        }
         roomId = rid;
         enterRoom(rid);
     } catch (e) {
-        notify('加入房间失败，请检查房间号');
+        console.error('[PK] pkJoin:', e);
+        notify('网络连接超时，请检查网络后重试');
     }
 }
 
@@ -926,7 +958,9 @@ function checkInvite() {
             showView('lobby');
             $('roomIdInput').value = rid;
         }
-    } catch {}
+    } catch (e) {
+        console.error('[PK] checkInvite:', e);
+    }
 }
 
 // =====================================================================
@@ -1431,3 +1465,12 @@ initFilters();
 initSourceFilter();
 initQuestionCount();
 updateCustomSongsUI();
+
+// Bangumi floating panel toggle
+$('bangumiToggle').addEventListener('click', () => {
+    const panel = $('bangumiPanel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+});
+$('bangumiClose').addEventListener('click', () => {
+    $('bangumiPanel').style.display = 'none';
+});
