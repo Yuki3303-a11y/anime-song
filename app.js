@@ -159,6 +159,57 @@ function getFilteredSongs() {
     });
 }
 
+// Fetch Bangumi index via CORS proxy (JSON API)
+async function fetchIndexViaProxy(indexId, allSubjects) {
+    let offset = 0;
+    while (true) {
+        const controller = new AbortController();
+        const tid = setTimeout(() => controller.abort(), 15000);
+        try {
+            const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
+            const res = await fetch(`https://cors-anywhere.fly.dev/${apiUrl}`, {
+                headers: { 'User-Agent': 'AnimeQuiz/1.0' },
+                signal: controller.signal
+            });
+            clearTimeout(tid);
+            if (!res.ok) return false;
+            const data = await res.json();
+            const batch = data.data || [];
+            allSubjects.push(...batch);
+            if (batch.length < 100) break;
+            offset += 100;
+        } catch { clearTimeout(tid); return false; }
+    }
+    return true;
+}
+
+// Fallback: parse Bangumi index HTML page via proxy
+async function fetchIndexViaHtml(indexId, allSubjects) {
+    const controller = new AbortController();
+    const tid = setTimeout(() => controller.abort(), 15000);
+    try {
+        const pageUrl = `https://bgm.tv/index/${indexId}`;
+        const res = await fetch(`https://cors-anywhere.fly.dev/${pageUrl}`, {
+            headers: { 'User-Agent': 'AnimeQuiz/1.0' },
+            signal: controller.signal
+        });
+        clearTimeout(tid);
+        if (!res.ok) return;
+        const html = await res.text();
+        // Parse subject IDs and names from HTML
+        const regex = /id="item_(\d+)".*?<a href="\/subject\/\d+" class="l">([^<]+)<\/a>/gs;
+        let match;
+        while ((match = regex.exec(html)) !== null) {
+            const id = parseInt(match[1]);
+            const name = match[2].trim();
+            // Find the type from the context (check for subject_type_2 = anime)
+            const typeMatch = html.substring(match.index, match.index + 500).match(/subject_type_(\d+)/);
+            const type = typeMatch ? parseInt(typeMatch[1]) : 0;
+            allSubjects.push({ id, name, name_cn: '', type });
+        }
+    } catch { clearTimeout(tid); }
+}
+
 // Import anime from Bangumi index and search for songs
 async function importFromBangumi(indexId) {
     const statusEl = $('importStatus');
@@ -169,25 +220,13 @@ async function importFromBangumi(indexId) {
     // Step 1: Fetch all subjects from the index
     let allSubjects = [];
     let offset = 0;
-    const PROXY = 'https://cors-anywhere.fly.dev/';
-    while (true) {
-        const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 15000);
-        try {
-            const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
-            const res = await fetch(PROXY + apiUrl, {
-                headers: { 'User-Agent': 'AnimeQuiz/1.0' },
-                signal: controller.signal
-            });
-            clearTimeout(tid);
-            if (!res.ok) { notify('目录不存在或无法访问'); return; }
-            const data = await res.json();
-            const batch = data.data || [];
-            allSubjects.push(...batch);
-            if (batch.length < 100) break;
-            offset += 100;
-        } catch { clearTimeout(tid); notify('网络错误，请检查网络后重试'); return; }
+    // Try API via CORS proxy first
+    const apiOk = await fetchIndexViaProxy(indexId, allSubjects);
+    if (!apiOk) {
+        // Fallback: parse the HTML index page via proxy
+        await fetchIndexViaHtml(indexId, allSubjects);
     }
+    if (allSubjects.length === 0) { notify('目录获取失败，请检查目录号'); return; }
 
     // Filter to anime only (type=2)
     const animeList = allSubjects.filter(s => s.type === 2);
