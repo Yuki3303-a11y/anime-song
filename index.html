@@ -59,9 +59,9 @@
                     <!-- Bangumi Import (direct on page) -->
                     <div class="card" style="margin-top: 16px;">
                         <div class="card-title">📚 导入Bangumi目录</div>
-                        <div class="custom-import-row">
-                            <input type="text" id="bangumiIndexInput" class="bangumi-input" placeholder="输入目录号 如 75323" autocomplete="off" spellcheck="false">
-                            <button class="btn btn-primary btn-sm" data-action="importBangumi">导入</button>
+                        <div style="display:flex;gap:8px;align-items:center;">
+                            <input type="text" id="bangumiIndexInput" placeholder="输入目录号 如 75323" autocomplete="off" spellcheck="false" style="flex:1;padding:10px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:white;color:#333;">
+                            <button class="btn btn-primary" style="padding:10px 18px;font-size:13px;white-space:nowrap;" data-action="importBangumi">导入</button>
                         </div>
                         <div id="importStatus" class="import-status"></div>
                         <div class="import-progress-bar"><div id="importProgress" class="import-progress-fill"></div></div>
