@@ -42,10 +42,10 @@
 | ERR-02 | 2 | — |
 | ERR-03 | 2 | — |
 | ERR-04 | 2 | — |
-| CLEAN-01 | 1 | — |
-| CLEAN-02 | 1 | — |
-| CLEAN-03 | 2 | — |
-| CLEAN-04 | 2 | — |
-| CLEAN-05 | 2 | — |
-| CLEAN-06 | 2 | — |
-| CLEAN-07 | 2 | — |
+| CLEAN-01 | 3 | — |
+| CLEAN-02 | 3 | — |
+| CLEAN-03 | 3 | — |
+| CLEAN-04 | 3 | — |
+| CLEAN-05 | 3 | — |
+| CLEAN-06 | 3 | — |
+| CLEAN-07 | 3 | — |
