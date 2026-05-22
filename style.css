@@ -886,13 +886,14 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     width: 100%;
     max-width: 440px;
-    max-height: 75vh;
+    max-height: 85vh;
     overflow-y: auto;
     transform: translateY(100%);
     transition: transform 0.4s var(--ease);
     border: 1px solid var(--border);
     border-bottom: none;
     box-shadow: 0 -8px 40px rgba(80, 40, 120, 0.12);
+    -webkit-overflow-scrolling: touch;
 }
 .settings-modal-bg.show .settings-modal {
     transform: translateY(0);
@@ -1009,10 +1010,13 @@ input[type="range"]::-webkit-slider-thumb {
     border: 1.5px solid var(--border);
     background: var(--bg-card);
     color: var(--text-primary);
-    font-size: 13px;
+    font-size: 13px !important;
     font-family: inherit;
+    text-align: left !important;
+    letter-spacing: normal !important;
     outline: none;
     transition: border-color 0.2s;
+    min-width: 0;
 }
 .custom-import-row .input:focus {
     border-color: var(--pink);
