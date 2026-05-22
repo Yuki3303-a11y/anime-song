@@ -1003,23 +1003,28 @@ input[type="range"]::-webkit-slider-thumb {
     gap: 8px;
     margin-bottom: 8px;
 }
-.custom-import-row .input {
+.bangumi-input {
     flex: 1;
     padding: 8px 12px;
     border-radius: var(--radius-sm);
     border: 1.5px solid var(--border);
     background: var(--bg-card);
     color: var(--text-primary);
-    font-size: 13px !important;
+    font-size: 13px;
     font-family: inherit;
-    text-align: left !important;
-    letter-spacing: normal !important;
+    text-align: left;
+    letter-spacing: normal;
     outline: none;
     transition: border-color 0.2s;
     min-width: 0;
 }
-.custom-import-row .input:focus {
+.bangumi-input:focus {
     border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+}
+.bangumi-input::placeholder {
+    color: var(--text-hint);
+    font-size: 12px;
 }
 .custom-import-row .btn-sm {
     padding: 8px 16px;
