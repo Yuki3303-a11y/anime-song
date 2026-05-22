@@ -13,6 +13,7 @@ const firebaseConfig = {
     storageBucket: "animequiz-a16c1.firebasestorage.app",
     messagingSenderId: "687982181232",
     appId: "1:687982181232:web:50f2582291064a6a9dedb5",
+    databaseURL: "https://animequiz-a16c1-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 const projectId = firebaseConfig.projectId;
 let db, auth, user, roomId, roomUnsub;
