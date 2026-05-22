@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♪ 萌豚挑战 - 二次元听歌猜番剧</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sakura Particles -->
+    <canvas id="sakuraCanvas"></canvas>
+
+    <div class="app">
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="logo">
+                    <div class="logo-icon">♪</div>
+                    <span class="logo-text">萌豚挑战</span>
+                </div>
+                <div class="header-right">
+                    <div class="status-pill">
+                        <div class="status-dot" id="statusDot"></div>
+                        <span id="uidText">...</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <main class="content">
+
+                <!-- Menu -->
+                <div id="v-menu" class="menu">
+                    <div class="hero">
+                        <div class="hero-icon">♪</div>
+                        <div class="hero-title">准备好挑战了吗？</div>
+                        <div class="hero-sub">收录 <strong id="songCount">150+</strong> 首经典动漫神曲</div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="filter-section">
+                        <button class="filter-toggle" data-action="toggleFilters">
+                            🎛️ 筛选曲库 <span id="filterArrow">▾</span>
+                        </button>
+                        <div class="filter-panel hidden" id="filterPanel">
+                            <div class="filter-group">
+                                <div class="filter-label">年份范围</div>
+                                <div class="filter-chips" id="yearChips"></div>
+                            </div>
+                            <div class="filter-group">
+                                <div class="filter-label">歌曲类型</div>
+                                <div class="filter-chips" id="typeChips"></div>
+                            </div>
+                            <div class="filter-count" id="filterCount"></div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" data-action="startSingle">
+                            <span>🎮</span> 单人挑战
+                        </button>
+                        <button class="btn btn-secondary" data-action="showView" data-value="lobby">
+                            <span>⚔️</span> 联机对战
+                        </button>
+                    </div>
+
+                    <button class="btn-ghost" data-action="showView" data-value="leaderboard">
+                        🏆 查看排行榜 →
+                    </button>
+                </div>
+
+                <!-- Lobby -->
+                <div id="v-lobby" class="lobby hidden">
+                    <button class="back-btn" data-action="showView" data-value="menu">← 返回</button>
+                    <div class="section-title">⚔️ 联机对战大厅</div>
+
+                    <div class="card">
+                        <div class="card-title">🏠 创建房间</div>
+                        <button class="btn btn-primary" data-action="pkCreate">创建新房间</button>
+                    </div>
+
+                    <div class="divider">或者</div>
+
+                    <div class="card">
+                        <div class="card-title">🔗 加入房间</div>
+                        <input class="input" id="roomIdInput" placeholder="输入4位房间号" maxlength="4">
+                        <button class="btn btn-secondary" data-action="pkJoin">加入对战</button>
+                    </div>
+                </div>
+
+                <!-- Room -->
+                <div id="v-room" class="room hidden">
+                    <div class="room-id-box">
+                        <div class="room-id-label">💌 房间号 (发给好友)</div>
+                        <div class="room-id" id="roomIdDisplay">----</div>
+                        <button class="btn btn-sm btn-secondary" data-action="pkShare">
+                            📤 分享邀请
+                        </button>
+                        <div id="shareFeedback" class="share-feedback"></div>
+                    </div>
+
+                    <div class="player-grid">
+                        <div class="player-card p1 active">
+                            <div class="player-avatar">P1</div>
+                            <div class="player-name">我</div>
+                        </div>
+                        <div class="player-card p2 waiting" id="p2Card">
+                            <div class="player-avatar">?</div>
+                            <div class="player-name">等待加入...</div>
+                        </div>
+                    </div>
+
+                    <div id="roomMsg" class="room-msg"></div>
+
+                    <button id="btnStartPk" class="btn btn-secondary" disabled data-action="pkStart">
+                        等待对手加入...
+                    </button>
+                    <button class="btn-ghost full-width" data-action="showView" data-value="menu">
+                        退出房间
+                    </button>
+                </div>
+
+                <!-- Game -->
+                <div id="v-game" class="hidden">
+                    <button class="back-btn" data-action="showView" data-value="menu">← 退出挑战</button>
+                    <div id="singleHeader" class="game-header">
+                        <div class="q-num"><span id="qNum">1</span><span>/10</span></div>
+                        <div class="score" id="scoreText">0</div>
+                    </div>
+
+                    <div id="pkHeader" class="pk-score hidden">
+                        <div class="pk-player">
+                            <div class="pk-avatar me">我</div>
+                            <div class="pk-score-num" id="myScoreText">0</div>
+                        </div>
+                        <div class="pk-vs">VS</div>
+                        <div class="pk-player">
+                            <div class="pk-score-num" id="opScoreText">0</div>
+                            <div class="pk-avatar op">敌</div>
+                        </div>
+                    </div>
+
+                    <div id="comboArea" class="combo"></div>
+
+                    <div class="player-box">
+                        <div id="visualizer" class="vis hidden">
+                            <div class="vis-bar" style="animation-duration: 0.35s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.5s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.3s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.45s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.4s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.55s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.35s"></div>
+                            <div class="vis-bar" style="animation-duration: 0.5s"></div>
+                        </div>
+
+                        <div id="playerStatus" class="player-status">准备中...</div>
+                        <audio id="audioEl" crossorigin="anonymous"></audio>
+                        <button id="playBtn" class="play-btn" disabled data-action="togglePlay" aria-label="播放/暂停">
+                            <svg id="playIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                        <div class="player-hint">🎵 30秒试听片段</div>
+                        <div class="volume">
+                            <span class="vol-icon">🔊</span>
+                            <input type="range" id="volSlider" min="0" max="1" step="0.05" value="0.5">
+                        </div>
+                    </div>
+
+                    <div class="progress">
+                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+
+                    <div id="songInfo" class="song-info">
+                        <div class="song-info-top">
+                            <span id="resultBadge" class="result-badge correct">✓ 正确</span>
+                        </div>
+                        <div class="song-detail">
+                            <div class="song-cover">🎵</div>
+                            <div class="song-meta">
+                                <div id="songTitle" class="song-title">-</div>
+                                <div id="songAnime" class="song-anime">-</div>
+                                <div id="songArtist" class="song-artist">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="optionsGrid" class="options"></div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div id="v-leaderboard" class="leaderboard hidden">
+                    <button class="back-btn" data-action="showView" data-value="menu">← 返回</button>
+                    <div class="section-title">🏆 本地排行榜</div>
+                    <div id="recordsList"></div>
+                    <button class="btn btn-sm btn-secondary full-width" style="margin-top: 20px;" data-action="clearRecords">
+                        清除记录
+                    </button>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- End Modal -->
+    <div id="endModal" class="modal-bg" role="dialog">
+        <div class="modal">
+            <div class="modal-emoji" id="endEmoji">🎉</div>
+            <div class="modal-title" id="endTitle">挑战结束</div>
+            <div class="modal-score" id="endScore">0</div>
+            <div class="modal-desc" id="endDesc">不错哦！</div>
+            <div class="modal-detail" id="endDetail"></div>
+            <button class="btn btn-primary" data-action="restartGame">🔄 再来一局</button>
+            <button class="btn-ghost full-width" data-action="goHome">返回主页</button>
+        </div>
+    </div>
+
+    <!-- Anime Detail Modal -->
+    <div id="animeDetailModal" class="detail-modal-bg">
+        <div class="detail-modal">
+            <button class="detail-close" data-action="closeDetail" aria-label="关闭">✕</button>
+            <div class="detail-cover-wrap">
+                <img id="detailCover" class="detail-cover" src="" alt="封面">
+            </div>
+            <div class="detail-body">
+                <h2 class="detail-title" id="detailTitle">-</h2>
+                <div class="detail-romaji" id="detailRomaji"></div>
+                <div class="detail-meta" id="detailMeta"></div>
+                <div class="detail-song-row" id="detailSongInfo"></div>
+                <a id="bangumiLink" class="btn btn-secondary full-width" href="#" target="_blank" rel="noopener">📺 查看番剧详情</a>
+                <button class="btn btn-primary" data-action="nextQuestion">继续下一题 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notif" class="notif" role="status" aria-live="polite"></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
