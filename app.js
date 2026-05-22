@@ -159,18 +159,16 @@ function getFilteredSongs() {
     });
 }
 
-// Fetch Bangumi index via CORS proxy (JSON API)
+// Fetch Bangumi index via CORS proxy
 async function fetchIndexViaProxy(indexId, allSubjects) {
     let offset = 0;
     while (true) {
+        const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
         const controller = new AbortController();
-        const tid = setTimeout(() => controller.abort(), 15000);
+        const tid = setTimeout(() => controller.abort(), 20000);
         try {
-            const apiUrl = `https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`;
-            const res = await fetch(`https://cors-anywhere.fly.dev/${apiUrl}`, {
-                headers: { 'User-Agent': 'AnimeQuiz/1.0' },
-                signal: controller.signal
-            });
+            const res = await fetch(proxyUrl, { signal: controller.signal });
             clearTimeout(tid);
             if (!res.ok) return false;
             const data = await res.json();
@@ -185,25 +183,21 @@ async function fetchIndexViaProxy(indexId, allSubjects) {
 
 // Fallback: parse Bangumi index HTML page via proxy
 async function fetchIndexViaHtml(indexId, allSubjects) {
+    const pageUrl = `https://bgm.tv/index/${indexId}`;
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(pageUrl)}`;
     const controller = new AbortController();
-    const tid = setTimeout(() => controller.abort(), 15000);
+    const tid = setTimeout(() => controller.abort(), 20000);
     try {
-        const pageUrl = `https://bgm.tv/index/${indexId}`;
-        const res = await fetch(`https://cors-anywhere.fly.dev/${pageUrl}`, {
-            headers: { 'User-Agent': 'AnimeQuiz/1.0' },
-            signal: controller.signal
-        });
+        const res = await fetch(proxyUrl, { signal: controller.signal });
         clearTimeout(tid);
         if (!res.ok) return;
         const html = await res.text();
-        // Parse subject IDs and names from HTML
-        const regex = /id="item_(\d+)".*?<a href="\/subject\/\d+" class="l">([^<]+)<\/a>/gs;
+        const regex = /id="item_(\d+)"[^]*?<a href="\/subject\/\d+" class="l">([^<]+)<\/a>/gs;
         let match;
         while ((match = regex.exec(html)) !== null) {
             const id = parseInt(match[1]);
             const name = match[2].trim();
-            // Find the type from the context (check for subject_type_2 = anime)
-            const typeMatch = html.substring(match.index, match.index + 500).match(/subject_type_(\d+)/);
+            const typeMatch = html.substring(match.index, match.index + 600).match(/subject_type_(\d+)/);
             const type = typeMatch ? parseInt(typeMatch[1]) : 0;
             allSubjects.push({ id, name, name_cn: '', type });
         }
