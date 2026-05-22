@@ -3,10 +3,10 @@
 ## v1 — Bug Fix & Cleanup
 
 ### PK Connection Reliability
-- [ ] **PK-01**: PK room creation adds retry logic (3 attempts, 1s backoff) with specific error messages
-- [ ] **PK-02**: PK room joining adds retry logic with better error handling
-- [ ] **PK-03**: Replace empty catch blocks in Firebase functions with console.error logging
-- [ ] **PK-04**: Add connection status check before PK operations (warn if offline)
+- [x] **PK-01**: PK room creation adds retry logic (3 attempts, 1s backoff) with specific error messages
+- [x] **PK-02**: PK room joining adds retry logic with better error handling
+- [x] **PK-03**: Replace empty catch blocks in Firebase functions with console.error logging
+- [x] **PK-04**: Add connection status check before PK operations (warn if offline)
 
 ### Error Handling
 - [ ] **ERR-01**: Replace all 14+ empty `catch {}` blocks with `console.error` + context
@@ -34,10 +34,10 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| PK-01 | 1 | — |
-| PK-02 | 1 | — |
-| PK-03 | 1 | — |
-| PK-04 | 1 | — |
+| PK-01 | 1 | Done |
+| PK-02 | 1 | Done |
+| PK-03 | 1 | Done |
+| PK-04 | 1 | Done |
 | ERR-01 | 2 | — |
 | ERR-02 | 2 | — |
 | ERR-03 | 2 | — |

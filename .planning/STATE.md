@@ -3,23 +3,23 @@
 ## Current Milestone
 
 **Milestone:** Bug Fix & Cleanup (v1)
-**Status:** Planning
+**Status:** In Progress
 
 ## Active Phase
 
-**Phase:** None (not started)
-**Current:** ROADMAP.md created, awaiting phase execution.
+**Phase:** 2 — Error Handling & Safety
+**Current:** Phase 1 complete. Phase 2 awaiting discussion and planning.
 
 ## Completed Phases
 
-None.
+- **Phase 1 — PK Connection Reliability** (completed 2026-05-23)
 
 ## Git Info
 
 | Field | Value |
 |-------|-------|
 | Branch | `master` |
-| Last Commit | `1274866` — docs: initialize project config and requirements |
+| Last Commit | `08338e0` — docs(01): add phase 1 execution summary |
 | Working Tree | Clean |
 
 ---

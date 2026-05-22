@@ -2,11 +2,11 @@
 
 ## Milestone: Bug Fix & Cleanup (v1)
 
-Status: Planning
+Status: In Progress
 
 ---
 
-### Phase 1 -- PK Connection Reliability
+### Phase 1 -- PK Connection Reliability [x] — Complete 2026-05-23
 
 **Goal:** Make multiplayer PK room creation and joining work reliably with retry logic, better error reporting, and offline detection.
 
