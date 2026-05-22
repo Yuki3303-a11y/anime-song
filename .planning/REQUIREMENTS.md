@@ -9,19 +9,19 @@
 - [x] **PK-04**: Add connection status check before PK operations (warn if offline)
 
 ### Error Handling
-- [ ] **ERR-01**: Replace all 14+ empty `catch {}` blocks with `console.error` + context
-- [ ] **ERR-02**: Replace generic error messages with specific ones ("连接失败，请检查网络" vs "加入房间失败，请检查房间号")
-- [ ] **ERR-03**: Add `confirm()` dialog before `clearCustom` operation
-- [ ] **ERR-04**: Add `confirm()` dialog before individual song deletion
+- [x] **ERR-01**: Replace all 14+ empty `catch {}` blocks with `console.error` + context
+- [x] **ERR-02**: Replace generic error messages with specific ones
+- [x] **ERR-03**: Add `confirm()` dialog before `clearCustom` operation
+- [x] **ERR-04**: Add `confirm()` dialog before individual song deletion
 
 ### Project Cleanup
-- [ ] **CLEAN-01**: Delete debug files (debug2.html through debug13.html, debug_input.html)
-- [ ] **CLEAN-02**: Delete `app_minimal.js`
-- [ ] **CLEAN-03**: Remove unused CSS classes: `.custom-import-row`, `.bangumi-input`, `.import-status`, `.import-progress-bar`, `.import-progress-fill`, `.custom-songs-list`, `.custom-empty`, `.custom-song-item`, `.custom-song-info`, `.custom-song-title`, `.custom-song-anime`, `.custom-song-del`, `.custom-actions`
-- [ ] **CLEAN-04**: Remove unused CSS animation: `@keyframes scoreBump`
-- [ ] **CLEAN-05**: Remove unused `@keyframes playRing`
-- [ ] **CLEAN-06**: Merge two separate `document.click` listeners into one handler
-- [ ] **CLEAN-07**: Extract magic numbers to named constants (timeout values)
+- [x] **CLEAN-01**: Delete debug files (debug2.html through debug13.html)
+- [x] **CLEAN-02**: Delete `app_minimal.js`
+- [x] **CLEAN-03**: Remove 14 unused CSS classes
+- [x] **CLEAN-04**: Remove unused CSS animation: `@keyframes scoreBump`
+- [x] **CLEAN-05**: Remove unused `@keyframes playRing`
+- [x] **CLEAN-06**: Merge two separate `document.click` listeners into one handler
+- [x] **CLEAN-07**: Extract 8 magic timeout/retry numbers to named constants
 
 ### Verified (no change needed)
 - ✓ Single-player quiz flow (start → load → answer → end)
@@ -38,14 +38,14 @@
 | PK-02 | 1 | Done |
 | PK-03 | 1 | Done |
 | PK-04 | 1 | Done |
-| ERR-01 | 2 | — |
-| ERR-02 | 2 | — |
-| ERR-03 | 2 | — |
-| ERR-04 | 2 | — |
-| CLEAN-01 | 3 | — |
-| CLEAN-02 | 3 | — |
-| CLEAN-03 | 3 | — |
-| CLEAN-04 | 3 | — |
-| CLEAN-05 | 3 | — |
-| CLEAN-06 | 3 | — |
-| CLEAN-07 | 3 | — |
+| ERR-01 | 2 | Done |
+| ERR-02 | 2 | Done |
+| ERR-03 | 2 | Done |
+| ERR-04 | 2 | Done |
+| CLEAN-01 | 3 | Done |
+| CLEAN-02 | 3 | Done |
+| CLEAN-03 | 3 | Done |
+| CLEAN-04 | 3 | Done |
+| CLEAN-05 | 3 | Done |
+| CLEAN-06 | 3 | Done |
+| CLEAN-07 | 3 | Done |
