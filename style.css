@@ -990,6 +990,147 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: 500;
 }
 
+.settings-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 18px 0;
+}
+
+/* Custom Songs / Bangumi Import */
+.custom-import-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.custom-import-row .input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.custom-import-row .input:focus {
+    border-color: var(--pink);
+}
+.custom-import-row .btn-sm {
+    padding: 8px 16px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.import-status {
+    font-size: 11px;
+    color: var(--text-secondary);
+    min-height: 16px;
+    margin-bottom: 4px;
+}
+
+.import-progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.import-progress-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.custom-songs-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.custom-songs-list::-webkit-scrollbar { width: 3px; }
+.custom-songs-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.custom-empty {
+    text-align: center;
+    padding: 16px;
+    font-size: 12px;
+    color: var(--text-hint);
+}
+
+.custom-song-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+}
+.custom-song-item:hover {
+    background: rgba(236, 72, 153, 0.04);
+}
+.custom-song-info {
+    flex: 1;
+    min-width: 0;
+}
+.custom-song-title {
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.custom-song-anime {
+    font-size: 11px;
+    color: var(--text-hint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.custom-song-del {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-hint);
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+.custom-song-del:hover {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: var(--accent-error);
+    color: var(--accent-error);
+}
+
+.custom-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.custom-actions .btn-ghost {
+    padding: 6px 12px;
+    font-size: 11px;
+    border-radius: 14px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+}
+.custom-actions .btn-ghost:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+}
+
 /* ===== End Modal ===== */
 .modal-bg {
     position: fixed;

@@ -69,14 +69,6 @@ const audio = $('audioEl');
 // =====================================================================
 const filterState = { years: new Set(), type: null };
 
-function getFilteredSongs() {
-    return SONGS.filter(s => {
-        if (filterState.years.size > 0 && !filterState.years.has(s.year)) return false;
-        if (filterState.type && s.type !== filterState.type) return false;
-        return true;
-    });
-}
-
 function updateFilterCount() {
     const count = getFilteredSongs().length;
     $('filterCount').textContent = `共 ${count} 首可选`;
@@ -122,6 +114,240 @@ class MemCache {
 
 const audioCache = new MemCache('audio_cache_v1', 500);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
+
+// =====================================================================
+// Custom Song Library (Bangumi Import)
+// =====================================================================
+const CUSTOM_SONGS_KEY = 'custom_songs_v1';
+
+function getCustomSongs() {
+    try { return JSON.parse(localStorage.getItem(CUSTOM_SONGS_KEY) || '[]'); }
+    catch { return []; }
+}
+
+function setCustomSongs(songs) {
+    localStorage.setItem(CUSTOM_SONGS_KEY, JSON.stringify(songs));
+    updateFilterCount();
+    updateCustomSongsUI();
+}
+
+function addCustomSong(song) {
+    const songs = getCustomSongs();
+    // Prevent exact duplicates
+    if (songs.some(s => s.title === song.title && s.anime === song.anime)) return false;
+    songs.push(song);
+    setCustomSongs(songs);
+    return true;
+}
+
+function removeCustomSong(index) {
+    const songs = getCustomSongs();
+    songs.splice(index, 1);
+    setCustomSongs(songs);
+}
+
+function getAllSongs() {
+    return [...SONGS, ...getCustomSongs()];
+}
+
+function getFilteredSongs() {
+    const all = getAllSongs();
+    return all.filter(s => {
+        if (filterState.years.size > 0 && !filterState.years.has(s.year)) return false;
+        if (filterState.type && s.type !== filterState.type) return false;
+        return true;
+    });
+}
+
+// Import anime from Bangumi index and search for songs
+async function importFromBangumi(indexId) {
+    const statusEl = $('importStatus');
+    const progressEl = $('importProgress');
+    if (statusEl) statusEl.textContent = '获取目录中...';
+    if (progressEl) progressEl.style.width = '0%';
+
+    // Step 1: Fetch all subjects from the index
+    let allSubjects = [];
+    let offset = 0;
+    while (true) {
+        const controller = new AbortController();
+        const tid = setTimeout(() => controller.abort(), 8000);
+        try {
+            const res = await fetch(`https://api.bgm.tv/v0/indices/${indexId}/subjects?limit=100&offset=${offset}`, {
+                headers: { 'User-Agent': 'AnimeQuiz/1.0' },
+                signal: controller.signal
+            });
+            clearTimeout(tid);
+            if (!res.ok) { notify('目录不存在或无法访问'); return; }
+            const data = await res.json();
+            const batch = data.data || [];
+            allSubjects.push(...batch);
+            if (batch.length < 100) break;
+            offset += 100;
+        } catch { clearTimeout(tid); notify('网络错误，请重试'); return; }
+    }
+
+    // Filter to anime only (type=2)
+    const animeList = allSubjects.filter(s => s.type === 2);
+    if (animeList.length === 0) { notify('该目录中没有动画'); return; }
+
+    if (statusEl) statusEl.textContent = `找到 ${animeList.length} 部动画，搜索歌曲中...`;
+
+    // Step 2: For each anime, search for songs via AniList + iTunes
+    const existingTitles = new Set(SONGS.map(s => s.anime));
+    const customSongs = getCustomSongs();
+    const customTitles = new Set(customSongs.map(s => s.anime));
+    let addedCount = 0;
+
+    for (let i = 0; i < animeList.length; i++) {
+        const anime = animeList[i];
+        const animeName = anime.name_cn || anime.name;
+        if (progressEl) progressEl.style.width = ((i + 1) / animeList.length * 100) + '%';
+        if (statusEl) statusEl.textContent = `[${i + 1}/${animeList.length}] ${animeName}`;
+
+        // Skip if already in built-in or custom library
+        if (existingTitles.has(animeName) || customTitles.has(animeName)) continue;
+
+        // Get romaji title from AniList for better iTunes search
+        let searchTitle = anime.name; // Japanese name
+        let year = anime.date ? parseInt(anime.date.slice(0, 4)) : 2020;
+
+        try {
+            const aq = `query($s:String){Media(search:$s,type:ANIME){title{romaji native}}}`;
+            const ares = await fetch('https://graphql.anilist.co', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: aq, variables: { s: animeName } })
+            });
+            const adata = await ares.json();
+            if (adata.data?.Media?.title?.romaji) {
+                searchTitle = adata.data.Media.title.romaji;
+            }
+        } catch {}
+
+        // Search iTunes for songs
+        const songs = await searchItunesForAnime(searchTitle, animeName, year);
+        for (const song of songs) {
+            if (addCustomSong(song)) addedCount++;
+        }
+
+        // Small delay to avoid rate limiting
+        await new Promise(r => setTimeout(r, 300));
+    }
+
+    if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
+    if (progressEl) progressEl.style.width = '100%';
+    notify(`🎵 导入完成，新增 ${addedCount} 首歌曲`);
+}
+
+// Search iTunes for anime OP/ED songs
+async function searchItunesForAnime(romajiTitle, animeName, year) {
+    const results = [];
+    const seen = new Set();
+
+    // Search with romaji + anime
+    for (const term of [`${romajiTitle} anime`, romajiTitle]) {
+        const controller = new AbortController();
+        const tid = setTimeout(() => controller.abort(), 5000);
+        try {
+            const res = await fetch(
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=5&country=JP`,
+                { signal: controller.signal }
+            );
+            clearTimeout(tid);
+            const data = await res.json();
+            for (const r of (data.results || [])) {
+                const title = r.trackName;
+                if (!title || seen.has(title)) continue;
+                seen.add(title);
+                results.push({
+                    title: title,
+                    titleCN: title,
+                    anime: animeName,
+                    artist: r.artistName || 'Unknown',
+                    year: year,
+                    type: guessSongType(title),
+                });
+            }
+            if (results.length > 0) break;
+        } catch { clearTimeout(tid); }
+    }
+    return results.slice(0, 2); // Max 2 songs per anime
+}
+
+// Guess if a song is OP/ED/IN based on its title
+function guessSongType(title) {
+    const t = title.toLowerCase();
+    if (/\bop\b|opening/.test(t)) return 'OP';
+    if (/\bed\b|ending/.test(t)) return 'ED';
+    return 'OP'; // Default to OP
+}
+
+// Export custom songs as JSON file
+function exportCustomSongs() {
+    const songs = getCustomSongs();
+    if (songs.length === 0) { notify('没有自定义歌曲可导出'); return; }
+    const blob = new Blob([JSON.stringify(songs, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `anime-quiz-songs-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    notify('已导出自定义曲库');
+}
+
+// Import custom songs from JSON file
+function importCustomSongsFile(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+        try {
+            const songs = JSON.parse(reader.result);
+            if (!Array.isArray(songs)) { notify('文件格式错误'); return; }
+            const existing = getCustomSongs();
+            const existingKeys = new Set(existing.map(s => s.title + '|' + s.anime));
+            let added = 0;
+            for (const s of songs) {
+                if (!s.title || !s.anime) continue;
+                const key = s.title + '|' + s.anime;
+                if (existingKeys.has(key)) continue;
+                existing.push({
+                    title: s.title,
+                    titleCN: s.titleCN || s.title,
+                    anime: s.anime,
+                    artist: s.artist || 'Unknown',
+                    year: s.year || 2020,
+                    type: s.type || 'OP',
+                });
+                existingKeys.add(key);
+                added++;
+            }
+            setCustomSongs(existing);
+            notify(`🎵 导入 ${added} 首新歌曲`);
+        } catch { notify('文件解析失败'); }
+    };
+    reader.readAsText(file);
+}
+
+// Update custom songs list in settings UI
+function updateCustomSongsUI() {
+    const list = $('customSongsList');
+    if (!list) return;
+    const songs = getCustomSongs();
+    if (songs.length === 0) {
+        list.innerHTML = '<div class="custom-empty">暂无自定义歌曲</div>';
+        return;
+    }
+    list.innerHTML = songs.map((s, i) => `
+        <div class="custom-song-item">
+            <div class="custom-song-info">
+                <div class="custom-song-title">${s.titleCN || s.title}</div>
+                <div class="custom-song-anime">${s.anime}</div>
+            </div>
+            <button class="custom-song-del" data-del-custom="${i}" aria-label="删除">✕</button>
+        </div>
+    `).join('');
+}
 
 // Best-match logic for Bangumi search results
 function pickBestBGMResult(list, animeName) {
@@ -1091,6 +1317,38 @@ document.addEventListener('click', (e) => {
         case 'closeSettings': closeSettings(); break;
         case 'closeDetail': $('animeDetailModal').classList.remove('show'); break;
         case 'nextQuestion': nextQuestion(); break;
+        case 'importBangumi': {
+            const input = $('bangumiIndexInput');
+            const id = input ? input.value.trim() : '';
+            if (!id || !/^\d+$/.test(id)) { notify('请输入有效的目录号'); return; }
+            importFromBangumi(id);
+            break;
+        }
+        case 'exportCustom': exportCustomSongs(); break;
+        case 'importCustom': $('importFileInput')?.click(); break;
+        case 'clearCustom': {
+            if (getCustomSongs().length === 0) { notify('没有自定义歌曲'); return; }
+            setCustomSongs([]);
+            notify('已清空自定义曲库');
+            break;
+        }
+    }
+});
+
+// Handle file input for importing custom songs
+document.addEventListener('change', (e) => {
+    if (e.target.id === 'importFileInput' && e.target.files[0]) {
+        importCustomSongsFile(e.target.files[0]);
+        e.target.value = '';
+    }
+});
+
+// Handle delete buttons for individual custom songs (event delegation)
+document.addEventListener('click', (e) => {
+    const delBtn = e.target.closest('[data-del-custom]');
+    if (delBtn) {
+        const index = parseInt(delBtn.dataset.delCustom);
+        if (!isNaN(index)) removeCustomSong(index);
     }
 });
 
@@ -1100,3 +1358,4 @@ document.addEventListener('click', (e) => {
 initSakura();
 initFilters();
 initQuestionCount();
+updateCustomSongsUI();

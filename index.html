@@ -212,6 +212,25 @@
                     <div class="settings-chips settings-chips-wrap" id="yearChips"></div>
                 </div>
                 <div class="settings-count" id="filterCount"></div>
+
+                <div class="settings-divider"></div>
+
+                <div class="settings-group">
+                    <div class="settings-label">📚 自定义曲库</div>
+                    <div class="custom-import-row">
+                        <input class="input" id="bangumiIndexInput" placeholder="Bangumi目录号 (如 75323)" inputmode="numeric">
+                        <button class="btn btn-primary btn-sm" data-action="importBangumi">导入</button>
+                    </div>
+                    <div id="importStatus" class="import-status"></div>
+                    <div class="import-progress-bar"><div id="importProgress" class="import-progress-fill"></div></div>
+                    <div id="customSongsList" class="custom-songs-list"></div>
+                    <div class="custom-actions">
+                        <button class="btn-ghost btn-sm" data-action="exportCustom">📤 导出JSON</button>
+                        <button class="btn-ghost btn-sm" data-action="importCustom">📥 导入JSON</button>
+                        <button class="btn-ghost btn-sm" data-action="clearCustom">🗑️ 清空</button>
+                        <input type="file" id="importFileInput" accept=".json" style="display:none">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
