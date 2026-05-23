@@ -153,8 +153,10 @@ const youtubeCache = new MemCache('youtube_cache_v1', 200);
 // =====================================================================
 // YouTube Data API keys — add more to increase daily quota (100 searches/key/day)
 const YT_API_KEYS = [
-    'AIzaSyDD0nNleGHHrbuMahHvoPGJCJe4a8zKIV8',  // new key
-    'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU',  // old key
+    'AIzaSyDD0nNleGHHrbuMahHvoPGJCJe4a8zKIV8',
+    'AIzaSyDLd9r91wT0DZdQmTKlXxZCdYFtZBsaasY',
+    'AIzaSyBXRRu63opUKrGQhu3E5yUI9gYUTedxLrQ',
+    'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU',
 ];
 let ytKeyIndex = 0;
 const ytKeyExhausted = new Set(); // indices of keys known to be over quota
