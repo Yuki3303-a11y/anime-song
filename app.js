@@ -142,6 +142,10 @@ let ytReady = false;
 let fpProgressInterval = null;
 let musicProgressInterval = null;
 
+// Quiz YouTube fallback state
+const quizYT = { active: false, videoId: null, timer: null };
+let quizProgressInterval = null;
+
 // Playlist state for home page music playback
 const playlist = {
     songs: [],
@@ -169,6 +173,16 @@ function loadYouTubeAPI() {
 
 function onYtError(e) {
     // YouTube error codes: 2=invalid param, 5=HTML5 error, 100=not found, 101/150=not embeddable
+    if (quizYT.active) {
+        notify('YouTube音频加载失败，跳过此题...');
+        stopQuizYT();
+        gameState.isPlaying = false;
+        $('visualizer').classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        gameState.questionIndex++;
+        setTimeout(() => loadQuestion(), 1500);
+        return;
+    }
     notify('该歌曲暂时无法播放，跳到下一首...');
     if (playlist.mode !== 'free' && playlist.songs.length > 1) {
         setTimeout(() => playNextSong(), 1500);
@@ -176,6 +190,25 @@ function onYtError(e) {
 }
 
 function onYtStateChange(e) {
+    // Quiz YouTube fallback — update quiz player UI
+    if (quizYT.active) {
+        if (e.data === YT.PlayerState.PLAYING) {
+            $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            gameState.isPlaying = true;
+            $('visualizer').classList.remove('hidden');
+            startQuizProgress();
+        } else if (e.data === YT.PlayerState.ENDED) {
+            stopQuizYT();
+            gameState.isPlaying = false;
+            $('visualizer').classList.add('hidden');
+            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        } else {
+            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+            stopQuizProgress();
+        }
+        return; // Don't also update full player / music player
+    }
+
     // Update detail modal player UI
     const icon = $('fpPlayIcon');
     const wave = $('fpWave');
@@ -1489,6 +1522,7 @@ function showView(viewName) {
     if (roomUnsub) { roomUnsub(); roomUnsub = null; }
     stopFullPlayer();
     hideMusicPlayer();
+    stopQuizYT();
     if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
     stopMusicProgress();
     audio.pause();
@@ -1683,6 +1717,7 @@ function checkInvite() {
 // Game Core
 // =====================================================================
 function loadQuestion() {
+    stopQuizYT();
     if (gameState.questionIndex >= gameState.playlist.length) {
         endGame();
         return;
@@ -1740,9 +1775,19 @@ function loadQuestion() {
             loadQuestion();
             return;
         }
-        audio.src = url;
-        $('playBtn').disabled = false;
-        $('playerStatus').textContent = '点击播放';
+        if (url.startsWith('yt:')) {
+            // YouTube fallback — use ytPlayer for 30s quiz clip
+            quizYT.active = true;
+            quizYT.videoId = url.slice(3);
+            $('playBtn').disabled = false;
+            $('playerStatus').textContent = '点击播放 (YouTube源)';
+        } else {
+            quizYT.active = false;
+            quizYT.videoId = null;
+            audio.src = url;
+            $('playBtn').disabled = false;
+            $('playerStatus').textContent = '点击播放';
+        }
         renderOptions(gameState.correctAnime);
     });
 }
@@ -1795,33 +1840,40 @@ async function fetchAudio(title, artist, anime) {
                     const s = scoreMatch(r);
                     if (s > bestScore) { bestScore = s; best = r; }
                 }
-                // Only accept if we have a reasonable match
-                if (best && bestScore >= 30) return best.previewUrl;
-                // Fallback: first result if title roughly matches
-                if (data.results[0].trackName?.toLowerCase().includes(title.toLowerCase().slice(0, 5))) {
-                    return data.results[0].previewUrl;
-                }
+                if (best && bestScore >= 30) return { url: best.previewUrl, score: bestScore };
+                // Low confidence — return score but no URL
+                if (best) return { url: null, score: bestScore };
             }
         } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
-        return null;
+        return { url: null, score: -1 };
     }
 
     // Try 1: artist + title (most precise)
     if (artist) {
-        const url = await searchItunes(`${artist} ${title}`);
-        if (url) { audioCache.set(cacheKey, url); return url; }
+        const r = await searchItunes(`${artist} ${title}`);
+        if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
     }
 
     // Try 2: title + anime (anime name helps disambiguate)
     {
-        const url = await searchItunes(`${title} ${anime}`);
-        if (url) { audioCache.set(cacheKey, url); return url; }
+        const r = await searchItunes(`${title} ${anime}`);
+        if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
     }
 
     // Try 3: just title
     {
-        const url = await searchItunes(title);
-        if (url) { audioCache.set(cacheKey, url); return url; }
+        const r = await searchItunes(title);
+        if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
+    }
+
+    // All iTunes attempts failed or low confidence — fall back to YouTube
+    console.log(`[Audio] iTunes miss for "${title}" by "${artist}", trying YouTube fallback`);
+    const ytQuery = `${title} ${anime} ${artist || ''}`;
+    const ytVideoId = await searchYouTube(ytQuery);
+    if (ytVideoId) {
+        const ytUrl = `yt:${ytVideoId}`;
+        audioCache.set(cacheKey, ytUrl);
+        return ytUrl;
     }
 
     return null;
@@ -1846,6 +1898,7 @@ function handleAnswer(btn, selected) {
     if (gameState.isLocked) return;
     gameState.isLocked = true;
     audio.pause();
+    stopQuizYT();
     gameState.isPlaying = false;
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
@@ -1926,26 +1979,73 @@ let playLock = false;
 function togglePlay() {
     if (playLock) return;
     if (gameState.isPlaying) {
-        audio.pause();
+        if (quizYT.active) {
+            stopQuizYT();
+        } else {
+            audio.pause();
+        }
         gameState.isPlaying = false;
         $('visualizer').classList.add('hidden');
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     } else {
-        if (audioContext) audioContext.resume();
-        playLock = true;
-        gameState.isPlaying = true;
-        $('visualizer').classList.remove('hidden');
-        $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-        const lockTimeout = setTimeout(() => { playLock = false; }, 5000);
-        audio.play().then(() => { clearTimeout(lockTimeout); playLock = false; }).catch(() => {
-            clearTimeout(lockTimeout);
-            playLock = false;
-            gameState.isPlaying = false;
-            $('visualizer').classList.add('hidden');
-            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-            notify('喵呜~ 音频播放失败了...再试一次吧');
-        });
+        if (quizYT.active) {
+            // YouTube quiz playback — play 30s clip
+            if (!ytPlayer || !ytReady || !quizYT.videoId) { notify('播放器未就绪'); return; }
+            stopFullPlayer();
+            stopMusicPlayer();
+            ytPlayer.loadVideoById({ videoId: quizYT.videoId, startSeconds: 0 });
+            // Auto-stop after 30 seconds
+            quizYT.timer = setTimeout(() => {
+                if (quizYT.active) {
+                    stopQuizYT();
+                    gameState.isPlaying = false;
+                    $('visualizer').classList.add('hidden');
+                    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+                }
+            }, 30000);
+        } else {
+            // Normal iTunes playback
+            if (audioContext) audioContext.resume();
+            playLock = true;
+            gameState.isPlaying = true;
+            $('visualizer').classList.remove('hidden');
+            $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            const lockTimeout = setTimeout(() => { playLock = false; }, 5000);
+            audio.play().then(() => { clearTimeout(lockTimeout); playLock = false; }).catch(() => {
+                clearTimeout(lockTimeout);
+                playLock = false;
+                gameState.isPlaying = false;
+                $('visualizer').classList.add('hidden');
+                $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+                notify('喵呜~ 音频播放失败了...再试一次吧');
+            });
+        }
     }
+}
+
+function stopQuizYT() {
+    if (quizYT.timer) { clearTimeout(quizYT.timer); quizYT.timer = null; }
+    stopQuizProgress();
+    quizYT.active = false;
+    quizYT.videoId = null;
+    if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+}
+
+function startQuizProgress() {
+    stopQuizProgress();
+    const duration = 30; // quiz clips are 30 seconds
+    quizProgressInterval = setInterval(() => {
+        if (!ytPlayer || !ytPlayer.getCurrentTime) return;
+        const t = ytPlayer.getCurrentTime();
+        $('progressFill').style.width = Math.min(t / duration * 100, 100) + '%';
+        const cur = formatTime(t);
+        const dur = formatTime(duration);
+        $('playerStatus').textContent = `${cur} / ${dur} (YouTube源)`;
+    }, 250);
+}
+
+function stopQuizProgress() {
+    if (quizProgressInterval) { clearInterval(quizProgressInterval); quizProgressInterval = null; }
 }
 
 audio.onended = () => {
