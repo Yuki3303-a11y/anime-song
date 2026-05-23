@@ -684,6 +684,8 @@ body {
     background: var(--accent-gradient);
     border-radius: 3px;
     animation: visBounce ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .player-status {
@@ -2198,8 +2200,9 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     pointer-events: none;
     z-index: -1;
-    filter: blur(60px);
+    filter: blur(40px);
     opacity: 0.4;
+    will-change: transform;
 }
 
 .bg-deco-1 {
@@ -2209,6 +2212,7 @@ input[type="range"]::-webkit-slider-thumb {
     top: -80px;
     right: -80px;
     animation: decoFloat1 20s ease-in-out infinite alternate;
+    transform: translateZ(0);
 }
 
 .bg-deco-2 {
@@ -2218,6 +2222,7 @@ input[type="range"]::-webkit-slider-thumb {
     bottom: -60px;
     left: -60px;
     animation: decoFloat2 25s ease-in-out infinite alternate;
+    transform: translateZ(0);
 }
 
 .bg-deco-3 {
@@ -2228,6 +2233,7 @@ input[type="range"]::-webkit-slider-thumb {
     left: 50%;
     animation: decoFloat3 18s ease-in-out infinite alternate;
     opacity: 0.2;
+    transform: translateZ(0);
 }
 
 @keyframes decoFloat1 {

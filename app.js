@@ -103,6 +103,7 @@ class MemCache {
         this._ttlMs = ttlMs;       // undefined = no expiry
         this._data = null;
         this._dirty = false;
+        this._timer = 0;
     }
     _load() {
         if (this._data) return;
@@ -118,7 +119,7 @@ class MemCache {
             if (Date.now() - entry.ts > this._ttlMs) {
                 delete this._data[k];
                 this._dirty = true;
-                this._flush();
+                this._scheduleFlush();
                 return null;
             }
             return entry.value;
@@ -134,9 +135,20 @@ class MemCache {
         if (keys.length > this._max) {
             keys.slice(0, keys.length - this._max).forEach(k => delete this._data[k]);
         }
-        this._flush();
+        this._scheduleFlush();
+    }
+    _scheduleFlush() {
+        if (this._timer) return;
+        this._timer = setTimeout(() => {
+            this._timer = 0;
+            if (!this._dirty) return;
+            try { localStorage.setItem(this._key, JSON.stringify(this._data)); }
+            catch (e) { console.error('[Cache] _flush:', e); }
+            this._dirty = false;
+        }, 200);
     }
     _flush() {
+        if (this._timer) { clearTimeout(this._timer); this._timer = 0; }
         if (!this._dirty) return;
         try { localStorage.setItem(this._key, JSON.stringify(this._data)); }
         catch (e) { console.error('[Cache] _flush:', e); }
@@ -1487,15 +1499,19 @@ function initSakura() {
     const ctx = canvas.getContext('2d');
     let petals = [];
     let stars = [];
-    const PETAL_COUNT = 25;
-    const STAR_COUNT = 15;
+    const PETAL_COUNT = 15;
+    const STAR_COUNT = 8;
 
+    let resizeTimer = 0;
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 200);
+    });
 
     class Petal {
         constructor() { this.reset(true); }
@@ -1570,13 +1586,17 @@ function initSakura() {
     for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal());
     for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
 
-    function animate() {
+    let lastFrame = 0;
+    function animate(ts) {
+        // Cap at ~24fps to reduce CPU/GPU load on mobile
+        if (ts - lastFrame < 42) { requestAnimationFrame(animate); return; }
+        lastFrame = ts;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         stars.forEach(s => { s.update(); s.draw(); });
         petals.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
-    animate();
+    requestAnimationFrame(animate);
 }
 
 // =====================================================================
