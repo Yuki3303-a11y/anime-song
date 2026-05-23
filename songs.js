@@ -455,8 +455,7 @@ export const SONGS = [
     { titleCN: "Lemon", title: "Lemon", anime: "非自然死亡", artist: "米津玄师", year: 2018, type: "ED" },
 
     // ===== 青春猪头少年 =====
-    { titleCN: "Dramaturgy", title: "Dramaturgy", anime: "青春猪头少年", artist: "Eve", year: 2018, type: "OP" },
-    { titleCN: "怪物", title: "Kaibutsu", anime: "青春猪头少年", artist: "Eve", year: 2019, type: "OP" },
+    { titleCN: "君のせい", title: "Kimi no Sei", anime: "青春猪头少年", artist: "the peggies", year: 2018, type: "OP" },
     { titleCN: "不可思議のカルテ", title: "Fukashigi no Karte", anime: "青春猪头少年", artist: "赤崎千夏", year: 2018, type: "ED" },
 
     // ===== 天气之子 =====
