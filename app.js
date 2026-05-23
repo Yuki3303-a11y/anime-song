@@ -2051,6 +2051,7 @@ async function fetchAudio(title, artist, anime) {
         const a = (r.artistName || '').toLowerCase();
         const lt = title.toLowerCase();
         const la = (artist || '').toLowerCase();
+        const lan = (anime || '').toLowerCase();
 
         let score = 0;
 
@@ -2060,11 +2061,17 @@ async function fetchAudio(title, artist, anime) {
         else if (t.includes(lt) || lt.includes(t)) score += 30;
         else return -1; // no title match at all — reject
 
-        // Artist match
-        if (la && (a.includes(la) || la.includes(a))) score += 50;
-        else if (la) score -= 20; // artist mismatch penalty
+        // Artist match — exact match gets full bonus, partial gets less
+        if (la) {
+            if (a === la) score += 50;
+            else if (a.includes(la) || la.includes(a)) score += 25;
+            else score -= 20; // artist mismatch penalty
+        }
 
-        // Album name contains title (bonus for anime OSTs)
+        // Album/collection name contains anime name (strong signal for anime songs)
+        if (lan && c.includes(lan)) score += 30;
+
+        // Bonus: album name contains title (common for singles/OSTs)
         if (c.includes(lt)) score += 10;
 
         return score;
@@ -2088,7 +2095,7 @@ async function fetchAudio(title, artist, anime) {
                     const s = scoreMatch(r);
                     if (s > bestScore) { bestScore = s; best = r; }
                 }
-                if (best && bestScore >= 30) return { url: best.previewUrl, score: bestScore };
+                if (best && bestScore >= 40) return { url: best.previewUrl, score: bestScore };
                 // Low confidence — return score but no URL
                 if (best) return { url: null, score: bestScore };
             }
@@ -2102,13 +2109,19 @@ async function fetchAudio(title, artist, anime) {
         if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
     }
 
-    // Try 2: title + anime (anime name helps disambiguate)
+    // Try 2: artist + title + anime (full context disambiguation)
+    if (artist) {
+        const r = await searchItunes(`${artist} ${title} ${anime}`);
+        if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
+    }
+
+    // Try 3: title + anime (anime name helps disambiguate even without artist)
     {
         const r = await searchItunes(`${title} ${anime}`);
         if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
     }
 
-    // Try 3: just title
+    // Try 4: just title (last resort before YouTube)
     {
         const r = await searchItunes(title);
         if (r.url) { audioCache.set(cacheKey, r.url); return r.url; }
