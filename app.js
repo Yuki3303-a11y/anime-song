@@ -463,15 +463,10 @@ async function searchAndLoadFullSong(song) {
     const lastAudio = gameState.lastAudioResult;
     let videoId = null;
 
-    // If YouTube player is not ready (common on mobile), skip straight to iTunes fallback
-    if (!ytPlayer || !ytReady) {
-        videoId = null;
-    }
-    // If quiz audio was YouTube, reuse the EXACT same video — no new search
-    else if (lastAudio && lastAudio.source === 'youtube' && lastAudio.ytVideoId) {
+    // Get a videoId regardless of ytReady — always search so we can at least show a YT link
+    if (lastAudio && lastAudio.source === 'youtube' && lastAudio.ytVideoId) {
         videoId = lastAudio.ytVideoId;
     } else {
-        // Build YouTube query — prefer iTunes-discovered metadata for accuracy
         let query;
         if (lastAudio && lastAudio.source === 'itunes' && lastAudio.itunesTrack) {
             query = `${lastAudio.itunesTrack} ${lastAudio.itunesArtist || ''} ${song.anime}`;
@@ -483,11 +478,12 @@ async function searchAndLoadFullSong(song) {
         videoId = await searchYouTube(query);
     }
 
-    if (videoId) {
+    // YouTube found AND player is ready → play embedded (desktop)
+    if (videoId && ytPlayer && ytReady) {
         if (!$('animeDetailModal').classList.contains('show')) return;
         playerEl.style.display = '';
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
-        $('fpSource').textContent = lastAudio?.source === 'youtube' ? '' : '';
+        $('fpSource').textContent = '';
         const yl = $('fpYtLink'); if (yl) yl.style.display = 'none';
         updateHeartUI();
         const fpCover = $('fpCover');
@@ -501,16 +497,14 @@ async function searchAndLoadFullSong(song) {
             fpCover.style.display = 'none';
             if (fpFallback) fpFallback.style.display = '';
         }
-        if (ytPlayer && ytPlayer.cueVideoById) {
-            ytPlayer.cueVideoById(videoId);
-        }
+        ytPlayer.cueVideoById(videoId);
         return;
     }
 
-    // YouTube failed or player not ready — fall back to iTunes preview
+    // YouTube found but player not ready → fall back to iTunes + show YT link (mobile)
+    // YouTube not found → fall back to iTunes only
     if (!$('animeDetailModal').classList.contains('show')) return;
 
-    // If we have a videoId but player isn't ready, show a YT link for mobile users
     const ytLinkEl = $('fpYtLink');
     if (ytLinkEl && videoId) {
         ytLinkEl.href = `https://www.youtube.com/watch?v=${videoId}`;
