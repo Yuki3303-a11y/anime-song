@@ -239,7 +239,7 @@ function loadYouTubeAPI() {
         if (loadFailed) return;
         try {
             ytPlayer = new YT.Player('ytPlayerEl', {
-                height: '1', width: '1',
+                height: '200', width: '300',
                 playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
                 events: {
                     onReady: () => { ytReady = true; },
