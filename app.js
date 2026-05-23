@@ -219,21 +219,11 @@ function loadYouTubeAPI() {
         if (!ytReady) {
             loadFailed = true;
             console.error('[YT] IFrame API load timeout (15s)');
-            $('playerStatus').textContent = '播放器加载失败';
             notify('YouTube播放器加载超时，请检查网络或关闭广告拦截插件后刷新页面');
         }
     }, 15000);
 
-    tag.onload = () => clearTimeout(failTimer);
-    tag.onerror = () => {
-        clearTimeout(failTimer);
-        loadFailed = true;
-        console.error('[YT] IFrame API script load error');
-        notify('YouTube播放器加载失败，请检查网络或关闭广告拦截插件后刷新页面');
-    };
-
-    document.head.appendChild(tag);
-
+    // MUST define callback BEFORE appending script — mobile browsers may load instantly
     window.onYouTubeIframeAPIReady = () => {
         clearTimeout(failTimer);
         if (loadFailed) return;
@@ -252,6 +242,15 @@ function loadYouTubeAPI() {
             notify('YouTube播放器初始化失败，请刷新页面重试');
         }
     };
+
+    tag.onerror = () => {
+        clearTimeout(failTimer);
+        loadFailed = true;
+        console.error('[YT] IFrame API script load error');
+        notify('YouTube播放器加载失败，请检查网络或关闭广告拦截插件后刷新页面');
+    };
+
+    document.head.appendChild(tag);
 }
 
 function onYtError(e) {
@@ -425,7 +424,7 @@ async function searchYouTube(query) {
         const key = YT_API_KEYS[idx];
         try {
             const res = await fetch(
-                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
             );
             if (res.status === 403 || res.status === 429) {
                 console.warn('[YT] Key #' + idx + ' quota exceeded, switching...');
