@@ -156,6 +156,7 @@ const YT_API_KEYS = [
     'AIzaSyDD0nNleGHHrbuMahHvoPGJCJe4a8zKIV8',
     'AIzaSyDLd9r91wT0DZdQmTKlXxZCdYFtZBsaasY',
     'AIzaSyBXRRu63opUKrGQhu3E5yUI9gYUTedxLrQ',
+    'AIzaSyBNFNUYb7cN9q6ROEslJwU16K5tqxXu9o0',
     'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU',
 ];
 let ytKeyIndex = 0;
