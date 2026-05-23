@@ -56,6 +56,7 @@ const gameState = {
     correctCount: 0,
     answerHistory: [],
     viewingHistory: false,
+    fetchGeneration: 0,
 };
 
 function getMaxScore(n) {
@@ -96,9 +97,10 @@ function updateFilterCount() {
 // In-Memory Cache Layer (reads localStorage once, fast access after)
 // =====================================================================
 class MemCache {
-    constructor(key, maxEntries) {
+    constructor(key, maxEntries, ttlMs) {
         this._key = key;
         this._max = maxEntries;
+        this._ttlMs = ttlMs;       // undefined = no expiry
         this._data = null;
         this._dirty = false;
     }
@@ -109,11 +111,24 @@ class MemCache {
     }
     get(k) {
         this._load();
-        return this._data[k] || null;
+        const entry = this._data[k];
+        if (!entry) return null;
+        // With TTL, entries are { value, ts } wrappers; check expiry
+        if (this._ttlMs && typeof entry === 'object' && 'ts' in entry) {
+            if (Date.now() - entry.ts > this._ttlMs) {
+                delete this._data[k];
+                this._dirty = true;
+                this._flush();
+                return null;
+            }
+            return entry.value;
+        }
+        return entry;
     }
     set(k, v) {
         this._load();
-        this._data[k] = v;
+        const stored = this._ttlMs ? { value: v, ts: Date.now() } : v;
+        this._data[k] = stored;
         this._dirty = true;
         const keys = Object.keys(this._data);
         if (keys.length > this._max) {
@@ -129,7 +144,7 @@ class MemCache {
     }
 }
 
-const audioCache = new MemCache('audio_cache_v2', 500);
+const audioCache = new MemCache('audio_cache_v2', 500, 24 * 60 * 60 * 1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
 
@@ -140,7 +155,9 @@ const YT_API_KEY = 'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU';
 let ytPlayer = null;
 let ytReady = false;
 let fpProgressInterval = null;
+let fpAudioInterval = null;
 let musicProgressInterval = null;
+let fpUseAudio = false;  // true when full player falls back to native <audio>
 
 // Quiz YouTube fallback state
 const quizYT = { active: false, videoId: null, timer: null };
@@ -157,24 +174,61 @@ const playlist = {
 function loadYouTubeAPI() {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
+
+    let loadFailed = false;
+    const failTimer = setTimeout(() => {
+        if (!ytReady) {
+            loadFailed = true;
+            console.error('[YT] IFrame API load timeout (15s)');
+            $('playerStatus').textContent = '播放器加载失败';
+            notify('YouTube播放器加载超时，请检查网络或关闭广告拦截插件后刷新页面');
+        }
+    }, 15000);
+
+    tag.onload = () => clearTimeout(failTimer);
+    tag.onerror = () => {
+        clearTimeout(failTimer);
+        loadFailed = true;
+        console.error('[YT] IFrame API script load error');
+        notify('YouTube播放器加载失败，请检查网络或关闭广告拦截插件后刷新页面');
+    };
+
     document.head.appendChild(tag);
+
     window.onYouTubeIframeAPIReady = () => {
-        ytPlayer = new YT.Player('ytPlayerEl', {
-            height: '1', width: '1',
-            playerVars: { autoplay: 0, controls: 0, disablekb: 1 },
-            events: {
-                onReady: () => { ytReady = true; },
-                onStateChange: onYtStateChange,
-                onError: onYtError
-            }
-        });
+        clearTimeout(failTimer);
+        if (loadFailed) return;
+        try {
+            ytPlayer = new YT.Player('ytPlayerEl', {
+                height: '1', width: '1',
+                playerVars: { autoplay: 0, controls: 0, disablekb: 1 },
+                events: {
+                    onReady: () => { ytReady = true; },
+                    onStateChange: onYtStateChange,
+                    onError: onYtError
+                }
+            });
+        } catch (e) {
+            console.error('[YT] Player constructor failed:', e);
+            notify('YouTube播放器初始化失败，请刷新页面重试');
+        }
     };
 }
 
 function onYtError(e) {
     // YouTube error codes: 2=invalid param, 5=HTML5 error, 100=not found, 101/150=not embeddable
+    const errorReasons = {
+        2: '参数无效',
+        5: '播放出错（HTML5播放器问题）',
+        100: '视频未找到或已下架',
+        101: '视频不允许嵌入播放',
+        150: '视频不允许嵌入播放'
+    };
+    const reason = errorReasons[e.data] || `播放出错（错误码${e.data}）`;
+
+    // Quiz YouTube fallback — skip this question
     if (quizYT.active) {
-        notify('YouTube音频加载失败，跳过此题...');
+        notify(`YouTube音频加载失败（${reason}），已跳过此题`);
         stopQuizYT();
         gameState.isPlaying = false;
         $('visualizer').classList.add('hidden');
@@ -183,10 +237,26 @@ function onYtError(e) {
         setTimeout(() => loadQuestion(), 1500);
         return;
     }
-    notify('该歌曲暂时无法播放，跳到下一首...');
-    if (playlist.mode !== 'free' && playlist.songs.length > 1) {
-        setTimeout(() => playNextSong(), 1500);
+
+    // Detail modal full player — just stop, don't skip
+    if ($('animeDetailModal').classList.contains('show')) {
+        notify(`该歌曲暂时无法播放（${reason}）`);
+        stopFullPlayer();
+        return;
     }
+
+    // Music modal (favorites playlist) — stop and skip to next
+    if ($('musicModal').classList.contains('show')) {
+        notify(`该歌曲暂时无法播放（${reason}），跳到下一首`);
+        stopMusicPlayer();
+        if (playlist.mode !== 'free' && playlist.songs.length > 1) {
+            setTimeout(() => playNextSong(), 1500);
+        }
+        return;
+    }
+
+    // Fallback
+    notify(`播放出错（${reason}）`);
 }
 
 function onYtStateChange(e) {
@@ -197,6 +267,16 @@ function onYtStateChange(e) {
             gameState.isPlaying = true;
             $('visualizer').classList.remove('hidden');
             startQuizProgress();
+            // Start 30s timer from actual playback start (not load time)
+            clearTimeout(quizYT.timer);
+            quizYT.timer = setTimeout(() => {
+                if (quizYT.active) {
+                    stopQuizYT();
+                    gameState.isPlaying = false;
+                    $('visualizer').classList.add('hidden');
+                    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+                }
+            }, 30000);
         } else if (e.data === YT.PlayerState.ENDED) {
             stopQuizYT();
             gameState.isPlaying = false;
@@ -209,7 +289,8 @@ function onYtStateChange(e) {
         return; // Don't also update full player / music player
     }
 
-    // Update detail modal player UI
+    // Update detail modal player UI (only in YouTube mode)
+    if (fpUseAudio) return;
     const icon = $('fpPlayIcon');
     const wave = $('fpWave');
     if (icon) {
@@ -266,6 +347,22 @@ function stopFpProgress() {
     if (fpProgressInterval) { clearInterval(fpProgressInterval); fpProgressInterval = null; }
 }
 
+function startFpAudioProgress() {
+    stopFpAudioProgress();
+    fpAudioInterval = setInterval(() => {
+        if (audio.duration) {
+            const pct = (audio.currentTime / audio.duration * 100) + '%';
+            $('fpProgressFill').style.width = pct;
+            $('fpProgressDot').style.left = pct;
+            $('fpCurrent').textContent = formatTime(audio.currentTime);
+        }
+    }, 250);
+}
+
+function stopFpAudioProgress() {
+    if (fpAudioInterval) { clearInterval(fpAudioInterval); fpAudioInterval = null; }
+}
+
 function formatTime(s) {
     const m = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
@@ -284,7 +381,10 @@ async function searchYouTube(query) {
         const videoId = data.items?.[0]?.id?.videoId || null;
         if (videoId) youtubeCache.set(cacheKey, videoId);
         return videoId;
-    } catch { return null; }
+    } catch (e) {
+        console.error('[YT] searchYouTube failed:', e);
+        return null;
+    }
 }
 
 async function searchAndLoadFullSong(song) {
@@ -293,6 +393,7 @@ async function searchAndLoadFullSong(song) {
     if (!playerEl) return;
     playerEl.style.display = 'none';
     stopFpProgress();
+    fpUseAudio = false;
     $('fpProgressFill').style.width = '0%';
     $('fpProgressDot').style.left = '0%';
     $('fpCurrent').textContent = '0:00';
@@ -302,16 +403,52 @@ async function searchAndLoadFullSong(song) {
 
     const romaji = $('detailRomaji')?.textContent || '';
     const query = `${romaji || song.title} ${song.anime} ${song.type}`;
-    const videoId = await searchYouTube(query);
-    if (!videoId) return;
 
-    // Check modal is still open (user might have closed it)
+    // Try YouTube first for full song
+    $('fpTitle').textContent = '正在搜索...';
+    const videoId = await searchYouTube(query);
+    if (videoId) {
+        if (!$('animeDetailModal').classList.contains('show')) return;
+        playerEl.style.display = '';
+        $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+        $('fpSource').textContent = '';
+        updateHeartUI();
+        const fpCover = $('fpCover');
+        const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
+        const detailCoverSrc = $('detailCover')?.src;
+        if (fpCover && detailCoverSrc) {
+            fpCover.src = detailCoverSrc;
+            fpCover.style.display = '';
+            if (fpFallback) fpFallback.style.display = 'none';
+        } else if (fpCover) {
+            fpCover.style.display = 'none';
+            if (fpFallback) fpFallback.style.display = '';
+        }
+        if (ytPlayer && ytPlayer.cueVideoById) {
+            ytPlayer.cueVideoById(videoId);
+        }
+        return;
+    }
+
+    // YouTube failed — fall back to iTunes preview
+    if (!$('animeDetailModal').classList.contains('show')) return;
+    $('fpTitle').textContent = '正在搜索试听...';
+    const previewUrl = await fetchAudio(song.title, song.artist, song.anime);
+    if (!previewUrl || previewUrl.startsWith('yt:')) {
+        if (!$('animeDetailModal').classList.contains('show')) return;
+        $('fpTitle').textContent = '未找到可播放的歌曲';
+        notify('未找到该歌曲的音频，请试试其他歌曲');
+        return;
+    }
+
     if (!$('animeDetailModal').classList.contains('show')) return;
 
+    // iTunes preview available — use native audio
     playerEl.style.display = '';
+    fpUseAudio = true;
     $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+    $('fpSource').textContent = '(试听片段)';
     updateHeartUI();
-    // Set cover image from detailCover (may not be loaded yet)
     const fpCover = $('fpCover');
     const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
     const detailCoverSrc = $('detailCover')?.src;
@@ -323,12 +460,38 @@ async function searchAndLoadFullSong(song) {
         fpCover.style.display = 'none';
         if (fpFallback) fpFallback.style.display = '';
     }
-    if (ytPlayer && ytPlayer.cueVideoById) {
-        ytPlayer.cueVideoById(videoId);
-    }
+    audio.src = previewUrl;
+    // Show duration once loaded
+    const showDur = () => {
+        if (audio.duration && isFinite(audio.duration)) {
+            $('fpDuration').textContent = formatTime(audio.duration);
+        } else {
+            setTimeout(showDur, 200);
+        }
+    };
+    showDur();
 }
 
 function toggleFullPlay() {
+    // iTunes preview fallback mode
+    if (fpUseAudio) {
+        if (audio.paused || audio.ended) {
+            stopFullPlayer(); // stop YT if somehow still playing
+            audio.currentTime = 0;
+            audio.play().catch(() => notify('喵呜~ 试听播放失败...'));
+            $('fpPlayIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            $('fpWave')?.classList.add('active');
+            startFpAudioProgress();
+        } else {
+            audio.pause();
+            $('fpPlayIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+            $('fpWave')?.classList.remove('active');
+            stopFpAudioProgress();
+        }
+        return;
+    }
+
+    // YouTube mode (default)
     if (!ytPlayer || !ytReady) return;
     const state = ytPlayer.getPlayerState();
     if (state === YT.PlayerState.PLAYING) {
@@ -343,8 +506,13 @@ function toggleFullPlay() {
 }
 
 function stopFullPlayer() {
+    if (fpUseAudio) {
+        audio.pause();
+        stopFpAudioProgress();
+    }
     if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
     stopFpProgress();
+    fpUseAudio = false;
     const icon = $('fpPlayIcon');
     if (icon) icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
     const wave = $('fpWave');
@@ -358,12 +526,19 @@ function stopFullPlayer() {
 // Progress bar click to seek
 document.addEventListener('click', (e) => {
     const bar = e.target.closest('#fpProgress');
-    if (!bar || !ytPlayer || !ytPlayer.getDuration) return;
+    if (!bar) return;
     const rect = bar.getBoundingClientRect();
     const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    ytPlayer.seekTo(pct * ytPlayer.getDuration(), true);
-    $('fpProgressFill').style.width = (pct * 100) + '%';
-    $('fpProgressDot').style.left = (pct * 100) + '%';
+    if (fpUseAudio) {
+        if (!audio.duration) return;
+        audio.currentTime = pct * audio.duration;
+        $('fpProgressFill').style.width = (pct * 100) + '%';
+        $('fpProgressDot').style.left = (pct * 100) + '%';
+    } else if (ytPlayer && ytPlayer.getDuration) {
+        ytPlayer.seekTo(pct * ytPlayer.getDuration(), true);
+        $('fpProgressFill').style.width = (pct * 100) + '%';
+        $('fpProgressDot').style.left = (pct * 100) + '%';
+    }
 });
 
 // =====================================================================
@@ -501,7 +676,11 @@ function playFavSong(index) {
 
 async function playFavSongAtIndex(index) {
     const song = playlist.songs[index];
-    if (!song || !ytPlayer || !ytReady) return;
+    if (!song) return;
+    if (!ytPlayer || !ytReady) {
+        notify('YouTube播放器尚未就绪，请稍候再试');
+        return;
+    }
     playlist.currentIndex = index;
     gameState.currentSong = song;
     showMusicPlayer(song);
@@ -1729,7 +1908,7 @@ function loadQuestion() {
         $('visualizer').classList.add('hidden');
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
         $('playBtn').disabled = true;
-        $('playerStatus').textContent = '回顾模式';
+        $('playerStatus').textContent = '回顾模式 — 搜索中...';
         $('progressFill').style.width = '0%';
         $('qNum').textContent = gameState.questionIndex + 1;
         const histCorrect = gameState.answerHistory.slice(0, gameState.questionIndex + 1).filter(r => r.isCorrect).length;
@@ -1737,6 +1916,24 @@ function loadQuestion() {
         $('songInfo').classList.remove('show');
         renderHistoryOptions(record);
         showSongInfo(record.isCorrect);
+        // Fetch audio for playback during review
+        fetchAudio(record.song.title, record.song.artist, record.song.anime).then(url => {
+            if (!url) {
+                $('playerStatus').textContent = '回顾模式 — 无音频';
+                return;
+            }
+            if (url.startsWith('yt:')) {
+                quizYT.active = true;
+                quizYT.videoId = url.slice(3);
+                $('playerStatus').textContent = '回顾模式 (YouTube源)';
+            } else {
+                quizYT.active = false;
+                quizYT.videoId = null;
+                audio.src = url;
+                $('playerStatus').textContent = '回顾模式';
+            }
+            $('playBtn').disabled = false;
+        });
         // Show detail modal after brief delay (same as normal flow)
         setTimeout(() => {
             showAnimeDetail(record.song);
@@ -1762,7 +1959,10 @@ function loadQuestion() {
     updatePrevButton();
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
+    gameState.fetchGeneration++;
+    const gen = gameState.fetchGeneration;
     fetchAudio(q.title, q.artist, q.anime).then(url => {
+        if (gen !== gameState.fetchGeneration) return;
         if (!url) {
             notify('呜喵~ 这首歌的音频获取失败了，已跳过~');
             gameState.questionIndex++;
@@ -1988,15 +2188,7 @@ function togglePlay() {
             stopFullPlayer();
             stopMusicPlayer();
             ytPlayer.loadVideoById({ videoId: quizYT.videoId, startSeconds: 0 });
-            // Auto-stop after 30 seconds
-            quizYT.timer = setTimeout(() => {
-                if (quizYT.active) {
-                    stopQuizYT();
-                    gameState.isPlaying = false;
-                    $('visualizer').classList.add('hidden');
-                    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-                }
-            }, 30000);
+            // Timer starts in onYtStateChange when PLAYING fires (after buffering)
         } else {
             // Normal iTunes playback
             if (audioContext) audioContext.resume();
@@ -2043,12 +2235,49 @@ function stopQuizProgress() {
 }
 
 audio.onended = () => {
+    if (fpUseAudio) {
+        // Full player iTunes mode — update detail player UI
+        stopFpAudioProgress();
+        $('fpPlayIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        $('fpWave')?.classList.remove('active');
+        $('fpProgressFill').style.width = '0%';
+        $('fpProgressDot').style.left = '0%';
+        $('fpCurrent').textContent = '0:00';
+        return;
+    }
     gameState.isPlaying = false;
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
 };
 audio.ontimeupdate = () => {
     if (audio.duration) $('progressFill').style.width = (audio.currentTime / audio.duration * 100) + '%';
+};
+audio.onerror = () => {
+    if (!quizYT.active && gameState.currentSong) {
+        const song = gameState.currentSong;
+        // Clear the stale/expired cache entry and re-fetch
+        const cacheKey = `${song.title}|${song.anime}`;
+        audioCache._load();
+        delete audioCache._data[cacheKey];
+        audioCache._dirty = true;
+        audioCache._flush();
+        gameState.isPlaying = false;
+        $('visualizer').classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        $('playBtn').disabled = true;
+        $('playerStatus').textContent = '音频过期，重新搜索中...';
+        fetchAudio(song.title, song.artist, song.anime).then(url => {
+            if (!url) {
+                notify('这首歌的音频暂时不可用，已跳过~');
+                gameState.questionIndex++;
+                loadQuestion();
+                return;
+            }
+            audio.src = url;
+            $('playBtn').disabled = false;
+            $('playerStatus').textContent = '点击播放';
+        });
+    }
 };
 $('volSlider').oninput = e => { audio.volume = e.target.value; };
 audio.volume = 0.5;
