@@ -476,7 +476,9 @@ function toggleFullPlay() {
     // iTunes preview fallback mode
     if (fpUseAudio) {
         if (audio.paused || audio.ended) {
-            stopFullPlayer(); // stop YT if somehow still playing
+            // Stop YT but don't hide the player
+            if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+            stopFpProgress();
             audio.currentTime = 0;
             audio.play().catch(() => notify('喵呜~ 试听播放失败...'));
             $('fpPlayIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
