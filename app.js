@@ -488,6 +488,7 @@ async function searchAndLoadFullSong(song) {
         playerEl.style.display = '';
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
         $('fpSource').textContent = lastAudio?.source === 'youtube' ? '' : '';
+        const yl = $('fpYtLink'); if (yl) yl.style.display = 'none';
         updateHeartUI();
         const fpCover = $('fpCover');
         const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
@@ -506,8 +507,18 @@ async function searchAndLoadFullSong(song) {
         return;
     }
 
-    // YouTube failed — fall back to iTunes preview
+    // YouTube failed or player not ready — fall back to iTunes preview
     if (!$('animeDetailModal').classList.contains('show')) return;
+
+    // If we have a videoId but player isn't ready, show a YT link for mobile users
+    const ytLinkEl = $('fpYtLink');
+    if (ytLinkEl && videoId) {
+        ytLinkEl.href = `https://www.youtube.com/watch?v=${videoId}`;
+        ytLinkEl.style.display = '';
+    } else if (ytLinkEl) {
+        ytLinkEl.style.display = 'none';
+    }
+
     $('fpTitle').textContent = '正在搜索试听...';
     const audioResult = await fetchAudio(song.title, song.artist, song.anime);
     const previewUrl = audioResult?.url;
