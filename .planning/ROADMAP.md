@@ -63,4 +63,38 @@ Status: Complete
 
 ---
 
+## Milestone: UI美化迭代 (v2)
+
+Status: In Progress
+
+### Phase 1 -- 深度UI美化 []
+
+**Goal:** 进一步增强二次元风格，添加更多动画效果和交互反馈，提升整体视觉体验。
+
+**Mode:** mvp
+
+**Requirements:**
+| REQ-ID | Description |
+|--------|-------------|
+| UI-01 | 添加点击涟漪动画效果 |
+| UI-02 | 正确/错误答案屏幕闪光反馈 |
+| UI-03 | 分数变化数字滚动动画 |
+| UI-04 | 加载状态二次元风格动画 |
+| UI-05 | 增加更多背景装饰元素 |
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Click ripple (UI-01) + Screen flash feedback (UI-02)
+- [ ] 04-02-PLAN.md — Score rolling animation (UI-03) + Anime loading (UI-04) + Background decorations (UI-05)
+
+**Success Criteria:**
+1. 按钮点击时有流畅的涟漪动画效果
+2. 答对/答错时屏幕有明显的视觉反馈（绿/红闪光）
+3. 分数变化时有数字滚动动画
+4. 加载状态显示二次元风格的加载动画
+5. 页面背景有更多层次的装饰元素
+
+---
+
 *Last updated: 2026-05-23*
