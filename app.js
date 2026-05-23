@@ -1774,6 +1774,7 @@ function startSingle() {
     gameState.correctCount = 0;
     gameState.answerHistory = [];
     gameState.viewingHistory = false;
+    gameState.fetchGeneration = 0;
     const pool = getFilteredSongs();
     if (pool.length < 4) { notify('呜喵~ 曲库太少了...请放宽筛选条件吧'); return; }
     const n = Math.min(gameState.questionCount, pool.length);
@@ -2013,6 +2014,7 @@ function loadQuestion() {
 
     gameState.fetchGeneration++;
     const gen = gameState.fetchGeneration;
+    const correctAnime = q.anime;  // capture now — prevents race if recursive loadQuestion overwrites gameState
     fetchAudio(q.title, q.artist, q.anime).then(url => {
         if (gen !== gameState.fetchGeneration) return;
         if (!url) {
@@ -2034,7 +2036,7 @@ function loadQuestion() {
             $('playBtn').disabled = false;
             $('playerStatus').textContent = '点击播放';
         }
-        renderOptions(gameState.correctAnime);
+        renderOptions(correctAnime);
     });
 }
 
@@ -2307,6 +2309,7 @@ audio.ontimeupdate = () => {
 audio.onerror = () => {
     if (!quizYT.active && gameState.currentSong) {
         const song = gameState.currentSong;
+        const gen = gameState.fetchGeneration;
         // Clear the stale/expired cache entry and re-fetch
         const cacheKey = `${song.title}|${song.anime}`;
         audioCache._load();
@@ -2319,6 +2322,7 @@ audio.onerror = () => {
         $('playBtn').disabled = true;
         $('playerStatus').textContent = '音频过期，重新搜索中...';
         fetchAudio(song.title, song.artist, song.anime).then(url => {
+            if (gen !== gameState.fetchGeneration) return;
             if (!url) {
                 notify('这首歌的音频暂时不可用，已跳过~');
                 gameState.questionIndex++;
