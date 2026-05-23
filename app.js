@@ -151,7 +151,13 @@ const youtubeCache = new MemCache('youtube_cache_v1', 200);
 // =====================================================================
 // YouTube Full Song Player
 // =====================================================================
-const YT_API_KEY = 'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU';
+// YouTube Data API keys — add more to increase daily quota (100 searches/key/day)
+const YT_API_KEYS = [
+    'AIzaSyDD0nNleGHHrbuMahHvoPGJCJe4a8zKIV8',  // new key
+    'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU',  // old key
+];
+let ytKeyIndex = 0;
+const ytKeyExhausted = new Set(); // indices of keys known to be over quota
 let ytPlayer = null;
 let ytReady = false;
 let fpProgressInterval = null;
@@ -373,18 +379,39 @@ async function searchYouTube(query) {
     const cacheKey = query;
     const cached = youtubeCache.get(cacheKey);
     if (cached) return cached;
-    try {
-        const res = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&maxResults=1&q=${encodeURIComponent(query)}&key=${YT_API_KEY}`
-        );
-        const data = await res.json();
-        const videoId = data.items?.[0]?.id?.videoId || null;
-        if (videoId) youtubeCache.set(cacheKey, videoId);
-        return videoId;
-    } catch (e) {
-        console.error('[YT] searchYouTube failed:', e);
-        return null;
+
+    // Try each key until one works
+    const tried = new Set();
+    while (tried.size < YT_API_KEYS.length) {
+        const idx = ytKeyIndex;
+        if (tried.has(idx) || ytKeyExhausted.has(idx)) {
+            ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
+            continue;
+        }
+        tried.add(idx);
+        const key = YT_API_KEYS[idx];
+        try {
+            const res = await fetch(
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
+            );
+            if (res.status === 403 || res.status === 429) {
+                console.warn('[YT] Key #' + idx + ' quota exceeded, switching...');
+                ytKeyExhausted.add(idx);
+                ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
+                continue;
+            }
+            const data = await res.json();
+            const videoId = data.items?.[0]?.id?.videoId || null;
+            if (videoId) youtubeCache.set(cacheKey, videoId);
+            return videoId;
+        } catch (e) {
+            console.error('[YT] searchYouTube failed:', e);
+            // Network error — try next key
+            ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
+        }
     }
+    console.error('[YT] All keys exhausted or failed');
+    return null;
 }
 
 async function searchAndLoadFullSong(song) {
