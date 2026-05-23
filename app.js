@@ -239,7 +239,7 @@ function loadYouTubeAPI() {
         if (loadFailed) return;
         try {
             ytPlayer = new YT.Player('ytPlayerEl', {
-                height: '100%', width: '100%',
+                height: '360', width: '640',
                 playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
                 events: {
                     onReady: () => { ytReady = true; },
@@ -425,7 +425,7 @@ async function searchYouTube(query) {
         const key = YT_API_KEYS[idx];
         try {
             const res = await fetch(
-                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
             );
             if (res.status === 403 || res.status === 429) {
                 console.warn('[YT] Key #' + idx + ' quota exceeded, switching...');
@@ -464,8 +464,12 @@ async function searchAndLoadFullSong(song) {
     const lastAudio = gameState.lastAudioResult;
     let videoId = null;
 
+    // If YouTube player is not ready (common on mobile), skip straight to iTunes fallback
+    if (!ytPlayer || !ytReady) {
+        videoId = null;
+    }
     // If quiz audio was YouTube, reuse the EXACT same video — no new search
-    if (lastAudio && lastAudio.source === 'youtube' && lastAudio.ytVideoId) {
+    else if (lastAudio && lastAudio.source === 'youtube' && lastAudio.ytVideoId) {
         videoId = lastAudio.ytVideoId;
     } else {
         // Build YouTube query — prefer iTunes-discovered metadata for accuracy
