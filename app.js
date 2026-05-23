@@ -240,7 +240,7 @@ function loadYouTubeAPI() {
         try {
             ytPlayer = new YT.Player('ytPlayerEl', {
                 height: '1', width: '1',
-                playerVars: { autoplay: 0, controls: 0, disablekb: 1 },
+                playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
                 events: {
                     onReady: () => { ytReady = true; },
                     onStateChange: onYtStateChange,
@@ -568,7 +568,7 @@ function toggleFullPlay() {
     }
 
     // YouTube mode (default)
-    if (!ytPlayer || !ytReady) return;
+    if (!ytPlayer || !ytReady) { notify('播放器加载中，请稍后再试'); return; }
     const state = ytPlayer.getPlayerState();
     if (state === YT.PlayerState.PLAYING) {
         ytPlayer.pauseVideo();
@@ -884,7 +884,7 @@ function stopMusicPlayer() {
 }
 
 function toggleMusicPlay() {
-    if (!ytPlayer || !ytReady) return;
+    if (!ytPlayer || !ytReady) { notify('播放器加载中，请稍后再试'); return; }
     const state = ytPlayer.getPlayerState();
     if (state === YT.PlayerState.PLAYING) {
         ytPlayer.pauseVideo();
@@ -1148,8 +1148,8 @@ async function importFromBangumi(indexId) {
             }
         } catch (e) { console.error('[Bangumi] AniList search:', e); }
 
-        // Search iTunes for songs
-        const songs = await searchItunesForAnime(searchTitle, animeName, year);
+        // Search iTunes for songs — pass Japanese name for album matching
+        const songs = await searchItunesForAnime(searchTitle, animeName, anime.name, year);
         for (const song of songs) {
             if (addCustomSong(song)) addedCount++;
         }
@@ -1165,7 +1165,7 @@ async function importFromBangumi(indexId) {
 }
 
 // Search iTunes for anime OP/ED songs — with scoring to ensure anime relevance
-async function searchItunesForAnime(romajiTitle, animeName, year) {
+async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
     const results = [];
     const seen = new Set();
 
@@ -1173,20 +1173,23 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
         const c = (r.collectionName || '').toLowerCase();
         const a = (r.artistName || '').toLowerCase();
         const t = (r.trackName || '').toLowerCase();
-        const lan = animeName.toLowerCase();
 
         let score = 0;
 
-        // Album/collection contains anime name (strongest signal)
-        if (lan && c.includes(lan)) score += 50;
-        // Also check romaji title in collection
+        // Album/collection contains Japanese anime name (key fix — matches iTunes JP metadata)
+        const jpn = (jpName || animeName).toLowerCase();
+        if (jpn && c.includes(jpn)) score += 50;
+        // Also check Chinese name as fallback
+        const cn = animeName.toLowerCase();
+        if (cn !== jpn && cn && c.includes(cn)) score += 50;
+        // Romaji title in collection
         const rt = romajiTitle.toLowerCase();
         if (rt && c.includes(rt)) score += 30;
 
-        // Track name should look like a real song (not random noise)
+        // Track name looks like a real song
         if (t.length >= 3 && !/^[a-z0-9_\-\.]+$/.test(t)) score += 10;
 
-        // Bonus for known anime music artists (heuristic)
+        // Known anime music artists
         const knownAnimeArtists = ['lisa', 'aimer', 'yoasobi', 'eve', 'yorushika', 'ヨルシカ',
             'kenshi yonezu', '米津玄師', 'official髭男dism', 'king gnu', 'yama', 'milet',
             'reona', '藍井エイル', 'eir aoi', 't.m.revolution', 'flow', 'granrodeo',
@@ -1200,7 +1203,9 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
         return score;
     }
 
-    for (const term of [`${romajiTitle} anime`, romajiTitle]) {
+    // Search with Japanese name (best results on iTunes JP) + romaji as fallback
+    const searchTerms = jpName ? [jpName, `${romajiTitle} anime`, romajiTitle] : [`${romajiTitle} anime`, romajiTitle];
+    for (const term of searchTerms) {
         const controller = new AbortController();
         const tid = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
@@ -1210,15 +1215,13 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
             );
             clearTimeout(tid);
             const data = await res.json();
-            // Score all results first, then filter
             const scored = [];
             for (const r of (data.results || [])) {
                 const title = r.trackName;
                 if (!title || seen.has(title)) continue;
                 const s = scoreImportResult(r);
-                if (s >= 30) scored.push({ r, score: s });
+                if (s >= 20) scored.push({ r, score: s });
             }
-            // Sort by score descending, take best
             scored.sort((a, b) => b.score - a.score);
             for (const { r } of scored) {
                 const title = r.trackName;
