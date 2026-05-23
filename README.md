@@ -1,14 +1,14 @@
 # 萌豚挑战 — 动漫音乐猜谜
 
 一款二次元风格的在线动漫音乐猜谜游戏。听30秒歌曲片段，猜出它来自哪部动漫。
+此网站完全由AI生成。
 
-**[>> 点击开始挑战 <<](https://yuki3303-a11y.github.io/anime-song/)**
 **[>> 点击开始挑战 <<](https://yuki3303-a11y.github.io/anime-song/)**
 
 ## 游戏模式
 
 - **单人挑战** — 自定义题数，答对得分，连续答对有连击加成
-- **PK对战** — 创建房间邀请好友，实时对战比拼谁更懂动漫音乐
+- **PK对战** — 创建房间邀请好友，实时对战比拼谁更懂动漫音乐（需要科学上网环境）
 
 ## 曲库
 
@@ -42,7 +42,7 @@
 纯前端实现，无需后端：
 
 - HTML / CSS / JavaScript（ES Modules）
-- Firebase Realtime Database（多人PK）
+- Firebase Realtime Database（多人PK）（需要科学上网环境）
 - Firebase Anonymous Auth
 - YouTube Data API v3 + IFrame Player API（完整歌曲播放）
 - AniList GraphQL API（动漫封面）
