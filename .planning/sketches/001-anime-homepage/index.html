@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sketch 001: Anime Homepage ★ Variant A Selected</title>
+<link rel="stylesheet" href="../themes/default.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    padding-top: 50px;
+  }
+  #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    padding: 8px 16px; display: flex; gap: 10px; }
+  #nav button { padding: 8px 18px; border-radius: 20px; border: 1.5px solid var(--color-border);
+    background: #fff; cursor: pointer; font-size: var(--text-sm); font-family: inherit;
+    transition: all 0.2s; }
+  #nav button:hover { border-color: var(--color-primary); }
+  #nav button.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .variant { display: none; }
+  .variant.active { display: block; }
+  /* A: 樱吹雪 */
+  .va { background: linear-gradient(180deg, #fef5f8 0%, #fff5f9 30%, #fdf2f8 100%); }
+  .va .header { text-align: center; padding: 32px 16px 24px; position: relative; }
+  .va .logo { font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #f08ca8, #c084d8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; display: inline-block; margin-bottom: 4px; }
+  .va .subtitle { font-size: 0.8rem; color: #c9a0b4; letter-spacing: 4px; }
+  .va .container { max-width: 420px; margin: 0 auto; padding: 0 20px 40px; position: relative; z-index: 1; }
+  .va .menu-grid { display: flex; flex-direction: column; gap: 14px; }
+  .va .menu-card { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 18px; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(240,140,168,0.15); cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden; }
+  .va .menu-card:hover { background: #fff; border-color: rgba(240,140,168,0.4); box-shadow: 0 8px 30px rgba(240,140,168,0.12); transform: translateY(-1px); }
+  .va .menu-card .icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+  .va .icon.pink { background: linear-gradient(135deg, #fde4eb, #fcd5e0); }
+  .va .icon.purple { background: linear-gradient(135deg, #ece6f9, #e0d4f5); }
+  .va .icon.teal { background: linear-gradient(135deg, #e0f5ec, #c8edda); }
+  .va .menu-card .info { flex: 1; }
+  .va .menu-card .label { font-size: 1rem; font-weight: 700; }
+  .va .menu-card .desc { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 2px; }
+  .va .menu-card .arrow { color: var(--color-primary); font-size: 1.1rem; opacity: 0.5; }
+  .va .player-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; padding: 14px 18px; border-radius: 16px; background: rgba(255,255,255,0.7); border: 1px solid rgba(240,140,168,0.1); font-size: 0.8rem; }
+  .va .player-dot { width: 10px; height: 10px; border-radius: 50%; background: #7ecba1; display: inline-block; margin-right: 6px; }
+  .va .player-id { color: var(--color-text-muted); }
+  .va .petal { position: fixed; pointer-events: none; z-index: 0; animation: petalFall linear infinite; opacity: 0.35; font-size: 1.2rem; }
+  @keyframes petalFall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.4; } 90% { opacity: 0.3; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+  /* B: 萌趣卡牌 */
+  .vb { background: linear-gradient(180deg, #fdf5ff 0%, #fef2f8 30%, #f5f0ff 100%); }
+  .vb .header { text-align: center; padding: 28px 16px 16px; }
+  .vb .mascot { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #fde4eb, #fcd5e0); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; margin: 0 auto 12px; box-shadow: 0 4px 20px rgba(240,140,168,0.2); animation: bounceMascot 3s ease-in-out infinite; }
+  @keyframes bounceMascot { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .vb .logo { font-size: 1.8rem; font-weight: 900; color: var(--color-text); letter-spacing: 3px; }
+  .vb .subtitle { font-size: 0.75rem; color: var(--color-text-muted); letter-spacing: 5px; margin-top: 2px; }
+  .vb .container { max-width: 400px; margin: 0 auto; padding: 0 20px 40px; position: relative; z-index: 1; }
+  .vb .section-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--color-primary); padding: 8px 16px; font-weight: 700; }
+  .vb .card-big { padding: 20px; border-radius: 22px; margin-bottom: 12px; cursor: pointer; position: relative; overflow: hidden; }
+  .vb .card-big.pink { background: linear-gradient(135deg, #fff5f8, #fef0f5); border: 1.5px solid #fcd5e0; }
+  .vb .card-big.purple { background: linear-gradient(135deg, #faf7ff, #f3edff); border: 1.5px solid #e0d4f5; }
+  .vb .card-big .card-icon { font-size: 2rem; margin-bottom: 6px; }
+  .vb .card-big .card-title { font-size: 1.05rem; font-weight: 800; }
+  .vb .card-big .card-desc { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 2px; }
+  .vb .card-big .tag { display: inline-block; margin-top: 10px; padding: 4px 12px; border-radius: 12px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; }
+  .vb .tag.pink { background: #fde4eb; color: #e87090; }
+  .vb .tag.purple { background: #ece6f9; color: #9b7fd4; }
+  .vb .card-big .deco { position: absolute; right: 16px; top: 12px; font-size: 2.5rem; opacity: 0.3; transform: rotate(10deg); }
+  .vb .footer-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; padding: 12px; }
+  .vb .footer-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-success); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .vb .footer-text { font-size: 0.75rem; color: var(--color-text-muted); }
+  .vb .star { position: fixed; pointer-events: none; z-index: 0; animation: starFloat 6s ease-in-out infinite; font-size: 0.9rem; opacity: 0.3; }
+  @keyframes starFloat { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(20deg); } }
+  /* C: 和风 */
+  .vc { background: #fbf7f4; background-image: radial-gradient(circle at 15% 20%, rgba(240,140,168,0.04) 0%, transparent 50%), radial-gradient(circle at 85% 60%, rgba(184,169,232,0.04) 0%, transparent 50%); }
+  .vc .wrapper { max-width: 440px; margin: 0 auto; padding: 80px 24px 40px; position: relative; z-index: 1; }
+  .vc .logo-area { margin-bottom: 32px; }
+  .vc .logo-jp { font-size: 0.7rem; color: var(--color-text-muted); letter-spacing: 6px; margin-bottom: 4px; text-transform: uppercase; }
+  .vc .logo-cn { font-size: 2rem; font-weight: 900; color: #3d2c3a; letter-spacing: 4px; position: relative; display: inline-block; }
+  .vc .logo-cn::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #f08ca8, transparent); border-radius: 2px; }
+  .vc .line { height: 1px; background: linear-gradient(90deg, transparent, #e8d5db, transparent); margin: 10px 0; }
+  .vc .menu-list { display: flex; flex-direction: column; gap: 10px; }
+  .vc .menu-item { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 14px; background: rgba(255,255,255,0.7); border: 1px solid #f0e8ea; cursor: pointer; transition: all 0.3s; }
+  .vc .menu-item:hover { background: #fff; border-color: #f0d5e0; box-shadow: 0 2px 12px rgba(240,140,168,0.06); }
+  .vc .menu-item .dot { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .vc .dot-a { background: #fde4eb; } .vc .dot-b { background: #ece6f9; } .vc .dot-c { background: #e8f4ec; }
+  .vc .menu-item .num { font-size: 0.65rem; color: var(--color-text-muted); letter-spacing: 2px; margin-right: 4px; }
+  .vc .menu-item .text { flex: 1; }
+  .vc .menu-item .title { font-size: 0.95rem; font-weight: 700; }
+  .vc .menu-item .desc { font-size: 0.7rem; color: var(--color-text-muted); }
+  .vc .menu-item .arrow { opacity: 0.25; font-size: 0.9rem; }
+  .vc .footer { text-align: center; margin-top: 32px; font-size: 0.7rem; color: var(--color-text-muted); }
+  .vc .footer span { display: inline-flex; align-items: center; gap: 6px; }
+  .vc .footer .diamond { width: 6px; height: 6px; background: var(--color-primary); transform: rotate(45deg); border-radius: 1px; }
+  .vc .pattern { position: fixed; pointer-events: none; z-index: 0; font-size: 5rem; opacity: 0.015; font-weight: 900; }
+</style>
+</head>
+<body>
+
+<div id="nav">
+  <button class="variant-tab active" onclick="switchVariant('a',this)">A: 樱吹雪 — 柔和少女风 ★</button>
+  <button class="variant-tab" onclick="switchVariant('b',this)">B: 萌趣卡牌 — 圆润可爱风</button>
+  <button class="variant-tab" onclick="switchVariant('c',this)">C: 和风轻量 — 简洁文艺风</button>
+</div>
+
+<!-- A: 樱吹雪 -->
+<div id="variant-a" class="variant active">
+  <div class="va" style="min-height:100vh">
+    <div class="header">
+      <div class="logo">萌 豚 挑 戦</div>
+      <div class="subtitle">アニメ音楽クイズ</div>
+    </div>
+    <div class="container">
+      <div class="menu-grid">
+        <div class="menu-card" onclick="this.style.transform='scale(0.98)';setTimeout(()=>this.style.transform='',150)">
+          <div class="icon pink">🎧</div>
+          <div class="info"><div class="label">单人挑战</div><div class="desc">10 首歌曲，猜出动画名</div></div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="menu-card">
+          <div class="icon purple">⚔️</div>
+          <div class="info"><div class="label">联机对战</div><div class="desc">与好友 PK 比拼曲库</div></div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="menu-card">
+          <div class="icon teal">⚙️</div>
+          <div class="info"><div class="label">游戏设置</div><div class="desc">筛选年代与类型</div></div>
+          <div class="arrow">›</div>
+        </div>
+      </div>
+      <div class="player-bar">
+        <span><span class="player-dot"></span>已连接到服务器</span>
+        <span class="player-id">ID: ABC123</span>
+      </div>
+    </div>
+    <div class="petal" style="left:5%;animation-duration:12s;animation-delay:0s">🌸</div>
+    <div class="petal" style="left:15%;animation-duration:14s;animation-delay:2s">🌸</div>
+    <div class="petal" style="left:30%;animation-duration:10s;animation-delay:4s">🌸</div>
+    <div class="petal" style="left:50%;animation-duration:16s;animation-delay:1s">🌸</div>
+    <div class="petal" style="left:65%;animation-duration:11s;animation-delay:3s">🌸</div>
+    <div class="petal" style="left:80%;animation-duration:13s;animation-delay:5s">🌸</div>
+    <div class="petal" style="left:90%;animation-duration:15s;animation-delay:0s">🌸</div>
+    <div class="petal" style="left:40%;animation-duration:9s;animation-delay:6s">🌸</div>
+  </div>
+</div>
+
+<!-- B: 萌趣卡牌 -->
+<div id="variant-b" class="variant">
+  <div class="vb" style="min-height:100vh">
+    <div class="header">
+      <div class="mascot">🐰</div>
+      <div class="logo">萌豚挑战</div>
+      <div class="subtitle">ANIME MUSIC QUIZ</div>
+    </div>
+    <div class="container">
+      <div class="section-title">♪ 开始游戏</div>
+      <div class="card-big pink" onclick="this.style.transform='scale(0.97)';setTimeout(()=>this.style.transform='',150)">
+        <div class="deco">🎧</div>
+        <div class="card-icon">🎵</div>
+        <div class="card-title">单人挑战</div>
+        <div class="card-desc">听 30 秒歌曲片段，猜出正确的动画</div>
+        <span class="tag pink">10 题 · 计分</span>
+      </div>
+      <div class="card-big purple">
+        <div class="deco">⚡</div>
+        <div class="card-icon">⚔️</div>
+        <div class="card-title">联机对战</div>
+        <div class="card-desc">创建房间邀请好友，实时 PK 比分</div>
+        <span class="tag purple">多人 · 实时</span>
+      </div>
+      <div class="section-title">♪ 更多</div>
+      <div class="card-big pink" style="opacity:0.9">
+        <div class="card-icon">⚙️</div>
+        <div class="card-title">设置筛选</div>
+        <div class="card-desc">按年代、类型、来源筛选曲库</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-dot"></div><span class="footer-text">已连接 · ID ABC123</span>
+      </div>
+    </div>
+    <div class="star" style="left:8%;top:20%;animation-delay:0s">✦</div>
+    <div class="star" style="left:18%;top:70%;animation-delay:2s;font-size:0.7rem">⋆</div>
+    <div class="star" style="left:75%;top:15%;animation-delay:1s">✧</div>
+    <div class="star" style="left:88%;top:55%;animation-delay:3s;font-size:0.6rem">✦</div>
+    <div class="star" style="left:55%;top:85%;animation-delay:4s">⋆</div>
+  </div>
+</div>
+
+<!-- C: 和风 -->
+<div id="variant-c" class="variant">
+  <div class="vc" style="min-height:100vh">
+    <div class="wrapper">
+      <div class="logo-area">
+        <div class="logo-jp">// anime song quiz</div>
+        <div class="logo-cn">萌豚挑战</div>
+        <div class="line"></div>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item" onclick="this.style.transform='scale(0.98)';setTimeout(()=>this.style.transform='',150)">
+          <span class="num">01</span><div class="dot dot-a">🎧</div>
+          <div class="text"><div class="title">单人挑战</div><div class="desc">听歌识曲 · 10 题</div></div>
+          <div class="arrow">→</div>
+        </div>
+        <div class="menu-item">
+          <span class="num">02</span><div class="dot dot-b">⚔️</div>
+          <div class="text"><div class="title">联机对战</div><div class="desc">创建房间 · 好友 PK</div></div>
+          <div class="arrow">→</div>
+        </div>
+        <div class="menu-item">
+          <span class="num">03</span><div class="dot dot-c">⚙️</div>
+          <div class="text"><div class="title">游戏设置</div><div class="desc">年代筛选 · 类型过滤</div></div>
+          <div class="arrow">→</div>
+        </div>
+      </div>
+      <div class="footer"><span><span class="diamond"></span> 在线 · abc123</span></div>
+    </div>
+    <div class="pattern" style="top:15%;left:5%">音</div>
+    <div class="pattern" style="top:65%;right:8%">楽</div>
+    <div class="pattern" style="bottom:10%;left:50%">曲</div>
+  </div>
+</div>
+
+<script>
+function switchVariant(id, btn) {
+  document.querySelectorAll('.variant').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.variant-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('variant-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

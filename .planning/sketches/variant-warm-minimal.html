@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sketch: Warm Minimal</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    background: #FBF7F4;
+    color: #3D3233;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* === VARIANT: Warm Minimal === */
+/* Design philosophy: Clean, airy, warm. No glass effects.
+   Focus on typography and spacing. Soft shadows. */
+
+.app {
+    width: 100%;
+    max-width: 780px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    margin-bottom: 24px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #E88D7D, #D4A574);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+}
+.logo-text {
+    font-weight: 800; font-size: 18px;
+    background: linear-gradient(135deg, #E88D7D, #D4A574);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.status-pill {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 12px; background: #FFF0ED; border-radius: 20px;
+    font-size: 12px; color: #8B7B7A;
+}
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #7BC47F; }
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 48px 32px;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #F0E8E4;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #E88D7D, #D4A574);
+}
+.hero-icon {
+    width: 80px; height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #E88D7D, #D4A574);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(232,141,125,0.25);
+}
+.hero-title {
+    font-size: 28px; font-weight: 900;
+    background: linear-gradient(135deg, #E88D7D, #D4A574);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+.hero-sub {
+    font-size: 15px; color: #8B7B7A;
+}
+.hero-sub strong { color: #E88D7D; -webkit-text-fill-color: #E88D7D; }
+
+/* Buttons */
+.btn-group {
+    display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 24px;
+}
+.btn {
+    width: 100%; padding: 18px 24px;
+    border-radius: 14px; border: none;
+    font-family: inherit; font-weight: 700; font-size: 16px;
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; gap: 10px;
+    transition: all 0.2s;
+}
+.btn-primary {
+    background: linear-gradient(135deg, #E88D7D, #D4A574);
+    color: white;
+    box-shadow: 0 4px 16px rgba(232,141,125,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,141,125,0.4); }
+.btn-secondary {
+    background: white; color: #3D3233;
+    border: 1.5px solid #F0E8E4;
+}
+.btn-secondary:hover { border-color: #E0D4CE; background: #FFF0ED; }
+
+/* Footer */
+.menu-footer {
+    display: flex; gap: 8px; justify-content: center;
+}
+.btn-ghost {
+    background: transparent; border: none; color: #8B7B7A;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    padding: 8px 16px; border-radius: 10px;
+    font-family: inherit; transition: all 0.2s;
+}
+.btn-ghost:hover { color: #E88D7D; background: rgba(232,141,125,0.06); }
+
+/* Decorative elements - minimal */
+.deco-circle {
+    position: fixed; border-radius: 50%; pointer-events: none;
+    z-index: -1; filter: blur(80px); opacity: 0.3;
+}
+.deco-1 { width: 400px; height: 400px; background: #E88D7D; top: -100px; right: -100px; }
+.deco-2 { width: 300px; height: 300px; background: #D4A574; bottom: -80px; left: -80px; }
+
+.variant-label {
+    position: fixed; top: 12px; left: 12px;
+    background: #3D3233; color: white; padding: 6px 14px;
+    border-radius: 8px; font-size: 12px; font-weight: 700;
+    z-index: 100;
+}
+</style>
+</head>
+<body>
+<div class="variant-label">Variant A: Warm Minimal</div>
+<div class="deco-circle deco-1"></div>
+<div class="deco-circle deco-2"></div>
+
+<div class="app">
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 32 32" width="22" height="22">
+                    <path d="M12 6C12 6 14 4 16 6C18 4 20 6 20 6L20 20C20 20 18 22 16 20C14 22 12 20 12 20Z" fill="rgba(255,255,255,0.95)"/>
+                    <circle cx="12" cy="22" r="4" fill="rgba(255,255,255,0.95)"/>
+                    <circle cx="20" cy="20" r="3.5" fill="rgba(255,255,255,0.9)"/>
+                </svg>
+            </div>
+            <span class="logo-text">萌豚挑战</span>
+        </div>
+        <div class="status-pill">
+            <div class="status-dot"></div>
+            <span>在线</span>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-icon">
+            <svg viewBox="0 0 48 48" width="38" height="38">
+                <path d="M10 28C10 18 16 12 24 12C32 12 38 18 38 28" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <rect x="7" y="26" width="8" height="12" rx="3" fill="rgba(255,255,255,0.95)"/>
+                <rect x="33" y="26" width="8" height="12" rx="3" fill="rgba(255,255,255,0.95)"/>
+                <circle cx="21" cy="30" r="3" fill="rgba(255,255,255,0.9)"/>
+                <path d="M24 30V18" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M24 18L29 16V20L24 22" fill="rgba(255,255,255,0.85)"/>
+            </svg>
+        </div>
+        <div class="hero-title">准备好挑战了吗？</div>
+        <div class="hero-sub">收录 <strong>600+</strong> 首经典动漫神曲</div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            开始单人挑战
+        </button>
+        <button class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            PK对战模式
+        </button>
+    </div>
+
+    <div class="menu-footer">
+        <button class="btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:4px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            设置
+        </button>
+        <button class="btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:4px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            排行榜
+        </button>
+    </div>
+</div>
+</body>
+</html>

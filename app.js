@@ -244,11 +244,11 @@ async function importFromBangumi(indexId) {
             await fetchIndexViaHtml(indexId, allSubjects);
         }
     }
-    if (allSubjects.length === 0) { notify('目录获取失败，请检查目录号或联系开发者添加'); return; }
+    if (allSubjects.length === 0) { notify('呜喵~ 目录获取失败了...请检查目录号或联系开发者添加喵'); return; }
 
     // Filter to anime only (type=2)
     const animeList = allSubjects.filter(s => s.type === 2);
-    if (animeList.length === 0) { notify('该目录中没有动画'); return; }
+    if (animeList.length === 0) { notify('喵呜~ 这个目录里没有动画呢...'); return; }
 
     if (statusEl) statusEl.textContent = `找到 ${animeList.length} 部动画，搜索歌曲中...`;
 
@@ -297,7 +297,7 @@ async function importFromBangumi(indexId) {
     if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
     if (progressEl) progressEl.style.width = '100%';
     if (progressWrapper) setTimeout(() => { progressWrapper.style.display = 'none'; }, 2000);
-    notify(`🎵 导入完成，新增 ${addedCount} 首歌曲`);
+    notify(`导入成功啦喵！新增了 ${addedCount} 首歌曲呢~`);
 }
 
 // Search iTunes for anime OP/ED songs
@@ -346,7 +346,7 @@ function guessSongType(title) {
 // Export custom songs as JSON file
 function exportCustomSongs() {
     const songs = getCustomSongs();
-    if (songs.length === 0) { notify('没有自定义歌曲可导出'); return; }
+    if (songs.length === 0) { notify('喵~ 还没有自定义歌曲可以导出哦'); return; }
     const blob = new Blob([JSON.stringify(songs, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -354,7 +354,7 @@ function exportCustomSongs() {
     a.download = `anime-quiz-songs-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    notify('已导出自定义曲库');
+    notify('已导出自定义曲库啦喵~');
 }
 
 // Import custom songs from JSON file
@@ -363,7 +363,7 @@ function importCustomSongsFile(file) {
     reader.onload = () => {
         try {
             const songs = JSON.parse(reader.result);
-            if (!Array.isArray(songs)) { notify('文件格式错误'); return; }
+            if (!Array.isArray(songs)) { notify('呜喵~ 文件格式不对呢...'); return; }
             const existing = getCustomSongs();
             const existingKeys = new Set(existing.map(s => s.title + '|' + s.anime));
             let added = 0;
@@ -383,8 +383,8 @@ function importCustomSongsFile(file) {
                 added++;
             }
             setCustomSongs(existing);
-            notify(`🎵 导入 ${added} 首新歌曲`);
-        } catch (e) { console.error('[Import] importCustomSongsFile:', e); notify('文件解析失败'); }
+            notify(`导入成功喵！新增了 ${added} 首歌曲~`);
+        } catch (e) { console.error('[Import] importCustomSongsFile:', e); notify('呜喵~ 文件解析失败了...'); }
     };
     reader.readAsText(file);
 }
@@ -395,7 +395,7 @@ function updateCustomSongsUI() {
     if (!list) return;
     const songs = getCustomSongs();
     if (songs.length === 0) {
-        list.innerHTML = '<div style="font-size:11px;color:#999;text-align:center;padding:10px;">暂无自定义歌曲</div>';
+        list.innerHTML = '<div style="font-size:11px;color:#999;text-align:center;padding:10px;">喵~ 还没有自定义歌曲呢</div>';
         return;
     }
     list.innerHTML = '<div style="font-size:11px;color:#999;margin-bottom:4px;">共 ' + songs.length + ' 首</div>' + songs.map((s, i) => `
@@ -604,9 +604,9 @@ function showAnimeDetail(song) {
 
     title.textContent = song.anime;
     romaji.textContent = '';
-    meta.innerHTML = `<span>📅 ${song.year}年</span><span>🎤 ${song.type}</span>`;
+    meta.innerHTML = `<span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${song.year}年</span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>${song.type}</span>`;
     songInfo.innerHTML = `
-        <div class="detail-song-icon">🎵</div>
+        <div class="detail-song-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <div class="detail-song-text">
             <div class="detail-song-name">${songName}</div>
             <div class="detail-song-artist">${song.artist}</div>
@@ -620,7 +620,7 @@ function showAnimeDetail(song) {
     if (!placeholder) {
         placeholder = document.createElement('div');
         placeholder.className = 'detail-cover-placeholder';
-        placeholder.textContent = '🎬';
+        placeholder.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg>';
         coverWrap.appendChild(placeholder);
     }
     placeholder.style.display = 'flex';
@@ -656,7 +656,9 @@ function initSakura() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let petals = [];
-    const PETAL_COUNT = 8;
+    let stars = [];
+    const PETAL_COUNT = 25;
+    const STAR_COUNT = 15;
 
     function resize() {
         canvas.width = window.innerWidth;
@@ -670,18 +672,23 @@ function initSakura() {
         reset(init) {
             this.x = Math.random() * canvas.width;
             this.y = init ? Math.random() * canvas.height : -20;
-            this.size = 6 + Math.random() * 8;
-            this.speedY = 0.3 + Math.random() * 0.5;
-            this.speedX = -0.2 + Math.random() * 0.4;
+            this.size = 8 + Math.random() * 12;
+            this.speedY = 0.5 + Math.random() * 0.8;
+            this.speedX = -0.3 + Math.random() * 0.6;
             this.rotation = Math.random() * Math.PI * 2;
-            this.rotSpeed = (Math.random() - 0.5) * 0.02;
-            this.opacity = 0.3 + Math.random() * 0.4;
+            this.rotSpeed = (Math.random() - 0.5) * 0.03;
+            this.opacity = 0.5 + Math.random() * 0.4;
             this.wobble = Math.random() * Math.PI * 2;
-            this.wobbleSpeed = 0.01 + Math.random() * 0.02;
-            const r = 236 + Math.floor(Math.random() * 20);
-            const g = 180 + Math.floor(Math.random() * 60);
-            const b = 200 + Math.floor(Math.random() * 40);
-            this.color = `rgba(${r},${g},${b},${this.opacity})`;
+            this.wobbleSpeed = 0.02 + Math.random() * 0.03;
+            if (Math.random() < 0.3) {
+                const v = 240 + Math.floor(Math.random() * 15);
+                this.color = `rgba(${v},${v-10},${v},${this.opacity})`;
+            } else {
+                const r = 236 + Math.floor(Math.random() * 20);
+                const g = 180 + Math.floor(Math.random() * 60);
+                const b = 200 + Math.floor(Math.random() * 40);
+                this.color = `rgba(${r},${g},${b},${this.opacity})`;
+            }
         }
         update() {
             this.y += this.speedY;
@@ -704,10 +711,38 @@ function initSakura() {
         }
     }
 
+    class Star {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = 1 + Math.random() * 2;
+            this.twinkleSpeed = 0.02 + Math.random() * 0.04;
+            this.twinkle = Math.random() * Math.PI * 2;
+            this.baseOpacity = 0.3 + Math.random() * 0.5;
+        }
+        update() {
+            this.twinkle += this.twinkleSpeed;
+        }
+        draw() {
+            const opacity = this.baseOpacity + Math.sin(this.twinkle) * 0.3;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, opacity);
+            ctx.fillStyle = '#fff';
+            ctx.shadowColor = 'rgba(236, 72, 153, 0.5)';
+            ctx.shadowBlur = this.size * 2;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
     for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal());
+    for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(s => { s.update(); s.draw(); });
         petals.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
@@ -775,7 +810,7 @@ function spawnSparkles(element, count = 4) {
         spark.style.top = (rect.top - containerRect.top + rect.height / 2 + offsetY) + 'px';
         spark.style.setProperty('--sx', (Math.random() - 0.5) * 60 + 'px');
         spark.style.setProperty('--sy', -20 - Math.random() * 40 + 'px');
-        spark.style.color = Math.random() > 0.5 ? '#ec4899' : '#8b5cf6';
+        spark.style.color = Math.random() > 0.5 ? '#E88D7D' : '#D4A574';
         container.appendChild(spark);
         setTimeout(() => spark.remove(), 800);
     }
@@ -798,6 +833,59 @@ function spawnCelebration() {
             setTimeout(() => el.remove(), 4000);
         }, i * 120);
     }
+}
+
+// =====================================================================
+// Ripple Effect
+// =====================================================================
+function createRipple(e) {
+    const el = e.currentTarget;
+    if (el.disabled) return;
+    const rect = el.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const span = document.createElement('span');
+    span.className = 'ripple-effect';
+    span.style.width = size + 'px';
+    span.style.height = size + 'px';
+    span.style.left = (e.clientX - rect.left - size/2) + 'px';
+    span.style.top = (e.clientY - rect.top - size/2) + 'px';
+    el.appendChild(span);
+    setTimeout(() => span.remove(), 600);
+}
+
+// =====================================================================
+// Screen Flash Feedback
+// =====================================================================
+function flashScreen(color) {
+    const overlay = document.getElementById('flashOverlay');
+    if (!overlay) return;
+    overlay.style.transition = 'none';
+    overlay.style.background = color;
+    overlay.style.opacity = '0.15';
+    overlay.offsetHeight; // Force reflow
+    overlay.style.transition = 'opacity 0.4s ease-out';
+    overlay.style.opacity = '0';
+}
+
+function animateScore(element, newValue) {
+    if (!element) return;
+    const oldValue = parseInt(element.textContent) || 0;
+    if (oldValue === newValue) return;
+
+    const newStr = String(newValue);
+    element.innerHTML = '';
+
+    for (let i = 0; i < newStr.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'score-digit';
+        span.textContent = newStr[i];
+        span.style.animationDelay = (i * 0.05) + 's';
+        element.appendChild(span);
+    }
+
+    setTimeout(() => {
+        element.textContent = newValue;
+    }, 450);
 }
 
 // =====================================================================
@@ -828,7 +916,7 @@ function startSingle() {
     gameState.maxCombo = 0;
     gameState.correctCount = 0;
     const pool = getFilteredSongs();
-    if (pool.length < 4) { notify('曲库太少，请放宽筛选条件'); return; }
+    if (pool.length < 4) { notify('呜喵~ 曲库太少了...请放宽筛选条件吧'); return; }
     const n = Math.min(gameState.questionCount, pool.length);
     gameState.playlist = shuffle([...pool]).slice(0, n);
     $('singleHeader').classList.remove('hidden');
@@ -843,9 +931,12 @@ function startSingle() {
 // =====================================================================
 // PK Mode
 // =====================================================================
+let pkBusy = false;
 async function pkCreate() {
-    if (!user) { notify('正在连接服务器...'); return; }
-    if (!navigator.onLine) { notify('当前无网络连接，请检查网络'); return; }
+    if (pkBusy) return;
+    if (!user) { notify('正在连接服务器喵~ 请稍等...'); return; }
+    if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
+    pkBusy = true;
     const rid = String(Math.floor(1000 + Math.random() * 9000));
     roomId = rid;
     try {
@@ -863,22 +954,26 @@ async function pkCreate() {
         enterRoom(rid);
     } catch (e) {
         console.error('[PK] pkCreate:', e);
-        notify('网络连接超时，请检查网络后重试');
+        notify('呜喵~ 网络连接超时了...请检查网络后再试一次吧');
+    } finally {
+        pkBusy = false;
     }
 }
 
 async function pkJoin() {
-    if (!user) { notify('正在连接服务器...'); return; }
-    if (!navigator.onLine) { notify('当前无网络连接，请检查网络'); return; }
+    if (pkBusy) return;
+    if (!user) { notify('正在连接服务器喵~ 请稍等...'); return; }
+    if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
     const rid = $('roomIdInput').value.trim();
-    if (rid.length !== 4) { notify('请输入4位房间号'); return; }
+    if (rid.length !== 4) { notify('喵~ 请输入4位房间号哦'); return; }
+    pkBusy = true;
     try {
         const snap = await retryPK(() => get(ref(db, 'rooms/' + rid)), 'pkJoin.getDoc');
-        if (!snap.exists()) { notify('房间号不存在或已过期'); return; }
+        if (!snap.exists()) { notify('呜喵~ 房间号不存在或已过期了...'); pkBusy = false; return; }
         const d = snap.val();
         if (d.status !== 'waiting' && d.guest !== user.uid) {
-            notify('该房间已满，请尝试其他房间');
-            return;
+            notify('喵呜~ 这个房间已经满了...试试其他房间吧');
+            pkBusy = false; return;
         }
         if (!d.guest) {
             await retryPK(
@@ -893,7 +988,9 @@ async function pkJoin() {
         enterRoom(rid);
     } catch (e) {
         console.error('[PK] pkJoin:', e);
-        notify('网络连接超时，请检查网络后重试');
+        notify('呜喵~ 网络连接超时了...请检查网络后再试一次吧');
+    } finally {
+        pkBusy = false;
     }
 }
 
@@ -936,7 +1033,7 @@ function enterRoom(rid) {
                 btn.textContent = '⚔️ 开始对战';
                 btn.setAttribute('data-action', 'pkStart');
             } else {
-                btn.textContent = '等待房主开始...';
+                btn.textContent = '等待房主开始喵~';
             }
         }
         if (d.status === 'playing' && gameState.mode !== 'pk') {
@@ -997,19 +1094,19 @@ function loadQuestion() {
     $('progressFill').style.width = '0%';
     $('songInfo').classList.remove('show');
     $('qNum').textContent = gameState.questionIndex + 1;
-    $('scoreText').textContent = gameState.score;
-    $('optionsGrid').innerHTML = '<div class="loading-state"><div class="spinner"></div></div>';
+    animateScore($('scoreText'), gameState.score);
+    $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
     fetchAudio(q.title, q.artist, q.anime).then(url => {
         if (!url) {
-            notify('⚠️ 该歌曲音频获取失败，已跳过');
+            notify('呜喵~ 这首歌的音频获取失败了，已跳过~');
             gameState.questionIndex++;
             loadQuestion();
             return;
         }
         audio.src = url;
         $('playBtn').disabled = false;
-        $('playerStatus').textContent = '🎵 点击播放';
+        $('playerStatus').textContent = '点击播放';
         renderOptions(gameState.correctAnime);
     });
 }
@@ -1092,6 +1189,7 @@ function handleAnswer(btn, selected) {
     if (isCorrect) {
         btn.classList.add('correct');
         beep(523, 0.3);
+        flashScreen('#7BC47F'); // Warm green flash for correct answer
         gameState.combo++;
         if (gameState.combo > gameState.maxCombo) gameState.maxCombo = gameState.combo;
         gameState.correctCount++;
@@ -1108,6 +1206,7 @@ function handleAnswer(btn, selected) {
     } else {
         btn.classList.add('wrong');
         beep(200, 0.3, 'sawtooth');
+        flashScreen('#E87D7D'); // Warm red flash for wrong answer
         gameState.combo = 0;
         $('comboArea').innerHTML = '';
         document.querySelectorAll('.opt-btn').forEach(b => {
@@ -1115,8 +1214,8 @@ function handleAnswer(btn, selected) {
         });
     }
 
-    $('scoreText').textContent = gameState.score;
-    $('myScoreText').textContent = gameState.score;
+    animateScore($('scoreText'), gameState.score);
+    animateScore($('myScoreText'), gameState.score);
     setTimeout(() => {
         showAnimeDetail(gameState.currentSong);
     }, 1500);
@@ -1128,27 +1227,29 @@ function showSongInfo(isCorrect) {
     const badge = $('resultBadge');
 
     $('songTitle').textContent = title;
-    $('songAnime').textContent = `📺 ${song.anime}`;
-    $('songArtist').textContent = `🎤 ${song.artist}`;
+    $('songAnime').textContent = song.anime;
+    $('songArtist').textContent = song.artist;
 
     if (isCorrect) {
         badge.className = 'result-badge correct';
-        badge.textContent = '✓ 正确';
+        badge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><polyline points="20 6 9 17 4 12"/></svg>正确';
     } else {
         badge.className = 'result-badge wrong';
-        badge.textContent = '✗ 错误';
+        badge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px;margin-right:2px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>错误';
     }
     $('songInfo').classList.add('show');
 }
 
 function showCombo() {
-    $('comboArea').innerHTML = `<span class="combo-text">🔥 ${gameState.combo} COMBO!</span>`;
+    $('comboArea').innerHTML = `<span class="combo-text"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:2px;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>${gameState.combo} COMBO!</span>`;
 }
 
 // =====================================================================
 // Playback Controls
 // =====================================================================
+let playLock = false;
 function togglePlay() {
+    if (playLock) return;
     if (gameState.isPlaying) {
         audio.pause();
         gameState.isPlaying = false;
@@ -1156,7 +1257,11 @@ function togglePlay() {
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     } else {
         if (audioContext) audioContext.resume();
-        audio.play().catch(() => notify('音频播放失败，请重试'));
+        playLock = true;
+        audio.play().then(() => { playLock = false; }).catch(() => {
+            playLock = false;
+            notify('喵呜~ 音频播放失败了...再试一次吧');
+        });
         gameState.isPlaying = true;
         $('visualizer').classList.remove('hidden');
         $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
@@ -1230,7 +1335,7 @@ function renderLeaderboard() {
     const recs = JSON.parse(localStorage.getItem('aq_rec') || '[]');
     const list = $('recordsList');
     if (!recs.length) {
-        list.innerHTML = '<p class="empty-state">🌸 暂无记录，快来挑战吧！</p>';
+        list.innerHTML = '<p class="empty-state"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:4px;"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>排行榜空空如也喵~ 快来挑战一下证明实力吧！</p>';
         return;
     }
     const medals = ['🥇', '🥈', '🥉'];
@@ -1246,10 +1351,14 @@ function renderLeaderboard() {
     `).join('');
 }
 
+let clearingRecords = false;
 function clearRecords() {
+    if (clearingRecords) return;
+    clearingRecords = true;
     localStorage.removeItem('aq_rec');
     renderLeaderboard();
-    notify('记录已清除');
+    notify('记录已清除啦喵~');
+    setTimeout(() => { clearingRecords = false; }, 500);
 }
 
 // =====================================================================
@@ -1415,11 +1524,18 @@ document.addEventListener('keydown', (e) => {
 // =====================================================================
 // Event Delegation
 // =====================================================================
+
+// Ripple effect listener (separate from main click handler)
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn, .opt-btn, .play-btn, .settings-chip');
+    if (btn) createRipple(e);
+});
+
 document.addEventListener('click', (e) => {
     // Custom song deletion (event delegation with confirmation)
     const delBtn = e.target.closest('[data-del-custom]');
     if (delBtn) {
-        if (!confirm('确定要删除这首自定义歌曲吗？')) return;
+        if (!confirm('主人确定要删除这首歌曲喵？')) return;
         const index = parseInt(delBtn.dataset.delCustom);
         if (!isNaN(index)) removeCustomSong(index);
         return;
@@ -1447,17 +1563,23 @@ document.addEventListener('click', (e) => {
         case 'importBangumi': {
             const input = $('bangumiIndexInput');
             const id = input ? input.value.trim() : '';
-            if (!id || !/^\d+$/.test(id)) { notify('请输入有效的目录号'); return; }
-            importFromBangumi(id);
+            if (!id || !/^\d+$/.test(id)) { notify('喵~ 请输入有效的目录号哦'); return; }
+            const importBtn = e.target.closest('[data-action="importBangumi"]');
+            if (importBtn) { importBtn.disabled = true; importBtn.textContent = '导入中...'; }
+            if (input) input.disabled = true;
+            importFromBangumi(id).finally(() => {
+                if (importBtn) { importBtn.disabled = false; importBtn.textContent = '导入'; }
+                if (input) input.disabled = false;
+            });
             break;
         }
         case 'exportCustom': exportCustomSongs(); break;
         case 'importCustom': $('importFileInput')?.click(); break;
         case 'clearCustom': {
-            if (getCustomSongs().length === 0) { notify('没有自定义歌曲'); return; }
-            if (!confirm('确定要清空所有自定义歌曲吗？此操作不可撤销。')) return;
+            if (getCustomSongs().length === 0) { notify('喵~ 还没有自定义歌曲呢'); return; }
+            if (!confirm('主人确定要清空所有自定义歌曲喵？人家会心疼的...')) return;
             setCustomSongs([]);
-            notify('已清空自定义曲库');
+            notify('已清空自定义曲库啦喵~');
             break;
         }
     }
