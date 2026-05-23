@@ -526,17 +526,11 @@ async function playFavSongAtIndex(index) {
         }
     }
 
+    audio.pause();
+    gameState.isPlaying = false;
+    $('visualizer')?.classList.add('hidden');
+    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     ytPlayer.loadVideoById(videoId);
-    // Small delay to ensure video loads before playing
-    setTimeout(() => {
-        if (ytPlayer && ytPlayer.playVideo) {
-            audio.pause();
-            gameState.isPlaying = false;
-            $('visualizer')?.classList.add('hidden');
-            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-            ytPlayer.playVideo();
-        }
-    }, 300);
     renderFavorites();
 }
 
