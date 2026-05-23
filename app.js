@@ -1191,7 +1191,7 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
             'kenshi yonezu', '米津玄師', 'official髭男dism', 'king gnu', 'yama', 'milet',
             'reona', '藍井エイル', 'eir aoi', 't.m.revolution', 'flow', 'granrodeo',
             'spyair', 'burnout syndromes', 'kana-boon', 'myth & roid', 'sawanohiroyuki',
-            '澤野弘之', '梶浦由記', 'fictionjunction', 'supercell', 'claris', 'l'arc~en~ciel',
+            '澤野弘之', '梶浦由記', 'fictionjunction', 'supercell', 'claris', "l'arc~en~ciel",
             'nana mizuki', '水樹奈々', 'maaya sakamoto', '坂本真綾', 'minori chihara', '茅原実里'];
         for (const known of knownAnimeArtists) {
             if (a.includes(known) || known.includes(a)) { score += 20; break; }
