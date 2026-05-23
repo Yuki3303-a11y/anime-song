@@ -129,7 +129,7 @@ class MemCache {
     }
 }
 
-const audioCache = new MemCache('audio_cache_v1', 500);
+const audioCache = new MemCache('audio_cache_v2', 500);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
 
@@ -1752,44 +1752,75 @@ async function fetchAudio(title, artist, anime) {
     const cached = audioCache.get(cacheKey);
     if (cached) return cached;
 
+    function scoreMatch(r) {
+        const t = (r.trackName || '').toLowerCase();
+        const c = (r.collectionName || '').toLowerCase();
+        const a = (r.artistName || '').toLowerCase();
+        const lt = title.toLowerCase();
+        const la = (artist || '').toLowerCase();
+
+        let score = 0;
+
+        // Title match (strict: exact or starts-with gets higher score)
+        if (t === lt) score += 100;
+        else if (t.startsWith(lt) || lt.startsWith(t)) score += 60;
+        else if (t.includes(lt) || lt.includes(t)) score += 30;
+        else return -1; // no title match at all — reject
+
+        // Artist match
+        if (la && (a.includes(la) || la.includes(a))) score += 50;
+        else if (la) score -= 20; // artist mismatch penalty
+
+        // Album name contains title (bonus for anime OSTs)
+        if (c.includes(lt)) score += 10;
+
+        return score;
+    }
+
     async function searchItunes(term) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
             const response = await fetch(
-                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=5&country=JP`,
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=10&country=JP`,
                 { signal: controller.signal }
             );
             clearTimeout(timeoutId);
             const data = await response.json();
             if (data.resultCount > 0) {
-                const lowerTitle = title.toLowerCase();
-                const match = data.results.find(r =>
-                    r.trackName?.toLowerCase().includes(lowerTitle) ||
-                    r.collectionName?.toLowerCase().includes(lowerTitle) ||
-                    lowerTitle.includes(r.trackName?.toLowerCase() || '')
-                );
-                return match ? match.previewUrl : data.results[0].previewUrl;
+                // Score all results and pick the best match
+                let best = null;
+                let bestScore = -1;
+                for (const r of data.results) {
+                    const s = scoreMatch(r);
+                    if (s > bestScore) { bestScore = s; best = r; }
+                }
+                // Only accept if we have a reasonable match
+                if (best && bestScore >= 30) return best.previewUrl;
+                // Fallback: first result if title roughly matches
+                if (data.results[0].trackName?.toLowerCase().includes(title.toLowerCase().slice(0, 5))) {
+                    return data.results[0].previewUrl;
+                }
             }
         } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
         return null;
     }
 
-    // Try 1: artist + title
+    // Try 1: artist + title (most precise)
     if (artist) {
         const url = await searchItunes(`${artist} ${title}`);
         if (url) { audioCache.set(cacheKey, url); return url; }
     }
 
-    // Try 2: just title
+    // Try 2: title + anime (anime name helps disambiguate)
     {
-        const url = await searchItunes(title);
+        const url = await searchItunes(`${title} ${anime}`);
         if (url) { audioCache.set(cacheKey, url); return url; }
     }
 
-    // Try 3: title with "anime" appended
+    // Try 3: just title
     {
-        const url = await searchItunes(`${title} anime`);
+        const url = await searchItunes(title);
         if (url) { audioCache.set(cacheKey, url); return url; }
     }
 
