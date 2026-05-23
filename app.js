@@ -1164,25 +1164,65 @@ async function importFromBangumi(indexId) {
     notify(`导入成功啦喵！新增了 ${addedCount} 首歌曲呢~`);
 }
 
-// Search iTunes for anime OP/ED songs
+// Search iTunes for anime OP/ED songs — with scoring to ensure anime relevance
 async function searchItunesForAnime(romajiTitle, animeName, year) {
     const results = [];
     const seen = new Set();
 
-    // Search with romaji + anime
+    function scoreImportResult(r) {
+        const c = (r.collectionName || '').toLowerCase();
+        const a = (r.artistName || '').toLowerCase();
+        const t = (r.trackName || '').toLowerCase();
+        const lan = animeName.toLowerCase();
+
+        let score = 0;
+
+        // Album/collection contains anime name (strongest signal)
+        if (lan && c.includes(lan)) score += 50;
+        // Also check romaji title in collection
+        const rt = romajiTitle.toLowerCase();
+        if (rt && c.includes(rt)) score += 30;
+
+        // Track name should look like a real song (not random noise)
+        if (t.length >= 3 && !/^[a-z0-9_\-\.]+$/.test(t)) score += 10;
+
+        // Bonus for known anime music artists (heuristic)
+        const knownAnimeArtists = ['lisa', 'aimer', 'yoasobi', 'eve', 'yorushika', 'ヨルシカ',
+            'kenshi yonezu', '米津玄師', 'official髭男dism', 'king gnu', 'yama', 'milet',
+            'reona', '藍井エイル', 'eir aoi', 't.m.revolution', 'flow', 'granrodeo',
+            'spyair', 'burnout syndromes', 'kana-boon', 'myth & roid', 'sawanohiroyuki',
+            '澤野弘之', '梶浦由記', 'fictionjunction', 'supercell', 'claris', 'l'arc~en~ciel',
+            'nana mizuki', '水樹奈々', 'maaya sakamoto', '坂本真綾', 'minori chihara', '茅原実里'];
+        for (const known of knownAnimeArtists) {
+            if (a.includes(known) || known.includes(a)) { score += 20; break; }
+        }
+
+        return score;
+    }
+
     for (const term of [`${romajiTitle} anime`, romajiTitle]) {
         const controller = new AbortController();
         const tid = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
             const res = await fetch(
-                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=5&country=JP`,
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=10&country=JP`,
                 { signal: controller.signal }
             );
             clearTimeout(tid);
             const data = await res.json();
+            // Score all results first, then filter
+            const scored = [];
             for (const r of (data.results || [])) {
                 const title = r.trackName;
                 if (!title || seen.has(title)) continue;
+                const s = scoreImportResult(r);
+                if (s >= 30) scored.push({ r, score: s });
+            }
+            // Sort by score descending, take best
+            scored.sort((a, b) => b.score - a.score);
+            for (const { r } of scored) {
+                const title = r.trackName;
+                if (seen.has(title)) continue;
                 seen.add(title);
                 results.push({
                     title: title,
@@ -1190,21 +1230,26 @@ async function searchItunesForAnime(romajiTitle, animeName, year) {
                     anime: animeName,
                     artist: r.artistName || 'Unknown',
                     year: year,
-                    type: guessSongType(title),
+                    type: guessSongType(title, r),
                 });
             }
-            if (results.length > 0) break;
+            if (results.length >= 2) break;
         } catch (e) { clearTimeout(tid); console.error('[iTunes] searchItunesForAnime:', e); }
     }
-    return results.slice(0, 2); // Max 2 songs per anime
+    return results.slice(0, 2);
 }
 
-// Guess if a song is OP/ED/IN based on its title
-function guessSongType(title) {
-    const t = title.toLowerCase();
-    if (/\bop\b|opening/.test(t)) return 'OP';
-    if (/\bed\b|ending/.test(t)) return 'ED';
-    return 'OP'; // Default to OP
+// Guess if a song is OP/ED/IN based on its title and iTunes metadata
+function guessSongType(title, r) {
+    const t = (title || '').toLowerCase();
+    // Explicit OP/ED in title
+    if (/\bop\b|opening|op\.|\bop\d/i.test(t)) return 'OP';
+    if (/\bed\b|ending|ed\.|\bed\d/i.test(t)) return 'ED';
+    // Check collection name for OP/ED hints
+    const c = ((r?.collectionName) || '').toLowerCase();
+    if (/opening|op\.|-op\b/i.test(c)) return 'OP';
+    if (/ending|ed\.|-ed\b/i.test(c)) return 'ED';
+    return 'OP'; // Default
 }
 
 // Export custom songs as JSON file
