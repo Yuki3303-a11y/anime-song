@@ -54,6 +54,8 @@ const gameState = {
     combo: 0,
     maxCombo: 0,
     correctCount: 0,
+    answerHistory: [],
+    viewingHistory: false,
 };
 
 function getMaxScore(n) {
@@ -63,6 +65,9 @@ function getMaxScore(n) {
 }
 
 const $ = id => document.getElementById(id);
+function escapeHTML(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 const audio = $('audioEl');
 
 // =====================================================================
@@ -79,7 +84,7 @@ const PK_RETRY_COUNT = 3;          // PK max retry attempts
 // =====================================================================
 // Filter State
 // =====================================================================
-const filterState = { years: new Set(), type: null, source: null };
+const filterState = { years: new Set(), types: new Set(), source: null };
 
 function updateFilterCount() {
     const count = getFilteredSongs().length;
@@ -126,6 +131,583 @@ class MemCache {
 
 const audioCache = new MemCache('audio_cache_v1', 500);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
+const youtubeCache = new MemCache('youtube_cache_v1', 200);
+
+// =====================================================================
+// YouTube Full Song Player
+// =====================================================================
+const YT_API_KEY = 'AIzaSyD3Thxm5vMGTja9h5hW91zHALjJ8vCXGyU';
+let ytPlayer = null;
+let ytReady = false;
+let fpProgressInterval = null;
+let musicProgressInterval = null;
+
+// Playlist state for home page music playback
+const playlist = {
+    songs: [],
+    currentIndex: -1,
+    mode: 'free',  // 'free' | 'sequential' | 'shuffle'
+    playing: false
+};
+
+function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady = () => {
+        ytPlayer = new YT.Player('ytPlayerEl', {
+            height: '1', width: '1',
+            playerVars: { autoplay: 0, controls: 0, disablekb: 1 },
+            events: {
+                onReady: () => { ytReady = true; },
+                onStateChange: onYtStateChange,
+                onError: onYtError
+            }
+        });
+    };
+}
+
+function onYtError(e) {
+    // YouTube error codes: 2=invalid param, 5=HTML5 error, 100=not found, 101/150=not embeddable
+    notify('该歌曲暂时无法播放，跳到下一首...');
+    if (playlist.mode !== 'free' && playlist.songs.length > 1) {
+        setTimeout(() => playNextSong(), 1500);
+    }
+}
+
+function onYtStateChange(e) {
+    // Update detail modal player UI
+    const icon = $('fpPlayIcon');
+    const wave = $('fpWave');
+    if (icon) {
+        if (e.data === YT.PlayerState.PLAYING) {
+            icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            if (wave) wave.classList.add('active');
+            startFpProgress();
+        } else {
+            icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            if (wave) wave.classList.remove('active');
+            stopFpProgress();
+        }
+    }
+
+    // Update music modal player UI
+    const mIcon = $('musicPlayIcon');
+    if (mIcon) {
+        if (e.data === YT.PlayerState.PLAYING) {
+            mIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            playlist.playing = true;
+            startMusicProgress();
+        } else {
+            mIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            playlist.playing = false;
+            stopMusicProgress();
+        }
+    }
+
+    // Auto-next when song ends (sequential/shuffle mode)
+    if (e.data === YT.PlayerState.ENDED) {
+        if (playlist.mode !== 'free' && playlist.songs.length > 0) {
+            playNextSong();
+        }
+    }
+}
+
+function startFpProgress() {
+    stopFpProgress();
+    fpProgressInterval = setInterval(() => {
+        if (!ytPlayer || !ytPlayer.getCurrentTime) return;
+        const cur = ytPlayer.getCurrentTime();
+        const dur = ytPlayer.getDuration();
+        if (dur > 0) {
+            const pct = (cur / dur * 100) + '%';
+            $('fpProgressFill').style.width = pct;
+            $('fpProgressDot').style.left = pct;
+            $('fpCurrent').textContent = formatTime(cur);
+            $('fpDuration').textContent = formatTime(dur);
+        }
+    }, 500);
+}
+
+function stopFpProgress() {
+    if (fpProgressInterval) { clearInterval(fpProgressInterval); fpProgressInterval = null; }
+}
+
+function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+async function searchYouTube(query) {
+    const cacheKey = query;
+    const cached = youtubeCache.get(cacheKey);
+    if (cached) return cached;
+    try {
+        const res = await fetch(
+            `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&maxResults=1&q=${encodeURIComponent(query)}&key=${YT_API_KEY}`
+        );
+        const data = await res.json();
+        const videoId = data.items?.[0]?.id?.videoId || null;
+        if (videoId) youtubeCache.set(cacheKey, videoId);
+        return videoId;
+    } catch { return null; }
+}
+
+async function searchAndLoadFullSong(song) {
+    stopMusicPlayer();
+    const playerEl = $('fullPlayer');
+    if (!playerEl) return;
+    playerEl.style.display = 'none';
+    stopFpProgress();
+    $('fpProgressFill').style.width = '0%';
+    $('fpProgressDot').style.left = '0%';
+    $('fpCurrent').textContent = '0:00';
+    $('fpDuration').textContent = '0:00';
+    const wave = $('fpWave');
+    if (wave) wave.classList.remove('active');
+
+    const romaji = $('detailRomaji')?.textContent || '';
+    const query = `${romaji || song.title} ${song.anime} ${song.type}`;
+    const videoId = await searchYouTube(query);
+    if (!videoId) return;
+
+    // Check modal is still open (user might have closed it)
+    if (!$('animeDetailModal').classList.contains('show')) return;
+
+    playerEl.style.display = '';
+    $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+    updateHeartUI();
+    // Set cover image from detailCover (may not be loaded yet)
+    const fpCover = $('fpCover');
+    const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
+    const detailCoverSrc = $('detailCover')?.src;
+    if (fpCover && detailCoverSrc) {
+        fpCover.src = detailCoverSrc;
+        fpCover.style.display = '';
+        if (fpFallback) fpFallback.style.display = 'none';
+    } else if (fpCover) {
+        fpCover.style.display = 'none';
+        if (fpFallback) fpFallback.style.display = '';
+    }
+    if (ytPlayer && ytPlayer.cueVideoById) {
+        ytPlayer.cueVideoById(videoId);
+    }
+}
+
+function toggleFullPlay() {
+    if (!ytPlayer || !ytReady) return;
+    const state = ytPlayer.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+        ytPlayer.pauseVideo();
+    } else {
+        audio.pause();
+        gameState.isPlaying = false;
+        $('visualizer').classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        ytPlayer.playVideo();
+    }
+}
+
+function stopFullPlayer() {
+    if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+    stopFpProgress();
+    const icon = $('fpPlayIcon');
+    if (icon) icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    const wave = $('fpWave');
+    if (wave) wave.classList.remove('active');
+    const dot = $('fpProgressDot');
+    if (dot) dot.style.left = '0%';
+    const playerEl = $('fullPlayer');
+    if (playerEl) playerEl.style.display = 'none';
+}
+
+// Progress bar click to seek
+document.addEventListener('click', (e) => {
+    const bar = e.target.closest('#fpProgress');
+    if (!bar || !ytPlayer || !ytPlayer.getDuration) return;
+    const rect = bar.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    ytPlayer.seekTo(pct * ytPlayer.getDuration(), true);
+    $('fpProgressFill').style.width = (pct * 100) + '%';
+    $('fpProgressDot').style.left = (pct * 100) + '%';
+});
+
+// =====================================================================
+// Favorites System
+// =====================================================================
+const FAV_KEY = 'fav_songs_v1';
+
+function getFavorites() {
+    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
+    catch { return []; }
+}
+
+function saveFavorites(favs) {
+    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+}
+
+function isFavorite(title, anime) {
+    return getFavorites().some(f => f.title === title && f.anime === anime);
+}
+
+function toggleFavorite() {
+    const song = gameState.currentSong;
+    if (!song) return;
+    const favs = getFavorites();
+    const idx = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
+    if (idx >= 0) {
+        favs.splice(idx, 1);
+        notify('已取消收藏');
+    } else {
+        const videoId = ytPlayer?.getVideoData?.()?.video_id || '';
+        favs.push({
+            title: song.title,
+            titleCN: song.titleCN || song.title,
+            anime: song.anime,
+            artist: song.artist,
+            year: song.year,
+            type: song.type,
+            videoId: videoId,
+            coverImage: $('detailCover')?.src || ''
+        });
+        notify('已收藏 ♡');
+    }
+    saveFavorites(favs);
+    updateHeartUI();
+    renderFavorites();
+}
+
+function updateHeartUI() {
+    const song = gameState.currentSong;
+    if (!song) return;
+    const btn = $('fpHeartBtn');
+    if (!btn) return;
+    const fav = isFavorite(song.title, song.anime);
+    btn.classList.toggle('favorited', fav);
+    const icon = $('fpHeartIcon');
+    if (icon) {
+        icon.setAttribute('fill', fav ? 'currentColor' : 'none');
+    }
+}
+
+function renderFavorites() {
+    const favs = getFavorites();
+    const section = $('favSection');
+    const list = $('favList');
+    const count = $('favCount');
+    if (!section || !list) return;
+
+    if (favs.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = '';
+    count.textContent = favs.length;
+
+    const activeKey = playlist.currentIndex >= 0 && playlist.songs[playlist.currentIndex]
+        ? playlist.songs[playlist.currentIndex].title + '|' + playlist.songs[playlist.currentIndex].anime
+        : '';
+
+    list.innerHTML = favs.map((f, i) => {
+        const isActive = (f.title + '|' + f.anime) === activeKey;
+        const fallbackSVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+        const safeCover = escapeHTML(f.coverImage || '');
+        const iconHTML = f.coverImage
+            ? `<img class="fav-item-cover" src="${safeCover}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span style="display:none">${fallbackSVG}</span>`
+            : fallbackSVG;
+        const safeTitle = escapeHTML(f.titleCN || f.title);
+        const safeAnime = escapeHTML(f.anime);
+        return `
+        <div class="fav-item${isActive ? ' active' : ''}" data-action="playFavSong" data-value="${i}">
+            <span class="fav-item-num">${i + 1}</span>
+            <div class="fav-item-icon">${iconHTML}</div>
+            <div class="fav-item-info">
+                <div class="fav-item-title">${safeTitle}</div>
+                <div class="fav-item-sub">${safeAnime} · ${f.year}</div>
+            </div>
+            <div class="fav-item-actions">
+                <button class="fav-item-btn remove-fav-btn" data-remove-fav="${i}" aria-label="取消收藏">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function playAllFavs() {
+    const favs = getFavorites();
+    if (favs.length === 0) return;
+    playlist.songs = [...favs];
+    playlist.mode = 'sequential';
+    playlist.currentIndex = 0;
+    playFavSongAtIndex(0);
+}
+
+function shufflePlayFavs() {
+    const favs = getFavorites();
+    if (favs.length === 0) return;
+    playlist.songs = shuffle([...favs]);
+    playlist.mode = 'shuffle';
+    playlist.currentIndex = 0;
+    playFavSongAtIndex(0);
+}
+
+function sequentialPlayFavs() {
+    playAllFavs();
+}
+
+function playFavSong(index) {
+    const favs = getFavorites();
+    if (index < 0 || index >= favs.length) return;
+    playlist.songs = favs;
+    playlist.mode = 'free';
+    playlist.currentIndex = index;
+    playFavSongAtIndex(index);
+}
+
+async function playFavSongAtIndex(index) {
+    const song = playlist.songs[index];
+    if (!song || !ytPlayer || !ytReady) return;
+    playlist.currentIndex = index;
+    gameState.currentSong = song;
+    showMusicPlayer(song);
+
+    let videoId = song.videoId;
+    if (!videoId) {
+        // Try to search YouTube for this song
+        notify('正在搜索歌曲...');
+        const query = `${song.title} ${song.anime} ${song.type || ''}`;
+        videoId = await searchYouTube(query);
+        if (!videoId) {
+            notify('未找到完整版歌曲，试试下一首吧');
+            return;
+        }
+        // Save the found videoId back to the playlist and favorites
+        song.videoId = videoId;
+        const favs = getFavorites();
+        const favIdx = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
+        if (favIdx >= 0) {
+            favs[favIdx].videoId = videoId;
+            saveFavorites(favs);
+        }
+    }
+
+    ytPlayer.loadVideoById(videoId);
+    // Small delay to ensure video loads before playing
+    setTimeout(() => {
+        if (ytPlayer && ytPlayer.playVideo) {
+            audio.pause();
+            gameState.isPlaying = false;
+            $('visualizer')?.classList.add('hidden');
+            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+            ytPlayer.playVideo();
+        }
+    }, 300);
+    renderFavorites();
+}
+
+function playPrevSong() {
+    if (playlist.songs.length === 0) return;
+    let idx = playlist.currentIndex - 1;
+    if (idx < 0) idx = playlist.songs.length - 1;
+    playFavSongAtIndex(idx);
+}
+
+function playNextSong() {
+    if (playlist.songs.length === 0) return;
+    let idx = playlist.currentIndex + 1;
+    if (idx >= playlist.songs.length) idx = 0;
+    playFavSongAtIndex(idx);
+}
+
+async function showMusicPlayer(song) {
+    const modal = $('musicModal');
+    if (!modal) return;
+    // Stop detail modal player if open
+    stopFullPlayer();
+    $('musicTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+    $('musicAnime').textContent = song.anime || '';
+    // Type badge
+    const badge = $('musicTypeBadge');
+    if (badge) {
+        if (song.type) {
+            badge.textContent = song.type;
+            badge.style.display = '';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+    // Cover image
+    const cover = $('musicCover');
+    const fallback = $('musicCoverFallback');
+    if (cover) {
+        if (song.coverImage) {
+            cover.src = song.coverImage;
+            cover.style.display = '';
+            if (fallback) fallback.style.display = 'none';
+        } else {
+            cover.style.display = 'none';
+            cover.src = '';
+            if (fallback) fallback.style.display = '';
+        }
+    }
+    // Bangumi link
+    const bgmLink = $('musicBangumiLink');
+    if (bgmLink) bgmLink.style.display = 'none';
+
+    updateMusicHeartUI(song);
+    modal.classList.add('show');
+
+    // Fetch anime detail for cover image and bangumi link
+    if (song.anime) {
+        fetchAnimeDetail(song.anime).then(detail => {
+            if (!detail) return;
+            if (detail.image && cover) {
+                cover.src = detail.image;
+                cover.style.display = '';
+                if (fallback) fallback.style.display = 'none';
+                // Save cover back to song and favorites
+                song.coverImage = detail.image;
+                const favs = getFavorites();
+                const fi = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
+                if (fi >= 0 && !favs[fi].coverImage) {
+                    favs[fi].coverImage = detail.image;
+                    saveFavorites(favs);
+                    renderFavorites();
+                }
+            }
+            if (detail.bangumiId && bgmLink) {
+                bgmLink.href = `https://bgm.tv/subject/${detail.bangumiId}`;
+                bgmLink.style.display = '';
+            }
+        });
+    }
+}
+
+function hideMusicPlayer() {
+    const modal = $('musicModal');
+    if (modal) modal.classList.remove('show');
+    if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+    stopMusicProgress();
+    playlist.playing = false;
+    playlist.currentIndex = -1;
+    const mIcon = $('musicPlayIcon');
+    if (mIcon) mIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    renderFavorites();
+}
+
+function stopMusicPlayer() {
+    hideMusicPlayer();
+}
+
+function toggleMusicPlay() {
+    if (!ytPlayer || !ytReady) return;
+    const state = ytPlayer.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+        ytPlayer.pauseVideo();
+    } else {
+        audio.pause();
+        gameState.isPlaying = false;
+        $('visualizer')?.classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        ytPlayer.playVideo();
+    }
+}
+
+function toggleMusicFav() {
+    const song = playlist.songs[playlist.currentIndex];
+    if (!song) return;
+    const favs = getFavorites();
+    const idx = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
+    if (idx >= 0) {
+        favs.splice(idx, 1);
+        notify('已取消收藏');
+    } else {
+        favs.push({ ...song });
+        notify('已收藏 ♡');
+    }
+    saveFavorites(favs);
+    updateMusicHeartUI(song);
+    renderFavorites();
+}
+
+function updateMusicHeartUI(song) {
+    if (!song) return;
+    const btn = $('musicHeartBtn');
+    if (!btn) return;
+    const fav = isFavorite(song.title, song.anime);
+    btn.classList.toggle('favorited', fav);
+    const icon = $('musicHeartIcon');
+    if (icon) icon.setAttribute('fill', fav ? 'currentColor' : 'none');
+}
+
+// Music modal progress tracking
+function startMusicProgress() {
+    stopMusicProgress();
+    musicProgressInterval = setInterval(() => {
+        if (!ytPlayer || !ytPlayer.getCurrentTime) return;
+        const cur = ytPlayer.getCurrentTime();
+        const dur = ytPlayer.getDuration();
+        if (dur > 0) {
+            const pct = (cur / dur * 100) + '%';
+            $('musicProgressFill').style.width = pct;
+            $('musicProgressDot').style.left = pct;
+            $('musicCurrent').textContent = formatTime(cur);
+            $('musicDuration').textContent = formatTime(dur);
+        }
+    }, 500);
+}
+
+function stopMusicProgress() {
+    if (musicProgressInterval) { clearInterval(musicProgressInterval); musicProgressInterval = null; }
+}
+
+function removeFavorite(index) {
+    const favs = getFavorites();
+    favs.splice(index, 1);
+    saveFavorites(favs);
+    renderFavorites();
+    updateHeartUI();
+}
+
+function clearFavorites() {
+    if (!confirm('确定清空所有收藏吗？')) return;
+    stopMusicPlayer();
+    saveFavorites([]);
+    renderFavorites();
+    updateHeartUI();
+    notify('收藏已清空');
+}
+
+// Volume control
+let ytVolume = 80;
+let volumeMuted = false;
+
+function toggleVolumeSlider() {
+    const slider = $('fpVolSlider');
+    if (slider) slider.classList.toggle('open');
+}
+
+function toggleMute() {
+    if (!ytPlayer) return;
+    volumeMuted = !volumeMuted;
+    ytPlayer.setVolume(volumeMuted ? 0 : ytVolume);
+    updateVolIcon();
+}
+
+function updateVolIcon() {
+    const muted = volumeMuted || ytVolume === 0;
+    const low = ytVolume < 50;
+    const svgMuted = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+    const svgLow = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+    const svgHigh = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+    const svg = muted ? svgMuted : (low ? svgLow : svgHigh);
+    const icon = $('fpVolIcon');
+    if (icon) icon.innerHTML = svg;
+    const mIcon = $('musicVolIcon');
+    if (mIcon) mIcon.innerHTML = svg;
+}
 
 // =====================================================================
 // Custom Song Library (Bangumi Import)
@@ -167,7 +749,7 @@ function getFilteredSongs() {
     const all = getAllSongs();
     return all.filter(s => {
         if (filterState.years.size > 0 && !filterState.years.has(s.year)) return false;
-        if (filterState.type && s.type !== filterState.type) return false;
+        if (filterState.types.size > 0 && !filterState.types.has(s.type)) return false;
         if (filterState.source === 'builtin' && customSet.has(s.title + '|' + s.anime)) return false;
         if (filterState.source === 'custom' && !customSet.has(s.title + '|' + s.anime)) return false;
         return true;
@@ -401,8 +983,8 @@ function updateCustomSongsUI() {
     list.innerHTML = '<div style="font-size:11px;color:#999;margin-bottom:4px;">共 ' + songs.length + ' 首</div>' + songs.map((s, i) => `
         <div style="display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:4px;margin-bottom:2px;background:#fafafa;">
             <div style="flex:1;min-width:0;">
-                <div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333;">${s.titleCN || s.title}</div>
-                <div style="font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.anime}</div>
+                <div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333;">${escapeHTML(s.titleCN || s.title)}</div>
+                <div style="font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHTML(s.anime)}</div>
             </div>
             <button data-del-custom="${i}" style="width:18px;height:18px;border-radius:50%;border:1px solid #ddd;background:none;color:#999;font-size:10px;cursor:pointer;flex-shrink:0;line-height:1;">✕</button>
         </div>
@@ -608,8 +1190,8 @@ function showAnimeDetail(song) {
     songInfo.innerHTML = `
         <div class="detail-song-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <div class="detail-song-text">
-            <div class="detail-song-name">${songName}</div>
-            <div class="detail-song-artist">${song.artist}</div>
+            <div class="detail-song-name">${escapeHTML(songName)}</div>
+            <div class="detail-song-artist">${escapeHTML(song.artist)}</div>
         </div>
     `;
 
@@ -640,12 +1222,22 @@ function showAnimeDetail(song) {
                 placeholder.style.display = 'flex';
             };
             placeholder.style.display = 'none';
+            // Also update the full player cover
+            const fpCover = $('fpCover');
+            const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
+            if (fpCover && $('fullPlayer')?.style.display !== 'none') {
+                fpCover.src = detail.image;
+                fpCover.style.display = '';
+                if (fpFallback) fpFallback.style.display = 'none';
+            }
         }
         if (detail.titleRomaji) romaji.textContent = detail.titleRomaji;
         if (detail.bangumiId) {
             bangumiLink.href = `https://bgm.tv/subject/${detail.bangumiId}`;
         }
     });
+
+    searchAndLoadFullSong(song);
 }
 
 // =====================================================================
@@ -769,11 +1361,13 @@ function beep(frequency, duration, type = 'sine') {
 // =====================================================================
 // Notification
 // =====================================================================
+let notifyTimer = null;
 function notify(text) {
     const n = $('notif');
+    if (notifyTimer) clearTimeout(notifyTimer);
     n.textContent = text;
     n.classList.add('show');
-    setTimeout(() => n.classList.remove('show'), NOTIFY_DURATION);
+    notifyTimer = setTimeout(() => { n.classList.remove('show'); notifyTimer = null; }, NOTIFY_DURATION);
 }
 
 // =====================================================================
@@ -893,6 +1487,10 @@ function animateScore(element, newValue) {
 // =====================================================================
 function showView(viewName) {
     if (roomUnsub) { roomUnsub(); roomUnsub = null; }
+    stopFullPlayer();
+    hideMusicPlayer();
+    if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+    stopMusicProgress();
     audio.pause();
     gameState.isPlaying = false;
     $('visualizer')?.classList.add('hidden');
@@ -915,6 +1513,8 @@ function startSingle() {
     gameState.combo = 0;
     gameState.maxCombo = 0;
     gameState.correctCount = 0;
+    gameState.answerHistory = [];
+    gameState.viewingHistory = false;
     const pool = getFilteredSongs();
     if (pool.length < 4) { notify('呜喵~ 曲库太少了...请放宽筛选条件吧'); return; }
     const n = Math.min(gameState.questionCount, pool.length);
@@ -965,7 +1565,7 @@ async function pkJoin() {
     if (!user) { notify('正在连接服务器喵~ 请稍等...'); return; }
     if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
     const rid = $('roomIdInput').value.trim();
-    if (rid.length !== 4) { notify('喵~ 请输入4位房间号哦'); return; }
+    if (rid.length !== 4 || !/^\d{4}$/.test(rid)) { notify('喵~ 请输入4位数字房间号哦'); return; }
     pkBusy = true;
     try {
         const snap = await retryPK(() => get(ref(db, 'rooms/' + rid)), 'pkJoin.getDoc');
@@ -1044,19 +1644,25 @@ function enterRoom(rid) {
             gameState.combo = 0;
             gameState.maxCombo = 0;
             gameState.correctCount = 0;
+            gameState.answerHistory = [];
+            gameState.viewingHistory = false;
             gameState.playlist = d.questions.map(i => SONGS[i]);
             $('singleHeader').classList.add('hidden');
             $('pkHeader').classList.remove('hidden');
             $('songInfo').classList.remove('show');
+            $('totalQ').textContent = gameState.playlist.length;
             showView('game');
+            // Re-subscribe for score sync (showView unsubscribed the room listener)
+            roomUnsub = onValue(ref(db, 'rooms/' + roomId), scoreSnap => {
+                if (!scoreSnap.exists()) return;
+                const sd = scoreSnap.val();
+                if (sd.scores) {
+                    const opId = sd.host === user.uid ? sd.guest : sd.host;
+                    gameState.opponentScore = sd.scores[opId] || 0;
+                    $('opScoreText').textContent = gameState.opponentScore;
+                }
+            });
             loadQuestion();
-        }
-        if (d.status === 'playing' && d.scores) {
-            const opId = d.host === user.uid ? d.guest : d.host;
-            gameState.score = d.scores[user.uid] || 0;
-            gameState.opponentScore = d.scores[opId] || 0;
-            $('myScoreText').textContent = gameState.score;
-            $('opScoreText').textContent = gameState.opponentScore;
         }
     });
 }
@@ -1081,6 +1687,35 @@ function loadQuestion() {
         endGame();
         return;
     }
+
+    // History viewing mode — show past answer with result markers
+    if (gameState.viewingHistory) {
+        const record = gameState.answerHistory[gameState.questionIndex];
+        if (!record) { gameState.viewingHistory = false; return; }
+        gameState.correctAnime = record.song.anime;
+        gameState.currentSong = record.song;
+        gameState.isLocked = true;
+        audio.pause();
+        gameState.isPlaying = false;
+        $('visualizer').classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        $('playBtn').disabled = true;
+        $('playerStatus').textContent = '回顾模式';
+        $('progressFill').style.width = '0%';
+        $('qNum').textContent = gameState.questionIndex + 1;
+        const histCorrect = gameState.answerHistory.slice(0, gameState.questionIndex + 1).filter(r => r.isCorrect).length;
+        animateScore($('scoreText'), histCorrect);
+        $('songInfo').classList.remove('show');
+        renderHistoryOptions(record);
+        showSongInfo(record.isCorrect);
+        // Show detail modal after brief delay (same as normal flow)
+        setTimeout(() => {
+            showAnimeDetail(record.song);
+            updatePrevButton();
+        }, 800);
+        return;
+    }
+
     const q = gameState.playlist[gameState.questionIndex];
     gameState.correctAnime = q.anime;
     gameState.currentSong = q;
@@ -1094,7 +1729,8 @@ function loadQuestion() {
     $('progressFill').style.width = '0%';
     $('songInfo').classList.remove('show');
     $('qNum').textContent = gameState.questionIndex + 1;
-    animateScore($('scoreText'), gameState.score);
+    animateScore($('scoreText'), gameState.correctCount);
+    updatePrevButton();
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
     fetchAudio(q.title, q.artist, q.anime).then(url => {
@@ -1184,6 +1820,13 @@ function handleAnswer(btn, selected) {
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
 
     const isCorrect = selected === gameState.correctAnime;
+    gameState.answerHistory.push({
+        song: gameState.currentSong,
+        selected: selected,
+        isCorrect: isCorrect,
+        options: Array.from(document.querySelectorAll('.opt-btn')).map(b => b.textContent),
+        scoreSnapshot: gameState.score
+    });
     showSongInfo(isCorrect);
 
     if (isCorrect) {
@@ -1214,10 +1857,11 @@ function handleAnswer(btn, selected) {
         });
     }
 
-    animateScore($('scoreText'), gameState.score);
+    animateScore($('scoreText'), gameState.correctCount);
     animateScore($('myScoreText'), gameState.score);
     setTimeout(() => {
         showAnimeDetail(gameState.currentSong);
+        updatePrevButton();
     }, 1500);
 }
 
@@ -1258,13 +1902,18 @@ function togglePlay() {
     } else {
         if (audioContext) audioContext.resume();
         playLock = true;
-        audio.play().then(() => { playLock = false; }).catch(() => {
-            playLock = false;
-            notify('喵呜~ 音频播放失败了...再试一次吧');
-        });
         gameState.isPlaying = true;
         $('visualizer').classList.remove('hidden');
         $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        const lockTimeout = setTimeout(() => { playLock = false; }, 5000);
+        audio.play().then(() => { clearTimeout(lockTimeout); playLock = false; }).catch(() => {
+            clearTimeout(lockTimeout);
+            playLock = false;
+            gameState.isPlaying = false;
+            $('visualizer').classList.add('hidden');
+            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+            notify('喵呜~ 音频播放失败了...再试一次吧');
+        });
     }
 }
 
@@ -1294,11 +1943,11 @@ function endGame() {
         $('endDesc').textContent = win ? '二次元之神就是你！' : '再接再厉！';
         if (win) spawnCelebration();
     } else {
-        const maxScore = getMaxScore(gameState.playlist.length);
-        const pct = maxScore > 0 ? gameState.score / maxScore * 100 : 0;
+        const total = gameState.playlist.length;
+        const pct = total > 0 ? gameState.correctCount / total * 100 : 0;
         $('endEmoji').textContent = pct >= 80 ? '🏆' : pct >= 50 ? '🎉' : '💪';
         $('endTitle').textContent = '挑战完成';
-        $('endScore').textContent = gameState.score;
+        $('endScore').textContent = `${gameState.correctCount} / ${total}`;
         $('endDesc').textContent = pct >= 80 ? '太强了！二次元之神！' : pct >= 50 ? '不错哦！继续加油！' : '加油！多听几首番剧曲吧~';
         if (pct >= 50) spawnCelebration();
     }
@@ -1310,9 +1959,10 @@ function endGame() {
         m: gameState.mode,
         c: gameState.maxCombo,
         r: gameState.correctCount,
+        n: gameState.playlist.length,
         t: new Date().toLocaleDateString('zh-CN')
     });
-    recs.sort((a, b) => b.s - a.s);
+    recs.sort((a, b) => (b.r || 0) - (a.r || 0));
     localStorage.setItem('aq_rec', JSON.stringify(recs.slice(0, 50)));
 }
 
@@ -1323,9 +1973,50 @@ function restartGame() {
 }
 
 function nextQuestion() {
+    stopFullPlayer();
     $('animeDetailModal').classList.remove('show');
-    gameState.questionIndex++;
+    if (gameState.viewingHistory) {
+        // Return to the current unanswered question
+        gameState.questionIndex = gameState.answerHistory.length;
+        gameState.viewingHistory = false;
+        loadQuestion();
+    } else {
+        gameState.questionIndex++;
+        loadQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (gameState.answerHistory.length === 0) return;
+    if (!gameState.viewingHistory && gameState.questionIndex === 0) return;
+    gameState.viewingHistory = true;
+    stopFullPlayer();
+    $('animeDetailModal').classList.remove('show');
+    gameState.questionIndex--;
+    if (gameState.questionIndex < 0) gameState.questionIndex = 0;
     loadQuestion();
+}
+
+function updatePrevButton() {
+    const btn = $('prevQuestionBtn');
+    if (!btn) return;
+    btn.style.display = gameState.questionIndex > 0 ? '' : 'none';
+}
+
+function renderHistoryOptions(record) {
+    const grid = $('optionsGrid');
+    grid.innerHTML = '';
+    const options = record.options || [record.song.anime];
+    options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.textContent = opt;
+        btn.dataset.key = i + 1;
+        btn.style.animationDelay = (i * 0.06) + 's';
+        if (opt === record.song.anime) btn.classList.add('correct');
+        else if (opt === record.selected && !record.isCorrect) btn.classList.add('wrong');
+        grid.appendChild(btn);
+    });
 }
 
 // =====================================================================
@@ -1343,10 +2034,10 @@ function renderLeaderboard() {
         <div class="record-item">
             <div class="record-rank">${i < 3 ? medals[i] : (i + 1)}</div>
             <div class="record-info">
-                <div class="record-score">${r.s}分</div>
+                <div class="record-score">✓ ${r.r || 0}${r.n ? '/' + r.n : ''}</div>
                 <div class="record-meta">${r.m==='single'?'🎮 单人':'⚔️ PK'} · ${r.t}</div>
             </div>
-            <div class="record-detail">🔥${r.c} ✓${r.r}</div>
+            <div class="record-detail">🔥${r.c}</div>
         </div>
     `).join('');
 }
@@ -1415,22 +2106,40 @@ function initFilters() {
         yearChips.appendChild(btn);
     });
 
-    // Type chips
+    // Type chips (multi-select)
     const typeOptions = [
-        { label: '全部', value: null },
         { label: 'OP', value: 'OP' },
         { label: 'ED', value: 'ED' },
         { label: '插曲', value: 'IN' },
     ];
     const typeChips = $('typeChips');
-    typeOptions.forEach((t, i) => {
+    const typeAllBtn = document.createElement('button');
+    typeAllBtn.className = 'settings-chip active';
+    typeAllBtn.textContent = '全部';
+    typeAllBtn.addEventListener('click', () => {
+        typeChips.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
+        typeAllBtn.classList.add('active');
+        filterState.types.clear();
+        updateFilterCount();
+    });
+    typeChips.appendChild(typeAllBtn);
+    typeOptions.forEach(t => {
         const btn = document.createElement('button');
-        btn.className = 'settings-chip' + (i === 0 ? ' active' : '');
+        btn.className = 'settings-chip';
         btn.textContent = t.label;
         btn.addEventListener('click', () => {
-            typeChips.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
-            btn.classList.add('active');
-            filterState.type = t.value;
+            if (filterState.types.has(t.value)) {
+                filterState.types.delete(t.value);
+                btn.classList.remove('active');
+            } else {
+                filterState.types.add(t.value);
+                btn.classList.add('active');
+            }
+            if (filterState.types.size === 0) {
+                typeAllBtn.classList.add('active');
+            } else {
+                typeAllBtn.classList.remove('active');
+            }
             updateFilterCount();
         });
         typeChips.appendChild(btn);
@@ -1500,11 +2209,26 @@ document.addEventListener('keydown', (e) => {
     const gameVisible = !$('v-game').classList.contains('hidden');
     const detailOpen = $('animeDetailModal').classList.contains('show');
     const settingsOpen = $('settingsModal').classList.contains('show');
+    const endOpen = $('endModal').classList.contains('show');
 
     // Escape to close modals
     if (e.key === 'Escape') {
         if (settingsOpen) { closeSettings(); return; }
         if (detailOpen) { nextQuestion(); return; }
+        if (endOpen) { $('endModal').classList.remove('show'); showView('menu'); return; }
+    }
+
+    // Space bar: toggle YouTube full player when detail modal is open
+    if (e.key === ' ' && detailOpen && !settingsOpen) {
+        e.preventDefault();
+        toggleFullPlay();
+        return;
+    }
+
+    // Arrow keys for question navigation when detail modal is open
+    if (detailOpen && !settingsOpen) {
+        if (e.key === 'ArrowLeft') { prevQuestion(); return; }
+        if (e.key === 'ArrowRight') { nextQuestion(); return; }
     }
 
     // 1-4 keys for answer selection during gameplay
@@ -1525,6 +2249,13 @@ document.addEventListener('keydown', (e) => {
 // Event Delegation
 // =====================================================================
 
+// Backdrop click to close modals
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'animeDetailModal') { nextQuestion(); return; }
+    if (e.target.id === 'settingsModal') { closeSettings(); return; }
+    if (e.target.id === 'endModal') { $('endModal').classList.remove('show'); showView('menu'); return; }
+});
+
 // Ripple effect listener (separate from main click handler)
 document.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn, .opt-btn, .play-btn, .settings-chip');
@@ -1538,6 +2269,14 @@ document.addEventListener('click', (e) => {
         if (!confirm('主人确定要删除这首歌曲喵？')) return;
         const index = parseInt(delBtn.dataset.delCustom);
         if (!isNaN(index)) removeCustomSong(index);
+        return;
+    }
+
+    const removeFavBtn = e.target.closest('[data-remove-fav]');
+    if (removeFavBtn) {
+        e.stopPropagation();
+        const index = parseInt(removeFavBtn.dataset.removeFav);
+        if (!isNaN(index)) removeFavorite(index);
         return;
     }
 
@@ -1558,8 +2297,21 @@ document.addEventListener('click', (e) => {
         case 'goHome': $('endModal').classList.remove('show'); showView('menu'); break;
         case 'openSettings': openSettings(); break;
         case 'closeSettings': closeSettings(); break;
-        case 'closeDetail': $('animeDetailModal').classList.remove('show'); break;
+        case 'closeDetail': nextQuestion(); break;
         case 'nextQuestion': nextQuestion(); break;
+        case 'prevQuestion': prevQuestion(); break;
+        case 'toggleFullPlay': toggleFullPlay(); break;
+        case 'toggleFavorite': toggleFavorite(); break;
+        case 'playFavSong': playFavSong(parseInt(value)); break;
+        case 'clearFavorites': clearFavorites(); break;
+        case 'playAllFavs': playAllFavs(); break;
+        case 'shufflePlayFavs': shufflePlayFavs(); break;
+        case 'sequentialPlayFavs': sequentialPlayFavs(); break;
+        case 'hideMusicPlayer': hideMusicPlayer(); break;
+        case 'toggleMusicPlay': toggleMusicPlay(); break;
+        case 'toggleMusicFav': toggleMusicFav(); break;
+        case 'playPrevSong': playPrevSong(); break;
+        case 'playNextSong': playNextSong(); break;
         case 'importBangumi': {
             const input = $('bangumiIndexInput');
             const id = input ? input.value.trim() : '';
@@ -1593,8 +2345,6 @@ document.addEventListener('change', (e) => {
     }
 });
 
-/* merged into main listener above */
-
 // =====================================================================
 // Init
 // =====================================================================
@@ -1612,3 +2362,53 @@ $('bangumiToggle').addEventListener('click', () => {
 $('bangumiClose').addEventListener('click', () => {
     $('bangumiPanel').style.display = 'none';
 });
+
+// Load YouTube IFrame API for full song playback
+loadYouTubeAPI();
+
+// Volume control
+$('fpVolBtn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleVolumeSlider();
+});
+$('fpVolRange')?.addEventListener('input', (e) => {
+    ytVolume = parseInt(e.target.value);
+    volumeMuted = false;
+    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(ytVolume);
+    updateVolIcon();
+});
+// Close volume slider on outside click
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.fp-vol-wrap')) {
+        $('fpVolSlider')?.classList.remove('open');
+    }
+    if (!e.target.closest('.music-vol-wrap')) {
+        $('musicVolSlider')?.classList.remove('open');
+    }
+});
+
+// Music modal volume control
+$('musicVolBtn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    $('musicVolSlider')?.classList.toggle('open');
+});
+$('musicVolRange')?.addEventListener('input', (e) => {
+    ytVolume = parseInt(e.target.value);
+    volumeMuted = false;
+    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(ytVolume);
+    updateVolIcon();
+});
+
+// Music modal progress bar click-to-seek
+document.addEventListener('click', (e) => {
+    const bar = e.target.closest('#musicProgress');
+    if (!bar || !ytPlayer || !ytPlayer.getDuration) return;
+    const rect = bar.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    ytPlayer.seekTo(pct * ytPlayer.getDuration(), true);
+    $('musicProgressFill').style.width = (pct * 100) + '%';
+    $('musicProgressDot').style.left = (pct * 100) + '%';
+});
+
+// Render favorites on load
+renderFavorites();
