@@ -15,7 +15,6 @@ const firebaseConfig = {
     appId: "1:687982181232:web:50f2582291064a6a9dedb5",
     databaseURL: "https://animequiz-a16c1-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
-const projectId = firebaseConfig.projectId;
 let db, auth, user, roomId, roomUnsub;
 
 try {
@@ -60,17 +59,12 @@ const gameState = {
     lastAudioResult: null,
 };
 
-function getMaxScore(n) {
-    let s = 0;
-    for (let i = 1; i <= n; i++) s += 10 + Math.min(i, 5);
-    return s;
-}
-
 const $ = id => document.getElementById(id);
 function escapeHTML(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 const audio = $('audioEl');
+const progressFill = progressFill;
 
 // =====================================================================
 // Timeout Constants
@@ -651,9 +645,10 @@ async function searchBilibili(anime, title, artist = '', type = '') {
         bilibiliCache.set(cacheKey, best);
         return best;
     } catch (e) {
-        clearTimeout(timeoutId);
         console.error('[Bili] searchBilibili:', e);
         return null;
+    } finally {
+        clearTimeout(timeoutId);
     }
 }
 
@@ -880,12 +875,17 @@ document.addEventListener('click', (e) => {
 // =====================================================================
 const FAV_KEY = 'fav_songs_v1';
 
+let _favoritesCache = null;
+
 function getFavorites() {
-    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
-    catch { return []; }
+    if (_favoritesCache) return _favoritesCache;
+    try { _favoritesCache = JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
+    catch { _favoritesCache = []; }
+    return _favoritesCache;
 }
 
 function saveFavorites(favs) {
+    _favoritesCache = favs;
     localStorage.setItem(FAV_KEY, JSON.stringify(favs));
 }
 
@@ -1326,12 +1326,17 @@ function updateVolIcon() {
 // =====================================================================
 const CUSTOM_SONGS_KEY = 'custom_songs_v1';
 
+let _customSongsCache = null;
+
 function getCustomSongs() {
-    try { return JSON.parse(localStorage.getItem(CUSTOM_SONGS_KEY) || '[]'); }
-    catch (e) { console.error('[CustomSongs] getCustomSongs:', e); return []; }
+    if (_customSongsCache) return _customSongsCache;
+    try { _customSongsCache = JSON.parse(localStorage.getItem(CUSTOM_SONGS_KEY) || '[]'); }
+    catch (e) { console.error('[CustomSongs] getCustomSongs:', e); _customSongsCache = []; }
+    return _customSongsCache;
 }
 
 function setCustomSongs(songs) {
+    _customSongsCache = songs;
     localStorage.setItem(CUSTOM_SONGS_KEY, JSON.stringify(songs));
     updateFilterCount();
     updateCustomSongsUI();
@@ -2042,19 +2047,20 @@ function initSakura() {
 
     let lastFrame = 0;
     let pageVisible = true;
+    let sakuraRafId = null;
     document.addEventListener('visibilitychange', () => { pageVisible = !document.hidden; });
     function animate(ts) {
         // Pause canvas drawing when page is hidden (tab switch / screen lock)
-        if (!pageVisible) { requestAnimationFrame(animate); return; }
+        if (!pageVisible) { sakuraRafId = requestAnimationFrame(animate); return; }
         // Cap at ~24fps to reduce CPU/GPU load on mobile
-        if (ts - lastFrame < 42) { requestAnimationFrame(animate); return; }
+        if (ts - lastFrame < 42) { sakuraRafId = requestAnimationFrame(animate); return; }
         lastFrame = ts;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         stars.forEach(s => { s.update(); s.draw(); });
         petals.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animate);
+        sakuraRafId = requestAnimationFrame(animate);
     }
-    requestAnimationFrame(animate);
+    sakuraRafId = requestAnimationFrame(animate);
 }
 
 // =====================================================================
@@ -2371,6 +2377,7 @@ function enterRoom(rid) {
             $('totalQ').textContent = gameState.playlist.length;
             showView('game');
             // Re-subscribe for score sync (showView unsubscribed the room listener)
+            if (roomUnsub) roomUnsub();
             roomUnsub = onValue(ref(db, 'rooms/' + roomId), scoreSnap => {
                 if (!scoreSnap.exists()) return;
                 const sd = scoreSnap.val();
@@ -2420,7 +2427,7 @@ function loadQuestion() {
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
         $('playBtn').disabled = true;
         $('playerStatus').textContent = '回顾模式 — 搜索中...';
-        $('progressFill').style.width = '0%';
+        progressFill.style.width = '0%';
         $('qNum').textContent = gameState.questionIndex + 1;
         const histCorrect = gameState.answerHistory.slice(0, gameState.questionIndex + 1).filter(r => r.isCorrect).length;
         animateScore($('scoreText'), histCorrect);
@@ -2463,7 +2470,7 @@ function loadQuestion() {
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     $('playBtn').disabled = true;
     $('playerStatus').textContent = '🔍 搜索中...';
-    $('progressFill').style.width = '0%';
+    progressFill.style.width = '0%';
     $('songInfo').classList.remove('show');
     $('reviewDetailBtn').style.display = 'none';
     $('qNum').textContent = gameState.questionIndex + 1;
@@ -2789,7 +2796,7 @@ function startQuizProgress() {
     quizProgressInterval = setInterval(() => {
         if (!ytPlayer || !ytPlayer.getCurrentTime) return;
         const t = ytPlayer.getCurrentTime();
-        $('progressFill').style.width = Math.min(t / duration * 100, 100) + '%';
+        progressFill.style.width = Math.min(t / duration * 100, 100) + '%';
         const cur = formatTime(t);
         const dur = formatTime(duration);
         $('playerStatus').textContent = `${cur} / ${dur} (YouTube源)`;
@@ -2819,7 +2826,7 @@ audio.ontimeupdate = () => {
     if (!audio.duration) return;
     const lastResult = gameState.lastAudioResult;
     const duration = (lastResult && lastResult.source === 'bilibili') ? 30 : audio.duration;
-    $('progressFill').style.width = (audio.currentTime / duration * 100) + '%';
+    progressFill.style.width = (audio.currentTime / duration * 100) + '%';
     // B站 quiz clip → stop at 30s (skip for detail modal full player)
     if (lastResult && lastResult.source === 'bilibili' && !fpUseAudio && audio.currentTime >= 30) {
         audio.pause();
