@@ -2743,8 +2743,8 @@ audio.ontimeupdate = () => {
     const lastResult = gameState.lastAudioResult;
     const duration = (lastResult && lastResult.source === 'bilibili') ? 30 : audio.duration;
     $('progressFill').style.width = (audio.currentTime / duration * 100) + '%';
-    // B站 full song → stop at 30s clip
-    if (lastResult && lastResult.source === 'bilibili' && audio.currentTime >= 30) {
+    // B站 quiz clip → stop at 30s (skip for detail modal full player)
+    if (lastResult && lastResult.source === 'bilibili' && !fpUseAudio && audio.currentTime >= 30) {
         audio.pause();
         gameState.isPlaying = false;
         $('visualizer').classList.add('hidden');
