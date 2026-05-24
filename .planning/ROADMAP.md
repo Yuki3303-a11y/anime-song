@@ -105,9 +105,9 @@ Plans:
 
 Status: In Progress
 
-### Phase 5 -- Bug修复 [ ] -- Plans Created 2026-05-24
+### Phase 5 -- Bug修复 [x] -- Complete 2026-05-24
 
-**Goal:** 修复4个已知bug：回顾模式导航逻辑、YouTube嵌入播放、手机性能、番剧导入匹配错误。
+**Goal:** 修复4个已知bug：回顾模式导航逻辑、YouTube嵌入播放、手机性能、番剧导入匹配错误。（手机端YouTube嵌入问题移至Phase 6专项修复）
 
 **Mode:** mvp
 
@@ -130,6 +130,26 @@ Plans:
 2. 手机端YouTube源歌曲全部可正常播放，桌面端夢灯笼等少数歌曲不再报嵌入错误
 3. 手机使用流畅度明显提升，发热减少，樱花动画在后台自动暂停
 4. 番剧导入不再出现完全无关的歌曲，低置信度匹配可手动确认
+
+---
+
+### Phase 6 -- 移动端YouTube兼容修复 [ ] — Context Pending
+
+**Goal:** 解决手机端YouTube嵌入播放失败问题：桌面端逻辑不变，手机端搜索多个候选视频并失败自动重试。
+
+**Mode:** mvp
+
+**Requirements:**
+| REQ-ID | Description |
+|--------|-------------|
+| MOB-01 | 手机端YouTube搜索取maxResults=5，桌面端保持maxResults=1 |
+| MOB-02 | 手机端播放失败(101/150)自动尝试下一个候选videoId |
+| MOB-03 | 所有候选都失败时给出明确提示，不跳过题目 |
+
+**Success Criteria:**
+1. 手机端YouTube源歌曲播放成功率显著提升
+2. 桌面端行为完全不变（maxResults=1，逻辑不变）
+3. 手机端播放失败自动切换候选，用户无感知
 
 ---
 
