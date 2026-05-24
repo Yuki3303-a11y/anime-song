@@ -523,50 +523,97 @@ async function searchYouTube(query) {
 // Bilibili Search & Audio
 // =====================================================================
 
-async function searchBilibili(query) {
-    const cacheKey = query.toLowerCase().trim();
+async function searchBilibili(anime, title, artist = '') {
+    // Cache key: anime is the primary differentiator
+    const cacheKey = `${anime}|${title}`.toLowerCase().trim();
     const cached = bilibiliCache.get(cacheKey);
     if (cached) return cached;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
-    try {
+
+    async function trySearch(query) {
         const resp = await fetch(
             `${BILI_WORKER_URL}/search?q=${encodeURIComponent(query)}`,
             { signal: controller.signal }
         );
-        clearTimeout(timeoutId);
         const data = await resp.json();
-        if (!data.results?.length) return null;
+        if (!data.results?.length) return [];
+        // Filter: skip very short (<30s) and very long (>10min)
+        return data.results.filter(r => r.duration <= 600 && r.duration >= 30);
+    }
 
-        // Filter: skip very long videos (>10min = full episodes)
-        const candidates = data.results.filter(r => r.duration <= 600 && r.duration >= 30);
+    function scoreResult(r, anime, title, artist) {
+        let s = 0;
+        const vt = r.title.toLowerCase();
+        const an = anime.toLowerCase();
+        const tl = title.toLowerCase();
+        const ar = (artist || '').toLowerCase();
+
+        // Anime name match (highest weight — must be correct anime)
+        for (const w of an.split(/\s+/)) {
+            if (w.length > 1 && vt.includes(w)) s += 25;
+        }
+        // Song title match
+        for (const w of tl.split(/\s+/)) {
+            if (w.length > 1 && vt.includes(w)) s += 15;
+        }
+        // Artist match (bonus)
+        if (ar) {
+            for (const w of ar.split(/\s+/)) {
+                if (w.length > 1 && vt.includes(w)) s += 10;
+            }
+        }
+        // Exact anime name in title is strong signal
+        if (vt.includes(an)) s += 30;
+        // Play count bonus
+        if (r.play > 100000) s += 15;
+        else if (r.play > 10000) s += 8;
+        // Duration: prefer 1-6 min
+        if (r.duration >= 60 && r.duration <= 360) s += 10;
+
+        return s;
+    }
+
+    try {
+        // Strategy 1: anime + title (anime first for better context)
+        let candidates = await trySearch(`${anime} ${title}`);
+        // Strategy 2: add artist if results are few or low quality
+        if (candidates.length < 3 && artist) {
+            const more = await trySearch(`${anime} ${title} ${artist}`);
+            // Merge without duplicates
+            const seen = new Set(candidates.map(r => r.bvid));
+            for (const r of more) {
+                if (!seen.has(r.bvid)) { candidates.push(r); seen.add(r.bvid); }
+            }
+        }
+        // Strategy 3: fallback — just anime name (broad search)
+        if (!candidates.length) {
+            candidates = await trySearch(anime);
+        }
         if (!candidates.length) return null;
 
-        // Score by title/anime match, prefer higher play count
-        const scored = candidates.map(r => {
-            let s = 0;
-            const vt = r.title.toLowerCase();
-            const ql = query.toLowerCase();
-            // Exact title match
-            if (vt.includes(ql) || ql.includes(vt.split(' ')[0])) s += 50;
-            // Partial keyword match
-            for (const w of ql.split(/\s+/)) {
-                if (w.length > 1 && vt.includes(w)) s += 15;
-            }
-            // Play count bonus (popular = more likely correct)
-            if (r.play > 100000) s += 20;
-            else if (r.play > 10000) s += 10;
-            // Duration: prefer 1-6 min (typical song length)
-            if (r.duration >= 60 && r.duration <= 360) s += 10;
-            return { ...r, _score: s };
-        });
+        const scored = candidates.map(r => ({
+            ...r, _score: scoreResult(r, anime, title, artist)
+        }));
         scored.sort((a, b) => b._score - a._score);
         const best = scored[0];
-        // Require minimum score to avoid completely wrong matches
-        if (best._score < 30) return null;
-        if (best) bilibiliCache.set(cacheKey, best);
-        return best || null;
+
+        // Require anime name to appear in title
+        const animeInTitle = anime.toLowerCase().split(/\s+/).some(
+            w => w.length > 1 && best.title.toLowerCase().includes(w)
+        );
+        if (!animeInTitle) {
+            console.log('[Bili] Rejected: anime not in title', best.title, '| anime:', anime);
+            return null;
+        }
+        if (best._score < 25) {
+            console.log('[Bili] Rejected: low score', best._score, best.title);
+            return null;
+        }
+
+        bilibiliCache.set(cacheKey, best);
+        return best;
     } catch (e) {
         clearTimeout(timeoutId);
         console.error('[Bili] searchBilibili:', e);
@@ -2348,8 +2395,7 @@ function loadQuestion() {
 }
 
 async function fetchBilibiliAudio(title, artist, anime, cacheKey) {
-    const query = `${title} ${anime} ${artist || ''}`;
-    const biliResult = await searchBilibili(query);
+    const biliResult = await searchBilibili(anime, title, artist);
     if (!biliResult) return null;
     const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
     if (!audioInfo?.url) return null;
