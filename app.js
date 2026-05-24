@@ -264,12 +264,15 @@ function onYtError(e) {
     };
     const reason = errorReasons[e.data] || `播放出错（错误码${e.data}）`;
 
-    // Quiz YouTube fallback — try next candidate before skipping
+    // Quiz YouTube fallback — try next candidate, then re-search, then give up
     if (quizYT.active) {
+        const song = gameState.currentSong;
         quizYT.candidateIndex++;
+
+        // Try next cached candidate first
         if (quizYT.candidateIndex < quizYT.candidates.length) {
             quizYT.videoId = quizYT.candidates[quizYT.candidateIndex];
-            notify('正在尝试备用视频源...');
+            notify(`备用视频 ${quizYT.candidateIndex + 1}/${quizYT.candidates.length}...`);
             clearTimeout(quizYT.timer);
             quizYT.timer = null;
             stopQuizProgress();
@@ -278,7 +281,35 @@ function onYtError(e) {
             }
             return;
         }
-        // All candidates exhausted — skip this question
+
+        // All cached candidates exhausted — do a fresh search with broader query
+        if (song && !quizYT._didReSearch) {
+            quizYT._didReSearch = true;
+            notify('正在重新搜索可用视频...');
+            const q = `${song.title} ${song.anime}`;
+            searchYouTube(q).then(ids => {
+                if (ids.length > 0 && quizYT.active) {
+                    quizYT.candidates = ids;
+                    quizYT.candidateIndex = 0;
+                    quizYT.videoId = ids[0];
+                    if (ytPlayer && ytReady) {
+                        ytPlayer.loadVideoById({ videoId: ids[0], startSeconds: 0 });
+                    }
+                } else if (quizYT.active) {
+                    // Truly nothing works — skip
+                    notify(`YouTube音频加载失败（${reason}），已跳过此题`);
+                    stopQuizYT();
+                    gameState.isPlaying = false;
+                    $('visualizer').classList.add('hidden');
+                    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+                    gameState.questionIndex++;
+                    setTimeout(() => loadQuestion(), 1500);
+                }
+            });
+            return;
+        }
+
+        // Everything exhausted — skip
         notify(`YouTube音频加载失败（${reason}），已跳过此题`);
         stopQuizYT();
         gameState.isPlaying = false;
@@ -2136,6 +2167,7 @@ function loadQuestion() {
                 quizYT.videoId = result.ytVideoId || url.slice(3);
                 quizYT.candidates = result.ytVideoIds && result.ytVideoIds.length > 0 ? result.ytVideoIds : [quizYT.videoId];
                 quizYT.candidateIndex = 0;
+                quizYT._didReSearch = false;
                 $('playerStatus').textContent = '回顾模式 (YouTube源)';
             } else {
                 quizYT.active = false;
@@ -2191,6 +2223,7 @@ function loadQuestion() {
             quizYT.videoId = result.ytVideoId || url.slice(3);
             quizYT.candidates = result.ytVideoIds && result.ytVideoIds.length > 0 ? result.ytVideoIds : [quizYT.videoId];
             quizYT.candidateIndex = 0;
+            quizYT._didReSearch = false;
             $('playBtn').disabled = false;
             $('playerStatus').textContent = '点击播放 (YouTube源)';
         } else {
@@ -2209,7 +2242,18 @@ function loadQuestion() {
 async function fetchAudio(title, artist, anime) {
     const cacheKey = `${title}|${anime}`;
     const cached = audioCache.get(cacheKey);
-    if (cached) return normalizeAudioEntry(cached);
+    if (cached) {
+        const entry = normalizeAudioEntry(cached);
+        // Enrich old YouTube cache entries with fresh candidate list
+        if (entry.source === 'youtube' && !entry.ytVideoIds) {
+            const ids = entry.ytQuery ? await searchYouTube(entry.ytQuery) : [];
+            entry.ytVideoIds = ids.length > 0 ? ids : [entry.ytVideoId];
+            entry.url = `yt:${entry.ytVideoIds[0]}`;
+            entry.ytVideoId = entry.ytVideoIds[0];
+            audioCache.set(cacheKey, entry);
+        }
+        return entry;
+    }
 
     function scoreMatch(r) {
         const t = (r.trackName || '').toLowerCase();
