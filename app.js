@@ -1663,7 +1663,8 @@ function initSakura() {
             ctx.globalAlpha = Math.max(0, opacity);
             ctx.fillStyle = '#fff';
             ctx.shadowColor = 'rgba(236, 72, 153, 0.5)';
-            ctx.shadowBlur = this.size * 2;
+            const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            ctx.shadowBlur = isMobile ? 0 : this.size * 2;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -1675,7 +1676,11 @@ function initSakura() {
     for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
 
     let lastFrame = 0;
+    let pageVisible = true;
+    document.addEventListener('visibilitychange', () => { pageVisible = !document.hidden; });
     function animate(ts) {
+        // Pause canvas drawing when page is hidden (tab switch / screen lock)
+        if (!pageVisible) { requestAnimationFrame(animate); return; }
         // Cap at ~24fps to reduce CPU/GPU load on mobile
         if (ts - lastFrame < 42) { requestAnimationFrame(animate); return; }
         lastFrame = ts;
