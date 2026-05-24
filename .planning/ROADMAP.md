@@ -103,7 +103,7 @@ Plans:
 
 ## Milestone: Bug修复 (v3)
 
-Status: In Progress
+Status: Complete
 
 ### Phase 5 -- Bug修复 [x] -- Complete 2026-05-24
 
@@ -133,7 +133,7 @@ Plans:
 
 ---
 
-### Phase 6 -- 移动端YouTube兼容修复 [ ] — Context Pending
+### Phase 6 -- 移动端YouTube兼容修复 [x] — Complete 2026-05-24
 
 **Goal:** 解决手机端YouTube嵌入播放失败问题：桌面端逻辑不变，手机端搜索多个候选视频并失败自动重试。
 
