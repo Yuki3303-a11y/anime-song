@@ -63,12 +63,14 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 5. For each anime: get romaji title from AniList, search iTunes, add up to 2 songs
 
 **Bilibili (B站) Audio Source:**
-- Proxy via Cloudflare Worker (`bili-worker.js`) — implements WBI signing + B站 API proxying
-- Zero cost (Cloudflare Workers free tier: 100k requests/day)
-- Worker endpoints: `/search?q=xxx` (video search), `/audio?bvid=xxx` (get audio stream URL)
+- Python proxy (`bili-proxy.py`) — uses bilibili-api library, runs on localhost:8765
+- Zero cost, runs from user's China IP (bypasses B站 WAF)
+- Start: `python3 bili-proxy.py` (must run before starting the quiz)
+- Endpoints: `/search?q=xxx` (video search), `/audio?bvid=xxx` (get audio stream URL)
 - B站 returns DASH audio streams (M4A/AAC) playable via `<audio>` element
 - B站 audio URLs expire quickly — never cached long-term in audioCache
-- `BILI_WORKER_URL` constant in app.js must be updated after deploying the Worker
+- `BILI_WORKER_URL` = `http://localhost:8765` in app.js
+- CF Worker (`bili-worker.js`) kept as reference but not active (CF IPs blocked by B站 WAF)
 
 **MemCache:** In-memory Map wrapping localStorage for O(1) reads:
 ```js
