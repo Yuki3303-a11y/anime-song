@@ -284,8 +284,46 @@ function onYtError(e) {
         return;
     }
 
-    // Detail modal full player — just stop, don't skip
+    // Detail modal full player
     if ($('animeDetailModal').classList.contains('show')) {
+        // Embed errors (101/150): auto-switch to iTunes + show YouTube external link
+        if ((e.data === 101 || e.data === 150) && gameState.currentSong) {
+            const ytLink = $('fpYtLink');
+            const ytHref = ytLink?.getAttribute('href') || '';
+            const videoId = ytHref.includes('youtube.com/watch?v=') ? ytHref.split('v=')[1]?.split('&')[0] : null;
+            stopFullPlayer();
+            if (videoId && ytLink) {
+                ytLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+                ytLink.textContent = 'YouTube源外部链接';
+                ytLink.style.display = '';
+            }
+            const song = gameState.currentSong;
+            fetchAudio(song.title, song.artist, song.anime).then(result => {
+                if (!$('animeDetailModal').classList.contains('show')) return;
+                const url = result?.url;
+                if (!url || url.startsWith('yt:')) {
+                    $('fpTitle').textContent = '未找到可播放的歌曲';
+                    return;
+                }
+                const playerEl = $('fullPlayer');
+                playerEl.style.display = '';
+                fpUseAudio = true;
+                audio.src = url;
+                $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+                $('fpSource').textContent = '(试听片段)';
+                updateHeartUI();
+                const fpCover = $('fpCover');
+                const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
+                const detailCoverSrc = $('detailCover')?.src;
+                if (fpCover && detailCoverSrc) {
+                    fpCover.src = detailCoverSrc;
+                    fpCover.style.display = '';
+                    if (fpFallback) fpFallback.style.display = 'none';
+                }
+            });
+            notify(`该歌曲暂时无法播放（${reason}），已切换为试听片段`);
+            return;
+        }
         notify(`该歌曲暂时无法播放（${reason}）`);
         stopFullPlayer();
         return;
@@ -492,7 +530,7 @@ async function searchAndLoadFullSong(song) {
         playerEl.style.display = '';
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
         $('fpSource').textContent = '';
-        const yl = $('fpYtLink'); if (yl) yl.style.display = 'none';
+        const yl = $('fpYtLink'); if (yl) { yl.href = `https://www.youtube.com/watch?v=${videoId}`; yl.style.display = 'none'; }
         updateHeartUI();
         const fpCover = $('fpCover');
         const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
