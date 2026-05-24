@@ -2587,8 +2587,9 @@ function prevQuestion() {
 function updateNavButtons() {
     const prevBtn = $('prevQuestionBtn');
     const nextBtn = $('nextQuestionBtn');
+    const detailOpen = $('animeDetailModal').classList.contains('show');
     if (prevBtn) prevBtn.style.display = gameState.questionIndex > 0 ? '' : 'none';
-    if (nextBtn) nextBtn.style.display = gameState.viewingHistory ? '' : 'none';
+    if (nextBtn) nextBtn.style.display = (gameState.viewingHistory || detailOpen) ? '' : 'none';
 }
 
 function renderHistoryOptions(record) {
