@@ -197,6 +197,8 @@ let fpProgressInterval = null;
 let fpAudioInterval = null;
 let musicProgressInterval = null;
 let fpUseAudio = false;  // true when full player falls back to native <audio>
+let fpLastYtVideoId = null;  // stashed videoId for YT link after embed failure
+let fpYtFailed = false;     // guard: only try YouTube→iTunes fallback once per song
 
 // Quiz YouTube fallback state
 const quizYT = { active: false, videoId: null, candidates: [], candidateIndex: 0, timer: null };
@@ -320,10 +322,17 @@ function onYtError(e) {
         return;
     }
 
-    // Detail modal full player — just stop, don't skip
-    if ($('animeDetailModal').classList.contains('show')) {
-        notify(`该歌曲暂时无法播放（${reason}）`);
+    // Detail modal full player — YouTube embed failed, fall back to iTunes (once)
+    if ($('animeDetailModal').classList.contains('show') && fpUseAudio === false && !fpYtFailed) {
+        fpYtFailed = true;
         stopFullPlayer();
+        const song = gameState.currentSong;
+        if (song) {
+            notify('YouTube无法嵌入，尝试iTunes试听...');
+            searchAndLoadFullSong(song, true);
+        } else {
+            notify(`该歌曲暂时无法播放（${reason}）`);
+        }
         return;
     }
 
@@ -493,13 +502,13 @@ async function searchYouTube(query) {
     return [];
 }
 
-async function searchAndLoadFullSong(song) {
+async function searchAndLoadFullSong(song, skipYoutube = false) {
     stopMusicPlayer();
     const playerEl = $('fullPlayer');
     if (!playerEl) return;
     playerEl.style.display = 'none';
     stopFpProgress();
-    fpUseAudio = false;
+    if (!skipYoutube) { fpUseAudio = false; fpYtFailed = false; fpLastYtVideoId = null; }
     $('fpProgressFill').style.width = '0%';
     $('fpProgressDot').style.left = '0%';
     $('fpCurrent').textContent = '0:00';
@@ -526,10 +535,11 @@ async function searchAndLoadFullSong(song) {
         videoId = fpVideoIds.length > 0 ? fpVideoIds[0] : null;
     }
 
-    // YouTube found AND player is ready → play embedded (desktop only; mobile skips to iTunes to avoid embed errors)
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (videoId && ytPlayer && ytReady && !isMobile) {
+    // YouTube found AND player is ready → play embedded (skip if retrying after embed failure)
+    if (!skipYoutube && videoId && ytPlayer && ytReady) {
         if (!$('animeDetailModal').classList.contains('show')) return;
+        // Stash videoId so onYtError fallback can reuse it for the YT link
+        fpLastYtVideoId = videoId;
         playerEl.style.display = '';
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
         $('fpSource').textContent = '';
@@ -555,8 +565,9 @@ async function searchAndLoadFullSong(song) {
     if (!$('animeDetailModal').classList.contains('show')) return;
 
     const ytLinkEl = $('fpYtLink');
-    if (ytLinkEl && videoId) {
-        ytLinkEl.href = `https://www.youtube.com/watch?v=${videoId}`;
+    const linkVideoId = videoId || fpLastYtVideoId;
+    if (ytLinkEl && linkVideoId) {
+        ytLinkEl.href = `https://www.youtube.com/watch?v=${linkVideoId}`;
         ytLinkEl.style.display = '';
     } else if (ytLinkEl) {
         ytLinkEl.style.display = 'none';
