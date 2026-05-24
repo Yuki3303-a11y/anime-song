@@ -998,16 +998,17 @@ function sequentialPlayFavs() {
     playAllFavs();
 }
 
-function playFavSong(index) {
+async function playFavSong(index) {
     const favs = getFavorites();
     if (index < 0 || index >= favs.length) return;
     playlist.songs = favs;
     playlist.mode = 'free';
     playlist.currentIndex = index;
-    playFavSongAtIndex(index);
+    await playFavSongAtIndex(index);
 }
 
 async function playFavSongAtIndex(index) {
+    try {
     const song = playlist.songs[index];
     if (!song) return;
     playlist.currentIndex = index;
@@ -1034,14 +1035,14 @@ async function playFavSongAtIndex(index) {
         return;
     }
 
-    // Old favorites without source — try B站 search first
-    if (!song.videoId || !song.source) {
+    // Old/missing source — try B站 search
+    if (!song.videoId || !song.source || song.source === 'bilibili') {
+        notify('B站搜索中...');
         const result = await fetchBilibiliAudio(
             song.title, song.artist, song.anime, song.type || '',
             `${song.title}|${song.anime}`
         );
         if (result) {
-            // Save source info for next time
             song.source = 'bilibili';
             song.bilibiliUrl = result.url;
             const favs = getFavorites();
@@ -1054,12 +1055,13 @@ async function playFavSongAtIndex(index) {
             playBilibili(result.url);
             return;
         }
+        notify('B站未找到该歌曲');
     }
 
     musicUseAudio = false;
 
     if (!ytPlayer || !ytReady) {
-        notify('YouTube播放器尚未就绪，请稍候再试');
+        notify('YouTube播放器尚未就绪');
         return;
     }
 
@@ -1087,6 +1089,10 @@ async function playFavSongAtIndex(index) {
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     ytPlayer.loadVideoById(videoId);
     renderFavorites();
+    } catch (e) {
+        console.error('[Music] playFavSongAtIndex:', e);
+        notify('播放失败: ' + (e.message || '未知错误'));
+    }
 }
 
 function playPrevSong() {
