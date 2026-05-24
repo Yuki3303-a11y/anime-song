@@ -539,9 +539,32 @@ async function searchBilibili(query) {
         const data = await resp.json();
         if (!data.results?.length) return null;
 
-        // Filter: skip very long videos (>10min = full episodes), prefer popular ones
-        const filtered = data.results.filter(r => r.duration <= 600);
-        const best = (filtered.length > 0 ? filtered : data.results)[0];
+        // Filter: skip very long videos (>10min = full episodes)
+        const candidates = data.results.filter(r => r.duration <= 600 && r.duration >= 30);
+        if (!candidates.length) return null;
+
+        // Score by title/anime match, prefer higher play count
+        const scored = candidates.map(r => {
+            let s = 0;
+            const vt = r.title.toLowerCase();
+            const ql = query.toLowerCase();
+            // Exact title match
+            if (vt.includes(ql) || ql.includes(vt.split(' ')[0])) s += 50;
+            // Partial keyword match
+            for (const w of ql.split(/\s+/)) {
+                if (w.length > 1 && vt.includes(w)) s += 15;
+            }
+            // Play count bonus (popular = more likely correct)
+            if (r.play > 100000) s += 20;
+            else if (r.play > 10000) s += 10;
+            // Duration: prefer 1-6 min (typical song length)
+            if (r.duration >= 60 && r.duration <= 360) s += 10;
+            return { ...r, _score: s };
+        });
+        scored.sort((a, b) => b._score - a._score);
+        const best = scored[0];
+        // Require minimum score to avoid completely wrong matches
+        if (best._score < 30) return null;
         if (best) bilibiliCache.set(cacheKey, best);
         return best || null;
     } catch (e) {
@@ -590,6 +613,21 @@ async function searchAndLoadFullSong(song) {
     if (wave) wave.classList.remove('active');
 
     const lastAudio = gameState.lastAudioResult;
+
+    // B站 source: play full song via <audio> (no YouTube embed)
+    if (lastAudio && lastAudio.source === 'bilibili') {
+        if (!$('animeDetailModal').classList.contains('show')) return;
+        const biliUrl = lastAudio.url;
+        playerEl.style.display = '';
+        fpUseAudio = true;
+        audio.src = biliUrl;
+        $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+        $('fpSource').textContent = '(B站源)';
+        updateHeartUI();
+        const yl = $('fpYtLink'); if (yl) yl.style.display = 'none';
+        return;
+    }
+
     let videoId = null;
 
     // Get a videoId regardless of ytReady — always search so we can at least show a YT link
