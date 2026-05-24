@@ -555,10 +555,12 @@ async function searchBilibili(anime, title, artist = '', type = '') {
         }
         // Exact anime name in title is strong signal
         if (vt.includes(an)) s += 30;
-        // Song title match
+        // Song title match (high weight — must prefer correct song over same-anime others)
         for (const w of tl.split(/\s+/)) {
-            if (w.length > 1 && vt.includes(w)) s += 15;
+            if (w.length > 1 && vt.includes(w)) s += 30;
         }
+        // Exact title match (very strong signal)
+        if (vt.includes(tl)) s += 40;
         // OP/ED keyword bonus (titles like "OP - xxx" or "ED「xxx」")
         const tp = (type || '').toUpperCase();
         if (tp && ['OP', 'ED'].includes(tp)) {
@@ -1604,10 +1606,10 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
                     _importScore: score,
                 });
             }
-            if (results.length >= 2) break;
+            if (results.length >= 5) break;
         } catch (e) { clearTimeout(tid); console.error('[iTunes] searchItunesForAnime:', e); }
     }
-    return results.slice(0, 2);
+    return results.slice(0, 5);
 }
 
 // Guess if a song is OP/ED/IN based on its title and iTunes metadata
