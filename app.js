@@ -2125,11 +2125,9 @@ function loadQuestion() {
             }
             $('playBtn').disabled = false;
         });
-        // Show detail modal after brief delay (same as normal flow)
-        setTimeout(() => {
-            showAnimeDetail(record.song);
-            updateNavButtons();
-        }, 800);
+        // Review mode: show a button to manually open detail instead of auto-showing
+        $('reviewDetailBtn').style.display = '';
+        updateNavButtons();
         return;
     }
 
@@ -2145,6 +2143,7 @@ function loadQuestion() {
     $('playerStatus').textContent = '🔍 搜索中...';
     $('progressFill').style.width = '0%';
     $('songInfo').classList.remove('show');
+    $('reviewDetailBtn').style.display = 'none';
     $('qNum').textContent = gameState.questionIndex + 1;
     animateScore($('scoreText'), gameState.correctCount);
     updateNavButtons();
@@ -2871,6 +2870,10 @@ document.addEventListener('click', (e) => {
         case 'openSettings': openSettings(); break;
         case 'closeSettings': closeSettings(); break;
         case 'closeDetail': closeDetailModal(); break;
+        case 'showAnimeDetail': {
+            if (gameState.currentSong) showAnimeDetail(gameState.currentSong);
+            break;
+        }
         case 'nextQuestion': nextQuestion(); break;
         case 'prevQuestion': prevQuestion(); break;
         case 'toggleFullPlay': toggleFullPlay(); break;
