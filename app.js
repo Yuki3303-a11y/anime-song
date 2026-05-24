@@ -84,7 +84,7 @@ const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
 const BILI_TIMEOUT = 8000;         // B站 Worker fetch timeout (ms)
-const BILI_WORKER_URL_DEFAULT = 'http://localhost:8765';
+const BILI_WORKER_URL_DEFAULT = 'https://anime-song-gamma.vercel.app';
 window.BILI_WORKER_URL = (() => {
     try { return localStorage.getItem('bili_proxy_url_v1') || BILI_WORKER_URL_DEFAULT; }
     catch { return BILI_WORKER_URL_DEFAULT; }
@@ -539,7 +539,7 @@ async function searchBilibili(anime, title, artist = '', type = '') {
 
     async function trySearch(query) {
         const resp = await fetch(
-            `${window.BILI_WORKER_URL}/search?q=${encodeURIComponent(query)}`,
+            `${window.BILI_WORKER_URL}/api/search?q=${encodeURIComponent(query)}`,
             { signal: controller.signal }
         );
         const data = await resp.json();
@@ -665,7 +665,7 @@ async function getBilibiliAudioUrl(bvid) {
     const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
     try {
         const resp = await fetch(
-            `${window.BILI_WORKER_URL}/audio?bvid=${encodeURIComponent(bvid)}`,
+            `${window.BILI_WORKER_URL}/api/search?bvid=${encodeURIComponent(bvid)}`,
             { signal: controller.signal }
         );
         clearTimeout(timeoutId);
@@ -2508,7 +2508,7 @@ async function fetchBilibiliAudio(title, artist, anime, type, cacheKey) {
     const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
     if (!audioInfo?.url) return null;
     const e = {
-        url: `${window.BILI_WORKER_URL}/stream?url=${encodeURIComponent(audioInfo.url)}`,
+        url: audioInfo.url,
         source: 'bilibili',
         bvid: biliResult.bvid,
         biliTitle: biliResult.title,
