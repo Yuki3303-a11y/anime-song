@@ -199,7 +199,7 @@ let musicProgressInterval = null;
 let fpUseAudio = false;  // true when full player falls back to native <audio>
 
 // Quiz YouTube fallback state
-const quizYT = { active: false, videoId: null, timer: null };
+const quizYT = { active: false, videoId: null, candidates: [], candidateIndex: 0, timer: null };
 let quizProgressInterval = null;
 
 // Playlist state for home page music playback
@@ -264,8 +264,21 @@ function onYtError(e) {
     };
     const reason = errorReasons[e.data] || `播放出错（错误码${e.data}）`;
 
-    // Quiz YouTube fallback — skip this question
+    // Quiz YouTube fallback — try next candidate before skipping
     if (quizYT.active) {
+        quizYT.candidateIndex++;
+        if (quizYT.candidateIndex < quizYT.candidates.length) {
+            quizYT.videoId = quizYT.candidates[quizYT.candidateIndex];
+            notify('正在尝试备用视频源...');
+            clearTimeout(quizYT.timer);
+            quizYT.timer = null;
+            stopQuizProgress();
+            if (ytPlayer && ytReady && quizYT.videoId) {
+                ytPlayer.loadVideoById({ videoId: quizYT.videoId, startSeconds: 0 });
+            }
+            return;
+        }
+        // All candidates exhausted — skip this question
         notify(`YouTube音频加载失败（${reason}），已跳过此题`);
         stopQuizYT();
         gameState.isPlaying = false;
@@ -410,7 +423,11 @@ function formatTime(s) {
 async function searchYouTube(query) {
     const cacheKey = query;
     const cached = youtubeCache.get(cacheKey);
-    if (cached) return cached;
+    if (cached) {
+        // Backward compat: old cache entries are single string videoIds
+        if (typeof cached === 'string') return [cached];
+        return cached;
+    }
 
     // Try each key until one works
     const tried = new Set();
@@ -424,7 +441,7 @@ async function searchYouTube(query) {
         const key = YT_API_KEYS[idx];
         try {
             const res = await fetch(
-                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=5&q=${encodeURIComponent(query)}&key=${key}`
             );
             if (res.status === 403 || res.status === 429) {
                 console.warn('[YT] Key #' + idx + ' quota exceeded, switching...');
@@ -433,17 +450,16 @@ async function searchYouTube(query) {
                 continue;
             }
             const data = await res.json();
-            const videoId = data.items?.[0]?.id?.videoId || null;
-            if (videoId) youtubeCache.set(cacheKey, videoId);
-            return videoId;
+            const videoIds = (data.items || []).map(item => item.id?.videoId).filter(Boolean);
+            youtubeCache.set(cacheKey, videoIds);
+            return videoIds;
         } catch (e) {
             console.error('[YT] searchYouTube failed:', e);
-            // Network error — try next key
             ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
         }
     }
     console.error('[YT] All keys exhausted or failed');
-    return null;
+    return [];
 }
 
 async function searchAndLoadFullSong(song) {
@@ -475,7 +491,8 @@ async function searchAndLoadFullSong(song) {
             query = `${romaji || song.title} ${song.anime} ${song.type}`;
         }
         $('fpTitle').textContent = '正在搜索...';
-        videoId = await searchYouTube(query);
+        const fpVideoIds = await searchYouTube(query);
+        videoId = fpVideoIds.length > 0 ? fpVideoIds[0] : null;
     }
 
     // YouTube found AND player is ready → play embedded (desktop)
@@ -774,7 +791,8 @@ async function playFavSongAtIndex(index) {
         // Try to search YouTube for this song
         notify('正在搜索歌曲...');
         const query = `${song.title} ${song.anime} ${song.type || ''}`;
-        videoId = await searchYouTube(query);
+        const searchIds = await searchYouTube(query);
+        videoId = searchIds.length > 0 ? searchIds[0] : null;
         if (!videoId) {
             notify('未找到完整版歌曲，试试下一首吧');
             return;
@@ -2115,11 +2133,15 @@ function loadQuestion() {
             const url = result.url;
             if (url.startsWith('yt:')) {
                 quizYT.active = true;
-                quizYT.videoId = url.slice(3);
+                quizYT.videoId = result.ytVideoId || url.slice(3);
+                quizYT.candidates = result.ytVideoIds && result.ytVideoIds.length > 0 ? result.ytVideoIds : [quizYT.videoId];
+                quizYT.candidateIndex = 0;
                 $('playerStatus').textContent = '回顾模式 (YouTube源)';
             } else {
                 quizYT.active = false;
                 quizYT.videoId = null;
+                quizYT.candidates = [];
+                quizYT.candidateIndex = 0;
                 audio.src = url;
                 $('playerStatus').textContent = '回顾模式';
             }
@@ -2166,12 +2188,16 @@ function loadQuestion() {
         if (url.startsWith('yt:')) {
             // YouTube fallback — use ytPlayer for 30s quiz clip
             quizYT.active = true;
-            quizYT.videoId = url.slice(3);
+            quizYT.videoId = result.ytVideoId || url.slice(3);
+            quizYT.candidates = result.ytVideoIds && result.ytVideoIds.length > 0 ? result.ytVideoIds : [quizYT.videoId];
+            quizYT.candidateIndex = 0;
             $('playBtn').disabled = false;
             $('playerStatus').textContent = '点击播放 (YouTube源)';
         } else {
             quizYT.active = false;
             quizYT.videoId = null;
+            quizYT.candidates = [];
+            quizYT.candidateIndex = 0;
             audio.src = url;
             $('playBtn').disabled = false;
             $('playerStatus').textContent = '点击播放';
@@ -2270,9 +2296,9 @@ async function fetchAudio(title, artist, anime) {
     // All iTunes attempts failed or low confidence — fall back to YouTube
     console.log(`[Audio] iTunes miss for "${title}" by "${artist}", trying YouTube fallback`);
     const ytQuery = `${title} ${anime} ${artist || ''}`;
-    const ytVideoId = await searchYouTube(ytQuery);
-    if (ytVideoId) {
-        const e = { url: `yt:${ytVideoId}`, source: 'youtube', ytVideoId, ytQuery };
+    const ytVideoIds = await searchYouTube(ytQuery);
+    if (ytVideoIds.length > 0) {
+        const e = { url: `yt:${ytVideoIds[0]}`, source: 'youtube', ytVideoId: ytVideoIds[0], ytVideoIds, ytQuery };
         audioCache.set(cacheKey, e);
         return e;
     }
