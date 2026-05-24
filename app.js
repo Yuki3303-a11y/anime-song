@@ -1129,6 +1129,7 @@ async function importFromBangumi(indexId) {
     const customSongs = getCustomSongs();
     const customTitles = new Set(customSongs.map(s => s.anime));
     let addedCount = 0;
+    const lowConfSongs = [];
 
     for (let i = 0; i < animeList.length; i++) {
         const anime = animeList[i];
@@ -1159,14 +1160,37 @@ async function importFromBangumi(indexId) {
         // Search iTunes for songs — pass Japanese name for album matching
         const songs = await searchItunesForAnime(searchTitle, animeName, anime.name, year);
         for (const song of songs) {
-            if (addCustomSong(song)) addedCount++;
+            if (addCustomSong(song)) {
+                addedCount++;
+                if (song._importScore && song._importScore < 80) {
+                    lowConfSongs.push(song);
+                }
+            }
         }
 
         // Small delay to avoid rate limiting
         await new Promise(r => setTimeout(r, 300));
     }
 
-    if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
+    if (lowConfSongs.length > 0) {
+        await new Promise(r => setTimeout(r, 500)); // Let UI settle
+        const names = lowConfSongs.map(s => `• ${s.title} (${s.anime})`).join('\n');
+        const shouldRemove = confirm(
+            `主人注意喵~ 以下 ${lowConfSongs.length} 首歌曲匹配度较低，可能和番剧无关：\n\n${names}\n\n是否移除这些歌曲？\n（点"取消"保留所有歌曲）`
+        );
+        if (shouldRemove) {
+            const current = getCustomSongs();
+            const toRemoveSet = new Set(lowConfSongs.map(s => `${s.title}|${s.anime}`));
+            const filtered = current.filter(s => !toRemoveSet.has(`${s.title}|${s.anime}`));
+            setCustomSongs(filtered);
+            addedCount -= lowConfSongs.length;
+            if (statusEl) statusEl.textContent = `导入完成！保留 ${addedCount} 首歌曲（已移除 ${lowConfSongs.length} 首低匹配合）`;
+        }
+    }
+
+    if (!statusEl?.textContent?.includes('保留')) {
+        if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
+    }
     if (progressEl) progressEl.style.width = '100%';
     if (progressWrapper) setTimeout(() => { progressWrapper.style.display = 'none'; }, 2000);
     notify(`导入成功啦喵！新增了 ${addedCount} 首歌曲呢~`);
@@ -1211,6 +1235,24 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
         return score;
     }
 
+    function crossValidateAnime(r, animeName, jpName) {
+        const t = (r.trackName || '').toLowerCase();
+        const c = (r.collectionName || '').toLowerCase();
+        const targets = [
+            (animeName || '').toLowerCase(),
+            (jpName || '').toLowerCase()
+        ].filter(Boolean);
+        for (const target of targets) {
+            if (t.includes(target) || c.includes(target)) return true;
+            // Also check 3-char substrings for partial name matching (e.g. "咒術" from "咒術廻戦")
+            for (let i = 0; i < target.length - 2; i++) {
+                const sub = target.substring(i, i + 3);
+                if (t.includes(sub) || c.includes(sub)) return true;
+            }
+        }
+        return false;
+    }
+
     // Search with Japanese name (best results on iTunes JP) + romaji as fallback
     const searchTerms = jpName ? [jpName, `${romajiTitle} anime`, romajiTitle] : [`${romajiTitle} anime`, romajiTitle];
     for (const term of searchTerms) {
@@ -1228,10 +1270,10 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
                 const title = r.trackName;
                 if (!title || seen.has(title)) continue;
                 const s = scoreImportResult(r);
-                if (s >= 20) scored.push({ r, score: s });
+                if (s >= 50 && crossValidateAnime(r, animeName, jpName)) scored.push({ r, score: s });
             }
             scored.sort((a, b) => b.score - a.score);
-            for (const { r } of scored) {
+            for (const { r, score } of scored) {
                 const title = r.trackName;
                 if (seen.has(title)) continue;
                 seen.add(title);
@@ -1242,6 +1284,7 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
                     artist: r.artistName || 'Unknown',
                     year: year,
                     type: guessSongType(title, r),
+                    _importScore: score,
                 });
             }
             if (results.length >= 2) break;
@@ -2085,7 +2128,7 @@ function loadQuestion() {
         // Show detail modal after brief delay (same as normal flow)
         setTimeout(() => {
             showAnimeDetail(record.song);
-            updatePrevButton();
+            updateNavButtons();
         }, 800);
         return;
     }
@@ -2104,7 +2147,7 @@ function loadQuestion() {
     $('songInfo').classList.remove('show');
     $('qNum').textContent = gameState.questionIndex + 1;
     animateScore($('scoreText'), gameState.correctCount);
-    updatePrevButton();
+    updateNavButtons();
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
     gameState.fetchGeneration++;
@@ -2304,7 +2347,7 @@ function handleAnswer(btn, selected) {
     animateScore($('myScoreText'), gameState.score);
     setTimeout(() => {
         showAnimeDetail(gameState.currentSong);
-        updatePrevButton();
+        updateNavButtons();
     }, 1500);
 }
 
@@ -2494,13 +2537,20 @@ function restartGame() {
     else showView('menu');
 }
 
+function closeDetailModal() {
+    stopFullPlayer();
+    $('animeDetailModal').classList.remove('show');
+}
+
 function nextQuestion() {
     stopFullPlayer();
     $('animeDetailModal').classList.remove('show');
     if (gameState.viewingHistory) {
-        // Return to the current unanswered question
-        gameState.questionIndex = gameState.answerHistory.length;
-        gameState.viewingHistory = false;
+        gameState.questionIndex++;
+        if (gameState.questionIndex >= gameState.answerHistory.length) {
+            gameState.viewingHistory = false;
+            gameState.questionIndex = gameState.answerHistory.length;
+        }
         loadQuestion();
     } else {
         gameState.questionIndex++;
@@ -2519,10 +2569,11 @@ function prevQuestion() {
     loadQuestion();
 }
 
-function updatePrevButton() {
-    const btn = $('prevQuestionBtn');
-    if (!btn) return;
-    btn.style.display = gameState.questionIndex > 0 ? '' : 'none';
+function updateNavButtons() {
+    const prevBtn = $('prevQuestionBtn');
+    const nextBtn = $('nextQuestionBtn');
+    if (prevBtn) prevBtn.style.display = gameState.questionIndex > 0 ? '' : 'none';
+    if (nextBtn) nextBtn.style.display = gameState.viewingHistory ? '' : 'none';
 }
 
 function renderHistoryOptions(record) {
@@ -2736,7 +2787,7 @@ document.addEventListener('keydown', (e) => {
     // Escape to close modals
     if (e.key === 'Escape') {
         if (settingsOpen) { closeSettings(); return; }
-        if (detailOpen) { nextQuestion(); return; }
+        if (detailOpen) { closeDetailModal(); return; }
         if (endOpen) { $('endModal').classList.remove('show'); showView('menu'); return; }
     }
 
@@ -2773,7 +2824,7 @@ document.addEventListener('keydown', (e) => {
 
 // Backdrop click to close modals
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'animeDetailModal') { nextQuestion(); return; }
+    if (e.target.id === 'animeDetailModal') { closeDetailModal(); return; }
     if (e.target.id === 'settingsModal') { closeSettings(); return; }
     if (e.target.id === 'endModal') { $('endModal').classList.remove('show'); showView('menu'); return; }
 });
@@ -2819,7 +2870,7 @@ document.addEventListener('click', (e) => {
         case 'goHome': $('endModal').classList.remove('show'); showView('menu'); break;
         case 'openSettings': openSettings(); break;
         case 'closeSettings': closeSettings(); break;
-        case 'closeDetail': nextQuestion(); break;
+        case 'closeDetail': closeDetailModal(); break;
         case 'nextQuestion': nextQuestion(); break;
         case 'prevQuestion': prevQuestion(); break;
         case 'toggleFullPlay': toggleFullPlay(); break;
