@@ -84,7 +84,11 @@ const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
 const BILI_TIMEOUT = 8000;         // B站 Worker fetch timeout (ms)
-const BILI_WORKER_URL = 'http://localhost:8765';
+const BILI_WORKER_URL_DEFAULT = 'http://localhost:8765';
+window.BILI_WORKER_URL = (() => {
+    try { return localStorage.getItem('bili_proxy_url_v1') || BILI_WORKER_URL_DEFAULT; }
+    catch { return BILI_WORKER_URL_DEFAULT; }
+})();
 
 // =====================================================================
 // Filter State
@@ -535,7 +539,7 @@ async function searchBilibili(anime, title, artist = '', type = '') {
 
     async function trySearch(query) {
         const resp = await fetch(
-            `${BILI_WORKER_URL}/search?q=${encodeURIComponent(query)}`,
+            `${window.BILI_WORKER_URL}/search?q=${encodeURIComponent(query)}`,
             { signal: controller.signal }
         );
         const data = await resp.json();
@@ -661,7 +665,7 @@ async function getBilibiliAudioUrl(bvid) {
     const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
     try {
         const resp = await fetch(
-            `${BILI_WORKER_URL}/audio?bvid=${encodeURIComponent(bvid)}`,
+            `${window.BILI_WORKER_URL}/audio?bvid=${encodeURIComponent(bvid)}`,
             { signal: controller.signal }
         );
         clearTimeout(timeoutId);
@@ -2504,7 +2508,7 @@ async function fetchBilibiliAudio(title, artist, anime, type, cacheKey) {
     const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
     if (!audioInfo?.url) return null;
     const e = {
-        url: `${BILI_WORKER_URL}/stream?url=${encodeURIComponent(audioInfo.url)}`,
+        url: `${window.BILI_WORKER_URL}/stream?url=${encodeURIComponent(audioInfo.url)}`,
         source: 'bilibili',
         bvid: biliResult.bvid,
         biliTitle: biliResult.title,
@@ -3117,6 +3121,28 @@ function initAudioSourceFilter() {
     ];
     const container = $('audioSourceChips');
     if (!container) return;
+
+    const proxyGroup = $('biliProxyGroup');
+    const proxyInput = $('biliProxyInput');
+    if (proxyInput) {
+        proxyInput.value = window.BILI_WORKER_URL || 'http://localhost:8765';
+    }
+    // Show proxy input only when B站 mode is active
+    if (proxyGroup) {
+        proxyGroup.style.display = audioSourcePref && audioSourcePref !== 'null' ? '' : 'none';
+    }
+
+    if ($('biliProxySave')) {
+        $('biliProxySave').addEventListener('click', () => {
+            const val = proxyInput?.value?.trim();
+            if (val) {
+                window.BILI_WORKER_URL = val;
+                try { localStorage.setItem('bili_proxy_url_v1', val); } catch {}
+                notify('代理地址已更新');
+            }
+        });
+    }
+
     options.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = 'settings-chip' + (opt.value === audioSourcePref ? ' active' : (i === 0 && !audioSourcePref ? ' active' : ''));
@@ -3126,6 +3152,9 @@ function initAudioSourceFilter() {
             btn.classList.add('active');
             saveAudioSourcePref(opt.value);
             audioCache.clear();
+            if (proxyGroup) {
+                proxyGroup.style.display = (opt.value && opt.value !== 'null') ? '' : 'none';
+            }
         });
         container.appendChild(btn);
     });
