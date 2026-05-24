@@ -148,6 +148,14 @@ class MemCache {
             this._dirty = false;
         }, 200);
     }
+    delete(k) {
+        this._load();
+        if (k in this._data) {
+            delete this._data[k];
+            this._dirty = true;
+            this._scheduleFlush();
+        }
+    }
     _flush() {
         if (this._timer) { clearTimeout(this._timer); this._timer = 0; }
         if (!this._dirty) return;
@@ -2183,7 +2191,13 @@ function loadQuestion() {
 async function fetchAudio(title, artist, anime) {
     const cacheKey = `${title}|${anime}`;
     const cached = audioCache.get(cacheKey);
-    if (cached) return normalizeAudioEntry(cached);
+    // Skip YouTube cache — always prefer iTunes 30s preview
+    if (cached) {
+        const entry = normalizeAudioEntry(cached);
+        if (entry && entry.source !== 'youtube') return entry;
+        // Stale YouTube cache: evict and re-fetch
+        audioCache.delete(cacheKey);
+    }
 
     function scoreMatch(r) {
         const t = (r.trackName || '').toLowerCase();
