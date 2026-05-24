@@ -4,9 +4,11 @@
 """
 import asyncio
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from bilibili_api import search, video, sync
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/search')
 def bili_search():
@@ -64,6 +66,34 @@ def bili_audio():
             'duration': duration,
             'audioQuality': best.audio_quality.value
         })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/stream')
+def stream_audio():
+    url = request.args.get('url', '')
+    if not url:
+        return jsonify({'error': 'missing url'}), 400
+    try:
+        import requests
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Referer': 'https://www.bilibili.com/'
+        }
+        resp = requests.get(url, headers=headers, stream=True, timeout=30)
+        def generate():
+            for chunk in resp.iter_content(chunk_size=8192):
+                if chunk:
+                    yield chunk
+        return app.response_class(
+            generate(),
+            content_type=resp.headers.get('Content-Type', 'audio/mp4'),
+            headers={
+                'Content-Length': resp.headers.get('Content-Length', ''),
+                'Accept-Ranges': 'bytes',
+                'Cache-Control': 'no-cache'
+            }
+        )
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

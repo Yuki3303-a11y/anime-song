@@ -2316,7 +2316,7 @@ async function fetchBilibiliAudio(title, artist, anime, cacheKey) {
     const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
     if (!audioInfo?.url) return null;
     const e = {
-        url: audioInfo.url,
+        url: `${BILI_WORKER_URL}/stream?url=${encodeURIComponent(audioInfo.url)}`,
         source: 'bilibili',
         bvid: biliResult.bvid,
         biliTitle: biliResult.title,

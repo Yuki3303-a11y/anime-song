@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --input-type=module -e \"import { readFileSync } from 'fs'; const c = readFileSync\\('app.js', 'utf-8'\\); console.log\\(\\(c.match\\(/\\\\{/g\\)||[]\\).length===\\(c.match\\(/\\\\}/g\\)||[]\\).length ? 'JS OK' : 'JS BAD'\\);\")",
+      "Bash(python -m http.server 8080)",
+      "Bash(start *)",
+      "Bash(wc *)",
+      "Bash(curl -s --max-time 10 -H 'Content-Type: application/json' -d '{\"query\":\"query\\($s:String\\){Media\\(search:$s,type:ANIME\\){title{romaji native}id}}\"}' https://graphql.anilist.co -x http://127.0.0.1:7897)",
+      "Bash(curl -s --max-time 10 -H 'Content-Type: application/json' -d '{\"query\":\"query\\($s:String\\){Media\\(search:$s,type:ANIME\\){title{romaji native}id}}\",\"variables\":{\"s\":\"葬送的芙莉莲\"}}' https://graphql.anilist.co -x http://127.0.0.1:7897)",
+      "Bash(curl -s --max-time 10 -H \"Content-Type: application/json\" -d '{\"query\":\"{Media\\(id:1\\){title{romaji}staff\\(role:DIRECTOR\\){edges{node{name{full}}}}}}\",\"variables\":{}}' \"https://graphql.anilist.co\" -x http://127.0.0.1:7897)",
+      "WebSearch",
+      "WebFetch(domain:anilist.gitbook.io)",
+      "Bash(curl -s --max-time 10 -H 'Content-Type: application/json' -d '{\"query\":\"query\\($id:Int\\){Media\\(id:$id\\){title{romaji}season year format genres tags{name}relations{edges{node{title{romaji}}relationType}}}}\",\"variables\":{\"id\":1}}' https://graphql.anilist.co -x http://127.0.0.1:7897)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d,dict,d,indent=2\\)\\)\")",
+      "Bash(curl *)",
+      "Bash(node --check app.js)",
+      "Bash(node --input-type=module -e \"import { readFileSync } from 'fs'; const c = readFileSync\\('app.js', 'utf-8'\\); const o=c.match\\(/\\\\{/g\\)?.length||0; const cl=c.match\\(/\\\\}/g\\)?.length||0; console.log\\(o===cl?'Braces OK:'+o:'BAD'\\);\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git -c http.proxy=http://127.0.0.1:7897 -c https.proxy=http://127.0.0.1:7897 push origin master)",
+      "Bash(git commit *)",
+      "Bash(gh api *)"
+    ]
+  }
+}
