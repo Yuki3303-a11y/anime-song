@@ -99,4 +99,32 @@ Plans:
 
 ---
 
-*Last updated: 2026-05-23*
+---
+
+## Milestone: Bug修复 (v3)
+
+Status: In Progress
+
+### Phase 5 -- Bug修复 [ ] -- Context Gathered 2026-05-24
+
+**Goal:** 修复4个已知bug：回顾模式导航逻辑、YouTube嵌入播放、手机性能、番剧导入匹配错误。
+
+**Mode:** mvp
+
+**Requirements:**
+| REQ-ID | Description |
+|--------|-------------|
+| BUG-01 | 回顾模式：关闭弹窗留在当前题 + 右箭头逐步前进历史题目 |
+| BUG-02 | YouTube播放：恢复transform:scale(0.001)渲染 + videoEmbeddable过滤 |
+| BUG-03 | 手机性能：Page Visibility API暂停背景动画 + 移动端降级shadowBlur |
+| BUG-04 | 导入匹配：提高评分阈值+交叉验证+导入后低分确认 |
+
+**Success Criteria:**
+1. 回顾模式中关闭详情弹窗停留在当前题目，右箭头可逐步浏览历史题
+2. 手机端YouTube源歌曲全部可正常播放，桌面端夢灯笼等少数歌曲不再报嵌入错误
+3. 手机使用流畅度明显提升，发热减少，樱花动画在后台自动暂停
+4. 番剧导入不再出现完全无关的歌曲，低置信度匹配可手动确认
+
+---
+
+*Last updated: 2026-05-24*
