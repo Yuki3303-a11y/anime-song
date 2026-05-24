@@ -2587,9 +2587,11 @@ function prevQuestion() {
 function updateNavButtons() {
     const prevBtn = $('prevQuestionBtn');
     const nextBtn = $('nextQuestionBtn');
-    const detailOpen = $('animeDetailModal').classList.contains('show');
+    // Show prev when not on first question
     if (prevBtn) prevBtn.style.display = gameState.questionIndex > 0 ? '' : 'none';
-    if (nextBtn) nextBtn.style.display = (gameState.viewingHistory || detailOpen) ? '' : 'none';
+    // Show next when: in review mode, OR answered current question and not on last question
+    const hasMore = gameState.questionIndex < gameState.playlist.length;
+    if (nextBtn) nextBtn.style.display = (gameState.viewingHistory || (gameState.isLocked && hasMore)) ? '' : 'none';
 }
 
 function renderHistoryOptions(record) {
