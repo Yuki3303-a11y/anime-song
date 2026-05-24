@@ -105,7 +105,7 @@ Plans:
 
 Status: In Progress
 
-### Phase 5 -- Bug修复 [ ] -- Context Gathered 2026-05-24
+### Phase 5 -- Bug修复 [ ] -- Plans Created 2026-05-24
 
 **Goal:** 修复4个已知bug：回顾模式导航逻辑、YouTube嵌入播放、手机性能、番剧导入匹配错误。
 
@@ -118,6 +118,12 @@ Status: In Progress
 | BUG-02 | YouTube播放：恢复transform:scale(0.001)渲染 + videoEmbeddable过滤 |
 | BUG-03 | 手机性能：Page Visibility API暂停背景动画 + 移动端降级shadowBlur |
 | BUG-04 | 导入匹配：提高评分阈值+交叉验证+导入后低分确认 |
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — YouTube iframe渲染修复 + videoEmbeddable过滤 (BUG-02) + 手机性能优化 Page Visibility API + shadowBlur降级 (BUG-03)
+- [ ] 05-02-PLAN.md — 回顾模式导航逻辑修复 (BUG-01) + 番剧导入匹配错误修复 (BUG-04)
 
 **Success Criteria:**
 1. 回顾模式中关闭详情弹窗停留在当前题目，右箭头可逐步浏览历史题
