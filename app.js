@@ -228,6 +228,7 @@ let fpProgressInterval = null;
 let fpAudioInterval = null;
 let musicProgressInterval = null;
 let fpUseAudio = false;  // true when full player falls back to native <audio>
+let musicUseAudio = false; // true when music player uses <audio> (B站 source)
 
 // Quiz YouTube fallback state
 const quizYT = { active: false, videoId: null, timer: null };
@@ -897,6 +898,7 @@ function toggleFavorite() {
         favs.splice(idx, 1);
         notify('已取消收藏');
     } else {
+        const lastResult = gameState.lastAudioResult;
         const videoId = ytPlayer?.getVideoData?.()?.video_id || '';
         favs.push({
             title: song.title,
@@ -906,7 +908,9 @@ function toggleFavorite() {
             year: song.year,
             type: song.type,
             videoId: videoId,
-            coverImage: $('detailCover')?.src || ''
+            coverImage: $('detailCover')?.src || '',
+            source: lastResult?.source || 'youtube',
+            bilibiliUrl: lastResult?.source === 'bilibili' ? (lastResult.url || '') : ''
         });
         notify('已收藏 ♡');
     }
@@ -1006,17 +1010,34 @@ function playFavSong(index) {
 async function playFavSongAtIndex(index) {
     const song = playlist.songs[index];
     if (!song) return;
-    if (!ytPlayer || !ytReady) {
-        notify('YouTube播放器尚未就绪，请稍候再试');
-        return;
-    }
     playlist.currentIndex = index;
     gameState.currentSong = song;
     showMusicPlayer(song);
 
+    // B站 source: play via <audio>
+    if (song.source === 'bilibili' && song.bilibiliUrl) {
+        stopMusicPlayer();
+        musicUseAudio = true;
+        audio.pause();
+        gameState.isPlaying = false;
+        $('visualizer')?.classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        audio.src = song.bilibiliUrl;
+        const musicPlayer = $('musicPlayer');
+        if (musicPlayer) musicPlayer.style.display = '';
+        $('musicSource').textContent = '(B站源)';
+        renderFavorites();
+        return;
+    }
+    musicUseAudio = false;
+
+    if (!ytPlayer || !ytReady) {
+        notify('YouTube播放器尚未就绪，请稍候再试');
+        return;
+    }
+
     let videoId = song.videoId;
     if (!videoId) {
-        // Try to search YouTube for this song
         notify('正在搜索歌曲...');
         const query = `${song.title} ${song.anime} ${song.type || ''}`;
         videoId = await searchYouTube(query);
@@ -1024,7 +1045,6 @@ async function playFavSongAtIndex(index) {
             notify('未找到完整版歌曲，试试下一首吧');
             return;
         }
-        // Save the found videoId back to the playlist and favorites
         song.videoId = videoId;
         const favs = getFavorites();
         const favIdx = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
@@ -1133,10 +1153,23 @@ function hideMusicPlayer() {
 }
 
 function stopMusicPlayer() {
+    if (musicUseAudio) {
+        audio.pause();
+        musicUseAudio = false;
+    }
     hideMusicPlayer();
 }
 
 function toggleMusicPlay() {
+    // B站 audio mode
+    if (musicUseAudio) {
+        if (audio.paused || audio.ended) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+        return;
+    }
     if (!ytPlayer || !ytReady) { notify('播放器加载中，请稍后再试'); return; }
     const state = ytPlayer.getPlayerState();
     if (state === YT.PlayerState.PLAYING) {
