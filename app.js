@@ -2085,7 +2085,7 @@ function loadQuestion() {
         // Show detail modal after brief delay (same as normal flow)
         setTimeout(() => {
             showAnimeDetail(record.song);
-            updatePrevButton();
+            updateNavButtons();
         }, 800);
         return;
     }
@@ -2104,7 +2104,7 @@ function loadQuestion() {
     $('songInfo').classList.remove('show');
     $('qNum').textContent = gameState.questionIndex + 1;
     animateScore($('scoreText'), gameState.correctCount);
-    updatePrevButton();
+    updateNavButtons();
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
     gameState.fetchGeneration++;
@@ -2304,7 +2304,7 @@ function handleAnswer(btn, selected) {
     animateScore($('myScoreText'), gameState.score);
     setTimeout(() => {
         showAnimeDetail(gameState.currentSong);
-        updatePrevButton();
+        updateNavButtons();
     }, 1500);
 }
 
@@ -2494,13 +2494,20 @@ function restartGame() {
     else showView('menu');
 }
 
+function closeDetailModal() {
+    stopFullPlayer();
+    $('animeDetailModal').classList.remove('show');
+}
+
 function nextQuestion() {
     stopFullPlayer();
     $('animeDetailModal').classList.remove('show');
     if (gameState.viewingHistory) {
-        // Return to the current unanswered question
-        gameState.questionIndex = gameState.answerHistory.length;
-        gameState.viewingHistory = false;
+        gameState.questionIndex++;
+        if (gameState.questionIndex >= gameState.answerHistory.length) {
+            gameState.viewingHistory = false;
+            gameState.questionIndex = gameState.answerHistory.length;
+        }
         loadQuestion();
     } else {
         gameState.questionIndex++;
@@ -2519,10 +2526,11 @@ function prevQuestion() {
     loadQuestion();
 }
 
-function updatePrevButton() {
-    const btn = $('prevQuestionBtn');
-    if (!btn) return;
-    btn.style.display = gameState.questionIndex > 0 ? '' : 'none';
+function updateNavButtons() {
+    const prevBtn = $('prevQuestionBtn');
+    const nextBtn = $('nextQuestionBtn');
+    if (prevBtn) prevBtn.style.display = gameState.questionIndex > 0 ? '' : 'none';
+    if (nextBtn) nextBtn.style.display = gameState.viewingHistory ? '' : 'none';
 }
 
 function renderHistoryOptions(record) {
@@ -2736,7 +2744,7 @@ document.addEventListener('keydown', (e) => {
     // Escape to close modals
     if (e.key === 'Escape') {
         if (settingsOpen) { closeSettings(); return; }
-        if (detailOpen) { nextQuestion(); return; }
+        if (detailOpen) { closeDetailModal(); return; }
         if (endOpen) { $('endModal').classList.remove('show'); showView('menu'); return; }
     }
 
@@ -2773,7 +2781,7 @@ document.addEventListener('keydown', (e) => {
 
 // Backdrop click to close modals
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'animeDetailModal') { nextQuestion(); return; }
+    if (e.target.id === 'animeDetailModal') { closeDetailModal(); return; }
     if (e.target.id === 'settingsModal') { closeSettings(); return; }
     if (e.target.id === 'endModal') { $('endModal').classList.remove('show'); showView('menu'); return; }
 });
@@ -2819,7 +2827,7 @@ document.addEventListener('click', (e) => {
         case 'goHome': $('endModal').classList.remove('show'); showView('menu'); break;
         case 'openSettings': openSettings(); break;
         case 'closeSettings': closeSettings(); break;
-        case 'closeDetail': nextQuestion(); break;
+        case 'closeDetail': closeDetailModal(); break;
         case 'nextQuestion': nextQuestion(); break;
         case 'prevQuestion': prevQuestion(); break;
         case 'toggleFullPlay': toggleFullPlay(); break;
