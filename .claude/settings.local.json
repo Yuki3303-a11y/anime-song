@@ -19,7 +19,9 @@
       "Bash(git commit -m ' *)",
       "Bash(git -c http.proxy=http://127.0.0.1:7897 -c https.proxy=http://127.0.0.1:7897 push origin master)",
       "Bash(git commit *)",
-      "Bash(gh api *)"
+      "Bash(gh api *)",
+      "Bash(python3 -c 'import urllib.parse; print\\(urllib.parse.quote\\('\\\\''__TRACKED_VAR__'\\\\''\\)\\)')",
+      "mcp__sequential-thinking__sequentialthinking"
     ]
   }
 }
