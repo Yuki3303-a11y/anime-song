@@ -1008,12 +1008,15 @@ async function playFavSong(index) {
 }
 
 async function playFavSongAtIndex(index) {
-    try {
+    console.log('[Music] playFavSongAtIndex called, index:', index);
     const song = playlist.songs[index];
-    if (!song) return;
+    if (!song) { console.log('[Music] no song at index'); return; }
+    console.log('[Music] song:', song.title, 'source:', song.source, 'videoId:', song.videoId, 'bilibiliUrl:', !!song.bilibiliUrl);
     playlist.currentIndex = index;
     gameState.currentSong = song;
+    notify('加载中: ' + (song.titleCN || song.title));
     showMusicPlayer(song);
+    try {
 
     const playBilibili = (url) => {
         stopMusicPlayer();
