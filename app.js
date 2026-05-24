@@ -77,7 +77,7 @@ const NOTIFY_DURATION = 2500;      // Toast auto-dismiss duration (ms)
 const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
-const BILI_TIMEOUT = 8000;         // B站 Worker fetch timeout (ms)
+const BILI_TIMEOUT = 12000;        // B站 proxy fetch timeout (ms)
 const BILI_WORKER_URL_DEFAULT = 'https://anime-song-gamma.vercel.app';
 window.BILI_WORKER_URL = (() => {
     try { return localStorage.getItem('bili_proxy_url_v1') || BILI_WORKER_URL_DEFAULT; }
@@ -628,16 +628,17 @@ async function searchBilibili(anime, title, artist = '', type = '') {
             return null;
         }
 
-        // Song title must also appear (at least one significant word > 2 chars)
-        const titleInTitle = tl.split(/\s+/).filter(w => w.length > 2).some(
-            w => vt.includes(w)
-        );
-        if (!titleInTitle) {
-            console.log('[Bili] Rejected: title not in video title', best.title, '| title:', title);
-            return null;
+        // Song title check: skip if title has no words > 2 chars (e.g. short titles)
+        const titleWords = tl.split(/\s+/).filter(w => w.length > 2);
+        if (titleWords.length > 0) {
+            const titleInTitle = titleWords.some(w => vt.includes(w));
+            if (!titleInTitle) {
+                console.log('[Bili] Rejected: title not in video title', best.title, '| title:', title);
+                return null;
+            }
         }
 
-        if (best._score < 25) {
+        if (best._score < 15) {
             console.log('[Bili] Rejected: low score', best._score, best.title);
             return null;
         }
