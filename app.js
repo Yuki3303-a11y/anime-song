@@ -1014,21 +1014,48 @@ async function playFavSongAtIndex(index) {
     gameState.currentSong = song;
     showMusicPlayer(song);
 
-    // B站 source: play via <audio>
-    if (song.source === 'bilibili' && song.bilibiliUrl) {
+    const playBilibili = (url) => {
         stopMusicPlayer();
         musicUseAudio = true;
         audio.pause();
         gameState.isPlaying = false;
         $('visualizer')?.classList.add('hidden');
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-        audio.src = song.bilibiliUrl;
+        audio.src = url;
         const musicPlayer = $('musicPlayer');
         if (musicPlayer) musicPlayer.style.display = '';
         $('musicSource').textContent = '(B站源)';
         renderFavorites();
+    };
+
+    // B站 source with URL
+    if (song.source === 'bilibili' && song.bilibiliUrl) {
+        playBilibili(song.bilibiliUrl);
         return;
     }
+
+    // Old favorites without source — try B站 search first
+    if (!song.videoId || !song.source) {
+        const result = await fetchBilibiliAudio(
+            song.title, song.artist, song.anime, song.type || '',
+            `${song.title}|${song.anime}`
+        );
+        if (result) {
+            // Save source info for next time
+            song.source = 'bilibili';
+            song.bilibiliUrl = result.url;
+            const favs = getFavorites();
+            const favIdx = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
+            if (favIdx >= 0) {
+                favs[favIdx].source = 'bilibili';
+                favs[favIdx].bilibiliUrl = result.url;
+                saveFavorites(favs);
+            }
+            playBilibili(result.url);
+            return;
+        }
+    }
+
     musicUseAudio = false;
 
     if (!ytPlayer || !ytReady) {
