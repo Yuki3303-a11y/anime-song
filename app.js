@@ -38,11 +38,6 @@ try {
 }
 
 // =====================================================================
-// Environment Detection
-// =====================================================================
-const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-// =====================================================================
 // Game State
 // =====================================================================
 const gameState = {
@@ -269,50 +264,8 @@ function onYtError(e) {
     };
     const reason = errorReasons[e.data] || `播放出错（错误码${e.data}）`;
 
-    // Quiz YouTube error — fall back to iTunes on mobile, skip on desktop
+    // Quiz YouTube fallback — skip this question
     if (quizYT.active) {
-        const fb = gameState.lastAudioResult?.fallbackUrl;
-        if (isMobile && fb) {
-            notify(`YouTube嵌入被限制，已切换为试听片段`);
-            stopQuizYT();
-            quizYT.active = false;
-            quizYT.videoId = null;
-            audio.src = fb;
-            gameState.isPlaying = false;
-            $('visualizer').classList.add('hidden');
-            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-            $('playerStatus').textContent = '点击播放 (试听片段)';
-            // Keep YouTube external link visible as backup
-            return;
-        }
-        if (isMobile) {
-            // No fallback — try to re-search iTunes directly
-            stopQuizYT();
-            gameState.isPlaying = false;
-            $('visualizer').classList.add('hidden');
-            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-            $('playerStatus').textContent = '正在搜索试听片段...';
-            const song = gameState.currentSong;
-            if (song) {
-                fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(song.artist + ' ' + song.title)}&media=music&entity=song&limit=5&country=JP`)
-                    .then(r => r.json()).then(data => {
-                        if (data.results?.[0]?.previewUrl) {
-                            audio.src = data.results[0].previewUrl;
-                            quizYT.active = false;
-                            quizYT.videoId = null;
-                            $('playerStatus').textContent = '点击播放 (试听片段)';
-                            notify('已切换为试听片段');
-                        } else {
-                            $('playerStatus').textContent = '暂无可用音频';
-                            notify(`YouTube嵌入被限制且无试听片段，请在 YouTube 打开观看`);
-                        }
-                    }).catch(() => {
-                        $('playerStatus').textContent = '暂无可用音频';
-                    });
-            }
-            return;
-        }
-        // Desktop: skip question as before
         notify(`YouTube音频加载失败（${reason}），已跳过此题`);
         stopQuizYT();
         gameState.isPlaying = false;
@@ -1753,6 +1706,7 @@ function initSakura() {
             ctx.globalAlpha = Math.max(0, opacity);
             ctx.fillStyle = '#fff';
             ctx.shadowColor = 'rgba(236, 72, 153, 0.5)';
+            const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             ctx.shadowBlur = isMobile ? 0 : this.size * 2;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -2152,28 +2106,22 @@ function loadQuestion() {
         renderHistoryOptions(record);
         showSongInfo(record.isCorrect);
         // Fetch audio for playback during review
-        fetchAudio(record.song.title, record.song.artist, record.song.anime, isMobile).then(result => {
+        fetchAudio(record.song.title, record.song.artist, record.song.anime).then(result => {
             if (!result) {
                 $('playerStatus').textContent = '回顾模式 — 无音频';
                 return;
             }
             gameState.lastAudioResult = result;
             const url = result.url;
-            const ytLink = $('ytExternalLink');
             if (url.startsWith('yt:')) {
                 quizYT.active = true;
                 quizYT.videoId = url.slice(3);
                 $('playerStatus').textContent = '回顾模式 (YouTube源)';
-                if (ytLink) {
-                    ytLink.href = `https://www.youtube.com/watch?v=${quizYT.videoId}`;
-                    ytLink.style.display = '';
-                }
             } else {
                 quizYT.active = false;
                 quizYT.videoId = null;
                 audio.src = url;
                 $('playerStatus').textContent = '回顾模式';
-                if (ytLink) ytLink.style.display = 'none';
             }
             $('playBtn').disabled = false;
         });
@@ -2204,11 +2152,10 @@ function loadQuestion() {
     gameState.fetchGeneration++;
     const gen = gameState.fetchGeneration;
     const correctAnime = q.anime;  // capture now — prevents race if recursive loadQuestion overwrites gameState
-    fetchAudio(q.title, q.artist, q.anime, isMobile).then(result => {
+    fetchAudio(q.title, q.artist, q.anime).then(result => {
         if (gen !== gameState.fetchGeneration) return;
         if (!result) {
             notify('呜喵~ 这首歌的音频获取失败了，已跳过~');
-            const yl = $('ytExternalLink'); if (yl) yl.style.display = 'none';
             gameState.questionIndex++;
             loadQuestion();
             return;
@@ -2216,35 +2163,27 @@ function loadQuestion() {
         // Save enriched result so full-song search can reuse the same audio source
         gameState.lastAudioResult = result;
         const url = result.url;
-        const ytLink = $('ytExternalLink');
         if (url.startsWith('yt:')) {
-            // YouTube — use ytPlayer for 30s quiz clip
+            // YouTube fallback — use ytPlayer for 30s quiz clip
             quizYT.active = true;
             quizYT.videoId = url.slice(3);
             $('playBtn').disabled = false;
             $('playerStatus').textContent = '点击播放 (YouTube源)';
-            if (ytLink) {
-                ytLink.href = `https://www.youtube.com/watch?v=${quizYT.videoId}`;
-                ytLink.style.display = '';
-            }
         } else {
             quizYT.active = false;
             quizYT.videoId = null;
             audio.src = url;
             $('playBtn').disabled = false;
             $('playerStatus').textContent = '点击播放';
-            if (ytLink) ytLink.style.display = 'none';
         }
         renderOptions(correctAnime);
     });
 }
 
-async function fetchAudio(title, artist, anime, preferYoutube = false) {
+async function fetchAudio(title, artist, anime) {
     const cacheKey = `${title}|${anime}`;
-    if (!preferYoutube) {
-        const cached = audioCache.get(cacheKey);
-        if (cached) return normalizeAudioEntry(cached);
-    }
+    const cached = audioCache.get(cacheKey);
+    if (cached) return normalizeAudioEntry(cached);
 
     function scoreMatch(r) {
         const t = (r.trackName || '').toLowerCase();
@@ -2302,32 +2241,6 @@ async function fetchAudio(title, artist, anime, preferYoutube = false) {
             }
         } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
         return { url: null, score: -1, trackName: null, artistName: null };
-    }
-
-    // Mobile: search YouTube first (primary) + iTunes in parallel (fallback)
-    if (preferYoutube) {
-        const ytQuery = `${title} ${anime} ${artist || ''}`;
-        const itunesQuery = artist ? `${artist} ${title}` : `${title} ${anime}`;
-        const [ytVideoId, itunesResult] = await Promise.all([
-            searchYouTube(ytQuery),
-            searchItunes(itunesQuery)
-        ]);
-        if (ytVideoId) {
-            const e = {
-                url: `yt:${ytVideoId}`, source: 'youtube', ytVideoId, ytQuery,
-                fallbackUrl: itunesResult.url || null,
-                itunesTrack: itunesResult.trackName, itunesArtist: itunesResult.artistName
-            };
-            audioCache.set(cacheKey, e);
-            return e;
-        }
-        // YouTube miss — try the iTunes result we already have
-        if (itunesResult.url) {
-            const e = { url: itunesResult.url, source: 'itunes', itunesTrack: itunesResult.trackName, itunesArtist: itunesResult.artistName };
-            audioCache.set(cacheKey, e);
-            return e;
-        }
-        // Both primary searches missed — fall through to exhaustive iTunes search below
     }
 
     // Try 1: artist + title (most precise)
@@ -2561,7 +2474,7 @@ audio.onerror = () => {
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
         $('playBtn').disabled = true;
         $('playerStatus').textContent = '音频过期，重新搜索中...';
-        fetchAudio(song.title, song.artist, song.anime, isMobile).then(result => {
+        fetchAudio(song.title, song.artist, song.anime).then(result => {
             if (gen !== gameState.fetchGeneration) return;
             if (!result) {
                 notify('这首歌的音频暂时不可用，已跳过~');
@@ -2570,23 +2483,9 @@ audio.onerror = () => {
                 return;
             }
             gameState.lastAudioResult = result;
-            const url = result.url;
-            const ytLink = $('ytExternalLink');
-            if (url.startsWith('yt:')) {
-                quizYT.active = true;
-                quizYT.videoId = url.slice(3);
-                if (ytLink) {
-                    ytLink.href = `https://www.youtube.com/watch?v=${quizYT.videoId}`;
-                    ytLink.style.display = '';
-                }
-            } else {
-                quizYT.active = false;
-                quizYT.videoId = null;
-                if (ytLink) ytLink.style.display = 'none';
-            }
-            audio.src = url;
+            audio.src = result.url;
             $('playBtn').disabled = false;
-            $('playerStatus').textContent = url.startsWith('yt:') ? '点击播放 (YouTube源)' : '点击播放';
+            $('playerStatus').textContent = '点击播放';
         });
     }
 };
