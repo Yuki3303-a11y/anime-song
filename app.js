@@ -83,10 +83,26 @@ const NOTIFY_DURATION = 2500;      // Toast auto-dismiss duration (ms)
 const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
+const BILI_TIMEOUT = 8000;         // B站 Worker fetch timeout (ms)
+const BILI_WORKER_URL = 'https://bili-proxy.REPLACE_ME.workers.dev'; // ← 部署 Worker 后替换
+
 // =====================================================================
 // Filter State
 // =====================================================================
 const filterState = { years: new Set(), types: new Set(), source: null };
+
+let audioSourcePref = (() => {
+    try { return localStorage.getItem('audio_source_pref_v1') || null; }
+    catch { return null; }
+})();
+
+function saveAudioSourcePref(value) {
+    try {
+        if (value === null) localStorage.removeItem('audio_source_pref_v1');
+        else localStorage.setItem('audio_source_pref_v1', value);
+        audioSourcePref = value;
+    } catch {}
+}
 
 function updateFilterCount() {
     const count = getFilteredSongs().length;
@@ -156,6 +172,11 @@ class MemCache {
             this._scheduleFlush();
         }
     }
+    clear() {
+        this._data = {};
+        this._dirty = true;
+        this._flush();
+    }
     _flush() {
         if (this._timer) { clearTimeout(this._timer); this._timer = 0; }
         if (!this._dirty) return;
@@ -168,6 +189,8 @@ class MemCache {
 const audioCache = new MemCache('audio_cache_v2', 500, 24 * 60 * 60 * 1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
+const bilibiliCache = new MemCache('bilibili_cache_v1', 200, 24 * 60 * 60 * 1000);
+const bilibiliAudioCache = new MemCache('bilibili_audio_cache_v1', 200, 5 * 60 * 1000);
 
 function normalizeAudioEntry(entry) {
     if (!entry) return null;
@@ -494,6 +517,62 @@ async function searchYouTube(query) {
     }
     console.error('[YT] All keys exhausted or failed');
     return null;
+}
+
+// =====================================================================
+// Bilibili Search & Audio
+// =====================================================================
+
+async function searchBilibili(query) {
+    const cacheKey = query.toLowerCase().trim();
+    const cached = bilibiliCache.get(cacheKey);
+    if (cached) return cached;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
+    try {
+        const resp = await fetch(
+            `${BILI_WORKER_URL}/search?q=${encodeURIComponent(query)}`,
+            { signal: controller.signal }
+        );
+        clearTimeout(timeoutId);
+        const data = await resp.json();
+        if (!data.results?.length) return null;
+
+        // Filter: skip very long videos (>10min = full episodes), prefer popular ones
+        const filtered = data.results.filter(r => r.duration <= 600);
+        const best = (filtered.length > 0 ? filtered : data.results)[0];
+        if (best) bilibiliCache.set(cacheKey, best);
+        return best || null;
+    } catch (e) {
+        clearTimeout(timeoutId);
+        console.error('[Bili] searchBilibili:', e);
+        return null;
+    }
+}
+
+async function getBilibiliAudioUrl(bvid) {
+    const cached = bilibiliAudioCache.get(bvid);
+    if (cached) return cached;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
+    try {
+        const resp = await fetch(
+            `${BILI_WORKER_URL}/audio?bvid=${encodeURIComponent(bvid)}`,
+            { signal: controller.signal }
+        );
+        clearTimeout(timeoutId);
+        const data = await resp.json();
+        if (!data.url) return null;
+        const result = { url: data.url, duration: data.duration, backupUrl: data.backupUrl || null };
+        bilibiliAudioCache.set(bvid, result);
+        return result;
+    } catch (e) {
+        clearTimeout(timeoutId);
+        console.error('[Bili] getBilibiliAudioUrl:', e);
+        return null;
+    }
 }
 
 async function searchAndLoadFullSong(song) {
@@ -2171,7 +2250,7 @@ function loadQuestion() {
                 quizYT.active = false;
                 quizYT.videoId = null;
                 audio.src = url;
-                $('playerStatus').textContent = '回顾模式';
+                $('playerStatus').textContent = result.source === 'bilibili' ? '回顾模式 (B站源)' : '回顾模式';
             }
             $('playBtn').disabled = false;
         });
@@ -2224,21 +2303,45 @@ function loadQuestion() {
             quizYT.videoId = null;
             audio.src = url;
             $('playBtn').disabled = false;
-            $('playerStatus').textContent = '点击播放';
+            $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';
         }
         renderOptions(correctAnime);
     });
 }
 
+async function fetchBilibiliAudio(title, artist, anime, cacheKey) {
+    const query = `${title} ${anime} ${artist || ''}`;
+    const biliResult = await searchBilibili(query);
+    if (!biliResult) return null;
+    const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
+    if (!audioInfo?.url) return null;
+    const e = {
+        url: audioInfo.url,
+        source: 'bilibili',
+        bvid: biliResult.bvid,
+        biliTitle: biliResult.title,
+        biliDuration: audioInfo.duration
+    };
+    audioCache.set(cacheKey, e);
+    return e;
+}
+
 async function fetchAudio(title, artist, anime) {
     const cacheKey = `${title}|${anime}`;
     const cached = audioCache.get(cacheKey);
-    // Skip YouTube cache — always prefer iTunes 30s preview
+    // Skip YouTube and B站 cache — always prefer iTunes 30s preview
     if (cached) {
         const entry = normalizeAudioEntry(cached);
-        if (entry && entry.source !== 'youtube') return entry;
-        // Stale YouTube cache: evict and re-fetch
+        if (entry && entry.source !== 'youtube' && entry.source !== 'bilibili') return entry;
+        // Stale YouTube/B站 cache: evict and re-fetch
         audioCache.delete(cacheKey);
+    }
+
+    // B站优先 / 仅B站
+    if (audioSourcePref === 'bilibili-first' || audioSourcePref === 'bilibili-only') {
+        const e = await fetchBilibiliAudio(title, artist, anime, cacheKey);
+        if (e) return e;
+        if (audioSourcePref === 'bilibili-only') return null;
     }
 
     function scoreMatch(r) {
@@ -2333,6 +2436,12 @@ async function fetchAudio(title, artist, anime) {
         const e = { url: `yt:${ytVideoId}`, source: 'youtube', ytVideoId, ytQuery };
         audioCache.set(cacheKey, e);
         return e;
+    }
+
+    // B站兜底 (only when no explicit preference set, i.e. default mode)
+    if (!audioSourcePref) {
+        const e = await fetchBilibiliAudio(title, artist, anime, cacheKey);
+        if (e) return e;
     }
 
     return null;
@@ -2515,7 +2624,17 @@ audio.onended = () => {
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
 };
 audio.ontimeupdate = () => {
-    if (audio.duration) $('progressFill').style.width = (audio.currentTime / audio.duration * 100) + '%';
+    if (!audio.duration) return;
+    const lastResult = gameState.lastAudioResult;
+    const duration = (lastResult && lastResult.source === 'bilibili') ? 30 : audio.duration;
+    $('progressFill').style.width = (audio.currentTime / duration * 100) + '%';
+    // B站 full song → stop at 30s clip
+    if (lastResult && lastResult.source === 'bilibili' && audio.currentTime >= 30) {
+        audio.pause();
+        gameState.isPlaying = false;
+        $('visualizer').classList.add('hidden');
+        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+    }
 };
 audio.onerror = () => {
     if (!quizYT.active && gameState.currentSong) {
@@ -2802,6 +2921,28 @@ function initSourceFilter() {
     });
 }
 
+function initAudioSourceFilter() {
+    const options = [
+        { label: 'iTunes + YouTube', value: null },
+        { label: 'B站优先', value: 'bilibili-first' },
+        { label: '仅B站', value: 'bilibili-only' },
+    ];
+    const container = $('audioSourceChips');
+    if (!container) return;
+    options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'settings-chip' + (opt.value === audioSourcePref ? ' active' : (i === 0 && !audioSourcePref ? ' active' : ''));
+        btn.textContent = opt.label;
+        btn.addEventListener('click', () => {
+            container.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            saveAudioSourcePref(opt.value);
+            audioCache.clear();
+        });
+        container.appendChild(btn);
+    });
+}
+
 // =====================================================================
 // Settings Modal
 // =====================================================================
@@ -2988,6 +3129,7 @@ document.addEventListener('change', (e) => {
 initSakura();
 initFilters();
 initSourceFilter();
+initAudioSourceFilter();
 initQuestionCount();
 updateCustomSongsUI();
 

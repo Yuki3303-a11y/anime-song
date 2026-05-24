@@ -34,7 +34,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 
 ## Key Systems
 
-**Audio:** iTunes Search API (`country=JP`) with `artist + title` query. Preview URLs cached via `MemCache` (in-memory wrapper over localStorage, key: `audio_cache_v1`). Cache key is `${title}|${anime}`. 5s timeout per request. Falls back to title-only search, then `title + anime`.
+**Audio:** iTunes Search API (`country=JP`) with `artist + title` query. Preview URLs cached via `MemCache` (in-memory wrapper over localStorage, key: `audio_cache_v2`). Cache key is `${title}|${anime}`. 5s timeout per request. Falls back to title-only search, then `title + anime`, then YouTube Data API, then B站 (via Cloudflare Worker proxy). Audio source preference stored in `audio_source_pref_v1` localStorage key (`null` / `'bilibili-first'` / `'bilibili-only'`).
 
 **Multiplayer:** Firebase Firestore (project: `animequiz-a16c1`). Anonymous auth. Rooms at `artifacts/{projectId}/public/data/rooms/{roomId}`. Real-time sync via `onSnapshot`.
 
@@ -62,10 +62,21 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 4. Filter to `type === 2` (anime only)
 5. For each anime: get romaji title from AniList, search iTunes, add up to 2 songs
 
+**Bilibili (B站) Audio Source:**
+- Proxy via Cloudflare Worker (`bili-worker.js`) — implements WBI signing + B站 API proxying
+- Zero cost (Cloudflare Workers free tier: 100k requests/day)
+- Worker endpoints: `/search?q=xxx` (video search), `/audio?bvid=xxx` (get audio stream URL)
+- B站 returns DASH audio streams (M4A/AAC) playable via `<audio>` element
+- B站 audio URLs expire quickly — never cached long-term in audioCache
+- `BILI_WORKER_URL` constant in app.js must be updated after deploying the Worker
+
 **MemCache:** In-memory Map wrapping localStorage for O(1) reads:
 ```js
-const audioCache = new MemCache('audio_cache_v1', 500);
+const audioCache = new MemCache('audio_cache_v2', 500, 24*60*60*1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
+const youtubeCache = new MemCache('youtube_cache_v1', 200);
+const bilibiliCache = new MemCache('bilibili_cache_v1', 200, 24*60*60*1000);
+const bilibiliAudioCache = new MemCache('bilibili_audio_cache_v1', 200, 5*60*1000);
 ```
 
 **Keyboard Shortcuts:**
