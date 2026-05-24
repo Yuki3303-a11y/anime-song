@@ -1129,6 +1129,7 @@ async function importFromBangumi(indexId) {
     const customSongs = getCustomSongs();
     const customTitles = new Set(customSongs.map(s => s.anime));
     let addedCount = 0;
+    const lowConfSongs = [];
 
     for (let i = 0; i < animeList.length; i++) {
         const anime = animeList[i];
@@ -1159,14 +1160,37 @@ async function importFromBangumi(indexId) {
         // Search iTunes for songs — pass Japanese name for album matching
         const songs = await searchItunesForAnime(searchTitle, animeName, anime.name, year);
         for (const song of songs) {
-            if (addCustomSong(song)) addedCount++;
+            if (addCustomSong(song)) {
+                addedCount++;
+                if (song._importScore && song._importScore < 80) {
+                    lowConfSongs.push(song);
+                }
+            }
         }
 
         // Small delay to avoid rate limiting
         await new Promise(r => setTimeout(r, 300));
     }
 
-    if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
+    if (lowConfSongs.length > 0) {
+        await new Promise(r => setTimeout(r, 500)); // Let UI settle
+        const names = lowConfSongs.map(s => `• ${s.title} (${s.anime})`).join('\n');
+        const shouldRemove = confirm(
+            `主人注意喵~ 以下 ${lowConfSongs.length} 首歌曲匹配度较低，可能和番剧无关：\n\n${names}\n\n是否移除这些歌曲？\n（点"取消"保留所有歌曲）`
+        );
+        if (shouldRemove) {
+            const current = getCustomSongs();
+            const toRemoveSet = new Set(lowConfSongs.map(s => `${s.title}|${s.anime}`));
+            const filtered = current.filter(s => !toRemoveSet.has(`${s.title}|${s.anime}`));
+            setCustomSongs(filtered);
+            addedCount -= lowConfSongs.length;
+            if (statusEl) statusEl.textContent = `导入完成！保留 ${addedCount} 首歌曲（已移除 ${lowConfSongs.length} 首低匹配合）`;
+        }
+    }
+
+    if (!statusEl?.textContent?.includes('保留')) {
+        if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
+    }
     if (progressEl) progressEl.style.width = '100%';
     if (progressWrapper) setTimeout(() => { progressWrapper.style.display = 'none'; }, 2000);
     notify(`导入成功啦喵！新增了 ${addedCount} 首歌曲呢~`);
@@ -1211,6 +1235,24 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
         return score;
     }
 
+    function crossValidateAnime(r, animeName, jpName) {
+        const t = (r.trackName || '').toLowerCase();
+        const c = (r.collectionName || '').toLowerCase();
+        const targets = [
+            (animeName || '').toLowerCase(),
+            (jpName || '').toLowerCase()
+        ].filter(Boolean);
+        for (const target of targets) {
+            if (t.includes(target) || c.includes(target)) return true;
+            // Also check 3-char substrings for partial name matching (e.g. "咒術" from "咒術廻戦")
+            for (let i = 0; i < target.length - 2; i++) {
+                const sub = target.substring(i, i + 3);
+                if (t.includes(sub) || c.includes(sub)) return true;
+            }
+        }
+        return false;
+    }
+
     // Search with Japanese name (best results on iTunes JP) + romaji as fallback
     const searchTerms = jpName ? [jpName, `${romajiTitle} anime`, romajiTitle] : [`${romajiTitle} anime`, romajiTitle];
     for (const term of searchTerms) {
@@ -1228,10 +1270,10 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
                 const title = r.trackName;
                 if (!title || seen.has(title)) continue;
                 const s = scoreImportResult(r);
-                if (s >= 20) scored.push({ r, score: s });
+                if (s >= 50 && crossValidateAnime(r, animeName, jpName)) scored.push({ r, score: s });
             }
             scored.sort((a, b) => b.score - a.score);
-            for (const { r } of scored) {
+            for (const { r, score } of scored) {
                 const title = r.trackName;
                 if (seen.has(title)) continue;
                 seen.add(title);
@@ -1242,6 +1284,7 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
                     artist: r.artistName || 'Unknown',
                     year: year,
                     type: guessSongType(title, r),
+                    _importScore: score,
                 });
             }
             if (results.length >= 2) break;
