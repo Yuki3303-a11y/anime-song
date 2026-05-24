@@ -3,7 +3,12 @@
 一款二次元风格的在线动漫音乐猜谜游戏。听30秒歌曲片段，猜出它来自哪部动漫。
 此网站完全由AI生成。
 
-**[>> 点击开始挑战 <<](https://yuki3303-a11y.github.io/anime-song/)**
+**两个地址，内容相同：**
+
+| 地址 | 推荐 |
+|------|------|
+| **[anime-song-gamma.vercel.app](https://anime-song-gamma.vercel.app)** | 推荐（B站源正常） |
+| [yuki3303-a11y.github.io/anime-song](https://yuki3303-a11y.github.io/anime-song/) | 备用 |
 
 ## 游戏模式
 
@@ -17,9 +22,17 @@
 - 可导入 Bangumi 目录扩充曲库
 - 支持自定义歌曲 JSON 导入/导出
 
+## 音频来源（设置中可切换）
+
+| 来源 | 说明 |
+|------|------|
+| **iTunes** | 30s 试听片段，优先推荐 |
+| **YouTube** | 完整歌曲，部分需科学上网 |
+| **B站** | 国内直接访问，无网络限制 |
+
 ## 特色功能
 
-- **完整歌曲播放** — 答题后可播放 YouTube 完整版歌曲
+- **完整歌曲播放** — 答题后可播放 YouTube/B站 完整版歌曲
 - **歌单系统** — 收藏喜欢的歌曲，支持全部播放、随机播放、顺序播放
 - **番剧封面** — 自动获取 AniList/Bangumi 番剧封面图
 - 樱花飘落背景动画
@@ -39,12 +52,11 @@
 
 ## 技术栈
 
-纯前端实现，无需后端：
-
 - HTML / CSS / JavaScript（ES Modules）
-- Firebase Realtime Database（多人PK）（需要科学上网环境）
+- Firebase Realtime Database（多人PK）
 - Firebase Anonymous Auth
-- YouTube Data API v3 + IFrame Player API（完整歌曲播放）
+- YouTube Data API v3 + IFrame Player API
+- B站 API（via Vercel Serverless Function）
 - AniList GraphQL API（动漫封面）
 - Bangumi API（番剧信息）
 - iTunes Search API（音频预览）
@@ -59,9 +71,11 @@ python -m http.server 8080
 # http://localhost:8080
 ```
 
-## 部署
-
-通过 GitHub Pages 自动部署，推送到 `master` 分支即可。
+如需本地 B站源（可选）：
+```bash
+python3 bili-proxy.py  # 启动本地代理
+# 然后在设置中把 B站代理地址 改为 http://localhost:8765
+```
 
 ## 许可
 
