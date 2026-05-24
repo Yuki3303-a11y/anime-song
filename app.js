@@ -64,7 +64,7 @@ function escapeHTML(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 const audio = $('audioEl');
-const progressFill = progressFill;
+const progressFill = $('progressFill');
 
 // =====================================================================
 // Timeout Constants
