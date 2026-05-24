@@ -2249,8 +2249,10 @@ async function fetchAudio(title, artist, anime) {
                     const s = scoreMatch(r);
                     if (s > bestScore) { bestScore = s; best = r; }
                 }
-                if (best && bestScore >= 40) return { url: best.previewUrl, score: bestScore, trackName: best.trackName, artistName: best.artistName };
-                // Low confidence — return score but no URL
+                // Use any iTunes result with at least a partial title match (score >= 0)
+                // scoreMatch returns -1 only when the title doesn't appear at all
+                if (best && bestScore >= 0) return { url: best.previewUrl, score: bestScore, trackName: best.trackName, artistName: best.artistName };
+                // No title match at all
                 if (best) return { url: null, score: bestScore, trackName: best.trackName, artistName: best.artistName };
             }
         } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
