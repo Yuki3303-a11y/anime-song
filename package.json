@@ -1,0 +1,24 @@
+{
+  "name": "anime-song",
+  "version": "1.0.0",
+  "description": "一款二次元风格的在线动漫音乐猜谜游戏。听30秒歌曲片段，猜出它来自哪部动漫。 此网站完全由AI生成。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuki3303-a11y/anime-song.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Yuki3303-a11y/anime-song/issues"
+  },
+  "homepage": "https://github.com/Yuki3303-a11y/anime-song#readme",
+  "dependencies": {
+    "spark-md5": "^3.0.2"
+  }
+}

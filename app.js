@@ -84,7 +84,7 @@ const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
 const BILI_TIMEOUT = 8000;         // B站 Worker fetch timeout (ms)
-const BILI_WORKER_URL = 'https://bili-proxy.REPLACE_ME.workers.dev'; // ← 部署 Worker 后替换
+const BILI_WORKER_URL = 'http://localhost:8765';
 
 // =====================================================================
 // Filter State
