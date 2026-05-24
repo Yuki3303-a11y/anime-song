@@ -696,6 +696,22 @@ body {
     font-weight: 500;
 }
 
+.yt-external-link {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 2px 8px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    margin-bottom: 14px;
+    transition: background 0.15s, color 0.15s;
+}
+.yt-external-link:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
 .play-btn {
     width: 64px;
     height: 64px;
