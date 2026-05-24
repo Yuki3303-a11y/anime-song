@@ -523,9 +523,9 @@ async function searchYouTube(query) {
 // Bilibili Search & Audio
 // =====================================================================
 
-async function searchBilibili(anime, title, artist = '') {
-    // Cache key: anime is the primary differentiator
-    const cacheKey = `${anime}|${title}`.toLowerCase().trim();
+async function searchBilibili(anime, title, artist = '', type = '') {
+    // Cache key: anime + type are primary differentiators
+    const cacheKey = `${anime}|${type}|${title}`.toLowerCase().trim();
     const cached = bilibiliCache.get(cacheKey);
     if (cached) return cached;
 
@@ -543,7 +543,7 @@ async function searchBilibili(anime, title, artist = '') {
         return data.results.filter(r => r.duration <= 600 && r.duration >= 30);
     }
 
-    function scoreResult(r, anime, title, artist) {
+    function scoreResult(r, anime, title, artist, type) {
         let s = 0;
         const vt = r.title.toLowerCase();
         const an = anime.toLowerCase();
@@ -554,9 +554,19 @@ async function searchBilibili(anime, title, artist = '') {
         for (const w of an.split(/\s+/)) {
             if (w.length > 1 && vt.includes(w)) s += 25;
         }
+        // Exact anime name in title is strong signal
+        if (vt.includes(an)) s += 30;
         // Song title match
         for (const w of tl.split(/\s+/)) {
             if (w.length > 1 && vt.includes(w)) s += 15;
+        }
+        // OP/ED keyword bonus (titles like "OP - xxx" or "ED「xxx」")
+        const tp = (type || '').toUpperCase();
+        if (tp && ['OP', 'ED'].includes(tp)) {
+            if (vt.includes(tp.toLowerCase())) s += 20;
+            // Also check common OP/ED patterns in B站 titles
+            if (vt.includes('op') || vt.includes('ＯＰ') || vt.includes('主題歌')) s += 10;
+            if (vt.includes('ed') || vt.includes('ＥＤ') || vt.includes('エンディング')) s += 10;
         }
         // Artist match (bonus)
         if (ar) {
@@ -564,8 +574,6 @@ async function searchBilibili(anime, title, artist = '') {
                 if (w.length > 1 && vt.includes(w)) s += 10;
             }
         }
-        // Exact anime name in title is strong signal
-        if (vt.includes(an)) s += 30;
         // Play count bonus
         if (r.play > 100000) s += 15;
         else if (r.play > 10000) s += 8;
@@ -576,25 +584,34 @@ async function searchBilibili(anime, title, artist = '') {
     }
 
     try {
-        // Strategy 1: anime + title (anime first for better context)
-        let candidates = await trySearch(`${anime} ${title}`);
-        // Strategy 2: add artist if results are few or low quality
+        // Strategy 1: anime + type + title (most precise, e.g. "约会大作战 OP デート・ア・ライブ")
+        const typeLabel = (type || '').toUpperCase();
+        const typeInQuery = ['OP', 'ED'].includes(typeLabel) ? ` ${typeLabel}` : '';
+        let candidates = await trySearch(`${anime}${typeInQuery} ${title}`);
+        // Strategy 2: anime + type + title + artist (add artist for disambiguation)
         if (candidates.length < 3 && artist) {
-            const more = await trySearch(`${anime} ${title} ${artist}`);
-            // Merge without duplicates
+            const more = await trySearch(`${anime}${typeInQuery} ${title} ${artist}`);
             const seen = new Set(candidates.map(r => r.bvid));
             for (const r of more) {
                 if (!seen.has(r.bvid)) { candidates.push(r); seen.add(r.bvid); }
             }
         }
-        // Strategy 3: fallback — just anime name (broad search)
+        // Strategy 3: anime + title (without type, broader)
+        if (candidates.length < 2) {
+            const more = await trySearch(`${anime} ${title}`);
+            const seen = new Set(candidates.map(r => r.bvid));
+            for (const r of more) {
+                if (!seen.has(r.bvid)) { candidates.push(r); seen.add(r.bvid); }
+            }
+        }
+        // Strategy 4: fallback — just anime name (broadest search)
         if (!candidates.length) {
             candidates = await trySearch(anime);
         }
         if (!candidates.length) return null;
 
         const scored = candidates.map(r => ({
-            ...r, _score: scoreResult(r, anime, title, artist)
+            ...r, _score: scoreResult(r, anime, title, artist, type)
         }));
         scored.sort((a, b) => b._score - a._score);
         const best = scored[0];
@@ -2394,8 +2411,8 @@ function loadQuestion() {
     });
 }
 
-async function fetchBilibiliAudio(title, artist, anime, cacheKey) {
-    const biliResult = await searchBilibili(anime, title, artist);
+async function fetchBilibiliAudio(title, artist, anime, type, cacheKey) {
+    const biliResult = await searchBilibili(anime, title, artist, type);
     if (!biliResult) return null;
     const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
     if (!audioInfo?.url) return null;
@@ -2423,7 +2440,7 @@ async function fetchAudio(title, artist, anime) {
 
     // B站优先 / 仅B站
     if (audioSourcePref === 'bilibili-first' || audioSourcePref === 'bilibili-only') {
-        const e = await fetchBilibiliAudio(title, artist, anime, cacheKey);
+        const e = await fetchBilibiliAudio(title, artist, anime, gameState.currentSong?.type || '', cacheKey);
         if (e) return e;
         if (audioSourcePref === 'bilibili-only') return null;
     }
@@ -2524,7 +2541,7 @@ async function fetchAudio(title, artist, anime) {
 
     // B站兜底 (only when no explicit preference set, i.e. default mode)
     if (!audioSourcePref) {
-        const e = await fetchBilibiliAudio(title, artist, anime, cacheKey);
+        const e = await fetchBilibiliAudio(title, artist, anime, gameState.currentSong?.type || '', cacheKey);
         if (e) return e;
     }
 
