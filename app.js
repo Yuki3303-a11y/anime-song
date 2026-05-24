@@ -1019,12 +1019,15 @@ async function playFavSongAtIndex(index) {
     try {
 
     const playBilibili = (url) => {
-        stopMusicPlayer();
+        // Stop any playing audio/video (don't hide modal via hideMusicPlayer)
+        if (musicUseAudio) { audio.pause(); musicUseAudio = false; }
+        if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+        stopMusicProgress();
         musicUseAudio = true;
         audio.pause();
-        gameState.isPlaying = false;
         audio.src = url;
         audio.load();
+        $('musicModal')?.classList.add('show');
         const mp = $('musicPlayer');
         if (mp) mp.style.display = '';
         const ms = $('musicSource');
