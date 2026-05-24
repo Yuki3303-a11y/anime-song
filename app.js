@@ -301,11 +301,15 @@ function onYtError(e) {
             fetchAudio(song.title, song.artist, song.anime).then(result => {
                 if (!$('animeDetailModal').classList.contains('show')) return;
                 const url = result?.url;
+                const playerEl = $('fullPlayer');
                 if (!url || url.startsWith('yt:')) {
-                    $('fpTitle').textContent = '未找到可播放的歌曲';
+                    // iTunes also unavailable — keep player visible with YT link only
+                    playerEl.style.display = '';
+                    $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
+                    $('fpSource').textContent = '无试听片段';
+                    updateHeartUI();
                     return;
                 }
-                const playerEl = $('fullPlayer');
                 playerEl.style.display = '';
                 fpUseAudio = true;
                 audio.src = url;
