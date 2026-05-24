@@ -1024,11 +1024,13 @@ async function playFavSongAtIndex(index) {
         audio.pause();
         gameState.isPlaying = false;
         audio.src = url;
+        audio.load();
         const mp = $('musicPlayer');
         if (mp) mp.style.display = '';
         const ms = $('musicSource');
         if (ms) ms.textContent = '(B站源)';
         renderFavorites();
+        audio.play().catch(e => console.error('[Music] B站 play failed:', e));
     };
 
     // B站 source with URL
