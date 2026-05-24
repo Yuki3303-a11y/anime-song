@@ -616,14 +616,28 @@ async function searchBilibili(anime, title, artist = '', type = '') {
         scored.sort((a, b) => b._score - a._score);
         const best = scored[0];
 
-        // Require anime name to appear in title
-        const animeInTitle = anime.toLowerCase().split(/\s+/).some(
-            w => w.length > 1 && best.title.toLowerCase().includes(w)
+        // Require BOTH anime name AND song title to appear in video title
+        const vt = best.title.toLowerCase();
+        const an = anime.toLowerCase();
+        const tl = title.toLowerCase();
+
+        const animeInTitle = an.split(/\s+/).some(
+            w => w.length > 1 && vt.includes(w)
         );
         if (!animeInTitle) {
             console.log('[Bili] Rejected: anime not in title', best.title, '| anime:', anime);
             return null;
         }
+
+        // Song title must also appear (at least one significant word > 2 chars)
+        const titleInTitle = tl.split(/\s+/).filter(w => w.length > 2).some(
+            w => vt.includes(w)
+        );
+        if (!titleInTitle) {
+            console.log('[Bili] Rejected: title not in video title', best.title, '| title:', title);
+            return null;
+        }
+
         if (best._score < 25) {
             console.log('[Bili] Rejected: low score', best._score, best.title);
             return null;
