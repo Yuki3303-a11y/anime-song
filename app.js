@@ -1020,12 +1020,11 @@ async function playFavSongAtIndex(index) {
         musicUseAudio = true;
         audio.pause();
         gameState.isPlaying = false;
-        $('visualizer')?.classList.add('hidden');
-        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
         audio.src = url;
-        const musicPlayer = $('musicPlayer');
-        if (musicPlayer) musicPlayer.style.display = '';
-        $('musicSource').textContent = '(B站源)';
+        const mp = $('musicPlayer');
+        if (mp) mp.style.display = '';
+        const ms = $('musicSource');
+        if (ms) ms.textContent = '(B站源)';
         renderFavorites();
     };
 
