@@ -526,8 +526,9 @@ async function searchAndLoadFullSong(song) {
         videoId = fpVideoIds.length > 0 ? fpVideoIds[0] : null;
     }
 
-    // YouTube found AND player is ready → play embedded (desktop)
-    if (videoId && ytPlayer && ytReady) {
+    // YouTube found AND player is ready → play embedded (desktop only; mobile skips to iTunes to avoid embed errors)
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (videoId && ytPlayer && ytReady && !isMobile) {
         if (!$('animeDetailModal').classList.contains('show')) return;
         playerEl.style.display = '';
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
@@ -2609,6 +2610,11 @@ function restartGame() {
 function closeDetailModal() {
     stopFullPlayer();
     $('animeDetailModal').classList.remove('show');
+    // In normal gameplay (not review), closing detail advances to next question
+    if (!gameState.viewingHistory && gameState.isLocked) {
+        gameState.questionIndex++;
+        loadQuestion();
+    }
 }
 
 function nextQuestion() {
