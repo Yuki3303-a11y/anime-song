@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, set, get, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_YEARS, AVAILABLE_TYPES } from './songs.js';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js';
 
 // =====================================================================
 // Firebase
@@ -188,7 +188,7 @@ const audioCache = new MemCache('audio_cache_v2', 500, 24 * 60 * 60 * 1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
 const bilibiliCache = new MemCache('bilibili_cache_v1', 200, 24 * 60 * 60 * 1000);
-const bilibiliAudioCache = new MemCache('bilibili_audio_cache_v1', 200, 5 * 60 * 1000);
+const bilibiliAudioCache = new MemCache('bilibili_audio_cache_v1', 200, 30 * 60 * 1000);
 
 function normalizeAudioEntry(entry) {
     if (!entry) return null;
@@ -1014,8 +1014,9 @@ async function playFavSongAtIndex(index) {
     showMusicPlayer(song);
     try {
 
+    let biliFallbackProxy = null;
+
     const playBilibili = (url) => {
-        // Stop any playing audio/video (don't hide modal via hideMusicPlayer)
         if (musicUseAudio) { audio.pause(); musicUseAudio = false; }
         if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
         stopMusicProgress();
@@ -1492,23 +1493,8 @@ async function importFromBangumi(indexId) {
     }
 
     if (lowConfSongs.length > 0) {
-        await new Promise(r => setTimeout(r, 500)); // Let UI settle
-        const names = lowConfSongs.map(s => `• ${s.title} (${s.anime})`).join('\n');
-        const shouldRemove = confirm(
-            `主人注意喵~ 以下 ${lowConfSongs.length} 首歌曲匹配度较低，可能和番剧无关：\n\n${names}\n\n是否移除这些歌曲？\n（点"取消"保留所有歌曲）`
-        );
-        if (shouldRemove) {
-            const current = getCustomSongs();
-            const toRemoveSet = new Set(lowConfSongs.map(s => `${s.title}|${s.anime}`));
-            const filtered = current.filter(s => !toRemoveSet.has(`${s.title}|${s.anime}`));
-            setCustomSongs(filtered);
-            addedCount -= lowConfSongs.length;
-            if (statusEl) statusEl.textContent = `导入完成！保留 ${addedCount} 首歌曲（已移除 ${lowConfSongs.length} 首低匹配合）`;
-        }
-    }
-
-    if (!statusEl?.textContent?.includes('保留')) {
-        if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲`;
+        await new Promise(r => setTimeout(r, 500));
+        if (statusEl) statusEl.textContent = `导入完成！新增 ${addedCount} 首歌曲。${lowConfSongs.length} 首匹配度较低的歌曲已自动添加，导入的歌曲可能与番剧匹配度较低，请自己查看修改喵~`;
     }
     if (progressEl) progressEl.style.width = '100%';
     if (progressWrapper) setTimeout(() => { progressWrapper.style.display = 'none'; }, 2000);
@@ -2501,13 +2487,22 @@ function loadQuestion() {
     });
 }
 
+function buildBiliProxyUrl(cdnUrl) {
+    const base = window.BILI_WORKER_URL;
+    if (base.includes('localhost') || base.includes('127.0.0.1')) {
+        return `${base}/stream?url=${encodeURIComponent(cdnUrl)}`;
+    }
+    return `${base}/api/search?stream=${encodeURIComponent(cdnUrl)}`;
+}
+
 async function fetchBilibiliAudio(title, artist, anime, type, cacheKey) {
     const biliResult = await searchBilibili(anime, title, artist, type);
     if (!biliResult) return null;
     const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
     if (!audioInfo?.url) return null;
+    // B站 CDN requires Referer header — must go through proxy
     const e = {
-        url: `${window.BILI_WORKER_URL}/api/search?stream=${encodeURIComponent(audioInfo.url)}`,
+        url: buildBiliProxyUrl(audioInfo.url),
         source: 'bilibili',
         bvid: biliResult.bvid,
         biliTitle: biliResult.title,
@@ -3010,45 +3005,6 @@ function shuffle(arr) {
 // Filter UI
 // =====================================================================
 function initFilters() {
-    const yearChips = $('yearChips');
-
-    // "全部" button
-    const allBtn = document.createElement('button');
-    allBtn.className = 'settings-chip active';
-    allBtn.textContent = '全部';
-    allBtn.addEventListener('click', () => {
-        yearChips.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
-        allBtn.classList.add('active');
-        filterState.years.clear();
-        updateFilterCount();
-    });
-    yearChips.appendChild(allBtn);
-
-    // Individual year buttons
-    const years = AVAILABLE_YEARS.slice().reverse();
-    years.forEach(y => {
-        const btn = document.createElement('button');
-        btn.className = 'settings-chip';
-        btn.textContent = y;
-        btn.dataset.year = y;
-        btn.addEventListener('click', () => {
-            if (filterState.years.has(y)) {
-                filterState.years.delete(y);
-                btn.classList.remove('active');
-            } else {
-                filterState.years.add(y);
-                btn.classList.add('active');
-            }
-            if (filterState.years.size === 0) {
-                allBtn.classList.add('active');
-            } else {
-                allBtn.classList.remove('active');
-            }
-            updateFilterCount();
-        });
-        yearChips.appendChild(btn);
-    });
-
     // Type chips (multi-select)
     const typeOptions = [
         { label: 'OP', value: 'OP' },
@@ -3142,6 +3098,24 @@ function initAudioSourceFilter() {
         });
     }
 
+    function ensureBiliPreconnect() {
+        const id = 'bili-preconnect';
+        if (document.getElementById(id)) return;
+        const link = document.createElement('link');
+        link.id = id;
+        link.rel = 'preconnect';
+        link.href = window.BILI_WORKER_URL;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+        // Also preconnect to B站 CDN
+        const link2 = document.createElement('link');
+        link2.id = 'bili-cdn-preconnect';
+        link2.rel = 'preconnect';
+        link2.href = 'https://upos-sz-mirrorcos.bilivideo.com';
+        link2.crossOrigin = 'anonymous';
+        document.head.appendChild(link2);
+    }
+
     options.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = 'settings-chip' + (opt.value === audioSourcePref ? ' active' : (i === 0 && !audioSourcePref ? ' active' : ''));
@@ -3154,9 +3128,16 @@ function initAudioSourceFilter() {
             if (proxyGroup) {
                 proxyGroup.style.display = (opt.value && opt.value !== 'null') ? '' : 'none';
             }
+            if (opt.value === 'bilibili-first' || opt.value === 'bilibili-only') {
+                ensureBiliPreconnect();
+            }
         });
         container.appendChild(btn);
     });
+
+    if (audioSourcePref === 'bilibili-first' || audioSourcePref === 'bilibili-only') {
+        ensureBiliPreconnect();
+    }
 }
 
 // =====================================================================
@@ -3349,13 +3330,12 @@ initAudioSourceFilter();
 initQuestionCount();
 updateCustomSongsUI();
 
-// Bangumi floating panel toggle
+// Bangumi panel toggle
 $('bangumiToggle').addEventListener('click', () => {
-    const panel = $('bangumiPanel');
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    $('bangumiModal').style.display = 'flex';
 });
 $('bangumiClose').addEventListener('click', () => {
-    $('bangumiPanel').style.display = 'none';
+    $('bangumiModal').style.display = 'none';
 });
 
 // Load YouTube IFrame API for full song playback

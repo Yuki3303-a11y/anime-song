@@ -6,7 +6,7 @@
     <meta name="referrer" content="no-referrer">
     <title>♪ 萌豚挑战 - 二次元听歌猜番剧</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
     <!-- Background Decorations -->
@@ -42,35 +42,32 @@
                 </div>
             </header>
 
-            <!-- Floating Bangumi Panel -->
-            <div id="bangumiFAB" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
-                <div style="position:relative;">
-                    <button id="bangumiToggle" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#E88D7D,#D4A574);color:#fff;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(232,141,125,0.4), 0 0 20px rgba(232,141,125,0.2);display:flex;align-items:center;justify-content:center;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    </button>
-                </div>
-                <style>
-                    #bangumiToggle:hover {
-                        transform: scale(1.1) rotate(5deg);
-                        box-shadow: 0 8px 32px rgba(232,141,125,0.5), 0 0 30px rgba(232,141,125,0.3) !important;
-                    }
-                </style>
-                <div id="bangumiPanel" style="display:none;position:absolute;bottom:52px;right:0;width:300px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.15);padding:14px;border:1px solid #eee;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                        <span style="font-weight:700;font-size:14px;color:#333;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>自定义曲库</span>
-                        <button id="bangumiClose" style="width:24px;height:24px;border-radius:50%;border:none;background:#f0f0f0;cursor:pointer;font-size:12px;color:#666;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <!-- Bangumi FAB Button -->
+            <button id="bangumiToggle" class="bangumi-fab" aria-label="自定义曲库">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </button>
+
+            <!-- Bangumi Panel (position:fixed — must NOT be inside .container or any overflow-hidden+border-radius element) -->
+            <div id="bangumiModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+                <div style="background:#11132b;border-radius:20px;width:92%;max-width:480px;max-height:85vh;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,0.08);box-shadow:0 16px 48px rgba(0,0,0,0.3);overflow:hidden;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.08);">
+                        <span style="font-size:18px;font-weight:800;color:#e2e8f0;letter-spacing:-0.3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>自定义曲库</span>
+                        <button id="bangumiClose" style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,0.08);border:none;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
                     </div>
-                    <div style="display:flex;gap:6px;margin-bottom:8px;">
-                        <input type="text" id="bangumiIndexInput" placeholder="目录号 如 75323" autocomplete="off" spellcheck="false" style="flex:1;padding:8px 10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;font-family:inherit;outline:none;color:#333;background:#fff;min-width:0;">
-                        <button data-action="importBangumi" style="padding:8px 14px;background:linear-gradient(135deg,#E88D7D,#D4A574);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">导入</button>
-                    </div>
-                    <div id="importStatus" style="font-size:11px;color:#E88D7D;min-height:16px;margin-bottom:4px;"></div>
-                    <div id="importProgressWrapper" style="height:3px;background:#eee;border-radius:2px;display:none;margin-bottom:8px;"><div id="importProgress" style="height:100%;width:0;background:linear-gradient(135deg,#E88D7D,#D4A574);border-radius:2px;transition:width 0.3s;"></div></div>
-                    <div id="customSongsList" style="max-height:150px;overflow-y:auto;margin-bottom:8px;"></div>
-                    <div style="display:flex;gap:4px;">
-                        <button data-action="exportCustom" style="padding:4px 10px;font-size:11px;background:#f8f8f8;border:1px solid #ddd;border-radius:4px;cursor:pointer;color:#666;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导出</button>
-                        <button data-action="importCustom" style="padding:4px 10px;font-size:11px;background:#f8f8f8;border:1px solid #ddd;border-radius:4px;cursor:pointer;color:#666;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导入</button>
-                        <button data-action="clearCustom" style="padding:4px 10px;font-size:11px;background:#f8f8f8;border:1px solid #ddd;border-radius:4px;cursor:pointer;color:#666;display:flex;align-items:center;gap:3px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>清空</button>
+                    <div style="padding:24px;overflow-y:auto;flex:1;min-height:0;">
+                        <div style="display:flex;gap:8px;margin-bottom:12px;">
+                            <input type="text" id="bangumiIndexInput" placeholder="输入 Bangumi 目录号，如 75323" autocomplete="off" spellcheck="false" style="flex:1;padding:12px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;font-size:14px;font-family:inherit;outline:none;color:#e2e8f0;background:rgba(255,255,255,0.06);min-width:0;">
+                            <button data-action="importBangumi" style="padding:12px 20px;background:linear-gradient(135deg,#00d4aa,#7c5cfc);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;">导入</button>
+                        </div>
+                        <div id="importStatus" style="font-size:12px;color:#5eead4;min-height:18px;margin-bottom:8px;font-weight:500;"></div>
+                        <div id="importProgressWrapper" style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;display:none;margin-bottom:16px;"><div id="importProgress" style="height:100%;width:0;background:linear-gradient(135deg,#00d4aa,#7c5cfc);border-radius:2px;transition:width 0.3s;"></div></div>
+                        <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">已导入歌曲</div>
+                        <div id="customSongsList" style="max-height:200px;overflow-y:auto;margin-bottom:16px;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px;min-height:40px;font-size:13px;color:#94a3b8;"></div>
+                        <div style="display:flex;gap:8px;">
+                            <button data-action="exportCustom" style="padding:8px 14px;font-size:12px;background:rgba(255,255,255,0.06);color:#94a3b8;border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导出</button>
+                            <button data-action="importCustom" style="padding:8px 14px;font-size:12px;background:rgba(255,255,255,0.06);color:#94a3b8;border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导入</button>
+                            <button data-action="clearCustom" style="padding:8px 14px;font-size:12px;background:rgba(255,255,255,0.06);color:#f43f5e;border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>清空</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,39 +80,45 @@
                 <div id="v-menu" class="menu">
                     <div class="hero">
                         <div class="hero-icon">
-                            <svg viewBox="0 0 48 48" width="38" height="38">
-                                <!-- Headphone band -->
-                                <path d="M10 28C10 18 16 12 24 12C32 12 38 18 38 28" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                <!-- Left ear cup -->
-                                <rect x="7" y="26" width="8" height="12" rx="3" fill="rgba(255,255,255,0.95)"/>
-                                <!-- Right ear cup -->
-                                <rect x="33" y="26" width="8" height="12" rx="3" fill="rgba(255,255,255,0.95)"/>
-                                <!-- Sound wave left -->
-                                <path d="M12 30C12 30 10 32 12 34" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <!-- Sound wave right -->
-                                <path d="M36 30C36 30 38 32 36 34" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                <!-- Music note -->
-                                <circle cx="21" cy="30" r="3" fill="rgba(255,255,255,0.9)"/>
-                                <path d="M24 30V18" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M24 18L29 16V20L24 22" fill="rgba(255,255,255,0.85)"/>
-                                <!-- Small sparkle -->
-                                <circle cx="30" cy="16" r="1.5" fill="rgba(255,255,255,0.6)"/>
-                                <circle cx="16" cy="14" r="1" fill="rgba(255,255,255,0.4)"/>
-                            </svg>
+                            <img src="hero-icon.jpg" alt="" width="80" height="80" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
                         </div>
-                        <div class="hero-title">准备好挑战了吗？</div>
-                        <div class="hero-sub">收录 <strong id="songCount">150+</strong> 首经典动漫神曲</div>
+                        <div class="hero-title">萌豚挑战</div>
+                        <div class="hero-sub">二次元听歌猜番剧 · <strong id="songCount">150+</strong> 首曲库</div>
                     </div>
 
                     <div class="btn-group">
                         <button class="btn btn-primary" data-action="startSingle">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             单人挑战
                         </button>
                         <button class="btn btn-secondary" data-action="showView" data-value="lobby">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             联机对战
                         </button>
+                    </div>
+
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background:rgba(0,212,170,0.12);color:#00d4aa;">♪</div>
+                            <div class="feature-text">
+                                <div class="feature-title">听歌猜番</div>
+                                <div class="feature-desc">播放30秒歌曲片段，从四个选项中猜出所属动漫</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background:rgba(124,92,252,0.12);color:#7c5cfc;">⚔</div>
+                            <div class="feature-text">
+                                <div class="feature-title">联机PK</div>
+                                <div class="feature-desc">创建房间邀请好友，实时对战比拼动漫曲库知识</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" style="background:rgba(94,234,212,0.12);color:#5eead4;">+</div>
+                            <div class="feature-text">
+                                <div class="feature-title">自定义曲库</div>
+                                <div class="feature-desc">通过 Bangumi 目录批量导入，支持导出与分享歌曲列表</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="menu-footer">
@@ -248,7 +251,7 @@
                         </div>
 
                         <div id="playerStatus" class="player-status">准备中...</div>
-                        <audio id="audioEl" crossorigin="anonymous"></audio>
+                        <audio id="audioEl" crossorigin="anonymous" preload="auto"></audio>
                         <button id="playBtn" class="play-btn" disabled data-action="togglePlay" aria-label="播放/暂停">
                             <svg id="playIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z"/>
@@ -297,14 +300,14 @@
         </div>
     </div>
 
-    <!-- Settings Modal -->
-    <div id="settingsModal" class="settings-modal-bg">
-        <div class="settings-modal">
-            <div class="settings-header">
-                <div class="settings-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:4px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>设置</div>
-                <button class="settings-close" data-action="closeSettings" aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <!-- Settings Card Modal -->
+    <div id="settingsModal" class="card-modal-bg">
+        <div class="card-modal card-modal-lg">
+            <div class="card-modal-header">
+                <span class="card-modal-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>设置</span>
+                <button class="card-modal-close" data-action="closeSettings" aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
-            <div class="settings-body">
+            <div class="card-modal-body">
                 <div class="settings-group">
                     <div class="settings-label">题目数量</div>
                     <div class="settings-chips" id="qcountChips"></div>
@@ -312,10 +315,6 @@
                 <div class="settings-group">
                     <div class="settings-label">歌曲类型</div>
                     <div class="settings-chips" id="typeChips"></div>
-                </div>
-                <div class="settings-group">
-                    <div class="settings-label">年份范围</div>
-                    <div class="settings-chips settings-chips-wrap" id="yearChips"></div>
                 </div>
                 <div class="settings-group">
                     <div class="settings-label">曲库来源</div>
@@ -470,6 +469,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=15"></script>
+    <script type="module" src="app.js?v=23"></script>
 </body>
 </html>

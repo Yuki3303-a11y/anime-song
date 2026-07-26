@@ -191,32 +191,22 @@ body {
 }
 
 .hero-icon {
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 14px;
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(124, 92, 252, 0.15));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
     color: white;
-    box-shadow: 0 6px 20px rgba(232, 141, 125, 0.25), 0 0 40px rgba(232, 141, 125, 0.1);
+    box-shadow: 0 6px 24px rgba(0, 212, 170, 0.15), 0 0 40px rgba(124, 92, 252, 0.08);
     animation: heroFloat 3s ease-in-out infinite;
     position: relative;
+    border: 1px solid rgba(0, 212, 170, 0.2);
 }
 .hero-icon::after {
-    content: '✦';
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    font-size: 12px;
-    color: #E8B87D;
-    animation: sparkle 1.5s ease-in-out infinite;
-}
-@keyframes sparkle {
-    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
-    50% { opacity: 0.5; transform: scale(1.2) rotate(15deg); }
+    content: none;
 }
 
 .hero-title {
@@ -237,6 +227,60 @@ body {
     color: var(--pink);
     -webkit-text-fill-color: var(--pink);
     font-weight: 700;
+}
+
+/* ===== Feature List ===== */
+.feature-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.2s ease;
+}
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.feature-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.feature-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.feature-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
 }
 
 /* ===== Buttons ===== */
@@ -307,6 +351,8 @@ body {
 .btn-ghost:active { transform: scale(0.97); }
 
 .btn-sm { padding: 10px 18px; font-size: 13px; border-radius: var(--radius-sm); }
+.btn-danger { color: #f43f5e; }
+.btn-danger:hover { color: #f43f5e; background: rgba(244, 63, 94, 0.08); }
 .full-width { width: 100%; }
 
 /* ===== Menu Footer ===== */
@@ -1063,80 +1109,92 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /* ===== Settings Modal ===== */
-.settings-modal-bg {
+/* ===== Card Modal (Settings + Bangumi) ===== */
+.card-modal-bg {
     position: fixed;
     inset: 0;
-    background: rgba(30, 16, 51, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 300;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
 }
-.settings-modal-bg.show {
+.card-modal-bg.show {
     opacity: 1;
     pointer-events: all;
 }
 
-.settings-modal {
+.card-modal {
     background: var(--bg-card);
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    width: 100%;
-    max-width: 440px;
+    border-radius: 20px;
+    width: 92%;
+    max-width: 460px;
     max-height: 85vh;
-    overflow-y: auto;
-    transform: translateY(100%);
-    transition: transform 0.4s var(--ease);
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.3s var(--ease);
     border: 1px solid var(--border);
-    border-bottom: none;
-    box-shadow: 0 -8px 40px rgba(80, 40, 120, 0.12);
-    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }
-.settings-modal-bg.show .settings-modal {
-    transform: translateY(0);
+.card-modal-bg.show .card-modal {
+    transform: scale(1) translateY(0);
+}
+.card-modal-lg {
+    max-width: 540px;
 }
 
-.settings-header {
+.card-modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px 0;
+    padding: 24px 24px 0;
     position: sticky;
     top: 0;
     background: var(--bg-card);
     z-index: 1;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
 }
 
-.settings-title {
-    font-size: 17px;
+.card-modal-title {
+    font-size: 18px;
     font-weight: 800;
+    letter-spacing: -0.3px;
 }
 
-.settings-close {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+.card-modal-close {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
     background: var(--border);
     border: none;
     color: var(--text-secondary);
-    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
 }
-.settings-close:hover {
-    background: var(--pink-light);
-    color: var(--pink);
+.card-modal-close:hover {
+    background: rgba(0, 212, 170, 0.15);
+    color: #00d4aa;
 }
 
-.settings-body {
-    padding: 20px;
+.card-modal-body {
+    padding: 24px;
+    overflow: visible;
+    flex: 1;
+    min-height: 0;
 }
+
+/* ===== Settings (inside card) ===== */
 
 .settings-group {
     margin-bottom: 18px;
@@ -1196,10 +1254,112 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: 500;
 }
 
+.settings-input {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    transition: border-color 0.2s;
+}
+.settings-input:focus {
+    border-color: #00d4aa;
+}
+
 .settings-divider {
     height: 1px;
     background: var(--border);
     margin: 18px 0;
+}
+
+/* ===== Bangumi FAB ===== */
+.bangumi-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 299;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d4aa, #7c5cfc);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(0, 212, 170, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bangumi-fab:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 32px rgba(124, 92, 252, 0.4);
+}
+
+/* ===== Bangumi Card ===== */
+.bangumi-import-row,
+.bangumi-import-row input,
+.bangumi-import-row .btn {
+    /* Input uses inline styles only — see Chrome compositing bug in CLAUDE.md */
+}
+
+.bangumi-status {
+    font-size: 12px;
+    color: #5eead4;
+    min-height: 18px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.bangumi-progress-wrap {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    display: none;
+    margin-bottom: 16px;
+}
+.bangumi-progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(135deg, #00d4aa, #7c5cfc);
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.bangumi-list-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.bangumi-song-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px;
+    min-height: 40px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+.bangumi-song-list:empty::after {
+    content: "暂无导入歌曲";
+    display: block;
+    text-align: center;
+    color: var(--text-hint);
+    padding: 8px;
+}
+
+.bangumi-actions {
+    display: flex;
+    gap: 8px;
 }
 
 /* ===== End Modal ===== */
@@ -2176,7 +2336,7 @@ input[type="range"]::-webkit-slider-thumb {
     .detail-cover { width: 140px; }
     .detail-cover-placeholder { width: 140px; height: 180px; }
     .room-id { font-size: 36px; }
-    .settings-modal { max-height: 80vh; }
+    .card-modal { max-height: 80vh; }
     .bg-deco-1 { width: 200px; height: 200px; }
     .bg-deco-2 { width: 180px; height: 180px; }
     .bg-deco-3 { display: none; }
@@ -2358,9 +2518,9 @@ input[type="range"]::-webkit-slider-thumb {
 .detail-modal::-webkit-scrollbar { width: 4px; }
 .detail-modal::-webkit-scrollbar-track { background: transparent; }
 .detail-modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-.settings-modal::-webkit-scrollbar { width: 4px; }
-.settings-modal::-webkit-scrollbar-track { background: transparent; }
-.settings-modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.card-modal-body::-webkit-scrollbar { width: 4px; }
+.card-modal-body::-webkit-scrollbar-track { background: transparent; }
+.card-modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 ::selection {
     background: rgba(232, 141, 125, 0.15);
@@ -2442,7 +2602,7 @@ button:focus:not(:focus-visible) {
         font-size: 12px;
     }
 
-    .settings-modal {
+    .card-modal {
         max-width: 520px;
     }
 
