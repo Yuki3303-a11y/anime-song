@@ -1366,6 +1366,46 @@ function getFilteredSongs() {
     });
 }
 
+// Anti-repeat question selection: remembers recently played songs across games.
+// Sliding window over the pool — every song is picked once per cycle before any
+// song can repeat, so repeated games cover the whole library instead of the
+// same few songs (birthday-paradox repeats from independent random draws).
+const PLAYED_HISTORY_KEY = 'played_history_v1';
+
+function loadPlayedHistory() {
+    try {
+        const v = JSON.parse(localStorage.getItem(PLAYED_HISTORY_KEY));
+        return Array.isArray(v) ? v : [];
+    } catch { return []; }
+}
+
+function savePlayedHistory(list) {
+    try { localStorage.setItem(PLAYED_HISTORY_KEY, JSON.stringify(list)); } catch {}
+}
+
+function buildPlaylist(pool, n) {
+    const songKey = s => s.title + '|' + s.anime;
+    const played = loadPlayedHistory();
+    const playedSet = new Set(played);
+    const fresh = pool.filter(s => !playedSet.has(songKey(s)));
+    let picks;
+    if (fresh.length >= n) {
+        picks = shuffle(fresh).slice(0, n);
+    } else {
+        picks = shuffle(fresh);
+        const order = new Map(played.map((k, i) => [k, i]));
+        picks.push(...pool
+            .filter(s => playedSet.has(songKey(s)))
+            .sort((a, b) => order.get(songKey(a)) - order.get(songKey(b)))
+            .slice(0, n - picks.length));
+    }
+    const next = played.filter(k => pool.some(s => songKey(s) === k));
+    next.push(...picks.map(songKey));
+    const cap = Math.max(0, pool.length - n);
+    savePlayedHistory(cap > 0 ? next.slice(-cap) : []);
+    return picks;
+}
+
 // Fetch Bangumi index via CORS proxy
 const CORS_PROXY = 'https://cors-anywhere.fly.dev/';
 async function fetchIndexViaProxy(indexId, allSubjects) {
@@ -2220,7 +2260,7 @@ function startSingle() {
     const pool = getFilteredSongs();
     if (pool.length < 4) { notify('呜喵~ 曲库太少了...请放宽筛选条件吧'); return; }
     const n = Math.min(gameState.questionCount, pool.length);
-    gameState.playlist = shuffle([...pool]).slice(0, n);
+    gameState.playlist = buildPlaylist(pool, n);
     $('singleHeader').classList.remove('hidden');
     $('pkHeader').classList.add('hidden');
     $('comboArea').innerHTML = '';
@@ -2249,7 +2289,7 @@ async function pkCreate() {
                 status: 'waiting',
                 timestamp: serverTimestamp(),
                 scores: { [user.uid]: 0 },
-                questions: shuffle([...Array(SONGS.length).keys()]).slice(0, 10),
+                questions: buildPlaylist(SONGS, 10).map(s => SONGS.indexOf(s)),
             }),
             'pkCreate'
         );

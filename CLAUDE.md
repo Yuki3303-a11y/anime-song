@@ -48,6 +48,8 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 - `filterState.source` — `null` (all), `'builtin'` (only SONGS), `'custom'` (only custom)
 - Applied via `getFilteredSongs()` → calls `getAllSongs()` which merges `SONGS` + `getCustomSongs()`
 
+**Anti-repeat question selection:** `buildPlaylist(pool, n)` (app.js) keeps a sliding window of recently played song keys in localStorage (`played_history_v1`) so each song is picked once per full-library cycle before any repeats. Used by both single-player (`startSingle`) and PK host (`pkCreate`).
+
 **Custom Song Library:**
 - Stored in localStorage (`custom_songs_v1`)
 - Import via Bangumi index: checks `index_{id}.json` locally, falls back to CORS proxy (`cors-anywhere.fly.dev`) → API, then HTML parsing
