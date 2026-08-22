@@ -914,6 +914,196 @@ export const SONGS = [
     { titleCN: "STARS", title: "STARS", anime: "BLEACH", artist: "w.o.d.", year: 2026, type: "OP" },
     { titleCN: "End of World", title: "End of World", anime: "BLEACH", artist: "Miura Jam", year: 2026, type: "ED" },
 
+    // ===== 2026TOP150 新增 =====
+    // ===== 进击的巨人 =====
+    { titleCN: "Rumbling", title: "Rumbling", anime: "进击的巨人", artist: "SiM", year: 2022, type: "OP" },
+    { titleCN: "Call your name", title: "Call your name", anime: "进击的巨人", artist: "mpi & CASG", year: 2013, type: "IN" },
+    { titleCN: "Zero Eclipse", title: "Zero Eclipse", anime: "进击的巨人", artist: "泽野弘之", year: 2018, type: "IN" },
+    { titleCN: "Barricades", title: "Barricades", anime: "进击的巨人", artist: "泽野弘之", year: 2017, type: "IN" },
+    { titleCN: "Call of Silence", title: "Call of Silence", anime: "进击的巨人", artist: "泽野弘之", year: 2017, type: "IN" },
+
+    // ===== 夏目友人帐 =====
+    { titleCN: "我爱你", title: "Aishiteru", anime: "夏目友人帐", artist: "高鈴", year: 2009, type: "ED" },
+    { titleCN: "夕晖", title: "Akanesasu", anime: "夏目友人帐", artist: "Aimer", year: 2016, type: "ED" },
+    { titleCN: "remember", title: "remember", anime: "夏目友人帐", artist: "Uru", year: 2018, type: "ED" },
+
+    // ===== 罪恶王冠 =====
+    { titleCN: "欧忒耳佩", title: "Euterpe", anime: "罪恶王冠", artist: "EGOIST", year: 2011, type: "IN" },
+
+    // ===== Re:从零开始的异世界生活 =====
+    { titleCN: "Wishing", title: "Wishing", anime: "Re:从零开始的异世界生活", artist: "水濑祈", year: 2016, type: "IN" },
+    { titleCN: "Stay Alive", title: "Stay Alive", anime: "Re:从零开始的异世界生活", artist: "高桥李依", year: 2016, type: "ED" },
+
+    // ===== BLEACH =====
+    { titleCN: "Life Is Like A Boat", title: "Life Is Like A Boat", anime: "BLEACH", artist: "Rie fu", year: 2004, type: "ED" },
+
+    // ===== 宝可梦 =====
+    { titleCN: "XY&Z", title: "XY&Z", anime: "宝可梦", artist: "松本梨香", year: 2015, type: "OP" },
+    { titleCN: "皮卡丘之歌", title: "Pikachu no Uta", anime: "宝可梦", artist: "大谷育江", year: 2016, type: "ED" },
+
+    // ===== 鬼灭之刃 =====
+    { titleCN: "灶门炭治郎之歌", title: "Kamado Tanjiro no Uta", anime: "鬼灭之刃", artist: "花江夏树", year: 2019, type: "IN" },
+
+    // ===== 火影忍者 =====
+    { titleCN: "Lovers", title: "Lovers", anime: "火影忍者", artist: "7!!", year: 2011, type: "OP" },
+
+    // ===== 海贼王 =====
+    { titleCN: "One day", title: "One day", anime: "海贼王", artist: "The Rootless", year: 2010, type: "OP" },
+
+    // ===== 轻音少女 =====
+    { titleCN: "相遇天使！", title: "Tenshi ni Fureta yo", anime: "轻音少女", artist: "放课后茶会", year: 2010, type: "IN" },
+
+    // ===== 刀剑神域 =====
+    { titleCN: "unlasting", title: "unlasting", anime: "刀剑神域", artist: "LiSA", year: 2019, type: "ED" },
+
+    // ===== 名侦探柯南 =====
+    { titleCN: "渡月桥~想念你~", title: "Togetsukyou Kimi Omou", anime: "名侦探柯南", artist: "仓木麻衣", year: 2017, type: "ED" },
+
+    // ===== 龙珠 =====
+    { titleCN: "渐渐被你吸引", title: "Dan Dan Kokoro Hikareteku", anime: "龙珠", artist: "FIELD OF VIEW", year: 1996, type: "OP" },
+
+    // ===== Code Geass =====
+    { titleCN: "Stories", title: "Stories", anime: "Code Geass", artist: "黑石瞳", year: 2008, type: "IN" },
+
+    // ===== 高达铁血的奥尔芬斯 =====
+    { titleCN: "小苍兰", title: "Freesia", anime: "高达铁血的奥尔芬斯", artist: "Uru", year: 2017, type: "ED" },
+
+    // ===== 头文字D =====
+    { titleCN: "Rage Your Dream", title: "Rage Your Dream", anime: "头文字D", artist: "m.o.v.e", year: 1998, type: "ED" },
+
+    // ===== 动物狂想曲 =====
+    { titleCN: "怪物", title: "Kaibutsu", anime: "动物狂想曲", artist: "YOASOBI", year: 2021, type: "OP" },
+
+    // ===== 间谍过家家 =====
+    { titleCN: "喜剧", title: "Kigeki", anime: "间谍过家家", artist: "星野源", year: 2022, type: "ED" },
+
+    // ===== DARLING in the FRANXX =====
+    { titleCN: "鸟笼", title: "Torikago", anime: "DARLING in the FRANXX", artist: "XX:me", year: 2018, type: "ED" },
+
+    // ===== BanG Dream! It's MyGO!!!!! =====
+    { titleCN: "春日影", title: "Haruhikage", anime: "BanG Dream! It's MyGO!!!!!", artist: "MyGO!!!!!", year: 2023, type: "IN" },
+
+    // ===== 杀戮天使 =====
+    { titleCN: "Pray", title: "Pray", anime: "杀戮天使", artist: "Rachel", year: 2018, type: "ED" },
+
+    // ===== 黑之契约者 =====
+    { titleCN: "月光的指引", title: "Tsukiakari no Michishirube", anime: "黑之契约者", artist: "Stereopony", year: 2009, type: "OP" },
+
+    // ===== 人渣的本愿 =====
+    { titleCN: "平行线", title: "Heikousen", anime: "人渣的本愿", artist: "さユり", year: 2017, type: "ED" },
+
+    // ===== 埃罗芒阿老师 =====
+    { titleCN: "自言自语", title: "Hitorigoto", anime: "埃罗芒阿老师", artist: "ClariS", year: 2017, type: "OP" },
+
+    // ===== 樱桃小丸子 =====
+    { titleCN: "大家来跳舞", title: "Odoru Pompokolin", anime: "樱桃小丸子", artist: "B.B.QUEENS", year: 1990, type: "ED" },
+
+    // ===== GOSICK =====
+    { titleCN: "Resuscitated Hope", title: "Resuscitated Hope", anime: "GOSICK", artist: "コミネリサ", year: 2011, type: "ED" },
+
+    // ===== 寄生兽 =====
+    { titleCN: "Let Me Hear", title: "Let Me Hear", anime: "寄生兽", artist: "Fear, and Loathing in Las Vegas", year: 2014, type: "OP" },
+
+    // ===== 干物妹！小埋 =====
+    { titleCN: "革新性的☆小埋变身", title: "Kakushinteki Metamaruphose", anime: "干物妹！小埋", artist: "田中爱美", year: 2015, type: "OP" },
+
+    // ===== 猫的报恩 =====
+    { titleCN: "幻化成风", title: "Kaze ni Naru", anime: "猫的报恩", artist: "辻亚弥乃", year: 2002, type: "ED" },
+
+    // ===== 地狱少女 =====
+    { titleCN: "倒逆之蝶", title: "Sakasama no Chou", anime: "地狱少女", artist: "SNoW", year: 2005, type: "OP" },
+
+    // ===== 游戏人生 =====
+    { titleCN: "This game", title: "This game", anime: "游戏人生", artist: "铃木木乃美", year: 2014, type: "OP" },
+    { titleCN: "THERE IS A REASON", title: "There Is a Reason", anime: "游戏人生", artist: "铃木木乃美", year: 2017, type: "ED" },
+
+    // ===== 可塑性记忆 =====
+    { titleCN: "Ring of Fortune", title: "Ring of Fortune", anime: "可塑性记忆", artist: "佐々木恵梨", year: 2015, type: "OP" },
+
+    // ===== 莉可丽丝 =====
+    { titleCN: "花之塔", title: "Hana no Tou", anime: "莉可丽丝", artist: "さユり", year: 2022, type: "ED" },
+
+    // ===== Fate/Grand Order =====
+    { titleCN: "Tell me", title: "Tell me", anime: "Fate/Grand Order", artist: "milet", year: 2019, type: "ED" },
+
+    // ===== 世界第一初恋 =====
+    { titleCN: "明天，我要去见你", title: "Ashita Boku wa Kimi ni Ai ni Iku", anime: "世界第一初恋", artist: "ワカバ", year: 2011, type: "ED" },
+
+    // ===== GIRLS BAND CRY =====
+    { titleCN: "熙熙攘攘、我们的城市", title: "Zattou Bokura no Machi", anime: "GIRLS BAND CRY", artist: "トゲナシトゲアリ", year: 2024, type: "OP" },
+
+    // ===== 未来都市NO.6 =====
+    { titleCN: "六等星之夜", title: "Rokutousei no Yoru", anime: "未来都市NO.6", artist: "Aimer", year: 2011, type: "ED" },
+
+    // ===== 强风吹拂 =====
+    { titleCN: "Reset", title: "Reset", anime: "强风吹拂", artist: "向井太一", year: 2018, type: "ED" },
+
+    // ===== 国王排名 =====
+    { titleCN: "Oz.", title: "Oz.", anime: "国王排名", artist: "yama", year: 2021, type: "ED" },
+
+    // ===== 水果篮子 =====
+    { titleCN: "致水果篮子", title: "For Fruits Basket", anime: "水果篮子", artist: "冈崎律子", year: 2001, type: "OP" },
+
+    // ===== 七大罪 =====
+    { titleCN: "Perfect Time", title: "Perfect Time", anime: "七大罪", artist: "泽野弘之", year: 2014, type: "IN" },
+
+    // ===== 机巧少女不会受伤 =====
+    { titleCN: "旋转吧，雪月花！", title: "Maware! Setsugetsuka", anime: "机巧少女不会受伤", artist: "原田瞳", year: 2013, type: "ED" },
+
+    // ===== 妖精的尾巴 =====
+    { titleCN: "MASAYUME CHASING", title: "Masayume Chasing", anime: "妖精的尾巴", artist: "BoA", year: 2013, type: "OP" },
+
+    // ===== 青春之旅 =====
+    { titleCN: "我的世界已坠入爱河", title: "Sekai wa Koi ni Ochiteiru", anime: "青春之旅", artist: "CHiCO with HoneyWorks", year: 2014, type: "OP" },
+
+    // ===== 总之就是非常可爱 =====
+    { titleCN: "恋之歌", title: "Koi no Uta", anime: "总之就是非常可爱", artist: "鬼头明里", year: 2020, type: "OP" },
+
+    // ===== Re:CREATORS =====
+    { titleCN: "gravityWall", title: "gravityWall", anime: "Re:CREATORS", artist: "泽野弘之", year: 2017, type: "OP" },
+
+    // ===== 战栗杀机 =====
+    { titleCN: "Prayer X", title: "Prayer X", anime: "战栗杀机", artist: "King Gnu", year: 2018, type: "ED" },
+
+    // ===== 异度侵入 =====
+    { titleCN: "Mr.Fixer", title: "Mr.Fixer", anime: "异度侵入", artist: "Sou", year: 2020, type: "OP" },
+
+    // ===== ANNE HAPPY =====
+    { titleCN: "路上的猫尾草，你的心情", title: "Michino Timothy Kimi no Kimochi", anime: "ANNE HAPPY", artist: "森永千才", year: 2016, type: "IN" },
+
+    // ===== 想哭的我戴上了猫的面具 =====
+    { titleCN: "花上亡灵", title: "Hana ni Bourei", anime: "想哭的我戴上了猫的面具", artist: "ヨルシカ", year: 2020, type: "ED" },
+
+    // ===== 千与千寻 =====
+    { titleCN: "永远同在", title: "Itsumo Nando Demo", anime: "千与千寻", artist: "木村弓", year: 2001, type: "ED" },
+
+    // ===== 家有女友 =====
+    { titleCN: "声嘶力竭", title: "Kawaki wo Ameku", anime: "家有女友", artist: "美波", year: 2019, type: "OP" },
+
+    // ===== 甲铁城的卡巴内利 =====
+    { titleCN: "ninelie", title: "ninelie", anime: "甲铁城的卡巴内利", artist: "Aimer", year: 2016, type: "ED" },
+
+    // ===== 妖狐x仆SS =====
+    { titleCN: "sweets parade", title: "Sweets Parade", anime: "妖狐x仆SS", artist: "花泽香菜", year: 2012, type: "ED" },
+
+    // ===== 恋如雨止 =====
+    { titleCN: "Ref:rain", title: "Ref:rain", anime: "恋如雨止", artist: "Aimer", year: 2018, type: "ED" },
+
+    // ===== AIR =====
+    { titleCN: "鸟之诗", title: "Tori no Uta", anime: "AIR", artist: "Lia", year: 2000, type: "OP" },
+
+    // ===== 铃音 =====
+    { titleCN: "Duvet", title: "Duvet", anime: "铃音", artist: "bôa", year: 1998, type: "OP" },
+
+    // ===== ALDNOAH.ZERO =====
+    { titleCN: "aLIEz", title: "aLIEz", anime: "ALDNOAH.ZERO", artist: "SawanoHiroyuki[nZk]", year: 2014, type: "ED" },
+
+    // ===== 升空的焰火 =====
+    { titleCN: "打上花火", title: "Uchiage Hanabi", anime: "升空的焰火", artist: "DAOKO × 米津玄师", year: 2017, type: "ED" },
+
+    // ===== 银魂 =====
+    { titleCN: "Some Like It Hot!!", title: "Some Like It Hot!!", anime: "银魂", artist: "SPYAIR", year: 2011, type: "ED" },
+
 ];
 
 export const ALL_ANIME = [...new Set(SONGS.map(s => s.anime))];
