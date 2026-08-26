@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, set, get, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=25';
 
 // =====================================================================
 // Firebase
@@ -70,6 +70,7 @@ const progressFill = $('progressFill');
 // Timeout Constants
 // =====================================================================
 const ITUNES_TIMEOUT = 5000;       // iTunes API fetch timeout (ms)
+const YT_TIMEOUT = 6000;           // YouTube Data API search timeout (ms)
 const ANILIST_TIMEOUT = 4000;      // AniList GraphQL timeout (ms)
 const BANGUMI_TIMEOUT = 4000;      // Bangumi search timeout (ms)
 const BANGUMI_PAGE_TIMEOUT = 20000; // Bangumi subject page fetch timeout (ms)
@@ -87,7 +88,7 @@ window.BILI_WORKER_URL = (() => {
 // =====================================================================
 // Filter State
 // =====================================================================
-const filterState = { years: new Set(), types: new Set(), source: null };
+const filterState = { types: new Set(), source: null };
 
 let audioSourcePref = (() => {
     try { return localStorage.getItem('audio_source_pref_v1') || null; }
@@ -494,10 +495,15 @@ async function searchYouTube(query) {
         }
         tried.add(idx);
         const key = YT_API_KEYS[idx];
+        // Per-attempt timeout — a hung request used to stall the whole fallback chain
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), YT_TIMEOUT);
         try {
             const res = await fetch(
-                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`,
+                { signal: controller.signal }
             );
+            clearTimeout(timeoutId);
             if (res.status === 403 || res.status === 429) {
                 console.warn('[YT] Key #' + idx + ' quota exceeded, switching...');
                 ytKeyExhausted.add(idx);
@@ -509,6 +515,7 @@ async function searchYouTube(query) {
             if (videoId) youtubeCache.set(cacheKey, videoId);
             return videoId;
         } catch (e) {
+            clearTimeout(timeoutId);
             console.error('[YT] searchYouTube failed:', e);
             // Network error — try next key
             ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
@@ -668,6 +675,21 @@ async function getBilibiliAudioUrl(bvid) {
     }
 }
 
+// Mirror the detail modal's cover image onto the full-player icon (with SVG fallback)
+function syncFpCover() {
+    const fpCover = $('fpCover');
+    const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
+    const detailCoverSrc = $('detailCover')?.src;
+    if (fpCover && detailCoverSrc) {
+        fpCover.src = detailCoverSrc;
+        fpCover.style.display = '';
+        if (fpFallback) fpFallback.style.display = 'none';
+    } else if (fpCover) {
+        fpCover.style.display = 'none';
+        if (fpFallback) fpFallback.style.display = '';
+    }
+}
+
 async function searchAndLoadFullSong(song) {
     stopMusicPlayer();
     const playerEl = $('fullPlayer');
@@ -723,17 +745,7 @@ async function searchAndLoadFullSong(song) {
         $('fpSource').textContent = '';
         const yl = $('fpYtLink'); if (yl) { yl.href = `https://www.youtube.com/watch?v=${videoId}`; yl.style.display = 'none'; }
         updateHeartUI();
-        const fpCover = $('fpCover');
-        const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
-        const detailCoverSrc = $('detailCover')?.src;
-        if (fpCover && detailCoverSrc) {
-            fpCover.src = detailCoverSrc;
-            fpCover.style.display = '';
-            if (fpFallback) fpFallback.style.display = 'none';
-        } else if (fpCover) {
-            fpCover.style.display = 'none';
-            if (fpFallback) fpFallback.style.display = '';
-        }
+        syncFpCover();
         ytPlayer.cueVideoById(videoId);
         return;
     }
@@ -768,17 +780,7 @@ async function searchAndLoadFullSong(song) {
     $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
     $('fpSource').textContent = '(试听片段)';
     updateHeartUI();
-    const fpCover = $('fpCover');
-    const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
-    const detailCoverSrc = $('detailCover')?.src;
-    if (fpCover && detailCoverSrc) {
-        fpCover.src = detailCoverSrc;
-        fpCover.style.display = '';
-        if (fpFallback) fpFallback.style.display = 'none';
-    } else if (fpCover) {
-        fpCover.style.display = 'none';
-        if (fpFallback) fpFallback.style.display = '';
-    }
+    syncFpCover();
     audio.src = previewUrl;
     // Show duration once loaded
     const showDur = () => {
@@ -901,7 +903,6 @@ function toggleFavorite() {
             titleCN: song.titleCN || song.title,
             anime: song.anime,
             artist: song.artist,
-            year: song.year,
             type: song.type,
             videoId: videoId,
             coverImage: $('detailCover')?.src || '',
@@ -961,7 +962,7 @@ function renderFavorites() {
             <div class="fav-item-icon">${iconHTML}</div>
             <div class="fav-item-info">
                 <div class="fav-item-title">${safeTitle}</div>
-                <div class="fav-item-sub">${safeAnime} · ${f.year}</div>
+                <div class="fav-item-sub">${safeAnime}</div>
             </div>
             <div class="fav-item-actions">
                 <button class="fav-item-btn remove-fav-btn" data-remove-fav="${i}" aria-label="取消收藏">
@@ -1358,7 +1359,6 @@ function getFilteredSongs() {
     const customSet = new Set(getCustomSongs().map(s => s.title + '|' + s.anime));
     const all = getAllSongs();
     return all.filter(s => {
-        if (filterState.years.size > 0 && !filterState.years.has(s.year)) return false;
         if (filterState.types.size > 0 && !filterState.types.has(s.type)) return false;
         if (filterState.source === 'builtin' && customSet.has(s.title + '|' + s.anime)) return false;
         if (filterState.source === 'custom' && !customSet.has(s.title + '|' + s.anime)) return false;
@@ -1399,7 +1399,10 @@ function buildPlaylist(pool, n) {
             .sort((a, b) => order.get(songKey(a)) - order.get(songKey(b)))
             .slice(0, n - picks.length));
     }
-    const next = played.filter(k => pool.some(s => songKey(s) === k));
+    // Keep played history consistent with the current pool — O(n + m) via Set
+    // (was O(n·m): pool.some() inside filter rescanned the pool per key)
+    const poolKeys = new Set(pool.map(songKey));
+    const next = played.filter(k => poolKeys.has(k));
     next.push(...picks.map(songKey));
     const cap = Math.max(0, pool.length - n);
     savePlayedHistory(cap > 0 ? next.slice(-cap) : []);
@@ -1502,15 +1505,19 @@ async function importFromBangumi(indexId) {
 
         // Get romaji title from AniList for better iTunes search
         let searchTitle = anime.name; // Japanese name
-        let year = anime.date ? parseInt(anime.date.slice(0, 4)) : 2020;
 
         try {
             const aq = `query($s:String){Media(search:$s,type:ANIME){title{romaji native}}}`;
+            // Timeout required — a hung AniList request used to stall the whole import loop
+            const actl = new AbortController();
+            const atid = setTimeout(() => actl.abort(), ANILIST_TIMEOUT);
             const ares = await fetch('https://graphql.anilist.co', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query: aq, variables: { s: animeName } })
+                body: JSON.stringify({ query: aq, variables: { s: animeName } }),
+                signal: actl.signal
             });
+            clearTimeout(atid);
             const adata = await ares.json();
             if (adata.data?.Media?.title?.romaji) {
                 searchTitle = adata.data.Media.title.romaji;
@@ -1518,7 +1525,7 @@ async function importFromBangumi(indexId) {
         } catch (e) { console.error('[Bangumi] AniList search:', e); }
 
         // Search iTunes for songs — pass Japanese name for album matching
-        const songs = await searchItunesForAnime(searchTitle, animeName, anime.name, year);
+        const songs = await searchItunesForAnime(searchTitle, animeName, anime.name);
         for (const song of songs) {
             if (addCustomSong(song)) {
                 addedCount++;
@@ -1542,7 +1549,7 @@ async function importFromBangumi(indexId) {
 }
 
 // Search iTunes for anime OP/ED songs — with scoring to ensure anime relevance
-async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
+async function searchItunesForAnime(romajiTitle, animeName, jpName) {
     const results = [];
     const seen = new Set();
 
@@ -1627,7 +1634,6 @@ async function searchItunesForAnime(romajiTitle, animeName, jpName, year) {
                     titleCN: title,
                     anime: animeName,
                     artist: r.artistName || 'Unknown',
-                    year: year,
                     type: guessSongType(title, r),
                     _importScore: score,
                 });
@@ -1684,7 +1690,6 @@ function importCustomSongsFile(file) {
                     titleCN: s.titleCN || s.title,
                     anime: s.anime,
                     artist: s.artist || 'Unknown',
-                    year: s.year || 2020,
                     type: s.type || 'OP',
                 });
                 existingKeys.add(key);
@@ -1912,7 +1917,7 @@ function showAnimeDetail(song) {
 
     title.textContent = song.anime;
     romaji.textContent = '';
-    meta.innerHTML = `<span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${song.year}年</span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>${song.type}</span>`;
+    meta.innerHTML = `<span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>${escapeHTML(String(song.type || ''))}</span>`;
     songInfo.innerHTML = `
         <div class="detail-song-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <div class="detail-song-text">
@@ -2427,6 +2432,7 @@ function checkInvite() {
 // =====================================================================
 function loadQuestion() {
     stopQuizYT();
+    audioRetryCount = 0; // fresh retry budget per question
     if (gameState.questionIndex >= gameState.playlist.length) {
         endGame();
         return;
@@ -2552,6 +2558,10 @@ async function fetchBilibiliAudio(title, artist, anime, type, cacheKey) {
     return e;
 }
 
+// In-flight dedup: concurrent fetchAudio calls for the same song share one
+// network pipeline — rapid question navigation used to fire duplicate searches.
+const fetchAudioInFlight = new Map();
+
 async function fetchAudio(title, artist, anime) {
     const cacheKey = `${title}|${anime}`;
     const cached = audioCache.get(cacheKey);
@@ -2563,6 +2573,14 @@ async function fetchAudio(title, artist, anime) {
         audioCache.delete(cacheKey);
     }
 
+    if (fetchAudioInFlight.has(cacheKey)) return fetchAudioInFlight.get(cacheKey);
+    const p = fetchAudioInner(title, artist, anime, cacheKey)
+        .finally(() => fetchAudioInFlight.delete(cacheKey));
+    fetchAudioInFlight.set(cacheKey, p);
+    return p;
+}
+
+async function fetchAudioInner(title, artist, anime, cacheKey) {
     // B站优先 / 仅B站
     if (audioSourcePref === 'bilibili-first' || audioSourcePref === 'bilibili-only') {
         const e = await fetchBilibiliAudio(title, artist, anime, gameState.currentSong?.type || '', cacheKey);
@@ -2630,28 +2648,32 @@ async function fetchAudio(title, artist, anime) {
         return { url: null, score: -1, trackName: null, artistName: null };
     }
 
+    // iTunes strategies: fire the most-precise query first; on a miss, fire the
+    // remaining three in parallel and consume them in priority order. Worst-case
+    // latency drops from 4 sequential round-trips to 2, while the common path
+    // (first query hits) still costs exactly one request.
+    const accept = r => r?.url
+        ? { url: r.url, source: 'itunes', itunesTrack: r.trackName, itunesArtist: r.artistName }
+        : null;
+
     // Try 1: artist + title (most precise)
     if (artist) {
-        const r = await searchItunes(`${artist} ${title}`);
-        if (r.url) { const e = { url: r.url, source: 'itunes', itunesTrack: r.trackName, itunesArtist: r.artistName }; audioCache.set(cacheKey, e); return e; }
+        const e = accept(await searchItunes(`${artist} ${title}`));
+        if (e) { audioCache.set(cacheKey, e); return e; }
     }
 
-    // Try 2: artist + title + anime (full context disambiguation)
-    if (artist) {
-        const r = await searchItunes(`${artist} ${title} ${anime}`);
-        if (r.url) { const e = { url: r.url, source: 'itunes', itunesTrack: r.trackName, itunesArtist: r.artistName }; audioCache.set(cacheKey, e); return e; }
-    }
-
-    // Try 3: title + anime (anime name helps disambiguate even without artist)
-    {
-        const r = await searchItunes(`${title} ${anime}`);
-        if (r.url) { const e = { url: r.url, source: 'itunes', itunesTrack: r.trackName, itunesArtist: r.artistName }; audioCache.set(cacheKey, e); return e; }
-    }
-
-    // Try 4: just title (last resort before YouTube)
-    {
-        const r = await searchItunes(title);
-        if (r.url) { const e = { url: r.url, source: 'itunes', itunesTrack: r.trackName, itunesArtist: r.artistName }; audioCache.set(cacheKey, e); return e; }
+    // Tries 2-4 issued concurrently, consumed in priority order:
+    //   2) artist + title + anime (full context disambiguation)
+    //   3) title + anime (anime name helps even without artist)
+    //   4) just title (broadest, last resort before YouTube)
+    const tries = [
+        artist ? searchItunes(`${artist} ${title} ${anime}`) : Promise.resolve(null),
+        searchItunes(`${title} ${anime}`),
+        searchItunes(title)
+    ];
+    for (const t of tries) {
+        const e = accept(await t);
+        if (e) { audioCache.set(cacheKey, e); return e; }
     }
 
     // All iTunes attempts failed or low confidence — fall back to YouTube
@@ -2862,35 +2884,56 @@ audio.ontimeupdate = () => {
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     }
 };
+// Retry budget for audio error recovery — a hard cap prevents any possibility
+// of an onerror → refetch → onerror loop (e.g. a B站 URL that keeps failing).
+let audioRetryCount = 0;
 audio.onerror = () => {
-    if (!quizYT.active && gameState.currentSong) {
-        const song = gameState.currentSong;
-        const gen = gameState.fetchGeneration;
-        // Clear the stale/expired cache entry and re-fetch
-        const cacheKey = `${song.title}|${song.anime}`;
-        audioCache._load();
-        delete audioCache._data[cacheKey];
-        audioCache._dirty = true;
-        audioCache._flush();
-        gameState.isPlaying = false;
-        $('visualizer').classList.add('hidden');
-        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-        $('playBtn').disabled = true;
-        $('playerStatus').textContent = '音频过期，重新搜索中...';
-        fetchAudio(song.title, song.artist, song.anime).then(result => {
-            if (gen !== gameState.fetchGeneration) return;
-            if (!result) {
-                notify('这首歌的音频暂时不可用，已跳过~');
-                gameState.questionIndex++;
-                loadQuestion();
-                return;
-            }
-            gameState.lastAudioResult = result;
+    if (quizYT.active || !gameState.currentSong) return;
+    if (audioRetryCount >= 2) {
+        // Gave up on this track — skip to the next question instead of looping
+        notify('这首歌的音频暂时不可用，已跳过~');
+        gameState.questionIndex++;
+        loadQuestion();
+        return;
+    }
+    audioRetryCount++;
+    const song = gameState.currentSong;
+    const gen = gameState.fetchGeneration;
+    // Clear the stale/expired cache entry and re-fetch
+    const cacheKey = `${song.title}|${song.anime}`;
+    audioCache._load();
+    delete audioCache._data[cacheKey];
+    audioCache._dirty = true;
+    audioCache._flush();
+    gameState.isPlaying = false;
+    $('visualizer').classList.add('hidden');
+    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+    $('playBtn').disabled = true;
+    $('playerStatus').textContent = '音频过期，重新搜索中...';
+    fetchAudio(song.title, song.artist, song.anime).then(result => {
+        if (gen !== gameState.fetchGeneration) return;
+        if (!result) {
+            notify('这首歌的音频暂时不可用，已跳过~');
+            gameState.questionIndex++;
+            loadQuestion();
+            return;
+        }
+        gameState.lastAudioResult = result;
+        if (result.url.startsWith('yt:')) {
+            // YouTube result — MUST go through the YT player. Assigning a "yt:"
+            // URL to <audio> fires onerror again and loops forever.
+            quizYT.active = true;
+            quizYT.videoId = result.url.slice(3);
+            $('playBtn').disabled = false;
+            $('playerStatus').textContent = '点击播放 (YouTube源)';
+        } else {
+            quizYT.active = false;
+            quizYT.videoId = null;
             audio.src = result.url;
             $('playBtn').disabled = false;
-            $('playerStatus').textContent = '点击播放';
-        });
-    }
+            $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';
+        }
+    });
 };
 $('volSlider').oninput = e => { audio.volume = e.target.value; };
 audio.volume = 0.5;
