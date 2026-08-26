@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "api/search.js": {
+      "memory": 512,
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/stream", "destination": "/api/search?stream=" }
+  ]
+}
