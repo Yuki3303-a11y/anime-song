@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=13">
+    <link rel="stylesheet" href="style.css?v=26">
 </head>
 <body>
     <!-- Background Decorations -->
@@ -91,12 +91,24 @@
                     </div>
 
                     <div class="btn-group">
-                        <button class="btn btn-primary" data-action="startSingle">
+                        <button class="btn btn-primary" data-action="startMode" data-value="anime">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            单人挑战
+                            猜番剧
                         </button>
-                        <button class="btn btn-secondary" data-action="showView" data-value="lobby">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <button class="btn btn-secondary" data-action="startMode" data-value="song">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                            猜歌名
+                        </button>
+                        <button class="btn btn-secondary" data-action="startMode" data-value="artist">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg>
+                            猜歌手
+                        </button>
+                        <button class="btn btn-secondary" data-action="startMode" data-value="mixed">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                            混合模式
+                        </button>
+                        <button class="btn btn-ghost" data-action="showView" data-value="lobby">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             联机对战
                         </button>
                     </div>
@@ -225,6 +237,7 @@
                             <div class="q-num"><span id="qNum">1</span><span>/</span><span id="totalQ">10</span></div>
                             <button class="q-nav-btn" id="nextQuestionBtn" data-action="nextQuestion" style="display:none;" aria-label="下一题">→</button>
                         </div>
+                        <span id="modeLabel" class="mode-label" style="display:none;"></span>
                         <div class="score"><span id="scoreText">0</span><span class="score-label">答对</span></div>
                     </div>
 
@@ -287,6 +300,7 @@
                         </div>
                     </div>
 
+                    <div id="hintBar" class="hint-bar hidden"></div>
                     <div id="optionsGrid" class="options"></div>
                 </div>
 
@@ -473,6 +487,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=25"></script>
+    <script type="module" src="app.js?v=26"></script>
 </body>
 </html>

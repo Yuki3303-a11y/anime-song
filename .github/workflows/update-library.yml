@@ -1,0 +1,69 @@
+# =====================================================================
+# 曲库自动更新工作流
+#
+# 每周日 03:00 UTC（北京时间周日 11:00）自动发现当季新番 OP/ED，
+# 生成候选曲库并创建 Pull Request 供人工复核合并。
+# 也可手动触发：Actions → Update library → Run workflow。
+#
+# 依赖：scripts/fetch-season.mjs（AniList + AnimeThemes 数据链路）
+# =====================================================================
+name: Update library
+
+on:
+  schedule:
+    - cron: "0 3 * * 0" # 每周日 03:00 UTC
+  workflow_dispatch: # 手动触发
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run season discovery
+        run: node scripts/fetch-season.mjs --out candidates
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if git diff --quiet -- candidates.js candidates.md; then
+            echo "No candidate changes for this season."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create PR with candidates
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          BRANCH="library-candidates-$(date +%Y%m%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add candidates.js candidates.md
+          git commit -m "曲库候选更新：$(date +%Y-%m-%d) 当季新番 OP/ED（自动生成，待人工复核）"
+          git push origin "$BRANCH"
+          gh pr create \
+            --title "曲库候选更新 $(date +%Y-%m-%d)" \
+            --body "## 自动生成的曲库候选
+
+本 PR 由定时工作流自动创建，数据来自 AniList + AnimeThemes。
+
+### 复核清单
+1. 打开 candidates.md 检查候选歌曲（歌名中文名、歌手、类型）
+2. titleCN 如与原文不符，用 Bangumi 中文名修正
+3. 确认无误后合并，并把 songs.js 的缓存版本号 v25 → v26
+4. 合并后 Vercel / GitHub Pages 自动重新部署" \
+            --base master \
+            --head "$BRANCH"

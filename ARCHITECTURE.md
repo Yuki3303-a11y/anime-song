@@ -25,9 +25,10 @@
 
 ```
 index.html  — 所有页面视图（菜单、大厅、房间、游戏、排行榜）都在一个 HTML 里
-app.js      — ~3000 行 ES Module，所有游戏逻辑
-songs.js    — 562 首歌曲数据，export SONGS 数组
+app.js      — ~3300 行 ES Module，所有游戏逻辑
+songs.js    — 285 首精选歌曲 / 188 部番剧，export SONGS 数组
 style.css   — 全部样式，CSS 自定义属性做主题
+scripts/    — fetch-season.mjs（曲库自动发现）、validate-songs.mjs（曲库校验）
 ```
 
 ### 页面切换原理
@@ -147,23 +148,42 @@ Vercel 函数作为中间人，设置正确的 `Referer` 和 `User-Agent` 头，
 
 ## 4. 游戏流程
 
-### 4.1 出题 `loadQuestion()`（app.js:2402）
+### 4.0 模式与题型
+
+`startMode(mode)` 启动单人游戏，支持 4 种模式：
+
+| 模式 | 题型 `guessType` |
+|------|-----------------|
+| 猜番剧 | anime（经典，每题猜动漫名） |
+| 猜歌名 | song（每题猜歌曲名） |
+| 猜歌手 | artist（每题猜演唱者） |
+| 混合模式 | 每局随机 anime / song / artist |
+
+`getGuessValue(song, guessType)` 提取本题的正确答案值；`buildWrongOptions(song, guessType)` 生成 3 个干扰项：
+
+- 猜番剧：从 `ALL_ANIME` 池抽取（排除当前番剧）
+- 猜歌名：从全部歌曲抽取，**严格排除同番剧、同歌手**（池不足 3 时放宽为仅排除同番剧）
+- 猜歌手：从 `ALL_ARTISTS` 等价歌手池抽取
+
+**提示系统**：每题 2 个提示按钮，标签按题型适配（猜歌名 → 歌手/番剧；猜歌手 → 歌名/番剧；猜番剧 → 歌手/歌名）。`useHint(which)` 显示提示内容并锁定按钮，得分乘子 `hintMult`：单提示 ×0.6、双提示 ×0.36。回顾模式与 PK 模式无提示。
+
+### 4.1 出题 `loadQuestion()`（app.js:2447）
 
 1. 从 `gameState.playlist` 取当前题（随机打乱的歌曲数组）
 2. 显示加载动画，调 `fetchAudio()` 获取音频
-3. 音频就绪后调 `renderOptions(correctAnime)` 生成 4 个选项：
-   - 1 个正确答案（当前歌的动漫名）
-   - 3 个随机错误答案（从 `ALL_ANIME` 中去重抽取）
+3. 音频就绪后按 `guessType` 调 `renderOptions(song)` 生成 4 个选项：
+   - 1 个正确答案（`getGuessValue` 提取）
+   - 3 个干扰项（`buildWrongOptions` 按题型生成）
 4. 按钮网格渲染完成后等待玩家点击
 
-### 4.2 答题 `selectAnswer()`
+### 4.2 答题 `handleAnswer(btn, selected)`（app.js:2808）
 
-1. 比对选择的动漫名和 `gameState.correctAnime`
-2. **答对**：得分 + 连击加成（combo >= 3 时 bonus = combo * 10），绿色闪光 + 涟漪动画
+1. 比对 `selected` 和 `gameState.correctValue`（按题型提取的正确答案）
+2. **答对**：得分 = 基础分 × 连击加成 × `hintMult`（combo >= 3 时 bonus = combo * 10），绿色闪光 + 涟漪动画
 3. **答错**：连击归零，红色闪光
-4. 锁定所有选项，标记正确/错误
+4. 锁定所有选项与提示按钮，标记正确/错误
 5. 自动弹出歌曲详情卡片（含完整歌曲播放、封面、收藏按钮）
-6. 记录到 `gameState.answerHistory`
+6. 记录到 `gameState.answerHistory`（含 guessType / correctValue，回顾模式按题型渲染）
 
 ### 4.3 连击系统
 
@@ -377,7 +397,7 @@ query ($search: String) {
 `renderLeaderboard()` 从 localStorage（`aq_rec`）读取游戏记录：
 
 ```json
-[{ "r": 8, "n": 10, "c": 5, "t": "2025-01-15 14:30", "m": "single" }]
+[{ "r": 8, "n": 10, "c": 5, "t": "2025-01-15 14:30", "m": "single", "g": "song" }]
 ```
 
 | 字段 | 含义 |
@@ -387,6 +407,7 @@ query ($search: String) {
 | `c` | 最大连击 |
 | `t` | 时间戳 |
 | `m` | 模式（single / pk） |
+| `g` | 玩法标签（anime / song / artist / mixed，单人模式由 `recordModeLabel()` 写入） |
 
 - 最多显示 10 条，前三名显示奖牌 emoji
 - 每次 `endGame()` 时自动写入新记录

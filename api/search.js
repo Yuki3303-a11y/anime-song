@@ -1,9 +1,17 @@
 // Vercel Serverless Function — B站 API Proxy
+// 加固：请求超时 + 瞬时错误重试 + 明确错误码 + stream 域名白名单（防开放代理滥用）
 const https = require('https');
 const http = require('http');
 
 const BILI_HOST = 'api.bilibili.com';
 const BILI_COOKIE = process.env.BILI_COOKIE || 'buvid3=64ACF920-EA61-EC9E-6006-82CB4F07CA6F32360infoc; buvid4=097522C7-6542-DCD3-483B-F479D7B9791033222-026012119-1m27iCIGWIIzOVEGv8R+1Q==; b_nut=1768995232';
+
+// 音频流代理域名白名单（后缀匹配，覆盖全部 upos 镜像；防开放代理滥用）
+const STREAM_HOST_SUFFIXES = ['.bilivideo.com', '.akamaized.net', '.mcdn.bilivideo.cn'];
+function isAllowedStreamHost(hostname) {
+  const h = hostname.toLowerCase();
+  return STREAM_HOST_SUFFIXES.some(s => h === s.slice(1) || h.endsWith(s));
+}
 
 const MIXIN_KEY_ENC_TAB = [
   46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35,
@@ -16,6 +24,10 @@ const FALLBACK_IMG = '7cd084941338484aae1ad9425b84077c';
 const FALLBACK_SUB = '4932caff0ff746eab6f01bf08b70ac45';
 const md5 = require('spark-md5').hash;
 const { URL } = require('url');
+
+// 加固参数
+const REQUEST_TIMEOUT = 10000; // 单次 B站请求超时（ms）
+const MAX_RETRIES = 2;          // 瞬时错误最多重试次数
 
 function getMixinKey(raw) {
   return MIXIN_KEY_ENC_TAB.map(i => raw[i]).join('').slice(0, 32);
@@ -32,14 +44,49 @@ function biliGet(path, params) {
       }
     };
     if (params) opts.path += '?' + new URLSearchParams(params).toString();
-    https.get(opts, res => {
+    const req = https.get(opts, res => {
       let body = '';
       res.on('data', c => body += c);
       res.on('end', () => {
-        try { resolve(JSON.parse(body)); } catch (e) { reject(new Error('JSON parse failed')); }
+        try {
+          const json = JSON.parse(body);
+          // 透传 B站业务错误码（0=成功；-412 风控；-799 请求频繁；-404 资源不存在）
+          if (json.code !== undefined && json.code !== 0) {
+            const err = new Error(`B站 API 错误 ${json.code}: ${json.message || ''}`);
+            err.biliCode = json.code;
+            reject(err);
+            return;
+          }
+          resolve(json);
+        } catch (e) {
+          reject(new Error('B站响应解析失败'));
+        }
       });
-    }).on('error', reject);
+    });
+    req.setTimeout(REQUEST_TIMEOUT, () => req.destroy(new Error('B站请求超时')));
+    req.on('error', reject);
   });
+}
+
+// 瞬时错误重试（超时 / 连接重置 / 风控）
+function isRetriable(err) {
+  const msg = err.message || '';
+  return msg.includes('超时') || msg.includes('ECONNRESET') ||
+    msg.includes('socket hang up') || msg.includes('EAI_AGAIN') ||
+    err.biliCode === -412 || err.biliCode === -799;
+}
+
+async function withRetry(fn) {
+  let lastErr;
+  for (let i = 0; i <= MAX_RETRIES; i++) {
+    try { return await fn(); }
+    catch (e) {
+      lastErr = e;
+      if (!isRetriable(e) || i === MAX_RETRIES) break;
+      await new Promise(r => setTimeout(r, 400 * (i + 1)));
+    }
+  }
+  throw lastErr;
 }
 
 async function signedGet(path, params) {
@@ -62,7 +109,16 @@ async function signedGet(path, params) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(v);
   }).join('&');
   const w_rid = md5(query + mixinKey);
-  return biliGet(`${path}?${query}&w_rid=${w_rid}`);
+  return withRetry(() => biliGet(`${path}?${query}&w_rid=${w_rid}`));
+}
+
+// 统一错误响应：区分业务码 / 超时 / 其他
+function sendError(res, err) {
+  const status = err.biliCode ? 502 : (err.message.includes('超时') ? 504 : 500);
+  return res.status(status).json({
+    error: err.message,
+    biliCode: err.biliCode || undefined
+  });
 }
 
 module.exports = async (req, res) => {
@@ -77,11 +133,15 @@ module.exports = async (req, res) => {
     if (stream) {
       const audioUrl = decodeURIComponent(stream);
       const parsed = new URL(audioUrl);
+      // 防开放代理：只允许 B站音频 CDN 域名
+      if (!isAllowedStreamHost(parsed.hostname)) {
+        return res.status(403).json({ error: 'stream host not allowed' });
+      }
       const protocol = parsed.protocol === 'https:' ? https : http;
       const hostname = parsed.hostname;
       const path = parsed.pathname + parsed.search;
 
-      protocol.get({
+      const upstreamReq = protocol.get({
         hostname, path,
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -100,7 +160,14 @@ module.exports = async (req, res) => {
         res.setHeader('Accept-Ranges', 'bytes');
         res.setHeader('Cache-Control', 'public, max-age=3600');
         upstream.pipe(res);
-      }).on('error', () => res.status(502).end());
+      });
+      upstreamReq.setTimeout(15000, () => {
+        upstreamReq.destroy(new Error('音频源连接超时'));
+      });
+      upstreamReq.on('error', () => {
+        if (!res.headersSent) res.status(502).json({ error: '音频源拉取失败' });
+        else res.end();
+      });
       return;
     }
 
@@ -123,6 +190,7 @@ module.exports = async (req, res) => {
     if (bvid) {
       const info = await signedGet('/x/web-interface/view', { bvid });
       const cid = info.data?.cid;
+      if (!cid) return res.status(404).json({ error: 'video not found or no cid' });
       const duration = info.data?.duration || 0;
       const play = await signedGet('/x/player/playurl', { bvid, cid: String(cid), fnval: '16', fnver: '0', fourk: '1' });
       const audio = (play.data?.dash?.audio || []).sort((a, b) => b.id - a.id)[0];
@@ -132,6 +200,6 @@ module.exports = async (req, res) => {
 
     return res.status(400).json({ error: 'missing q or bvid' });
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    return sendError(res, e);
   }
 };

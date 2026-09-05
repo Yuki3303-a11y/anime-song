@@ -4,6 +4,9 @@
   "description": "一款二次元风格的在线动漫音乐猜谜游戏。听30秒歌曲片段，猜出它来自哪部动漫。 此网站完全由AI生成。",
   "main": "app.js",
   "scripts": {
+    "validate": "node scripts/validate-songs.mjs",
+    "discover": "node scripts/fetch-season.mjs",
+    "serve": "python -m http.server 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

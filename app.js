@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, set, get, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=25';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=26';
 
 // =====================================================================
 // Firebase
@@ -41,6 +41,9 @@ try {
 // =====================================================================
 const gameState = {
     mode: 'single',
+    gameMode: 'anime',      // 单人子模式: anime / song / artist / mixed
+    guessType: 'anime',     // 当前题题型: anime / song / artist
+    hints: { h1: false, h2: false },  // 提示使用状态（h1/h2 各一次）
     playlist: [],
     questionIndex: 0,
     questionCount: 10,
@@ -79,11 +82,33 @@ const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
 const BILI_TIMEOUT = 12000;        // B站 proxy fetch timeout (ms)
+
+// B站代理失败状态（用于提示分级：代理不可达 / 取流被风控 / 无搜索结果）
+const biliProxyState = { down: false, notified: false, reason: null };
 const BILI_WORKER_URL_DEFAULT = 'https://anime-song-gamma.vercel.app';
 window.BILI_WORKER_URL = (() => {
     try { return localStorage.getItem('bili_proxy_url_v1') || BILI_WORKER_URL_DEFAULT; }
     catch { return BILI_WORKER_URL_DEFAULT; }
 })();
+
+// 自动探测本地代理：用户没手动设置代理地址时，若本机代理（bili-proxy.mjs）在运行就自动使用它。
+// 本地代理从用户自己网络访问 B站，不会被境外服务器风控，B站模式更稳。
+function probeLocalProxy() {
+    try {
+        if (localStorage.getItem('bili_proxy_url_v1')) return; // 用户已手动指定代理，不覆盖
+    } catch { return; }
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), 1500);
+    fetch('http://localhost:8765/api/search?q=__probe__', { signal: ctl.signal })
+        .then(r => {
+            clearTimeout(t);
+            if (r.ok) {
+                window.BILI_WORKER_URL = 'http://localhost:8765';
+                console.log('[Bili] 已自动使用本地代理 http://localhost:8765');
+            }
+        })
+        .catch(() => clearTimeout(t));
+}
 
 // =====================================================================
 // Filter State
@@ -645,6 +670,13 @@ async function searchBilibili(anime, title, artist = '', type = '') {
         return best;
     } catch (e) {
         console.error('[Bili] searchBilibili:', e);
+        // 区分：代理不可达（网络/超时）vs 其他失败；不可达时记录状态供提示分级
+        if (e.name === 'AbortError' || e.name === 'TypeError') {
+            biliProxyState.down = true;
+            biliProxyState.reason = 'proxy-down';
+        } else {
+            biliProxyState.reason = 'no-result';
+        }
         return null;
     } finally {
         clearTimeout(timeoutId);
@@ -664,6 +696,12 @@ async function getBilibiliAudioUrl(bvid) {
         );
         clearTimeout(timeoutId);
         const data = await resp.json();
+        // 代理可达但取流失败（如境外 Vercel 被 B站风控返回 no audio stream）→ 引导用户用本地代理
+        if (data.error) {
+            biliProxyState.down = true;
+            biliProxyState.reason = 'no-stream';
+            return null;
+        }
         if (!data.url) return null;
         const result = { url: data.url, duration: data.duration, backupUrl: data.backupUrl || null };
         bilibiliAudioCache.set(bvid, result);
@@ -671,6 +709,12 @@ async function getBilibiliAudioUrl(bvid) {
     } catch (e) {
         clearTimeout(timeoutId);
         console.error('[Bili] getBilibiliAudioUrl:', e);
+        if (e.name === 'AbortError' || e.name === 'TypeError') {
+            biliProxyState.down = true;
+            biliProxyState.reason = 'proxy-down';
+        } else {
+            biliProxyState.reason = 'no-result';
+        }
         return null;
     }
 }
@@ -2178,8 +2222,8 @@ function spawnCelebration() {
 // Ripple Effect
 // =====================================================================
 function createRipple(e) {
-    const el = e.currentTarget;
-    if (el.disabled) return;
+    const el = e.target.closest('.btn, .opt-btn, .play-btn, .settings-chip');
+    if (!el || el.disabled) return;
     const rect = el.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const span = document.createElement('span');
@@ -2252,8 +2296,14 @@ function showView(viewName) {
 // =====================================================================
 // Single Player Mode
 // =====================================================================
-function startSingle() {
+function startMode(mode) {
     gameState.mode = 'single';
+    gameState.gameMode = mode || 'anime';
+    const modeLabelEl = $('modeLabel');
+    if (modeLabelEl) {
+        modeLabelEl.textContent = ({ anime: '猜番剧', song: '猜歌名', artist: '猜歌手', mixed: '混合' })[gameState.gameMode] || '猜番剧';
+        modeLabelEl.style.display = '';
+    }
     gameState.score = 0;
     gameState.questionIndex = 0;
     gameState.combo = 0;
@@ -2273,6 +2323,11 @@ function startSingle() {
     $('totalQ').textContent = n;
     showView('game');
     loadQuestion();
+}
+
+// 兼容旧入口（默认猜番剧）
+function startSingle() {
+    startMode('anime');
 }
 
 // =====================================================================
@@ -2456,6 +2511,7 @@ function loadQuestion() {
         const histCorrect = gameState.answerHistory.slice(0, gameState.questionIndex + 1).filter(r => r.isCorrect).length;
         animateScore($('scoreText'), histCorrect);
         $('songInfo').classList.remove('show');
+        $('hintBar')?.classList.add('hidden');
         renderHistoryOptions(record);
         showSongInfo(record.isCorrect);
         // Fetch audio for playback during review
@@ -2485,6 +2541,11 @@ function loadQuestion() {
     }
 
     const q = gameState.playlist[gameState.questionIndex];
+    // 决定当前题题型：PK 固定猜番剧；混合模式随机；其余按所选模式
+    gameState.guessType = gameState.mode === 'pk' ? 'anime'
+        : gameState.gameMode === 'mixed' ? (['anime', 'song', 'artist'])[Math.floor(Math.random() * 3)]
+        : gameState.gameMode;
+    gameState.hints = { h1: false, h2: false };
     gameState.correctAnime = q.anime;
     gameState.currentSong = q;
     gameState.isLocked = false;
@@ -2508,7 +2569,18 @@ function loadQuestion() {
     fetchAudio(q.title, q.artist, q.anime).then(result => {
         if (gen !== gameState.fetchGeneration) return;
         if (!result) {
-            notify('呜喵~ 这首歌的音频获取失败了，已跳过~');
+            // B站源失败提示分级：代理不可达/取流被风控（首次给操作指引，后续简短）vs 普通失败
+            const biliBroken = biliProxyState.reason === 'proxy-down' || biliProxyState.reason === 'no-stream';
+            if (audioSourcePref === 'bilibili-only' && biliBroken) {
+                if (!biliProxyState.notified) {
+                    biliProxyState.notified = true;
+                    notify('呜喵~ B站音频获取失败（当前代理被B站拒绝或连不上）。建议：双击运行项目里的"启动B站代理.bat"，再到设置里把B站代理地址填为 http://localhost:8765~');
+                } else {
+                    notify('B站代理不可用，已跳过此题~');
+                }
+            } else {
+                notify('呜喵~ 这首歌的音频获取失败了，已跳过~');
+            }
             gameState.questionIndex++;
             loadQuestion();
             return;
@@ -2529,7 +2601,8 @@ function loadQuestion() {
             $('playBtn').disabled = false;
             $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';
         }
-        renderOptions(correctAnime);
+        renderHintBar();
+        renderOptions(q);
     });
 }
 
@@ -2695,8 +2768,34 @@ async function fetchAudioInner(title, artist, anime, cacheKey) {
     return null;
 }
 
-function renderOptions(answer) {
-    const wrongs = shuffle(ALL_ANIME.filter(a => a !== answer)).slice(0, 3);
+function getGuessValue(song, guessType) {
+    if (guessType === 'song') return song.titleCN || song.title;
+    if (guessType === 'artist') return song.artist;
+    return song.anime;
+}
+
+function buildWrongOptions(song, guessType) {
+    if (guessType === 'song') {
+        const answer = song.titleCN || song.title;
+        // 干扰项排除同番剧、同歌手（不足 3 个时放宽同歌手，保持不同番剧）
+        const pool = getAllSongs().filter(s => s.anime !== song.anime && (s.artist || '') !== (song.artist || ''));
+        let titles = [...new Set(pool.map(s => s.titleCN || s.title).filter(t => t && t !== answer))];
+        if (titles.length < 3) {
+            const loose = [...new Set(getAllSongs().filter(s => s.anime !== song.anime).map(s => s.titleCN || s.title).filter(t => t && t !== answer))];
+            titles = [...new Set([...titles, ...loose])];
+        }
+        return shuffle(titles).slice(0, 3);
+    }
+    if (guessType === 'artist') {
+        const artists = [...new Set(getAllSongs().map(s => s.artist).filter(a => a && a !== song.artist))];
+        return shuffle(artists).slice(0, 3);
+    }
+    return shuffle(ALL_ANIME.filter(a => a !== song.anime)).slice(0, 3);
+}
+
+function renderOptions(song) {
+    const answer = getGuessValue(song, gameState.guessType);
+    const wrongs = buildWrongOptions(song, gameState.guessType);
     const opts = shuffle([...wrongs, answer]);
     $('optionsGrid').innerHTML = '';
     opts.forEach((opt, i) => {
@@ -2710,18 +2809,71 @@ function renderOptions(answer) {
     });
 }
 
+// =====================================================================
+// Hint System（提示系统：每题 2 个提示，使用后本题得分打折）
+// =====================================================================
+const HINT_LABELS = {
+    anime: { h1: '歌手', h2: '歌名' },
+    song:  { h1: '歌手', h2: '番剧' },
+    artist:{ h1: '歌名', h2: '番剧' },
+};
+
+function getHintContent(song, guessType, which) {
+    if (which === 'h1') {
+        const label = HINT_LABELS[guessType].h1;
+        if (label === '歌手') return '歌手：' + song.artist;
+        if (label === '歌名') return '歌名：' + (song.titleCN || song.title);
+        return '番剧：' + song.anime;
+    }
+    const label = HINT_LABELS[guessType].h2;
+    if (label === '歌手') return '歌手：' + song.artist;
+    if (label === '番剧') return '番剧：' + song.anime;
+    const t = song.titleCN || song.title;
+    return '歌名首字「' + t.slice(0, 1) + '」· 共 ' + t.length + ' 字';
+}
+
+function renderHintBar() {
+    const bar = $('hintBar');
+    if (!bar) return;
+    if (gameState.mode === 'pk') { bar.classList.add('hidden'); return; }
+    bar.classList.remove('hidden');
+    const labels = HINT_LABELS[gameState.guessType] || HINT_LABELS.anime;
+    bar.innerHTML = '<span class="hint-label">提示</span>'
+        + '<button class="hint-btn" id="hintBtn1">💡 ' + labels.h1 + '</button>'
+        + '<button class="hint-btn" id="hintBtn2">💡 ' + labels.h2 + '</button>';
+    $('hintBtn1').onclick = () => useHint('h1');
+    $('hintBtn2').onclick = () => useHint('h2');
+}
+
+function useHint(which) {
+    if (gameState.isLocked || gameState.hints[which]) return;
+    const btn = $(which === 'h1' ? 'hintBtn1' : 'hintBtn2');
+    if (!btn) return;
+    gameState.hints[which] = true;
+    btn.textContent = getHintContent(gameState.currentSong, gameState.guessType, which);
+    btn.classList.add('used');
+    btn.disabled = true;
+    const mult = (gameState.hints.h1 && gameState.hints.h2) ? 0.36 : 0.6;
+    notify('提示已使用，本题得分 ×' + mult);
+}
+
 function handleAnswer(btn, selected) {
     if (gameState.isLocked) return;
     gameState.isLocked = true;
+    // 锁定提示按钮
+    document.querySelectorAll('.hint-btn').forEach(b => { b.disabled = true; b.classList.add('used'); });
     audio.pause();
     stopQuizYT();
     gameState.isPlaying = false;
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
 
-    const isCorrect = selected === gameState.correctAnime;
+    const correctValue = getGuessValue(gameState.currentSong, gameState.guessType);
+    const isCorrect = selected === correctValue;
     gameState.answerHistory.push({
         song: gameState.currentSong,
+        guessType: gameState.guessType,
+        correctValue: correctValue,
         selected: selected,
         isCorrect: isCorrect,
         options: Array.from(document.querySelectorAll('.opt-btn')).map(b => b.textContent),
@@ -2736,7 +2888,8 @@ function handleAnswer(btn, selected) {
         gameState.combo++;
         if (gameState.combo > gameState.maxCombo) gameState.maxCombo = gameState.combo;
         gameState.correctCount++;
-        gameState.score += 10 + Math.min(gameState.combo, 5);
+        const hintMult = (gameState.hints.h1 && gameState.hints.h2) ? 0.36 : (gameState.hints.h1 || gameState.hints.h2) ? 0.6 : 1;
+        gameState.score += Math.round((10 + Math.min(gameState.combo, 5)) * hintMult);
         if (gameState.combo >= 2) {
             showCombo();
             spawnSparkles($('comboArea'));
@@ -2753,7 +2906,7 @@ function handleAnswer(btn, selected) {
         gameState.combo = 0;
         $('comboArea').innerHTML = '';
         document.querySelectorAll('.opt-btn').forEach(b => {
-            if (b.textContent === gameState.correctAnime) b.classList.add('reveal');
+            if (b.textContent === correctValue) b.classList.add('reveal');
         });
     }
 
@@ -2967,6 +3120,7 @@ function endGame() {
     recs.push({
         s: gameState.score,
         m: gameState.mode,
+        g: gameState.gameMode,
         c: gameState.maxCombo,
         r: gameState.correctCount,
         n: gameState.playlist.length,
@@ -2978,7 +3132,7 @@ function endGame() {
 
 function restartGame() {
     $('endModal').classList.remove('show');
-    if (gameState.mode === 'single') startSingle();
+    if (gameState.mode === 'single') startMode(gameState.gameMode);
     else showView('menu');
 }
 
@@ -3028,13 +3182,14 @@ function renderHistoryOptions(record) {
     const grid = $('optionsGrid');
     grid.innerHTML = '';
     const options = record.options || [record.song.anime];
+    const correctValue = record.correctValue || record.song.anime;
     options.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = 'opt-btn';
         btn.textContent = opt;
         btn.dataset.key = i + 1;
         btn.style.animationDelay = (i * 0.06) + 's';
-        if (opt === record.song.anime) btn.classList.add('correct');
+        if (opt === correctValue) btn.classList.add('correct');
         else if (opt === record.selected && !record.isCorrect) btn.classList.add('wrong');
         grid.appendChild(btn);
     });
@@ -3056,11 +3211,16 @@ function renderLeaderboard() {
             <div class="record-rank">${i < 3 ? medals[i] : (i + 1)}</div>
             <div class="record-info">
                 <div class="record-score">✓ ${r.r || 0}${r.n ? '/' + r.n : ''}</div>
-                <div class="record-meta">${r.m==='single'?'🎮 单人':'⚔️ PK'} · ${r.t}</div>
+                <div class="record-meta">${recordModeLabel(r)} · ${r.t}</div>
             </div>
             <div class="record-detail">🔥${r.c}</div>
         </div>
     `).join('');
+}
+
+function recordModeLabel(r) {
+    if (r.m === 'pk') return '⚔️ PK';
+    return ({ anime: '🎮 猜番剧', song: '🎵 猜歌名', artist: '🎤 猜歌手', mixed: '🔀 混合' })[r.g || 'anime'] || '🎮 单人';
 }
 
 let clearingRecords = false;
@@ -3227,6 +3387,11 @@ function initAudioSourceFilter() {
 // Settings Modal
 // =====================================================================
 function openSettings() {
+    // 打开设置时把当前生效的代理地址同步到输入框（自动探测可能已切换）
+    const proxyInput = $('biliProxyInput');
+    if (proxyInput && !localStorage.getItem('bili_proxy_url_v1')) {
+        proxyInput.value = window.BILI_WORKER_URL || 'http://localhost:8765';
+    }
     $('settingsModal').classList.add('show');
 }
 function closeSettings() {
@@ -3340,6 +3505,7 @@ document.addEventListener('click', (e) => {
     const value = actionEl.dataset.value;
     switch (action) {
         case 'startSingle': startSingle(); break;
+        case 'startMode': startMode(value); break;
         case 'showView': showView(value); break;
         case 'pkCreate': pkCreate(); break;
         case 'pkJoin': pkJoin(); break;
@@ -3411,6 +3577,7 @@ initFilters();
 initSourceFilter();
 initAudioSourceFilter();
 initQuestionCount();
+probeLocalProxy();   // 自动探测本地 B站代理（bili-proxy.mjs），在跑就自动启用
 updateCustomSongsUI();
 
 // Bangumi panel toggle
