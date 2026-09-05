@@ -90,29 +90,35 @@ async function searchBilibili(keyword) {
     }).filter(r => r.bvid);
 }
 
-// ---------- 流式转发 B站 CDN 音频（解决 Referer 校验） ----------
-function pipeStream(res, audioUrl) {
+// ---------- 流式转发 B站 CDN 音频（解决 Referer 校验，支持 Range 分段请求） ----------
+function pipeStream(res, audioUrl, req) {
     let target;
     try { target = new URL(audioUrl); }
     catch { res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }); res.end(JSON.stringify({ error: 'bad stream url' })); return; }
     const mod = target.protocol === 'https:' ? https : http;
+    // 转发 Range header（浏览器 <audio> 播放时会发分段请求）
+    const upstreamHeaders = { 'User-Agent': UA, 'Referer': REFERER, 'Accept': '*/*' };
+    if (req?.headers?.range) upstreamHeaders['Range'] = req.headers.range;
     const upstream = mod.get({
         hostname: target.hostname,
         path: target.pathname + target.search,
-        headers: { 'User-Agent': UA, 'Referer': REFERER, 'Accept': '*/*' }
+        headers: upstreamHeaders
     }, u => {
         if (u.statusCode >= 400) {
             res.writeHead(u.statusCode, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             res.end(JSON.stringify({ error: 'upstream ' + u.statusCode }));
             return;
         }
-        res.writeHead(200, {
-            'Content-Type': u.headers['content-type'] || 'audio/mp4',
-            'Content-Length': u.headers['content-length'],
+        // 传递上游状态码（200 完整内容 / 206 分段内容）和相关 header
+        const respHeaders = {
+            'Content-Type': 'audio/mp4',  // B站 CDN 有时返回 application/octet-stream，强制 audio/mp4
             'Accept-Ranges': 'bytes',
             'Cache-Control': 'public, max-age=3600',
             'Access-Control-Allow-Origin': '*'
-        });
+        };
+        if (u.headers['content-length']) respHeaders['Content-Length'] = u.headers['content-length'];
+        if (u.headers['content-range']) respHeaders['Content-Range'] = u.headers['content-range'];
+        res.writeHead(u.statusCode, respHeaders);
         u.pipe(res);
     });
     upstream.setTimeout(15000, () => upstream.destroy(new Error('音频源连接超时')));
@@ -141,7 +147,7 @@ const server = http.createServer(async (req, res) => {
         // 1) 音频流转发：/stream?url= 或 /api/search?stream=
         const streamParam = url.pathname === '/stream' ? url.searchParams.get('url') : url.searchParams.get('stream');
         if (streamParam) {
-            pipeStream(res, decodeURIComponent(streamParam));
+            pipeStream(res, decodeURIComponent(streamParam), req);
             return;
         }
 

@@ -227,7 +227,20 @@ async function main() {
   // 质量门槛：零热度番直接剔除（popularity 为 0 说明数据异常）
   const clean = fresh.filter(c => c.popularity > 0);
 
-  console.log(`[4/4] 候选：${candidates.length} 首原始 → 去重后 ${fresh.length} → 有效 ${clean.length}`);
+  // 精简：按人气取 top N 部番剧（默认 8 部，可通过 --top-anime 覆盖）
+  const TOP_ANIME = parseInt(argVal('--top-anime', '8'));
+  const byAnime = new Map();
+  for (const c of clean) {
+    if (!byAnime.has(c.anime) || c.popularity > byAnime.get(c.anime).popularity) {
+      byAnime.set(c.anime, c);
+    }
+  }
+  const topAnimeSet = new Set(
+    [...byAnime.values()].sort((a, b) => b.popularity - a.popularity).slice(0, TOP_ANIME).map(s => s.anime)
+  );
+  const final = clean.filter(c => topAnimeSet.has(c.anime));
+
+  console.log(`[4/4] 候选：${candidates.length} 首原始 → 去重后 ${fresh.length} → 有效 ${clean.length} → 精简 top ${TOP_ANIME} 部 ${final.length} 首`);
   if (unmatched.length) {
     console.log(`\n⚠️ 未匹配番剧（AnimeThemes 无数据或名称不一致，前 10 部）：`);
     unmatched.slice(0, 10).forEach(u => console.log(`   - ${u.romaji} (pop ${u.popularity})`));
@@ -237,7 +250,7 @@ async function main() {
   const stamp = new Date().toISOString().slice(0, 10);
   const js = `// 由 scripts/fetch-season.mjs 自动生成 — ${year} ${season} 档候选（${stamp}）
 // ⚠️ 人工复核后合并进 songs.js：titleCN 建议用 Bangumi 中文名核对，确认后 bump 版本号 v25→v26
-export const CANDIDATES = ${JSON.stringify(clean, null, 2)};
+export const CANDIDATES = ${JSON.stringify(final, null, 2)};
 `;
   const jsPath = path.resolve(process.cwd(), `${outBase}.js`);
   fs.writeFileSync(jsPath, js, 'utf-8');
@@ -247,12 +260,12 @@ export const CANDIDATES = ${JSON.stringify(clean, null, 2)};
     `# 曲库候选报告 — ${year} ${season} 档（${stamp}）`,
     ``,
     `- 数据源：AniList（热度排序）+ AnimeThemes（主题曲）+ Bangumi（中文番剧名）`,
-    `- 候选 ${clean.length} 首 / ${new Set(clean.map(c => c.anime)).size} 部番剧（已与现有曲库去重）`,
+    `- 候选 ${final.length} 首 / ${new Set(final.map(c => c.anime)).size} 部番剧（已与现有曲库去重，按人气取 top ${TOP_ANIME} 部）`,
     `- 每番限 OP1 + ED1；合并前请人工复核歌名与热度`,
     ``,
     `| 番剧 | 歌曲 | 歌手 | 类型 | 人气 | 评分 | 链接 |`,
     `|------|------|------|------|------|------|------|`,
-    ...clean.map(c => `| ${c.animeCN}（${c.anime}） | ${c.title} | ${c.artist} | ${c.type} | ${c.popularity} | ${c.averageScore || '-'} | [AnimeThemes](${c.animethemeUrl}) |`),
+    ...final.map(c => `| ${c.animeCN}（${c.anime}） | ${c.title} | ${c.artist} | ${c.type} | ${c.popularity} | ${c.averageScore || '-'} | [AnimeThemes](${c.animethemeUrl}) |`),
     ``,
     unmatched.length ? `## 未匹配番剧（${unmatched.length} 部，需人工核对）\n\n${unmatched.map(u => `- ${u.romaji}（人气 ${u.popularity}）`).join('\n')}\n` : '',
   ].join('\n');

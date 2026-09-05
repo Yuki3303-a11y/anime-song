@@ -1,7 +1,7 @@
 # =====================================================================
 # 曲库自动更新工作流
 #
-# 每周日 03:00 UTC（北京时间周日 11:00）自动发现当季新番 OP/ED，
+# 每季度（1/4/7/10 月 1 号）03:00 UTC（北京时间 11:00）自动发现当季新番 OP/ED，
 # 生成候选曲库并创建 Pull Request 供人工复核合并。
 # 也可手动触发：Actions → Update library → Run workflow。
 #
@@ -11,7 +11,7 @@ name: Update library
 
 on:
   schedule:
-    - cron: "0 3 * * 0" # 每周日 03:00 UTC
+    - cron: "0 3 1 1,4,7,10 *" # 每季度第一个月 1 号 03:00 UTC
   workflow_dispatch: # 手动触发
 
 permissions:
@@ -63,7 +63,7 @@ jobs:
 ### 复核清单
 1. 打开 candidates.md 检查候选歌曲（歌名中文名、歌手、类型）
 2. titleCN 如与原文不符，用 Bangumi 中文名修正
-3. 确认无误后合并，并把 songs.js 的缓存版本号 v25 → v26
+3. 确认无误后合并，并把 index.html / app.js / songs.js 的缓存版本号 +1（当前 v26 → v27）
 4. 合并后 Vercel / GitHub Pages 自动重新部署" \
             --base master \
             --head "$BRANCH"

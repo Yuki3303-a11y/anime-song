@@ -568,6 +568,7 @@ async function searchBilibili(anime, title, artist = '', type = '') {
             `${window.BILI_WORKER_URL}/api/search?q=${encodeURIComponent(query)}`,
             { signal: controller.signal }
         );
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
         if (!data.results?.length) return [];
         // Filter: skip very short (<30s) and very long (>10min)
@@ -695,6 +696,7 @@ async function getBilibiliAudioUrl(bvid) {
             { signal: controller.signal }
         );
         clearTimeout(timeoutId);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
         // 代理可达但取流失败（如境外 Vercel 被 B站风控返回 no audio stream）→ 引导用户用本地代理
         if (data.error) {
@@ -756,6 +758,9 @@ async function searchAndLoadFullSong(song) {
         const biliUrl = lastAudio.url;
         playerEl.style.display = '';
         fpUseAudio = true;
+        audio.onerror = () => {
+            notify('呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~');
+        };
         audio.src = biliUrl;
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
         $('fpSource').textContent = '(B站源)';
@@ -1067,6 +1072,9 @@ async function playFavSongAtIndex(index) {
         stopMusicProgress();
         musicUseAudio = true;
         audio.pause();
+        audio.onerror = () => {
+            notify('呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~');
+        };
         audio.src = url;
         audio.load();
         $('musicModal')?.classList.add('show');
@@ -1075,12 +1083,34 @@ async function playFavSongAtIndex(index) {
         const ms = $('musicSource');
         if (ms) ms.textContent = '(B站源)';
         renderFavorites();
-        audio.play().catch(e => console.error('[Music] B站 play failed:', e));
+        audio.play().catch(e => {
+            console.error('[Music] B站 play failed:', e);
+            notify('呜喵~ B站音频播放失败了~');
+        });
     };
 
-    // B站 source with URL
-    if (song.source === 'bilibili' && song.bilibiliUrl) {
-        playBilibili(song.bilibiliUrl);
+    // B站 source — 每次播放都重新取流（B站 CDN URL 带签名会过期，缓存的 URL 可能失效）
+    // 搜索结果有 24h 缓存、取流有 30min 缓存，实际不会每次都重新请求网络
+    if (song.source === 'bilibili') {
+        notify('B站搜索中...');
+        const result = await fetchBilibiliAudio(
+            song.title, song.artist, song.anime, song.type || '',
+            `${song.title}|${song.anime}`
+        );
+        if (result) {
+            song.source = 'bilibili';
+            song.bilibiliUrl = result.url;
+            const favs = getFavorites();
+            const favIdx = favs.findIndex(f => f.title === song.title && f.anime === song.anime);
+            if (favIdx >= 0) {
+                favs[favIdx].source = 'bilibili';
+                favs[favIdx].bilibiliUrl = result.url;
+                saveFavorites(favs);
+            }
+            playBilibili(result.url);
+            return;
+        }
+        notify('B站未找到该歌曲');
         return;
     }
 
@@ -2597,6 +2627,11 @@ function loadQuestion() {
         } else {
             quizYT.active = false;
             quizYT.videoId = null;
+            audio.onerror = () => {
+                if (result.source === 'bilibili') {
+                    notify('呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~');
+                }
+            };
             audio.src = url;
             $('playBtn').disabled = false;
             $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';

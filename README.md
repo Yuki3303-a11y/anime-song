@@ -7,7 +7,7 @@
 
 | 地址 | 推荐 |
 |------|------|
-| **[anime-song-gamma.vercel.app](https://anime-song-gamma.vercel.app)** | 推荐（B站源正常） |
+| **[anime-song-gamma.vercel.app](https://anime-song-gamma.vercel.app)** | 推荐（主站） |
 | [yuki3303-a11y.github.io/anime-song](https://yuki3303-a11y.github.io/anime-song/) | 备用 |
 
 ## 游戏模式
@@ -29,7 +29,7 @@
 - 支持按年份、类型（可多选）筛选
 - 可导入 Bangumi 目录扩充曲库
 - 支持自定义歌曲 JSON 导入/导出
-- 曲库自动更新：定时工作流发现当季新番 OP/ED 并生成候选，人工复核后合并
+- 曲库自动更新：每季度第一个月自动发现当季新番 OP/ED 并生成候选（top 8 部最火番剧），人工复核后合并
 
 ## 音频来源（设置中可切换）
 
@@ -37,7 +37,7 @@
 |------|------|
 | **iTunes** | 30s 试听片段，优先推荐 |
 | **YouTube** | 完整歌曲，部分需科学上网 |
-| **B站** | 国内直接访问，无网络限制 |
+| **B站** | 需运行本地代理（双击「启动B站代理.bat」）；Vercel 境外代理已被 B站风控，仅B站模式必须用本地代理 |
 
 ## 特色功能
 
@@ -65,7 +65,7 @@
 - Firebase Realtime Database（多人PK）
 - Firebase Anonymous Auth
 - YouTube Data API v3 + IFrame Player API
-- B站 API（via Vercel Serverless Function）
+- B站 API（本地代理 bili-proxy.mjs，兼容 Vercel Serverless Function 契约）
 - AniList GraphQL API（动漫封面）
 - Bangumi API（番剧信息）
 - iTunes Search API（音频预览）
