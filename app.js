@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, set, get, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=26';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=27';
 
 // =====================================================================
 // Firebase
@@ -210,7 +210,7 @@ class MemCache {
     }
 }
 
-const audioCache = new MemCache('audio_cache_v2', 500, 24 * 60 * 60 * 1000);
+const audioCache = new MemCache('audio_cache_v3', 500, 24 * 60 * 60 * 1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
 const bilibiliCache = new MemCache('bilibili_cache_v1', 200, 24 * 60 * 60 * 1000);
@@ -571,8 +571,13 @@ async function searchBilibili(anime, title, artist = '', type = '') {
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
         if (!data.results?.length) return [];
-        // Filter: skip very short (<30s) and very long (>10min)
-        return data.results.filter(r => r.duration <= 600 && r.duration >= 30);
+        // 过滤：时长 30s-10min，排除合集/精选/混音视频（这些会导致播放的歌和题目不一致）
+        const COLLECTION_KW = ['合集', '合集', 'op/ed', 'oped', '全曲', '主题曲合集', '精选集', 'mix', 'medley', 'nonstop', '串烧', '联唱', '高音質', '高音质'];
+        return data.results.filter(r => {
+            if (r.duration > 600 || r.duration < 30) return false;
+            const t = r.title.toLowerCase();
+            return !COLLECTION_KW.some(k => t.includes(k));
+        });
     }
 
     function scoreResult(r, anime, title, artist, type) {
@@ -658,6 +663,18 @@ async function searchBilibili(anime, title, artist = '', type = '') {
         if (!animeInTitle) {
             console.log('[Bili] Rejected: anime not in title', best.title, '| anime:', anime);
             return null;
+        }
+
+        // 歌名匹配检查：歌名的至少一个有意义的词必须在视频标题里
+        // 防止合集视频或同番剧其他歌曲被选中，导致播放的歌和题目不一致
+        const tl = title.toLowerCase();
+        const titleWords = tl.split(/\s+/).filter(w => w.length > 1);
+        if (titleWords.length > 0) {
+            const titleInVideo = titleWords.some(w => vt.includes(w));
+            if (!titleInVideo) {
+                console.log('[Bili] Rejected: song title not in video title', best.title, '| song:', title);
+                return null;
+            }
         }
 
         // Higher bar for very short anime names (e.g. "86") that risk false matches
@@ -2704,6 +2721,10 @@ async function fetchAudioInner(title, artist, anime, cacheKey) {
         const la = (artist || '').toLowerCase();
         const lan = (anime || '').toLowerCase();
 
+        // 排除翻唱/钢琴/伴奏/混音/现场版本（这些会导致播放的歌和题目不一致）
+        const BAD_KW = ['cover', 'piano', 'instrumental', 'karaoke', 'remix', 'remaster', 'version', 'ver.', 'arrange', 'acoustic', 'live', '现场', '翻唱', '钢琴', '伴奏', '混音', 'カバー', 'ピアノ', 'インスト', 'カラオケ', 'リミックス', 'リマスター', 'アレンジ', 'アコースティック', 'ライブ'];
+        if (BAD_KW.some(k => t.includes(k) || c.includes(k))) return -1;
+
         let score = 0;
 
         // Title match (strict: exact or starts-with gets higher score)
@@ -2746,10 +2767,10 @@ async function fetchAudioInner(title, artist, anime, cacheKey) {
                     const s = scoreMatch(r);
                     if (s > bestScore) { bestScore = s; best = r; }
                 }
-                // Use any iTunes result with at least a partial title match (score >= 0)
-                // scoreMatch returns -1 only when the title doesn't appear at all
-                if (best && bestScore >= 0) return { url: best.previewUrl, score: bestScore, trackName: best.trackName, artistName: best.artistName };
-                // No title match at all
+                // 只接受高置信度匹配：标题精确匹配或开头匹配（score >= 60）
+                // 部分包含（score 30）可能是同名不同歌或翻唱版本，会导致歌曲和答案不一致
+                if (best && bestScore >= 60) return { url: best.previewUrl, score: bestScore, trackName: best.trackName, artistName: best.artistName };
+                // 低置信度匹配，不接受（fallback 到 YouTube）
                 if (best) return { url: null, score: bestScore, trackName: best.trackName, artistName: best.artistName };
             }
         } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
