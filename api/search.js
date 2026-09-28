@@ -1,7 +1,6 @@
 // Vercel Serverless Function — B站 API Proxy
 // 加固：请求超时 + 瞬时错误重试 + 明确错误码 + stream 域名白名单（防开放代理滥用）
 const https = require('https');
-const http = require('http');
 
 const BILI_HOST = 'api.bilibili.com';
 const BILI_COOKIE = process.env.BILI_COOKIE || 'buvid3=64ACF920-EA61-EC9E-6006-82CB4F07CA6F32360infoc; buvid4=097522C7-6542-DCD3-483B-F479D7B9791033222-026012119-1m27iCIGWIIzOVEGv8R+1Q==; b_nut=1768995232';
@@ -131,31 +130,37 @@ module.exports = async (req, res) => {
   try {
     // Stream audio proxy — fetch B站 CDN audio and pipe to browser
     if (stream) {
-      const audioUrl = decodeURIComponent(stream);
+      const audioUrl = stream;
       const parsed = new URL(audioUrl);
       // 防开放代理：只允许 B站音频 CDN 域名
-      if (!isAllowedStreamHost(parsed.hostname)) {
+      if (parsed.protocol !== 'https:' || (parsed.port && parsed.port !== '443') ||
+          parsed.username || parsed.password || !isAllowedStreamHost(parsed.hostname)) {
         return res.status(403).json({ error: 'stream host not allowed' });
       }
-      const protocol = parsed.protocol === 'https:' ? https : http;
       const hostname = parsed.hostname;
       const path = parsed.pathname + parsed.search;
 
-      const upstreamReq = protocol.get({
+      const headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://www.bilibili.com/',
+        'Accept': '*/*'
+      };
+      if (req.headers.range) headers.Range = req.headers.range;
+      const upstreamReq = https.get({
         hostname, path,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          'Referer': 'https://www.bilibili.com/',
-          'Accept': '*/*'
-        }
+        headers
       }, upstream => {
         if (upstream.statusCode >= 400) {
           res.status(upstream.statusCode).end();
           return;
         }
+        res.status(upstream.statusCode);
         res.setHeader('Content-Type', upstream.headers['content-type'] || 'audio/mp4');
         if (upstream.headers['content-length']) {
           res.setHeader('Content-Length', upstream.headers['content-length']);
+        }
+        if (upstream.headers['content-range']) {
+          res.setHeader('Content-Range', upstream.headers['content-range']);
         }
         res.setHeader('Accept-Ranges', 'bytes');
         res.setHeader('Cache-Control', 'public, max-age=3600');

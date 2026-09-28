@@ -25,7 +25,7 @@
 
 ```
 index.html  — 所有页面视图（菜单、大厅、房间、游戏、排行榜）都在一个 HTML 里
-app.js      — ~3300 行 ES Module，所有游戏逻辑
+app.js      — 浏览器端 ES Module，包含游戏与播放器逻辑
 songs.js    — 285 首精选歌曲 / 188 部番剧，export SONGS 数组
 style.css   — 全部样式，CSS 自定义属性做主题
 scripts/    — fetch-season.mjs（曲库自动发现）、validate-songs.mjs（曲库校验）
@@ -71,7 +71,7 @@ iTunes 30s 试听 (主源) → YouTube (降级) → B站 (兜底/可设为优先
    - 标题完全匹配 +100，包含 +30
    - 歌手匹配 +50，不匹配 -20
    - 专辑名包含动漫名 +30
-4. 评分 >= 0 就接受，返回 30s 试听 URL（M4A 格式，`<audio>` 直接播放）
+4. 评分 >= 60 且存在试听 URL 才接受，返回 30s 试听 URL（M4A 格式，`<audio>` 直接播放）
 
 ### 2.2 YouTube 降级
 
@@ -299,13 +299,13 @@ new MemCache(localStorageKey, maxEntries, ttlMs?)
 
 | 实例 | localStorage Key | 最大条目 | TTL |
 |------|------------------|----------|-----|
-| `audioCache` | `audio_cache_v2` | 500 | 24h |
+| `audioCache` | `audio_cache_v3` | 500 | 24h |
 | `animeDetailCache` | `anime_detail_cache_v1` | 300 | 永不过期 |
 | `bilibiliCache` | `bilibili_cache_v1` | 200 | 24h |
-| `bilibiliAudioCache` | `bilibili_audio_cache_v1` | 200 | 5min |
+| `bilibiliAudioCache` | `bilibili_audio_cache_v1` | 200 | 30min |
 | `youtubeCache` | `youtube_cache_v1` | 200 | 永不过期 |
 
-B站音频缓存 TTL 较短（5 分钟），因为 B站 CDN 的音频 URL 会过期。
+B站音频缓存 TTL 为 30 分钟；若 CDN URL 提前失效，播放器会重新取流。
 
 ---
 
@@ -384,7 +384,6 @@ query ($search: String) {
 
 | 筛选维度 | 状态变量 | 行为 |
 |----------|----------|------|
-| 年份 | `filterState.years`（Set） | 多选，空集 = 全部 |
 | 类型 | `filterState.types`（Set） | 多选，OP/ED/IN |
 | 来源 | `filterState.source` | null=全部 / "builtin"=仅内置 / "custom"=仅自定义 |
 

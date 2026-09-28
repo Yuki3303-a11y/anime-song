@@ -9,7 +9,7 @@
 //
 // 使用方法：
 //   1. 双击运行"启动B站代理.bat"（或命令行 node bili-proxy.mjs）
-//   2. 打开游戏 → 设置 → B站代理地址填：http://localhost:8765 → 保存
+//   2. 打开游戏 → 设置 → B站代理地址填：http://127.0.0.1:8765 → 保存
 //   3. 开始游戏即可（也可让游戏自动探测，默认就会优先用本代理）
 //
 // 依赖：仅 Node.js 内置模块，无需安装任何东西。
@@ -22,6 +22,13 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const REFERER = 'https://www.bilibili.com/';
 const API_BASE = 'https://api.bilibili.com';
 const TIMEOUT = 12000;
+const STREAM_HOST_SUFFIXES = ['.bilivideo.com', '.akamaized.net', '.mcdn.bilivideo.cn'];
+
+function isAllowedStreamUrl(url) {
+    const host = url.hostname.toLowerCase();
+    return url.protocol === 'https:' && (!url.port || url.port === '443') && !url.username && !url.password &&
+        STREAM_HOST_SUFFIXES.some(suffix => host === suffix.slice(1) || host.endsWith(suffix));
+}
 
 // ---------- B站 API 请求（JSON） ----------
 function biliJson(pathWithQuery) {
@@ -95,11 +102,15 @@ function pipeStream(res, audioUrl, req) {
     let target;
     try { target = new URL(audioUrl); }
     catch { res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }); res.end(JSON.stringify({ error: 'bad stream url' })); return; }
-    const mod = target.protocol === 'https:' ? https : http;
+    if (!isAllowedStreamUrl(target)) {
+        res.writeHead(403, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        res.end(JSON.stringify({ error: 'stream host not allowed' }));
+        return;
+    }
     // 转发 Range header（浏览器 <audio> 播放时会发分段请求）
     const upstreamHeaders = { 'User-Agent': UA, 'Referer': REFERER, 'Accept': '*/*' };
     if (req?.headers?.range) upstreamHeaders['Range'] = req.headers.range;
-    const upstream = mod.get({
+    const upstream = https.get({
         hostname: target.hostname,
         path: target.pathname + target.search,
         headers: upstreamHeaders
@@ -132,7 +143,7 @@ function pipeStream(res, audioUrl, req) {
 
 // ---------- HTTP 服务 ----------
 const server = http.createServer(async (req, res) => {
-    const url = new URL(req.url, 'http://localhost:' + PORT);
+    const url = new URL(req.url, 'http://127.0.0.1:' + PORT);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', '*');
@@ -147,7 +158,7 @@ const server = http.createServer(async (req, res) => {
         // 1) 音频流转发：/stream?url= 或 /api/search?stream=
         const streamParam = url.pathname === '/stream' ? url.searchParams.get('url') : url.searchParams.get('stream');
         if (streamParam) {
-            pipeStream(res, decodeURIComponent(streamParam), req);
+            pipeStream(res, streamParam, req);
             return;
         }
 
@@ -173,10 +184,10 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, '127.0.0.1', () => {
     console.log('============================================');
     console.log('  B站本地代理已启动');
-    console.log(`  地址：http://localhost:${PORT}`);
+    console.log(`  地址：http://127.0.0.1:${PORT}`);
     console.log('  游戏设置里把 B站代理地址填成这个地址即可');
     console.log('  关闭本窗口 = 停止代理');
     console.log('============================================');

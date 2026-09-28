@@ -43,6 +43,28 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10001;
+    padding: 8px 12px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    transform: translateY(-150%);
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* ===== Sakura Canvas ===== */
 #sakuraCanvas {
     position: fixed;

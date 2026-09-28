@@ -63,7 +63,7 @@ jobs:
 ### 复核清单
 1. 打开 candidates.md 检查候选歌曲（歌名中文名、歌手、类型）
 2. titleCN 如与原文不符，用 Bangumi 中文名修正
-3. 确认无误后合并，并把 index.html / app.js / songs.js 的缓存版本号 +1（当前 v26 → v27）
+3. 确认无误后合并，并把 index.html / app.js / songs.js 的缓存版本号同步 +1
 4. 合并后 Vercel / GitHub Pages 自动重新部署" \
             --base master \
             --head "$BRANCH"

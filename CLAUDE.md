@@ -21,7 +21,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 **5 core files, no framework, no bundler:**
 
 - `index.html` — All views in one HTML (menu, lobby, room, game, leaderboard). Views toggled via `.hidden` class on direct children of `main.content`. Event delegation on `[data-action]` attributes. Bangumi import UI is in a `position:fixed` bottom bar, **outside** the view system — do NOT put interactive elements (inputs) inside `.container` or `.content`.
-- `app.js` — ES module. All game logic, Firebase multiplayer, AniList API, iTunes API, YouTube API, sakura canvas, audio playback, custom songs CRUD, Bangumi index import. ~3300 lines.
+- `app.js` — ES module. All game logic, Firebase multiplayer, AniList API, iTunes API, YouTube API, sakura canvas, audio playback, custom songs CRUD, Bangumi index import.
 - `songs.js` — Exports `SONGS` array (285 entries / 188 anime), `ALL_ANIME`, `AVAILABLE_TYPES`. Each song: `{ titleCN, title, anime, artist, type }`. `title` field is the iTunes search term and cache key.
 - `style.css` — All styles. CSS custom properties for theming. Note: `.container` must NOT use `overflow: hidden` (causes invisible text in inputs).
 - `index_75323.json` — Pre-fetched Bangumi index #75323 (108 anime). Format: `{ total, items: [{ id, name, name_cn, date }] }`. The import flow checks for `index_{id}.json` first before trying proxy.
@@ -34,7 +34,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 
 ## Key Systems
 
-**Audio:** iTunes Search API (`country=JP`) with `artist + title` query. Preview URLs cached via `MemCache` (in-memory wrapper over localStorage, key: `audio_cache_v2`). Cache key is `${title}|${anime}`. 5s timeout per request. Falls back to title-only search, then `title + anime`, then YouTube Data API, then B站 (via Cloudflare Worker proxy). Audio source preference stored in `audio_source_pref_v1` localStorage key (`null` / `'bilibili-first'` / `'bilibili-only'`).
+**Audio:** iTunes Search API (`country=JP`) with `artist + title` query. Preview URLs cached via `MemCache` (in-memory wrapper over localStorage, key: `audio_cache_v3`). Cache key is `${title}|${anime}`. 5s timeout per request. Falls back through additional iTunes searches, then YouTube Data API, then B站 (via Vercel or local proxy). Audio source preference stored in `audio_source_pref_v1` localStorage key (`null` / `'bilibili-first'` / `'bilibili-only'`).
 
 **Multiplayer:** Firebase Firestore (project: `animequiz-a16c1`). Anonymous auth. Rooms at `artifacts/{projectId}/public/data/rooms/{roomId}`. Real-time sync via `onSnapshot`.
 
@@ -77,9 +77,9 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 5. For each anime: get romaji title from AniList, search iTunes, add up to 2 songs
 
 **Bilibili (B站) Audio Source:**
-- Node proxy (`bili-proxy.mjs`, zero deps, Node built-ins only) — runs on localhost:8765
+- Node proxy (`bili-proxy.mjs`, zero deps, Node built-ins only) — listens on 127.0.0.1:8765
 - Start: double-click `启动B站代理.bat` or `node bili-proxy.mjs` (must be running for B站 mode)
-- Frontend auto-probes `localhost:8765` on load (`probeLocalProxy()` in app.js); if reachable, `window.BILI_WORKER_URL` switches to it automatically. Manual override via settings → B站代理地址 (localStorage `bili_proxy_url_v1`).
+- Frontend auto-probes `127.0.0.1:8765` on load (`probeLocalProxy()` in app.js); if reachable, `window.BILI_WORKER_URL` switches to it automatically. Manual override via settings → B站代理地址 (localStorage `bili_proxy_url_v1`). Saved `localhost` values are normalized for compatibility.
 - Endpoints (compatible with the Vercel `/api/search` contract): `/api/search?q=xxx` (video search), `/api/search?bvid=xxx` (view + playurl DASH audio, durl fallback), `/stream?url=` (CDN audio pipe with Referer header)
 - Why it exists: the default Vercel proxy (anime-song-gamma.vercel.app) runs from overseas IPs and B站 WAF rejects its playurl requests (`no audio stream`), so 仅B站 mode failed for every song. Local proxy runs from the user's own IP → no WAF block.
 - Failure hinting in app.js: `biliProxyState.reason` is `proxy-down` (network) or `no-stream` (Vercel WAF reject); 仅B站 mode shows actionable guidance on first failure.
@@ -89,7 +89,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 
 **MemCache:** In-memory Map wrapping localStorage for O(1) reads:
 ```js
-const audioCache = new MemCache('audio_cache_v2', 500, 24*60*60*1000);
+const audioCache = new MemCache('audio_cache_v3', 500, 24*60*60*1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
 const bilibiliCache = new MemCache('bilibili_cache_v1', 200, 24*60*60*1000);

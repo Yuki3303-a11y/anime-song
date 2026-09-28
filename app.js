@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getDatabase, ref, set, get, onValue, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=27';
 
 // =====================================================================
@@ -86,8 +86,11 @@ const BILI_TIMEOUT = 12000;        // B站 proxy fetch timeout (ms)
 // B站代理失败状态（用于提示分级：代理不可达 / 取流被风控 / 无搜索结果）
 const biliProxyState = { down: false, notified: false, reason: null };
 const BILI_WORKER_URL_DEFAULT = 'https://anime-song-gamma.vercel.app';
+function normalizeLocalProxyUrl(value) {
+    return value.replace(/^http:\/\/localhost(?=[:/]|$)/i, 'http://127.0.0.1');
+}
 window.BILI_WORKER_URL = (() => {
-    try { return localStorage.getItem('bili_proxy_url_v1') || BILI_WORKER_URL_DEFAULT; }
+    try { return normalizeLocalProxyUrl(localStorage.getItem('bili_proxy_url_v1') || BILI_WORKER_URL_DEFAULT); }
     catch { return BILI_WORKER_URL_DEFAULT; }
 })();
 
@@ -99,12 +102,12 @@ function probeLocalProxy() {
     } catch { return; }
     const ctl = new AbortController();
     const t = setTimeout(() => ctl.abort(), 1500);
-    fetch('http://localhost:8765/api/search?q=__probe__', { signal: ctl.signal })
+    fetch('http://127.0.0.1:8765/api/search?q=__probe__', { signal: ctl.signal })
         .then(r => {
             clearTimeout(t);
             if (r.ok) {
-                window.BILI_WORKER_URL = 'http://localhost:8765';
-                console.log('[Bili] 已自动使用本地代理 http://localhost:8765');
+                window.BILI_WORKER_URL = 'http://127.0.0.1:8765';
+                console.log('[Bili] 已自动使用本地代理 http://127.0.0.1:8765');
             }
         })
         .catch(() => clearTimeout(t));
@@ -514,11 +517,15 @@ async function searchYouTube(query) {
     const tried = new Set();
     while (tried.size < YT_API_KEYS.length) {
         const idx = ytKeyIndex;
-        if (tried.has(idx) || ytKeyExhausted.has(idx)) {
+        if (tried.has(idx)) {
             ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
             continue;
         }
         tried.add(idx);
+        if (ytKeyExhausted.has(idx)) {
+            ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
+            continue;
+        }
         const key = YT_API_KEYS[idx];
         // Per-attempt timeout — a hung request used to stall the whole fallback chain
         const controller = new AbortController();
@@ -775,9 +782,6 @@ async function searchAndLoadFullSong(song) {
         const biliUrl = lastAudio.url;
         playerEl.style.display = '';
         fpUseAudio = true;
-        audio.onerror = () => {
-            notify('呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~');
-        };
         audio.src = biliUrl;
         $('fpTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
         $('fpSource').textContent = '(B站源)';
@@ -1089,9 +1093,6 @@ async function playFavSongAtIndex(index) {
         stopMusicProgress();
         musicUseAudio = true;
         audio.pause();
-        audio.onerror = () => {
-            notify('呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~');
-        };
         audio.src = url;
         audio.load();
         $('musicModal')?.classList.add('show');
@@ -1270,6 +1271,10 @@ async function showMusicPlayer(song) {
 }
 
 function hideMusicPlayer() {
+    if (musicUseAudio) {
+        audio.pause();
+        musicUseAudio = false;
+    }
     const modal = $('musicModal');
     if (modal) modal.classList.remove('show');
     if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
@@ -1994,6 +1999,7 @@ async function fetchAnimeDetail(animeName) {
     return result;
 }
 
+let detailReturnFocus = null;
 function showAnimeDetail(song) {
     const modal = $('animeDetailModal');
     const coverWrap = document.querySelector('.detail-cover-wrap');
@@ -2032,7 +2038,9 @@ function showAnimeDetail(song) {
     // Safe fallback: Bangumi search URL (always works)
     bangumiLink.href = `https://bgm.tv/search/subject/${encodeURIComponent(song.anime)}`;
 
+    if (!modal.classList.contains('show')) detailReturnFocus = document.activeElement;
     modal.classList.add('show');
+    modal.querySelector('.detail-close')?.focus();
 
     fetchAnimeDetail(song.anime).then(detail => {
         if (!detail) return;
@@ -2066,6 +2074,7 @@ function showAnimeDetail(song) {
 // Sakura Particle System
 // =====================================================================
 function initSakura() {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
     const canvas = document.getElementById('sakuraCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -2322,6 +2331,7 @@ function animateScore(element, newValue) {
 // View Navigation
 // =====================================================================
 function showView(viewName) {
+    if (viewName !== 'game') gameState.fetchGeneration++;
     if (roomUnsub) { roomUnsub(); roomUnsub = null; }
     stopFullPlayer();
     hideMusicPlayer();
@@ -2358,7 +2368,6 @@ function startMode(mode) {
     gameState.correctCount = 0;
     gameState.answerHistory = [];
     gameState.viewingHistory = false;
-    gameState.fetchGeneration = 0;
     const pool = getFilteredSongs();
     if (pool.length < 4) { notify('呜喵~ 曲库太少了...请放宽筛选条件吧'); return; }
     const n = Math.min(gameState.questionCount, pool.length);
@@ -2386,21 +2395,29 @@ async function pkCreate() {
     if (!user) { notify('正在连接服务器喵~ 请稍等...'); return; }
     if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
     pkBusy = true;
-    const rid = String(Math.floor(1000 + Math.random() * 9000));
-    roomId = rid;
     try {
-        await retryPK(
-            () => set(ref(db, 'rooms/' + rid), {
-                host: user.uid,
-                guest: null,
-                status: 'waiting',
-                timestamp: serverTimestamp(),
-                scores: { [user.uid]: 0 },
-                questions: buildPlaylist(SONGS, 10).map(s => SONGS.indexOf(s)),
-            }),
-            'pkCreate'
-        );
-        enterRoom(rid);
+        const questions = buildPlaylist(SONGS, 10).map(s => SONGS.indexOf(s));
+        let created = false;
+        for (let attempt = 0; attempt < 10 && !created; attempt++) {
+            const rid = String(Math.floor(1000 + Math.random() * 9000));
+            const result = await retryPK(() => runTransaction(ref(db, 'rooms/' + rid), current => {
+                if (current !== null) return;
+                return {
+                    host: user.uid,
+                    guest: null,
+                    status: 'waiting',
+                    timestamp: serverTimestamp(),
+                    scores: { [user.uid]: 0 },
+                    questions,
+                };
+            }, { applyLocally: false }), 'pkCreate');
+            if (result.committed) {
+                roomId = rid;
+                enterRoom(rid);
+                created = true;
+            }
+        }
+        if (!created) notify('房间号暂时不足，请再试一次');
     } catch (e) {
         console.error('[PK] pkCreate:', e);
         notify('呜喵~ 网络连接超时了...请检查网络后再试一次吧');
@@ -2425,13 +2442,18 @@ async function pkJoin() {
             pkBusy = false; return;
         }
         if (!d.guest) {
-            await retryPK(
-                () => update(ref(db, 'rooms/' + rid), {
+            const result = await retryPK(() => runTransaction(ref(db, 'rooms/' + rid), current => {
+                if (!current || current.status !== 'waiting' || (current.guest && current.guest !== user.uid)) return;
+                return {
+                    ...current,
                     guest: user.uid,
-                    [`scores/${user.uid}`]: 0
-                }),
-                'pkJoin.updateDoc'
-            );
+                    scores: { ...current.scores, [user.uid]: 0 }
+                };
+            }, { applyLocally: false }), 'pkJoin.transaction');
+            if (!result.committed) {
+                notify('喵呜~ 这个房间已经满了...试试其他房间吧');
+                return;
+            }
         }
         roomId = rid;
         enterRoom(rid);
@@ -2458,8 +2480,17 @@ function pkShare() {
 }
 
 async function pkStart() {
-    if (!roomId) return;
-    await update(ref(db, 'rooms/' + roomId), { status: 'playing' });
+    if (!roomId || !user) return;
+    try {
+        const result = await runTransaction(ref(db, 'rooms/' + roomId), current => {
+            if (!current || current.host !== user.uid || !current.guest || current.status !== 'waiting') return;
+            return { ...current, status: 'playing' };
+        }, { applyLocally: false });
+        if (!result.committed) notify('房间状态已变化，请刷新后重试');
+    } catch (e) {
+        console.error('[PK] pkStart:', e);
+        notify('开始对战失败，请检查网络后重试');
+    }
 }
 
 function enterRoom(rid) {
@@ -2535,6 +2566,7 @@ function checkInvite() {
 function loadQuestion() {
     stopQuizYT();
     audioRetryCount = 0; // fresh retry budget per question
+    const gen = ++gameState.fetchGeneration;
     if (gameState.questionIndex >= gameState.playlist.length) {
         endGame();
         return;
@@ -2563,6 +2595,7 @@ function loadQuestion() {
         showSongInfo(record.isCorrect);
         // Fetch audio for playback during review
         fetchAudio(record.song.title, record.song.artist, record.song.anime).then(result => {
+            if (gen !== gameState.fetchGeneration) return;
             if (!result) {
                 $('playerStatus').textContent = '回顾模式 — 无音频';
                 return;
@@ -2610,8 +2643,6 @@ function loadQuestion() {
     updateNavButtons();
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
-    gameState.fetchGeneration++;
-    const gen = gameState.fetchGeneration;
     const correctAnime = q.anime;  // capture now — prevents race if recursive loadQuestion overwrites gameState
     fetchAudio(q.title, q.artist, q.anime).then(result => {
         if (gen !== gameState.fetchGeneration) return;
@@ -2621,7 +2652,7 @@ function loadQuestion() {
             if (audioSourcePref === 'bilibili-only' && biliBroken) {
                 if (!biliProxyState.notified) {
                     biliProxyState.notified = true;
-                    notify('呜喵~ B站音频获取失败（当前代理被B站拒绝或连不上）。建议：双击运行项目里的"启动B站代理.bat"，再到设置里把B站代理地址填为 http://localhost:8765~');
+                    notify('呜喵~ B站音频获取失败（当前代理被B站拒绝或连不上）。建议：双击运行项目里的"启动B站代理.bat"，再到设置里把B站代理地址填为 http://127.0.0.1:8765~');
                 } else {
                     notify('B站代理不可用，已跳过此题~');
                 }
@@ -2644,11 +2675,6 @@ function loadQuestion() {
         } else {
             quizYT.active = false;
             quizYT.videoId = null;
-            audio.onerror = () => {
-                if (result.source === 'bilibili') {
-                    notify('呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~');
-                }
-            };
             audio.src = url;
             $('playBtn').disabled = false;
             $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';
@@ -2691,7 +2717,7 @@ async function fetchAudio(title, artist, anime) {
     const cacheKey = `${title}|${anime}`;
     const cached = audioCache.get(cacheKey);
     // Skip YouTube and B站 cache — always prefer iTunes 30s preview
-    if (cached) {
+    if (cached && !audioSourcePref) {
         const entry = normalizeAudioEntry(cached);
         if (entry && entry.source !== 'youtube' && entry.source !== 'bilibili') return entry;
         // Stale YouTube/B站 cache: evict and re-fetch
@@ -2968,8 +2994,13 @@ function handleAnswer(btn, selected) {
 
     animateScore($('scoreText'), gameState.correctCount);
     animateScore($('myScoreText'), gameState.score);
+    const answeredSong = gameState.currentSong;
+    const answeredIndex = gameState.questionIndex;
+    const answeredGeneration = gameState.fetchGeneration;
     setTimeout(() => {
-        showAnimeDetail(gameState.currentSong);
+        if (gameState.currentSong !== answeredSong || gameState.questionIndex !== answeredIndex ||
+            gameState.fetchGeneration !== answeredGeneration) return;
+        showAnimeDetail(answeredSong);
         updateNavButtons();
     }, 1500);
 }
@@ -3097,6 +3128,12 @@ audio.ontimeupdate = () => {
 // of an onerror → refetch → onerror loop (e.g. a B站 URL that keeps failing).
 let audioRetryCount = 0;
 audio.onerror = () => {
+    if (fpUseAudio || musicUseAudio) {
+        notify(musicUseAudio || gameState.lastAudioResult?.source === 'bilibili'
+            ? '呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~'
+            : '呜喵~ 歌曲音频加载失败了，请稍后重试~');
+        return;
+    }
     if (quizYT.active || !gameState.currentSong) return;
     if (audioRetryCount >= 2) {
         // Gave up on this track — skip to the next question instead of looping
@@ -3152,6 +3189,7 @@ audio.volume = 0.5;
 // =====================================================================
 function endGame() {
     $('endModal').classList.add('show');
+    const answeredTotal = gameState.answerHistory.length;
 
     if (gameState.mode === 'pk') {
         const win = gameState.score > gameState.opponentScore;
@@ -3162,7 +3200,7 @@ function endGame() {
         $('endDesc').textContent = win ? '二次元之神就是你！' : '再接再厉！';
         if (win) spawnCelebration();
     } else {
-        const total = gameState.playlist.length;
+        const total = answeredTotal;
         const pct = total > 0 ? gameState.correctCount / total * 100 : 0;
         $('endEmoji').textContent = pct >= 80 ? '🏆' : pct >= 50 ? '🎉' : '💪';
         $('endTitle').textContent = '挑战完成';
@@ -3170,7 +3208,9 @@ function endGame() {
         $('endDesc').textContent = pct >= 80 ? '太强了！二次元之神！' : pct >= 50 ? '不错哦！继续加油！' : '加油！多听几首番剧曲吧~';
         if (pct >= 50) spawnCelebration();
     }
-    $('endDetail').textContent = `连击 ${gameState.maxCombo} · 答对 ${gameState.correctCount}/${gameState.playlist.length}`;
+    const skippedTotal = gameState.playlist.length - answeredTotal;
+    $('endDetail').textContent = `连击 ${gameState.maxCombo} · 答对 ${gameState.correctCount}/${answeredTotal}`
+        + (skippedTotal > 0 ? ` · 音频不可用 ${skippedTotal} 题` : '');
 
     const recs = JSON.parse(localStorage.getItem('aq_rec') || '[]');
     recs.push({
@@ -3179,7 +3219,7 @@ function endGame() {
         g: gameState.gameMode,
         c: gameState.maxCombo,
         r: gameState.correctCount,
-        n: gameState.playlist.length,
+        n: answeredTotal,
         t: new Date().toLocaleDateString('zh-CN')
     });
     recs.sort((a, b) => (b.r || 0) - (a.r || 0));
@@ -3195,11 +3235,12 @@ function restartGame() {
 function closeDetailModal() {
     stopFullPlayer();
     $('animeDetailModal').classList.remove('show');
+    detailReturnFocus?.focus();
+    detailReturnFocus = null;
 }
 
 function nextQuestion() {
-    stopFullPlayer();
-    $('animeDetailModal').classList.remove('show');
+    closeDetailModal();
     if (gameState.viewingHistory) {
         gameState.questionIndex++;
         if (gameState.questionIndex >= gameState.answerHistory.length) {
@@ -3217,8 +3258,7 @@ function prevQuestion() {
     if (gameState.answerHistory.length === 0) return;
     if (!gameState.viewingHistory && gameState.questionIndex === 0) return;
     gameState.viewingHistory = true;
-    stopFullPlayer();
-    $('animeDetailModal').classList.remove('show');
+    closeDetailModal();
     gameState.questionIndex--;
     if (gameState.questionIndex < 0) gameState.questionIndex = 0;
     loadQuestion();
@@ -3282,6 +3322,7 @@ function recordModeLabel(r) {
 let clearingRecords = false;
 function clearRecords() {
     if (clearingRecords) return;
+    if (!confirm('确定清除所有本地排行榜记录吗？')) return;
     clearingRecords = true;
     localStorage.removeItem('aq_rec');
     renderLeaderboard();
@@ -3379,7 +3420,7 @@ function initAudioSourceFilter() {
     const proxyGroup = $('biliProxyGroup');
     const proxyInput = $('biliProxyInput');
     if (proxyInput) {
-        proxyInput.value = window.BILI_WORKER_URL || 'http://localhost:8765';
+        proxyInput.value = window.BILI_WORKER_URL || 'http://127.0.0.1:8765';
     }
     // Show proxy input only when B站 mode is active
     if (proxyGroup) {
@@ -3388,9 +3429,10 @@ function initAudioSourceFilter() {
 
     if ($('biliProxySave')) {
         $('biliProxySave').addEventListener('click', () => {
-            const val = proxyInput?.value?.trim();
+            const val = normalizeLocalProxyUrl(proxyInput?.value?.trim() || '');
             if (val) {
                 window.BILI_WORKER_URL = val;
+                proxyInput.value = val;
                 try { localStorage.setItem('bili_proxy_url_v1', val); } catch {}
                 notify('代理地址已更新');
             }
@@ -3442,16 +3484,21 @@ function initAudioSourceFilter() {
 // =====================================================================
 // Settings Modal
 // =====================================================================
+let settingsReturnFocus = null;
 function openSettings() {
     // 打开设置时把当前生效的代理地址同步到输入框（自动探测可能已切换）
     const proxyInput = $('biliProxyInput');
     if (proxyInput && !localStorage.getItem('bili_proxy_url_v1')) {
-        proxyInput.value = window.BILI_WORKER_URL || 'http://localhost:8765';
+        proxyInput.value = window.BILI_WORKER_URL || 'http://127.0.0.1:8765';
     }
+    settingsReturnFocus = document.activeElement;
     $('settingsModal').classList.add('show');
+    $('settingsModal').querySelector('.card-modal-close')?.focus();
 }
 function closeSettings() {
     $('settingsModal').classList.remove('show');
+    settingsReturnFocus?.focus();
+    settingsReturnFocus = null;
 }
 
 // =====================================================================
@@ -3477,10 +3524,6 @@ function initQuestionCount() {
 // Keyboard Shortcuts
 // =====================================================================
 document.addEventListener('keydown', (e) => {
-    // Don't intercept when user is typing in an input/textarea
-    const tag = document.activeElement?.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-
     const gameVisible = !$('v-game').classList.contains('hidden');
     const detailOpen = $('animeDetailModal').classList.contains('show');
     const settingsOpen = $('settingsModal').classList.contains('show');
@@ -3488,10 +3531,15 @@ document.addEventListener('keydown', (e) => {
 
     // Escape to close modals
     if (e.key === 'Escape') {
+        if ($('bangumiModal').style.display === 'flex') { closeBangumiPanel(); return; }
         if (settingsOpen) { closeSettings(); return; }
         if (detailOpen) { closeDetailModal(); return; }
         if (endOpen) { $('endModal').classList.remove('show'); showView('menu'); return; }
     }
+
+    // Don't intercept gameplay shortcuts when the user is typing.
+    const tag = document.activeElement?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
 
     // Space bar: toggle YouTube full player when detail modal is open
     if (e.key === ' ' && detailOpen && !settingsOpen) {
@@ -3639,10 +3687,13 @@ updateCustomSongsUI();
 // Bangumi panel toggle
 $('bangumiToggle').addEventListener('click', () => {
     $('bangumiModal').style.display = 'flex';
+    $('bangumiIndexInput').focus();
 });
-$('bangumiClose').addEventListener('click', () => {
+function closeBangumiPanel() {
     $('bangumiModal').style.display = 'none';
-});
+    $('bangumiToggle').focus();
+}
+$('bangumiClose').addEventListener('click', closeBangumiPanel);
 
 // Load YouTube IFrame API for full song playback
 loadYouTubeAPI();

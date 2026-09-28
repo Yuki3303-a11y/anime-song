@@ -7,7 +7,7 @@
     "validate": "node scripts/validate-songs.mjs",
     "discover": "node scripts/fetch-season.mjs",
     "serve": "python -m http.server 8080",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test tests/regressions.test.mjs"
   },
   "repository": {
     "type": "git",
