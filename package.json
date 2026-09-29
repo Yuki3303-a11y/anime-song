@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "validate": "node scripts/validate-songs.mjs && node scripts/validate-seasons.mjs",
+    "audit": "node scripts/audit-integrity.mjs && node scripts/audit-romaji.mjs",
     "discover": "node scripts/fetch-season.mjs",
     "update-season": "node scripts/update-season.mjs",
     "serve": "python -m http.server 8080",
