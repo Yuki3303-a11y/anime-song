@@ -1,0 +1,534 @@
+{
+  "season": "2026-04",
+  "rankSource": "AniList POPULARITY_DESC TV",
+  "targetAnime": 15,
+  "complete": true,
+  "selected": [
+    {
+      "rank": 1,
+      "anime": "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
+      "anilistId": 189046,
+      "songs": [
+        {
+          "titleCN": "Recollect",
+          "title": "Recollect",
+          "anime": "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
+          "animeCN": "",
+          "animeNative": "Re:ゼロから始める異世界生活 4th season",
+          "artist": "Konomi Suzuki, Ashnikko",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 189046,
+          "popularity": 144435,
+          "rank": 1,
+          "animethemesUrl": "https://animethemes.moe/anime/rezero_kara_hajimeru_isekai_seikatsu_4th_season"
+        },
+        {
+          "titleCN": "Ender Ember",
+          "title": "Ender Ember",
+          "anime": "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
+          "animeCN": "",
+          "animeNative": "Re:ゼロから始める異世界生活 4th season",
+          "artist": "MYTH & ROID, TK from Ling tosite sigure",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 189046,
+          "popularity": 144435,
+          "rank": 1,
+          "animethemesUrl": "https://animethemes.moe/anime/rezero_kara_hajimeru_isekai_seikatsu_4th_season"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "anime": "Tensei shitara Slime Datta Ken 4th Season",
+      "anilistId": 182205,
+      "songs": [
+        {
+          "titleCN": "Esoragoto",
+          "title": "Esoragoto",
+          "anime": "Tensei shitara Slime Datta Ken 4th Season",
+          "animeCN": "",
+          "animeNative": "転生したらスライムだった件 第4期 第1&2クール",
+          "artist": "Eir Aoi",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 182205,
+          "popularity": 139386,
+          "rank": 2,
+          "animethemesUrl": "https://animethemes.moe/anime/tensei_shitara_slime_datta_ken_4th_season"
+        },
+        {
+          "titleCN": "Katsubou",
+          "title": "Katsubou",
+          "anime": "Tensei shitara Slime Datta Ken 4th Season",
+          "animeCN": "",
+          "animeNative": "転生したらスライムだった件 第4期 第1&2クール",
+          "artist": "CiON",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 182205,
+          "popularity": 139386,
+          "rank": 2,
+          "animethemesUrl": "https://animethemes.moe/anime/tensei_shitara_slime_datta_ken_4th_season"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "anime": "Yomi no Tsugai",
+      "anilistId": 195600,
+      "songs": [
+        {
+          "titleCN": "Tobu Toki",
+          "title": "Tobu Toki",
+          "anime": "Yomi no Tsugai",
+          "animeCN": "",
+          "animeNative": "黄泉のツガイ",
+          "artist": "Vaundy",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 195600,
+          "popularity": 138873,
+          "rank": 3,
+          "animethemesUrl": "https://animethemes.moe/anime/yomi_no_tsugai"
+        },
+        {
+          "titleCN": "Tobou yo",
+          "title": "Tobou yo",
+          "anime": "Yomi no Tsugai",
+          "animeCN": "",
+          "animeNative": "黄泉のツガイ",
+          "artist": "yama",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 195600,
+          "popularity": 138873,
+          "rank": 3,
+          "animethemesUrl": "https://animethemes.moe/anime/yomi_no_tsugai"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "anime": "Tsue to Tsurugi no Wistoria Season 2",
+      "anilistId": 182300,
+      "songs": [
+        {
+          "titleCN": "BELIEVERS",
+          "title": "BELIEVERS",
+          "anime": "Tsue to Tsurugi no Wistoria Season 2",
+          "animeCN": "",
+          "animeNative": "杖と剣のウィストリア Season2",
+          "artist": "ASH DA HERO",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 182300,
+          "popularity": 120160,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/tsue_to_tsurugi_no_wistoria_season_2"
+        },
+        {
+          "titleCN": "Reachlight",
+          "title": "Reachlight",
+          "anime": "Tsue to Tsurugi no Wistoria Season 2",
+          "animeCN": "",
+          "animeNative": "杖と剣のウィストリア Season2",
+          "artist": "Shiyui",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 182300,
+          "popularity": 120160,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/tsue_to_tsurugi_no_wistoria_season_2"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "anime": "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
+      "anilistId": 180745,
+      "songs": [
+        {
+          "titleCN": "MONSTER",
+          "title": "MONSTER",
+          "anime": "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
+          "animeCN": "",
+          "animeNative": "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期",
+          "artist": "Eir Aoi",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 180745,
+          "popularity": 119279,
+          "rank": 5,
+          "animethemesUrl": "https://animethemes.moe/anime/youkoso_jitsuryoku_shijou_shugi_no_kyoushitsu_e_4th_season_2nenseihen_ichi_gakki"
+        },
+        {
+          "titleCN": "Liar Veil",
+          "title": "Liar Veil",
+          "anime": "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
+          "animeCN": "",
+          "animeNative": "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期",
+          "artist": "ZAQ",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 180745,
+          "popularity": 119279,
+          "rank": 5,
+          "animethemesUrl": "https://animethemes.moe/anime/youkoso_jitsuryoku_shijou_shugi_no_kyoushitsu_e_4th_season_2nenseihen_ichi_gakki"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "anime": "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
+      "anilistId": 169580,
+      "songs": [
+        {
+          "titleCN": "Submarine Youth",
+          "title": "Submarine Youth",
+          "anime": "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
+          "animeCN": "",
+          "animeNative": "クラスで２番目に可愛い女の子と友だちになった",
+          "artist": "reGretGirl",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 169580,
+          "popularity": 101757,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/class_de_2banme_ni_kawaii_onnanoko_to_tomodachi_ni_natta"
+        },
+        {
+          "titleCN": "Zutto 1-ban ni Shite ne",
+          "title": "Zutto 1-ban ni Shite ne",
+          "anime": "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
+          "animeCN": "",
+          "animeNative": "クラスで２番目に可愛い女の子と友だちになった",
+          "artist": "Koresawa",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 169580,
+          "popularity": 101757,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/class_de_2banme_ni_kawaii_onnanoko_to_tomodachi_ni_natta"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "anime": "MARRIAGETOXIN",
+      "anilistId": 199547,
+      "songs": [
+        {
+          "titleCN": "Kill or Kiss",
+          "title": "Kill or Kiss",
+          "anime": "MARRIAGETOXIN",
+          "animeCN": "",
+          "animeNative": "マリッジトキシン",
+          "artist": "Yurina Hirate",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 199547,
+          "popularity": 91799,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/marriagetoxin"
+        },
+        {
+          "titleCN": "Shake Na Baby",
+          "title": "Shake Na Baby",
+          "anime": "MARRIAGETOXIN",
+          "animeCN": "",
+          "animeNative": "マリッジトキシン",
+          "artist": "AKASAKI",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 199547,
+          "popularity": 91799,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/marriagetoxin"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "anime": "Dr. STONE: SCIENCE FUTURE Part 3",
+      "anilistId": 199221,
+      "songs": [
+        {
+          "titleCN": "Skins",
+          "title": "Skins",
+          "anime": "Dr. STONE: SCIENCE FUTURE Part 3",
+          "animeCN": "",
+          "animeNative": "Dr.STONE SCIENCE FUTURE 3クール",
+          "artist": "Asian Kung-Fu Generation",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 199221,
+          "popularity": 80617,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/dr_stone_science_future_part_3"
+        },
+        {
+          "titleCN": "ROCKET",
+          "title": "ROCKET",
+          "anime": "Dr. STONE: SCIENCE FUTURE Part 3",
+          "animeCN": "",
+          "animeNative": "Dr.STONE SCIENCE FUTURE 3クール",
+          "artist": "BURNOUT SYNDROMES",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 199221,
+          "popularity": 80617,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/dr_stone_science_future_part_3"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "anime": "Koori no Jouheki",
+      "anilistId": 186497,
+      "songs": [
+        {
+          "titleCN": "Toumei",
+          "title": "Toumei",
+          "anime": "Koori no Jouheki",
+          "animeCN": "",
+          "animeNative": "氷の城壁",
+          "artist": "Novelbright",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 186497,
+          "popularity": 79940,
+          "rank": 9,
+          "animethemesUrl": "https://animethemes.moe/anime/koori_no_jouheki"
+        },
+        {
+          "titleCN": "Sakasama",
+          "title": "Sakasama",
+          "anime": "Koori no Jouheki",
+          "animeCN": "",
+          "animeNative": "氷の城壁",
+          "artist": "Polkadot Stingray",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 186497,
+          "popularity": 79940,
+          "rank": 9,
+          "animethemesUrl": "https://animethemes.moe/anime/koori_no_jouheki"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "anime": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
+      "anilistId": 170019,
+      "songs": [
+        {
+          "titleCN": "Kimi wa Koibito",
+          "title": "Kimi wa Koibito",
+          "anime": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
+          "animeCN": "",
+          "animeNative": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
+          "artist": "Masayoshi Ooishi",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 170019,
+          "popularity": 79417,
+          "rank": 10,
+          "animethemesUrl": "https://animethemes.moe/anime/otonari_no_tenshisama_ni_itsunomanika_dame_ningen_ni_sareteita_ken_2nd_season"
+        },
+        {
+          "titleCN": "Ureshii! Tanoshii! Daisuki!",
+          "title": "Ureshii! Tanoshii! Daisuki!",
+          "anime": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
+          "animeCN": "",
+          "animeNative": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
+          "artist": "Manaka Iwami",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 170019,
+          "popularity": 79417,
+          "rank": 10,
+          "animethemesUrl": "https://animethemes.moe/anime/otonari_no_tenshisama_ni_itsunomanika_dame_ningen_ni_sareteita_ken_2nd_season"
+        }
+      ]
+    },
+    {
+      "rank": 11,
+      "anime": "Otaku ni Yasashii Gal wa Inai!?",
+      "anilistId": 199588,
+      "songs": [
+        {
+          "titleCN": "HIDE AND SEEK",
+          "title": "HIDE AND SEEK",
+          "anime": "Otaku ni Yasashii Gal wa Inai!?",
+          "animeCN": "",
+          "animeNative": "オタクに優しいギャルはいない!?",
+          "artist": "i-dle",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 199588,
+          "popularity": 70561,
+          "rank": 11,
+          "animethemesUrl": "https://animethemes.moe/anime/otaku_ni_yasashii_gal_wa_inai"
+        },
+        {
+          "titleCN": "Isshou Nakako",
+          "title": "Isshou Nakako",
+          "anime": "Otaku ni Yasashii Gal wa Inai!?",
+          "animeCN": "",
+          "animeNative": "オタクに優しいギャルはいない!?",
+          "artist": "sunsoogirl",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 199588,
+          "popularity": 70561,
+          "rank": 11,
+          "animethemesUrl": "https://animethemes.moe/anime/otaku_ni_yasashii_gal_wa_inai"
+        }
+      ]
+    },
+    {
+      "rank": 12,
+      "anime": "Aishiteru Game wo Owarasetai",
+      "anilistId": 194393,
+      "songs": [
+        {
+          "titleCN": "Kimi no Sei de Aishiteru",
+          "title": "Kimi no Sei de Aishiteru",
+          "anime": "Aishiteru Game wo Owarasetai",
+          "animeCN": "",
+          "animeNative": "愛してるゲームを終わらせたい",
+          "artist": "CHiCO, HoneyWorks",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 194393,
+          "popularity": 61588,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/aishiteru_game_wo_owarasetai"
+        },
+        {
+          "titleCN": "Little World",
+          "title": "Little World",
+          "anime": "Aishiteru Game wo Owarasetai",
+          "animeCN": "",
+          "animeNative": "愛してるゲームを終わらせたい",
+          "artist": "PompadollS",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 194393,
+          "popularity": 61588,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/aishiteru_game_wo_owarasetai"
+        }
+      ]
+    },
+    {
+      "rank": 13,
+      "anime": "Hime Kishi wa Barbaroi no Yome",
+      "anilistId": 182483,
+      "songs": [
+        {
+          "titleCN": "BEAUTIFUL",
+          "title": "BEAUTIFUL",
+          "anime": "Hime Kishi wa Barbaroi no Yome",
+          "animeCN": "",
+          "animeNative": "姫騎士は蛮族の嫁",
+          "artist": "Mayu Maeshima",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 182483,
+          "popularity": 55663,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/hime_kishi_wa_barbaroi_no_yome"
+        },
+        {
+          "titleCN": "Shirubeki Koto",
+          "title": "Shirubeki Koto",
+          "anime": "Hime Kishi wa Barbaroi no Yome",
+          "animeCN": "",
+          "animeNative": "姫騎士は蛮族の嫁",
+          "artist": "sajou no hana",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 182483,
+          "popularity": 55663,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/hime_kishi_wa_barbaroi_no_yome"
+        }
+      ]
+    },
+    {
+      "rank": 14,
+      "anime": "Isekai Nonbiri Nouka 2",
+      "anilistId": 197824,
+      "songs": [
+        {
+          "titleCN": "It's a beautiful story",
+          "title": "It's a beautiful story",
+          "anime": "Isekai Nonbiri Nouka 2",
+          "animeCN": "",
+          "animeNative": "異世界のんびり農家２",
+          "artist": "Aya Suzaki, Shino Shimoji",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 197824,
+          "popularity": 52628,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/isekai_nonbiri_nouka_2"
+        },
+        {
+          "titleCN": "Sunny Steps",
+          "title": "Sunny Steps",
+          "anime": "Isekai Nonbiri Nouka 2",
+          "animeCN": "",
+          "animeNative": "異世界のんびり農家２",
+          "artist": "Yui Hizuki",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 197824,
+          "popularity": 52628,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/isekai_nonbiri_nouka_2"
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "anime": "Kill Ao",
+      "anilistId": 198113,
+      "songs": [
+        {
+          "titleCN": "ATTITUDE",
+          "title": "ATTITUDE",
+          "anime": "Kill Ao",
+          "animeCN": "",
+          "animeNative": "キルアオ",
+          "artist": "aespa",
+          "type": "OP",
+          "season": "2026-04",
+          "anilistId": 198113,
+          "popularity": 48511,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/kill_ao"
+        },
+        {
+          "titleCN": "KILL SHOT",
+          "title": "KILL SHOT",
+          "anime": "Kill Ao",
+          "animeCN": "",
+          "animeNative": "キルアオ",
+          "artist": "RIIZE",
+          "type": "ED",
+          "season": "2026-04",
+          "anilistId": 198113,
+          "popularity": 48511,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/kill_ao"
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}

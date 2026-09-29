@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FBF7F4">
+    <meta name="theme-color" content="#fff3f5">
     <meta name="referrer" content="no-referrer">
     <title>♪ 萌豚挑战 - 二次元听歌猜番剧</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=27">
+    <link rel="stylesheet" href="style.css?v=50">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -48,31 +48,27 @@
                 </div>
             </header>
 
-            <!-- Bangumi FAB Button -->
-            <button id="bangumiToggle" class="bangumi-fab" aria-label="自定义曲库">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            </button>
-
-            <!-- Bangumi Panel (position:fixed — must NOT be inside .container or any overflow-hidden+border-radius element) -->
-            <div id="bangumiModal" role="dialog" aria-modal="true" aria-label="自定义曲库" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;">
-                <div style="background:#11132b;border-radius:20px;width:92%;max-width:480px;max-height:85vh;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,0.08);box-shadow:0 16px 48px rgba(0,0,0,0.3);overflow:hidden;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.08);">
-                        <span style="font-size:18px;font-weight:800;color:#e2e8f0;letter-spacing:-0.3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>自定义曲库</span>
-                        <button id="bangumiClose" aria-label="关闭自定义曲库" style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,0.08);border:none;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <!-- Bangumi Panel: app.js moves this dialog to body so it layers above Settings. -->
+            <div id="bangumiModal" class="bangumi-modal-bg" role="dialog" aria-modal="true" aria-labelledby="bangumiTitle">
+                <div class="bangumi-card">
+                    <div class="bangumi-card-header">
+                        <h2 id="bangumiTitle" class="bangumi-card-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>自定义曲库</h2>
+                        <button id="bangumiClose" class="card-modal-close" type="button" aria-label="关闭自定义曲库"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
                     </div>
-                    <div style="padding:24px;overflow-y:auto;flex:1;min-height:0;">
-                        <div style="display:flex;gap:8px;margin-bottom:12px;">
-                            <input type="text" id="bangumiIndexInput" aria-label="Bangumi 目录号" inputmode="numeric" placeholder="输入 Bangumi 目录号，如 75323" autocomplete="off" spellcheck="false" style="flex:1;padding:12px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;font-size:14px;font-family:inherit;color:#e2e8f0;background:rgba(255,255,255,0.06);min-width:0;">
-                            <button data-action="importBangumi" style="padding:12px 20px;background:linear-gradient(135deg,#00d4aa,#7c5cfc);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;">导入</button>
+                    <div class="bangumi-card-body">
+                        <label class="bangumi-list-label" for="bangumiIndexInput">Bangumi 目录号</label>
+                        <div class="bangumi-import-row">
+                            <input type="text" id="bangumiIndexInput" name="bangumi-index" inputmode="numeric" placeholder="例如 75323…" autocomplete="off" spellcheck="false">
+                            <button class="bangumi-import-btn" type="button" data-action="importBangumi">导入</button>
                         </div>
-                        <div id="importStatus" style="font-size:12px;color:#5eead4;min-height:18px;margin-bottom:8px;font-weight:500;"></div>
-                        <div id="importProgressWrapper" style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;display:none;margin-bottom:16px;"><div id="importProgress" style="height:100%;width:0;background:linear-gradient(135deg,#00d4aa,#7c5cfc);border-radius:2px;transition:width 0.3s;"></div></div>
-                        <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">已导入歌曲</div>
-                        <div id="customSongsList" style="max-height:200px;overflow-y:auto;margin-bottom:16px;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px;min-height:40px;font-size:13px;color:#94a3b8;"></div>
-                        <div style="display:flex;gap:8px;">
-                            <button data-action="exportCustom" style="padding:8px 14px;font-size:12px;background:rgba(255,255,255,0.06);color:#94a3b8;border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导出</button>
-                            <button data-action="importCustom" style="padding:8px 14px;font-size:12px;background:rgba(255,255,255,0.06);color:#94a3b8;border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导入</button>
-                            <button data-action="clearCustom" style="padding:8px 14px;font-size:12px;background:rgba(255,255,255,0.06);color:#f43f5e;border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>清空</button>
+                        <div id="importStatus" class="bangumi-status" role="status" aria-live="polite"></div>
+                        <div id="importProgressWrapper" class="bangumi-progress-wrap"><div id="importProgress" class="bangumi-progress-fill"></div></div>
+                        <div class="bangumi-list-label">已导入歌曲</div>
+                        <div id="customSongsList" class="bangumi-song-list"></div>
+                        <div class="bangumi-actions">
+                            <button class="bangumi-action" type="button" data-action="exportCustom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导出</button>
+                            <button class="bangumi-action" type="button" data-action="importCustom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导入文件</button>
+                            <button class="bangumi-action bangumi-action-danger" type="button" data-action="clearCustom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>清空</button>
                         </div>
                     </div>
                 </div>
@@ -85,13 +81,34 @@
                 <!-- Menu -->
                 <div id="v-menu" class="menu">
                     <div class="hero">
+                        <span class="hero-kicker">ANIME / MUSIC / QUIZ</span>
+                        <img id="heroFeaturedCover" class="hero-featured-cover" alt="" decoding="async">
+                        <div class="hero-cover-nav" aria-label="切换首页番剧封面">
+                            <button type="button" data-action="shiftHomeHero" data-value="-1" aria-label="上一部首页番剧">‹</button>
+                            <span id="heroFeaturedCount">01 / 15</span>
+                            <button type="button" data-action="shiftHomeHero" data-value="1" aria-label="下一部首页番剧">›</button>
+                        </div>
+                        <span id="heroFeaturedTitle" class="hero-featured-title"></span>
                         <div class="hero-icon">
                             <img src="hero-icon.png" alt="" width="80" height="80" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
                         </div>
                         <h1 class="hero-title">萌豚挑战</h1>
                         <div class="hero-sub">二次元听歌猜番剧 · <strong id="songCount">150+</strong> 首曲库</div>
+                        <p class="hero-line">熟悉的前奏响起，<br>你能认出哪一部番？</p>
+                        <span class="hero-edition">VOL. 01　♪　听歌 · 猜番 · 追番</span>
                     </div>
 
+                    <div class="menu-library-card">
+                        <span class="menu-library-kicker">02 / YOUR POOL</span>
+                        <div class="menu-library-info"><strong>当前曲库</strong><span id="menuSourceSummary">全部歌曲</span></div>
+                        <p class="menu-library-hint">先确定本局会出的歌曲，再选择挑战方式。</p>
+                        <div class="menu-library-actions">
+                            <button type="button" class="menu-library-link" data-action="showLibrary">查看当前歌曲</button>
+                            <button type="button" class="menu-library-link" data-action="openSourceSettings">更换曲库</button>
+                        </div>
+                    </div>
+
+                    <div class="mode-heading"><span>选择挑战</span><small>CHOOSE YOUR PANEL</small></div>
                     <div class="btn-group">
                         <button class="btn btn-primary" data-action="startMode" data-value="anime">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -109,29 +126,25 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
                             混合模式
                         </button>
-                        <button class="btn btn-ghost" data-action="showView" data-value="lobby">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                            联机对战
-                        </button>
                     </div>
 
                     <div class="feature-list">
                         <div class="feature-item">
-                            <div class="feature-icon" style="background:rgba(0,212,170,0.12);color:#00d4aa;">♪</div>
+                            <div class="feature-icon feature-icon-song">♪</div>
                             <div class="feature-text">
                                 <div class="feature-title">听歌猜番</div>
                                 <div class="feature-desc">播放30秒歌曲片段，从四个选项中猜出所属动漫</div>
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon" style="background:rgba(124,92,252,0.12);color:#7c5cfc;">⚔</div>
+                            <div class="feature-icon feature-icon-pk">⚔</div>
                             <div class="feature-text">
                                 <div class="feature-title">联机PK</div>
                                 <div class="feature-desc">创建房间邀请好友，实时对战比拼动漫曲库知识</div>
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon" style="background:rgba(94,234,212,0.12);color:#5eead4;">+</div>
+                            <div class="feature-icon feature-icon-custom">+</div>
                             <div class="feature-text">
                                 <div class="feature-title">自定义曲库</div>
                                 <div class="feature-desc">通过 Bangumi 目录批量导入，支持导出与分享歌曲列表</div>
@@ -139,7 +152,23 @@
                         </div>
                     </div>
 
+                    <section class="home-anime-gallery" aria-labelledby="homeAnimeTitle">
+                        <div class="home-gallery-heading">
+                            <div><span id="homeAnimeSeasonLabel">2026 / SUMMER ANIME</span><h2 id="homeAnimeTitle">从封面认出这个夏天</h2></div>
+                            <div class="home-gallery-actions">
+                                <div class="home-gallery-nav" aria-label="切换季度番剧封面">
+                                    <button type="button" data-action="shiftHomeGallery" data-value="-1" aria-label="上一组季度番剧">‹</button>
+                                    <span id="homeGalleryCount">1 / 4</span>
+                                    <button type="button" data-action="shiftHomeGallery" data-value="1" aria-label="下一组季度番剧">›</button>
+                                </div>
+                                <button type="button" data-action="showSeasonLibrary">查看本季曲库 →</button>
+                            </div>
+                        </div>
+                        <div id="homeAnimePosters" class="home-anime-posters"></div>
+                    </section>
+
                     <div class="menu-footer">
+                        <button class="btn-ghost" data-action="showView" data-value="lobby">⚔ 联机对战</button>
                         <button class="btn-ghost" data-action="openSettings">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                             设置
@@ -176,6 +205,90 @@
                         <div id="favList" class="fav-list"></div>
                     </div>
 
+                </div>
+
+                <!-- Personal single-player library -->
+                <div id="v-library" class="library-view hidden">
+                    <button class="back-btn" data-action="showView" data-value="menu">← 返回主页</button>
+                    <div class="library-heading">
+                        <h1>我的曲库</h1>
+                        <p>按季度选歌、整理追番与复习错题</p>
+                    </div>
+                    <div class="library-tabs" role="tablist" aria-label="我的曲库分类">
+                        <button type="button" class="library-tab active" role="tab" aria-controls="libraryCurrentPanel" data-action="libraryTab" data-value="current">当前曲库</button>
+                        <button type="button" class="library-tab" role="tab" aria-controls="libraryTracksPanel" data-action="libraryTab" data-value="tracks">全部曲目</button>
+                        <button type="button" class="library-tab" role="tab" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度曲库</button>
+                        <button type="button" class="library-tab" role="tab" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
+                        <button type="button" class="library-tab" role="tab" aria-controls="libraryWatchPanel" data-action="libraryTab" data-value="watch">我的追番</button>
+                        <button type="button" class="library-tab" role="tab" aria-controls="libraryMistakesPanel" data-action="libraryTab" data-value="mistakes">错题本</button>
+                        <button type="button" class="library-tab" role="tab" aria-controls="libraryFeedbackPanel" data-action="libraryTab" data-value="feedback">音源反馈</button>
+                    </div>
+                    <div id="libraryPreviewBanner" class="library-preview-banner hidden" role="status" aria-live="polite">
+                        <span id="libraryPreviewStatus">选择歌曲试听</span>
+                        <a id="libraryPreviewLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden">打开视频试听</a>
+                        <label>音量 <input id="libraryVolRange" type="range" min="0" max="100" value="50" aria-label="曲库试听音量"></label>
+                    </div>
+                    <section id="libraryCurrentPanel" class="library-panel" role="tabpanel">
+                        <p class="library-help">这里按番剧展示当前可能出题的歌曲。可试听、收藏单曲，也可到“更换曲库”组合更多来源。</p>
+                        <div class="library-quick-tools">
+                            <input id="libraryCurrentSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索当前曲库" placeholder="搜索当前曲库的番剧、歌名或歌手…">
+                            <button type="button" class="library-mini-btn" data-action="openSourceSettings">添加歌曲 / 更换曲库</button>
+                        </div>
+                        <div id="libraryCurrentSummary" class="library-summary"></div>
+                        <div id="libraryCurrentResults" class="library-cover-grid"></div>
+                    </section>
+                    <section id="libraryTracksPanel" class="library-panel hidden" role="tabpanel">
+                        <p class="library-help">按番剧浏览所有已收录歌曲；点“添加”可把单曲加入我的选歌。</p>
+                        <div class="library-quick-tools">
+                            <input id="libraryTrackSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索所有歌曲" placeholder="搜索番剧、歌名或歌手…">
+                            <button type="button" class="library-mini-btn" data-action="useSelectedSongs">只用我的选歌</button>
+                        </div>
+                        <div id="libraryTrackSummary" class="library-summary"></div>
+                        <div id="libraryTrackResults" class="library-cover-grid"></div>
+                    </section>
+                    <section id="librarySeasonPanel" class="library-panel hidden" role="tabpanel">
+                        <div id="librarySeasonTabs" class="library-season-tabs"></div>
+                        <div id="librarySeasonSummary" class="library-summary"></div>
+                        <div class="library-quick-tools">
+                            <input id="librarySeasonSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索本季番剧、歌曲或歌手" placeholder="搜索本季番剧、歌曲或歌手…">
+                            <label class="library-watch-filter" for="libraryOnlyWatched"><input type="checkbox" id="libraryOnlyWatched">只猜我追的番</label>
+                        </div>
+                        <button type="button" class="btn btn-primary library-start-btn" data-action="startSelectedSeason">用这个季度开始猜番剧</button>
+                        <div id="librarySeasonAnime" class="library-cover-grid"></div>
+                    </section>
+                    <section id="libraryBangumiPanel" class="library-panel hidden" role="tabpanel">
+                        <p class="library-help">按番剧查看从 Bangumi 导入的 OP / ED，试听确认后可以直接挑战。</p>
+                        <div class="library-quick-tools">
+                            <input id="libraryBangumiSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索 Bangumi 导入的歌曲" placeholder="搜索番剧、歌名或歌手…">
+                            <button type="button" class="library-mini-btn" data-action="openBangumi">继续导入</button>
+                        </div>
+                        <div id="libraryBangumiSummary" class="library-summary"></div>
+                        <button type="button" class="btn btn-primary library-start-btn" data-action="startBangumiSongs">用导入曲库开始猜番剧</button>
+                        <div id="libraryBangumiAnime" class="library-cover-grid"></div>
+                    </section>
+                    <section id="libraryWatchPanel" class="library-panel hidden" role="tabpanel">
+                        <p class="library-help">勾选正在追或已经看过的番剧，再到设置中开启“只猜我追的番”。清单仅保存在这台设备。</p>
+                        <label class="library-search-label" for="libraryAnimeSearch">查找番剧</label>
+                        <input id="libraryAnimeSearch" class="settings-input library-search" type="search" autocomplete="off" placeholder="输入中文或原名…">
+                        <div id="libraryWatchSummary" class="library-summary"></div>
+                        <div id="libraryWatchResults" class="library-cover-grid"></div>
+                    </section>
+                    <section id="libraryMistakesPanel" class="library-panel hidden" role="tabpanel">
+                        <div id="libraryMistakeSummary" class="library-summary"></div>
+                        <button type="button" class="btn btn-primary library-start-btn" data-action="practiceMistakes">练习这些错题</button>
+                        <div id="libraryMistakeList" class="library-record-list"></div>
+                    </section>
+                    <section id="libraryFeedbackPanel" class="library-panel hidden" role="tabpanel">
+                        <p class="library-help">反馈仅保存在本机，不会自动发送。复制反馈后可发给曲库维护者。</p>
+                        <div class="library-feedback-actions">
+                            <button type="button" class="bangumi-action" data-action="copyFeedback">复制反馈</button>
+                            <button type="button" class="bangumi-action" data-action="exportFeedback">导出 JSON</button>
+                        </div>
+                        <h2 class="library-subtitle">我的反馈</h2>
+                        <div id="libraryFeedbackList" class="library-record-list"></div>
+                        <h2 class="library-subtitle">最近播放失败</h2>
+                        <div id="libraryFailedTracks" class="library-record-list"></div>
+                    </section>
                 </div>
 
                 <!-- Lobby -->
@@ -257,6 +370,9 @@
 
                     <div id="comboArea" class="combo"></div>
 
+                    <div class="game-play-grid">
+                    <div id="gameAudioPanel" class="game-audio-panel">
+                    <div id="inlineDetailHost"></div>
                     <div class="player-box">
                         <div id="visualizer" class="vis hidden">
                             <div class="vis-bar" style="animation-duration: 0.35s"></div>
@@ -269,24 +385,33 @@
                             <div class="vis-bar" style="animation-duration: 0.5s"></div>
                         </div>
 
-                        <div id="playerStatus" class="player-status">准备中...</div>
+                        <div id="playerStatus" class="player-status" role="status" aria-live="polite">准备中...</div>
                         <audio id="audioEl" crossorigin="anonymous" preload="auto"></audio>
                         <button id="playBtn" class="play-btn" disabled data-action="togglePlay" aria-label="播放/暂停">
                             <svg id="playIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z"/>
                             </svg>
                         </button>
-                        <div class="player-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>30秒试听片段</div>
+                        <div class="player-time" aria-hidden="true"><span id="playerTimeCurrent">00:00</span><span>30 秒试听</span><span>00:30</span></div>
                         <div class="volume">
                             <span class="vol-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
-                            <input type="range" id="volSlider" aria-label="试听音量" min="0" max="1" step="0.05" value="0.5">
+                            <input type="range" id="volSlider" aria-label="统一播放音量" min="0" max="100" step="1" value="50">
+                            <output id="volValue" for="volSlider">50%</output>
                         </div>
+                    </div>
+
+                    <div class="player-assist">
+                        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.93 4.93a10 10 0 0 1 14.14 0M7.76 7.76a6 6 0 0 1 8.48 0M10.59 10.59a2 2 0 0 1 2.82 0"/><circle cx="12" cy="15" r="1"/></svg>失败时自动换源，不计错题</span>
+                        <button id="retryAudioBtn" type="button" data-action="retryQuestionAudio" hidden>重新加载</button>
                     </div>
 
                     <div class="progress">
                         <div id="progressFill" class="progress-fill" style="width: 0%"></div>
                     </div>
+                    </div>
 
+                    <div class="game-answer-panel">
+                    <div class="answer-heading">选择答案 <span>SELECT ONE</span></div>
                     <div id="songInfo" class="song-info">
                         <div class="song-info-top">
                             <span id="resultBadge" class="result-badge correct"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><polyline points="20 6 9 17 4 12"/></svg>正确</span>
@@ -298,12 +423,15 @@
                                 <div id="songAnime" class="song-anime">-</div>
                                 <div id="songArtist" class="song-artist">-</div>
                             </div>
-                            <button id="reviewDetailBtn" class="review-detail-btn" data-action="showAnimeDetail" style="display:none;" aria-label="查看番剧详情">📋</button>
+                            <button id="reviewDetailBtn" class="review-detail-btn" data-action="showAnimeDetail" style="display:none;">番剧详情</button>
+                            <button class="review-detail-btn song-feedback-btn" data-action="reportCurrentSong" aria-label="反馈这首歌曲的问题">反馈</button>
                         </div>
+                        <button id="answerNextBtn" class="btn btn-primary answer-next-btn" data-action="nextQuestion">下一题 →</button>
                     </div>
-
                     <div id="hintBar" class="hint-bar hidden"></div>
                     <div id="optionsGrid" class="options"></div>
+                    </div>
+                    </div>
                 </div>
 
                 <!-- Leaderboard -->
@@ -317,6 +445,29 @@
                 </div>
 
             </main>
+        </div>
+    </div>
+
+    <audio id="libraryPreviewAudio" preload="none"></audio>
+    <div id="feedbackModal" class="card-modal-bg" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle" aria-hidden="true" inert>
+        <div class="card-modal">
+            <div class="card-modal-header">
+                <h2 id="feedbackModalTitle" class="card-modal-title">反馈歌曲问题</h2>
+                <button class="card-modal-close" type="button" data-action="closeFeedback" aria-label="关闭反馈弹窗">×</button>
+            </div>
+            <div class="card-modal-body feedback-form">
+                <p id="feedbackSongLabel" class="library-help"></p>
+                <label for="feedbackReason">问题类型</label>
+                <select id="feedbackReason" class="settings-input">
+                    <option value="unplayable">无法播放</option>
+                    <option value="wrong-match">音频匹配错误</option>
+                    <option value="metadata">歌名、歌手或番剧信息错误</option>
+                </select>
+                <label for="feedbackNote">补充说明（可选）</label>
+                <textarea id="feedbackNote" class="settings-input" rows="3" maxlength="400" placeholder="例如：播放的是翻唱版本…"></textarea>
+                <p class="library-help">保存后可在“我的曲库 → 音源反馈”复制或导出。</p>
+                <button type="button" class="btn btn-primary" data-action="saveFeedback">保存到本机</button>
+            </div>
         </div>
     </div>
 
@@ -338,11 +489,23 @@
                 </div>
                 <div class="settings-group">
                     <div class="settings-label">曲库来源</div>
-                    <div class="settings-chips" id="sourceChips"></div>
+                    <div class="settings-chips settings-chips-wrap" id="sourceChips" aria-label="曲库大类"></div>
+                    <div id="officialSourceGroup" class="source-subgroup hidden">
+                        <div class="settings-label">官方曲库范围</div>
+                        <div class="settings-chips settings-chips-wrap" id="officialSourceChips"></div>
+                        <div class="settings-chips settings-chips-wrap source-season-chips hidden" id="seasonSourceChips"></div>
+                    </div>
+                    <div id="mixSourceGroup" class="source-subgroup mix-source-group hidden" aria-label="自由组合来源"></div>
+                    <button id="bangumiToggle" type="button" class="settings-chip library-import-action">导入 Bangumi 曲库</button>
+                </div>
+                <div class="settings-group">
+                    <label class="library-watch-filter" for="watchedOnlyFilter"><input type="checkbox" id="watchedOnlyFilter">只猜我追的番</label>
+                    <p class="library-filter-hint">与季度、曲库来源及歌曲类型筛选同时生效</p>
                 </div>
                 <div class="settings-group">
                     <div class="settings-label">音频来源</div>
                     <div class="settings-chips" id="audioSourceChips"></div>
+                    <p class="library-filter-hint">推荐「智选三源」：比较 iTunes、YouTube 和 B站的匹配证据，自动选择最可信的可播音源。</p>
                 </div>
                 <div class="settings-group" id="biliProxyGroup" style="display:none;">
                     <div class="settings-label">B站代理地址</div>
@@ -369,8 +532,8 @@
         </div>
     </div>
 
-    <!-- Anime Detail Modal -->
-    <div id="animeDetailModal" class="detail-modal-bg" role="dialog" aria-modal="true" aria-label="歌曲详情">
+    <!-- Inline answer detail, moved into the game after initialization -->
+    <div id="animeDetailModal" class="detail-modal-bg" role="region" aria-label="歌曲详情">
         <div class="detail-modal">
             <button class="detail-close" data-action="closeDetail" aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             <div class="detail-cover-wrap">
@@ -489,6 +652,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=27"></script>
+    <script type="module" src="app.js?v=50"></script>
 </body>
 </html>

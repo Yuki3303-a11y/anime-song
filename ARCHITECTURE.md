@@ -27,8 +27,9 @@
 index.html  — 所有页面视图（菜单、大厅、房间、游戏、排行榜）都在一个 HTML 里
 app.js      — 浏览器端 ES Module，包含游戏与播放器逻辑
 songs.js    — 285 首精选歌曲 / 188 部番剧，export SONGS 数组
+seasonal-pools.js — 已复核并发布的季度曲库，按 YYYY-MM 保存；不改变 SONGS 题目索引
 style.css   — 全部样式，CSS 自定义属性做主题
-scripts/    — fetch-season.mjs（曲库自动发现）、validate-songs.mjs（曲库校验）
+scripts/    — fetch-season.mjs（按 AniList ID 生成季度候选）、validate-songs.mjs / validate-seasons.mjs（曲库校验）
 ```
 
 ### 页面切换原理
@@ -380,12 +381,12 @@ query ($search: String) {
 
 ## 11. 筛选系统
 
-`getFilteredSongs()` 从 `SONGS` + `customSongs` 合并后过滤：
+`getFilteredSongs()` 从 `SONGS` + `SEASONAL_POOLS` + `customSongs` 合并后过滤。单人模式从过滤后的结果抽题，干扰选项使用同一抽题范围；多人 PK 始终从 `SONGS` 的原有题目索引抽题。
 
 | 筛选维度 | 状态变量 | 行为 |
 |----------|----------|------|
 | 类型 | `filterState.types`（Set） | 多选，OP/ED/IN |
-| 来源 | `filterState.source` | null=全部 / "builtin"=仅内置 / "custom"=仅自定义 |
+| 来源 | `filterState.source` | null=全部 / "builtin"=所有内置 / "legacy"=原有曲库 / "custom"=仅自定义 / "season:YYYY-MM"=指定季度 |
 
 设置界面用 chip 按钮网格渲染，点击切换 active 状态。"全部" 按钮清空对应 Set。
 

@@ -1,0 +1,534 @@
+{
+  "season": "2026-07",
+  "rankSource": "AniList POPULARITY_DESC TV",
+  "targetAnime": 15,
+  "complete": true,
+  "selected": [
+    {
+      "rank": 1,
+      "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
+      "anilistId": 178789,
+      "songs": [
+        {
+          "titleCN": "Ketsui no Uta",
+          "title": "Ketsui no Uta",
+          "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
+          "animeCN": "",
+          "animeNative": "無職転生Ⅲ ～異世界行ったら本気だす～",
+          "artist": "Yuiko Oohara",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 178789,
+          "popularity": 163662,
+          "rank": 1,
+          "animethemesUrl": "https://animethemes.moe/anime/mushoku_tensei_iii_isekai_ittara_honki_dasu"
+        },
+        {
+          "titleCN": "Inori, Owareba",
+          "title": "Inori, Owareba",
+          "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
+          "animeCN": "",
+          "animeNative": "無職転生Ⅲ ～異世界行ったら本気だす～",
+          "artist": "Mika Nakashima",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 178789,
+          "popularity": 163662,
+          "rank": 1,
+          "animethemesUrl": "https://animethemes.moe/anime/mushoku_tensei_iii_isekai_ittara_honki_dasu"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "anime": "Super no Ura de Yani Suu Futari",
+      "anilistId": 196187,
+      "songs": [
+        {
+          "titleCN": "Ichijiku Kemuri",
+          "title": "Ichijiku Kemuri",
+          "anime": "Super no Ura de Yani Suu Futari",
+          "animeCN": "",
+          "animeNative": "スーパーの裏でヤニ吸うふたり",
+          "artist": "Zutto Mayonaka de Ii no ni.",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 196187,
+          "popularity": 126864,
+          "rank": 2,
+          "animethemesUrl": "https://animethemes.moe/anime/super_no_ura_de_yani_suu_futari"
+        },
+        {
+          "titleCN": "Fiction",
+          "title": "Fiction",
+          "anime": "Super no Ura de Yani Suu Futari",
+          "animeCN": "",
+          "animeNative": "スーパーの裏でヤニ吸うふたり",
+          "artist": "imase",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 196187,
+          "popularity": 126864,
+          "rank": 2,
+          "animethemesUrl": "https://animethemes.moe/anime/super_no_ura_de_yani_suu_futari"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "anime": "Youjo Senki II",
+      "anilistId": 135865,
+      "songs": [
+        {
+          "titleCN": "Why? RED induction",
+          "title": "Why? RED induction",
+          "anime": "Youjo Senki II",
+          "animeCN": "",
+          "animeNative": "幼女戦記Ⅱ",
+          "artist": "MYTH & ROID",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 135865,
+          "popularity": 95312,
+          "rank": 3,
+          "animethemesUrl": "https://animethemes.moe/anime/youjo_senki_ii"
+        },
+        {
+          "titleCN": "Weiter! Weiter!",
+          "title": "Weiter! Weiter!",
+          "anime": "Youjo Senki II",
+          "animeCN": "",
+          "animeNative": "幼女戦記Ⅱ",
+          "artist": "Aoi Yuuki",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 135865,
+          "popularity": 95312,
+          "rank": 3,
+          "animethemesUrl": "https://animethemes.moe/anime/youjo_senki_ii"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+      "anilistId": 185874,
+      "songs": [
+        {
+          "titleCN": "I-BULL",
+          "title": "I-BULL",
+          "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+          "animeCN": "",
+          "animeNative": "BLEACH 千年血戦篇-禍進譚-",
+          "artist": "jo0ji",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 185874,
+          "popularity": 89771,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/bleach_sennen_kessenhen_kashintan"
+        },
+        {
+          "titleCN": "Rasen",
+          "title": "Rasen",
+          "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+          "animeCN": "",
+          "animeNative": "BLEACH 千年血戦篇-禍進譚-",
+          "artist": "9Lana",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 185874,
+          "popularity": 89771,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/bleach_sennen_kessenhen_kashintan"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "anime": "Yani Neko",
+      "anilistId": 207141,
+      "songs": [
+        {
+          "titleCN": "Nanmonee",
+          "title": "Nanmonee",
+          "anime": "Yani Neko",
+          "animeCN": "",
+          "animeNative": "ヤニねこ",
+          "artist": "Wasureranneyo",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 207141,
+          "popularity": 77608,
+          "rank": 5,
+          "animethemesUrl": "https://animethemes.moe/anime/yani_neko"
+        },
+        {
+          "titleCN": "Kemuri to Blue",
+          "title": "Kemuri to Blue",
+          "anime": "Yani Neko",
+          "animeCN": "",
+          "animeNative": "ヤニねこ",
+          "artist": "Necry Talkie",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 207141,
+          "popularity": 77608,
+          "rank": 5,
+          "animethemesUrl": "https://animethemes.moe/anime/yani_neko"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "anime": "BLACK TORCH",
+      "anilistId": 187538,
+      "songs": [
+        {
+          "titleCN": "FREEZE ME UP",
+          "title": "FREEZE ME UP",
+          "anime": "BLACK TORCH",
+          "animeCN": "",
+          "animeNative": "BLACK TORCH",
+          "artist": "SiM",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 187538,
+          "popularity": 72343,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/black_torch"
+        },
+        {
+          "titleCN": "Groooovy",
+          "title": "Groooovy",
+          "anime": "BLACK TORCH",
+          "animeCN": "",
+          "animeNative": "BLACK TORCH",
+          "artist": "I Don't Like Mondays.",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 187538,
+          "popularity": 72343,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/black_torch"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+      "anilistId": 180136,
+      "songs": [
+        {
+          "titleCN": "Awake",
+          "title": "Awake",
+          "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+          "animeCN": "",
+          "animeNative": "追放された転生重騎士はゲーム知識で無双する",
+          "artist": "SPYAIR",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 180136,
+          "popularity": 65250,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/tsuihou_sareta_tensei_juukishi_wa_game_chishiki_de_musou_suru"
+        },
+        {
+          "titleCN": "Lv.1 Shokugyou:Ningen",
+          "title": "Lv.1 Shokugyou:Ningen",
+          "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+          "animeCN": "",
+          "animeNative": "追放された転生重騎士はゲーム知識で無双する",
+          "artist": "ReoNa",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 180136,
+          "popularity": 65250,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/tsuihou_sareta_tensei_juukishi_wa_game_chishiki_de_musou_suru"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "anime": "Seihantai na Kimi to Boku 2nd Season",
+      "anilistId": 210031,
+      "songs": [
+        {
+          "titleCN": "Nekojarashi",
+          "title": "Nekojarashi",
+          "anime": "Seihantai na Kimi to Boku 2nd Season",
+          "animeCN": "",
+          "animeNative": "正反対な君と僕 第2期",
+          "artist": "7co",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 210031,
+          "popularity": 62344,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/seihantai_na_kimi_to_boku_2nd_season"
+        },
+        {
+          "titleCN": "Unmei no Kimi",
+          "title": "Unmei no Kimi",
+          "anime": "Seihantai na Kimi to Boku 2nd Season",
+          "animeCN": "",
+          "animeNative": "正反対な君と僕 第2期",
+          "artist": "Mega Shinnosuke",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 210031,
+          "popularity": 62344,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/seihantai_na_kimi_to_boku_2nd_season"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
+      "anilistId": 103303,
+      "songs": [
+        {
+          "titleCN": "Eureka Evrika",
+          "title": "Eureka Evrika",
+          "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
+          "animeCN": "",
+          "animeNative": "二十世紀電氣目録-ユーレカ・エヴリカ-",
+          "artist": "Luna Goami",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 103303,
+          "popularity": 59603,
+          "rank": 9,
+          "animethemesUrl": "https://animethemes.moe/anime/nijusseiki_denki_mokuroku_eureka_evrika"
+        },
+        {
+          "titleCN": "Soarin'",
+          "title": "Soarin'",
+          "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
+          "animeCN": "",
+          "animeNative": "二十世紀電氣目録-ユーレカ・エヴリカ-",
+          "artist": "Ginger Root",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 103303,
+          "popularity": 59603,
+          "rank": 9,
+          "animethemesUrl": "https://animethemes.moe/anime/nijusseiki_denki_mokuroku_eureka_evrika"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "anime": "Kimi ga Shinu made Koi wo Shitai",
+      "anilistId": 187260,
+      "songs": [
+        {
+          "titleCN": "Amore",
+          "title": "Amore",
+          "anime": "Kimi ga Shinu made Koi wo Shitai",
+          "animeCN": "",
+          "animeNative": "きみが死ぬまで恋をしたい",
+          "artist": "ReoNa",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 187260,
+          "popularity": 56473,
+          "rank": 10,
+          "animethemesUrl": "https://animethemes.moe/anime/kimi_ga_shinu_made_koi_wo_shitai"
+        },
+        {
+          "titleCN": "Eternal",
+          "title": "Eternal",
+          "anime": "Kimi ga Shinu made Koi wo Shitai",
+          "animeCN": "",
+          "animeNative": "きみが死ぬまで恋をしたい",
+          "artist": "sajou no hana",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 187260,
+          "popularity": 56473,
+          "rank": 10,
+          "animethemesUrl": "https://animethemes.moe/anime/kimi_ga_shinu_made_koi_wo_shitai"
+        }
+      ]
+    },
+    {
+      "rank": 11,
+      "anime": "Otomege Sekai wa Mob ni Kibishii Sekai desu 2",
+      "anilistId": 159309,
+      "songs": [
+        {
+          "titleCN": "Jinsei End Roll",
+          "title": "Jinsei End Roll",
+          "anime": "Otomege Sekai wa Mob ni Kibishii Sekai desu 2",
+          "animeCN": "",
+          "animeNative": "乙女ゲー世界はモブに厳しい世界です2",
+          "artist": "Ando",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 159309,
+          "popularity": 55788,
+          "rank": 11,
+          "animethemesUrl": "https://animethemes.moe/anime/otomege_sekai_wa_mob_ni_kibishii_sekai_desu_2"
+        },
+        {
+          "titleCN": "Ashita wa Ashita no Ke Sera Sera!",
+          "title": "Ashita wa Ashita no Ke Sera Sera!",
+          "anime": "Otomege Sekai wa Mob ni Kibishii Sekai desu 2",
+          "animeCN": "",
+          "animeNative": "乙女ゲー世界はモブに厳しい世界です2",
+          "artist": "MEISHOHIKOKAI",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 159309,
+          "popularity": 55788,
+          "rank": 11,
+          "animethemesUrl": "https://animethemes.moe/anime/otomege_sekai_wa_mob_ni_kibishii_sekai_desu_2"
+        }
+      ]
+    },
+    {
+      "rank": 12,
+      "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
+      "anilistId": 177699,
+      "songs": [
+        {
+          "titleCN": "GO GHOST",
+          "title": "GO GHOST",
+          "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
+          "animeCN": "",
+          "animeNative": "攻殻機動隊 THE GHOST IN THE SHELL",
+          "artist": "King Gnu",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 177699,
+          "popularity": 54549,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/koukaku_kidoutai_the_ghost_in_the_shell"
+        },
+        {
+          "titleCN": "Blue",
+          "title": "Blue",
+          "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
+          "animeCN": "",
+          "animeNative": "攻殻機動隊 THE GHOST IN THE SHELL",
+          "artist": "millennium parade",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 177699,
+          "popularity": 54549,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/koukaku_kidoutai_the_ghost_in_the_shell"
+        }
+      ]
+    },
+    {
+      "rank": 13,
+      "anime": "Gaikotsu Kishi-sama, Tadaima Isekai e Odekakechuu II",
+      "anilistId": 185542,
+      "songs": [
+        {
+          "titleCN": "Roman Kaidou, Osanpo-chuu",
+          "title": "Roman Kaidou, Osanpo-chuu",
+          "anime": "Gaikotsu Kishi-sama, Tadaima Isekai e Odekakechuu II",
+          "animeCN": "",
+          "animeNative": "骸骨騎士様、只今異世界へお出掛け中Ⅱ",
+          "artist": "PelleK",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 185542,
+          "popularity": 50600,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/gaikotsu_kishisama_tadaima_isekai_e_odekakechuu_ii"
+        },
+        {
+          "titleCN": "Kiseki wa Okinai",
+          "title": "Kiseki wa Okinai",
+          "anime": "Gaikotsu Kishi-sama, Tadaima Isekai e Odekakechuu II",
+          "animeCN": "",
+          "animeNative": "骸骨騎士様、只今異世界へお出掛け中Ⅱ",
+          "artist": "DIALOGUE+",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 185542,
+          "popularity": 50600,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/gaikotsu_kishisama_tadaima_isekai_e_odekakechuu_ii"
+        }
+      ]
+    },
+    {
+      "rank": 14,
+      "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
+      "anilistId": 202269,
+      "songs": [
+        {
+          "titleCN": "Hitohira",
+          "title": "Hitohira",
+          "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
+          "animeCN": "",
+          "animeNative": "透明な夜に駆ける君と、目に見えない恋をした。",
+          "artist": "Motohiro Hata",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 202269,
+          "popularity": 50039,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/toumei_na_yoru_ni_kakeru_kimi_to_me_ni_mienai_koi_wo_shita"
+        },
+        {
+          "titleCN": "Hikari",
+          "title": "Hikari",
+          "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
+          "animeCN": "",
+          "animeNative": "透明な夜に駆ける君と、目に見えない恋をした。",
+          "artist": "Yui Sakurai",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 202269,
+          "popularity": 50039,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/toumei_na_yoru_ni_kakeru_kimi_to_me_ni_mienai_koi_wo_shita"
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "anime": "Katainaka no Ossan, Kensei ni Naru II",
+      "anilistId": 194829,
+      "songs": [
+        {
+          "titleCN": "Kurenai no Ha",
+          "title": "Kurenai no Ha",
+          "anime": "Katainaka no Ossan, Kensei ni Naru II",
+          "animeCN": "",
+          "animeNative": "片田舎のおっさん、剣聖になるII",
+          "artist": "Unicorn",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 194829,
+          "popularity": 46305,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/katainaka_no_ossan_kensei_ni_naru_ii"
+        },
+        {
+          "titleCN": "Mikansei",
+          "title": "Mikansei",
+          "anime": "Katainaka no Ossan, Kensei ni Naru II",
+          "animeCN": "",
+          "animeNative": "片田舎のおっさん、剣聖になるII",
+          "artist": "BLUE ENCOUNT",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 194829,
+          "popularity": 46305,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/katainaka_no_ossan_kensei_ni_naru_ii"
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}

@@ -1,18 +1,9 @@
-# =====================================================================
-# 曲库自动更新工作流
-#
-# 每季度（1/4/7/10 月 1 号）03:00 UTC（北京时间 11:00）自动发现当季新番 OP/ED，
-# 生成候选曲库并创建 Pull Request 供人工复核合并。
-# 也可手动触发：Actions → Update library → Run workflow。
-#
-# 依赖：scripts/fetch-season.mjs（AniList + AnimeThemes 数据链路）
-# =====================================================================
-name: Update library
+name: Update library candidates
 
 on:
   schedule:
-    - cron: "0 3 1 1,4,7,10 *" # 每季度第一个月 1 号 03:00 UTC
-  workflow_dispatch: # 手动触发
+    - cron: "0 3 * * 1" # Mondays, 03:00 UTC; keep checking until a complete pool is ready.
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -23,47 +14,46 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Run season discovery
-        run: node scripts/fetch-season.mjs --out candidates
-
-      - name: Detect changes
-        id: changes
+      - name: Discover current season
+        id: season
         run: |
-          if git diff --quiet -- candidates.js candidates.md; then
-            echo "No candidate changes for this season."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
+          KEY=$(node -e "const d=new Date(); process.stdout.write(d.getUTCFullYear()+'-'+String(1+3*Math.floor(d.getUTCMonth()/3)).padStart(2,'0'))")
+          echo "key=$KEY" >> "$GITHUB_OUTPUT"
+          node scripts/fetch-season.mjs --out "candidates/$KEY"
+          if node -e "process.exit(require('./candidates/$KEY.json').complete ? 0 : 1)"; then
+            echo "complete=true" >> "$GITHUB_OUTPUT"
           else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Pool incomplete; no review PR will be opened." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if grep -Fq "\"$KEY\":" seasonal-pools.js; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create PR with candidates
-        if: steps.changes.outputs.changed == 'true'
+      - name: Open or update the review PR
+        if: steps.season.outputs.complete == 'true' && steps.season.outputs.published != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEY: ${{ steps.season.outputs.key }}
         run: |
-          BRANCH="library-candidates-$(date +%Y%m%d)"
+          BRANCH="library-candidates-$KEY"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
-          git add candidates.js candidates.md
-          git commit -m "曲库候选更新：$(date +%Y-%m-%d) 当季新番 OP/ED（自动生成，待人工复核）"
-          git push origin "$BRANCH"
-          gh pr create \
-            --title "曲库候选更新 $(date +%Y-%m-%d)" \
-            --body "## 自动生成的曲库候选
-
-本 PR 由定时工作流自动创建，数据来自 AniList + AnimeThemes。
-
-### 复核清单
-1. 打开 candidates.md 检查候选歌曲（歌名中文名、歌手、类型）
-2. titleCN 如与原文不符，用 Bangumi 中文名修正
-3. 确认无误后合并，并把 index.html / app.js / songs.js 的缓存版本号同步 +1
-4. 合并后 Vercel / GitHub Pages 自动重新部署" \
-            --base master \
-            --head "$BRANCH"
+          git fetch origin "+refs/heads/$BRANCH:refs/remotes/origin/$BRANCH" || true
+          git switch -C "$BRANCH"
+          git add "candidates/$KEY.json" "candidates/$KEY.md"
+          if git diff --cached --quiet; then
+            echo "No candidate changes." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Update $KEY seasonal song candidates"
+          git push --force-with-lease origin "$BRANCH"
+          if ! gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+            gh pr create --base "${{ github.event.repository.default_branch }}" --head "$BRANCH" \
+              --title "$KEY 季度曲库候选（待人工复核）" \
+              --body "候选已凑齐 15 部番剧、30 首 OP/ED。请核对名称、歌手、类型和音源。此 PR 只包含候选；复核后另行加入 seasonal-pools.js 才会向玩家发布。"
+          fi

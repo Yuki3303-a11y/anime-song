@@ -16,6 +16,8 @@
 // ============================================================
 import http from 'node:http';
 import https from 'node:https';
+import crypto from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 const PORT = 8765;
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
@@ -23,6 +25,15 @@ const REFERER = 'https://www.bilibili.com/';
 const API_BASE = 'https://api.bilibili.com';
 const TIMEOUT = 12000;
 const STREAM_HOST_SUFFIXES = ['.bilivideo.com', '.akamaized.net', '.mcdn.bilivideo.cn'];
+const MIXIN_KEY_ENC_TAB = [
+    46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35,
+    27, 43, 5, 49, 33, 9, 42, 19, 29, 28, 14, 39, 12, 38, 41, 13,
+    37, 48, 7, 16, 24, 55, 40, 61, 26, 17, 0, 1, 60, 51, 30, 4,
+    22, 25, 54, 21, 56, 59, 6, 63, 57, 62, 11, 36, 20, 34, 44, 52
+];
+const FALLBACK_IMG = '7cd084941338484aae1ad9425b84077c';
+const FALLBACK_SUB = '4932caff0ff746eab6f01bf08b70ac45';
+let cachedWbiKeys = null;
 
 function isAllowedStreamUrl(url) {
     const host = url.hostname.toLowerCase();
@@ -42,12 +53,86 @@ function biliJson(pathWithQuery) {
             let buf = '';
             res.on('data', d => { buf += d; });
             res.on('end', () => {
-                try { resolve(JSON.parse(buf)); }
-                catch { reject(new Error('B站响应解析失败')); }
+                if (res.statusCode >= 400) {
+                    const error = new Error(`B站 HTTP ${res.statusCode}`);
+                    error.statusCode = res.statusCode;
+                    reject(error);
+                    return;
+                }
+                try {
+                    const data = JSON.parse(buf);
+                    if (data.code !== undefined && data.code !== 0) {
+                        const error = new Error(`B站 API 错误 ${data.code}: ${data.message || ''}`);
+                        error.biliCode = data.code;
+                        reject(error);
+                        return;
+                    }
+                    resolve(data);
+                } catch { reject(new Error('B站响应解析失败')); }
             });
         });
         req.setTimeout(TIMEOUT, () => req.destroy(new Error('B站请求超时')));
         req.on('error', reject);
+    });
+}
+
+function getMixinKey(raw) {
+    return MIXIN_KEY_ENC_TAB.map(i => raw[i]).join('').slice(0, 32);
+}
+
+function buildWbiQuery(params, mixinKey, nowSeconds = Math.floor(Date.now() / 1000)) {
+    const all = { ...params, wts: String(nowSeconds) };
+    const query = Object.keys(all).sort().map(key => {
+        const value = String(all[key]).replace(/[!'()*]/g, '');
+        return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    }).join('&');
+    const wRid = crypto.createHash('md5').update(query + mixinKey).digest('hex');
+    return `${query}&w_rid=${wRid}`;
+}
+
+function isRetriable(error) {
+    const message = error?.message || '';
+    return error?.statusCode === 412 || error?.statusCode === 429 ||
+        error?.biliCode === -412 || error?.biliCode === -799 ||
+        /超时|ECONNRESET|socket hang up|EAI_AGAIN/.test(message);
+}
+
+async function withRetry(fn, options = {}) {
+    const maxRetries = options.maxRetries ?? 2;
+    const delay = options.delay ?? (ms => new Promise(resolve => setTimeout(resolve, ms)));
+    let lastError;
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try { return await fn(); }
+        catch (error) {
+            lastError = error;
+            if (!isRetriable(error) || attempt === maxRetries) break;
+            await delay(300 * (attempt + 1));
+        }
+    }
+    throw lastError;
+}
+
+async function getWbiKeys(forceRefresh = false) {
+    if (cachedWbiKeys && !forceRefresh) return cachedWbiKeys;
+    try {
+        const nav = await biliJson('/x/web-interface/nav');
+        const wbi = nav?.data?.wbi_img;
+        if (!wbi?.img_url || !wbi?.sub_url) throw new Error('WBI keys unavailable');
+        cachedWbiKeys = {
+            img: wbi.img_url.split('/').pop().split('.')[0],
+            sub: wbi.sub_url.split('/').pop().split('.')[0]
+        };
+    } catch {
+        cachedWbiKeys = { img: FALLBACK_IMG, sub: FALLBACK_SUB };
+    }
+    return cachedWbiKeys;
+}
+
+async function signedBiliJson(path, params) {
+    return withRetry(async () => {
+        const keys = await getWbiKeys();
+        const mixinKey = getMixinKey(keys.img + keys.sub);
+        return biliJson(`${path}?${buildWbiQuery(params, mixinKey)}`);
     });
 }
 
@@ -78,7 +163,13 @@ async function getAudioStream(bvid) {
 
 // ---------- B站视频搜索 ----------
 async function searchBilibili(keyword) {
-    const data = await biliJson('/x/web-interface/search/type?search_type=video&keyword=' + encodeURIComponent(keyword) + '&page=1');
+    const data = await signedBiliJson('/x/web-interface/wbi/search/type', {
+        search_type: 'video', keyword, page: '1'
+    });
+    return parseSearchResults(data);
+}
+
+function parseSearchResults(data) {
     const list = data?.data?.result || [];
     return list.map(r => {
         let dur = 0;
@@ -98,47 +189,63 @@ async function searchBilibili(keyword) {
 }
 
 // ---------- 流式转发 B站 CDN 音频（解决 Referer 校验，支持 Range 分段请求） ----------
-function pipeStream(res, audioUrl, req) {
-    let target;
-    try { target = new URL(audioUrl); }
-    catch { res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }); res.end(JSON.stringify({ error: 'bad stream url' })); return; }
-    if (!isAllowedStreamUrl(target)) {
-        res.writeHead(403, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-        res.end(JSON.stringify({ error: 'stream host not allowed' }));
-        return;
-    }
-    // 转发 Range header（浏览器 <audio> 播放时会发分段请求）
-    const upstreamHeaders = { 'User-Agent': UA, 'Referer': REFERER, 'Accept': '*/*' };
-    if (req?.headers?.range) upstreamHeaders['Range'] = req.headers.range;
-    const upstream = https.get({
-        hostname: target.hostname,
-        path: target.pathname + target.search,
-        headers: upstreamHeaders
-    }, u => {
-        if (u.statusCode >= 400) {
-            res.writeHead(u.statusCode, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-            res.end(JSON.stringify({ error: 'upstream ' + u.statusCode }));
+function pipeStream(res, audioUrl, req, backupUrl = null, transport = https) {
+    const candidates = [audioUrl, backupUrl].filter(Boolean);
+    const targets = [];
+    for (const candidate of candidates) {
+        let target;
+        try { target = new URL(candidate); }
+        catch {
+            res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            res.end(JSON.stringify({ error: 'bad stream url' }));
             return;
         }
-        // 传递上游状态码（200 完整内容 / 206 分段内容）和相关 header
-        const respHeaders = {
-            'Content-Type': 'audio/mp4',  // B站 CDN 有时返回 application/octet-stream，强制 audio/mp4
-            'Accept-Ranges': 'bytes',
-            'Cache-Control': 'public, max-age=3600',
-            'Access-Control-Allow-Origin': '*'
-        };
-        if (u.headers['content-length']) respHeaders['Content-Length'] = u.headers['content-length'];
-        if (u.headers['content-range']) respHeaders['Content-Range'] = u.headers['content-range'];
-        res.writeHead(u.statusCode, respHeaders);
-        u.pipe(res);
-    });
-    upstream.setTimeout(15000, () => upstream.destroy(new Error('音频源连接超时')));
-    upstream.on('error', () => {
-        if (!res.headersSent) {
-            res.writeHead(502, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-            res.end(JSON.stringify({ error: '音频源拉取失败' }));
-        } else { res.end(); }
-    });
+        if (!isAllowedStreamUrl(target)) {
+            res.writeHead(403, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            res.end(JSON.stringify({ error: 'stream host not allowed' }));
+            return;
+        }
+        targets.push(target);
+    }
+
+    const requestTarget = index => {
+        const target = targets[index];
+        const upstreamHeaders = { 'User-Agent': UA, 'Referer': REFERER, 'Accept': '*/*' };
+        if (req?.headers?.range) upstreamHeaders.Range = req.headers.range;
+        const upstream = transport.get({
+            hostname: target.hostname,
+            path: target.pathname + target.search,
+            headers: upstreamHeaders
+        }, u => {
+            if (u.statusCode >= 400) {
+                u.resume?.();
+                if (index + 1 < targets.length && !res.headersSent) return requestTarget(index + 1);
+                res.writeHead(u.statusCode, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+                res.end(JSON.stringify({ error: 'upstream ' + u.statusCode }));
+                return;
+            }
+            const upstreamType = u.headers['content-type'];
+            const respHeaders = {
+                'Content-Type': !upstreamType || upstreamType === 'application/octet-stream' ? 'audio/mp4' : upstreamType,
+                'Accept-Ranges': 'bytes',
+                'Cache-Control': 'public, max-age=3600',
+                'Access-Control-Allow-Origin': '*'
+            };
+            if (u.headers['content-length']) respHeaders['Content-Length'] = u.headers['content-length'];
+            if (u.headers['content-range']) respHeaders['Content-Range'] = u.headers['content-range'];
+            res.writeHead(u.statusCode, respHeaders);
+            u.pipe(res);
+        });
+        upstream.setTimeout(15000, () => upstream.destroy(new Error('音频源连接超时')));
+        upstream.on('error', () => {
+            if (index + 1 < targets.length && !res.headersSent) return requestTarget(index + 1);
+            if (!res.headersSent) {
+                res.writeHead(502, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+                res.end(JSON.stringify({ error: '音频源拉取失败' }));
+            } else { res.end(); }
+        });
+    };
+    requestTarget(0);
 }
 
 // ---------- HTTP 服务 ----------
@@ -158,7 +265,7 @@ const server = http.createServer(async (req, res) => {
         // 1) 音频流转发：/stream?url= 或 /api/search?stream=
         const streamParam = url.pathname === '/stream' ? url.searchParams.get('url') : url.searchParams.get('stream');
         if (streamParam) {
-            pipeStream(res, streamParam, req);
+            pipeStream(res, streamParam, req, url.searchParams.get('backup'));
             return;
         }
 
@@ -184,11 +291,15 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(PORT, '127.0.0.1', () => {
-    console.log('============================================');
-    console.log('  B站本地代理已启动');
-    console.log(`  地址：http://127.0.0.1:${PORT}`);
-    console.log('  游戏设置里把 B站代理地址填成这个地址即可');
-    console.log('  关闭本窗口 = 停止代理');
-    console.log('============================================');
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+    server.listen(PORT, '127.0.0.1', () => {
+        console.log('============================================');
+        console.log('  B站本地代理已启动');
+        console.log(`  地址：http://127.0.0.1:${PORT}`);
+        console.log('  游戏设置里把 B站代理地址填成这个地址即可');
+        console.log('  关闭本窗口 = 停止代理');
+        console.log('============================================');
+    });
+}
+
+export { buildWbiQuery, getMixinKey, parseSearchResults, pipeStream, withRetry };

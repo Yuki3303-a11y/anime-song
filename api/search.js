@@ -125,54 +125,57 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const { q, bvid, stream } = req.query;
+  const { q, bvid, stream, backup } = req.query;
 
   try {
     // Stream audio proxy — fetch B站 CDN audio and pipe to browser
     if (stream) {
-      const audioUrl = stream;
-      const parsed = new URL(audioUrl);
-      // 防开放代理：只允许 B站音频 CDN 域名
-      if (parsed.protocol !== 'https:' || (parsed.port && parsed.port !== '443') ||
-          parsed.username || parsed.password || !isAllowedStreamHost(parsed.hostname)) {
-        return res.status(403).json({ error: 'stream host not allowed' });
+      const targets = [];
+      for (const audioUrl of [stream, backup].filter(Boolean)) {
+        const parsed = new URL(audioUrl);
+        if (parsed.protocol !== 'https:' || (parsed.port && parsed.port !== '443') ||
+            parsed.username || parsed.password || !isAllowedStreamHost(parsed.hostname)) {
+          return res.status(403).json({ error: 'stream host not allowed' });
+        }
+        targets.push(parsed);
       }
-      const hostname = parsed.hostname;
-      const path = parsed.pathname + parsed.search;
 
-      const headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': 'https://www.bilibili.com/',
-        'Accept': '*/*'
+      const pipeTarget = index => {
+        const parsed = targets[index];
+        const headers = {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': 'https://www.bilibili.com/',
+          'Accept': '*/*'
+        };
+        if (req.headers.range) headers.Range = req.headers.range;
+        const upstreamReq = https.get({
+          hostname: parsed.hostname,
+          path: parsed.pathname + parsed.search,
+          headers
+        }, upstream => {
+          if (upstream.statusCode >= 400) {
+            upstream.resume?.();
+            if (index + 1 < targets.length && !res.headersSent) return pipeTarget(index + 1);
+            res.status(upstream.statusCode).end();
+            return;
+          }
+          res.status(upstream.statusCode);
+          const upstreamType = upstream.headers['content-type'];
+          res.setHeader('Content-Type', !upstreamType || upstreamType === 'application/octet-stream' ? 'audio/mp4' : upstreamType);
+          if (upstream.headers['content-length']) res.setHeader('Content-Length', upstream.headers['content-length']);
+          if (upstream.headers['content-range']) res.setHeader('Content-Range', upstream.headers['content-range']);
+          res.setHeader('Accept-Ranges', 'bytes');
+          res.setHeader('Cache-Control', 'public, max-age=3600');
+          upstream.pipe(res);
+        });
+        upstreamReq.setTimeout(15000, () => upstreamReq.destroy(new Error('音频源连接超时')));
+        upstreamReq.on('error', () => {
+          if (index + 1 < targets.length && !res.headersSent) return pipeTarget(index + 1);
+          if (!res.headersSent) res.status(502).json({ error: '音频源拉取失败' });
+          else res.end();
+        });
       };
-      if (req.headers.range) headers.Range = req.headers.range;
-      const upstreamReq = https.get({
-        hostname, path,
-        headers
-      }, upstream => {
-        if (upstream.statusCode >= 400) {
-          res.status(upstream.statusCode).end();
-          return;
-        }
-        res.status(upstream.statusCode);
-        res.setHeader('Content-Type', upstream.headers['content-type'] || 'audio/mp4');
-        if (upstream.headers['content-length']) {
-          res.setHeader('Content-Length', upstream.headers['content-length']);
-        }
-        if (upstream.headers['content-range']) {
-          res.setHeader('Content-Range', upstream.headers['content-range']);
-        }
-        res.setHeader('Accept-Ranges', 'bytes');
-        res.setHeader('Cache-Control', 'public, max-age=3600');
-        upstream.pipe(res);
-      });
-      upstreamReq.setTimeout(15000, () => {
-        upstreamReq.destroy(new Error('音频源连接超时'));
-      });
-      upstreamReq.on('error', () => {
-        if (!res.headersSent) res.status(502).json({ error: '音频源拉取失败' });
-        else res.end();
-      });
+      pipeTarget(0);
       return;
     }
 

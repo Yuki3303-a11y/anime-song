@@ -4,7 +4,7 @@ export const SONGS = [
 
     // ===== 银河铁道999 =====
     { titleCN: "银河铁道999", title: "Galaxy Express 999", anime: "银河铁道999", artist: "佐々木功", type: "OP" },
-    { titleCN: "告别之光", title: "Sayonara no Natsu", anime: "银河铁道999", artist: "佐々木功", type: "ED" },
+    { titleCN: "青い地球", title: "Aoi Chikyuu", anime: "银河铁道999", artist: "佐々木功", type: "ED" },
 
     // ===== 机动战士高达 =====
     { titleCN: "翔べ！ガンダム", title: "Tobe! Gundam", anime: "机动战士高达", artist: "池田鸿", type: "OP" },

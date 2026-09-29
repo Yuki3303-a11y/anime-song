@@ -1,7 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=27';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=50';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=38';
+import { SEASONAL_COVERS } from './seasonal-covers.js?v=1';
+import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
+import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback } from './library-tools.mjs?v=1';
+import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=3';
 
 // =====================================================================
 // Firebase
@@ -45,6 +50,7 @@ const gameState = {
     guessType: 'anime',     // 当前题题型: anime / song / artist
     hints: { h1: false, h2: false },  // 提示使用状态（h1/h2 各一次）
     playlist: [],
+    activePool: [],
     questionIndex: 0,
     questionCount: 10,
     score: 0,
@@ -60,6 +66,12 @@ const gameState = {
     viewingHistory: false,
     fetchGeneration: 0,
     lastAudioResult: null,
+    mediaState: 'idle',
+    mediaRetryCount: 0,
+    recoveringAudio: false,
+    failedAudioSources: new Set(),
+    failedBiliVideos: new Set(),
+    failedYtVideos: new Set(),
 };
 
 const $ = id => document.getElementById(id);
@@ -116,11 +128,60 @@ function probeLocalProxy() {
 // =====================================================================
 // Filter State
 // =====================================================================
-const filterState = { types: new Set(), source: null };
+const filterState = { types: new Set(), source: null, watchedOnly: (() => {
+    try { return localStorage.getItem('watched_only_v1') === '1'; }
+    catch { return false; }
+})() };
+const SOURCE_MIX_KEY = 'song_source_mix_v1';
+function defaultSourceMix() {
+    return { legacy: true, seasons: Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length === 30), imported: true, watched: false, selected: true };
+}
+function loadSourceMix() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(SOURCE_MIX_KEY) || 'null');
+        if (!saved || !Array.isArray(saved.seasons)) return defaultSourceMix();
+        return { legacy: !!saved.legacy, seasons: saved.seasons.filter(key => SEASONAL_POOLS[key]?.length === 30),
+            imported: !!saved.imported, watched: !!saved.watched, selected: saved.selected !== false };
+    } catch { return defaultSourceMix(); }
+}
+filterState.mix = loadSourceMix();
+try { if (localStorage.getItem('song_source_mode_v1') === 'mix') filterState.source = 'mix'; } catch {}
+
+const PERSONAL_KEYS = {
+    watched: 'watched_anime_v1', mistakes: 'mistake_book_v1',
+    audio: 'local_audio_checks_v1', feedback: 'song_feedback_v1', selected: 'selected_song_keys_v1'
+};
+function readPersonalList(key) {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(key) || '[]');
+        return Array.isArray(parsed) ? parsed : [];
+    } catch { return []; }
+}
+function savePersonalList(key, entries) {
+    try { localStorage.setItem(key, JSON.stringify(entries)); }
+    catch (error) { console.warn('[Library] local save failed:', error); }
+}
+let watchedAnimeKeys = readPersonalList(PERSONAL_KEYS.watched).filter(key => typeof key === 'string');
+let mistakeBook = readPersonalList(PERSONAL_KEYS.mistakes);
+let audioChecks = readPersonalList(PERSONAL_KEYS.audio);
+let songFeedback = readPersonalList(PERSONAL_KEYS.feedback);
+let selectedSongKeys = readPersonalList(PERSONAL_KEYS.selected).filter(key => typeof key === 'string');
+function getWatchedAnimeKeys() { return watchedAnimeKeys; }
+function recordMistake(song, selected) {
+    mistakeBook = putMistake(mistakeBook, song, selected);
+    savePersonalList(PERSONAL_KEYS.mistakes, mistakeBook);
+}
+function recordLocalAudioCheck(song, status, source = '') {
+    if (!song) return;
+    audioChecks = putAudioCheck(audioChecks, song, status, source);
+    savePersonalList(PERSONAL_KEYS.audio, audioChecks);
+}
 
 let audioSourcePref = (() => {
-    try { return localStorage.getItem('audio_source_pref_v1') || null; }
-    catch { return null; }
+    try {
+        const saved = localStorage.getItem('audio_source_pref_v1');
+        return saved === 'bilibili-only' || saved === 'itunes-youtube' ? saved : 'smart';
+    } catch { return 'smart'; }
 })();
 
 function saveAudioSourcePref(value) {
@@ -132,9 +193,15 @@ function saveAudioSourcePref(value) {
 }
 
 function updateFilterCount() {
-    const count = getFilteredSongs().length;
+    const count = uniqueChallengePool(getFilteredSongs()).length;
     $('filterCount').textContent = `共 ${count} 首可选`;
     $('songCount').textContent = count + '+';
+    const selected = sourceSelection(filterState.source);
+    const sourceName = selected.group === 'mix' ? '自由组合' : selected.group === 'all' ? '全部歌曲' : selected.group === 'custom' ? '我的导入' :
+        selected.official === 'legacy' ? '原有曲库' : selected.official === 'season' ? `${selected.season.slice(0, 4)} 年 ${Number(selected.season.slice(5))} 月新番` : '全部官方曲库';
+    $('menuSourceSummary').textContent = `${sourceName}${filterState.watchedOnly ? ' · 仅追番' : ''} · ${count} 首`;
+    if (typeof selectedLibraryTab !== 'undefined' && selectedLibraryTab === 'current' &&
+        !$('v-library').classList.contains('hidden')) renderCurrentLibrary();
 }
 
 // =====================================================================
@@ -216,25 +283,8 @@ class MemCache {
 const audioCache = new MemCache('audio_cache_v3', 500, 24 * 60 * 60 * 1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
-const bilibiliCache = new MemCache('bilibili_cache_v1', 200, 24 * 60 * 60 * 1000);
+const bilibiliCache = new MemCache('bilibili_cache_v2', 200, 24 * 60 * 60 * 1000);
 const bilibiliAudioCache = new MemCache('bilibili_audio_cache_v1', 200, 30 * 60 * 1000);
-
-function normalizeAudioEntry(entry) {
-    if (!entry) return null;
-    // Backward compat: old cache entries are plain URL strings
-    if (typeof entry === 'string') {
-        const isYT = entry.startsWith('yt:');
-        return {
-            url: entry,
-            source: isYT ? 'youtube' : 'itunes',
-            ytVideoId: isYT ? entry.slice(3) : null,
-            ytQuery: null,
-            itunesTrack: null,
-            itunesArtist: null
-        };
-    }
-    return entry;
-}
 
 // =====================================================================
 // YouTube Full Song Player
@@ -251,6 +301,7 @@ let ytKeyIndex = 0;
 const ytKeyExhausted = new Set(); // indices of keys known to be over quota
 let ytPlayer = null;
 let ytReady = false;
+let youtubeApiPromise = null;
 let fpProgressInterval = null;
 let fpAudioInterval = null;
 let musicProgressInterval = null;
@@ -269,47 +320,56 @@ const playlist = {
     playing: false
 };
 
-function loadYouTubeAPI() {
+function ensureYouTubeAPI() {
+    if (ytReady && ytPlayer) return Promise.resolve(ytPlayer);
+    if (youtubeApiPromise) return youtubeApiPromise;
+    youtubeApiPromise = new Promise((resolve, reject) => {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
 
     let loadFailed = false;
+    const fail = (message) => {
+        if (loadFailed) return;
+        loadFailed = true;
+        clearTimeout(failTimer);
+        tag.remove();
+        youtubeApiPromise = null;
+        reject(new Error(message));
+    };
     const failTimer = setTimeout(() => {
         if (!ytReady) {
-            loadFailed = true;
             console.error('[YT] IFrame API load timeout (15s)');
-            notify('YouTube播放器加载超时，请检查网络或关闭广告拦截插件后刷新页面');
+            fail('YouTube播放器加载超时');
         }
     }, 15000);
 
     // MUST define callback BEFORE appending script — mobile browsers may load instantly
     window.onYouTubeIframeAPIReady = () => {
-        clearTimeout(failTimer);
         if (loadFailed) return;
         try {
             ytPlayer = new YT.Player('ytPlayerEl', {
                 height: '360', width: '640',
                 playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
                 events: {
-                    onReady: () => { ytReady = true; },
+                    onReady: () => { if (loadFailed) return; ytReady = true; clearTimeout(failTimer); applyPlayerVolume(); resolve(ytPlayer); },
                     onStateChange: onYtStateChange,
                     onError: onYtError
                 }
             });
         } catch (e) {
             console.error('[YT] Player constructor failed:', e);
-            notify('YouTube播放器初始化失败，请刷新页面重试');
+            fail('YouTube播放器初始化失败');
         }
     };
 
     tag.onerror = () => {
-        clearTimeout(failTimer);
-        loadFailed = true;
         console.error('[YT] IFrame API script load error');
-        notify('YouTube播放器加载失败，请检查网络或关闭广告拦截插件后刷新页面');
+        fail('YouTube播放器加载失败');
     };
 
     document.head.appendChild(tag);
+    });
+    return youtubeApiPromise;
 }
 
 function onYtError(e) {
@@ -325,13 +385,12 @@ function onYtError(e) {
 
     // Quiz YouTube fallback — skip this question
     if (quizYT.active) {
-        notify(`YouTube音频加载失败（${reason}），已跳过此题`);
-        stopQuizYT();
-        gameState.isPlaying = false;
-        $('visualizer').classList.add('hidden');
-        $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-        gameState.questionIndex++;
-        setTimeout(() => loadQuestion(), 1500);
+        recoverQuestionAudio(`YouTube播放失败：${reason}`);
+        return;
+    }
+
+    if (libraryPreviewSession.activeKey && libraryPreviewResult?.source === 'youtube') {
+        recoverLibraryPreviewAudio(`YouTube播放失败：${reason}`);
         return;
     }
 
@@ -402,6 +461,7 @@ function onYtStateChange(e) {
     // Quiz YouTube fallback — update quiz player UI
     if (quizYT.active) {
         if (e.data === YT.PlayerState.PLAYING) {
+            setQuizMediaState('playing', '正在播放 · YouTube源');
             $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
             gameState.isPlaying = true;
             $('visualizer').classList.remove('hidden');
@@ -410,15 +470,18 @@ function onYtStateChange(e) {
             clearTimeout(quizYT.timer);
             quizYT.timer = setTimeout(() => {
                 if (quizYT.active) {
-                    stopQuizYT();
+                    if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+                    stopQuizProgress();
                     gameState.isPlaying = false;
+                    setQuizMediaState('ready', '试听结束 · YouTube源');
                     $('visualizer').classList.add('hidden');
                     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
                 }
             }, 30000);
         } else if (e.data === YT.PlayerState.ENDED) {
-            stopQuizYT();
+            clearQuizMediaTimeout();
             gameState.isPlaying = false;
+            setQuizMediaState('ready', '播放结束 · YouTube源');
             $('visualizer').classList.add('hidden');
             $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
         } else {
@@ -426,6 +489,29 @@ function onYtStateChange(e) {
             stopQuizProgress();
         }
         return; // Don't also update full player / music player
+    }
+
+    if (libraryPreviewSession.activeKey && libraryPreviewResult?.source === 'youtube') {
+        if (e.data === YT.PlayerState.PLAYING) {
+            clearTimeout(libraryPreviewTimer);
+            libraryPreviewState = 'playing';
+            recordLocalAudioCheck(libraryPreviewSong, 'played', 'youtube');
+            updateLibraryTrackStatus(libraryPreviewSong);
+            libraryPreviewTimer = setTimeout(() => {
+                if (!libraryPreviewSession.activeKey || libraryPreviewResult?.source !== 'youtube') return;
+                ytPlayer?.pauseVideo?.();
+                libraryPreviewState = 'ended';
+                updateLibraryPreviewUI();
+            }, 30000);
+        } else if (e.data === YT.PlayerState.ENDED) {
+            clearTimeout(libraryPreviewTimer);
+            libraryPreviewState = 'ended';
+        } else if (e.data === YT.PlayerState.PAUSED && libraryPreviewState === 'playing') {
+            clearTimeout(libraryPreviewTimer);
+            libraryPreviewState = 'paused';
+        }
+        updateLibraryPreviewUI();
+        return;
     }
 
     // Update detail modal player UI (only in YouTube mode)
@@ -557,68 +643,110 @@ async function searchYouTube(query) {
     return null;
 }
 
+// Quiz searches inspect multiple videos. Search's embeddable filter is useful,
+// but the player can still reject a video later (Content ID / platform policy).
+async function searchQuizYouTubeCandidates(song) {
+    let networkFailures = 0;
+    for (const query of audioSearchQueries(song).youtube) {
+        const tried = new Set();
+        while (tried.size < YT_API_KEYS.length) {
+            const idx = ytKeyIndex;
+            ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
+            if (tried.has(idx)) continue;
+            tried.add(idx);
+            if (ytKeyExhausted.has(idx)) continue;
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), YT_TIMEOUT);
+            try {
+                const key = YT_API_KEYS[idx];
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=10&q=${encodeURIComponent(query)}&key=${key}`, { signal: controller.signal });
+                if (response.status === 403 || response.status === 429) { ytKeyExhausted.add(idx); continue; }
+                if (!response.ok) continue;
+                const items = (await response.json()).items || [];
+                const ids = items.map(item => item.id?.videoId).filter(Boolean);
+                if (!ids.length) break;
+                const details = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=status&id=${ids.join(',')}&key=${key}`, { signal: controller.signal });
+                if (!details.ok) break;
+                const status = new Map(((await details.json()).items || []).map(item => [item.id, item.status?.embeddable]));
+                const candidates = items.filter(item => item.id?.videoId && status.get(item.id.videoId) === true)
+                    .map(item => ({ source: 'youtube', videoId: item.id.videoId, title: item.snippet?.title || '',
+                        artist: item.snippet?.channelTitle || '', embeddable: true }));
+                if (rankAudioCandidates(song, candidates).length) return candidates;
+                break;
+            } catch (error) {
+                console.warn('[YT] quiz search failed:', error);
+                if (++networkFailures >= 2) return [];
+            }
+            finally { clearTimeout(timeout); }
+        }
+        if (ytKeyExhausted.size >= YT_API_KEYS.length) break;
+    }
+    return [];
+}
+
 // =====================================================================
 // Bilibili Search & Audio
 // =====================================================================
 
-async function searchBilibili(anime, title, artist = '', type = '') {
+function normalizeBiliText(value) {
+    return String(value || '').normalize('NFKC').toLowerCase()
+        .replace(/[\p{P}\p{S}\s]/gu, '');
+}
+
+function biliTitleMatches(videoTitle, aliases) {
+    const normalizedVideo = normalizeBiliText(videoTitle);
+    return aliases.some(alias => {
+        const normalizedAlias = normalizeBiliText(alias);
+        return normalizedAlias.length > 1 && normalizedVideo.includes(normalizedAlias);
+    });
+}
+
+async function searchBilibili(anime, title, artist = '', type = '', aliases = {}) {
     // Cache key: anime + type are primary differentiators
-    const cacheKey = `${anime}|${type}|${title}`.toLowerCase().trim();
+    const animeAliases = [...new Set([anime, aliases.animeCN, aliases.animeNative].filter(Boolean))];
+    const titleAliases = [...new Set([title, aliases.titleCN].filter(Boolean))];
+    const cacheKey = `${animeAliases.join('/')}|${type}|${titleAliases.join('/')}`.toLowerCase().trim();
     const cached = bilibiliCache.get(cacheKey);
     if (cached) return cached;
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
-
     async function trySearch(query) {
-        const resp = await fetch(
-            `${window.BILI_WORKER_URL}/api/search?q=${encodeURIComponent(query)}`,
-            { signal: controller.signal }
-        );
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const data = await resp.json();
-        if (!data.results?.length) return [];
-        // 过滤：时长 30s-10min，排除合集/精选/混音视频（这些会导致播放的歌和题目不一致）
-        const COLLECTION_KW = ['合集', '合集', 'op/ed', 'oped', '全曲', '主题曲合集', '精选集', 'mix', 'medley', 'nonstop', '串烧', '联唱', '高音質', '高音质'];
-        return data.results.filter(r => {
-            if (r.duration > 600 || r.duration < 30) return false;
-            const t = r.title.toLowerCase();
-            return !COLLECTION_KW.some(k => t.includes(k));
-        });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), BILI_TIMEOUT);
+        try {
+            const resp = await fetch(
+                `${window.BILI_WORKER_URL}/api/search?q=${encodeURIComponent(query)}`,
+                { signal: controller.signal }
+            );
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            const data = await resp.json();
+            if (!data.results?.length) return [];
+            const COLLECTION_KW = ['合集', '主题曲合集', '精选集', 'mix', 'medley', 'nonstop', '串烧', '联唱'];
+            return data.results.filter(r => {
+                if (r.duration > 600 || r.duration < 25) return false;
+                const normalizedTitle = String(r.title || '').toLowerCase();
+                return !COLLECTION_KW.some(keyword => normalizedTitle.includes(keyword));
+            });
+        } finally {
+            clearTimeout(timeoutId);
+        }
     }
 
-    function scoreResult(r, anime, title, artist, type) {
+    function scoreResult(r) {
         let s = 0;
-        const vt = r.title.toLowerCase();
-        const an = anime.toLowerCase();
-        const tl = title.toLowerCase();
-        const ar = (artist || '').toLowerCase();
-
-        // Anime name match (highest weight — must be correct anime)
-        for (const w of an.split(/\s+/)) {
-            if (w.length > 1 && vt.includes(w)) s += 25;
-        }
-        // Exact anime name in title is strong signal
-        if (vt.includes(an)) s += 30;
-        // Song title match (high weight — must prefer correct song over same-anime others)
-        for (const w of tl.split(/\s+/)) {
-            if (w.length > 1 && vt.includes(w)) s += 30;
-        }
-        // Exact title match (very strong signal)
-        if (vt.includes(tl)) s += 40;
+        const videoTitle = r.title || '';
+        const normalizedVideo = normalizeBiliText(videoTitle);
+        const animeMatch = biliTitleMatches(videoTitle, animeAliases);
+        const titleMatch = biliTitleMatches(videoTitle, titleAliases);
+        const artistMatch = biliTitleMatches(videoTitle, [artist]);
+        if (animeMatch) s += 55;
+        if (titleMatch) s += 75;
+        if (artistMatch) s += 20;
         // OP/ED keyword bonus (titles like "OP - xxx" or "ED「xxx」")
         const tp = (type || '').toUpperCase();
         if (tp && ['OP', 'ED'].includes(tp)) {
-            if (vt.includes(tp.toLowerCase())) s += 20;
-            // Also check common OP/ED patterns in B站 titles
-            if (vt.includes('op') || vt.includes('ＯＰ') || vt.includes('主題歌')) s += 10;
-            if (vt.includes('ed') || vt.includes('ＥＤ') || vt.includes('エンディング')) s += 10;
-        }
-        // Artist match (bonus)
-        if (ar) {
-            for (const w of ar.split(/\s+/)) {
-                if (w.length > 1 && vt.includes(w)) s += 10;
-            }
+            if (normalizedVideo.includes(tp.toLowerCase())) s += 20;
+            if (tp === 'OP' && /片头|主题歌|主題歌/.test(videoTitle)) s += 10;
+            if (tp === 'ED' && /片尾|エンディング/.test(videoTitle)) s += 10;
         }
         // Play count bonus
         if (r.play > 100000) s += 15;
@@ -630,67 +758,43 @@ async function searchBilibili(anime, title, artist = '', type = '') {
     }
 
     try {
-        // Strategy 1: anime + type + title (most precise, e.g. "约会大作战 OP デート・ア・ライブ")
         const typeLabel = (type || '').toUpperCase();
-        const typeInQuery = ['OP', 'ED'].includes(typeLabel) ? ` ${typeLabel}` : '';
-        let candidates = await trySearch(`${anime}${typeInQuery} ${title}`);
-        // Strategy 2: anime + type + title + artist (add artist for disambiguation)
-        if (candidates.length < 3 && artist) {
-            const more = await trySearch(`${anime}${typeInQuery} ${title} ${artist}`);
-            const seen = new Set(candidates.map(r => r.bvid));
-            for (const r of more) {
-                if (!seen.has(r.bvid)) { candidates.push(r); seen.add(r.bvid); }
+        const queries = audioSearchQueries({ anime, animeCN: aliases.animeCN, animeNative: aliases.animeNative,
+            title, titleCN: aliases.titleCN, artist, type });
+        const candidates = [];
+        const seen = new Set();
+        let lastError = null;
+        const searches = await Promise.allSettled(queries.bilibili.map(query => trySearch(query)));
+        for (const search of searches) {
+            if (search.status === 'rejected') { lastError = search.reason; continue; }
+            for (const result of search.value) {
+                if (!seen.has(result.bvid)) { candidates.push(result); seen.add(result.bvid); }
             }
         }
-        // Strategy 3: anime + title (without type, broader)
-        if (candidates.length < 2) {
-            const more = await trySearch(`${anime} ${title}`);
-            const seen = new Set(candidates.map(r => r.bvid));
-            for (const r of more) {
-                if (!seen.has(r.bvid)) { candidates.push(r); seen.add(r.bvid); }
-            }
-        }
-        // Strategy 4: fallback — just anime name (broadest search)
         if (!candidates.length) {
-            candidates = await trySearch(anime);
+            if (lastError) throw lastError;
+            return null;
         }
-        if (!candidates.length) return null;
 
         const scored = candidates.map(r => ({
-            ...r, _score: scoreResult(r, anime, title, artist, type)
+            ...r, _score: scoreResult(r)
         }));
         scored.sort((a, b) => b._score - a._score);
-        const best = scored[0];
-
-        // Only require anime name in title (core matching guarantee)
-        const vt = best.title.toLowerCase();
-        const an = anime.toLowerCase();
-        const animeWords = an.split(/\s+/).filter(w => w.length > 1);
-        const animeInTitle = animeWords.some(w => vt.includes(w));
-        if (!animeInTitle) {
-            console.log('[Bili] Rejected: anime not in title', best.title, '| anime:', anime);
+        const minScore = normalizeBiliText(anime).length <= 3 ? 75 : 70;
+        const viable = scored.filter(candidate => {
+            const hasTitle = biliTitleMatches(candidate.title, titleAliases);
+            const hasContext = biliTitleMatches(candidate.title, animeAliases) ||
+                biliTitleMatches(candidate.title, [artist]) ||
+                (['OP', 'ED'].includes(typeLabel) && normalizeBiliText(candidate.title).includes(typeLabel.toLowerCase()));
+            return hasTitle && hasContext && candidate._score >= minScore;
+        });
+        if (!viable.length) {
+            console.log('[Bili] Rejected: no candidate passed title/context matching');
             return null;
         }
 
-        // 歌名匹配检查：歌名的至少一个有意义的词必须在视频标题里
-        // 防止合集视频或同番剧其他歌曲被选中，导致播放的歌和题目不一致
-        const tl = title.toLowerCase();
-        const titleWords = tl.split(/\s+/).filter(w => w.length > 1);
-        if (titleWords.length > 0) {
-            const titleInVideo = titleWords.some(w => vt.includes(w));
-            if (!titleInVideo) {
-                console.log('[Bili] Rejected: song title not in video title', best.title, '| song:', title);
-                return null;
-            }
-        }
-
-        // Higher bar for very short anime names (e.g. "86") that risk false matches
-        const minScore = an.length <= 3 ? 30 : 10;
-        if (best._score < minScore) {
-            console.log('[Bili] Rejected: low score', best._score, '<', minScore, best.title);
-            return null;
-        }
-
+        const best = viable[0];
+        best._alternates = viable.slice(1, 5).map(candidate => ({ ...candidate, _alternates: undefined }));
         bilibiliCache.set(cacheKey, best);
         return best;
     } catch (e) {
@@ -703,8 +807,6 @@ async function searchBilibili(anime, title, artist = '', type = '') {
             biliProxyState.reason = 'no-result';
         }
         return null;
-    } finally {
-        clearTimeout(timeoutId);
     }
 }
 
@@ -805,6 +907,11 @@ async function searchAndLoadFullSong(song) {
         }
         $('fpTitle').textContent = '正在搜索...';
         videoId = await searchYouTube(query);
+    }
+
+    if (videoId) {
+        try { await ensureYouTubeAPI(); }
+        catch (error) { console.warn('[YT] Full song player unavailable:', error); }
     }
 
     // YouTube found AND player is ready → play embedded (desktop)
@@ -972,6 +1079,7 @@ function toggleFavorite() {
             title: song.title,
             titleCN: song.titleCN || song.title,
             anime: song.anime,
+            animeCN: song.animeCN || '',
             artist: song.artist,
             type: song.type,
             videoId: videoId,
@@ -1025,7 +1133,7 @@ function renderFavorites() {
             ? `<img class="fav-item-cover" src="${safeCover}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span style="display:none">${fallbackSVG}</span>`
             : fallbackSVG;
         const safeTitle = escapeHTML(f.titleCN || f.title);
-        const safeAnime = escapeHTML(f.anime);
+        const safeAnime = escapeHTML(animeLabel(f));
         return `
         <div class="fav-item${isActive ? ' active' : ''}" data-action="playFavSong" data-value="${i}">
             <span class="fav-item-num">${i + 1}</span>
@@ -1212,7 +1320,7 @@ async function showMusicPlayer(song) {
     // Stop detail modal player if open
     stopFullPlayer();
     $('musicTitle').textContent = `${song.titleCN || song.title} — ${song.artist}`;
-    $('musicAnime').textContent = song.anime || '';
+    $('musicAnime').textContent = animeLabel(song);
     // Type badge
     const badge = $('musicTypeBadge');
     if (badge) {
@@ -1382,8 +1490,16 @@ function clearFavorites() {
     notify('收藏已清空');
 }
 
-// Volume control
-let ytVolume = 80;
+// Shared volume control for native audio and YouTube
+const PLAYER_VOLUME_KEY = 'player_volume_v1';
+let playerVolume = (() => {
+    try {
+        const raw = localStorage.getItem(PLAYER_VOLUME_KEY);
+        if (raw === null || raw === '') return 50;
+        const saved = Number(raw);
+        return Number.isFinite(saved) && saved >= 0 && saved <= 100 ? saved : 50;
+    } catch { return 50; }
+})();
 let volumeMuted = false;
 
 function toggleVolumeSlider() {
@@ -1392,15 +1508,35 @@ function toggleVolumeSlider() {
 }
 
 function toggleMute() {
-    if (!ytPlayer) return;
     volumeMuted = !volumeMuted;
-    ytPlayer.setVolume(volumeMuted ? 0 : ytVolume);
+    applyPlayerVolume();
+}
+
+function applyPlayerVolume() {
+    const effectiveVolume = volumeMuted ? 0 : playerVolume;
+    audio.volume = effectiveVolume / 100;
+    $('libraryPreviewAudio').volume = effectiveVolume / 100;
+    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(effectiveVolume);
+    for (const id of ['volSlider', 'fpVolRange', 'musicVolRange', 'libraryVolRange']) {
+        const slider = $(id);
+        if (slider) slider.value = String(playerVolume);
+    }
+    const value = $('volValue');
+    if (value) value.textContent = `${playerVolume}%`;
     updateVolIcon();
 }
 
+function setPlayerVolume(value) {
+    const numeric = Number(value);
+    playerVolume = Math.max(0, Math.min(100, Number.isFinite(numeric) ? Math.round(numeric) : 50));
+    volumeMuted = false;
+    try { localStorage.setItem(PLAYER_VOLUME_KEY, String(playerVolume)); } catch {}
+    applyPlayerVolume();
+}
+
 function updateVolIcon() {
-    const muted = volumeMuted || ytVolume === 0;
-    const low = ytVolume < 50;
+    const muted = volumeMuted || playerVolume === 0;
+    const low = playerVolume < 50;
     const svgMuted = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
     const svgLow = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
     const svgHigh = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
@@ -1410,6 +1546,8 @@ function updateVolIcon() {
     const mIcon = $('musicVolIcon');
     if (mIcon) mIcon.innerHTML = svg;
 }
+
+applyPlayerVolume();
 
 // =====================================================================
 // Custom Song Library (Bangumi Import)
@@ -1430,6 +1568,7 @@ function setCustomSongs(songs) {
     localStorage.setItem(CUSTOM_SONGS_KEY, JSON.stringify(songs));
     updateFilterCount();
     updateCustomSongsUI();
+    if (!$('v-library').classList.contains('hidden')) renderLibrary();
 }
 
 function addCustomSong(song) {
@@ -1448,18 +1587,30 @@ function removeCustomSong(index) {
 }
 
 function getAllSongs() {
-    return [...SONGS, ...getCustomSongs()];
+    return [...SONGS, ...Object.values(SEASONAL_POOLS).flat(), ...getCustomSongs()];
 }
 
 function getFilteredSongs() {
-    const customSet = new Set(getCustomSongs().map(s => s.title + '|' + s.anime));
-    const all = getAllSongs();
-    return all.filter(s => {
+    const customSongs = getCustomSongs();
+    if (filterState.source === 'mix') {
+        const mixed = selectMixedSongs({ legacy: SONGS, seasons: SEASONAL_POOLS, imported: customSongs,
+            watchedKeys: getWatchedAnimeKeys(), animeKey, trackKey, selectedKeys: selectedSongKeys, mix: filterState.mix });
+        return filterWatchedSongs(mixed.filter(song => !filterState.types.size || filterState.types.has(song.type)),
+            getWatchedAnimeKeys(), filterState.watchedOnly);
+    }
+    const builtinCount = SONGS.length + Object.values(SEASONAL_POOLS).reduce((n, songs) => n + songs.length, 0);
+    const all = [...SONGS, ...Object.values(SEASONAL_POOLS).flat(), ...customSongs];
+    const filtered = all.filter((s, index) => {
         if (filterState.types.size > 0 && !filterState.types.has(s.type)) return false;
-        if (filterState.source === 'builtin' && customSet.has(s.title + '|' + s.anime)) return false;
-        if (filterState.source === 'custom' && !customSet.has(s.title + '|' + s.anime)) return false;
+        const custom = index >= builtinCount;
+        if (filterState.source === 'builtin' && custom) return false;
+        if (filterState.source === 'custom' && !custom) return false;
+        if (filterState.source === 'legacy' && !SONGS.includes(s)) return false;
+        if (filterState.source?.startsWith('season:') &&
+            (custom || s.season !== filterState.source.slice(7))) return false;
         return true;
     });
+    return filterWatchedSongs(filtered, getWatchedAnimeKeys(), filterState.watchedOnly);
 }
 
 // Anti-repeat question selection: remembers recently played songs across games.
@@ -1481,6 +1632,8 @@ function savePlayedHistory(list) {
 
 function buildPlaylist(pool, n) {
     const songKey = s => s.title + '|' + s.anime;
+    pool = uniqueChallengePool(pool);
+    n = Math.min(n, pool.length);
     const played = loadPlayedHistory();
     const playedSet = new Set(played);
     const fresh = pool.filter(s => !playedSet.has(songKey(s)));
@@ -1584,9 +1737,6 @@ async function importFromBangumi(indexId) {
     if (statusEl) statusEl.textContent = `找到 ${animeList.length} 部动画，搜索歌曲中...`;
 
     // Step 2: For each anime, search for songs via AniList + iTunes
-    const existingTitles = new Set(SONGS.map(s => s.anime));
-    const customSongs = getCustomSongs();
-    const customTitles = new Set(customSongs.map(s => s.anime));
     let addedCount = 0;
     const lowConfSongs = [];
 
@@ -1596,8 +1746,8 @@ async function importFromBangumi(indexId) {
         if (progressEl) progressEl.style.width = ((i + 1) / animeList.length * 100) + '%';
         if (statusEl) statusEl.textContent = `[${i + 1}/${animeList.length}] ${animeName}`;
 
-        // Skip if already in built-in or custom library
-        if (existingTitles.has(animeName) || customTitles.has(animeName)) continue;
+        // A Bangumi collection can intentionally include anime already in the official pools.
+        // addCustomSong handles exact repeats within the imported pool.
 
         // Get romaji title from AniList for better iTunes search
         let searchTitle = anime.name; // Japanese name
@@ -1623,7 +1773,7 @@ async function importFromBangumi(indexId) {
         // Search iTunes for songs — pass Japanese name for album matching
         const songs = await searchItunesForAnime(searchTitle, animeName, anime.name);
         for (const song of songs) {
-            if (addCustomSong(song)) {
+            if (addCustomSong({ ...song, origin: 'bangumi', bangumiIndexId: indexId })) {
                 addedCount++;
                 if (song._importScore && song._importScore < 80) {
                     lowConfSongs.push(song);
@@ -1804,16 +1954,16 @@ function updateCustomSongsUI() {
     if (!list) return;
     const songs = getCustomSongs();
     if (songs.length === 0) {
-        list.innerHTML = '<div style="font-size:11px;color:#999;text-align:center;padding:10px;">喵~ 还没有自定义歌曲呢</div>';
+        list.innerHTML = '<div class="bangumi-empty">喵~ 还没有自定义歌曲呢</div>';
         return;
     }
-    list.innerHTML = '<div style="font-size:11px;color:#999;margin-bottom:4px;">共 ' + songs.length + ' 首</div>' + songs.map((s, i) => `
-        <div style="display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:4px;margin-bottom:2px;background:#fafafa;">
-            <div style="flex:1;min-width:0;">
-                <div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333;">${escapeHTML(s.titleCN || s.title)}</div>
-                <div style="font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHTML(s.anime)}</div>
+    list.innerHTML = '<div class="bangumi-song-count">共 ' + songs.length + ' 首</div>' + songs.map((s, i) => `
+        <div class="bangumi-song-row">
+            <div class="bangumi-song-info">
+                <div class="bangumi-song-title">${escapeHTML(s.titleCN || s.title)}</div>
+                <div class="bangumi-song-anime">${escapeHTML(s.anime)}</div>
             </div>
-            <button data-del-custom="${i}" style="width:18px;height:18px;border-radius:50%;border:1px solid #ddd;background:none;color:#999;font-size:10px;cursor:pointer;flex-shrink:0;line-height:1;">✕</button>
+            <button class="bangumi-song-remove" type="button" data-del-custom="${i}" aria-label="移除 ${escapeHTML(s.titleCN || s.title)}">✕</button>
         </div>
     `).join('');
 }
@@ -2000,7 +2150,9 @@ async function fetchAnimeDetail(animeName) {
 }
 
 let detailReturnFocus = null;
-function showAnimeDetail(song) {
+let detailRequestId = 0;
+function showAnimeDetail(song, { auto = false } = {}) {
+    const requestId = ++detailRequestId;
     const modal = $('animeDetailModal');
     const coverWrap = document.querySelector('.detail-cover-wrap');
     const cover = $('detailCover');
@@ -2012,7 +2164,7 @@ function showAnimeDetail(song) {
 
     const songName = song.titleCN || song.title;
 
-    title.textContent = song.anime;
+    title.textContent = animeLabel(song);
     romaji.textContent = '';
     meta.innerHTML = `<span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>${escapeHTML(String(song.type || ''))}</span>`;
     songInfo.innerHTML = `
@@ -2024,8 +2176,9 @@ function showAnimeDetail(song) {
     `;
 
     // Reset cover state - show placeholder
-    cover.src = '';
-    cover.style.display = 'none';
+    const localCover = song.anilistId ? SEASONAL_COVERS[song.anilistId] : '';
+    cover.src = localCover || '';
+    cover.style.display = localCover ? 'block' : 'none';
     let placeholder = coverWrap.querySelector('.detail-cover-placeholder');
     if (!placeholder) {
         placeholder = document.createElement('div');
@@ -2033,17 +2186,17 @@ function showAnimeDetail(song) {
         placeholder.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg>';
         coverWrap.appendChild(placeholder);
     }
-    placeholder.style.display = 'flex';
+    placeholder.style.display = localCover ? 'none' : 'flex';
 
     // Safe fallback: Bangumi search URL (always works)
     bangumiLink.href = `https://bgm.tv/search/subject/${encodeURIComponent(song.anime)}`;
 
-    if (!modal.classList.contains('show')) detailReturnFocus = document.activeElement;
+    if (!modal.classList.contains('show')) detailReturnFocus = auto ? null : document.activeElement;
     modal.classList.add('show');
-    modal.querySelector('.detail-close')?.focus();
+    if (!auto) modal.querySelector('.detail-close')?.focus();
 
-    fetchAnimeDetail(song.anime).then(detail => {
-        if (!detail) return;
+    if (!auto || !localCover) fetchAnimeDetail(song.anime).then(detail => {
+        if (!detail || requestId !== detailRequestId || !modal.classList.contains('show')) return;
         if (detail.image) {
             cover.src = detail.image;
             cover.style.display = 'block';
@@ -2067,7 +2220,7 @@ function showAnimeDetail(song) {
         }
     });
 
-    searchAndLoadFullSong(song);
+    if (!auto) searchAndLoadFullSong(song);
 }
 
 // =====================================================================
@@ -2331,7 +2484,10 @@ function animateScore(element, newValue) {
 // View Navigation
 // =====================================================================
 function showView(viewName) {
+    if (viewName !== 'game' && $('animeDetailModal').classList.contains('show')) closeDetailModal();
+    if (viewName !== 'library' && libraryPreviewSession.activeKey) stopLibraryPreview();
     if (viewName !== 'game') gameState.fetchGeneration++;
+    if (viewName !== 'library') stopLibraryPreview();
     if (roomUnsub) { roomUnsub(); roomUnsub = null; }
     stopFullPlayer();
     hideMusicPlayer();
@@ -2348,17 +2504,20 @@ function showView(viewName) {
     const target = $('v-' + viewName);
     if (target) target.classList.remove('hidden');
     if (viewName === 'leaderboard') renderLeaderboard();
+    if (viewName === 'library') renderLibrary();
 }
 
 // =====================================================================
 // Single Player Mode
 // =====================================================================
-function startMode(mode) {
+function startMode(mode, practiceSongs = null, poolName = '') {
     gameState.mode = 'single';
     gameState.gameMode = mode || 'anime';
+    gameState.practiceMode = Array.isArray(practiceSongs) && !poolName;
     const modeLabelEl = $('modeLabel');
     if (modeLabelEl) {
-        modeLabelEl.textContent = ({ anime: '猜番剧', song: '猜歌名', artist: '猜歌手', mixed: '混合' })[gameState.gameMode] || '猜番剧';
+        modeLabelEl.textContent = poolName || (gameState.practiceMode ? '错题练习' :
+            (({ anime: '猜番剧', song: '猜歌名', artist: '猜歌手', mixed: '混合' })[gameState.gameMode] || '猜番剧'));
         modeLabelEl.style.display = '';
     }
     gameState.score = 0;
@@ -2367,16 +2526,26 @@ function startMode(mode) {
     gameState.maxCombo = 0;
     gameState.correctCount = 0;
     gameState.answerHistory = [];
+    gameState.failedQuestionSongs = [];
     gameState.viewingHistory = false;
-    const pool = getFilteredSongs();
-    if (pool.length < 4) { notify('呜喵~ 曲库太少了...请放宽筛选条件吧'); return; }
-    const n = Math.min(gameState.questionCount, pool.length);
-    gameState.playlist = buildPlaylist(pool, n);
+    const pool = practiceSongs || getFilteredSongs();
+    if (pool.length === 0) {
+        notify(filterState.watchedOnly && !gameState.practiceMode ? '追番曲库为空，请先在「我的曲库」标记追番' : '曲库为空，请调整筛选条件');
+        return;
+    }
+    gameState.activePool = pool;
+    const enoughAnime = new Set(pool.map(animeLabel)).size >= 4;
+    const enoughArtists = new Set(pool.map(s => s.artist)).size >= 4;
+    const seasonDistractors = !gameState.practiceMode && filterState.source?.startsWith('season:')
+        ? (SEASONAL_POOLS[filterState.source.slice(7)] || []).filter(song => !filterState.types.size || filterState.types.has(song.type))
+        : null;
+    gameState.optionPool = pool.length >= 4 && enoughAnime && enoughArtists ? pool : (seasonDistractors || getAllSongs());
+    gameState.playlist = buildPlaylist(pool, gameState.questionCount);
     $('singleHeader').classList.remove('hidden');
     $('pkHeader').classList.add('hidden');
     $('comboArea').innerHTML = '';
     $('songInfo').classList.remove('show');
-    $('totalQ').textContent = n;
+    $('totalQ').textContent = gameState.playlist.length;
     showView('game');
     loadQuestion();
 }
@@ -2563,9 +2732,57 @@ function checkInvite() {
 // =====================================================================
 // Game Core
 // =====================================================================
+function setQuizMediaState(state, message) {
+    gameState.mediaState = state;
+    if (state === 'playing' && gameState.mode === 'single' && !gameState.viewingHistory) {
+        recordLocalAudioCheck(gameState.currentSong, 'played', gameState.lastAudioResult?.source || '');
+    }
+    const status = $('playerStatus');
+    if (status) {
+        status.textContent = message || '';
+        status.dataset.state = state;
+    }
+    const canPlay = state === 'awaiting-play' || state === 'ready' || state === 'playing';
+    const canAnswer = state === 'ready' || state === 'playing';
+    const playButton = $('playBtn');
+    if (playButton) playButton.disabled = !canPlay;
+    document.querySelectorAll('.opt-btn').forEach(button => { button.disabled = !canAnswer; });
+    const retryButton = $('retryAudioBtn');
+    if (retryButton) {
+        retryButton.hidden = state === 'idle' || state === 'searching';
+        retryButton.disabled = state === 'switching';
+    }
+    if (canAnswer) clearQuizMediaTimeout();
+}
+
+let quizMediaTimeout = null;
+
+function clearQuizMediaTimeout() {
+    if (quizMediaTimeout) clearTimeout(quizMediaTimeout);
+    quizMediaTimeout = null;
+}
+
+function armQuizMediaTimeout(reason, delay = 12000) {
+    clearQuizMediaTimeout();
+    const generation = gameState.fetchGeneration;
+    quizMediaTimeout = setTimeout(() => {
+        quizMediaTimeout = null;
+        if (generation !== gameState.fetchGeneration) return;
+        recoverQuestionAudio(reason);
+    }, delay);
+}
+
 function loadQuestion() {
+    if ($('animeDetailModal').classList.contains('show')) closeDetailModal();
+    $('gameAudioPanel').classList.remove('answered');
     stopQuizYT();
+    clearQuizMediaTimeout();
     audioRetryCount = 0; // fresh retry budget per question
+    gameState.mediaRetryCount = 0;
+    gameState.recoveringAudio = false;
+    gameState.failedAudioSources = new Set();
+    gameState.failedBiliVideos = new Set();
+    gameState.failedYtVideos = new Set();
     const gen = ++gameState.fetchGeneration;
     if (gameState.questionIndex >= gameState.playlist.length) {
         endGame();
@@ -2633,9 +2850,9 @@ function loadQuestion() {
     gameState.isPlaying = false;
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-    $('playBtn').disabled = true;
-    $('playerStatus').textContent = '🔍 搜索中...';
+    setQuizMediaState('searching', '正在搜索音频…');
     progressFill.style.width = '0%';
+    $('playerTimeCurrent').textContent = '00:00';
     $('songInfo').classList.remove('show');
     $('reviewDetailBtn').style.display = 'none';
     $('qNum').textContent = gameState.questionIndex + 1;
@@ -2652,227 +2869,323 @@ function loadQuestion() {
             if (audioSourcePref === 'bilibili-only' && biliBroken) {
                 if (!biliProxyState.notified) {
                     biliProxyState.notified = true;
-                    notify('呜喵~ B站音频获取失败（当前代理被B站拒绝或连不上）。建议：双击运行项目里的"启动B站代理.bat"，再到设置里把B站代理地址填为 http://127.0.0.1:8765~');
+                    skipUnplayableQuestion('B站音频获取失败。请检查本地代理或设置中的代理地址');
                 } else {
-                    notify('B站代理不可用，已跳过此题~');
+                    skipUnplayableQuestion('B站代理不可用');
                 }
             } else {
-                notify('呜喵~ 这首歌的音频获取失败了，已跳过~');
+                skipUnplayableQuestion('这首歌暂无可用音源');
             }
-            gameState.questionIndex++;
-            loadQuestion();
             return;
-        }
-        // Save enriched result so full-song search can reuse the same audio source
-        gameState.lastAudioResult = result;
-        const url = result.url;
-        if (url.startsWith('yt:')) {
-            // YouTube fallback — use ytPlayer for 30s quiz clip
-            quizYT.active = true;
-            quizYT.videoId = url.slice(3);
-            $('playBtn').disabled = false;
-            $('playerStatus').textContent = '点击播放 (YouTube源)';
-        } else {
-            quizYT.active = false;
-            quizYT.videoId = null;
-            audio.src = url;
-            $('playBtn').disabled = false;
-            $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';
         }
         renderHintBar();
         renderOptions(q);
+        prepareQuestionAudio(result, gen);
     });
 }
 
-function buildBiliProxyUrl(cdnUrl) {
-    const base = window.BILI_WORKER_URL;
-    if (base.includes('localhost') || base.includes('127.0.0.1')) {
-        return `${base}/stream?url=${encodeURIComponent(cdnUrl)}`;
-    }
-    return `${base}/api/search?stream=${encodeURIComponent(cdnUrl)}`;
+function sourceLabel(source) {
+    if (source === 'bilibili') return 'B站源';
+    if (source === 'youtube') return 'YouTube源';
+    return 'iTunes源';
 }
 
-async function fetchBilibiliAudio(title, artist, anime, type, cacheKey) {
-    const biliResult = await searchBilibili(anime, title, artist, type);
-    if (!biliResult) return null;
-    const audioInfo = await getBilibiliAudioUrl(biliResult.bvid);
-    if (!audioInfo?.url) return null;
-    // B站 CDN requires Referer header — must go through proxy
-    const e = {
-        url: buildBiliProxyUrl(audioInfo.url),
-        source: 'bilibili',
-        bvid: biliResult.bvid,
-        biliTitle: biliResult.title,
-        biliDuration: audioInfo.duration
+function prepareQuestionAudio(result, generation) {
+    if (generation !== gameState.fetchGeneration) return;
+    gameState.lastAudioResult = result;
+    rememberResolvedAudio(gameState.currentSong, result);
+    const label = sourceLabel(result.source);
+    if (result.url.startsWith('yt:')) {
+        quizYT.active = true;
+        quizYT.videoId = result.url.slice(3);
+        setQuizMediaState('buffering', `音频已找到 · 正在准备${label}播放器`);
+        ensureYouTubeAPI().then(() => {
+            if (generation === gameState.fetchGeneration && quizYT.videoId === result.url.slice(3))
+                setQuizMediaState('awaiting-play', `音频已找到 · ${label} · 点击播放`);
+        }).catch(() => {
+            if (generation === gameState.fetchGeneration) recoverQuestionAudio('YouTube播放器不可用');
+        });
+        return;
+    }
+    quizYT.active = false;
+    quizYT.videoId = null;
+    setQuizMediaState('buffering', `正在缓冲 · ${label}`);
+    audio.src = result.url;
+    audio.load?.();
+    armQuizMediaTimeout(`${label}缓冲超时`);
+}
+
+function skipUnplayableQuestion(message) {
+    clearQuizMediaTimeout();
+    if (gameState.mode === 'single') recordLocalAudioCheck(gameState.currentSong, 'failed', gameState.lastAudioResult?.source || audioSourcePref || 'default');
+    let replacement = null;
+    if (gameState.mode === 'single') {
+        gameState.failedQuestionSongs ||= [];
+        gameState.failedQuestionSongs.push(gameState.currentSong);
+        replacement = pickReplacementSong(gameState.activePool, gameState.playlist, gameState.failedQuestionSongs);
+    }
+    if (replacement) gameState.playlist[gameState.questionIndex] = replacement;
+    else gameState.questionIndex++;
+    const status = `${message}${replacement ? '，已换另一首' : '，已跳过此题'}`;
+    setQuizMediaState('failed', status);
+    notify(status);
+    const generation = gameState.fetchGeneration;
+    setTimeout(() => {
+        if (generation === gameState.fetchGeneration) loadQuestion();
+    }, 800);
+}
+
+async function recoverQuestionAudio(reason) {
+    if (gameState.recoveringAudio || gameState.isLocked || !gameState.currentSong) return;
+    gameState.recoveringAudio = true;
+    clearQuizMediaTimeout();
+    const failedSource = gameState.lastAudioResult?.source || null;
+    if (failedSource === 'bilibili' && gameState.lastAudioResult?.bvid) {
+        gameState.failedBiliVideos.add(gameState.lastAudioResult.bvid);
+    } else if (failedSource === 'youtube' && gameState.lastAudioResult?.ytVideoId) {
+        if (!gameState.failedYtVideos) gameState.failedYtVideos = new Set();
+        gameState.failedYtVideos.add(gameState.lastAudioResult.ytVideoId);
+    } else if (failedSource) {
+        gameState.failedAudioSources.add(failedSource);
+    }
+    gameState.mediaRetryCount++;
+    if (gameState.mediaRetryCount > 5) {
+        gameState.recoveringAudio = false;
+        skipUnplayableQuestion('所有音频来源均不可用，已跳过此题');
+        return;
+    }
+
+    const song = gameState.currentSong;
+    const generation = ++gameState.fetchGeneration;
+    stopQuizYT();
+    audio.pause();
+    setQuizMediaState('switching', `${reason}，正在自动换源…`);
+    const cacheKey = `${song.title}|${song.anime}`;
+    audioCache.delete(cacheKey);
+    forgetResolvedAudio(song);
+    let result = null;
+    try {
+        result = await fetchAudioInner(
+            song.title, song.artist, song.anime, cacheKey, gameState.failedAudioSources, song.type || ''
+        );
+    } catch (error) {
+        console.error('[Audio] automatic recovery failed:', error);
+    }
+    if (generation !== gameState.fetchGeneration) return;
+    gameState.recoveringAudio = false;
+    if (!result) {
+        skipUnplayableQuestion('没有可用的备用音频，已跳过此题');
+        return;
+    }
+    prepareQuestionAudio(result, generation);
+}
+
+async function retryQuestionAudio() {
+    if (gameState.recoveringAudio || gameState.isLocked || !gameState.currentSong) return;
+    gameState.recoveringAudio = true;
+    clearQuizMediaTimeout();
+    const song = gameState.currentSong;
+    const generation = ++gameState.fetchGeneration;
+    stopQuizYT();
+    audio.pause();
+    gameState.isPlaying = false;
+    gameState.failedAudioSources = new Set();
+    gameState.failedBiliVideos = new Set();
+    gameState.failedYtVideos = new Set();
+    gameState.mediaRetryCount = 0;
+    const cacheKey = `${song.title}|${song.anime}`;
+    audioCache.delete(cacheKey);
+    forgetResolvedAudio(song);
+    if (gameState.lastAudioResult?.bvid) bilibiliAudioCache.delete(gameState.lastAudioResult.bvid);
+    setQuizMediaState('switching', '正在重新加载音频…');
+    let result = null;
+    try {
+        result = await fetchAudioInner(song.title, song.artist, song.anime, cacheKey, new Set());
+    } catch (error) {
+        console.error('[Audio] manual reload failed:', error);
+    }
+    if (generation !== gameState.fetchGeneration) return;
+    gameState.recoveringAudio = false;
+    if (!result) {
+        skipUnplayableQuestion('重新加载失败，已跳过此题');
+        return;
+    }
+    prepareQuestionAudio(result, generation);
+}
+
+function buildBiliProxyUrl(cdnUrl, backupUrl = '') {
+    const base = window.BILI_WORKER_URL;
+    const backup = backupUrl ? `&backup=${encodeURIComponent(backupUrl)}` : '';
+    if (base.includes('localhost') || base.includes('127.0.0.1')) {
+        return `${base}/stream?url=${encodeURIComponent(cdnUrl)}${backup}`;
+    }
+    return `${base}/api/search?stream=${encodeURIComponent(cdnUrl)}${backup}`;
+}
+
+async function fetchBilibiliAudio(title, artist, anime, type, cacheKey, excludedBvids = new Set()) {
+    const aliases = {
+        titleCN: gameState.currentSong?.titleCN || '',
+        animeCN: gameState.currentSong?.animeCN || ''
     };
-    audioCache.set(cacheKey, e);
-    return e;
+    const biliResult = await searchBilibili(anime, title, artist, type, aliases);
+    if (!biliResult) return null;
+    const candidates = [biliResult, ...(biliResult._alternates || [])]
+        .filter(candidate => !excludedBvids.has(candidate.bvid)).slice(0, 4);
+    for (const candidate of candidates) {
+        const audioInfo = await getBilibiliAudioUrl(candidate.bvid);
+        if (!audioInfo?.url) continue;
+        const e = {
+            url: buildBiliProxyUrl(audioInfo.url, audioInfo.backupUrl),
+            source: 'bilibili',
+            bvid: candidate.bvid,
+            biliTitle: candidate.title,
+            biliDuration: audioInfo.duration
+        };
+        biliProxyState.down = false;
+        biliProxyState.reason = null;
+        audioCache.set(cacheKey, e);
+        return e;
+    }
+    return null;
 }
 
 // In-flight dedup: concurrent fetchAudio calls for the same song share one
 // network pipeline — rapid question navigation used to fire duplicate searches.
 const fetchAudioInFlight = new Map();
+const resolvedAudioCache = new Map();
+function audioResultKey(title, artist, anime, type, preference = audioSourcePref) {
+    return [title, artist, anime, type, preference].map(value => String(value || '')).join('|');
+}
+function forgetResolvedAudio(song) {
+    if (!song) return;
+    resolvedAudioCache.delete(audioResultKey(song.title, song.artist, song.anime, song.type || ''));
+}
+function rememberResolvedAudio(song, result) {
+    if (song && result?.url) resolvedAudioCache.set(audioResultKey(song.title, song.artist, song.anime, song.type || ''), result);
+}
 
-async function fetchAudio(title, artist, anime) {
+async function fetchAudio(title, artist, anime, songType = '') {
     const cacheKey = `${title}|${anime}`;
-    const cached = audioCache.get(cacheKey);
-    // Skip YouTube and B站 cache — always prefer iTunes 30s preview
-    if (cached && !audioSourcePref) {
-        const entry = normalizeAudioEntry(cached);
-        if (entry && entry.source !== 'youtube' && entry.source !== 'bilibili') return entry;
-        // Stale YouTube/B站 cache: evict and re-fetch
-        audioCache.delete(cacheKey);
-    }
-
-    if (fetchAudioInFlight.has(cacheKey)) return fetchAudioInFlight.get(cacheKey);
-    const p = fetchAudioInner(title, artist, anime, cacheKey)
-        .finally(() => fetchAudioInFlight.delete(cacheKey));
-    fetchAudioInFlight.set(cacheKey, p);
+    const type = songType || gameState.currentSong?.type || '';
+    const preference = audioSourcePref;
+    const inFlightKey = audioResultKey(title, artist, anime, type, preference);
+    if (resolvedAudioCache.has(inFlightKey)) return resolvedAudioCache.get(inFlightKey);
+    if (fetchAudioInFlight.has(inFlightKey)) return fetchAudioInFlight.get(inFlightKey);
+    const p = fetchAudioInner(title, artist, anime, cacheKey, new Set(), type, preference)
+        .then(result => { if (result?.url) resolvedAudioCache.set(inFlightKey, result); return result; })
+        .finally(() => fetchAudioInFlight.delete(inFlightKey));
+    fetchAudioInFlight.set(inFlightKey, p);
     return p;
 }
 
-async function fetchAudioInner(title, artist, anime, cacheKey) {
-    // B站优先 / 仅B站
-    if (audioSourcePref === 'bilibili-first' || audioSourcePref === 'bilibili-only') {
-        const e = await fetchBilibiliAudio(title, artist, anime, gameState.currentSong?.type || '', cacheKey);
-        if (e) return e;
-        if (audioSourcePref === 'bilibili-only') return null;
-    }
-
-    function scoreMatch(r) {
-        const t = (r.trackName || '').toLowerCase();
-        const c = (r.collectionName || '').toLowerCase();
-        const a = (r.artistName || '').toLowerCase();
-        const lt = title.toLowerCase();
-        const la = (artist || '').toLowerCase();
-        const lan = (anime || '').toLowerCase();
-
-        // 排除翻唱/钢琴/伴奏/混音/现场版本（这些会导致播放的歌和题目不一致）
-        const BAD_KW = ['cover', 'piano', 'instrumental', 'karaoke', 'remix', 'remaster', 'version', 'ver.', 'arrange', 'acoustic', 'live', '现场', '翻唱', '钢琴', '伴奏', '混音', 'カバー', 'ピアノ', 'インスト', 'カラオケ', 'リミックス', 'リマスター', 'アレンジ', 'アコースティック', 'ライブ'];
-        if (BAD_KW.some(k => t.includes(k) || c.includes(k))) return -1;
-
-        let score = 0;
-
-        // Title match (strict: exact or starts-with gets higher score)
-        if (t === lt) score += 100;
-        else if (t.startsWith(lt) || lt.startsWith(t)) score += 60;
-        else if (t.includes(lt) || lt.includes(t)) score += 30;
-        else return -1; // no title match at all — reject
-
-        // Artist match — exact match gets full bonus, partial gets less
-        if (la) {
-            if (a === la) score += 50;
-            else if (a.includes(la) || la.includes(a)) score += 25;
-            else score -= 20; // artist mismatch penalty
-        }
-
-        // Album/collection name contains anime name (strong signal for anime songs)
-        if (lan && c.includes(lan)) score += 30;
-
-        // Bonus: album name contains title (common for singles/OSTs)
-        if (c.includes(lt)) score += 10;
-
-        return score;
-    }
-
-    async function searchItunes(term) {
+async function searchQuizItunesCandidates(song) {
+    const terms = audioSearchQueries(song).itunes;
+    const results = await Promise.allSettled(terms.map(async term => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
+        const timer = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
-            const response = await fetch(
-                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=10&country=JP`,
-                { signal: controller.signal }
-            );
-            clearTimeout(timeoutId);
-            const data = await response.json();
-            if (data.resultCount > 0) {
-                // Score all results and pick the best match
-                let best = null;
-                let bestScore = -1;
-                for (const r of data.results) {
-                    const s = scoreMatch(r);
-                    if (s > bestScore) { bestScore = s; best = r; }
-                }
-                // 只接受高置信度匹配：标题精确匹配或开头匹配（score >= 60）
-                // 部分包含（score 30）可能是同名不同歌或翻唱版本，会导致歌曲和答案不一致
-                if (best && bestScore >= 60) return { url: best.previewUrl, score: bestScore, trackName: best.trackName, artistName: best.artistName };
-                // 低置信度匹配，不接受（fallback 到 YouTube）
-                if (best) return { url: null, score: bestScore, trackName: best.trackName, artistName: best.artistName };
-            }
-        } catch (e) { clearTimeout(timeoutId); console.error('[iTunes] searchItunes:', e); }
-        return { url: null, score: -1, trackName: null, artistName: null };
-    }
+            const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=10&country=JP`, { signal: controller.signal });
+            if (!response.ok) return [];
+            return ((await response.json()).results || []).filter(item => item.previewUrl).map(item => ({
+                source: 'itunes', url: item.previewUrl, title: item.trackName, artist: item.artistName, album: item.collectionName
+            }));
+        } finally { clearTimeout(timer); }
+    }));
+    const seen = new Set();
+    return results.flatMap(result => result.status === 'fulfilled' ? result.value : []).filter(item => {
+        if (seen.has(item.url)) return false;
+        seen.add(item.url);
+        return true;
+    });
+}
 
-    // iTunes strategies: fire the most-precise query first; on a miss, fire the
-    // remaining three in parallel and consume them in priority order. Worst-case
-    // latency drops from 4 sequential round-trips to 2, while the common path
-    // (first query hits) still costs exactly one request.
-    const accept = r => r?.url
-        ? { url: r.url, source: 'itunes', itunesTrack: r.trackName, itunesArtist: r.artistName }
-        : null;
+function settleWithin(promise, ms, fallback = null) {
+    let timer;
+    return Promise.race([promise, new Promise(resolve => { timer = setTimeout(() => resolve(fallback), ms); })])
+        .finally(() => clearTimeout(timer));
+}
 
-    // Try 1: artist + title (most precise)
-    if (artist) {
-        const e = accept(await searchItunes(`${artist} ${title}`));
-        if (e) { audioCache.set(cacheKey, e); return e; }
-    }
-
-    // Tries 2-4 issued concurrently, consumed in priority order:
-    //   2) artist + title + anime (full context disambiguation)
-    //   3) title + anime (anime name helps even without artist)
-    //   4) just title (broadest, last resort before YouTube)
-    const tries = [
-        artist ? searchItunes(`${artist} ${title} ${anime}`) : Promise.resolve(null),
-        searchItunes(`${title} ${anime}`),
-        searchItunes(title)
+async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources = new Set(), songType = gameState.currentSong?.type || '', sourcePreference = audioSourcePref,
+    excludedVideos = { yt: gameState.failedYtVideos, bili: gameState.failedBiliVideos }) {
+    const song = (gameState.currentSong?.title === title && gameState.currentSong?.anime === anime &&
+        (!artist || gameState.currentSong.artist === artist) ? gameState.currentSong : null) ||
+        getAllSongs().find(item => item.title === title && item.anime === anime && (!artist || item.artist === artist)) ||
+        { title, artist, anime, type: songType };
+    const useBili = sourcePreference !== 'itunes-youtube' && !excludedSources.has('bilibili');
+    const useOthers = sourcePreference !== 'bilibili-only';
+    const tasks = [
+        useOthers && !excludedSources.has('itunes') ? searchQuizItunesCandidates(song) : Promise.resolve([]),
+        useOthers && !excludedSources.has('youtube') ? searchQuizYouTubeCandidates(song) : Promise.resolve([]),
+        useBili ? settleWithin(searchBilibili(anime, title, artist, songType,
+            { titleCN: song.titleCN, animeCN: song.animeCN, animeNative: song.animeNative }), 15000) : Promise.resolve(null)
     ];
-    for (const t of tries) {
-        const e = accept(await t);
-        if (e) { audioCache.set(cacheKey, e); return e; }
+    const [itunes, youtube, bili] = await Promise.allSettled(tasks);
+    const candidates = [
+        ...(itunes.status === 'fulfilled' ? itunes.value : []),
+        ...(youtube.status === 'fulfilled' ? youtube.value : []).filter(item => !excludedVideos.yt?.has(item.videoId))
+    ];
+    const seasonalSong = Object.values(SEASONAL_POOLS).flat().find(item => item.title === title && item.anime === anime);
+    if (useOthers && !excludedSources.has('youtube') && seasonalSong?.youtubeVideoId &&
+        !excludedVideos.yt?.has(seasonalSong.youtubeVideoId)) {
+        candidates.push({ source: 'youtube', videoId: seasonalSong.youtubeVideoId,
+            title: `${song.animeCN || anime} ${song.type || songType} ${song.title} ${artist}` });
     }
-
-    // All iTunes attempts failed or low confidence — fall back to YouTube
-    console.log(`[Audio] iTunes miss for "${title}" by "${artist}", trying YouTube fallback`);
-    const ytQuery = `${title} ${anime} ${artist || ''}`;
-    const ytVideoId = await searchYouTube(ytQuery);
-    if (ytVideoId) {
-        const e = { url: `yt:${ytVideoId}`, source: 'youtube', ytVideoId, ytQuery };
-        audioCache.set(cacheKey, e);
-        return e;
+    if (bili.status === 'fulfilled' && bili.value) {
+        for (const item of [bili.value, ...(bili.value._alternates || [])]) {
+            if (!excludedVideos.bili?.has(item.bvid)) candidates.push({
+                source: 'bilibili', bvid: item.bvid, title: item.title, artist: item.author || ''
+            });
+        }
     }
-
-    // B站兜底 (only when no explicit preference set, i.e. default mode)
-    if (!audioSourcePref) {
-        const e = await fetchBilibiliAudio(title, artist, anime, gameState.currentSong?.type || '', cacheKey);
-        if (e) return e;
+    const lastCheck = audioChecks.find(entry => entry.key === trackKey(song));
+    const ranked = rankAudioCandidates(song, candidates.map(candidate => ({
+        ...candidate, localFailure: lastCheck?.status === 'failed' && lastCheck.source === candidate.source
+    })));
+    for (const candidate of ranked) {
+        if (candidate.source === 'itunes') return { url: candidate.url, source: 'itunes', score: candidate.score,
+            itunesTrack: candidate.title, itunesArtist: candidate.artist };
+        if (candidate.source === 'youtube') return { url: `yt:${candidate.videoId}`, source: 'youtube', score: candidate.score,
+            ytVideoId: candidate.videoId };
+        if (candidate.source === 'bilibili') {
+            const info = await getBilibiliAudioUrl(candidate.bvid);
+            if (!info?.url) continue;
+            biliProxyState.down = false;
+            biliProxyState.reason = null;
+            return { url: buildBiliProxyUrl(info.url, info.backupUrl), source: 'bilibili', score: candidate.score,
+                bvid: candidate.bvid, biliTitle: candidate.title, biliDuration: info.duration };
+        }
     }
-
     return null;
 }
 
 function getGuessValue(song, guessType) {
     if (guessType === 'song') return song.titleCN || song.title;
     if (guessType === 'artist') return song.artist;
-    return song.anime;
+    return animeLabel(song);
+}
+
+function animeLabel(song) {
+    return song.animeCN || song.anime;
 }
 
 function buildWrongOptions(song, guessType) {
+    const optionPool = gameState.mode === 'single' ? (gameState.optionPool || gameState.activePool) : SONGS;
     if (guessType === 'song') {
         const answer = song.titleCN || song.title;
         // 干扰项排除同番剧、同歌手（不足 3 个时放宽同歌手，保持不同番剧）
-        const pool = getAllSongs().filter(s => s.anime !== song.anime && (s.artist || '') !== (song.artist || ''));
+        const pool = optionPool.filter(s => s.anime !== song.anime && (s.artist || '') !== (song.artist || ''));
         let titles = [...new Set(pool.map(s => s.titleCN || s.title).filter(t => t && t !== answer))];
         if (titles.length < 3) {
-            const loose = [...new Set(getAllSongs().filter(s => s.anime !== song.anime).map(s => s.titleCN || s.title).filter(t => t && t !== answer))];
+            const loose = [...new Set(optionPool.filter(s => s.anime !== song.anime).map(s => s.titleCN || s.title).filter(t => t && t !== answer))];
             titles = [...new Set([...titles, ...loose])];
         }
         return shuffle(titles).slice(0, 3);
     }
     if (guessType === 'artist') {
-        const artists = [...new Set(getAllSongs().map(s => s.artist).filter(a => a && a !== song.artist))];
+        const artists = [...new Set(optionPool.map(s => s.artist).filter(a => a && a !== song.artist))];
         return shuffle(artists).slice(0, 3);
     }
-    return shuffle(ALL_ANIME.filter(a => a !== song.anime)).slice(0, 3);
+    return shuffle([...new Set(optionPool.filter(s => s.anime !== song.anime).map(animeLabel))]).slice(0, 3);
 }
 
 function renderOptions(song) {
@@ -2886,6 +3199,7 @@ function renderOptions(song) {
         btn.textContent = opt;
         btn.dataset.key = i + 1;
         btn.style.animationDelay = (i * 0.06) + 's';
+        btn.disabled = gameState.mediaState !== 'ready' && gameState.mediaState !== 'playing';
         btn.onclick = () => handleAnswer(btn, opt);
         $('optionsGrid').appendChild(btn);
     });
@@ -2905,11 +3219,11 @@ function getHintContent(song, guessType, which) {
         const label = HINT_LABELS[guessType].h1;
         if (label === '歌手') return '歌手：' + song.artist;
         if (label === '歌名') return '歌名：' + (song.titleCN || song.title);
-        return '番剧：' + song.anime;
+        return '番剧：' + animeLabel(song);
     }
     const label = HINT_LABELS[guessType].h2;
     if (label === '歌手') return '歌手：' + song.artist;
-    if (label === '番剧') return '番剧：' + song.anime;
+    if (label === '番剧') return '番剧：' + animeLabel(song);
     const t = song.titleCN || song.title;
     return '歌名首字「' + t.slice(0, 1) + '」· 共 ' + t.length + ' 字';
 }
@@ -2941,17 +3255,21 @@ function useHint(which) {
 
 function handleAnswer(btn, selected) {
     if (gameState.isLocked) return;
+    if (gameState.mediaState && gameState.mediaState !== 'ready' && gameState.mediaState !== 'playing') return;
     gameState.isLocked = true;
     // 锁定提示按钮
     document.querySelectorAll('.hint-btn').forEach(b => { b.disabled = true; b.classList.add('used'); });
     audio.pause();
+    const replayVideoId = gameState.lastAudioResult?.source === 'youtube' ? gameState.lastAudioResult.ytVideoId : null;
     stopQuizYT();
+    if (replayVideoId) { quizYT.active = true; quizYT.videoId = replayVideoId; }
     gameState.isPlaying = false;
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
 
     const correctValue = getGuessValue(gameState.currentSong, gameState.guessType);
     const isCorrect = selected === correctValue;
+    if (!isCorrect && gameState.mode === 'single') recordMistake(gameState.currentSong, selected);
     gameState.answerHistory.push({
         song: gameState.currentSong,
         guessType: gameState.guessType,
@@ -2994,15 +3312,7 @@ function handleAnswer(btn, selected) {
 
     animateScore($('scoreText'), gameState.correctCount);
     animateScore($('myScoreText'), gameState.score);
-    const answeredSong = gameState.currentSong;
-    const answeredIndex = gameState.questionIndex;
-    const answeredGeneration = gameState.fetchGeneration;
-    setTimeout(() => {
-        if (gameState.currentSong !== answeredSong || gameState.questionIndex !== answeredIndex ||
-            gameState.fetchGeneration !== answeredGeneration) return;
-        showAnimeDetail(answeredSong);
-        updateNavButtons();
-    }, 1500);
+    updateNavButtons();
 }
 
 function showSongInfo(isCorrect) {
@@ -3011,7 +3321,7 @@ function showSongInfo(isCorrect) {
     const badge = $('resultBadge');
 
     $('songTitle').textContent = title;
-    $('songAnime').textContent = song.anime;
+    $('songAnime').textContent = animeLabel(song);
     $('songArtist').textContent = song.artist;
 
     if (isCorrect) {
@@ -3022,6 +3332,11 @@ function showSongInfo(isCorrect) {
         badge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px;margin-right:2px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>错误';
     }
     $('songInfo').classList.add('show');
+    $('reviewDetailBtn').style.display = '';
+    $('answerNextBtn').textContent = gameState.questionIndex + 1 >= gameState.playlist.length && !gameState.viewingHistory
+        ? '查看结果 →' : '下一题 →';
+    $('gameAudioPanel').classList.add('answered');
+    showAnimeDetail(song, { auto: true });
 }
 
 function showCombo() {
@@ -3036,36 +3351,52 @@ function togglePlay() {
     if (playLock) return;
     if (gameState.isPlaying) {
         if (quizYT.active) {
-            stopQuizYT();
+            if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+            clearQuizMediaTimeout();
         } else {
             audio.pause();
         }
         gameState.isPlaying = false;
+        setQuizMediaState('ready', `已暂停 · ${sourceLabel(gameState.lastAudioResult?.source)}`);
         $('visualizer').classList.add('hidden');
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     } else {
         if (quizYT.active) {
             // YouTube quiz playback — play 30s clip
-            if (!ytPlayer || !ytReady || !quizYT.videoId) { notify('播放器未就绪'); return; }
+            if (!ytPlayer || !ytReady || !quizYT.videoId) {
+                recoverQuestionAudio('YouTube播放器未就绪');
+                return;
+            }
             stopFullPlayer();
             stopMusicPlayer();
+            setQuizMediaState('buffering', '正在启动 · YouTube源');
             ytPlayer.loadVideoById({ videoId: quizYT.videoId, startSeconds: 0 });
-            // Timer starts in onYtStateChange when PLAYING fires (after buffering)
+            armQuizMediaTimeout('YouTube播放启动超时', 10000);
         } else {
             // Normal iTunes playback
+            if ($('fullPlayer')?.style.display !== 'none') {
+                stopFullPlayer();
+                const quizUrl = gameState.lastAudioResult?.url;
+                if (quizUrl && !quizUrl.startsWith('yt:')) audio.src = quizUrl;
+                audio.currentTime = 0;
+            }
             if (audioContext) audioContext.resume();
             playLock = true;
             gameState.isPlaying = true;
             $('visualizer').classList.remove('hidden');
             $('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
             const lockTimeout = setTimeout(() => { playLock = false; }, 5000);
-            audio.play().then(() => { clearTimeout(lockTimeout); playLock = false; }).catch(() => {
+            audio.play().then(() => {
+                clearTimeout(lockTimeout);
+                playLock = false;
+                setQuizMediaState('playing', `正在播放 · ${sourceLabel(gameState.lastAudioResult?.source)}`);
+            }).catch(() => {
                 clearTimeout(lockTimeout);
                 playLock = false;
                 gameState.isPlaying = false;
                 $('visualizer').classList.add('hidden');
                 $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-                notify('喵呜~ 音频播放失败了...再试一次吧');
+                recoverQuestionAudio('音频播放失败');
             });
         }
     }
@@ -3079,6 +3410,10 @@ function stopQuizYT() {
     if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
 }
 
+function updateQuizTime(seconds) {
+    $('playerTimeCurrent').textContent = formatTime(Math.min(Math.max(seconds || 0, 0), 30)).padStart(5, '0');
+}
+
 function startQuizProgress() {
     stopQuizProgress();
     const duration = 30; // quiz clips are 30 seconds
@@ -3086,9 +3421,7 @@ function startQuizProgress() {
         if (!ytPlayer || !ytPlayer.getCurrentTime) return;
         const t = ytPlayer.getCurrentTime();
         progressFill.style.width = Math.min(t / duration * 100, 100) + '%';
-        const cur = formatTime(t);
-        const dur = formatTime(duration);
-        $('playerStatus').textContent = `${cur} / ${dur} (YouTube源)`;
+        updateQuizTime(t);
     }, 250);
 }
 
@@ -3108,6 +3441,9 @@ audio.onended = () => {
         return;
     }
     gameState.isPlaying = false;
+    if (!musicUseAudio && !quizYT.active && !gameState.isLocked && gameState.mediaState === 'playing') {
+        setQuizMediaState('ready', `试听结束 · ${sourceLabel(gameState.lastAudioResult?.source)}`);
+    }
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
 };
@@ -3116,17 +3452,25 @@ audio.ontimeupdate = () => {
     const lastResult = gameState.lastAudioResult;
     const duration = (lastResult && lastResult.source === 'bilibili') ? 30 : audio.duration;
     progressFill.style.width = (audio.currentTime / duration * 100) + '%';
+    if (!fpUseAudio && !musicUseAudio && !gameState.isLocked) updateQuizTime(audio.currentTime);
     // B站 quiz clip → stop at 30s (skip for detail modal full player)
     if (lastResult && lastResult.source === 'bilibili' && !fpUseAudio && audio.currentTime >= 30) {
         audio.pause();
         gameState.isPlaying = false;
+        setQuizMediaState('ready', '试听结束 · B站源');
         $('visualizer').classList.add('hidden');
         $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     }
 };
-// Retry budget for audio error recovery — a hard cap prevents any possibility
-// of an onerror → refetch → onerror loop (e.g. a B站 URL that keeps failing).
 let audioRetryCount = 0;
+audio.oncanplay = () => {
+    if (fpUseAudio || musicUseAudio || quizYT.active || gameState.isLocked || gameState.mediaState !== 'buffering') return;
+    setQuizMediaState('ready', `音频已就绪 · ${sourceLabel(gameState.lastAudioResult?.source)}`);
+};
+audio.onstalled = () => {
+    if (fpUseAudio || musicUseAudio || quizYT.active || gameState.isLocked) return;
+    if (gameState.mediaState === 'buffering') recoverQuestionAudio('音频连接停滞');
+};
 audio.onerror = () => {
     if (fpUseAudio || musicUseAudio) {
         notify(musicUseAudio || gameState.lastAudioResult?.source === 'bilibili'
@@ -3135,54 +3479,13 @@ audio.onerror = () => {
         return;
     }
     if (quizYT.active || !gameState.currentSong) return;
-    if (audioRetryCount >= 2) {
-        // Gave up on this track — skip to the next question instead of looping
-        notify('这首歌的音频暂时不可用，已跳过~');
-        gameState.questionIndex++;
-        loadQuestion();
-        return;
-    }
     audioRetryCount++;
-    const song = gameState.currentSong;
-    const gen = gameState.fetchGeneration;
-    // Clear the stale/expired cache entry and re-fetch
-    const cacheKey = `${song.title}|${song.anime}`;
-    audioCache._load();
-    delete audioCache._data[cacheKey];
-    audioCache._dirty = true;
-    audioCache._flush();
     gameState.isPlaying = false;
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-    $('playBtn').disabled = true;
-    $('playerStatus').textContent = '音频过期，重新搜索中...';
-    fetchAudio(song.title, song.artist, song.anime).then(result => {
-        if (gen !== gameState.fetchGeneration) return;
-        if (!result) {
-            notify('这首歌的音频暂时不可用，已跳过~');
-            gameState.questionIndex++;
-            loadQuestion();
-            return;
-        }
-        gameState.lastAudioResult = result;
-        if (result.url.startsWith('yt:')) {
-            // YouTube result — MUST go through the YT player. Assigning a "yt:"
-            // URL to <audio> fires onerror again and loops forever.
-            quizYT.active = true;
-            quizYT.videoId = result.url.slice(3);
-            $('playBtn').disabled = false;
-            $('playerStatus').textContent = '点击播放 (YouTube源)';
-        } else {
-            quizYT.active = false;
-            quizYT.videoId = null;
-            audio.src = result.url;
-            $('playBtn').disabled = false;
-            $('playerStatus').textContent = result.source === 'bilibili' ? '点击播放 (B站源)' : '点击播放';
-        }
-    });
+    recoverQuestionAudio('音频加载失败');
 };
-$('volSlider').oninput = e => { audio.volume = e.target.value; };
-audio.volume = 0.5;
+$('volSlider').oninput = e => { setPlayerVolume(e.target.value); };
 
 // =====================================================================
 // Game End
@@ -3228,11 +3531,15 @@ function endGame() {
 
 function restartGame() {
     $('endModal').classList.remove('show');
-    if (gameState.mode === 'single') startMode(gameState.gameMode);
+    if (gameState.mode === 'single') {
+        if (gameState.practiceMode) startMistakePractice();
+        else startMode(gameState.gameMode);
+    }
     else showView('menu');
 }
 
 function closeDetailModal() {
+    detailRequestId++;
     stopFullPlayer();
     $('animeDetailModal').classList.remove('show');
     detailReturnFocus?.focus();
@@ -3277,8 +3584,8 @@ function updateNavButtons() {
 function renderHistoryOptions(record) {
     const grid = $('optionsGrid');
     grid.innerHTML = '';
-    const options = record.options || [record.song.anime];
-    const correctValue = record.correctValue || record.song.anime;
+    const options = record.options || [animeLabel(record.song)];
+    const correctValue = record.correctValue || animeLabel(record.song);
     options.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = 'opt-btn';
@@ -3387,31 +3694,605 @@ function initFilters() {
     updateFilterCount();
 }
 
-function initSourceFilter() {
-    const options = [
-        { label: '全部', value: null },
-        { label: '内置曲库', value: 'builtin' },
-        { label: '自定义曲库', value: 'custom' },
-    ];
-    const container = $('sourceChips');
-    options.forEach((opt, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'settings-chip' + (i === 0 ? ' active' : '');
-        btn.textContent = opt.label;
-        btn.addEventListener('click', () => {
-            container.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
-            btn.classList.add('active');
-            filterState.source = opt.value;
-            updateFilterCount();
-        });
-        container.appendChild(btn);
+let lastOfficialSource = 'builtin';
+function setSourceFilter(source) {
+    filterState.source = source;
+    if (source && source !== 'custom' && source !== 'mix') lastOfficialSource = source;
+    try { localStorage.setItem('song_source_mode_v1', source === 'mix' ? 'mix' : 'single'); } catch {}
+    if (source?.startsWith('season:')) selectedLibrarySeason = source.slice(7);
+    renderSourceFilter();
+    updateFilterCount();
+}
+function renderSourceFilter() {
+    const selected = sourceSelection(filterState.source);
+    $('officialSourceGroup').classList.toggle('hidden', selected.group !== 'official');
+    $('mixSourceGroup').classList.toggle('hidden', selected.group !== 'mix');
+    $('seasonSourceChips').classList.toggle('hidden', selected.official !== 'season' || selected.group !== 'official');
+    document.querySelectorAll('[data-source-group]').forEach(button => {
+        const active = button.dataset.sourceGroup === selected.group;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
     });
+    document.querySelectorAll('[data-official-source]').forEach(button => {
+        const active = button.dataset.officialSource === selected.official;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+    });
+    document.querySelectorAll('[data-source^="season:"]').forEach(button => {
+        const active = button.dataset.source === filterState.source;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+    });
+    document.querySelectorAll('[data-mix-source]').forEach(input => {
+        const key = input.dataset.mixSource;
+        input.checked = key.startsWith('season:') ? filterState.mix.seasons.includes(key.slice(7)) : !!filterState.mix[key];
+    });
+}
+function initSourceFilter() {
+    const primary = [
+        { label: '全部歌曲', group: 'all' },
+        { label: '官方曲库', group: 'official' },
+        { label: '我的导入', group: 'custom' },
+        { label: '自由组合', group: 'mix' }
+    ];
+    $('sourceChips').innerHTML = primary.map(option => `<button type="button" class="settings-chip" data-source-group="${option.group}">${option.label}</button>`).join('');
+    $('officialSourceChips').innerHTML = [
+        { label: '全部官方', official: 'all' },
+        { label: '原有曲库', official: 'legacy' },
+        { label: '季度新番', official: 'season' }
+    ].map(option => `<button type="button" class="settings-chip" data-official-source="${option.official}">${option.label}</button>`).join('');
+    const seasons = Object.keys(SEASONAL_POOLS).sort().reverse().filter(key => SEASONAL_POOLS[key].length === 30);
+    $('seasonSourceChips').innerHTML = seasons.map(key => `<button type="button" class="settings-chip" data-source="season:${key}">${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月</button>`).join('');
+    $('mixSourceGroup').innerHTML = [
+        { key: 'legacy', label: '原有曲库' },
+        ...seasons.map(key => ({ key: `season:${key}`, label: `${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月新番` })),
+        { key: 'imported', label: '我的导入（含 Bangumi）' },
+        { key: 'watched', label: '我的追番歌曲' },
+        { key: 'selected', label: '我挑选的歌曲' }
+    ].map(option => `<label class="library-watch-filter mix-source-option"><input type="checkbox" data-mix-source="${option.key}">${option.label}</label>`).join('');
+    $('sourceChips').addEventListener('click', event => {
+        const group = event.target.closest('[data-source-group]')?.dataset.sourceGroup;
+        if (!group) return;
+        setSourceFilter(group === 'official' ? lastOfficialSource : sourceFromSelection({ group }));
+    });
+    $('officialSourceChips').addEventListener('click', event => {
+        const official = event.target.closest('[data-official-source]')?.dataset.officialSource;
+        if (!official) return;
+        const previousSeason = sourceSelection(lastOfficialSource).season;
+        setSourceFilter(sourceFromSelection({ group: 'official', official, season: previousSeason || seasons[0] }));
+    });
+    $('seasonSourceChips').addEventListener('click', event => {
+        const source = event.target.closest('[data-source]')?.dataset.source;
+        if (source) setSourceFilter(source);
+    });
+    $('mixSourceGroup').addEventListener('change', event => {
+        const key = event.target.dataset.mixSource;
+        if (!key) return;
+        if (key.startsWith('season:')) {
+            const season = key.slice(7);
+            filterState.mix.seasons = event.target.checked
+                ? [...new Set([...filterState.mix.seasons, season])]
+                : filterState.mix.seasons.filter(value => value !== season);
+        } else filterState.mix[key] = event.target.checked;
+        try { localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix)); } catch {}
+        updateFilterCount();
+    });
+    renderSourceFilter();
+}
+
+// =====================================================================
+// Personal Library (local single-player data only)
+// =====================================================================
+const publishedSeasons = Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length === 30).sort().reverse();
+let selectedLibrarySeason = publishedSeasons[0] || null;
+let selectedLibraryTab = 'current';
+let feedbackTargetSong = null;
+const libraryPreviewSession = createPreviewSession();
+let libraryPreviewState = 'idle';
+let libraryPreviewSong = null;
+let libraryPreviewSource = '';
+let libraryPreviewVideo = '';
+let libraryPreviewUrl = '';
+let libraryPreviewResult = null;
+let libraryPreviewRecovering = false;
+let libraryPreviewRetryCount = 0;
+let libraryPreviewTimer = null;
+const libraryPreviewFailedSources = new Set();
+const libraryPreviewFailedVideos = { yt: new Set(), bili: new Set() };
+
+function updateLibraryTrackStatus(song) {
+    const status = trackPlaybackStatus(song);
+    document.querySelectorAll('[data-track-status-key]').forEach(element => {
+        if (element.dataset.trackStatusKey !== trackKey(song)) return;
+        element.textContent = status.label;
+        element.classList.toggle('played', status.className === 'played');
+        element.classList.toggle('failed', status.className === 'failed');
+    });
+}
+
+function updateLibraryPreviewUI() {
+    const key = libraryPreviewSession.activeKey;
+    $('libraryPreviewBanner').classList.toggle('hidden', !key);
+    if (!key) return;
+    const title = libraryPreviewSong?.titleCN || libraryPreviewSong?.title || '歌曲';
+    const labels = {
+        searching: `正在搜索「${title}」…`, loading: `正在加载「${title}」…`,
+        switching: `当前音源不可播，正在为「${title}」换源…`,
+        playing: `正在试听「${title}」 · ${sourceLabel(libraryPreviewSource)}`,
+        paused: `已暂停「${title}」`, ended: `试听结束 · ${title}`,
+        ready: `「${title}」已就绪，点击试听按钮播放`,
+        failed: `「${title}」暂时无法播放，可反馈音源问题`
+    };
+    $('libraryPreviewStatus').textContent = labels[libraryPreviewState] || title;
+    const link = $('libraryPreviewLink');
+    link.classList.toggle('hidden', !libraryPreviewVideo);
+    if (libraryPreviewVideo) link.href = libraryPreviewVideo;
+    document.querySelectorAll('[data-action="previewSong"]').forEach(button => {
+        const active = button.dataset.songKey === key;
+        button.setAttribute('aria-pressed', String(active && libraryPreviewState === 'playing'));
+        button.textContent = !active ? '试听' : ({ searching: '取消', loading: '加载中', switching: '换源中', playing: '暂停', paused: '继续', ended: '重听', ready: '播放', failed: '重试' })[libraryPreviewState] || '试听';
+    });
+}
+
+function stopLibraryPreview() {
+    libraryPreviewSession.stop();
+    const player = $('libraryPreviewAudio');
+    player.pause();
+    player.removeAttribute('src');
+    if (libraryPreviewResult?.source === 'youtube') ytPlayer?.pauseVideo?.();
+    clearTimeout(libraryPreviewTimer);
+    libraryPreviewTimer = null;
+    libraryPreviewSong = null;
+    libraryPreviewSource = '';
+    libraryPreviewVideo = '';
+    libraryPreviewUrl = '';
+    libraryPreviewResult = null;
+    libraryPreviewRecovering = false;
+    libraryPreviewRetryCount = 0;
+    libraryPreviewFailedSources.clear();
+    libraryPreviewFailedVideos.yt.clear();
+    libraryPreviewFailedVideos.bili.clear();
+    libraryPreviewState = 'idle';
+    $('libraryPreviewBanner').classList.add('hidden');
+    document.querySelectorAll('[data-action="previewSong"]').forEach(button => { button.textContent = '试听'; button.setAttribute('aria-pressed', 'false'); });
+}
+
+async function prepareLibraryPreviewAudio(result, token) {
+    if (!libraryPreviewSession.isCurrent(token)) return;
+    libraryPreviewResult = result;
+    libraryPreviewSource = result.source || '';
+    libraryPreviewUrl = result.url;
+    libraryPreviewVideo = result.source === 'youtube'
+        ? `https://www.youtube.com/watch?v=${encodeURIComponent(result.ytVideoId)}` : '';
+    libraryPreviewState = 'loading';
+    updateLibraryPreviewUI();
+    if (result.source === 'youtube') {
+        try { await ensureYouTubeAPI(); }
+        catch { if (libraryPreviewSession.isCurrent(token)) await recoverLibraryPreviewAudio('YouTube播放器不可用'); return; }
+        if (!libraryPreviewSession.isCurrent(token)) return;
+        ytPlayer.loadVideoById({ videoId: result.ytVideoId, startSeconds: 0 });
+        clearTimeout(libraryPreviewTimer);
+        libraryPreviewTimer = setTimeout(() => {
+            if (libraryPreviewSession.isCurrent(token) && libraryPreviewState === 'loading') {
+                libraryPreviewState = 'ready';
+                updateLibraryPreviewUI();
+            }
+        }, 12000);
+        return;
+    }
+    const player = $('libraryPreviewAudio');
+    player.src = result.url;
+    player.volume = (volumeMuted ? 0 : playerVolume) / 100;
+    try { await player.play(); }
+    catch (error) {
+        if (!libraryPreviewSession.isCurrent(token) || libraryPreviewRecovering) return;
+        if (error?.name === 'NotAllowedError') libraryPreviewState = 'ready';
+        else if (error?.name !== 'AbortError') return recoverLibraryPreviewAudio('音频无法播放');
+        updateLibraryPreviewUI();
+    }
+}
+
+async function recoverLibraryPreviewAudio(reason) {
+    if (!libraryPreviewSong || libraryPreviewRecovering || !libraryPreviewSession.activeKey) return;
+    libraryPreviewRecovering = true;
+    clearTimeout(libraryPreviewTimer);
+    const song = libraryPreviewSong;
+    const token = libraryPreviewSession.start(trackKey(song));
+    const failed = libraryPreviewResult;
+    if (failed?.source === 'youtube' && failed.ytVideoId) libraryPreviewFailedVideos.yt.add(failed.ytVideoId);
+    else if (failed?.source === 'bilibili' && failed.bvid) libraryPreviewFailedVideos.bili.add(failed.bvid);
+    else if (failed?.source) libraryPreviewFailedSources.add(failed.source);
+    if (failed?.source === 'youtube') ytPlayer?.pauseVideo?.();
+    $('libraryPreviewAudio').pause();
+    forgetResolvedAudio(song);
+    recordLocalAudioCheck(song, 'failed', failed?.source || audioSourcePref);
+    updateLibraryTrackStatus(song);
+    libraryPreviewState = 'switching';
+    updateLibraryPreviewUI();
+    let result = null;
+    if (++libraryPreviewRetryCount <= 5) {
+        try {
+            result = await fetchAudioInner(song.title, song.artist, song.anime, `${song.title}|${song.anime}`,
+                libraryPreviewFailedSources, song.type || '', audioSourcePref, libraryPreviewFailedVideos);
+        } catch (error) { console.warn('[Library] preview recovery failed:', reason, error); }
+    }
+    if (!libraryPreviewSession.isCurrent(token)) return;
+    libraryPreviewRecovering = false;
+    if (!result?.url) {
+        libraryPreviewState = 'failed';
+        updateLibraryPreviewUI();
+        return;
+    }
+    rememberResolvedAudio(song, result);
+    await prepareLibraryPreviewAudio(result, token);
+}
+
+async function playLibraryPreview(song) {
+    if (!song) { notify('这首歌已不在当前曲库中'); return; }
+    const key = trackKey(song);
+    const player = $('libraryPreviewAudio');
+    if (libraryPreviewSession.activeKey === key) {
+        if (['searching', 'loading', 'switching'].includes(libraryPreviewState)) { stopLibraryPreview(); return; }
+        if (libraryPreviewState === 'playing') {
+            if (libraryPreviewSource === 'youtube') ytPlayer?.pauseVideo?.();
+            else player.pause();
+            libraryPreviewState = 'paused'; updateLibraryPreviewUI(); return;
+        }
+        if (libraryPreviewSource === 'youtube' && ['paused', 'ended', 'ready'].includes(libraryPreviewState)) {
+            if (!ytReady || !ytPlayer) { notify('YouTube 播放器仍在加载，请稍后重试'); return; }
+            if (libraryPreviewState === 'ended') ytPlayer.loadVideoById({ videoId: libraryPreviewResult.ytVideoId, startSeconds: 0 });
+            else if (libraryPreviewState === 'ready') ytPlayer.loadVideoById({ videoId: libraryPreviewResult.ytVideoId, startSeconds: 0 });
+            else ytPlayer.playVideo();
+            libraryPreviewState = 'loading'; updateLibraryPreviewUI(); return;
+        }
+        if (player.src && ['paused', 'ended', 'ready'].includes(libraryPreviewState)) {
+            if (libraryPreviewState === 'ended') player.currentTime = 0;
+            try { await player.play(); } catch { libraryPreviewState = 'ready'; updateLibraryPreviewUI(); }
+            return;
+        }
+    }
+    stopLibraryPreview();
+    libraryPreviewSong = song;
+    libraryPreviewState = 'searching';
+    const token = libraryPreviewSession.start(key);
+    updateLibraryPreviewUI();
+    try {
+        const result = await fetchAudio(song.title, song.artist, song.anime, song.type);
+        if (!libraryPreviewSession.isCurrent(token)) return;
+        if (!result?.url) throw new Error('No audio source');
+        await prepareLibraryPreviewAudio(result, token);
+    } catch {
+        if (!libraryPreviewSession.isCurrent(token)) return;
+        libraryPreviewState = 'failed';
+        recordLocalAudioCheck(song, 'failed', audioSourcePref || 'default');
+        updateLibraryTrackStatus(song);
+        updateLibraryPreviewUI();
+    }
+}
+
+function catalogAnime() {
+    const byKey = new Map();
+    for (const song of getAllSongs()) {
+        const key = animeKey(song);
+        if (!byKey.has(key)) byKey.set(key, {
+            key, title: animeLabel(song), originalTitle: song.animeNative || song.anime,
+            song
+        });
+    }
+    return [...byKey.values()];
+}
+
+function findCatalogSong(key) { return getAllSongs().find(song => trackKey(song) === key) || null; }
+function seasonLabel(key) { return `${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月`; }
+function watchButton(key) {
+    const watched = watchedAnimeKeys.includes(key);
+    return `<button type="button" class="library-watch-btn${watched ? ' active' : ''}" data-action="toggleWatchedAnime" data-value="${escapeHTML(key)}" aria-pressed="${watched}">${watched ? '✓ 已追' : '+ 加入追番'}</button>`;
+}
+function animeNativeLabel(anime) {
+    return anime.originalTitle && anime.originalTitle !== anime.title
+        ? `<div class="library-anime-native">${escapeHTML(anime.originalTitle)}</div>` : '';
+}
+function trackPlaybackStatus(song) {
+    const record = audioChecks.find(entry => entry.key === trackKey(song));
+    if (!record) return { label: '待试听', className: '' };
+    if (record.status === 'played') return { label: `上次可播${record.source ? ' · ' + sourceLabel(record.source) : ''}`, className: 'played' };
+    return { label: '上次失败', className: 'failed' };
+}
+const libraryPages = { current: 0, tracks: 0, season: 0, bangumi: 0, watch: 0 };
+const LIBRARY_PAGE_SIZE = 12;
+const libraryCoverCache = new Map();
+const libraryCoverRequests = new Map();
+let libraryCoverObserver = null;
+function libraryCoverCard(anime) {
+    const posterSongKey = trackKey(anime.song);
+    return `<article class="library-cover-card">
+        <div class="library-cover-main">
+            <div class="library-poster" data-cover-song-key="${escapeHTML(posterSongKey)}"><img alt="" loading="lazy" decoding="async"><span aria-hidden="true">${escapeHTML((anime.title || '♪').slice(0, 1))}</span></div>
+            <div class="library-cover-heading"><h3>${escapeHTML(anime.title)}</h3>${animeNativeLabel(anime)}
+                <div class="library-cover-count">${anime.tracks.length} 首歌曲${anime.song.season ? ` · ${seasonLabel(anime.song.season)}` : ''}</div>
+                ${watchButton(anime.key)}
+            </div>
+        </div>
+        <div class="library-cover-tracks">${anime.tracks.map(song => {
+            const key = trackKey(song);
+            const status = trackPlaybackStatus(song);
+            const selected = selectedSongKeys.includes(key);
+            return `<div class="library-cover-track">
+                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML(song.type || '曲目')}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small><span class="library-track-status ${status.className}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
+                <div class="library-cover-actions"><button type="button" class="library-mini-btn library-preview-btn" data-action="previewSong" data-song-key="${escapeHTML(key)}" aria-label="试听 ${escapeHTML(song.titleCN || song.title)}">试听</button>
+                    <button type="button" class="library-mini-btn library-add-btn${selected ? ' active' : ''}" data-action="toggleSelectedSong" data-song-key="${escapeHTML(key)}" aria-pressed="${selected}" aria-label="${selected ? '移出我的选歌' : '添加到我的选歌'}：${escapeHTML(song.titleCN || song.title)}">${selected ? '✓ 已添加' : '+ 添加'}</button>
+                    <button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(key)}" aria-label="反馈 ${escapeHTML(song.titleCN || song.title)}">反馈</button></div>
+            </div>`;
+        }).join('')}</div>
+    </article>`;
+}
+function renderLibraryCoverGrid(id, groups, tab, emptyMessage) {
+    const totalPages = Math.max(1, Math.ceil(groups.length / LIBRARY_PAGE_SIZE));
+    libraryPages[tab] = Math.min(libraryPages[tab] || 0, totalPages - 1);
+    const page = libraryPages[tab];
+    const visible = groups.slice(page * LIBRARY_PAGE_SIZE, (page + 1) * LIBRARY_PAGE_SIZE);
+    const pager = totalPages > 1 ? `<nav class="library-cover-pager" aria-label="番剧分页">
+        <button type="button" class="library-mini-btn" data-action="libraryPage" data-value="${tab}:${page - 1}" ${page === 0 ? 'disabled' : ''}>上一页</button>
+        <span>第 ${page + 1} / ${totalPages} 页 · 共 ${groups.length} 部</span>
+        <button type="button" class="library-mini-btn" data-action="libraryPage" data-value="${tab}:${page + 1}" ${page === totalPages - 1 ? 'disabled' : ''}>下一页</button>
+    </nav>` : '';
+    $(id).innerHTML = visible.length ? visible.map(libraryCoverCard).join('') + pager : `<div class="library-empty">${escapeHTML(emptyMessage)}</div>`;
+    observeLibraryCovers($(id));
+    updateLibraryPreviewUI();
+}
+function observeLibraryCovers(root) {
+    if (!libraryCoverObserver && 'IntersectionObserver' in window) {
+        libraryCoverObserver = new IntersectionObserver(entries => {
+            for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                libraryCoverObserver.unobserve(entry.target);
+                loadLibraryCover(entry.target);
+            }
+        }, { rootMargin: '120px' });
+    }
+    root.querySelectorAll('[data-cover-song-key]').forEach(poster => {
+        if (libraryCoverObserver) libraryCoverObserver.observe(poster);
+        else loadLibraryCover(poster);
+    });
+}
+async function loadLibraryCover(poster) {
+    const song = findCatalogSong(poster.dataset.coverSongKey);
+    if (!song) return;
+    const key = animeKey(song);
+    if (!libraryCoverRequests.has(key)) libraryCoverRequests.set(key, findLibraryCover(song));
+    const url = await libraryCoverRequests.get(key);
+    if (!poster.isConnected || !url) return;
+    const image = poster.querySelector('img');
+    image.onload = () => { poster.classList.add('has-image'); };
+    image.onerror = () => { poster.classList.remove('has-image'); };
+    image.src = url;
+}
+async function findLibraryCover(song) {
+    const key = animeKey(song);
+    if (libraryCoverCache.has(key)) return libraryCoverCache.get(key);
+    let image = /^https:\/\//i.test(song.coverImage || '') ? song.coverImage : '';
+    if (!image && song.anilistId) image = SEASONAL_COVERS[song.anilistId] || '';
+    if (!image && song.anilistId) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), ANILIST_TIMEOUT);
+        try {
+            const response = await fetch('https://graphql.anilist.co', { method: 'POST',
+                headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
+                body: JSON.stringify({ query: 'query ($id: Int) { Media(id: $id, type: ANIME) { coverImage { large } } }', variables: { id: Number(song.anilistId) } }) });
+            if (response.ok) image = (await response.json()).data?.Media?.coverImage?.large || '';
+        } catch {} finally { clearTimeout(timer); }
+    }
+    if (!image) image = (await searchAniList(song.animeNative || song.anime))?.coverImage?.large || '';
+    if (!image) {
+        const matches = await searchBangumi(animeLabel(song));
+        const match = pickBestBGMResult(matches, animeLabel(song));
+        if (isHighConfidenceMatch(match, animeLabel(song))) image = match.images?.large || '';
+    }
+    image = /^https:\/\//i.test(image) ? image : '';
+    libraryCoverCache.set(key, image);
+    return image;
+}
+function renderCurrentLibrary() {
+    const pool = uniqueChallengePool(getFilteredSongs());
+    const matches = searchLibraryTracks(pool, $('libraryCurrentSearch').value);
+    const groups = groupLibrarySongs(matches, animeKey);
+    $('libraryCurrentSummary').textContent = `当前可出 ${pool.length} 首 · 搜索找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲`;
+    renderLibraryCoverGrid('libraryCurrentResults', groups, 'current', '当前曲库没有匹配的歌曲。可以清除搜索词，或点击“添加歌曲 / 更换曲库”。');
+}
+function renderTracksLibrary() {
+    const matches = searchLibraryTracks(getAllSongs(), $('libraryTrackSearch').value);
+    const groups = groupLibrarySongs(matches, animeKey);
+    $('libraryTrackSummary').textContent = `找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲 · 已添加 ${selectedSongKeys.length} 首到我的选歌`;
+    renderLibraryCoverGrid('libraryTrackResults', groups, 'tracks', '没有找到对应歌曲，试试更短的歌名、番剧名或歌手');
+}
+function renderSeasonLibrary() {
+    const tabs = $('librarySeasonTabs');
+    if (!selectedLibrarySeason) {
+        tabs.innerHTML = '';
+        $('librarySeasonSummary').textContent = '暂无已发布的季度曲库';
+        $('librarySeasonAnime').innerHTML = '';
+        return;
+    }
+    tabs.innerHTML = publishedSeasons.map(key => `<button type="button" class="library-season-tab${key === selectedLibrarySeason ? ' active' : ''}" data-action="selectLibrarySeason" data-value="${key}">${seasonLabel(key)}</button>`).join('');
+    const songs = SEASONAL_POOLS[selectedLibrarySeason];
+    const groups = groupLibrarySongs(songs, animeKey);
+    const query = ($('librarySeasonSearch').value || '').normalize('NFKC').trim().toLowerCase();
+    const visibleGroups = groups.filter(anime => !query || [anime.title, anime.originalTitle,
+        ...anime.tracks.flatMap(song => [song.title, song.titleCN, song.artist])]
+        .join(' ').normalize('NFKC').toLowerCase().includes(query));
+    const played = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'played')).length;
+    const failed = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'failed')).length;
+    const eligible = filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly).length;
+    $('librarySeasonSummary').textContent = `${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
+    renderLibraryCoverGrid('librarySeasonAnime', visibleGroups, 'season', '没有找到本季曲目，试试番剧名、歌名或歌手');
+}
+
+function getBangumiSongs() {
+    return getCustomSongs().filter(song => song.origin === 'bangumi' || song._importScore !== undefined);
+}
+function renderBangumiLibrary() {
+    const songs = getBangumiSongs();
+    const query = ($('libraryBangumiSearch').value || '').normalize('NFKC').trim().toLowerCase();
+    const groups = groupLibrarySongs(songs, animeKey);
+    const visible = groups.filter(group => !query || [group.title, group.originalTitle,
+        ...group.tracks.flatMap(song => [song.title, song.titleCN, song.artist])]
+        .join(' ').normalize('NFKC').toLowerCase().includes(query));
+    const eligible = filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly);
+    $('libraryBangumiSummary').textContent = `${groups.length} 部番剧 · ${songs.length} 首歌曲 · 当前类型和追番筛选可出 ${uniqueChallengePool(eligible).length} 题${query ? ` · 搜索找到 ${visible.length} 部` : ''}`;
+    document.querySelector('[data-action="startBangumiSongs"]').disabled = eligible.length === 0;
+    renderLibraryCoverGrid('libraryBangumiAnime', visible, 'bangumi', '还没有导入歌曲。点击「继续导入」添加 Bangumi 目录，或试试其他关键词。');
+}
+function startBangumiSongs() {
+    const songs = filterWatchedSongs(getBangumiSongs().filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly);
+    if (!songs.length) { notify('当前筛选下没有 Bangumi 导入歌曲'); return; }
+    startMode('anime', songs, 'Bangumi 导入');
+}
+
+function renderWatchLibrary() {
+    const query = ($('libraryAnimeSearch').value || '').normalize('NFKC').trim().toLowerCase();
+    const catalog = groupLibrarySongs(getAllSongs(), animeKey).sort((a, b) => {
+        const watchedDifference = Number(watchedAnimeKeys.includes(b.key)) - Number(watchedAnimeKeys.includes(a.key));
+        return watchedDifference || a.title.localeCompare(b.title, 'zh-CN');
+    });
+    const matches = catalog.filter(anime => !query || `${anime.title} ${anime.originalTitle}`.normalize('NFKC').toLowerCase().includes(query));
+    $('libraryWatchSummary').textContent = `已追 ${watchedAnimeKeys.length} 部 · 找到 ${matches.length} 部番剧`;
+    renderLibraryCoverGrid('libraryWatchResults', matches, 'watch', '没有找到对应番剧，试试原名或更短的关键词');
+}
+
+function renderMistakeLibrary() {
+    const available = mistakeBook.map(entry => findCatalogSong(entry.key)).filter(Boolean);
+    $('libraryMistakeSummary').textContent = `记录 ${mistakeBook.length} 首错题 · 当前可练习 ${available.length} 首；答对后不会自动移出，可手动标记掌握。`;
+    document.querySelector('[data-action="practiceMistakes"]').disabled = available.length === 0;
+    $('libraryMistakeList').innerHTML = mistakeBook.length ? mistakeBook.map(entry => `
+        <article class="library-record-card"><div class="library-record-head">
+            <div><div class="library-record-title">${escapeHTML(entry.title || '')}</div><div class="library-record-meta">${escapeHTML(entry.anime || '')} · 错 ${Number(entry.count) || 1} 次 · 上次选了「${escapeHTML(entry.selected || '')}」</div></div>
+            <div class="library-record-actions"><button type="button" class="library-mini-btn library-preview-btn" data-action="previewSong" data-song-key="${escapeHTML(entry.key)}">试听</button><button type="button" class="library-mini-btn" data-action="removeMistake" data-value="${escapeHTML(entry.key)}">标记掌握</button></div>
+        </div></article>`).join('') : '<div class="library-empty">还没有错题，去挑战一局吧</div>';
+}
+
+function renderFeedbackLibrary() {
+    const reasonNames = { unplayable: '无法播放', 'wrong-match': '音频匹配错误', metadata: '曲目信息错误' };
+    $('libraryFeedbackList').innerHTML = songFeedback.length ? songFeedback.map((entry, index) => `
+        <article class="library-record-card"><div class="library-record-head"><div><div class="library-record-title">${escapeHTML(entry.title || '')} · ${escapeHTML(entry.anime || '')}</div><div class="library-record-meta">${reasonNames[entry.reason] || '其他问题'}${entry.note ? ' · ' + escapeHTML(entry.note) : ''}</div></div><button type="button" class="library-mini-btn" data-action="removeFeedback" data-value="${index}">删除</button></div></article>`).join('') : '<div class="library-empty">还没有保存过反馈</div>';
+    const failed = audioChecks.filter(entry => entry.status === 'failed').slice(0, 20);
+    $('libraryFailedTracks').innerHTML = failed.length ? failed.map(entry => `
+        <article class="library-record-card"><div class="library-record-head"><div><div class="library-record-title">${escapeHTML(entry.title || '')}</div><div class="library-record-meta">${escapeHTML(entry.anime || '')} · 上次播放失败</div></div><button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(entry.key)}">反馈</button></div></article>`).join('') : '<div class="library-empty">暂无本机播放失败记录</div>';
+    document.querySelector('[data-action="copyFeedback"]').disabled = songFeedback.length === 0;
+    document.querySelector('[data-action="exportFeedback"]').disabled = songFeedback.length === 0;
+}
+
+function renderLibrary() {
+    document.querySelectorAll('.library-tab').forEach(tab => {
+        const active = tab.dataset.value === selectedLibraryTab;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', String(active));
+    });
+    for (const name of ['current', 'tracks', 'season', 'bangumi', 'watch', 'mistakes', 'feedback']) {
+        $(`library${name[0].toUpperCase() + name.slice(1)}Panel`).classList.toggle('hidden', name !== selectedLibraryTab);
+    }
+    if (selectedLibraryTab === 'current') renderCurrentLibrary();
+    if (selectedLibraryTab === 'tracks') renderTracksLibrary();
+    if (selectedLibraryTab === 'season') renderSeasonLibrary();
+    if (selectedLibraryTab === 'bangumi') renderBangumiLibrary();
+    if (selectedLibraryTab === 'watch') renderWatchLibrary();
+    if (selectedLibraryTab === 'mistakes') renderMistakeLibrary();
+    if (selectedLibraryTab === 'feedback') renderFeedbackLibrary();
+    updateLibraryPreviewUI();
+}
+
+function toggleWatchedAnime(key) {
+    watchedAnimeKeys = watchedAnimeKeys.includes(key) ? watchedAnimeKeys.filter(value => value !== key) : [...watchedAnimeKeys, key];
+    savePersonalList(PERSONAL_KEYS.watched, watchedAnimeKeys);
+    updateFilterCount();
+    renderLibrary();
+}
+function toggleSelectedSong(key) {
+    const song = findCatalogSong(key);
+    if (!song) { notify('这首歌已不在曲库中'); return; }
+    const alreadySelected = selectedSongKeys.includes(key);
+    const alreadyInCurrent = getFilteredSongs().some(item => trackKey(item) === key);
+    selectedSongKeys = alreadySelected ? selectedSongKeys.filter(item => item !== key) : [...selectedSongKeys, key];
+    savePersonalList(PERSONAL_KEYS.selected, selectedSongKeys);
+    if (!alreadySelected && !alreadyInCurrent) {
+        if (filterState.source !== 'mix') {
+            filterState.mix = mixForAddedSong(filterState.source, publishedSeasons);
+        } else filterState.mix.selected = true;
+        try { localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix)); } catch {}
+        setSourceFilter('mix');
+    } else updateFilterCount();
+    renderLibrary();
+    notify(alreadySelected ? '已移出我的选歌' : alreadyInCurrent ? '已加入我的选歌' : '已加入当前曲库');
+}
+function useSelectedSongs() {
+    if (!selectedSongKeys.length) { notify('先添加想猜的歌曲'); return; }
+    filterState.mix = { legacy: false, seasons: [], imported: false, watched: false, selected: true };
+    try { localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix)); } catch {}
+    setSourceFilter('mix');
+    selectedLibraryTab = 'current';
+    renderLibrary();
+    notify('当前曲库已切换为我的选歌');
+}
+function startSelectedSeason() {
+    if (!selectedLibrarySeason) return;
+    setSourceFilter(`season:${selectedLibrarySeason}`);
+    startMode('anime');
+}
+function startMistakePractice() {
+    const keys = new Set(mistakeBook.map(entry => entry.key));
+    const songs = getAllSongs().filter(song => keys.has(trackKey(song)));
+    if (!songs.length) { notify('错题本里没有可用的歌曲'); return; }
+    startMode('anime', songs);
+}
+
+let feedbackReturnFocus = null;
+function openSongFeedback(song) {
+    if (!song) { notify('这首歌已不在当前曲库中'); return; }
+    feedbackTargetSong = song;
+    feedbackReturnFocus = document.activeElement;
+    $('feedbackSongLabel').textContent = `${animeLabel(song)} · ${song.titleCN || song.title}`;
+    $('feedbackReason').value = audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'failed') ? 'unplayable' : 'wrong-match';
+    $('feedbackNote').value = '';
+    $('feedbackModal').classList.add('show');
+    $('feedbackModal').removeAttribute('inert');
+    $('feedbackModal').setAttribute('aria-hidden', 'false');
+    $('feedbackReason').focus();
+}
+function closeSongFeedback() {
+    $('feedbackModal').classList.remove('show');
+    $('feedbackModal').setAttribute('aria-hidden', 'true');
+    $('feedbackModal').setAttribute('inert', '');
+    feedbackTargetSong = null;
+    feedbackReturnFocus?.focus();
+    feedbackReturnFocus = null;
+}
+function saveSongFeedback() {
+    if (!feedbackTargetSong) return;
+    songFeedback = putFeedback(songFeedback, feedbackTargetSong, $('feedbackReason').value, $('feedbackNote').value);
+    savePersonalList(PERSONAL_KEYS.feedback, songFeedback);
+    closeSongFeedback();
+    if (!$('v-library').classList.contains('hidden')) renderLibrary();
+    notify('反馈已保存在本机，可在「我的曲库」复制或导出');
+}
+async function copySongFeedback() {
+    if (!songFeedback.length) return;
+    const text = songFeedback.map(entry => `${entry.anime} · ${entry.title} (${entry.type})｜${entry.reason}｜${entry.note || '无补充'}`).join('\n');
+    try { await navigator.clipboard.writeText(text); notify('反馈已复制，可以发给维护者'); }
+    catch { notify('复制失败，请使用导出 JSON'); }
+}
+function exportSongFeedback() {
+    if (!songFeedback.length) return;
+    const blob = new Blob([JSON.stringify(songFeedback, null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'anime-song-feedback.json';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
 }
 
 function initAudioSourceFilter() {
     const options = [
-        { label: 'iTunes + YouTube', value: null },
-        { label: 'B站优先', value: 'bilibili-first' },
+        { label: '智选三源 · 推荐', value: 'smart' },
+        { label: 'iTunes + YouTube', value: 'itunes-youtube' },
         { label: '仅B站', value: 'bilibili-only' },
     ];
     const container = $('audioSourceChips');
@@ -3424,7 +4305,7 @@ function initAudioSourceFilter() {
     }
     // Show proxy input only when B站 mode is active
     if (proxyGroup) {
-        proxyGroup.style.display = audioSourcePref && audioSourcePref !== 'null' ? '' : 'none';
+        proxyGroup.style.display = audioSourcePref === 'itunes-youtube' ? 'none' : '';
     }
 
     if ($('biliProxySave')) {
@@ -3457,26 +4338,27 @@ function initAudioSourceFilter() {
         document.head.appendChild(link2);
     }
 
-    options.forEach((opt, i) => {
+    options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'settings-chip' + (opt.value === audioSourcePref ? ' active' : (i === 0 && !audioSourcePref ? ' active' : ''));
+        btn.className = 'settings-chip' + (opt.value === audioSourcePref ? ' active' : '');
         btn.textContent = opt.label;
         btn.addEventListener('click', () => {
             container.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
             btn.classList.add('active');
             saveAudioSourcePref(opt.value);
             audioCache.clear();
+            stopLibraryPreview();
             if (proxyGroup) {
-                proxyGroup.style.display = (opt.value && opt.value !== 'null') ? '' : 'none';
+                proxyGroup.style.display = opt.value === 'itunes-youtube' ? 'none' : '';
             }
-            if (opt.value === 'bilibili-first' || opt.value === 'bilibili-only') {
+            if (opt.value === 'smart' || opt.value === 'bilibili-only') {
                 ensureBiliPreconnect();
             }
         });
         container.appendChild(btn);
     });
 
-    if (audioSourcePref === 'bilibili-first' || audioSourcePref === 'bilibili-only') {
+    if (audioSourcePref === 'smart' || audioSourcePref === 'bilibili-only') {
         ensureBiliPreconnect();
     }
 }
@@ -3531,7 +4413,8 @@ document.addEventListener('keydown', (e) => {
 
     // Escape to close modals
     if (e.key === 'Escape') {
-        if ($('bangumiModal').style.display === 'flex') { closeBangumiPanel(); return; }
+        if ($('feedbackModal').classList.contains('show')) { closeSongFeedback(); return; }
+        if ($('bangumiModal').classList.contains('show')) { closeBangumiPanel(); return; }
         if (settingsOpen) { closeSettings(); return; }
         if (detailOpen) { closeDetailModal(); return; }
         if (endOpen) { $('endModal').classList.remove('show'); showView('menu'); return; }
@@ -3576,6 +4459,7 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('click', (e) => {
     if (e.target.id === 'animeDetailModal') { closeDetailModal(); return; }
     if (e.target.id === 'settingsModal') { closeSettings(); return; }
+    if (e.target.id === 'feedbackModal') { closeSongFeedback(); return; }
     if (e.target.id === 'endModal') { $('endModal').classList.remove('show'); showView('menu'); return; }
 });
 
@@ -3589,7 +4473,6 @@ document.addEventListener('click', (e) => {
     // Custom song deletion (event delegation with confirmation)
     const delBtn = e.target.closest('[data-del-custom]');
     if (delBtn) {
-        if (!confirm('主人确定要删除这首歌曲喵？')) return;
         const index = parseInt(delBtn.dataset.delCustom);
         if (!isNaN(index)) removeCustomSong(index);
         return;
@@ -3608,6 +4491,57 @@ document.addEventListener('click', (e) => {
     const action = actionEl.dataset.action;
     const value = actionEl.dataset.value;
     switch (action) {
+        case 'showLibrary': selectedLibraryTab = 'current'; showView('library'); break;
+        case 'showSeasonLibrary':
+            selectedLibraryTab = 'season';
+            selectedLibrarySeason = homeGallerySeason;
+            $('librarySeasonSearch').value = value || '';
+            libraryPages.season = 0;
+            showView('library');
+            break;
+        case 'shiftHomeHero': shiftHomeAnime('hero', Number(value)); break;
+        case 'shiftHomeGallery': shiftHomeAnime('gallery', Number(value)); break;
+        case 'openSourceSettings': openSettings(); $('sourceChips').scrollIntoView({ block: 'center' }); break;
+        case 'libraryTab': selectedLibraryTab = value; renderLibrary(); break;
+        case 'libraryPage': {
+            const [tab, pageText] = String(value || '').split(':');
+            const page = Number(pageText);
+            if (tab === selectedLibraryTab && Number.isInteger(page) && page >= 0) {
+                libraryPages[tab] = page;
+                renderLibrary();
+                $(`library${tab[0].toUpperCase() + tab.slice(1)}Panel`).scrollIntoView({ block: 'start' });
+            }
+            break;
+        }
+        case 'selectLibrarySeason': selectedLibrarySeason = value; renderLibrary(); break;
+        case 'startBangumiSongs': startBangumiSongs(); break;
+        case 'openBangumi': openBangumiPanel(actionEl); break;
+        case 'toggleWatchedAnime': toggleWatchedAnime(value); break;
+        case 'toggleSelectedSong': toggleSelectedSong(actionEl.dataset.songKey); break;
+        case 'useSelectedSongs': useSelectedSongs(); break;
+        case 'startSelectedSeason': startSelectedSeason(); break;
+        case 'practiceMistakes': startMistakePractice(); break;
+        case 'removeMistake':
+            if (confirm('把这首歌从错题本移出吗？')) {
+                mistakeBook = mistakeBook.filter(entry => entry.key !== value);
+                savePersonalList(PERSONAL_KEYS.mistakes, mistakeBook);
+                renderLibrary();
+            }
+            break;
+        case 'reportSong': openSongFeedback(findCatalogSong(actionEl.dataset.songKey)); break;
+        case 'previewSong': playLibraryPreview(findCatalogSong(actionEl.dataset.songKey)); break;
+        case 'reportCurrentSong': openSongFeedback(gameState.currentSong); break;
+        case 'closeFeedback': closeSongFeedback(); break;
+        case 'saveFeedback': saveSongFeedback(); break;
+        case 'removeFeedback':
+            if (confirm('删除这条本机反馈吗？')) {
+                songFeedback.splice(Number(value), 1);
+                savePersonalList(PERSONAL_KEYS.feedback, songFeedback);
+                renderLibrary();
+            }
+            break;
+        case 'copyFeedback': copySongFeedback(); break;
+        case 'exportFeedback': exportSongFeedback(); break;
         case 'startSingle': startSingle(); break;
         case 'startMode': startMode(value); break;
         case 'showView': showView(value); break;
@@ -3616,6 +4550,7 @@ document.addEventListener('click', (e) => {
         case 'pkShare': pkShare(); break;
         case 'pkStart': pkStart(); break;
         case 'togglePlay': togglePlay(); break;
+        case 'retryQuestionAudio': retryQuestionAudio(); break;
         case 'restartGame': restartGame(); break;
         case 'clearRecords': clearRecords(); break;
         case 'goHome': $('endModal').classList.remove('show'); showView('menu'); break;
@@ -3676,27 +4611,117 @@ document.addEventListener('change', (e) => {
 // =====================================================================
 // Init
 // =====================================================================
+const homeGallerySeason = Object.keys(SEASONAL_POOLS).sort().reverse()[0] || '2026-07';
+const homeAnimePool = [...new Map((SEASONAL_POOLS[homeGallerySeason] || []).map(song => [song.anilistId, song])).values()]
+    .filter(song => SEASONAL_COVERS[song.anilistId]);
+const homeHeroPool = [...new Map(Object.keys(SEASONAL_POOLS).sort().reverse()
+    .flatMap(season => SEASONAL_POOLS[season]).map(song => [song.anilistId, song])).values()]
+    .filter(song => SEASONAL_COVERS[song.anilistId]);
+const HOME_GALLERY_SIZE = 4;
+let homeHeroIndex = 0;
+let homeGalleryPage = 0;
+function renderHomeAnimeGallery() {
+    if (!homeAnimePool.length) return;
+    const [year, month] = homeGallerySeason.split('-');
+    const seasonNames = { '01': ['WINTER', '冬天', '冬'], '04': ['SPRING', '春天', '春'], '07': ['SUMMER', '夏天', '夏'], '10': ['AUTUMN', '秋天', '秋'] };
+    const [englishSeason, chineseSeason, shortSeason] = seasonNames[month];
+    $('homeAnimeSeasonLabel').textContent = `${year} / ${englishSeason} ANIME`;
+    $('homeAnimeTitle').textContent = `从封面认出这个${chineseSeason}`;
+    const hero = homeHeroPool[homeHeroIndex];
+    $('heroFeaturedCover').src = SEASONAL_COVERS[hero.anilistId];
+    $('heroFeaturedTitle').textContent = hero.animeCN || hero.anime;
+    $('heroFeaturedCount').textContent = `${String(homeHeroIndex + 1).padStart(2, '0')} / ${homeHeroPool.length}`;
+    const pageCount = Math.ceil(homeAnimePool.length / HOME_GALLERY_SIZE);
+    $('homeGalleryCount').textContent = `${homeGalleryPage + 1} / ${pageCount}`;
+    const start = homeGalleryPage * HOME_GALLERY_SIZE;
+    $('homeAnimePosters').innerHTML = homeAnimePool.slice(start, start + HOME_GALLERY_SIZE).map((song, index) => {
+        const name = escapeHTML(song.animeCN || song.anime);
+        return `<button type="button" class="home-poster-card" data-action="showSeasonLibrary" data-value="${name}" aria-label="查看${name}的季度歌曲">
+            <span class="home-poster-image"><img src="${SEASONAL_COVERS[song.anilistId]}" alt="" loading="lazy" decoding="async"><em>${String(start + index + 1).padStart(2, '0')}</em></span>
+            <strong>${name}</strong><small>${year} ${shortSeason} · OP / ED</small>
+        </button>`;
+    }).join('');
+}
+function shiftHomeAnime(group, delta) {
+    if (!homeAnimePool.length || !Number.isInteger(delta) || Math.abs(delta) !== 1) return;
+    if (group === 'hero') homeHeroIndex = (homeHeroIndex + delta + homeHeroPool.length) % homeHeroPool.length;
+    else if (group === 'gallery') {
+        const pages = Math.ceil(homeAnimePool.length / HOME_GALLERY_SIZE);
+        homeGalleryPage = (homeGalleryPage + delta + pages) % pages;
+    } else return;
+    renderHomeAnimeGallery();
+}
+
+$('inlineDetailHost').appendChild($('animeDetailModal'));
+renderHomeAnimeGallery();
 initSakura();
 initFilters();
 initSourceFilter();
 initAudioSourceFilter();
 initQuestionCount();
+const watchedOnlyFilter = $('watchedOnlyFilter');
+watchedOnlyFilter.checked = filterState.watchedOnly;
+watchedOnlyFilter.addEventListener('change', () => {
+    filterState.watchedOnly = watchedOnlyFilter.checked;
+    $('libraryOnlyWatched').checked = filterState.watchedOnly;
+    try { localStorage.setItem('watched_only_v1', filterState.watchedOnly ? '1' : '0'); } catch {}
+    updateFilterCount();
+    if (!$('v-library').classList.contains('hidden')) renderLibrary();
+});
+$('libraryAnimeSearch').addEventListener('input', () => {
+    libraryPages.watch = 0;
+    if (selectedLibraryTab === 'watch') renderWatchLibrary();
+});
+$('librarySeasonSearch').addEventListener('input', () => { libraryPages.season = 0; renderSeasonLibrary(); });
+$('libraryBangumiSearch').addEventListener('input', () => { libraryPages.bangumi = 0; renderBangumiLibrary(); });
+$('libraryTrackSearch').addEventListener('input', () => { libraryPages.tracks = 0; renderTracksLibrary(); });
+$('libraryCurrentSearch').addEventListener('input', () => { libraryPages.current = 0; renderCurrentLibrary(); });
+$('libraryOnlyWatched').checked = filterState.watchedOnly;
+$('libraryOnlyWatched').addEventListener('change', () => {
+    $('watchedOnlyFilter').checked = $('libraryOnlyWatched').checked;
+    $('watchedOnlyFilter').dispatchEvent(new Event('change'));
+});
+const libraryPreviewAudio = $('libraryPreviewAudio');
+libraryPreviewAudio.addEventListener('playing', () => {
+    if (!libraryPreviewSession.activeKey || !libraryPreviewSong || !libraryPreviewUrl) return;
+    libraryPreviewState = 'playing';
+    recordLocalAudioCheck(libraryPreviewSong, 'played', libraryPreviewSource);
+    updateLibraryTrackStatus(libraryPreviewSong);
+    updateLibraryPreviewUI();
+});
+libraryPreviewAudio.addEventListener('ended', () => {
+    if (!libraryPreviewSession.activeKey) return;
+    libraryPreviewState = 'ended';
+    updateLibraryPreviewUI();
+});
+libraryPreviewAudio.addEventListener('error', () => {
+    if (!libraryPreviewSession.activeKey || !libraryPreviewSong || !libraryPreviewUrl) return;
+    recoverLibraryPreviewAudio('音频加载失败');
+});
+$('libraryVolRange').addEventListener('input', event => setPlayerVolume(event.target.value));
 probeLocalProxy();   // 自动探测本地 B站代理（bili-proxy.mjs），在跑就自动启用
 updateCustomSongsUI();
 
-// Bangumi panel toggle
-$('bangumiToggle').addEventListener('click', () => {
-    $('bangumiModal').style.display = 'flex';
-    $('bangumiIndexInput').focus();
-});
+// Return focus to whichever entry point opened the panel.
+let bangumiReturnFocus = null;
+// The site card animates with a transform and clips overflow. A fixed dialog
+// inside it forms a lower stacking context than the settings dialog.
+document.body.appendChild($('bangumiModal'));
+function openBangumiPanel(trigger) {
+    bangumiReturnFocus = trigger || $('bangumiToggle');
+    if ($('settingsModal').classList.contains('show')) $('settingsModal').setAttribute('inert', '');
+    $('bangumiModal').classList.add('show');
+    if (window.matchMedia('(pointer: fine)').matches) $('bangumiIndexInput').focus();
+    else $('bangumiClose').focus();
+}
+$('bangumiToggle').addEventListener('click', event => openBangumiPanel(event.currentTarget));
 function closeBangumiPanel() {
-    $('bangumiModal').style.display = 'none';
-    $('bangumiToggle').focus();
+    $('bangumiModal').classList.remove('show');
+    $('settingsModal').removeAttribute('inert');
+    bangumiReturnFocus?.focus();
+    bangumiReturnFocus = null;
 }
 $('bangumiClose').addEventListener('click', closeBangumiPanel);
-
-// Load YouTube IFrame API for full song playback
-loadYouTubeAPI();
 
 // Volume control
 $('fpVolBtn')?.addEventListener('click', (e) => {
@@ -3704,10 +4729,7 @@ $('fpVolBtn')?.addEventListener('click', (e) => {
     toggleVolumeSlider();
 });
 $('fpVolRange')?.addEventListener('input', (e) => {
-    ytVolume = parseInt(e.target.value);
-    volumeMuted = false;
-    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(ytVolume);
-    updateVolIcon();
+    setPlayerVolume(e.target.value);
 });
 // Close volume slider on outside click
 document.addEventListener('click', (e) => {
@@ -3725,10 +4747,7 @@ $('musicVolBtn')?.addEventListener('click', (e) => {
     $('musicVolSlider')?.classList.toggle('open');
 });
 $('musicVolRange')?.addEventListener('input', (e) => {
-    ytVolume = parseInt(e.target.value);
-    volumeMuted = false;
-    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(ytVolume);
-    updateVolIcon();
+    setPlayerVolume(e.target.value);
 });
 
 // Music modal progress bar click-to-seek
