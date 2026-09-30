@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=50';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=51';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=38';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=1';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
@@ -94,6 +94,12 @@ const PK_RETRY_DELAY = 1000;       // PK retry backoff (ms)
 const PK_RETRY_COUNT = 3;          // PK max retry attempts
 
 const BILI_TIMEOUT = 12000;        // B站 proxy fetch timeout (ms)
+const BILI_SEARCH_BUDGET = 10000;  // B站整体搜索预算（含4条查询，不再等到15s）
+const BILI_QUERY_BUDGET = 7000;    // B站单条搜索查询预算，慢查询到点放弃，不阻塞
+const YT_SEARCH_BUDGET = 7000;     // YouTube 整体搜索预算（并行查询）
+const GATHER_GRACE = 700;          // 首个音源就绪后，给其它音源的额外收集窗口
+const GATHER_HARD = 8000;          // 音源候选收集硬上限
+const STRONG_SCORE = 90;           // 可立即采用的高置信候选分数
 
 // B站代理失败状态（用于提示分级：代理不可达 / 取流被风控 / 无搜索结果）
 const biliProxyState = { down: false, notified: false, reason: null };
@@ -487,6 +493,10 @@ function onYtStateChange(e) {
         } else {
             $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
             stopQuizProgress();
+            // Autoplay blocked (unstarted/paused/cued): let the user start it manually.
+            if (e.data !== YT.PlayerState.BUFFERING &&
+                (gameState.mediaState === 'buffering' || gameState.mediaState === 'switching'))
+                setQuizMediaState('awaiting-play', `音频已找到 · YouTube源 · 点击播放`);
         }
         return; // Don't also update full player / music player
     }
@@ -646,8 +656,9 @@ async function searchYouTube(query) {
 // Quiz searches inspect multiple videos. Search's embeddable filter is useful,
 // but the player can still reject a video later (Content ID / platform policy).
 async function searchQuizYouTubeCandidates(song) {
-    let networkFailures = 0;
-    for (const query of audioSearchQueries(song).youtube) {
+    const queries = audioSearchQueries(song).youtube;
+    // Run all queries in parallel (was a serial nested loop), each rotating keys independently.
+    const runOne = async (query) => {
         const tried = new Set();
         while (tried.size < YT_API_KEYS.length) {
             const idx = ytKeyIndex;
@@ -661,27 +672,33 @@ async function searchQuizYouTubeCandidates(song) {
                 const key = YT_API_KEYS[idx];
                 const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=10&q=${encodeURIComponent(query)}&key=${key}`, { signal: controller.signal });
                 if (response.status === 403 || response.status === 429) { ytKeyExhausted.add(idx); continue; }
-                if (!response.ok) continue;
+                if (!response.ok) return [];
                 const items = (await response.json()).items || [];
                 const ids = items.map(item => item.id?.videoId).filter(Boolean);
-                if (!ids.length) break;
+                if (!ids.length) return [];
                 const details = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=status&id=${ids.join(',')}&key=${key}`, { signal: controller.signal });
-                if (!details.ok) break;
+                if (!details.ok) return [];
                 const status = new Map(((await details.json()).items || []).map(item => [item.id, item.status?.embeddable]));
-                const candidates = items.filter(item => item.id?.videoId && status.get(item.id.videoId) === true)
+                return items.filter(item => item.id?.videoId && status.get(item.id.videoId) === true)
                     .map(item => ({ source: 'youtube', videoId: item.id.videoId, title: item.snippet?.title || '',
                         artist: item.snippet?.channelTitle || '', embeddable: true }));
-                if (rankAudioCandidates(song, candidates).length) return candidates;
-                break;
             } catch (error) {
                 console.warn('[YT] quiz search failed:', error);
-                if (++networkFailures >= 2) return [];
-            }
-            finally { clearTimeout(timeout); }
+                return [];
+            } finally { clearTimeout(timeout); }
         }
-        if (ytKeyExhausted.size >= YT_API_KEYS.length) break;
+        return [];
+    };
+    const settled = await settleWithin(Promise.all(queries.map(runOne)), YT_SEARCH_BUDGET, []);
+    // Merge across queries, dedupe by videoId, then return the scored/ordered matches.
+    const seen = new Set();
+    const all = [];
+    for (const list of (settled || [])) {
+        for (const c of (list || [])) {
+            if (!seen.has(c.videoId)) { seen.add(c.videoId); all.push(c); }
+        }
     }
-    return [];
+    return rankAudioCandidates(song, all);
 }
 
 // =====================================================================
@@ -764,7 +781,9 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
         const candidates = [];
         const seen = new Set();
         let lastError = null;
-        const searches = await Promise.allSettled(queries.bilibili.map(query => trySearch(query)));
+        const searches = await Promise.allSettled(queries.bilibili.map(
+            query => settleWithin(trySearch(query), BILI_QUERY_BUDGET, [])
+        ));
         for (const search of searches) {
             if (search.status === 'rejected') { lastError = search.reason; continue; }
             for (const result of search.value) {
@@ -2896,13 +2915,30 @@ function prepareQuestionAudio(result, generation) {
     rememberResolvedAudio(gameState.currentSong, result);
     const label = sourceLabel(result.source);
     if (result.url.startsWith('yt:')) {
+        const videoId = result.url.slice(3);
         quizYT.active = true;
-        quizYT.videoId = result.url.slice(3);
+        quizYT.videoId = videoId;
         setQuizMediaState('buffering', `音频已找到 · 正在准备${label}播放器`);
-        ensureYouTubeAPI().then(() => {
-            if (generation === gameState.fetchGeneration && quizYT.videoId === result.url.slice(3))
+        let prepSettled = false;
+        // Bounded preparation: don't hang on "正在准备播放器" if the API/player never becomes ready.
+        const prepTimer = setTimeout(() => {
+            if (!prepSettled && generation === gameState.fetchGeneration)
+                recoverQuestionAudio('YouTube播放器准备超时');
+        }, 8000);
+        ensureYouTubeAPI().then(player => {
+            prepSettled = true;
+            clearTimeout(prepTimer);
+            if (generation !== gameState.fetchGeneration || quizYT.videoId !== videoId) return;
+            // Load & start immediately; onYtStateChange flips to playing when it actually starts.
+            if (player && player.loadVideoById && ytReady) {
+                player.loadVideoById({ videoId, startSeconds: 0 });
+                armQuizMediaTimeout('YouTube播放启动超时', 10000);
+            } else {
                 setQuizMediaState('awaiting-play', `音频已找到 · ${label} · 点击播放`);
+            }
         }).catch(() => {
+            prepSettled = true;
+            clearTimeout(prepTimer);
             if (generation === gameState.fetchGeneration) recoverQuestionAudio('YouTube播放器不可用');
         });
         return;
@@ -3113,30 +3149,68 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         { title, artist, anime, type: songType };
     const useBili = sourcePreference !== 'itunes-youtube' && !excludedSources.has('bilibili');
     const useOthers = sourcePreference !== 'bilibili-only';
-    const tasks = [
-        useOthers && !excludedSources.has('itunes') ? searchQuizItunesCandidates(song) : Promise.resolve([]),
-        useOthers && !excludedSources.has('youtube') ? searchQuizYouTubeCandidates(song) : Promise.resolve([]),
-        useBili ? settleWithin(searchBilibili(anime, title, artist, songType,
-            { titleCN: song.titleCN, animeCN: song.animeCN, animeNative: song.animeNative }), 15000) : Promise.resolve(null)
-    ];
-    const [itunes, youtube, bili] = await Promise.allSettled(tasks);
-    const candidates = [
-        ...(itunes.status === 'fulfilled' ? itunes.value : []),
-        ...(youtube.status === 'fulfilled' ? youtube.value : []).filter(item => !excludedVideos.yt?.has(item.videoId))
-    ];
     const seasonalSong = Object.values(SEASONAL_POOLS).flat().find(item => item.title === title && item.anime === anime);
-    if (useOthers && !excludedSources.has('youtube') && seasonalSong?.youtubeVideoId &&
-        !excludedVideos.yt?.has(seasonalSong.youtubeVideoId)) {
-        candidates.push({ source: 'youtube', videoId: seasonalSong.youtubeVideoId,
-            title: `${song.animeCN || anime} ${song.type || songType} ${song.title} ${artist}` });
-    }
-    if (bili.status === 'fulfilled' && bili.value) {
-        for (const item of [bili.value, ...(bili.value._alternates || [])]) {
-            if (!excludedVideos.bili?.has(item.bvid)) candidates.push({
-                source: 'bilibili', bvid: item.bvid, title: item.title, artist: item.author || ''
-            });
+
+    // Start all source searches in parallel.
+    const rawItunes = useOthers && !excludedSources.has('itunes') ? searchQuizItunesCandidates(song) : Promise.resolve([]);
+    const rawYt = useOthers && !excludedSources.has('youtube') ? searchQuizYouTubeCandidates(song) : Promise.resolve([]);
+    const rawBili = useBili ? settleWithin(searchBilibili(anime, title, artist, songType,
+        { titleCN: song.titleCN, animeCN: song.animeCN, animeNative: song.animeNative }), BILI_SEARCH_BUDGET)
+        : Promise.resolve(null);
+
+    // Incremental gather: converge fast after the first source settles + a grace window,
+    // but keep waiting (up to the hard cap) while there is still no viable candidate.
+    const gathered = { itunes: [], youtube: [], bili: null };
+    const wrap = (k, p) => Promise.resolve(p).then(v => ({ k, v }), e => ({ k, e }));
+    const entries = [
+        { k: 'itunes', p: wrap('itunes', rawItunes) },
+        { k: 'youtube', p: wrap('youtube', rawYt) },
+        { k: 'bili', p: wrap('bili', rawBili) }
+    ];
+    const buildCandidates = () => {
+        const list = [
+            ...gathered.itunes,
+            ...gathered.youtube.filter(item => !excludedVideos.yt?.has(item.videoId))
+        ];
+        if (useOthers && !excludedSources.has('youtube') && seasonalSong?.youtubeVideoId &&
+            !excludedVideos.yt?.has(seasonalSong.youtubeVideoId)) {
+            list.push({ source: 'youtube', videoId: seasonalSong.youtubeVideoId,
+                title: `${song.animeCN || anime} ${song.type || songType} ${song.title} ${artist}` });
         }
+        if (gathered.bili) {
+            for (const item of [gathered.bili, ...(gathered.bili._alternates || [])]) {
+                if (!excludedVideos.bili?.has(item.bvid)) list.push({
+                    source: 'bilibili', bvid: item.bvid, title: item.title, artist: item.author || ''
+                });
+            }
+        }
+        return list;
+    };
+    const gatherStart = performance.now();
+    let firstAt = null;
+    while (entries.length) {
+        const hardLeft = GATHER_HARD - (performance.now() - gatherStart);
+        if (hardLeft <= 0) break;
+        const races = entries.map(e => e.p);
+        if (firstAt !== null) {
+            const gLeft = GATHER_GRACE - (performance.now() - firstAt);
+            if (gLeft > 0) races.push(new Promise(res => setTimeout(() => res({ k: '__grace__' }), gLeft)));
+        }
+        const out = await Promise.race(races);
+        if (out?.k === '__grace__') {
+            // Grace elapsed: converge if a viable candidate exists, otherwise reset and wait for slower sources.
+            if (rankAudioCandidates(song, buildCandidates()).length) break;
+            firstAt = null;
+            continue;
+        }
+        if (firstAt === null) firstAt = performance.now();
+        if (out.k === 'itunes') gathered.itunes = out.e ? [] : (out.v || []);
+        if (out.k === 'youtube') gathered.youtube = out.e ? [] : (out.v || []);
+        if (out.k === 'bili') gathered.bili = out.e ? null : out.v;
+        const i = entries.findIndex(e => e.k === out.k);
+        if (i >= 0) entries.splice(i, 1);
     }
+    const candidates = buildCandidates();
     const lastCheck = audioChecks.find(entry => entry.key === trackKey(song));
     const ranked = rankAudioCandidates(song, candidates.map(candidate => ({
         ...candidate, localFailure: lastCheck?.status === 'failed' && lastCheck.source === candidate.source

@@ -99,6 +99,10 @@ test('Bilibili keeps searching after unrelated results fill the first page', asy
     },
     setTimeout, clearTimeout, AbortController, Set, Promise, console,
     biliProxyState: {}, audioSearchQueries,
+    BILI_QUERY_BUDGET: 7000,
+    settleWithin(promise, ms, fallback = null) {
+      return Promise.race([promise, new Promise(r => setTimeout(() => r(fallback), ms))]);
+    },
   };
   vm.createContext(context);
   vm.runInContext(source, context);
@@ -119,11 +123,12 @@ test('three-source search waits for the Bilibili search budget instead of discar
     rankAudioCandidates, audioChecks: [], trackKey: () => 'key',
     getBilibiliAudioUrl: async () => ({ url: 'https://cdn.test/right' }),
     buildBiliProxyUrl: url => url, biliProxyState: {}, Promise, Set, Object,
+    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, performance,
   };
   vm.createContext(context);
   vm.runInContext(source, context);
   await context.fetchAudioInner(song.title, song.artist, song.anime, 'key', new Set(), 'OP', 'smart');
-  assert.ok(budget >= 12000, `Bilibili search budget was ${budget} ms`);
+  assert.ok(budget >= 10000, `Bilibili search budget was ${budget} ms`);
 });
 
 test('iTunes tries translated song title when the first spelling has no matching recording', async () => {
@@ -154,7 +159,11 @@ test('YouTube retries a localized query when the first page has no trustworthy s
   const searches = [];
   const context = {
     YT_API_KEYS: ['test-key'], ytKeyIndex: 0, ytKeyExhausted: new Set(), YT_TIMEOUT: 6000,
+    YT_SEARCH_BUDGET: 7000,
     audioSearchQueries, rankAudioCandidates,
+    settleWithin(promise, ms, fallback = null) {
+      return Promise.race([promise, new Promise(r => setTimeout(() => r(fallback), ms))]);
+    },
     fetch: async url => {
       const path = new URL(url).pathname;
       if (path.endsWith('/search')) {
@@ -179,14 +188,18 @@ test('YouTube stops promptly when the network cannot reach its API', async () =>
   let requests = 0;
   const context = {
     YT_API_KEYS: ['a', 'b', 'c'], ytKeyIndex: 0, ytKeyExhausted: new Set(), YT_TIMEOUT: 6000,
+    YT_SEARCH_BUDGET: 7000,
     audioSearchQueries, rankAudioCandidates,
+    settleWithin(promise, ms, fallback = null) {
+      return Promise.race([promise, new Promise(r => setTimeout(() => r(fallback), ms))]);
+    },
     fetch: async () => { requests++; throw new TypeError('network unavailable'); },
     AbortController, setTimeout, clearTimeout, Promise, Set, Map, console: { warn() {} },
   };
   vm.createContext(context);
   vm.runInContext(source, context);
   assert.equal((await context.searchQuizYouTubeCandidates(song)).length, 0);
-  assert.ok(requests <= 2, `unreachable API was called ${requests} times`);
+  assert.ok(requests <= 3, `unreachable API was called ${requests} times`);
 });
 
 const app = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
@@ -203,6 +216,7 @@ test('three-source quiz ranks candidates while limited modes never query the exc
     rankAudioCandidates, audioChecks: [], trackKey: () => 'key', getBilibiliAudioUrl: async () => ({ url: 'https://cdn.test/audio' }),
     buildBiliProxyUrl: url => url, biliProxyState: {},
     settleWithin: promise => promise, Promise, Set, Object,
+    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, performance,
   };
   vm.createContext(context);
   vm.runInContext(app.slice(start, end), context);
@@ -230,6 +244,7 @@ test('failed YouTube embed IDs are excluded before the next ranked attempt', asy
       { source: 'youtube', title: `ERASED OP ${song.title}`, videoId: 'next' }
     ],
     searchBilibili: async () => null, rankAudioCandidates, audioChecks: [], trackKey: () => 'key', settleWithin: promise => promise, Promise, Set, Object,
+    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, performance,
   };
   vm.createContext(context);
   vm.runInContext(source, context);
