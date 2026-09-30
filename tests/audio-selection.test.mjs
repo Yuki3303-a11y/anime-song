@@ -45,6 +45,45 @@ test('a source that failed locally loses priority for the same song', () => {
   assert.equal(rankAudioCandidates(song, candidates)[0].source, 'bilibili');
 });
 
+test('a title-only match is kept but ranks below a relation-confirmed candidate', () => {
+  const ranked = rankAudioCandidates(song, [
+    { source: 'youtube', title: song.title },
+    { source: 'youtube', title: `ERASED OP ${song.title}` },
+    { source: 'bilibili', title: `只有我不存在的城市 OP ${song.title} ${song.artist}` }
+  ]);
+  assert.equal(ranked.length, 3);
+  assert.equal(ranked[0].source, 'bilibili');
+  assert.equal(ranked[2].title, song.title); // title-only lands last
+});
+
+test('failure penalty is progressive and subtracts from the score', () => {
+  const mk = failurePenalty => scoreAudioCandidate(song, { source: 'youtube', title: `ERASED OP ${song.title}`, failurePenalty });
+  const base = mk(0);
+  assert.equal(base - mk(10), 10);
+  assert.equal(base - mk(20), 20);
+  assert.equal(base - mk(30), 30);
+});
+
+test('source failure tracker escalates, caps, and resets on success', () => {
+  const block = app.slice(app.indexOf('const sourceFailures = new Map()'), app.indexOf('async function fetchAudio('));
+  const context = { trackKey: () => 'key', Map };
+  vm.createContext(context);
+  vm.runInContext(block, context);
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 0);
+  context.noteSourceFailure(song, 'youtube');
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 10);
+  context.noteSourceFailure(song, 'youtube');
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 20);
+  context.noteSourceFailure(song, 'youtube');
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 30);
+  context.noteSourceFailure(song, 'youtube');
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 30); // capped
+  context.noteSourceFailure(song, 'itunes');
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 30); // other source independent
+  context.noteSourceSuccess(song, 'youtube');
+  assert.equal(context.sourceFailurePenalty(song, 'youtube'), 0);
+});
+
 test('one challenge cannot contain the same title and anime twice', () => {
   const pool = [song, { ...song, type: 'ED' }, { ...song }, { ...song, title: 'Other' }];
   assert.equal(uniqueChallengePool(pool).length, 2);
@@ -64,7 +103,7 @@ test('quiz replaces an unplayable question without consuming a question slot', (
     questionIndex: 0, fetchGeneration: 1, lastAudioResult: null, failedQuestionSongs: [] };
   let loaded = 0;
   const context = {
-    gameState: state, clearQuizMediaTimeout() {}, recordLocalAudioCheck() {},
+    gameState: state, clearQuizMediaTimeout() {}, recordLocalAudioCheck() {}, noteSourceFailure() {},
     setQuizMediaState() {}, notify() {}, pickReplacementSong,
     audioSourcePref: 'smart', setTimeout: callback => { callback(); }, loadQuestion: () => { loaded++; },
   };
@@ -120,10 +159,10 @@ test('three-source search waits for the Bilibili search budget instead of discar
     searchQuizItunesCandidates: async () => [], searchQuizYouTubeCandidates: async () => [],
     searchBilibili: async () => ({ title: `ERASED OP ${song.title}`, bvid: 'right' }),
     settleWithin: async (promise, ms) => { budget = ms; return promise; },
-    rankAudioCandidates, audioChecks: [], trackKey: () => 'key',
+    rankAudioCandidates, audioChecks: [], trackKey: () => 'key', sourceFailurePenalty: () => 0,
     getBilibiliAudioUrl: async () => ({ url: 'https://cdn.test/right' }),
     buildBiliProxyUrl: url => url, biliProxyState: {}, Promise, Set, Object,
-    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, performance,
+    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, STRONG_SCORE: 90, performance,
   };
   vm.createContext(context);
   vm.runInContext(source, context);
@@ -213,10 +252,10 @@ test('three-source quiz ranks candidates while limited modes never query the exc
     searchQuizItunesCandidates: async () => { calls.push('itunes'); return [{ source: 'itunes', title: song.title, artist: song.artist, url: 'clip' }]; },
     searchQuizYouTubeCandidates: async () => { calls.push('youtube'); return [{ source: 'youtube', title: `ERASED OP ${song.title}`, videoId: 'yt' }]; },
     searchBilibili: async () => { calls.push('bilibili'); return { title: `只有我不存在的城市 OP ${song.title} ${song.artist}`, bvid: 'bv' }; },
-    rankAudioCandidates, audioChecks: [], trackKey: () => 'key', getBilibiliAudioUrl: async () => ({ url: 'https://cdn.test/audio' }),
+    rankAudioCandidates, audioChecks: [], trackKey: () => 'key', sourceFailurePenalty: () => 0, getBilibiliAudioUrl: async () => ({ url: 'https://cdn.test/audio' }),
     buildBiliProxyUrl: url => url, biliProxyState: {},
     settleWithin: promise => promise, Promise, Set, Object,
-    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, performance,
+    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, STRONG_SCORE: 90, performance,
   };
   vm.createContext(context);
   vm.runInContext(app.slice(start, end), context);
@@ -243,8 +282,8 @@ test('failed YouTube embed IDs are excluded before the next ranked attempt', asy
       { source: 'youtube', title: `ERASED OP ${song.title}`, videoId: 'blocked' },
       { source: 'youtube', title: `ERASED OP ${song.title}`, videoId: 'next' }
     ],
-    searchBilibili: async () => null, rankAudioCandidates, audioChecks: [], trackKey: () => 'key', settleWithin: promise => promise, Promise, Set, Object,
-    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, performance,
+    searchBilibili: async () => null, rankAudioCandidates, audioChecks: [], trackKey: () => 'key', sourceFailurePenalty: () => 0, settleWithin: promise => promise, Promise, Set, Object,
+    BILI_SEARCH_BUDGET: 10000, GATHER_GRACE: 700, GATHER_HARD: 9000, STRONG_SCORE: 90, performance,
   };
   vm.createContext(context);
   vm.runInContext(source, context);
@@ -351,7 +390,7 @@ test('a failed preview video is excluded and its replacement becomes the quiz ve
     libraryPreviewState: 'playing', libraryPreviewTimer: null, libraryPreviewRecovering: false, libraryPreviewRetryCount: 0,
     libraryPreviewFailedSources: new Set(), libraryPreviewFailedVideos: { yt: new Set(), bili: new Set() },
     ytPlayer: { pauseVideo() {} }, $: () => player, trackKey: () => 'song', audioSourcePref: 'smart',
-    forgetResolvedAudio() {}, recordLocalAudioCheck() {}, updateLibraryTrackStatus() {}, updateLibraryPreviewUI() {},
+    forgetResolvedAudio() {}, recordLocalAudioCheck() {}, noteSourceFailure() {}, updateLibraryTrackStatus() {}, updateLibraryPreviewUI() {},
     fetchAudioInner: async (_title, _artist, _anime, _key, _sources, _type, _pref, ids) => {
       assert.equal(ids.yt.has('blocked'), true);
       return { source: 'bilibili', url: 'https://cdn.test/backup', bvid: 'backup' };

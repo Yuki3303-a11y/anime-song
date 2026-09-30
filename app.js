@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=52';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=53';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=38';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=1';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
@@ -506,6 +506,7 @@ function onYtStateChange(e) {
             clearTimeout(libraryPreviewTimer);
             libraryPreviewState = 'playing';
             recordLocalAudioCheck(libraryPreviewSong, 'played', 'youtube');
+            noteSourceSuccess(libraryPreviewSong, 'youtube');
             updateLibraryTrackStatus(libraryPreviewSong);
             libraryPreviewTimer = setTimeout(() => {
                 if (!libraryPreviewSession.activeKey || libraryPreviewResult?.source !== 'youtube') return;
@@ -749,28 +750,23 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
     }
 
     function scoreResult(r) {
+        // B站-specific relevance ranking, used ONLY to pick which B站 results are returned.
+        // The global scoreAudioCandidate owns identity/relation evidence (exact title/anime/
+        // artist/type), so these are kept small tiebreakers to avoid double-amplifying the same
+        // evidence; B站-specific signals (play count, duration) are the primary ordering.
         let s = 0;
         const videoTitle = r.title || '';
         const normalizedVideo = normalizeBiliText(videoTitle);
-        const animeMatch = biliTitleMatches(videoTitle, animeAliases);
-        const titleMatch = biliTitleMatches(videoTitle, titleAliases);
-        const artistMatch = biliTitleMatches(videoTitle, [artist]);
-        if (animeMatch) s += 55;
-        if (titleMatch) s += 75;
-        if (artistMatch) s += 20;
-        // OP/ED keyword bonus (titles like "OP - xxx" or "ED「xxx」")
+        if (biliTitleMatches(videoTitle, animeAliases)) s += 20;
+        if (biliTitleMatches(videoTitle, [artist])) s += 12;
         const tp = (type || '').toUpperCase();
-        if (tp && ['OP', 'ED'].includes(tp)) {
-            if (normalizedVideo.includes(tp.toLowerCase())) s += 20;
-            if (tp === 'OP' && /片头|主题歌|主題歌/.test(videoTitle)) s += 10;
-            if (tp === 'ED' && /片尾|エンディング/.test(videoTitle)) s += 10;
-        }
-        // Play count bonus
-        if (r.play > 100000) s += 15;
-        else if (r.play > 10000) s += 8;
-        // Duration: prefer 1-6 min
+        if (tp && ['OP', 'ED'].includes(tp) && normalizedVideo.includes(tp.toLowerCase())) s += 10;
+        // B站 quality / popularity
+        if (r.play > 1000000) s += 25;
+        else if (r.play > 100000) s += 18;
+        else if (r.play > 10000) s += 10;
+        else if (r.play > 1000) s += 5;
         if (r.duration >= 60 && r.duration <= 360) s += 10;
-
         return s;
     }
 
@@ -799,14 +795,11 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
             ...r, _score: scoreResult(r)
         }));
         scored.sort((a, b) => b._score - a._score);
-        const minScore = normalizeBiliText(anime).length <= 3 ? 75 : 70;
-        const viable = scored.filter(candidate => {
-            const hasTitle = biliTitleMatches(candidate.title, titleAliases);
-            const hasContext = biliTitleMatches(candidate.title, animeAliases) ||
-                biliTitleMatches(candidate.title, [artist]) ||
-                (['OP', 'ED'].includes(typeLabel) && normalizeBiliText(candidate.title).includes(typeLabel.toLowerCase()));
-            return hasTitle && hasContext && candidate._score >= minScore;
-        });
+        // Identity gate: title must match. Context (anime/artist/type) is no longer a hard
+        // requirement (mirrors the global policy) — title-only matches are kept, ordered lower
+        // here, and the global ranker assigns the final confidence.
+        const viable = scored.filter(candidate =>
+            biliTitleMatches(candidate.title, titleAliases));
         if (!viable.length) {
             console.log('[Bili] Rejected: no candidate passed title/context matching');
             return null;
@@ -2755,6 +2748,7 @@ function setQuizMediaState(state, message) {
     gameState.mediaState = state;
     if (state === 'playing' && gameState.mode === 'single' && !gameState.viewingHistory) {
         recordLocalAudioCheck(gameState.currentSong, 'played', gameState.lastAudioResult?.source || '');
+        noteSourceSuccess(gameState.currentSong, gameState.lastAudioResult?.source);
     }
     const status = $('playerStatus');
     if (status) {
@@ -2953,7 +2947,10 @@ function prepareQuestionAudio(result, generation) {
 
 function skipUnplayableQuestion(message) {
     clearQuizMediaTimeout();
-    if (gameState.mode === 'single') recordLocalAudioCheck(gameState.currentSong, 'failed', gameState.lastAudioResult?.source || audioSourcePref || 'default');
+    if (gameState.mode === 'single') {
+        recordLocalAudioCheck(gameState.currentSong, 'failed', gameState.lastAudioResult?.source || audioSourcePref || 'default');
+        noteSourceFailure(gameState.currentSong, gameState.lastAudioResult?.source || audioSourcePref);
+    }
     let replacement = null;
     if (gameState.mode === 'single') {
         gameState.failedQuestionSongs ||= [];
@@ -2984,6 +2981,7 @@ async function recoverQuestionAudio(reason) {
     } else if (failedSource) {
         gameState.failedAudioSources.add(failedSource);
     }
+    noteSourceFailure(gameState.currentSong, failedSource);
     gameState.mediaRetryCount++;
     if (gameState.mediaRetryCount > 5) {
         gameState.recoveringAudio = false;
@@ -3100,6 +3098,27 @@ function rememberResolvedAudio(song, result) {
     if (song && result?.url) resolvedAudioCache.set(audioResultKey(song.title, song.artist, song.anime, song.type || ''), result);
 }
 
+// ---- Progressive, recoverable per-source failure tracking (this session) ----
+// Keyed by trackKey + source. A source gets a small escalating penalty on repeated failures
+// and is fully restored once it plays successfully. Nothing here is persisted, so a failure
+// never permanently demotes a source (also resets on reload).
+const sourceFailures = new Map(); // trackKey|source -> count
+function sourceFailureKey(song, source) { return `${trackKey(song)}|${source}`; }
+function noteSourceFailure(song, source) {
+    if (!song || !source) return;
+    const k = sourceFailureKey(song, source);
+    sourceFailures.set(k, (sourceFailures.get(k) || 0) + 1);
+}
+function noteSourceSuccess(song, source) {
+    if (!song || !source) return;
+    sourceFailures.delete(sourceFailureKey(song, source));
+}
+function sourceFailurePenalty(song, source) {
+    const n = sourceFailures.get(sourceFailureKey(song, source)) || 0;
+    if (n <= 0) return 0;
+    return n >= 3 ? 30 : n === 2 ? 20 : 10;
+}
+
 async function fetchAudio(title, artist, anime, songType = '') {
     const cacheKey = `${title}|${anime}`;
     const type = songType || gameState.currentSong?.type || '';
@@ -3186,6 +3205,12 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         }
         return list;
     };
+    const bestScoreNow = () => {
+        const ranked = rankAudioCandidates(song, buildCandidates().map(c => ({
+            ...c, failurePenalty: sourceFailurePenalty(song, c.source)
+        })));
+        return ranked.length ? ranked[0].score : -Infinity;
+    };
     const gatherStart = performance.now();
     let firstAt = null;
     while (entries.length) {
@@ -3198,8 +3223,9 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         }
         const out = await Promise.race(races);
         if (out?.k === '__grace__') {
-            // Grace elapsed: converge if a viable candidate exists, otherwise reset and wait for slower sources.
-            if (rankAudioCandidates(song, buildCandidates()).length) break;
+            // Grace elapsed: converge if any viable candidate exists (even weak); otherwise
+            // keep waiting for a slower source.
+            if (bestScoreNow() >= 0) break;
             firstAt = null;
             continue;
         }
@@ -3209,11 +3235,12 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         if (out.k === 'bili') gathered.bili = out.e ? null : out.v;
         const i = entries.findIndex(e => e.k === out.k);
         if (i >= 0) entries.splice(i, 1);
+        // Strong, high-confidence candidate (verified relation) → converge immediately.
+        if (bestScoreNow() >= STRONG_SCORE) break;
     }
     const candidates = buildCandidates();
-    const lastCheck = audioChecks.find(entry => entry.key === trackKey(song));
     const ranked = rankAudioCandidates(song, candidates.map(candidate => ({
-        ...candidate, localFailure: lastCheck?.status === 'failed' && lastCheck.source === candidate.source
+        ...candidate, failurePenalty: sourceFailurePenalty(song, candidate.source)
     })));
     for (const candidate of ranked) {
         if (candidate.source === 'itunes') return { url: candidate.url, source: 'itunes', score: candidate.score,
@@ -3980,6 +4007,7 @@ async function recoverLibraryPreviewAudio(reason) {
     $('libraryPreviewAudio').pause();
     forgetResolvedAudio(song);
     recordLocalAudioCheck(song, 'failed', failed?.source || audioSourcePref);
+    noteSourceFailure(song, failed?.source || audioSourcePref);
     updateLibraryTrackStatus(song);
     libraryPreviewState = 'switching';
     updateLibraryPreviewUI();
@@ -4039,6 +4067,7 @@ async function playLibraryPreview(song) {
         if (!libraryPreviewSession.isCurrent(token)) return;
         libraryPreviewState = 'failed';
         recordLocalAudioCheck(song, 'failed', audioSourcePref || 'default');
+        noteSourceFailure(song, audioSourcePref);
         updateLibraryTrackStatus(song);
         updateLibraryPreviewUI();
     }
@@ -4760,6 +4789,7 @@ libraryPreviewAudio.addEventListener('playing', () => {
     if (!libraryPreviewSession.activeKey || !libraryPreviewSong || !libraryPreviewUrl) return;
     libraryPreviewState = 'playing';
     recordLocalAudioCheck(libraryPreviewSong, 'played', libraryPreviewSource);
+    noteSourceSuccess(libraryPreviewSong, libraryPreviewSource);
     updateLibraryTrackStatus(libraryPreviewSong);
     updateLibraryPreviewUI();
 });

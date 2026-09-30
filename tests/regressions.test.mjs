@@ -610,7 +610,7 @@ test('automatic recovery remembers earlier failed sources and moves to a new sou
     gameState,
     clearQuizMediaTimeout() {}, stopQuizYT() {}, setQuizMediaState() {},
     audio: { pause() {} }, audioCache: { delete() {} },
-    forgetResolvedAudio() {},
+    forgetResolvedAudio() {}, noteSourceFailure() {},
     fetchAudioInner: async (_title, _artist, _anime, _key, excluded) => {
       seen.push([...excluded]);
       return { source: 'youtube', url: 'yt:abc' };
