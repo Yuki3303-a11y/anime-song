@@ -112,7 +112,7 @@ test('seasonal wrong answers come from the active question pool', () => {
 test('a 30-question game uses every song in the selected season', () => {
   const start = app.indexOf('function buildPlaylist(pool, n) {');
   const end = app.indexOf('// Fetch Bangumi index', start);
-  const context = { loadPlayedHistory: () => [], savePlayedHistory: () => {}, shuffle: songs => songs, uniqueChallengePool };
+  const context = { loadRecentGames: () => [], saveRecentGames: () => {}, shuffle: songs => songs, uniqueChallengePool };
   vm.createContext(context);
   vm.runInContext(app.slice(start, end), context);
   for (const key of ['2026-04', '2026-07']) {

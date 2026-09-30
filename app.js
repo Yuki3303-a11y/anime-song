@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=51';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=52';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=38';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=1';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
@@ -1636,44 +1636,44 @@ function getFilteredSongs() {
 // Sliding window over the pool — every song is picked once per cycle before any
 // song can repeat, so repeated games cover the whole library instead of the
 // same few songs (birthday-paradox repeats from independent random draws).
-const PLAYED_HISTORY_KEY = 'played_history_v1';
+const PLAYED_GAMES_KEY = 'played_games_v1';
+const RECENT_GAME_COUNT = 5;   // 同一首歌在最近 N 局内不重复（用户要求：5 局）
 
-function loadPlayedHistory() {
+function loadRecentGames() {
     try {
-        const v = JSON.parse(localStorage.getItem(PLAYED_HISTORY_KEY));
-        return Array.isArray(v) ? v : [];
+        const v = JSON.parse(localStorage.getItem(PLAYED_GAMES_KEY));
+        if (!Array.isArray(v)) return [];
+        return v.filter(g => Array.isArray(g)).slice(-RECENT_GAME_COUNT);
     } catch { return []; }
 }
 
-function savePlayedHistory(list) {
-    try { localStorage.setItem(PLAYED_HISTORY_KEY, JSON.stringify(list)); } catch {}
+function saveRecentGames(games) {
+    try { localStorage.setItem(PLAYED_GAMES_KEY, JSON.stringify(games.slice(-RECENT_GAME_COUNT))); } catch {}
 }
 
 function buildPlaylist(pool, n) {
     const songKey = s => s.title + '|' + s.anime;
     pool = uniqueChallengePool(pool);
     n = Math.min(n, pool.length);
-    const played = loadPlayedHistory();
-    const playedSet = new Set(played);
-    const fresh = pool.filter(s => !playedSet.has(songKey(s)));
-    let picks;
-    if (fresh.length >= n) {
-        picks = shuffle(fresh).slice(0, n);
-    } else {
-        picks = shuffle(fresh);
-        const order = new Map(played.map((k, i) => [k, i]));
-        picks.push(...pool
-            .filter(s => playedSet.has(songKey(s)))
-            .sort((a, b) => order.get(songKey(a)) - order.get(songKey(b)))
-            .slice(0, n - picks.length));
-    }
-    // Keep played history consistent with the current pool — O(n + m) via Set
-    // (was O(n·m): pool.some() inside filter rescanned the pool per key)
     const poolKeys = new Set(pool.map(songKey));
-    const next = played.filter(k => poolKeys.has(k));
-    next.push(...picks.map(songKey));
-    const cap = Math.max(0, pool.length - n);
-    savePlayedHistory(cap > 0 ? next.slice(-cap) : []);
+    // recentGames: oldest → newest, each a list of song keys (only those still in this pool).
+    const recentGames = loadRecentGames().map(g => g.filter(k => poolKeys.has(k)));
+
+    // Exclude songs used in the last N games; if not enough remain, relax by dropping the
+    // oldest game first, until we can fill n songs.
+    let picks = null;
+    for (let keep = recentGames.length; keep >= 0; keep--) {
+        const excluded = new Set();
+        for (let i = recentGames.length - keep; i < recentGames.length; i++)
+            for (const k of recentGames[i]) excluded.add(k);
+        const eligible = pool.filter(s => !excluded.has(songKey(s)));
+        if (eligible.length >= n) { picks = shuffle(eligible).slice(0, n); break; }
+        if (keep === 0) picks = shuffle(eligible).slice(0, n);
+    }
+
+    // Record this game and keep only the last RECENT_GAME_COUNT games.
+    recentGames.push(picks.map(songKey));
+    saveRecentGames(recentGames);
     return picks;
 }
 

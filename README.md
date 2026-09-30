@@ -96,13 +96,14 @@ anime-song/
 
 ### 前端
 
-- **`app.js`（主程序，`?v=51`）**
+- **`app.js`（主程序，`?v=52`）**
   全局状态、游戏循环、音源检索、播放控制、答案判定、提示、结算、排行榜、「我的曲库」、Bangumi 导入、收藏、以及遗留的匿名 PK。是项目的核心，绝大部分逻辑都在这里。
 
 - **`audio-selection.mjs`（`?v=3`）**
   - `audioSearchQueries(song)`：为 iTunes / YouTube / B 站分别构造多组搜索词。
   - `scoreAudioCandidate(song, candidate)` / `rankAudioCandidates(...)`：对每个候选做**标题/番剧/歌手/类型匹配**，过滤翻唱、钢琴、伴奏、错误版本，并打分排序。
   - `uniqueChallengePool(pool)`：按「歌名 + 番剧」去重，保证同一首歌不会在一局里重复出现。
+  - `buildPlaylist`：**跨最近 5 局去重**——记录最近 5 局（`played_games_v1`）出现过的歌，选题时优先挑 5 局内没出现过的；若排除后题目不够，会从最旧的一局开始放宽。
   - `pickReplacementSong(...)`：某题不可播时，从池中挑一首未用过的替换歌。
 
 - **`library-navigation.mjs`**
@@ -207,7 +208,7 @@ sequenceDiagram
     participant Src as 音源(iTunes/YT/B站)
     U->>App: 选择模式并开始
     App->>App: getFilteredSongs() 按来源/类型/追番过滤
-    App->>App: uniqueChallengePool 去重 + buildPlaylist 选题(优先未玩过)
+    App->>App: uniqueChallengePool 去重 + buildPlaylist 选题(排除最近5局)
     loop 每一题
         App->>Src: fetchAudio 并行检索
         Src-->>App: 候选 → 打分排序
@@ -298,7 +299,7 @@ Vercel Serverless（`api/search.js`）支持以下可选变量：
 
 ### 静态资源缓存
 
-- 资源引用带版本号（如 `app.js?v=51`、`style.css?v=51`），更新代码时**把对应版本号 +1** 即可强制浏览器拉取新版本（`scripts/validate-songs.mjs` 会检查版本号一致性）。
+- 资源引用带版本号（如 `app.js?v=52`、`style.css?v=52`），更新代码时**把对应版本号 +1** 即可强制浏览器拉取新版本（`scripts/validate-songs.mjs` 会检查版本号一致性）。
 
 ---
 
