@@ -2,7 +2,7 @@ name: Update library candidates
 
 on:
   schedule:
-    - cron: "0 3 * * 1" # Mondays, 03:00 UTC; keep checking until a complete pool is ready.
+    - cron: "0 3 1 1,4,7,10 *" # Quarterly on Jan/Apr/Jul/Oct 1st, 03:00 UTC.
   workflow_dispatch:
 
 permissions:

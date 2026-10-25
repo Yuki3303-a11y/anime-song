@@ -17,6 +17,8 @@ export function seasonKey(year, season) {
   if (!Number.isInteger(year) || year < 1900 || !MONTH[season]) throw new Error('Invalid year or season');
   return `${year}-${MONTH[season]}`;
 }
+const nap = ms => new Promise(resolve => setTimeout(resolve, ms));
+const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}\s]/gu, '');
 export function pickThemePair(anime) {
   const sorted = [...(anime.animethemes || [])]
     .filter(t => ['OP', 'ED'].includes(t.type) && t.song?.title?.trim() && t.song?.artists?.some(a => a.name))
@@ -53,6 +55,54 @@ export function selectSeasonSongs(ranked, themeAnime, target = 15) {
       coverUrl: media.coverImage?.medium || '', songs });
   }
   return { complete: selected.length === target, selected, skipped, songs: selected.flatMap(x => x.songs) };
+}
+async function fetchJson(url, options = {}, timeout = 12000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    if (!response.ok) {
+      const error = new Error(`HTTP ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+    return await response.json();
+  } finally { clearTimeout(timer); }
+}
+async function lookupBangumiName(show) {
+  const aliases = [show.animeNative, show.animeEnglish, show.anime].filter(Boolean);
+  for (const keyword of aliases) {
+    try {
+      const body = await fetchJson('https://api.bgm.tv/v0/search/subjects', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'User-Agent': 'anime-song-candidate-fetcher/1.0'
+        },
+        body: JSON.stringify({ keyword, sort: 'match', filter: { type: [2], nsfw: false }, limit: 10 })
+      });
+      const items = Array.isArray(body) ? body : body.data || [];
+      const exact = items.find(item => aliases.some(alias => normalize(alias) === normalize(item.name)));
+      const chinese = String(exact?.name_cn || '').trim();
+      if (chinese && /[\u3400-\u9fff]/.test(chinese)) return chinese;
+    } catch { /* use original name when Bangumi lookup fails */ }
+    await nap(250);
+  }
+  return '';
+}
+async function applyChineseAnimeNames(result) {
+  await Promise.all(result.selected.map(async show => {
+    const chineseName = await lookupBangumiName(show);
+    show.animeCN = chineseName;
+    if (chineseName) {
+      show.anime = chineseName;
+      for (const song of show.songs) {
+        song.anime = chineseName;
+        song.animeCN = chineseName;
+      }
+    }
+  }));
 }
 async function fetchAniList(year, season, limit) {
   const query = `query ($page: Int, $perPage: Int, $year: Int, $season: MediaSeason) {
@@ -109,6 +159,7 @@ async function main() {
   const out = path.resolve(value('--out', `candidates/${key}`));
   const [ranked, themes] = await Promise.all([fetchAniList(year, season, limit), fetchAnimeThemes(year, season)]);
   const result = selectSeasonSongs(ranked, themes, target);
+  await applyChineseAnimeNames(result);
   const data = { season: key, rankSource: 'AniList POPULARITY_DESC TV', targetAnime: target, complete: result.complete, selected: result.selected, skipped: result.skipped };
   const report = [
     `# ${key} 季度曲库候选`, '',
