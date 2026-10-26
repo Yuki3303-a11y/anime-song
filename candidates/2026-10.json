@@ -1,0 +1,579 @@
+{
+  "season": "2026-10",
+  "rankSource": "AniList POPULARITY_DESC TV",
+  "targetAnime": 15,
+  "complete": true,
+  "selected": [
+    {
+      "rank": 1,
+      "anime": "Kusuriya no Hitorigoto 3rd Season",
+      "anilistId": 195516,
+      "animeNative": "薬屋のひとりごと 第3期",
+      "animeEnglish": "The Apothecary Diaries Season 3",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx195516-MJpUZlOberqH.jpg",
+      "songs": [
+        {
+          "titleCN": "Kumo wo Nuke Kazashimo e Watashi dake",
+          "title": "Kumo wo Nuke Kazashimo e Watashi dake",
+          "anime": "Kusuriya no Hitorigoto 3rd Season",
+          "animeCN": "",
+          "animeNative": "薬屋のひとりごと 第3期",
+          "artist": "Yorushika",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 195516,
+          "popularity": 104549,
+          "rank": 1,
+          "animethemesUrl": "https://animethemes.moe/anime/kusuriya_no_hitorigoto_3rd_season"
+        },
+        {
+          "titleCN": "AIYOU",
+          "title": "AIYOU",
+          "anime": "Kusuriya no Hitorigoto 3rd Season",
+          "animeCN": "",
+          "animeNative": "薬屋のひとりごと 第3期",
+          "artist": "Eve",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 195516,
+          "popularity": 104549,
+          "rank": 1,
+          "animethemesUrl": "https://animethemes.moe/anime/kusuriya_no_hitorigoto_3rd_season"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "anime": "Black Clover 2nd Season",
+      "anilistId": 195604,
+      "animeNative": "ブラッククローバー 第2期",
+      "animeEnglish": "Black Clover Season 2",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx195604-tSZcfKbVqSEG.jpg",
+      "songs": [
+        {
+          "titleCN": "Kienai Riyuu",
+          "title": "Kienai Riyuu",
+          "anime": "Black Clover 2nd Season",
+          "animeCN": "",
+          "animeNative": "ブラッククローバー 第2期",
+          "artist": "WANIMA",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 195604,
+          "popularity": 98232,
+          "rank": 2,
+          "animethemesUrl": "https://animethemes.moe/anime/black_clover_2nd_season"
+        },
+        {
+          "titleCN": "Yellow Brick Road",
+          "title": "Yellow Brick Road",
+          "anime": "Black Clover 2nd Season",
+          "animeCN": "",
+          "animeNative": "ブラッククローバー 第2期",
+          "artist": "ONE OR EIGHT",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 195604,
+          "popularity": 98232,
+          "rank": 2,
+          "animethemesUrl": "https://animethemes.moe/anime/black_clover_2nd_season"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "anime": "Ao no Hako Season 2",
+      "anilistId": 189123,
+      "animeNative": "アオのハコ Season２",
+      "animeEnglish": "Blue Box Season 2",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx189123-0secXELIhkIW.jpg",
+      "songs": [
+        {
+          "titleCN": "Anata no Hana no Iro",
+          "title": "Anata no Hana no Iro",
+          "anime": "Ao no Hako Season 2",
+          "animeCN": "",
+          "animeNative": "アオのハコ Season２",
+          "artist": "aiko",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 189123,
+          "popularity": 49666,
+          "rank": 3,
+          "animethemesUrl": "https://animethemes.moe/anime/ao_no_hako_season_2"
+        },
+        {
+          "titleCN": "blue in",
+          "title": "blue in",
+          "anime": "Ao no Hako Season 2",
+          "animeCN": "",
+          "animeNative": "アオのハコ Season２",
+          "artist": "Elsewhere Kikou",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 189123,
+          "popularity": 49666,
+          "rank": 3,
+          "animethemesUrl": "https://animethemes.moe/anime/ao_no_hako_season_2"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "anime": "Hotaru no Yomeiri",
+      "anilistId": 205909,
+      "animeNative": "ホタルの嫁入り",
+      "animeEnglish": "Firefly Wedding",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx205909-DM0fAzNQulod.jpg",
+      "songs": [
+        {
+          "titleCN": "Period",
+          "title": "Period",
+          "anime": "Hotaru no Yomeiri",
+          "animeCN": "",
+          "animeNative": "ホタルの嫁入り",
+          "artist": "iri",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 205909,
+          "popularity": 44686,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/hotaru_no_yomeiri"
+        },
+        {
+          "titleCN": "Yumegokochi",
+          "title": "Yumegokochi",
+          "anime": "Hotaru no Yomeiri",
+          "animeCN": "",
+          "animeNative": "ホタルの嫁入り",
+          "artist": "TOOBOE",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 205909,
+          "popularity": 44686,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/hotaru_no_yomeiri"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "anime": "Seitokai ni mo Ana wa Aru!",
+      "anilistId": 191656,
+      "animeNative": "生徒会にも穴はある！",
+      "animeEnglish": "Even the Student Council Has Its Holes!",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx191656-xFHtxM8SUTdU.png",
+      "songs": [
+        {
+          "titleCN": "Kaze no Naka wa Hashiru kkya Nai!",
+          "title": "Kaze no Naka wa Hashiru kkya Nai!",
+          "anime": "Seitokai ni mo Ana wa Aru!",
+          "animeCN": "",
+          "animeNative": "生徒会にも穴はある！",
+          "artist": "Sangatsu no Phantasia",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 191656,
+          "popularity": 43400,
+          "rank": 5,
+          "animethemesUrl": "https://animethemes.moe/anime/seitokai_ni_mo_ana_wa_aru"
+        },
+        {
+          "titleCN": "Pi",
+          "title": "Pi",
+          "anime": "Seitokai ni mo Ana wa Aru!",
+          "animeCN": "",
+          "animeNative": "生徒会にも穴はある！",
+          "artist": "Akari Nanawo",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 191656,
+          "popularity": 43400,
+          "rank": 5,
+          "animethemesUrl": "https://animethemes.moe/anime/seitokai_ni_mo_ana_wa_aru"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "anime": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
+      "anilistId": 207329,
+      "animeNative": "追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。　～俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫？～",
+      "animeEnglish": "The Laid-Off Cheat-Granting Mage Enjoys a Second Lease on Life",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/b207329-6VPeZIDfF4Sr.png",
+      "songs": [
+        {
+          "titleCN": "Ember Torch",
+          "title": "Ember Torch",
+          "anime": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
+          "animeCN": "",
+          "animeNative": "追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。　～俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫？～",
+          "artist": "sumika",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 207329,
+          "popularity": 38176,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/chiifuyo"
+        },
+        {
+          "titleCN": "Role Playing Life",
+          "title": "Role Playing Life",
+          "anime": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
+          "animeCN": "",
+          "animeNative": "追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。　～俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫？～",
+          "artist": "Luov",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 207329,
+          "popularity": 38176,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/chiifuyo"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "anime": "Tokyo Revengers: Santen Sensou-hen",
+      "anilistId": 178083,
+      "animeNative": "東京リベンジャーズ 三天戦争編",
+      "animeEnglish": "Tokyo Revengers: War of the Three Titans Arc",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx178083-bg7pg6TCHwtG.jpg",
+      "songs": [
+        {
+          "titleCN": "IGNITE",
+          "title": "IGNITE",
+          "anime": "Tokyo Revengers: Santen Sensou-hen",
+          "animeCN": "",
+          "animeNative": "東京リベンジャーズ 三天戦争編",
+          "artist": "JO1",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 178083,
+          "popularity": 36721,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/tokyo_revengers_santen_sensouhen"
+        },
+        {
+          "titleCN": "Trickster",
+          "title": "Trickster",
+          "anime": "Tokyo Revengers: Santen Sensou-hen",
+          "animeCN": "",
+          "animeNative": "東京リベンジャーズ 三天戦争編",
+          "artist": "go!go!vanillas",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 178083,
+          "popularity": 36721,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/tokyo_revengers_santen_sensouhen"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "anime": "Koori no Jouheki 2nd Season",
+      "anilistId": 213805,
+      "animeNative": "氷の城壁 第2期",
+      "animeEnglish": "The Ramparts of Ice Season 2",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx213805-Nokui3uWlIlw.png",
+      "songs": [
+        {
+          "titleCN": "Escort",
+          "title": "Escort",
+          "anime": "Koori no Jouheki 2nd Season",
+          "animeCN": "",
+          "animeNative": "氷の城壁 第2期",
+          "artist": "THE BEAT GARDEN",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 213805,
+          "popularity": 36472,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/koori_no_jouheki_2nd_season"
+        },
+        {
+          "titleCN": "Hanakage",
+          "title": "Hanakage",
+          "anime": "Koori no Jouheki 2nd Season",
+          "animeCN": "",
+          "animeNative": "氷の城壁 第2期",
+          "artist": "Superfly",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 213805,
+          "popularity": 36472,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/koori_no_jouheki_2nd_season"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "anime": "Kikansha no Mahou wa Tokubetsu desu 2nd Season",
+      "anilistId": 172192,
+      "animeNative": "帰還者の魔法は特別です 第2期",
+      "animeEnglish": "A Returner's Magic Should be Special Season 2",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx172192-W7P5xEUaxF3y.jpg",
+      "songs": [
+        {
+          "titleCN": "Sorrow",
+          "title": "Sorrow",
+          "anime": "Kikansha no Mahou wa Tokubetsu desu 2nd Season",
+          "animeCN": "",
+          "animeNative": "帰還者の魔法は特別です 第2期",
+          "artist": "FLOW",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 172192,
+          "popularity": 32089,
+          "rank": 9,
+          "animethemesUrl": "https://animethemes.moe/anime/kikansha_no_mahou_wa_tokubetsu_desu_2nd_season"
+        },
+        {
+          "titleCN": "Everlasting",
+          "title": "Everlasting",
+          "anime": "Kikansha no Mahou wa Tokubetsu desu 2nd Season",
+          "animeCN": "",
+          "animeNative": "帰還者の魔法は特別です 第2期",
+          "artist": "krage",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 172192,
+          "popularity": 32089,
+          "rank": 9,
+          "animethemesUrl": "https://animethemes.moe/anime/kikansha_no_mahou_wa_tokubetsu_desu_2nd_season"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "anime": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+      "anilistId": 185756,
+      "animeNative": "転生貴族、鑑定スキルで成り上がる 第3期",
+      "animeEnglish": "As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World Season 3",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx185756-xPCl0RyQ7fXD.jpg",
+      "songs": [
+        {
+          "titleCN": "Still Water",
+          "title": "Still Water",
+          "anime": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+          "animeCN": "",
+          "animeNative": "転生貴族、鑑定スキルで成り上がる 第3期",
+          "artist": "Rico Sasaki",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 185756,
+          "popularity": 27679,
+          "rank": 10,
+          "animethemesUrl": "https://animethemes.moe/anime/tensei_kizoku_kantei_skill_de_nariagaru_3rd_season"
+        },
+        {
+          "titleCN": "Hibi wo Koete",
+          "title": "Hibi wo Koete",
+          "anime": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+          "animeCN": "",
+          "animeNative": "転生貴族、鑑定スキルで成り上がる 第3期",
+          "artist": "Akuru Yoru no Hitsuji",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 185756,
+          "popularity": 27679,
+          "rank": 10,
+          "animethemesUrl": "https://animethemes.moe/anime/tensei_kizoku_kantei_skill_de_nariagaru_3rd_season"
+        }
+      ]
+    },
+    {
+      "rank": 11,
+      "anime": "Dragon Ball Super: Beerus",
+      "anilistId": 206814,
+      "animeNative": "ドラゴンボール超 ビルス",
+      "animeEnglish": "Dragon Ball Super: Beerus",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx206814-PVVzRbf1IQpe.jpg",
+      "songs": [
+        {
+          "titleCN": "Onogami",
+          "title": "Onogami",
+          "anime": "Dragon Ball Super: Beerus",
+          "animeCN": "",
+          "animeNative": "ドラゴンボール超 ビルス",
+          "artist": "Megatera Zero",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 206814,
+          "popularity": 27134,
+          "rank": 11,
+          "animethemesUrl": "https://animethemes.moe/anime/dragon_ball_super_beerus"
+        },
+        {
+          "titleCN": "Kanpeki no Peki",
+          "title": "Kanpeki no Peki",
+          "anime": "Dragon Ball Super: Beerus",
+          "animeCN": "",
+          "animeNative": "ドラゴンボール超 ビルス",
+          "artist": "Vickeblanka",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 206814,
+          "popularity": 27134,
+          "rank": 11,
+          "animethemesUrl": "https://animethemes.moe/anime/dragon_ball_super_beerus"
+        }
+      ]
+    },
+    {
+      "rank": 12,
+      "anime": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
+      "anilistId": 207191,
+      "animeNative": "どうも、好きな人に惚れ薬を依頼された魔女です。",
+      "animeEnglish": "Hello, I am a Witch and my Crush Wants me to Make a Love Potion!",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx207191-VgkIzfH92WoZ.jpg",
+      "songs": [
+        {
+          "titleCN": "Kanawanai,",
+          "title": "Kanawanai,",
+          "anime": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
+          "animeCN": "",
+          "animeNative": "どうも、好きな人に惚れ薬を依頼された魔女です。",
+          "artist": "centimillimental",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 207191,
+          "popularity": 26358,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/doumo_suki_na_hito_ni_horegusuri_wo_irai_sareta_majo_desu"
+        },
+        {
+          "titleCN": "Mada Uso ni Naranai",
+          "title": "Mada Uso ni Naranai",
+          "anime": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
+          "animeCN": "",
+          "animeNative": "どうも、好きな人に惚れ薬を依頼された魔女です。",
+          "artist": "Reini",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 207191,
+          "popularity": 26358,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/doumo_suki_na_hito_ni_horegusuri_wo_irai_sareta_majo_desu"
+        }
+      ]
+    },
+    {
+      "rank": 13,
+      "anime": "Tantei wa mou, Shindeiru. Season 2",
+      "anilistId": 152677,
+      "animeNative": "探偵はもう、死んでいる。Season2",
+      "animeEnglish": "The Detective Is Already Dead Season 2",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx152677-gtJbgjE94lCN.png",
+      "songs": [
+        {
+          "titleCN": "Kono Shinzou ni Hanataba wo",
+          "title": "Kono Shinzou ni Hanataba wo",
+          "anime": "Tantei wa mou, Shindeiru. Season 2",
+          "animeCN": "",
+          "animeNative": "探偵はもう、死んでいる。Season2",
+          "artist": "Koume",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 152677,
+          "popularity": 25743,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/tantei_wa_mou_shindeiru_season_2"
+        },
+        {
+          "titleCN": "Hakuchuumu",
+          "title": "Hakuchuumu",
+          "anime": "Tantei wa mou, Shindeiru. Season 2",
+          "animeCN": "",
+          "animeNative": "探偵はもう、死んでいる。Season2",
+          "artist": "Kagura Nana",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 152677,
+          "popularity": 25743,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/tantei_wa_mou_shindeiru_season_2"
+        }
+      ]
+    },
+    {
+      "rank": 14,
+      "anime": "Kyouran Reijou Nia Liston",
+      "anilistId": 206949,
+      "animeNative": "凶乱令嬢ニア・リストン",
+      "animeEnglish": "Nia Liston: The Merciless Maiden",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx206949-4HYI3YuP0eLI.png",
+      "songs": [
+        {
+          "titleCN": "RESPAWN!!",
+          "title": "RESPAWN!!",
+          "anime": "Kyouran Reijou Nia Liston",
+          "animeCN": "",
+          "animeNative": "凶乱令嬢ニア・リストン",
+          "artist": "Watame Tsunomaki",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 206949,
+          "popularity": 25622,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/kyouran_reijou_nia_liston"
+        },
+        {
+          "titleCN": "Tokimeki Un Deux Trois♪",
+          "title": "Tokimeki Un Deux Trois♪",
+          "anime": "Kyouran Reijou Nia Liston",
+          "animeCN": "",
+          "animeNative": "凶乱令嬢ニア・リストン",
+          "artist": "Magic Vision Hirome-tai",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 206949,
+          "popularity": 25622,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/kyouran_reijou_nia_liston"
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "anime": "Aoashi 2nd Season",
+      "anilistId": 191788,
+      "animeNative": "アオアシ 第2期",
+      "animeEnglish": "Aoashi Season 2",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx191788-XC6F24LdX6a4.jpg",
+      "songs": [
+        {
+          "titleCN": "Fortress Defense",
+          "title": "Fortress Defense",
+          "anime": "Aoashi 2nd Season",
+          "animeCN": "",
+          "animeNative": "アオアシ 第2期",
+          "artist": "10-FEET",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 191788,
+          "popularity": 25237,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/aoashi_2nd_season"
+        },
+        {
+          "titleCN": "Triangle",
+          "title": "Triangle",
+          "anime": "Aoashi 2nd Season",
+          "animeCN": "",
+          "animeNative": "アオアシ 第2期",
+          "artist": "Ai Higuchi",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 191788,
+          "popularity": 25237,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/aoashi_2nd_season"
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}
