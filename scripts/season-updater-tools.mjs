@@ -64,9 +64,15 @@ export function prepareSeasonForPublish(candidate, seasonKey, chineseNamesById, 
       songNames.add(songNameKey);
       if (song.animeNative) entry.animeNative = song.animeNative;
       if (song.youtubeVideoId && /^[A-Za-z0-9_-]{11}$/.test(song.youtubeVideoId)) entry.youtubeVideoId = song.youtubeVideoId;
-      const checkedAudio = audioByTrack.get(`${song.anilistId}|${song.type}`);
-      if (checkedAudio?.source === 'youtube' && /^[A-Za-z0-9_-]{11}$/.test(checkedAudio.videoId || ''))
-        entry.youtubeVideoId = checkedAudio.videoId;
+      if (audio.source === 'youtube' && /^[A-Za-z0-9_-]{11}$/.test(audio.videoId || ''))
+        entry.youtubeVideoId = audio.videoId;
+      if (audio.source === 'bilibili' && /^BV\w{10}$/.test(audio.bvid || ''))
+        entry.bilibiliVideoId = audio.bvid;
+      if (audio.source === 'itunes' && audio.url) {
+        const url = new URL(audio.url);
+        if (url.protocol === 'https:' && url.hostname.endsWith('.itunes.apple.com') &&
+            !url.username && !url.password && !url.port) entry.itunesPreviewUrl = url.href;
+      }
       songs.push(entry);
     }
   }

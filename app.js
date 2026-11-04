@@ -1,12 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=53';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=38';
-import { SEASONAL_COVERS } from './seasonal-covers.js?v=1';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=56';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=39';
+import { SEASONAL_COVERS } from './seasonal-covers.js?v=2';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
 import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback } from './library-tools.mjs?v=1';
-import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=3';
+import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=5';
 
 // =====================================================================
 // Firebase
@@ -3170,6 +3170,20 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
     const useOthers = sourcePreference !== 'bilibili-only';
     const seasonalSong = Object.values(SEASONAL_POOLS).flat().find(item => item.title === title && item.anime === anime);
 
+    if (useOthers && !excludedSources.has('itunes') && seasonalSong?.itunesPreviewUrl) {
+        return { url: seasonalSong.itunesPreviewUrl, source: 'itunes', itunesTrack: title, itunesArtist: artist };
+    }
+    if (useOthers && !excludedSources.has('youtube') && seasonalSong?.youtubeVideoId &&
+        !excludedVideos.yt?.has(seasonalSong.youtubeVideoId)) {
+        return { url: `yt:${seasonalSong.youtubeVideoId}`, source: 'youtube', ytVideoId: seasonalSong.youtubeVideoId };
+    }
+    if (useBili && seasonalSong?.bilibiliVideoId && !excludedVideos.bili?.has(seasonalSong.bilibiliVideoId)) {
+        const bvid = seasonalSong.bilibiliVideoId;
+        const info = await getBilibiliAudioUrl(bvid);
+        if (info?.url) return { url: buildBiliProxyUrl(info.url, info.backupUrl), source: 'bilibili',
+            bvid, biliTitle: title, biliDuration: info.duration };
+    }
+
     // Start all source searches in parallel.
     const rawItunes = useOthers && !excludedSources.has('itunes') ? searchQuizItunesCandidates(song) : Promise.resolve([]);
     const rawYt = useOthers && !excludedSources.has('youtube') ? searchQuizYouTubeCandidates(song) : Promise.resolve([]);
@@ -3191,11 +3205,6 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
             ...gathered.itunes,
             ...gathered.youtube.filter(item => !excludedVideos.yt?.has(item.videoId))
         ];
-        if (useOthers && !excludedSources.has('youtube') && seasonalSong?.youtubeVideoId &&
-            !excludedVideos.yt?.has(seasonalSong.youtubeVideoId)) {
-            list.push({ source: 'youtube', videoId: seasonalSong.youtubeVideoId,
-                title: `${song.animeCN || anime} ${song.type || songType} ${song.title} ${artist}` });
-        }
         if (gathered.bili) {
             for (const item of [gathered.bili, ...(gathered.bili._alternates || [])]) {
                 if (!excludedVideos.bili?.has(item.bvid)) list.push({
@@ -4200,10 +4209,10 @@ function renderCurrentLibrary() {
     const matches = searchLibraryTracks(pool, $('libraryCurrentSearch').value);
     const groups = groupLibrarySongs(matches, animeKey);
     $('libraryCurrentSummary').textContent = `当前可出 ${pool.length} 首 · 搜索找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲`;
-    renderLibraryCoverGrid('libraryCurrentResults', groups, 'current', '当前曲库没有匹配的歌曲。可以清除搜索词，或点击“添加歌曲 / 更换曲库”。');
+    renderLibraryCoverGrid('libraryCurrentResults', groups, 'current', '当前曲库没有匹配的歌曲。可以清除搜索词，或浏览全部曲库。');
 }
 function renderTracksLibrary() {
-    const matches = searchLibraryTracks(getAllSongs(), $('libraryTrackSearch').value);
+    const matches = searchLibraryTracks(SONGS, $('libraryTrackSearch').value);
     const groups = groupLibrarySongs(matches, animeKey);
     $('libraryTrackSummary').textContent = `找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲 · 已添加 ${selectedSongKeys.length} 首到我的选歌`;
     renderLibraryCoverGrid('libraryTrackResults', groups, 'tracks', '没有找到对应歌曲，试试更短的歌名、番剧名或歌手');
@@ -4285,10 +4294,12 @@ function renderFeedbackLibrary() {
 }
 
 function renderLibrary() {
-    document.querySelectorAll('.library-tab').forEach(tab => {
-        const active = tab.dataset.value === selectedLibraryTab;
+    const inCatalog = ['tracks', 'season', 'bangumi'].includes(selectedLibraryTab);
+    $('libraryCatalogTabs').classList.toggle('hidden', !inCatalog);
+    document.querySelectorAll('.library-main-tabs button, .library-section-links button').forEach(tab => {
+        const active = tab.dataset.value === 'all' ? inCatalog : tab.dataset.value === selectedLibraryTab;
         tab.classList.toggle('active', active);
-        tab.setAttribute('aria-selected', String(active));
+        tab.setAttribute('aria-pressed', String(active));
     });
     for (const name of ['current', 'tracks', 'season', 'bangumi', 'watch', 'mistakes', 'feedback']) {
         $(`library${name[0].toUpperCase() + name.slice(1)}Panel`).classList.toggle('hidden', name !== selectedLibraryTab);
@@ -4605,7 +4616,11 @@ document.addEventListener('click', (e) => {
         case 'shiftHomeHero': shiftHomeAnime('hero', Number(value)); break;
         case 'shiftHomeGallery': shiftHomeAnime('gallery', Number(value)); break;
         case 'openSourceSettings': openSettings(); $('sourceChips').scrollIntoView({ block: 'center' }); break;
-        case 'libraryTab': selectedLibraryTab = value; renderLibrary(); break;
+        case 'libraryTab':
+            selectedLibraryTab = value === 'all' ? 'season' : value;
+            if (!['watch', 'mistakes', 'feedback'].includes(selectedLibraryTab)) $('libraryTools').open = false;
+            renderLibrary();
+            break;
         case 'libraryPage': {
             const [tab, pageText] = String(value || '').split(':');
             const page = Number(pageText);
@@ -4623,6 +4638,7 @@ document.addEventListener('click', (e) => {
         case 'toggleSelectedSong': toggleSelectedSong(actionEl.dataset.songKey); break;
         case 'useSelectedSongs': useSelectedSongs(); break;
         case 'startSelectedSeason': startSelectedSeason(); break;
+        case 'startLegacyLibrary': setSourceFilter('legacy'); startMode('anime'); break;
         case 'practiceMistakes': startMistakePractice(); break;
         case 'removeMistake':
             if (confirm('把这首歌从错题本移出吗？')) {

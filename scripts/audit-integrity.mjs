@@ -97,3 +97,4 @@ console.log(`\nSONGS total=${SONGS.length}, ALL_ANIME=${ALL_ANIME.length}, AVAIL
 console.log(`\n===== ISSUES (${issues.length}) =====`);
 issues.forEach(i => console.log(' - ' + i));
 fs.rmSync(tmp, { recursive: true, force: true });
+if (issues.length) process.exitCode = 1;

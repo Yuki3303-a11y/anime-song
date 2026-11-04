@@ -4,6 +4,15 @@ import crypto from 'node:crypto';
 
 const proxy = await import('../bili-proxy.mjs');
 
+test('local stream proxy forwards the verified mcdn port despite an untrusted backup', () => {
+  const calls = [];
+  proxy.pipeStream({ writeHead() {}, end() {} }, 'https://xy223x94x121x216xy.mcdn.bilivideo.cn:8082/audio',
+    { headers: {} }, 'https://edge.mountaintoys.cn:4483/audio', {
+      get(options) { calls.push([options.hostname, options.port]); return { setTimeout() {}, on() {} }; }
+    });
+  assert.deepEqual(calls, [['xy223x94x121x216xy.mcdn.bilivideo.cn', '8082']]);
+});
+
 test('local proxy builds a deterministic sorted WBI query', () => {
   const mixinKey = proxy.getMixinKey(
     '7cd084941338484aae1ad9425b84077c' +

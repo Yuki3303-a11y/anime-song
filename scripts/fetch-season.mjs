@@ -18,12 +18,16 @@ export function seasonKey(year, season) {
   return `${year}-${MONTH[season]}`;
 }
 export function pickThemePair(anime) {
+  const pair = pickThemes(anime);
+  return pair.OP && pair.ED ? pair : null;
+}
+export function pickThemes(anime) {
   const sorted = [...(anime.animethemes || [])]
     .filter(t => ['OP', 'ED'].includes(t.type) && t.song?.title?.trim() && t.song?.artists?.some(a => a.name))
     .sort((a, b) => (a.slug || '').localeCompare(b.slug || '', undefined, { numeric: true }));
   const OP = sorted.find(t => t.type === 'OP');
   const ED = sorted.find(t => t.type === 'ED');
-  return OP && ED ? { OP, ED } : null;
+  return { OP, ED };
 }
 export function selectSeasonSongs(ranked, themeAnime, target = 15) {
   const byId = new Map();
@@ -54,11 +58,11 @@ export function selectSeasonSongs(ranked, themeAnime, target = 15) {
   }
   return { complete: selected.length === target, selected, skipped, songs: selected.flatMap(x => x.songs) };
 }
-async function fetchAniList(year, season, limit) {
+export async function fetchAniList(year, season, limit) {
   const query = `query ($page: Int, $perPage: Int, $year: Int, $season: MediaSeason) {
     Page(page: $page, perPage: $perPage) {
       media(season: $season, seasonYear: $year, type: ANIME, format: TV, sort: POPULARITY_DESC, isAdult: false) {
-        id season seasonYear title { romaji english native } coverImage { medium } popularity
+        id season seasonYear title { romaji english native } synonyms coverImage { medium large } popularity
       }
     }
   }`;
@@ -78,7 +82,7 @@ async function fetchAniList(year, season, limit) {
   }
   return all;
 }
-async function fetchAnimeThemes(year, season) {
+export async function fetchAnimeThemes(year, season) {
   const all = [];
   for (let page = 1; page <= 30; page++) {
     const params = new URLSearchParams({

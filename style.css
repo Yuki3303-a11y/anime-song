@@ -3459,6 +3459,12 @@ body {
 .library-tab.active, .library-season-tab.active { color: #fff; background: var(--text-primary); border-color: var(--text-primary); }
 .library-tab:hover, .library-season-tab:hover { color: var(--pink); border-color: var(--text-primary); }
 .library-tab.active:hover { color: #fff; }
+.library-main-tabs.library-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.library-section-links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.library-section-links .active { background: var(--text-primary); color: #fff; }
+.library-tools-menu { margin: 0 0 16px; color: var(--text-secondary); font-size: 13px; }
+.library-tools-menu summary { cursor: pointer; width: fit-content; padding: 5px 0; }
+.library-tools-menu .library-section-links { margin: 8px 0 0; }
 .library-season-tab, .settings-chip { border-radius: 0; border-color: var(--text-primary); }
 .settings-chip.active { background: var(--pink); border-color: var(--text-primary); }
 #audioSourceChips { flex-wrap: wrap; }

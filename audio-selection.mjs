@@ -45,7 +45,7 @@ function containsAlias(haystack, aliases) {
     });
 }
 
-export function scoreAudioCandidate(song, candidate) {
+export function scoreAudioCandidate(song, candidate, { requireRelation = false } = {}) {
     const title = candidate.title || '';
     const artist = candidate.artist || '';
     const album = candidate.album || '';
@@ -60,6 +60,7 @@ export function scoreAudioCandidate(song, candidate) {
     const animeAliases = [song.anime, song.animeCN, song.animeNative].filter(Boolean);
     const animeMatch = containsAlias(`${title} ${album}`, animeAliases);
     const artistMatch = containsAlias(`${title} ${artist}`, [song.artist]);
+    if (requireRelation && !animeMatch && !artistMatch) return -1;
 
     // OP/ED type conflict stays a hard rejection — unless the title also contains the wanted type.
     const opposite = song.type === 'OP' ? /\bED\d*\b|片尾|エンディング/i : song.type === 'ED' ? /\bOP\d*\b|片头|オープニング/i : null;
@@ -92,8 +93,8 @@ export function scoreAudioCandidate(song, candidate) {
     return score;
 }
 
-export function rankAudioCandidates(song, candidates) {
-    return candidates.map(candidate => ({ ...candidate, score: scoreAudioCandidate(song, candidate) }))
+export function rankAudioCandidates(song, candidates, options) {
+    return candidates.map(candidate => ({ ...candidate, score: scoreAudioCandidate(song, candidate, options) }))
         .filter(candidate => candidate.score >= 0)
         .sort((a, b) => b.score - a.score);
 }

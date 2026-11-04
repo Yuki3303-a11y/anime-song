@@ -12,6 +12,11 @@ function isAllowedStreamHost(hostname) {
   return STREAM_HOST_SUFFIXES.some(s => h === s.slice(1) || h.endsWith(s));
 }
 
+function isAllowedStreamUrl(url) {
+  const validPort = !url.port || (url.port === '8082' && url.hostname.endsWith('.mcdn.bilivideo.cn'));
+  return url.protocol === 'https:' && validPort && !url.username && !url.password && isAllowedStreamHost(url.hostname);
+}
+
 const MIXIN_KEY_ENC_TAB = [
   46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35,
   27, 43, 5, 49, 33, 9, 42, 19, 29, 28, 14, 39, 12, 38, 41, 13,
@@ -131,10 +136,12 @@ module.exports = async (req, res) => {
     // Stream audio proxy — fetch B站 CDN audio and pipe to browser
     if (stream) {
       const targets = [];
-      for (const audioUrl of [stream, backup].filter(Boolean)) {
-        const parsed = new URL(audioUrl);
-        if (parsed.protocol !== 'https:' || (parsed.port && parsed.port !== '443') ||
-            parsed.username || parsed.password || !isAllowedStreamHost(parsed.hostname)) {
+      for (const [index, audioUrl] of [stream, backup].filter(Boolean).entries()) {
+        let parsed;
+        try { parsed = new URL(audioUrl); }
+        catch { if (index > 0) continue; return res.status(400).json({ error: 'bad stream url' }); }
+        if (!isAllowedStreamUrl(parsed)) {
+          if (index > 0) continue;
           return res.status(403).json({ error: 'stream host not allowed' });
         }
         targets.push(parsed);
@@ -150,6 +157,7 @@ module.exports = async (req, res) => {
         if (req.headers.range) headers.Range = req.headers.range;
         const upstreamReq = https.get({
           hostname: parsed.hostname,
+          port: parsed.port || undefined,
           path: parsed.pathname + parsed.search,
           headers
         }, upstream => {
@@ -201,9 +209,15 @@ module.exports = async (req, res) => {
       if (!cid) return res.status(404).json({ error: 'video not found or no cid' });
       const duration = info.data?.duration || 0;
       const play = await signedGet('/x/player/playurl', { bvid, cid: String(cid), fnval: '16', fnver: '0', fourk: '1' });
-      const audio = (play.data?.dash?.audio || []).sort((a, b) => b.id - a.id)[0];
-      if (!audio?.baseUrl) return res.status(404).json({ error: 'no audio stream' });
-      return res.json({ url: audio.baseUrl, backupUrl: (audio.backupUrl || [null])[0], duration, audioQuality: audio.id });
+      const tracks = (play.data?.dash?.audio || []).sort((a, b) => b.id - a.id);
+      const urls = tracks.flatMap(track => [track.baseUrl, ...(track.backupUrl || [])]).flatMap(value => {
+        try { const url = new URL(value); return isAllowedStreamUrl(url) ? [{ url, quality: track.id }] : []; }
+        catch { return []; }
+      }).sort((a, b) => Number(Boolean(a.url.port)) - Number(Boolean(b.url.port)));
+      const first = urls[0];
+      if (!first) return res.status(404).json({ error: 'no allowed audio stream' });
+      const backupUrl = urls.find(item => item.url.href !== first.url.href)?.url.href || null;
+      return res.json({ url: first.url.href, backupUrl, duration, audioQuality: first.quality });
     }
 
     return res.status(400).json({ error: 'missing q or bvid' });

@@ -37,8 +37,16 @@ let cachedWbiKeys = null;
 
 function isAllowedStreamUrl(url) {
     const host = url.hostname.toLowerCase();
-    return url.protocol === 'https:' && (!url.port || url.port === '443') && !url.username && !url.password &&
+    const validPort = !url.port || (url.port === '8082' && host.endsWith('.mcdn.bilivideo.cn'));
+    return url.protocol === 'https:' && validPort && !url.username && !url.password &&
         STREAM_HOST_SUFFIXES.some(suffix => host === suffix.slice(1) || host.endsWith(suffix));
+}
+
+function selectStreamUrls(urls) {
+    return [...new Set(urls.filter(Boolean))].flatMap(value => {
+        try { const url = new URL(value); return isAllowedStreamUrl(url) ? [url] : []; }
+        catch { return []; }
+    }).sort((a, b) => Number(Boolean(a.port)) - Number(Boolean(b.port))).map(url => url.href);
 }
 
 // ---------- B站 API 请求（JSON） ----------
@@ -148,15 +156,17 @@ async function getAudioStream(bvid) {
     const title = info?.data?.title || '';
     // 优先 DASH 音频（fnval=16），失败再退回 mp4 音频轨（fnval=1 durl）
     let play = await biliJson(`/x/player/playurl?bvid=${encodeURIComponent(bvid)}&cid=${cid}&fnval=16&fnver=0&fourk=1`);
-    let audio = (play?.data?.dash?.audio || []).sort((a, b) => b.id - a.id)[0];
-    if (audio?.baseUrl) {
-        return { url: audio.baseUrl, backupUrl: audio.backupUrl?.[0] || null, duration, title };
+    const tracks = (play?.data?.dash?.audio || []).sort((a, b) => b.id - a.id);
+    const dash = selectStreamUrls(tracks.flatMap(track => [track.baseUrl, ...(track.backupUrl || [])]));
+    if (dash.length) {
+        return { url: dash[0], backupUrl: dash[1] || null, duration, title };
     }
     // durl 模式：取最大清晰度音轨
     play = await biliJson(`/x/player/playurl?bvid=${encodeURIComponent(bvid)}&cid=${cid}&fnval=1`);
     const durl = (play?.data?.durl || []).sort((a, b) => (b.size || 0) - (a.size || 0))[0];
-    if (durl?.url) {
-        return { url: durl.url, backupUrl: durl.backup_url?.[0] || null, duration, title };
+    const fallback = selectStreamUrls([durl?.url, ...(durl?.backup_url || [])]);
+    if (fallback.length) {
+        return { url: fallback[0], backupUrl: fallback[1] || null, duration, title };
     }
     throw new Error('没有可用的音频流');
 }
@@ -192,15 +202,17 @@ function parseSearchResults(data) {
 function pipeStream(res, audioUrl, req, backupUrl = null, transport = https) {
     const candidates = [audioUrl, backupUrl].filter(Boolean);
     const targets = [];
-    for (const candidate of candidates) {
+    for (const [index, candidate] of candidates.entries()) {
         let target;
         try { target = new URL(candidate); }
         catch {
+            if (index > 0) continue;
             res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             res.end(JSON.stringify({ error: 'bad stream url' }));
             return;
         }
         if (!isAllowedStreamUrl(target)) {
+            if (index > 0) continue;
             res.writeHead(403, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             res.end(JSON.stringify({ error: 'stream host not allowed' }));
             return;
@@ -214,6 +226,7 @@ function pipeStream(res, audioUrl, req, backupUrl = null, transport = https) {
         if (req?.headers?.range) upstreamHeaders.Range = req.headers.range;
         const upstream = transport.get({
             hostname: target.hostname,
+            port: target.port || undefined,
             path: target.pathname + target.search,
             headers: upstreamHeaders
         }, u => {
@@ -302,4 +315,4 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     });
 }
 
-export { buildWbiQuery, getMixinKey, parseSearchResults, pipeStream, withRetry };
+export { buildWbiQuery, getAudioStream, getMixinKey, parseSearchResults, pipeStream, withRetry };

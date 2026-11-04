@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=53">
+    <link rel="stylesheet" href="style.css?v=56">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -106,7 +106,7 @@
                         <p class="menu-library-hint">先确定本局会出的歌曲，再选择挑战方式。</p>
                         <div class="menu-library-actions">
                             <button type="button" class="menu-library-link" data-action="showLibrary">查看当前歌曲</button>
-                            <button type="button" class="menu-library-link" data-action="openSourceSettings">更换曲库</button>
+                            <button type="button" class="menu-library-link" data-action="showSeasonLibrary">更换曲库</button>
                         </div>
                     </div>
 
@@ -216,15 +216,23 @@
                         <h1>我的曲库</h1>
                         <p>按季度选歌、整理追番与复习错题</p>
                     </div>
-                    <div class="library-tabs" role="tablist" aria-label="我的曲库分类">
-                        <button type="button" class="library-tab active" role="tab" aria-controls="libraryCurrentPanel" data-action="libraryTab" data-value="current">当前曲库</button>
-                        <button type="button" class="library-tab" role="tab" aria-controls="libraryTracksPanel" data-action="libraryTab" data-value="tracks">全部曲目</button>
-                        <button type="button" class="library-tab" role="tab" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度曲库</button>
-                        <button type="button" class="library-tab" role="tab" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
-                        <button type="button" class="library-tab" role="tab" aria-controls="libraryWatchPanel" data-action="libraryTab" data-value="watch">我的追番</button>
-                        <button type="button" class="library-tab" role="tab" aria-controls="libraryMistakesPanel" data-action="libraryTab" data-value="mistakes">错题本</button>
-                        <button type="button" class="library-tab" role="tab" aria-controls="libraryFeedbackPanel" data-action="libraryTab" data-value="feedback">音源反馈</button>
+                    <div class="library-tabs library-main-tabs" role="group" aria-label="我的曲库">
+                        <button type="button" class="library-tab active" aria-pressed="true" aria-controls="libraryCurrentPanel" data-action="libraryTab" data-value="current">当前曲库</button>
+                        <button type="button" class="library-tab" aria-pressed="false" aria-controls="libraryCatalogTabs" data-action="libraryTab" data-value="all">全部曲库</button>
                     </div>
+                    <div id="libraryCatalogTabs" class="library-section-links hidden" role="group" aria-label="全部曲库分类">
+                        <button type="button" class="library-mini-btn" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度曲库</button>
+                        <button type="button" class="library-mini-btn" aria-controls="libraryTracksPanel" data-action="libraryTab" data-value="tracks">自带曲库</button>
+                        <button type="button" class="library-mini-btn" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
+                    </div>
+                    <details id="libraryTools" class="library-tools-menu">
+                        <summary>曲库工具</summary>
+                        <div class="library-section-links" role="group" aria-label="曲库工具">
+                            <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="watch">我的追番</button>
+                            <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="mistakes">错题本</button>
+                            <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="feedback">音源反馈</button>
+                        </div>
+                    </details>
                     <div id="libraryPreviewBanner" class="library-preview-banner hidden" role="status" aria-live="polite">
                         <span id="libraryPreviewStatus">选择歌曲试听</span>
                         <a id="libraryPreviewLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden">打开视频试听</a>
@@ -234,18 +242,20 @@
                         <p class="library-help">这里按番剧展示当前可能出题的歌曲。可试听、收藏单曲，也可到“更换曲库”组合更多来源。</p>
                         <div class="library-quick-tools">
                             <input id="libraryCurrentSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索当前曲库" placeholder="搜索当前曲库的番剧、歌名或歌手…">
-                            <button type="button" class="library-mini-btn" data-action="openSourceSettings">添加歌曲 / 更换曲库</button>
+                            <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="all">浏览曲库</button>
+                            <button type="button" class="library-mini-btn" data-action="openSourceSettings">组合筛选</button>
                         </div>
                         <div id="libraryCurrentSummary" class="library-summary"></div>
                         <div id="libraryCurrentResults" class="library-cover-grid"></div>
                     </section>
                     <section id="libraryTracksPanel" class="library-panel hidden" role="tabpanel">
-                        <p class="library-help">按番剧浏览所有已收录歌曲；点“添加”可把单曲加入我的选歌。</p>
+                        <p class="library-help">按番剧浏览网站原有曲库；点“添加”可把单曲加入我的选歌。</p>
                         <div class="library-quick-tools">
-                            <input id="libraryTrackSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索所有歌曲" placeholder="搜索番剧、歌名或歌手…">
+                            <input id="libraryTrackSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索自带曲库" placeholder="搜索番剧、歌名或歌手…">
                             <button type="button" class="library-mini-btn" data-action="useSelectedSongs">只用我的选歌</button>
                         </div>
                         <div id="libraryTrackSummary" class="library-summary"></div>
+                        <button type="button" class="btn btn-primary library-start-btn" data-action="startLegacyLibrary">用自带曲库开始猜番剧</button>
                         <div id="libraryTrackResults" class="library-cover-grid"></div>
                     </section>
                     <section id="librarySeasonPanel" class="library-panel hidden" role="tabpanel">
@@ -654,6 +664,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=53"></script>
+    <script type="module" src="app.js?v=56"></script>
 </body>
 </html>

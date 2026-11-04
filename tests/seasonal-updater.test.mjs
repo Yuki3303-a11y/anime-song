@@ -1,6 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { currentLocalSeason, prepareSeasonForPublish, mergeSeasonData } from '../scripts/season-updater-tools.mjs';
+import { matchBangumiShow } from '../scripts/bangumi-season.mjs';
+import { rankAudioCandidates } from '../audio-selection.mjs';
+
+test('Bangumi discovery distinguishes sequels and leaves ambiguous titles for review', () => {
+  const media = [
+    { id: 1, title: { native: 'アオアシ' } },
+    { id: 2, title: { native: 'アオアシ 第2期' } }
+  ];
+  const show = { id: 555605, name: 'アオアシ Season 2' };
+  assert.equal(matchBangumiShow(show, media, [])?.id, 2);
+  assert.equal(matchBangumiShow(show, [...media, { ...media[1], id: 3 }], []), null);
+});
+
+test('publishing rejects a playable title-only hit while allowing a match with artist evidence', () => {
+  const song = { title: 'RESPAWN!!', anime: 'Nia Liston', artist: 'Watame Tsunomaki', type: 'OP' };
+  const unrelated = { title: 'Fortnite Respawn Rumble', source: 'bilibili' };
+  const related = { title: 'Watame Tsunomaki — RESPAWN!!', source: 'youtube' };
+  assert.deepEqual(rankAudioCandidates(song, [unrelated, related], { requireRelation: true })
+    .map(item => item.title), [related.title]);
+});
 
 function candidateFor(key = '2026-10') {
   return {
@@ -44,8 +64,12 @@ test('publish preparation requires 15 AniList shows, 30 paired songs, covers, Ch
   assert.throws(() => prepareSeasonForPublish(candidate, '2026-10', {}, playableFor(candidate)), /Chinese|中文/i);
   const youtubeChecks = playableFor(candidate);
   youtubeChecks[0] = { ...youtubeChecks[0], source: 'youtube', videoId: 'abcdefghijk' };
+  youtubeChecks[1] = { ...youtubeChecks[1], source: 'bilibili', bvid: 'BV1234567890' };
+  youtubeChecks[2].url = 'https://audio-ssl.itunes.apple.com/preview.m4a';
   const youtubePrepared = prepareSeasonForPublish(candidate, '2026-10', namesFor(candidate), youtubeChecks);
   assert.equal(youtubePrepared.songs[0].youtubeVideoId, 'abcdefghijk');
+  assert.equal(youtubePrepared.songs[1].bilibiliVideoId, 'BV1234567890');
+  assert.equal(youtubePrepared.songs[2].itunesPreviewUrl, youtubeChecks[2].url);
 });
 
 test('publish preparation rejects duplicate IDs, broken OP/ED pairs and invalid covers', () => {

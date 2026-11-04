@@ -1,355 +1,98 @@
-# ♪ 萌豚挑战 · 二次元听歌猜番剧
+# 萌豚挑战 · 二次元听歌猜番剧
 
-> 听歌 30 秒，猜出它来自哪部番剧。
-> 纯前端、无框架、无构建步骤的二次元音乐猜谜网页游戏。
+听一段约 30 秒的动画歌曲，猜番剧、歌名或歌手。混合模式会逐题切换题型。内置曲库有 285 首原有歌曲和 120 首季度歌曲（2026 年 1、4、7、10 月各 30 首）。音频由第三方平台实时提供。
 
----
+## 本地运行
 
-## 一、项目简介
+准备 Node.js 22 或 24、可通过 `python` 命令运行的 Python 3，以及现代浏览器。首次运行在仓库目录执行 `npm ci`，安装 Vercel 函数使用的 `spark-md5`。
 
-「萌豚挑战」是一款**纯静态网页游戏**：播放一段约 30 秒的动漫歌曲片段，玩家从 4 个选项中猜出答案。数据全部内置在仓库中，音频在游玩时实时从多个公开音源检索。
+Windows 双击 **一键启动.bat**。它会启动或复用 8080 网站服务和 8765 B 站代理，再打开浏览器。也可以分别启动：
 
-- **总曲库：345 首歌曲**
-  - 官方曲库（`songs.js`）：**285 首 / 188 部番剧**
-  - 季度新番（`seasonal-pools.js`）：**2026 春（30 首 / 15 部）+ 2026 夏（30 首 / 15 部）**
-- **无打包、无编译**：源码即产物，改完刷新即可看到效果。
-- **可部署到 Vercel、GitHub Pages 或任意静态托管**。
+```sh
+python -m http.server 8080 --bind 127.0.0.1
+node bili-proxy.mjs
+```
 
-### 主要玩法
+打开 [本地网站](http://127.0.0.1:8080/)。通过 HTTP 加载浏览器 ES Modules。B 站代理可单独用 `启动B站代理.bat` 启动。浏览器会尝试探测本地代理，也可在设置中填写 `http://127.0.0.1:8765`。
 
-| 模式 | 玩法 |
+## 游戏与曲库
+
+- 首页可切换番剧封面、查看当前出题范围和设置曲库来源。支持原有曲库、季度曲库、导入和自由组合，可叠加歌曲类型和追番筛选。
+- 单人挑战可选 10、20、30 题，实际题数受曲池大小限制。答题后左侧展示番剧和歌曲信息，支持复听、收藏、反馈和回顾。提示会降低本题得分。
+- 「我的曲库」分为当前曲库与全部曲库。全部曲库包含季度、自带曲库和 Bangumi 导入。追番、错题练习与音源反馈收在「曲库工具」。Bangumi 导入接受目录号，支持自定义歌曲 JSON 导入和导出。
+- 收藏、排行榜、设置、导入歌曲、追番、错题和音源反馈保存在当前浏览器的 `localStorage`，按站点来源隔离。
+- 联机 PK 使用 Firebase 匿名身份和 Realtime Database。房间以四位房间号或邀请链接加入，题目按 `songs.js` 中的索引同步。联机题目索引依赖原有曲库顺序。
+
+## 目录与技术栈
+
+| 路径 | 职责 |
 |---|---|
-| 猜番剧 | 听歌，选出歌曲来自哪部番剧 |
-| 猜歌名 | 听歌，选出歌曲名称 |
-| 猜歌手 | 听歌，选出演唱者/乐队 |
-| 混合模式 | 每题在「番剧 / 歌名 / 歌手」三种题型间随机切换 |
+| `index.html`、`style.css` | 单页视图、弹窗、响应式布局与动画 |
+| `app.js` | 游戏状态、播放器、曲库、收藏、导入、Firebase 房间与页面事件 |
+| `audio-selection.mjs` | 构造搜索词、候选评分、失败权重、歌曲去重及替换 |
+| `library-navigation.mjs` | 曲库来源映射、组合、搜索、分组及试听会话标记 |
+| `library-tools.mjs` | 曲目与番剧身份、追番过滤、本地错题、音源状态与反馈记录 |
+| `songs.js`、`seasonal-pools.js`、`seasonal-covers.js` | 原有歌曲、已发布季度曲库和封面地址 |
+| `index_75323.json` | Bangumi 目录 75323 的本地索引 |
+| `bili-proxy.mjs`、`api/search.js` | Node.js 本地代理、Vercel B 站代理 |
+| `scripts/`、`candidates/` | 季度发现、更新、校验和审计，以及候选与核查记录 |
+| `tests/`、`.github/workflows/` | Node 内置测试、定期生成季度候选的工作流 |
 
-### 主要功能
+前端采用原生 HTML、CSS、JavaScript 和浏览器 ES Modules。Firebase SDK 通过 CDN 加载。播放使用 HTML Audio 与 YouTube IFrame Player API。本地代理使用 Node 内置模块，Vercel 函数使用 `spark-md5` 生成 B 站 WBI 签名。
 
-- **三音源智能选择**：iTunes 30 秒试听、YouTube 嵌入式播放、B 站音频（本地代理 / Vercel 代理）。
-- **自动换源 + 自动跳题**：某音源失败时自动尝试其它来源；所有音源都不可用时自动换一首，**不计错误**。
-- **「我的曲库」中心**：按番剧分组浏览、搜索、筛选、试听、加自选、标记追番、错题本、音源反馈。
-- **Bangumi 目录一键导入**：输入 Bangumi 收藏目录号，自动把收藏的番剧主题曲拉进曲库。
-- **自定义曲库导入 / 导出**（JSON）。
-- **本地排行榜**（最高连对数、最高连击，存于浏览器）。
-- **提示系统**：每题 2 个提示（歌手 / 歌名），使用后本题得分打折。
-- **匿名 PK**（遗留功能，基于 Firebase，见下文「遗留模块」）。
+## 核心数据流
 
----
+1. 单人出题先合并曲库和筛选范围，按歌名与番剧去重，优先抽取最近五局没出现的歌曲。池子不足时逐步放宽历史限制。错误选项按题型和可用曲池生成。
+2. 智选三源并行检索 iTunes、YouTube 和 B 站。设置可限定为 iTunes + YouTube 或仅 B 站。搜索使用歌名、番名、歌手、类型和可用别名。评分区分歌曲识别证据与播放失败记录。强候选可提前结束收集，普通候选有约 700ms 的收集窗口，收集阶段硬上限约 8 秒。
+3. iTunes 返回试听地址，YouTube 候选检查嵌入状态，B 站先搜视频再取音频流。媒体就绪后开放答题。播放失败会尝试其他候选。无可用结果时，单人模式会尝试换歌或跳题，跳过不计错。
+4. 曲库试听与答题共用音源解析和会话内解析缓存。并发请求按歌曲与来源设置合并。B 站视频搜索结果缓存 24 小时，取流结果缓存 30 分钟。两者通过 `MemCache` 写入本地存储，CDN 地址可能提前失效。季度封面来自内置地址，其他封面按需查询并缓存。
+5. Bangumi 目录导入优先读取仓库里的同号 JSON，其余目录通过公共 CORS 转发获取 API 或目录页面。随后用 AniList 和 iTunes 补充番名、匹配歌曲并写入本机自定义曲库。
 
-## 二、技术栈
+## API 与配置
 
-| 类别 | 技术 |
+| 入口 | 行为 |
 |---|---|
-| 前端 | 原生 HTML / CSS / JavaScript（ES Modules），无框架、无打包 |
-| 视频播放 | YouTube IFrame Player API |
-| 实时对战（遗留） | Firebase Authentication（匿名）+ Realtime Database（RTDB，`asia-southeast1`） |
-| 外部音源 / 元数据 | iTunes Search API、YouTube Data API v3、AniList GraphQL、Bangumi（bgm.tv）REST API |
-| 后端 | Node.js Serverless Functions（Vercel）|
-| 本地 B 站代理 | Node.js（仅内置模块，零依赖）|
-| 数据 / 校验脚本 | Node.js（ESM，`.mjs`），`spark-md5`（用于 Bangumi 密码学签名）|
-| 部署 | Vercel（`vercel.json` 配置路由），也可纯静态托管 |
-| 测试 | Node.js 内置测试运行器（`node --test`）|
+| `/api/search?q=关键词` | B 站搜索，返回视频 ID、标题、作者、时长等 |
+| `/api/search?bvid=BV…` | 取音频 CDN 地址，可能带备用地址。仅本地代理还有直链视频流回退 |
+| `/api/search?stream=…&backup=…` | 转发允许的 HTTPS CDN 地址，保留字节范围，主地址失败时可试备用地址 |
 
----
+前端配置在源码和浏览器设置中。YouTube 客户端 API Key 与 Firebase 配置可被浏览器查看，权限和配额依赖各平台控制台。Vercel 可选设置 `BILI_COOKIE` 供服务端请求使用。季度更新脚本可选设置 `YOUTUBE_API_KEY` 和 `BILI_WORKER_URL`。GitHub Actions 用工作流提供的令牌维护季度候选 PR。
 
-## 三、目录结构
+## 季度更新
 
-```
-anime-song/
-├── index.html                # 单页面：所有视图（首页/游戏/曲库/对战）与弹窗
-├── style.css                 # 全部样式（含响应式、动画、各弹窗）
-├── app.js                    # 主程序：游戏循环、音源检索、曲库、收藏、对战等全部前端逻辑
-├── audio-selection.mjs       # 音源搜索词构造 + 候选打分/排序 + 曲库去重 + 替换歌选取
-├── library-navigation.mjs    # 曲库的搜索/分组/排序、自定义歌曲构建
-├── library-tools.mjs         # 公共工具：WBI 签名、Bangumi 图片、番剧元数据、季度歌查找
-├── songs.js                  # 官方曲库：285 首
-├── seasonal-pools.js         # 季度新番池：2026-04、2026-07 各 30 首
-├── seasonal-covers.js        # 季度番剧内置封面：30 张 HTTPS 图
-├── candidates.js             # 抓取脚本产生的中间草稿（**不被页面加载**，仅开发用）
-├── bili-proxy.mjs            # 本地 B 站音频代理（在你自己电脑上跑）
-├── api/
-│   └── search.js             # Vercel Serverless：B 站搜索 / 取流 / 流转发 / 热备线路
-├── scripts/                  # 数据抓取、更新、校验、审计脚本
-│   ├── fetch-season.mjs          # 抓取/筛选季度候选
-│   ├── update-season.mjs         # 一键更新季度曲库（CLI 交互）
-│   ├── season-updater-tools.mjs  # 一键更新的公共工具（WBI、解析、合并、封面）
-│   ├── validate-songs.mjs       # 校验官方曲库与版本号
-│   ├── validate-seasons.mjs     # 校验季度曲库（30 首 / 15 部）
-│   ├── audit-integrity.mjs       # 数据完整性审计（字段、重复、配对）
-│   └── audit-romaji.mjs          # 统计仅含罗马音元数据的季度歌
-├── tests/                    # 9 个测试文件（node --test）
-├── 一键启动.bat               # Windows：启动本地服务器 + 自动打开网页
-├── 启动B站代理.bat            # Windows：启动本地 B 站代理
-├── 一键更新季度曲库.bat        # Windows：跑 update-season.mjs
-├── vercel.json               # Vercel 路由重写（/api/search 等）
-├── package.json              # 脚本与依赖
-├── ARCHITECTURE.md           # 旧架构文档（部分内容已过时，以本 README 为准）
-├── CLAUDE.md                 # 给 AI 编码助手的项目说明（部分内容已过时）
-├── PROJECT_STATUS.md         # 项目交接 / 状态文档（**长期冻结后先看这个**）
-└── .github/workflows/        # 定时更新季度曲库的 GitHub Actions
+```sh
+npm run discover -- --year 2026 --season fall --out candidates/2026-10
+npm run update-season -- --year 2026 --season fall
 ```
 
----
+发现脚本从 AniList 获取当季热门 TV 动画，按 AniList ID 关联 AnimeThemes，筛选有 OP 和 ED 的番剧，默认目标为 15 部。候选保存在 `candidates/YYYY-MM.json` 和同名 Markdown 中。季度键使用 01、04、07、10。发现命令默认用 UTC，Windows 更新入口默认用本机日期。
 
-## 四、核心模块说明
+`一键更新季度曲库.bat` 默认按本机日期取当季。补查 10 月可在命令窗口运行 `一键更新季度曲库.bat --year 2026 --season fall`。交互脚本按 Bangumi 收藏热度选择当季 TV 动画，直接使用榜单中文名，以 AniList 和 AnimeThemes 补充封面及 OP／ED。
 
-### 前端
+遇到无法确认的番剧或歌曲时，按窗口提示补填或跳过。输入 `/quit` 保存退出，下次继续。手工音源支持 YouTube 视频、B 站完整视频地址和 iTunes 试听直链。请先试听确认曲目，脚本会再检查链接可用性。候选进度与逐首报告在 `candidates/YYYY-MM-bangumi.*`。
 
-- **`app.js`（主程序，`?v=53`）**
-  全局状态、游戏循环、音源检索、播放控制、答案判定、提示、结算、排行榜、「我的曲库」、Bangumi 导入、收藏、以及遗留的匿名 PK。是项目的核心，绝大部分逻辑都在这里。
+B 站请粘贴浏览器地址栏中形如 `https://www.bilibili.com/video/BV…/` 的视频页。若复制到的是 `b23.tv` 分享短链，先用浏览器打开，再复制展开后的地址。可用 `--check-links 9` 抽查榜单前 9 部的音源，或用 `--retry-skipped` 把已跳过的番剧放回复核队列。
 
-- **`audio-selection.mjs`（`?v=3`）**
-  - `audioSearchQueries(song)`：为 iTunes / YouTube / B 站分别构造多组搜索词。
-  - `scoreAudioCandidate(song, candidate)` / `rankAudioCandidates(...)`：对每个候选做**标题/番剧/歌手/类型匹配**，过滤翻唱、钢琴、伴奏、错误版本，并打分排序。
-  - `uniqueChallengePool(pool)`：按「歌名 + 番剧」去重，保证同一首歌不会在一局里重复出现。
-  - `buildPlaylist`：**跨最近 5 局去重**——记录最近 5 局（`played_games_v1`）出现过的歌，选题时优先挑 5 局内没出现过的；若排除后题目不够，会从最旧的一局开始放宽。
-  - `pickReplacementSong(...)`：某题不可播时，从池中挑一首未用过的替换歌。
+进入逐项复核前，脚本会批量检查当前候选。每次最多检查两首，每首的三个音源并行，快查上限 12 秒。扫描后可输入 `R` 重试失败项，已通过的结果会复用。更新代理文件后，重启已打开的本地 B 站代理窗口可使用新的线路规则。
 
-- **`library-navigation.mjs`**
-  曲库浏览专用：`searchLibraryTracks`（搜索）、`groupLibrarySongs`（按番剧分组）、`sortLibraryGroups`（排序）、`buildPlaylist`、自定义歌曲记录构建等。
+凑齐 15 部与 30 首后，输入 `Y` 才写入曲库、封面与音源，并更新浏览器缓存版本。失败会恢复这些文件。成功后刷新 8080 可查看新季度、海报和试听。YouTube 的自动检查依据嵌入状态，实际播放仍受地区、网络和授权限制。GitHub 工作流使用独立的 AniList 发现命令维护候选 PR。
 
-- **`library-tools.mjs`**
-  公共纯函数：B 站 WBI 签名相关、Bangumi 图片处理（`resolveBangumiImage`）、番剧元数据、季度歌查找、`filterWatchedSongs`（追番过滤）等。
+## 验证与部署
 
-### 后端
-
-- **`api/search.js`（Vercel Serverless）**
-  服务端实现 B 站能力，避免在浏览器里直接调 B 站被 CORS / 风控拦截。支持三类请求：
-  - `q=关键词`：服务端 B 站视频搜索；
-  - `bvid=...`：返回该视频可直接播放的音频 CDN URL；
-  - `stream=...`：服务端流式转发 B 站 CDN 音频（含 3 条热备线路自动切换）。
-  - 可选环境变量 `BILI_COOKIE`（登录态）以降低被风控概率。
-
-- **`bili-proxy.mjs`（本地代理，端口 8765）**
-  在你自己电脑上运行，从你的网络直接访问 B 站，不会被 Vercel 境外 IP 的风控拦（`no audio stream`）。提供与 Serverless 相同的搜索 / 取流 / 流转发能力，**只用 Node 内置模块、零依赖**。
-
-### 数据
-
-- **`songs.js`**：285 首官方曲库（`OP/ED/IN` 三种类型）。
-- **`seasonal-pools.js`**：按 `YYYY-MM` 组织的季度池，每池 15 部番剧 × (OP + ED) = 30 首。
-- **`seasonal-covers.js`**：季度番剧的内置封面（避免每次去 AniList 现取）。
-
----
-
-## 五、实现原理
-
-### 1. 音源解析管线（核心）
-
-每加载一道题，前端会**并行**向各音源检索候选 → 边返回边汇总 → 统一打分 → 按分数从高到低依次尝试播放。
-
-**快速收敛（避免「等最慢的源」）**：三个音源同时发起，谁先返回就先收集；首个音源返回后给其它音源一个约 **700ms 的宽限窗口**，窗口内返回的候选也纳入排序。若窗口结束时已有可用候选就立即采用；若仍无可用候选（例如先返回的是空结果）则继续等待较慢的源，**整个收集硬上限约 8 秒**。这样正常情况下约 1–3 秒即可开始，而不是被某个慢源拖到 15 秒。各音源内部也都有预算：YouTube 多条搜索词**并行**（整体约 7 秒，旧版是逐词串行）、B 站单条搜索慢查询到点放弃（约 7 秒）、B 站整体搜索预算约 10 秒。
-
-```mermaid
-flowchart TD
-    A[加载题目] --> B[并行检索三音源]
-    B --> B1["iTunes Search<br/>（多组搜索词并行）"]
-    B --> B2["YouTube Data API<br/>（多词并行 + 校验可嵌入）"]
-    B --> B3["B 站<br/>（本地代理 / Vercel）"]
-    B1 --> C[首个返回 → 700ms 宽限收集]
-    B2 --> C
-    B3 --> C
-    C --> C1{有可用候选?}
-    C1 -->|否、未到 8s| C
-    C1 -->|是| D[rankAudioCandidates 打分/排序]
-    D --> E{逐个尝试}
-    E -->|iTunes| F1["<audio> 直接播放 30s 预览"]
-    E -->|YouTube| F2["YouTube IFrame 自动加载，被拦则点击播放"]
-    E -->|B 站| F3["经代理/流转发播放"]
-    F1 --> G[可播 → 进入答题]
-    F2 --> G
-    F3 --> G
-    E -->|8s 内全部失败| H[自动换一首替换歌，不计错]
-    H --> A
+```sh
+npm test
+npm run validate
+npm run audit
 ```
 
-### 2. 候选打分与过滤（三层）
+项目无构建、Lint 和 TypeScript 步骤。Vercel 从仓库根目录提供静态资源与 `api/search.js`。GitHub Pages 和其他纯静态托管仅提供网页，B 站功能使用网页设置中的代理地址。部署应包含三个数据模块、所有前端模块和图片。修改模块时更新其导入 URL 的缓存版本。校验脚本要求 `index.html` 的 CSS、入口脚本与 `app.js` 的原有曲库版本一致。
 
-评分明确分成**两层判断**：① 确认候选是不是这首歌曲、属于哪部番（识别/关系层）；② 该音源能否播放（播放层）。`rankAudioCandidates` 先过滤、再按证据打分、降序排列。
+## 常见问题
 
-**第一层 · 硬否决（继续直接淘汰）**
-- 错误版本：标题中出现 cover / piano / instrumental / karaoke / remix / live / 翻唱 / 钢琴 / 伴奏 / カバー / ピアノ 等（先把歌曲自身的别名从标题里剔除，避免误判）。
-- 标题**完全不含歌名别名**（日文/中文都算）。
-- OP/ED 类型冲突（OP 题是纯 ED 视频，反之亦然），除非标题同时含目标类型。
-- YouTube 明确不可嵌入；iTunes 同名候选的歌手与已知歌手明显不符（iTunes 歌手元数据可靠，视为不同录音）。
+- **页面空白或按钮没反应**。确认从 HTTP 地址打开，并检查浏览器能否访问 Firebase CDN。
+- **B 站取流失败**。检查 8765 本地代理是否在运行。线上代理和本地代理都可能被 B 站限流。
+- **YouTube 提示点击播放或跳题**。浏览器可能拦截自动播放，视频也可能受嵌入或地区限制。可点播放或切换来源。
+- **季度曲目难匹配**。部分曲名和歌手只有罗马音，外部搜索结果可能主要用日文。查看音源反馈和候选核查记录。
+- **换浏览器后数据不见了**。本地记录按浏览器和站点来源保存。自定义曲库可用 JSON 迁移。
 
-**第二层 · 证据驱动打分（低基础分，证据决定）**
-- 基础分仅 15（表示标题已含歌名）。
-- 标题精确命中 +38（仅含别名 +16）；**番名命中 +26、歌手命中 +22、OP/ED 类型命中 +14**。
-- 「精确歌名 + 番名 + 类型」全部命中（确认就是该番的 OP/ED）再 +10。
-- iTunes 官方直连 +8；**"既无番名也无歌手"不再淘汰，改为 −12**（避免误杀，排序自然偏低）。
-- 播放失败的递进惩罚见下（−10/−20/−30）。
-
-**第三层 · 播放失败的递进惩罚（可恢复）**
-- 每个音源在本次会话内按「歌曲 + 音源」累计失败次数：第 1/2/3 次分别 −10/−20/−30，之后封顶 −30。
-- 该音源一旦播放成功，立即清零恢复权重；记录不持久化，**一次失败不会永久降权**。
-
-**收集何时收敛（不被慢源拖、也不被弱候选误切）**：强候选（分数 ≥ 90，识别证据充分）一出现就立即收敛；宽限窗口（首个源返回后约 700ms）结束时，只要有任何可播候选（即使较弱）也收敛，否则继续等慢源；硬上限约 8 秒。
-
-### 3. 音源差异与 B 站代理
-
-- **iTunes**：返回官方 30 秒 `.m4a` 预览，直连 `<audio>` 即可，但**对日系动漫音乐覆盖不全**。
-- **YouTube**：通过 IFrame API 播放；会先用 `videos?part=status` 校验视频是否可嵌入。
-- **B 站**：音质全、覆盖全，但有两个限制：
-  - 浏览器直接调 B 站会被 **CORS / 风控**拦；
-  - **Vercel 境外服务器 IP** 取 B 站音频常被风控返回 `no audio stream`。
-  - 因此 B 站音频统一走代理：**本地代理 `bili-proxy.mjs`（推荐）** 或 Vercel Serverless 热备线路。
-
-### 4. 缓存机制
-
-| 缓存 | 作用域 | 说明 |
-|---|---|---|
-| `resolvedAudioCache`（`Map`） | 内存 / 当次会话 | 已成功解析的音源结果，避免重复检索 |
-| `fetchAudioInFlight`（`Map`） | 内存 | 合并同一首歌的并发请求 |
-| `bilibiliCache`（`bilibili_cache_v2`） | localStorage | 缓存 B 站搜索到的最佳视频 |
-| `bilibiliAudioCache` | 内存 | 缓存 bvid → 音频 CDN URL |
-| `libraryCoverCache` / `libraryCoverRequests` | 内存 | 曲库封面缓存与去重请求 |
-| `SEASONAL_COVERS` | 内置数据 | 季度番剧封面直接内置，无需网络请求 |
-
-> 注：`audioCache`（`audio_cache_v3`）目前**只写不读**，属于遗留代码，实际缓存由 `resolvedAudioCache` 等承担，详见 `PROJECT_STATUS.md`。
-
-### 5. 失败恢复与跳题
-
-- **播放中失败**：`recoverQuestionAudio` 记录失败来源，排除该来源后重新解析，最多重试 5 次（自动换源）。
-- **所有音源都失败**：`skipUnplayableQuestion` 用 `pickReplacementSong` 从当前曲池找一首没用到的歌**替换本题**；没有可替换的则直接跳过。**被跳过的题不计错误**，随后自动加载下一题。
-
-### 6. 一局游戏的数据流
-
-```mermaid
-sequenceDiagram
-    participant U as 玩家
-    participant App as app.js
-    participant Src as 音源(iTunes/YT/B站)
-    U->>App: 选择模式并开始
-    App->>App: getFilteredSongs() 按来源/类型/追番过滤
-    App->>App: uniqueChallengePool 去重 + buildPlaylist 选题(排除最近5局)
-    loop 每一题
-        App->>Src: fetchAudio 并行检索
-        Src-->>App: 候选 → 打分排序
-        App->>U: 播放 30s 片段
-        U->>App: 选择答案
-        App->>App: 判定对错 / 记录错题 / 连击
-        App->>U: 显示正确答案
-        U->>App: 下一题
-    end
-    App->>U: 结算（正确率、连击、排行榜）
-```
-
-### 7. 季度曲库更新机制（离线脚本）
-
-- `fetch-season.mjs`：抓取 AniList 当季番剧 → 用 `animethemes.moe` 筛出有 OP/ED 的 → 拉取 B 站音频。
-- `update-season.mjs`（`一键更新季度曲库.bat`）：交互式一键流程，确认新番列表、抓取、缓存、校验、合并、写封面，最后自动跑校验。
-- GitHub Actions（`.github/workflows`）可按计划自动执行更新。
-
----
-
-## 六、本地安装与运行
-
-### 前置要求
-
-- [Node.js](https://nodejs.org/)（建议 18+；本地代理与数据脚本需要，**纯浏览官方曲库可不装**）。
-- 浏览器（推荐最新版 Chrome / Edge）。
-
-### 方式 A：双击启动（Windows）
-
-1. 双击 **`一键启动.bat`**，会启动本地服务器并自动打开浏览器。
-2. 想用 B 站音源时，再双击 **`启动B站代理.bat`**。
-
-### 方式 B：命令行
-
-```bash
-# 1. 启动静态服务器（任选其一）
-npm run serve            # Python: http://localhost:8080
-# 或
-npx serve .              # Node 静态服务器
-
-# 2. （可选）启动本地 B 站代理
-node bili-proxy.mjs      # http://127.0.0.1:8765
-
-# 3. 浏览器打开 http://localhost:8080
-```
-
-> 直接用 `file://` 双击打开 `index.html` 也能运行，但部分浏览器对 `file://` 下的 ES Module / fetch 有限制，**建议用本地服务器**。
-
-### 运行测试与校验
-
-```bash
-npm test                 # 91 个单元测试
-npm run validate         # 校验曲库与版本号
-npm run audit            # 数据完整性 + 罗马音元数据审计
-```
-
----
-
-## 七、环境变量
-
-**前端不需要任何环境变量**（没有 `.env`）。
-
-Vercel Serverless（`api/search.js`）支持以下可选变量：
-
-| 变量 | 是否必填 | 说明 |
-|---|---|---|
-| `BILI_COOKIE` | 否 | B 站登录态 Cookie，用于降低服务端取流被风控的概率。不设置时使用未登录请求。 |
-
-> 页面代码中内联了 YouTube Data API Key 与 Firebase 配置。它们属于**公开可暴露的客户端标识**（非私密服务端密钥）；Firebase 配置本身是设计为公开的。若 API Key 被滥用，可在对应平台控制台重置。
-
----
-
-## 八、构建与部署
-
-项目**没有构建步骤**，源码即产物。
-
-### 部署到 Vercel（推荐）
-
-1. 将仓库导入 Vercel。
-2. `vercel.json` 已配置好 `/api/search`、`/api/search.js` 等路由到 Serverless 函数。
-3.（可选）在 Vercel 项目设置里配置 `BILI_COOKIE`。
-4. 部署后静态资源与 `/api/*` 即生效。
-
-### 部署到 GitHub Pages / 纯静态托管
-
-- 直接把根目录作为静态站点发布即可。
-- 注意：纯静态环境下 **`/api/search`（B 站服务端能力）不可用**，B 站音源需改走本地代理 `bili-proxy.mjs`；iTunes / YouTube 音源不受影响。
-
-### 静态资源缓存
-
-- 资源引用带版本号（如 `app.js?v=53`、`style.css?v=53`），更新代码时**把对应版本号 +1** 即可强制浏览器拉取新版本（`scripts/validate-songs.mjs` 会检查版本号一致性）。
-
----
-
-## 九、常见问题（FAQ）
-
-**Q1：B 站歌曲提示「没有可用音源 / no audio stream」？**
-境外服务器（Vercel）IP 被 B 站风控。请在本机运行 `node bili-proxy.mjs`（或 `启动B站代理.bat`），页面会自动探测并切换到 `http://127.0.0.1:8765`。
-
-**Q2：某些季度新番始终播放不出来？**
-这是已知限制：季度歌的元数据是**罗马音**，而 B 站视频标题多为日文/中文，严格匹配时可能无法命中（官方视频其实存在）。根因与建议修法见 `PROJECT_STATUS.md`，本次未做高风险修改。
-
-**Q3：YouTube 视频黑屏 / 不可播放 / 一直「正在准备播放器」？**
-可能是视频未开放嵌入或地区限制，或 IFrame 脚本在当前网络下加载慢。准备阶段约 8 秒仍不成功会自动换源；浏览器拦截自动播放时会提示「点击播放」，点一下中央播放键即可。也可在设置中切换音源。
-
-**Q3b：iTunes 偶发报 CORS 错误 / 加载很慢？**
-iTunes 官方接口本身返回 CORS 头（`Access-Control-Allow-Origin: *`）。若浏览器在**代理 TUN 模式下**偶发报 CORS 或连接被重置，通常是代理节点在并发突发下丢了连接（属网络/代理问题，不是代码问题）；用命令行请求同一 URL 通常正常。可尝试切换代理节点、调整分流规则，或等待程序自动换源。
-
-**Q4：Bangumi 导入失败？**
-确认输入的是纯数字目录号（如 `99046`）。首次导入需要访问 Bangumi，网络不通时会失败；CORS 异常时代理会尝试公共转发（可能不可用）。
-
-**Q5：刷新后我改的代码没生效？**
-浏览器缓存了旧版本。请把改动文件的 `?v=数字` +1，并在浏览器里强制刷新（Ctrl+F5）。
-
-**Q6：我在隐私/无痕模式下行为丢了？**
-收藏、追番、错题、排行榜等都存在 `localStorage`，清除浏览器数据或更换浏览器/设备不会同步。
-
----
-
-## 十、当前项目状态
-
-本项目短期开发已结束，**进入长期冻结**。
-
-- 当前版本功能完整、可正常运行；测试与校验全部通过。
-- 已知限制、技术债务、重启方式与排查建议统一记录在 **[PROJECT_STATUS.md](./PROJECT_STATUS.md)**。
-- 长期后重新接手时，**请先读 `PROJECT_STATUS.md`，再读本 README**。
-
----
-
-> 本站为个人学习项目，由 AI 辅助生成。动漫歌曲版权归原作者所有，本项目不托管任何音频文件，音频均来自公开第三方音源。
+当前验证范围、待确认项和维护顺序见 [PROJECT_STATUS.md](PROJECT_STATUS.md)。
