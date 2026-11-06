@@ -47,3 +47,11 @@
 - #21 黄金神威 最终章 · OP Ougon no Kanata missing
 
 《我推的孩子》第三季 OP 以[动画官网](https://ichigoproduction.com/Season3/music/)为准，采用 `TEST ME`。
+
+## 2026-11-06 备用源补充
+
+下列视频标题的番剧、OP／ED 与歌曲信息已对照现有条目检查。本地代理分别完成取流和 `Range: bytes=0-1023` 检查，均返回 HTTP 206、`audio/mp4`、1024 字节。此检查不等同于整首人工试听，也不保证未来或其他网络可播放。原有 iTunes／YouTube 主源保留。
+
+- `lulu.` — Mrs. GREEN APPLE，OP，[B 站备用](https://www.bilibili.com/video/BV1FnrFBNEAJ/)
+- `The Story of Us` — milet，ED，[B 站备用](https://www.bilibili.com/video/BV1CEkcB7EZe/)
+- `TEST ME` — CHANMINA，OP，[B 站备用](https://www.bilibili.com/video/BV1kZrVBLEuY/)

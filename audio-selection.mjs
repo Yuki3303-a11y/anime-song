@@ -1,5 +1,14 @@
 const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}\s]/gu, '');
-const badVersion = /\b(?:cover|piano|instrumental|karaoke|remix|remaster(?:ed)?|acoustic|live|guitar lesson|drum cover)\b|翻唱|钢琴|伴奏|混音|鼓谱|吉他谱|翻奏|演奏|指弹|扒谱|教程|カバー|ピアノ|インスト|カラオケ|リミックス|ライブ/i;
+const badVersion = /\b(?:cover|piano|instrumental|karaoke|remix|remaster(?:ed)?|acoustic|live|guitar lesson|drum cover)\b|纯音乐|无人声|无主唱|人声消除|消音版|\b(?:off[ -]?vocals?|no[ -]?vocals?|backing track|inst)\b|翻唱|钢琴|伴奏|混音|鼓谱|吉他谱|翻奏|演奏|指弹|扒谱|教程|カバー|ピアノ|インスト|カラオケ|リミックス|ライブ/i;
+
+// Verified against the official iTunes artist identity; do not infer unrelated artists.
+const knownArtistAliases = [['泽野弘之', '澤野弘之', 'SawanoHiroyuki[nZk]']];
+function artistAliases(song) {
+    const supplied = [song.artist, ...(Array.isArray(song.artistAliases) ? song.artistAliases : [])]
+        .filter(value => typeof value === 'string' && value.trim());
+    const names = new Set(supplied.map(normalize));
+    return [...new Set([...supplied, ...knownArtistAliases.filter(group => group.some(name => names.has(normalize(name)))).flat()])];
+}
 
 function hasBadVersion(song, description) {
     const aliases = [song.title, song.titleCN, song.anime, song.animeCN, song.animeNative]
@@ -16,10 +25,12 @@ export function audioSearchQueries(song) {
     const unique = values => [...new Set(values.map(value => String(value || '').trim()).filter(Boolean))];
     const titles = unique([song.title, song.titleCN]);
     const anime = unique([song.anime, song.animeCN, song.animeNative]);
+    const artists = artistAliases(song);
     const type = song.type || '';
     return {
         itunes: unique([
             `${song.artist || ''} ${titles[0] || ''}`,
+            ...artists.map(artist => `${artist} ${titles[0] || ''}`),
             ...titles.map(title => `${title} ${anime[0] || ''}`),
             ...titles
         ]),
@@ -29,6 +40,7 @@ export function audioSearchQueries(song) {
             `${titles[0] || ''} ${song.artist || ''}`
         ]),
         bilibili: unique([
+            `${song.animeCN || song.animeNative || song.anime || ''} ${type}`,
             `${anime[1] || anime[0] || ''} ${type} ${titles.at(-1) || ''}`,
             `${anime[0] || ''} ${type} ${titles[0] || ''}`,
             `${anime.at(-1) || ''} ${type} ${titles[0] || ''}`,
@@ -41,6 +53,10 @@ function containsAlias(haystack, aliases) {
     const text = normalize(haystack);
     return aliases.some(alias => {
         const value = normalize(alias);
+        // Short names such as Blue / Eve must not match Blueberry / never.
+        if (/^[a-z0-9]{2,4}$/i.test(String(alias).trim())) {
+            return new RegExp(`(^|[^a-z0-9])${value}(?=$|[^a-z0-9])`, 'i').test(String(haystack).normalize('NFKC'));
+        }
         return value.length >= 2 && text.includes(value);
     });
 }
@@ -56,11 +72,11 @@ export function scoreAudioCandidate(song, candidate, { requireRelation = false }
     const songAliases = [song.title, song.titleCN].filter(Boolean);
     if (!containsAlias(title, songAliases)) return -1;             // title has no song-name alias at all
 
-    // ===== Layer B — relation evidence (song → anime/type). Not gates; evidence only. =====
+    // Video uploads need song identity plus anime or artist evidence.
     const animeAliases = [song.anime, song.animeCN, song.animeNative].filter(Boolean);
     const animeMatch = containsAlias(`${title} ${album}`, animeAliases);
-    const artistMatch = containsAlias(`${title} ${artist}`, [song.artist]);
-    if (requireRelation && !animeMatch && !artistMatch) return -1;
+    const artistMatch = containsAlias(`${title} ${artist}`, artistAliases(song));
+    if ((requireRelation || candidate.source !== 'itunes') && !animeMatch && !artistMatch) return -1;
 
     // OP/ED type conflict stays a hard rejection — unless the title also contains the wanted type.
     const opposite = song.type === 'OP' ? /\bED\d*\b|片尾|エンディング/i : song.type === 'ED' ? /\bOP\d*\b|片头|オープニング/i : null;
@@ -83,9 +99,10 @@ export function scoreAudioCandidate(song, candidate, { requireRelation = false }
     if (typeMatch) score += 14;                        // OP/ED type present
     if (exactTitle && animeMatch && typeMatch) score += 10; // strong: exact title + anime + type all confirmed
 
+    if (candidate.source === 'youtube') score -= 20; // iframe startup/embedding risk versus direct audio
     if (candidate.source === 'itunes') score += 8;     // direct official preview, reliable
 
-    // Missing relation context used to be a hard rejection — now it just lowers confidence.
+    // Remaining candidates without relation evidence have lower confidence.
     if (!animeMatch && !artistMatch) score -= 12;
 
     // Progressive, recoverable per-source failure penalty (replaces the flat permanent -35).

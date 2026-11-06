@@ -13,7 +13,8 @@ export const SEASONAL_POOLS = {
       "animethemesUrl": "https://animethemes.moe/anime/sousou_no_frieren_2nd_season",
       "animeCN": "葬送的芙莉莲 第二季",
       "animeNative": "葬送のフリーレン 第2期",
-      "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4d/9f/5f/4d9f5f06-3e20-9ce6-f3e0-fbe4e5fc40a1/mzaf_6745694631041190913.plus.aac.p.m4a"
+      "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4d/9f/5f/4d9f5f06-3e20-9ce6-f3e0-fbe4e5fc40a1/mzaf_6745694631041190913.plus.aac.p.m4a",
+      "bilibiliVideoId": "BV1FnrFBNEAJ"
     },
     {
       "titleCN": "The Story of Us",
@@ -26,7 +27,8 @@ export const SEASONAL_POOLS = {
       "animethemesUrl": "https://animethemes.moe/anime/sousou_no_frieren_2nd_season",
       "animeCN": "葬送的芙莉莲 第二季",
       "animeNative": "葬送のフリーレン 第2期",
-      "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/96/72/00/967200f5-5691-84f9-a16d-ffe49d06b88e/mzaf_1206845256533816144.plus.aac.p.m4a"
+      "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/96/72/00/967200f5-5691-84f9-a16d-ffe49d06b88e/mzaf_1206845256533816144.plus.aac.p.m4a",
+      "bilibiliVideoId": "BV1CEkcB7EZe"
     },
     {
       "titleCN": "PROVANT",
@@ -117,7 +119,8 @@ export const SEASONAL_POOLS = {
       "animethemesUrl": "https://animethemes.moe/anime/oshi_no_ko_3rd_season",
       "animeCN": "【我推的孩子】 第三季",
       "animeNative": "【推しの子】第3期",
-      "youtubeVideoId": "QgIQbeRzkkc"
+      "youtubeVideoId": "QgIQbeRzkkc",
+      "bilibiliVideoId": "BV1kZrVBLEuY"
     },
     {
       "titleCN": "Serenade",
@@ -470,7 +473,8 @@ export const SEASONAL_POOLS = {
       "animethemesUrl": "https://animethemes.moe/anime/kusuriya_no_hitorigoto_3rd_season",
       "animeCN": "药屋少女的呢喃 第三季",
       "animeNative": "薬屋のひとりごと 第3期",
-      "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/91/9d/02919d45-e9c3-e60f-ac9b-b45d1173aecd/mzaf_4507834398239403482.plus.aac.p.m4a"
+      "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/91/9d/02919d45-e9c3-e60f-ac9b-b45d1173aecd/mzaf_4507834398239403482.plus.aac.p.m4a",
+      "bilibiliVideoId": "BV1mdak62EVE"
     },
     {
       "titleCN": "Ghost Sequence",
@@ -1425,6 +1429,7 @@ export const SEASONAL_POOLS = {
     {
       "titleCN": "GO GHOST",
       "title": "GO GHOST",
+      "bilibiliVideoId": "BV1y1Mh6HEB5",
       "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
       "artist": "King Gnu",
       "type": "OP",

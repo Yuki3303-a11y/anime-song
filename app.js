@@ -1,12 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=56';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=39';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=60';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=41';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=2';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
-import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback } from './library-tools.mjs?v=1';
-import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=5';
+import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback } from './library-tools.mjs?v=2';
+import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=7';
+import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=1';
+import { createAudioPrefetch } from './audio-prefetch.mjs?v=1';
 
 // =====================================================================
 // Firebase
@@ -97,7 +99,7 @@ const BILI_TIMEOUT = 12000;        // B站 proxy fetch timeout (ms)
 const BILI_SEARCH_BUDGET = 10000;  // B站整体搜索预算（含4条查询，不再等到15s）
 const BILI_QUERY_BUDGET = 7000;    // B站单条搜索查询预算，慢查询到点放弃，不阻塞
 const YT_SEARCH_BUDGET = 7000;     // YouTube 整体搜索预算（并行查询）
-const GATHER_GRACE = 700;          // 首个音源就绪后，给其它音源的额外收集窗口
+const GATHER_GRACE = 1500;          // 首个音源就绪后，给其它音源的额外收集窗口
 const GATHER_HARD = 8000;          // 音源候选收集硬上限
 const STRONG_SCORE = 90;           // 可立即采用的高置信候选分数
 
@@ -152,6 +154,20 @@ function loadSourceMix() {
 }
 filterState.mix = loadSourceMix();
 try { if (localStorage.getItem('song_source_mode_v1') === 'mix') filterState.source = 'mix'; } catch {}
+try {
+    const raw = localStorage.getItem('game_settings_v1');
+    if (raw) {
+        parsePersonalBackup(JSON.stringify({ format: 'anime-song-personal-backup', version: 1, data: { game_settings_v1: raw } }));
+        const saved = JSON.parse(raw);
+        gameState.questionCount = saved.questionCount;
+        filterState.types = new Set(saved.types);
+        filterState.source = saved.source?.startsWith('season:') && !SEASONAL_POOLS[saved.source.slice(7)] ? null : saved.source;
+    }
+} catch { /* Ignore invalid saved preferences; keep defaults. */ }
+function saveGameSettings() {
+    try { localStorage.setItem('game_settings_v1', JSON.stringify({ questionCount: gameState.questionCount,
+        types: [...filterState.types], source: filterState.source })); } catch {}
+}
 
 const PERSONAL_KEYS = {
     watched: 'watched_anime_v1', mistakes: 'mistake_book_v1',
@@ -177,9 +193,9 @@ function recordMistake(song, selected) {
     mistakeBook = putMistake(mistakeBook, song, selected);
     savePersonalList(PERSONAL_KEYS.mistakes, mistakeBook);
 }
-function recordLocalAudioCheck(song, status, source = '') {
+function recordLocalAudioCheck(song, status, source = '', reason = '') {
     if (!song) return;
-    audioChecks = putAudioCheck(audioChecks, song, status, source);
+    audioChecks = putAudioCheck(audioChecks, song, status, source, Date.now(), reason);
     savePersonalList(PERSONAL_KEYS.audio, audioChecks);
 }
 
@@ -191,6 +207,8 @@ let audioSourcePref = (() => {
 })();
 
 function saveAudioSourcePref(value) {
+    gameState.audioPrefetch?.cancel(true);
+    gameState.youtubeUnavailableUntil = 0;
     try {
         if (value === null) localStorage.removeItem('audio_source_pref_v1');
         else localStorage.setItem('audio_source_pref_v1', value);
@@ -199,6 +217,7 @@ function saveAudioSourcePref(value) {
 }
 
 function updateFilterCount() {
+    saveGameSettings();
     const count = uniqueChallengePool(getFilteredSongs()).length;
     $('filterCount').textContent = `共 ${count} 首可选`;
     $('songCount').textContent = count + '+';
@@ -327,54 +346,66 @@ const playlist = {
 };
 
 function ensureYouTubeAPI() {
+    if (Date.now() < (gameState.youtubeUnavailableUntil || 0)) {
+        return Promise.reject(new Error(gameState.youtubeFailureReason || 'YouTube播放器暂时不可用'));
+    }
     if (ytReady && ytPlayer) return Promise.resolve(ytPlayer);
     if (youtubeApiPromise) return youtubeApiPromise;
     youtubeApiPromise = new Promise((resolve, reject) => {
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-
-    let loadFailed = false;
-    const fail = (message) => {
-        if (loadFailed) return;
-        loadFailed = true;
-        clearTimeout(failTimer);
-        tag.remove();
-        youtubeApiPromise = null;
-        reject(new Error(message));
-    };
-    const failTimer = setTimeout(() => {
-        if (!ytReady) {
-            console.error('[YT] IFrame API load timeout (15s)');
-            fail('YouTube播放器加载超时');
+        let tag = null;
+        let instance = null;
+        let loadFailed = false;
+        const fail = message => {
+            if (loadFailed) return;
+            loadFailed = true;
+            clearTimeout(failTimer);
+            tag?.remove();
+            instance?.destroy?.();
+            ytPlayer = null;
+            ytReady = false;
+            const container = document.getElementById?.('ytPlayerContainer');
+            if (container) container.innerHTML = '<div id="ytPlayerEl"></div>';
+            gameState.youtubeUnavailableUntil = Date.now() + 60000;
+            gameState.youtubeFailureReason = message;
+            reject(new Error(message));
+        };
+        // One bounded initialization shared by all callers; fail the platform once, not each video.
+        const failTimer = setTimeout(() => fail('YouTube播放器连接超时，暂时改用其他来源'), 8000);
+        const createPlayer = () => {
+            if (loadFailed || instance) return;
+            try {
+                instance = new YT.Player('ytPlayerEl', {
+                    height: '360', width: '640',
+                    playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1, origin: window.location?.origin || '' },
+                    events: {
+                        onReady: () => {
+                            if (loadFailed || ytPlayer !== instance) return;
+                            ytReady = true;
+                            clearTimeout(failTimer);
+                            applyPlayerVolume();
+                            resolve(instance);
+                        },
+                        onStateChange: event => { if (!loadFailed && ytPlayer === instance) onYtStateChange(event); },
+                        onError: event => {
+                            if (loadFailed || ytPlayer !== instance) return;
+                            if (!ytReady) fail('YouTube播放器初始化失败');
+                            else onYtError(event);
+                        },
+                        onAutoplayBlocked: event => { if (!loadFailed && ytPlayer === instance) onYtAutoplayBlocked(event); }
+                    }
+                });
+                ytPlayer = instance;
+            } catch { fail('YouTube播放器初始化失败'); }
+        };
+        if (typeof YT !== 'undefined' && YT.Player) createPlayer();
+        else {
+            tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            window.onYouTubeIframeAPIReady = createPlayer;
+            tag.onerror = () => fail('无法连接YouTube播放器，暂时改用其他来源');
+            document.head.appendChild(tag);
         }
-    }, 15000);
-
-    // MUST define callback BEFORE appending script — mobile browsers may load instantly
-    window.onYouTubeIframeAPIReady = () => {
-        if (loadFailed) return;
-        try {
-            ytPlayer = new YT.Player('ytPlayerEl', {
-                height: '360', width: '640',
-                playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
-                events: {
-                    onReady: () => { if (loadFailed) return; ytReady = true; clearTimeout(failTimer); applyPlayerVolume(); resolve(ytPlayer); },
-                    onStateChange: onYtStateChange,
-                    onError: onYtError
-                }
-            });
-        } catch (e) {
-            console.error('[YT] Player constructor failed:', e);
-            fail('YouTube播放器初始化失败');
-        }
-    };
-
-    tag.onerror = () => {
-        console.error('[YT] IFrame API script load error');
-        fail('YouTube播放器加载失败');
-    };
-
-    document.head.appendChild(tag);
-    });
+    }).catch(error => { youtubeApiPromise = null; throw error; });
     return youtubeApiPromise;
 }
 
@@ -385,9 +416,14 @@ function onYtError(e) {
         5: '播放出错（HTML5播放器问题）',
         100: '视频未找到或已下架',
         101: '视频不允许嵌入播放',
-        150: '视频不允许嵌入播放'
+        150: '视频不允许嵌入播放',
+        153: '播放器未收到站点来源信息，请刷新页面后重试'
     };
     const reason = errorReasons[e.data] || `播放出错（错误码${e.data}）`;
+    if (e.data === 153) {
+        gameState.youtubeUnavailableUntil = Date.now() + 60000;
+        gameState.youtubeFailureReason = reason;
+    }
 
     // Quiz YouTube fallback — skip this question
     if (quizYT.active) {
@@ -463,6 +499,17 @@ function onYtError(e) {
     notify(`播放出错（${reason}）`);
 }
 
+function onYtAutoplayBlocked() {
+    if (quizYT.active) {
+        gameState.isPlaying = false;
+        setQuizMediaState('awaiting-play', '浏览器需要确认播放 · 点击播放按钮');
+    } else if (libraryPreviewSession.activeKey && libraryPreviewResult?.source === 'youtube') {
+        clearTimeout(libraryPreviewTimer);
+        libraryPreviewState = 'ready';
+        updateLibraryPreviewUI();
+    }
+}
+
 function onYtStateChange(e) {
     // Quiz YouTube fallback — update quiz player UI
     if (quizYT.active) {
@@ -472,31 +519,24 @@ function onYtStateChange(e) {
             gameState.isPlaying = true;
             $('visualizer').classList.remove('hidden');
             startQuizProgress();
-            // Start 30s timer from actual playback start (not load time)
-            clearTimeout(quizYT.timer);
-            quizYT.timer = setTimeout(() => {
-                if (quizYT.active) {
-                    if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
-                    stopQuizProgress();
-                    gameState.isPlaying = false;
-                    setQuizMediaState('ready', '试听结束 · YouTube源');
-                    $('visualizer').classList.add('hidden');
-                    $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-                }
-            }, 30000);
         } else if (e.data === YT.PlayerState.ENDED) {
             clearQuizMediaTimeout();
             gameState.isPlaying = false;
             setQuizMediaState('ready', '播放结束 · YouTube源');
             $('visualizer').classList.add('hidden');
             $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-        } else {
-            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+        } else if (e.data === YT.PlayerState.BUFFERING) {
+            gameState.isPlaying = true; // keep pause available while the stream buffers
+            setQuizMediaState('buffering', '正在缓冲 · YouTube源');
+            armQuizMediaTimeout('YouTube持续缓冲超时', 10000, true);
+        } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.CUED) {
+            gameState.isPlaying = false;
+            clearTimeout(quizYT.timer);
             stopQuizProgress();
-            // Autoplay blocked (unstarted/paused/cued): let the user start it manually.
-            if (e.data !== YT.PlayerState.BUFFERING &&
-                (gameState.mediaState === 'buffering' || gameState.mediaState === 'switching'))
-                setQuizMediaState('awaiting-play', `音频已找到 · YouTube源 · 点击播放`);
+            $('visualizer').classList.add('hidden');
+            $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+            setQuizMediaState((ytPlayer?.getCurrentTime?.() || 0) > 0 ? 'ready' : 'awaiting-play',
+                (ytPlayer?.getCurrentTime?.() || 0) > 0 ? '已暂停 · YouTube源' : '播放器已就绪 · 点击播放');
         }
         return; // Don't also update full player / music player
     }
@@ -508,12 +548,6 @@ function onYtStateChange(e) {
             recordLocalAudioCheck(libraryPreviewSong, 'played', 'youtube');
             noteSourceSuccess(libraryPreviewSong, 'youtube');
             updateLibraryTrackStatus(libraryPreviewSong);
-            libraryPreviewTimer = setTimeout(() => {
-                if (!libraryPreviewSession.activeKey || libraryPreviewResult?.source !== 'youtube') return;
-                ytPlayer?.pauseVideo?.();
-                libraryPreviewState = 'ended';
-                updateLibraryPreviewUI();
-            }, 30000);
         } else if (e.data === YT.PlayerState.ENDED) {
             clearTimeout(libraryPreviewTimer);
             libraryPreviewState = 'ended';
@@ -656,12 +690,13 @@ async function searchYouTube(query) {
 
 // Quiz searches inspect multiple videos. Search's embeddable filter is useful,
 // but the player can still reject a video later (Content ID / platform policy).
-async function searchQuizYouTubeCandidates(song) {
+async function searchQuizYouTubeCandidates(song, signal = null) {
     const queries = audioSearchQueries(song).youtube;
     // Run all queries in parallel (was a serial nested loop), each rotating keys independently.
     const runOne = async (query) => {
         const tried = new Set();
         while (tried.size < YT_API_KEYS.length) {
+            if (signal?.aborted) return [];
             const idx = ytKeyIndex;
             ytKeyIndex = (ytKeyIndex + 1) % YT_API_KEYS.length;
             if (tried.has(idx)) continue;
@@ -671,19 +706,21 @@ async function searchQuizYouTubeCandidates(song) {
             const timeout = setTimeout(() => controller.abort(), YT_TIMEOUT);
             try {
                 const key = YT_API_KEYS[idx];
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=10&q=${encodeURIComponent(query)}&key=${key}`, { signal: controller.signal });
+                const requestSignal = signal ? AbortSignal.any([signal, controller.signal]) : controller.signal;
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=10&q=${encodeURIComponent(query)}&key=${key}`, { signal: requestSignal });
                 if (response.status === 403 || response.status === 429) { ytKeyExhausted.add(idx); continue; }
                 if (!response.ok) return [];
                 const items = (await response.json()).items || [];
                 const ids = items.map(item => item.id?.videoId).filter(Boolean);
                 if (!ids.length) return [];
-                const details = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=status&id=${ids.join(',')}&key=${key}`, { signal: controller.signal });
+                const details = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=status&id=${ids.join(',')}&key=${key}`, { signal: requestSignal });
                 if (!details.ok) return [];
                 const status = new Map(((await details.json()).items || []).map(item => [item.id, item.status?.embeddable]));
                 return items.filter(item => item.id?.videoId && status.get(item.id.videoId) === true)
                     .map(item => ({ source: 'youtube', videoId: item.id.videoId, title: item.snippet?.title || '',
                         artist: item.snippet?.channelTitle || '', embeddable: true }));
             } catch (error) {
+                if (signal?.aborted) return [];
                 console.warn('[YT] quiz search failed:', error);
                 return [];
             } finally { clearTimeout(timeout); }
@@ -719,7 +756,8 @@ function biliTitleMatches(videoTitle, aliases) {
     });
 }
 
-async function searchBilibili(anime, title, artist = '', type = '', aliases = {}) {
+async function searchBilibili(anime, title, artist = '', type = '', aliases = {}, signal = null) {
+    if (signal?.aborted) return null;
     // Cache key: anime + type are primary differentiators
     const animeAliases = [...new Set([anime, aliases.animeCN, aliases.animeNative].filter(Boolean))];
     const titleAliases = [...new Set([title, aliases.titleCN].filter(Boolean))];
@@ -733,7 +771,7 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
         try {
             const resp = await fetch(
                 `${window.BILI_WORKER_URL}/api/search?q=${encodeURIComponent(query)}`,
-                { signal: controller.signal }
+                { signal: signal ? AbortSignal.any([signal, controller.signal]) : controller.signal }
             );
             if (!resp.ok) throw new Error('HTTP ' + resp.status);
             const data = await resp.json();
@@ -780,6 +818,7 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
         const searches = await Promise.allSettled(queries.bilibili.map(
             query => settleWithin(trySearch(query), BILI_QUERY_BUDGET, [])
         ));
+        if (signal?.aborted) return null;
         for (const search of searches) {
             if (search.status === 'rejected') { lastError = search.reason; continue; }
             for (const result of search.value) {
@@ -795,11 +834,11 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
             ...r, _score: scoreResult(r)
         }));
         scored.sort((a, b) => b._score - a._score);
-        // Identity gate: title must match. Context (anime/artist/type) is no longer a hard
-        // requirement (mirrors the global policy) — title-only matches are kept, ordered lower
-        // here, and the global ranker assigns the final confidence.
-        const viable = scored.filter(candidate =>
-            biliTitleMatches(candidate.title, titleAliases));
+        // Reject wrong versions and unrelated recordings before the five-item shortlist.
+        const identitySong = { title, titleCN: aliases.titleCN, anime, animeCN: aliases.animeCN, animeNative: aliases.animeNative, artist, type };
+        const viable = rankAudioCandidates(identitySong, scored.map(candidate => ({
+            ...candidate, source: 'bilibili', artist: candidate.author || ''
+        })), { requireRelation: true });
         if (!viable.length) {
             console.log('[Bili] Rejected: no candidate passed title/context matching');
             return null;
@@ -810,6 +849,7 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
         bilibiliCache.set(cacheKey, best);
         return best;
     } catch (e) {
+        if (signal?.aborted) return null;
         console.error('[Bili] searchBilibili:', e);
         // 区分：代理不可达（网络/超时）vs 其他失败；不可达时记录状态供提示分级
         if (e.name === 'AbortError' || e.name === 'TypeError') {
@@ -822,7 +862,8 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
     }
 }
 
-async function getBilibiliAudioUrl(bvid) {
+async function getBilibiliAudioUrl(bvid, signal = null) {
+    if (signal?.aborted) return null;
     const cached = bilibiliAudioCache.get(bvid);
     if (cached) return cached;
 
@@ -831,7 +872,7 @@ async function getBilibiliAudioUrl(bvid) {
     try {
         const resp = await fetch(
             `${window.BILI_WORKER_URL}/api/search?bvid=${encodeURIComponent(bvid)}`,
-            { signal: controller.signal }
+            { signal: signal ? AbortSignal.any([signal, controller.signal]) : controller.signal }
         );
         clearTimeout(timeoutId);
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
@@ -848,6 +889,7 @@ async function getBilibiliAudioUrl(bvid) {
         return result;
     } catch (e) {
         clearTimeout(timeoutId);
+        if (signal?.aborted) return null;
         console.error('[Bili] getBilibiliAudioUrl:', e);
         if (e.name === 'AbortError' || e.name === 'TypeError') {
             biliProxyState.down = true;
@@ -1929,6 +1971,41 @@ function exportCustomSongs() {
     notify('已导出自定义曲库啦喵~');
 }
 
+let pendingPersonalBackup = null;
+function exportPersonalData() {
+    try {
+        saveGameSettings();
+        const document = createPersonalBackup(localStorage);
+        const link = window.document.createElement('a');
+        link.href = URL.createObjectURL(new Blob([JSON.stringify(document, null, 2)], { type: 'application/json' }));
+        link.download = `anime-song-backup-${new Date().toISOString().slice(0, 10)}.json`;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        $('personalBackupStatus').textContent = `已导出 · ${describePersonalBackup(document)}`;
+    } catch (error) { $('personalBackupStatus').textContent = `无法导出：${error.message}`; }
+}
+async function readPersonalBackupFile(file) {
+    pendingPersonalBackup = null;
+    $('personalBackupActions').classList.add('hidden');
+    try {
+        if (file.size > 5 * 1024 * 1024) throw new Error('文件超过 5 MB，请选择个人数据备份 JSON');
+        const document = parsePersonalBackup(await file.text());
+        pendingPersonalBackup = document;
+        $('personalBackupStatus').textContent = `${describePersonalBackup(document)}。确认后将个人数据恢复到备份时的状态，并刷新页面。建议先导出当前备份。`;
+        $('personalBackupActions').classList.remove('hidden');
+        $('confirmPersonalRestore').focus();
+    } catch (error) { $('personalBackupStatus').textContent = `无法读取：${error.message}。本机数据未改变。`; }
+}
+function confirmPersonalRestore() {
+    if (!pendingPersonalBackup) return;
+    try {
+        restorePersonalBackup(localStorage, pendingPersonalBackup);
+        pendingPersonalBackup = null;
+        gameState.audioPrefetch?.cancel(true);
+        location.reload();
+    } catch (error) { $('personalBackupStatus').textContent = `恢复失败，已尝试恢复原数据：${error.message}`; }
+}
+
 // Import custom songs from JSON file
 function importCustomSongsFile(file) {
     const reader = new FileReader();
@@ -1940,16 +2017,11 @@ function importCustomSongsFile(file) {
             const existingKeys = new Set(existing.map(s => s.title + '|' + s.anime));
             let added = 0;
             for (const s of songs) {
-                if (!s.title || !s.anime) continue;
-                const key = s.title + '|' + s.anime;
+                const song = normalizeImportedSong(s);
+                if (!song) continue;
+                const key = song.title + '|' + song.anime;
                 if (existingKeys.has(key)) continue;
-                existing.push({
-                    title: s.title,
-                    titleCN: s.titleCN || s.title,
-                    anime: s.anime,
-                    artist: s.artist || 'Unknown',
-                    type: s.type || 'OP',
-                });
+                existing.push(song);
                 existingKeys.add(key);
                 added++;
             }
@@ -2245,7 +2317,7 @@ function initSakura() {
     const ctx = canvas.getContext('2d');
     let petals = [];
     let stars = [];
-    const PETAL_COUNT = 15;
+    const PETAL_COUNT = window.innerWidth < 600 ? 22 : Math.min(52, Math.max(36, Math.round(window.innerWidth * window.innerHeight / 26000)));
     const STAR_COUNT = 8;
 
     let resizeTimer = 0;
@@ -2264,23 +2336,17 @@ function initSakura() {
         reset(init) {
             this.x = Math.random() * canvas.width;
             this.y = init ? Math.random() * canvas.height : -20;
-            this.size = 8 + Math.random() * 12;
-            this.speedY = 0.5 + Math.random() * 0.8;
+            this.foreground = Math.random() < 0.28;
+            this.size = this.foreground ? 22 + Math.random() * 10 : 11 + Math.random() * 10;
+            this.speedY = (this.foreground ? 1.1 : 0.65) + Math.random() * 0.7;
             this.speedX = -0.3 + Math.random() * 0.6;
             this.rotation = Math.random() * Math.PI * 2;
             this.rotSpeed = (Math.random() - 0.5) * 0.03;
-            this.opacity = 0.5 + Math.random() * 0.4;
+            this.opacity = this.foreground ? 0.72 : 0.48 + Math.random() * 0.22;
             this.wobble = Math.random() * Math.PI * 2;
             this.wobbleSpeed = 0.02 + Math.random() * 0.03;
-            if (Math.random() < 0.3) {
-                const v = 240 + Math.floor(Math.random() * 15);
-                this.color = `rgba(${v},${v-10},${v},${this.opacity})`;
-            } else {
-                const r = 236 + Math.floor(Math.random() * 20);
-                const g = 180 + Math.floor(Math.random() * 60);
-                const b = 200 + Math.floor(Math.random() * 40);
-                this.color = `rgba(${r},${g},${b},${this.opacity})`;
-            }
+            const shades = ['219,112,151', '230,139,170', '243,172,194', '207,103,143'];
+            this.color = `rgba(${shades[Math.floor(Math.random() * shades.length)]},${this.opacity})`;
         }
         update() {
             this.y += this.speedY;
@@ -2295,10 +2361,15 @@ function initSakura() {
             ctx.rotate(this.rotation);
             ctx.fillStyle = this.color;
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.bezierCurveTo(this.size * 0.4, -this.size * 0.3, this.size, -this.size * 0.3, this.size * 0.6, this.size * 0.1);
-            ctx.bezierCurveTo(this.size * 0.3, this.size * 0.4, -this.size * 0.1, this.size * 0.3, 0, 0);
+            // A notched blossom petal, visible against both paper and cover art.
+            ctx.moveTo(0, -this.size * 0.28);
+            ctx.bezierCurveTo(-this.size * 0.42, -this.size * 0.72, -this.size * 0.68, this.size * 0.12, 0, this.size * 0.65);
+            ctx.bezierCurveTo(this.size * 0.68, this.size * 0.12, this.size * 0.42, -this.size * 0.72, 0, -this.size * 0.28);
+            ctx.closePath();
             ctx.fill();
+            ctx.strokeStyle = `rgba(171,73,115,${this.opacity * 0.25})`;
+            ctx.lineWidth = 0.65;
+            ctx.stroke();
             ctx.restore();
         }
     }
@@ -2496,6 +2567,7 @@ function animateScore(element, newValue) {
 // View Navigation
 // =====================================================================
 function showView(viewName) {
+    gameState.audioPrefetch?.cancel(true);
     if (viewName !== 'game' && $('animeDetailModal').classList.contains('show')) closeDetailModal();
     if (viewName !== 'library' && libraryPreviewSession.activeKey) stopLibraryPreview();
     if (viewName !== 'game') gameState.fetchGeneration++;
@@ -2749,13 +2821,23 @@ function setQuizMediaState(state, message) {
     if (state === 'playing' && gameState.mode === 'single' && !gameState.viewingHistory) {
         recordLocalAudioCheck(gameState.currentSong, 'played', gameState.lastAudioResult?.source || '');
         noteSourceSuccess(gameState.currentSong, gameState.lastAudioResult?.source);
+        const next = gameState.audioPrefetch && gameState.playlist[gameState.questionIndex + 1];
+        if (next && gameState.audioPrefetch && !navigator.connection?.saveData) {
+            gameState.audioPrefetch.schedule(audioResultKey(next.title, next.artist, next.anime, next.type, audioSourcePref),
+                { song: next, preference: audioSourcePref });
+        }
     }
     const status = $('playerStatus');
     if (status) {
         status.textContent = message || '';
         status.dataset.state = state;
+        if (state === 'searching') { gameState.audioLoadStartedAt = Date.now(); delete status.dataset.loadMs; status.title = ''; }
+        if ((state === 'ready' || state === 'playing') && !status.dataset.loadMs && gameState.audioLoadStartedAt) {
+            status.dataset.loadMs = String(Date.now() - gameState.audioLoadStartedAt);
+            status.title = `本题音源就绪耗时 ${(Number(status.dataset.loadMs) / 1000).toFixed(2)} 秒`;
+        }
     }
-    const canPlay = state === 'awaiting-play' || state === 'ready' || state === 'playing';
+    const canPlay = state === 'awaiting-play' || state === 'ready' || state === 'playing' || (state === 'buffering' && gameState.isPlaying);
     const canAnswer = state === 'ready' || state === 'playing';
     const playButton = $('playBtn');
     if (playButton) playButton.disabled = !canPlay;
@@ -2765,7 +2847,7 @@ function setQuizMediaState(state, message) {
         retryButton.hidden = state === 'idle' || state === 'searching';
         retryButton.disabled = state === 'switching';
     }
-    if (canAnswer) clearQuizMediaTimeout();
+    if (canAnswer || state === 'awaiting-play') clearQuizMediaTimeout();
 }
 
 let quizMediaTimeout = null;
@@ -2775,12 +2857,16 @@ function clearQuizMediaTimeout() {
     quizMediaTimeout = null;
 }
 
-function armQuizMediaTimeout(reason, delay = 12000) {
+function armQuizMediaTimeout(reason, delay = 12000, youtubeConnection = false) {
     clearQuizMediaTimeout();
     const generation = gameState.fetchGeneration;
     quizMediaTimeout = setTimeout(() => {
         quizMediaTimeout = null;
         if (generation !== gameState.fetchGeneration) return;
+        if (youtubeConnection) {
+            gameState.youtubeUnavailableUntil = Date.now() + 60000;
+            gameState.youtubeFailureReason = reason;
+        }
         recoverQuestionAudio(reason);
     }, delay);
 }
@@ -2804,6 +2890,7 @@ function loadQuestion() {
 
     // History viewing mode — show past answer with result markers
     if (gameState.viewingHistory) {
+        gameState.audioPrefetch?.cancel(true);
         const record = gameState.answerHistory[gameState.questionIndex];
         if (!record) { gameState.viewingHistory = false; return; }
         gameState.correctAnime = record.song.anime;
@@ -2858,6 +2945,7 @@ function loadQuestion() {
     gameState.hints = { h1: false, h2: false };
     gameState.correctAnime = q.anime;
     gameState.currentSong = q;
+    gameState.lastAudioResult = null;
     gameState.isLocked = false;
     audio.pause();
     gameState.isPlaying = false;
@@ -2874,7 +2962,11 @@ function loadQuestion() {
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
     const correctAnime = q.anime;  // capture now — prevents race if recursive loadQuestion overwrites gameState
-    fetchAudio(q.title, q.artist, q.anime).then(result => {
+    const prepared = gameState.audioPrefetch?.take(audioResultKey(q.title, q.artist, q.anime, q.type, audioSourcePref));
+    gameState.audioPrefetch?.cancel();
+    const resolved = prepared ? prepared.then(result => (result?.source === 'youtube' && Date.now() < (gameState.youtubeUnavailableUntil || 0) ? null : result) || (gen === gameState.fetchGeneration
+        ? fetchAudio(q.title, q.artist, q.anime, q.type) : null)) : fetchAudio(q.title, q.artist, q.anime, q.type);
+    resolved.then(result => {
         if (gen !== gameState.fetchGeneration) return;
         if (!result) {
             // B站源失败提示分级：代理不可达/取流被风控（首次给操作指引，后续简短）vs 普通失败
@@ -2900,12 +2992,14 @@ function loadQuestion() {
 function sourceLabel(source) {
     if (source === 'bilibili') return 'B站源';
     if (source === 'youtube') return 'YouTube源';
-    return 'iTunes源';
+    if (source === 'itunes') return 'iTunes源';
+    return '音源搜索';
 }
 
 function prepareQuestionAudio(result, generation) {
     if (generation !== gameState.fetchGeneration) return;
     gameState.lastAudioResult = result;
+    gameState.isPlaying = false;
     rememberResolvedAudio(gameState.currentSong, result);
     const label = sourceLabel(result.source);
     if (result.url.startsWith('yt:')) {
@@ -2913,27 +3007,17 @@ function prepareQuestionAudio(result, generation) {
         quizYT.active = true;
         quizYT.videoId = videoId;
         setQuizMediaState('buffering', `音频已找到 · 正在准备${label}播放器`);
-        let prepSettled = false;
-        // Bounded preparation: don't hang on "正在准备播放器" if the API/player never becomes ready.
-        const prepTimer = setTimeout(() => {
-            if (!prepSettled && generation === gameState.fetchGeneration)
-                recoverQuestionAudio('YouTube播放器准备超时');
-        }, 8000);
         ensureYouTubeAPI().then(player => {
-            prepSettled = true;
-            clearTimeout(prepTimer);
             if (generation !== gameState.fetchGeneration || quizYT.videoId !== videoId) return;
             // Load & start immediately; onYtStateChange flips to playing when it actually starts.
             if (player && player.loadVideoById && ytReady) {
                 player.loadVideoById({ videoId, startSeconds: 0 });
-                armQuizMediaTimeout('YouTube播放启动超时', 10000);
+                armQuizMediaTimeout('YouTube播放启动超时', 10000, true);
             } else {
                 setQuizMediaState('awaiting-play', `音频已找到 · ${label} · 点击播放`);
             }
-        }).catch(() => {
-            prepSettled = true;
-            clearTimeout(prepTimer);
-            if (generation === gameState.fetchGeneration) recoverQuestionAudio('YouTube播放器不可用');
+        }).catch(error => {
+            if (generation === gameState.fetchGeneration) recoverQuestionAudio(error.message || 'YouTube播放器不可用');
         });
         return;
     }
@@ -2948,7 +3032,7 @@ function prepareQuestionAudio(result, generation) {
 function skipUnplayableQuestion(message) {
     clearQuizMediaTimeout();
     if (gameState.mode === 'single') {
-        recordLocalAudioCheck(gameState.currentSong, 'failed', gameState.lastAudioResult?.source || audioSourcePref || 'default');
+        recordLocalAudioCheck(gameState.currentSong, 'failed', gameState.lastAudioResult?.source || audioSourcePref || 'default', message);
         noteSourceFailure(gameState.currentSong, gameState.lastAudioResult?.source || audioSourcePref);
     }
     let replacement = null;
@@ -2982,6 +3066,8 @@ async function recoverQuestionAudio(reason) {
         gameState.failedAudioSources.add(failedSource);
     }
     noteSourceFailure(gameState.currentSong, failedSource);
+    recordLocalAudioCheck(gameState.currentSong, 'failed', failedSource || audioSourcePref, reason);
+    if (failedSource === 'bilibili' && gameState.lastAudioResult?.bvid) bilibiliAudioCache.delete(gameState.lastAudioResult.bvid);
     gameState.mediaRetryCount++;
     if (gameState.mediaRetryCount > 5) {
         gameState.recoveringAudio = false;
@@ -3000,7 +3086,8 @@ async function recoverQuestionAudio(reason) {
     let result = null;
     try {
         result = await fetchAudioInner(
-            song.title, song.artist, song.anime, cacheKey, gameState.failedAudioSources, song.type || ''
+            song.title, song.artist, song.anime, cacheKey, gameState.failedAudioSources, song.type || '', audioSourcePref,
+            { yt: gameState.failedYtVideos, bili: gameState.failedBiliVideos }, null, song, gameState.lastAudioResult?.alternatives || []
         );
     } catch (error) {
         console.error('[Audio] automatic recovery failed:', error);
@@ -3017,6 +3104,7 @@ async function recoverQuestionAudio(reason) {
 async function retryQuestionAudio() {
     if (gameState.recoveringAudio || gameState.isLocked || !gameState.currentSong) return;
     gameState.recoveringAudio = true;
+    gameState.youtubeUnavailableUntil = 0;
     clearQuizMediaTimeout();
     const song = gameState.currentSong;
     const generation = ++gameState.fetchGeneration;
@@ -3095,7 +3183,10 @@ function forgetResolvedAudio(song) {
     resolvedAudioCache.delete(audioResultKey(song.title, song.artist, song.anime, song.type || ''));
 }
 function rememberResolvedAudio(song, result) {
-    if (song && result?.url) resolvedAudioCache.set(audioResultKey(song.title, song.artist, song.anime, song.type || ''), result);
+    if (song && result?.url) {
+        result.resolvedAt = Date.now();
+        resolvedAudioCache.set(audioResultKey(song.title, song.artist, song.anime, song.type || ''), result);
+    }
 }
 
 // ---- Progressive, recoverable per-source failure tracking (this session) ----
@@ -3124,30 +3215,38 @@ async function fetchAudio(title, artist, anime, songType = '') {
     const type = songType || gameState.currentSong?.type || '';
     const preference = audioSourcePref;
     const inFlightKey = audioResultKey(title, artist, anime, type, preference);
-    if (resolvedAudioCache.has(inFlightKey)) return resolvedAudioCache.get(inFlightKey);
+    const cached = resolvedAudioCache.get(inFlightKey);
+    const maxAge = cached?.source === 'bilibili' ? 20 * 60 * 1000 : 6 * 60 * 60 * 1000;
+    if (cached && !(cached.source === 'youtube' && Date.now() < (gameState.youtubeUnavailableUntil || 0)) &&
+        Date.now() - (cached.resolvedAt || 0) < maxAge) return cached;
+    if (cached) resolvedAudioCache.delete(inFlightKey);
     if (fetchAudioInFlight.has(inFlightKey)) return fetchAudioInFlight.get(inFlightKey);
     const p = fetchAudioInner(title, artist, anime, cacheKey, new Set(), type, preference)
-        .then(result => { if (result?.url) resolvedAudioCache.set(inFlightKey, result); return result; })
+        .then(result => { if (result?.url) { result.resolvedAt = Date.now(); resolvedAudioCache.set(inFlightKey, result); } return result; })
         .finally(() => fetchAudioInFlight.delete(inFlightKey));
     fetchAudioInFlight.set(inFlightKey, p);
     return p;
 }
 
-async function searchQuizItunesCandidates(song) {
+async function searchQuizItunesCandidates(song, signal = null) {
+    if (signal?.aborted) return [];
     const terms = audioSearchQueries(song).itunes;
-    const results = await Promise.allSettled(terms.map(async term => {
+    const results = await Promise.any(terms.map(async term => {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), ITUNES_TIMEOUT);
         try {
-            const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=10&country=JP`, { signal: controller.signal });
-            if (!response.ok) return [];
-            return ((await response.json()).results || []).filter(item => item.previewUrl).map(item => ({
+            const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=10&country=JP`, { signal: signal ? AbortSignal.any([signal, controller.signal]) : controller.signal });
+            if (!response.ok) throw new Error('iTunes search unavailable');
+            const candidates = ((await response.json()).results || []).filter(item => item.previewUrl).map(item => ({
                 source: 'itunes', url: item.previewUrl, title: item.trackName, artist: item.artistName, album: item.collectionName
             }));
+            const matches = rankAudioCandidates(song, candidates);
+            if (!matches.length) throw new Error('No matching iTunes recording');
+            return matches;
         } finally { clearTimeout(timer); }
-    }));
+    })).catch(() => []);
     const seen = new Set();
-    return results.flatMap(result => result.status === 'fulfilled' ? result.value : []).filter(item => {
+    return results.filter(item => {
         if (seen.has(item.url)) return false;
         seen.add(item.url);
         return true;
@@ -3161,34 +3260,57 @@ function settleWithin(promise, ms, fallback = null) {
 }
 
 async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources = new Set(), songType = gameState.currentSong?.type || '', sourcePreference = audioSourcePref,
-    excludedVideos = { yt: gameState.failedYtVideos, bili: gameState.failedBiliVideos }) {
-    const song = (gameState.currentSong?.title === title && gameState.currentSong?.anime === anime &&
+    excludedVideos = { yt: gameState.failedYtVideos, bili: gameState.failedBiliVideos }, signal = null, requestedSong = null, preferredCandidates = []) {
+    if (signal?.aborted) return null;
+    const song = requestedSong || (gameState.currentSong?.title === title && gameState.currentSong?.anime === anime &&
         (!artist || gameState.currentSong.artist === artist) ? gameState.currentSong : null) ||
         getAllSongs().find(item => item.title === title && item.anime === anime && (!artist || item.artist === artist)) ||
         { title, artist, anime, type: songType };
     const useBili = sourcePreference !== 'itunes-youtube' && !excludedSources.has('bilibili');
     const useOthers = sourcePreference !== 'bilibili-only';
-    const seasonalSong = Object.values(SEASONAL_POOLS).flat().find(item => item.title === title && item.anime === anime);
-
-    if (useOthers && !excludedSources.has('itunes') && seasonalSong?.itunesPreviewUrl) {
-        return { url: seasonalSong.itunesPreviewUrl, source: 'itunes', itunesTrack: title, itunesArtist: artist };
+    const useYoutube = () => useOthers && !excludedSources.has('youtube') && Date.now() >= (gameState.youtubeUnavailableUntil || 0);
+    const pinned = [];
+    if (song.itunesPreviewUrl) pinned.push({ source: 'itunes', url: song.itunesPreviewUrl, title, artist });
+    if (song.youtubeVideoId) pinned.push({ source: 'youtube', videoId: song.youtubeVideoId, title, artist });
+    if (song.bilibiliVideoId) pinned.push({ source: 'bilibili', bvid: song.bilibiliVideoId, title, artist });
+    const allowed = candidate => !excludedSources.has(candidate.source) && (
+        candidate.source === 'itunes' ? useOthers : candidate.source === 'youtube'
+            ? useYoutube() && !excludedVideos.yt?.has(candidate.videoId)
+            : candidate.source === 'bilibili' && useBili && !excludedVideos.bili?.has(candidate.bvid));
+    async function resolveCandidate(candidate, alternatives) {
+        if (signal?.aborted || !allowed(candidate)) return null;
+        if (candidate.source === 'itunes') return { url: candidate.url, source: 'itunes', score: candidate.score,
+            itunesTrack: candidate.title, itunesArtist: candidate.artist, alternatives };
+        if (candidate.source === 'youtube') return { url: `yt:${candidate.videoId}`, source: 'youtube', score: candidate.score,
+            ytVideoId: candidate.videoId, alternatives };
+        const info = await getBilibiliAudioUrl(candidate.bvid, signal);
+        if (!info?.url || signal?.aborted) return null;
+        biliProxyState.down = false;
+        biliProxyState.reason = null;
+        return { url: buildBiliProxyUrl(info.url, info.backupUrl), source: 'bilibili', score: candidate.score,
+            bvid: candidate.bvid, biliTitle: candidate.title, biliDuration: info.duration, alternatives };
     }
-    if (useOthers && !excludedSources.has('youtube') && seasonalSong?.youtubeVideoId &&
-        !excludedVideos.yt?.has(seasonalSong.youtubeVideoId)) {
-        return { url: `yt:${seasonalSong.youtubeVideoId}`, source: 'youtube', ytVideoId: seasonalSong.youtubeVideoId };
+    const saved = [...pinned, ...rankAudioCandidates(song, preferredCandidates, { requireRelation: true })].filter(allowed);
+    for (const candidate of saved.filter(item => item.source !== 'youtube')) {
+        const result = await resolveCandidate(candidate, saved);
+        if (result) return result;
     }
-    if (useBili && seasonalSong?.bilibiliVideoId && !excludedVideos.bili?.has(seasonalSong.bilibiliVideoId)) {
-        const bvid = seasonalSong.bilibiliVideoId;
-        const info = await getBilibiliAudioUrl(bvid);
-        if (info?.url) return { url: buildBiliProxyUrl(info.url, info.backupUrl), source: 'bilibili',
-            bvid, biliTitle: title, biliDuration: info.duration };
-    }
+    if (signal?.aborted) return null;
 
     // Start all source searches in parallel.
-    const rawItunes = useOthers && !excludedSources.has('itunes') ? searchQuizItunesCandidates(song) : Promise.resolve([]);
-    const rawYt = useOthers && !excludedSources.has('youtube') ? searchQuizYouTubeCandidates(song) : Promise.resolve([]);
+    const rawItunes = useOthers && !excludedSources.has('itunes') ? searchQuizItunesCandidates(song, signal) : Promise.resolve([]);
+    const savedYoutube = saved.filter(item => item.source === 'youtube');
+    if (savedYoutube.length) {
+        const direct = await settleWithin(rawItunes, 1500, []);
+        const choices = [...rankAudioCandidates(song, direct || []), ...savedYoutube];
+        for (const candidate of choices) {
+            const result = await resolveCandidate(candidate, choices);
+            if (result) return result;
+        }
+    }
+    const rawYt = useYoutube() ? searchQuizYouTubeCandidates(song, signal) : Promise.resolve([]);
     const rawBili = useBili ? settleWithin(searchBilibili(anime, title, artist, songType,
-        { titleCN: song.titleCN, animeCN: song.animeCN, animeNative: song.animeNative }), BILI_SEARCH_BUDGET)
+        { titleCN: song.titleCN, animeCN: song.animeCN, animeNative: song.animeNative }, signal), BILI_SEARCH_BUDGET)
         : Promise.resolve(null);
 
     // Incremental gather: converge fast after the first source settles + a grace window,
@@ -3212,7 +3334,7 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
                 });
             }
         }
-        return list;
+        return list.filter(allowed);
     };
     const bestScoreNow = () => {
         const ranked = rankAudioCandidates(song, buildCandidates().map(c => ({
@@ -3223,6 +3345,7 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
     const gatherStart = performance.now();
     let firstAt = null;
     while (entries.length) {
+        if (signal?.aborted) return null;
         const hardLeft = GATHER_HARD - (performance.now() - gatherStart);
         if (hardLeft <= 0) break;
         const races = entries.map(e => e.p);
@@ -3230,7 +3353,8 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
             const gLeft = GATHER_GRACE - (performance.now() - firstAt);
             if (gLeft > 0) races.push(new Promise(res => setTimeout(() => res({ k: '__grace__' }), gLeft)));
         }
-        const out = await Promise.race(races);
+        const out = await settleWithin(Promise.race(races), hardLeft, { k: '__deadline__' });
+        if (out.k === '__deadline__') break;
         if (out?.k === '__grace__') {
             // Grace elapsed: converge if any viable candidate exists (even weak); otherwise
             // keep waiting for a slower source.
@@ -3245,25 +3369,16 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         const i = entries.findIndex(e => e.k === out.k);
         if (i >= 0) entries.splice(i, 1);
         // Strong, high-confidence candidate (verified relation) → converge immediately.
-        if (bestScoreNow() >= STRONG_SCORE) break;
+        if (bestScoreNow() >= STRONG_SCORE && !entries.some(entry => entry.k === 'itunes')) break;
     }
     const candidates = buildCandidates();
     const ranked = rankAudioCandidates(song, candidates.map(candidate => ({
         ...candidate, failurePenalty: sourceFailurePenalty(song, candidate.source)
     })));
+    const alternatives = rankAudioCandidates(song, candidates, { requireRelation: true }).slice(0, 8);
     for (const candidate of ranked) {
-        if (candidate.source === 'itunes') return { url: candidate.url, source: 'itunes', score: candidate.score,
-            itunesTrack: candidate.title, itunesArtist: candidate.artist };
-        if (candidate.source === 'youtube') return { url: `yt:${candidate.videoId}`, source: 'youtube', score: candidate.score,
-            ytVideoId: candidate.videoId };
-        if (candidate.source === 'bilibili') {
-            const info = await getBilibiliAudioUrl(candidate.bvid);
-            if (!info?.url) continue;
-            biliProxyState.down = false;
-            biliProxyState.reason = null;
-            return { url: buildBiliProxyUrl(info.url, info.backupUrl), source: 'bilibili', score: candidate.score,
-                bvid: candidate.bvid, biliTitle: candidate.title, biliDuration: info.duration };
-        }
+        const result = await resolveCandidate(candidate, alternatives);
+        if (result) return result;
     }
     return null;
 }
@@ -3462,6 +3577,8 @@ function togglePlay() {
     if (gameState.isPlaying) {
         if (quizYT.active) {
             if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+            clearTimeout(quizYT.timer);
+            stopQuizProgress();
             clearQuizMediaTimeout();
         } else {
             audio.pause();
@@ -3477,11 +3594,13 @@ function togglePlay() {
                 recoverQuestionAudio('YouTube播放器未就绪');
                 return;
             }
-            stopFullPlayer();
-            stopMusicPlayer();
-            setQuizMediaState('buffering', '正在启动 · YouTube源');
-            ytPlayer.loadVideoById({ videoId: quizYT.videoId, startSeconds: 0 });
-            armQuizMediaTimeout('YouTube播放启动超时', 10000);
+            setQuizMediaState('buffering', '正在缓冲 · YouTube源');
+            if (ytPlayer.getVideoData?.().video_id === quizYT.videoId && (ytPlayer.getCurrentTime?.() || 0) < 30) {
+                ytPlayer.playVideo();
+            } else {
+                ytPlayer.loadVideoById({ videoId: quizYT.videoId, startSeconds: 0, endSeconds: 30 });
+            }
+            armQuizMediaTimeout('YouTube播放启动超时', 10000, true);
         } else {
             // Normal iTunes playback
             if ($('fullPlayer')?.style.display !== 'none') {
@@ -3500,13 +3619,14 @@ function togglePlay() {
                 clearTimeout(lockTimeout);
                 playLock = false;
                 setQuizMediaState('playing', `正在播放 · ${sourceLabel(gameState.lastAudioResult?.source)}`);
-            }).catch(() => {
+            }).catch(error => {
                 clearTimeout(lockTimeout);
                 playLock = false;
                 gameState.isPlaying = false;
                 $('visualizer').classList.add('hidden');
                 $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-                recoverQuestionAudio('音频播放失败');
+                if (error?.name === 'NotAllowedError') setQuizMediaState('awaiting-play', '浏览器需要确认播放 · 点击播放按钮');
+                else if (error?.name !== 'AbortError') recoverQuestionAudio('音频播放失败');
             });
         }
     }
@@ -3532,6 +3652,12 @@ function startQuizProgress() {
         const t = ytPlayer.getCurrentTime();
         progressFill.style.width = Math.min(t / duration * 100, 100) + '%';
         updateQuizTime(t);
+        if (t >= duration) {
+            ytPlayer.pauseVideo();
+            gameState.isPlaying = false;
+            stopQuizProgress();
+            setQuizMediaState('ready', '试听结束 · YouTube源');
+        }
     }, 250);
 }
 
@@ -3601,6 +3727,7 @@ $('volSlider').oninput = e => { setPlayerVolume(e.target.value); };
 // Game End
 // =====================================================================
 function endGame() {
+    gameState.audioPrefetch?.cancel(true);
     $('endModal').classList.add('show');
     const answeredTotal = gameState.answerHistory.length;
 
@@ -3770,7 +3897,7 @@ function initFilters() {
     ];
     const typeChips = $('typeChips');
     const typeAllBtn = document.createElement('button');
-    typeAllBtn.className = 'settings-chip active';
+    typeAllBtn.className = 'settings-chip' + (!filterState.types.size ? ' active' : '');
     typeAllBtn.textContent = '全部';
     typeAllBtn.addEventListener('click', () => {
         typeChips.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
@@ -3781,7 +3908,7 @@ function initFilters() {
     typeChips.appendChild(typeAllBtn);
     typeOptions.forEach(t => {
         const btn = document.createElement('button');
-        btn.className = 'settings-chip';
+        btn.className = 'settings-chip' + (filterState.types.has(t.value) ? ' active' : '');
         btn.textContent = t.label;
         btn.addEventListener('click', () => {
             if (filterState.types.has(t.value)) {
@@ -3915,6 +4042,7 @@ function updateLibraryTrackStatus(song) {
     document.querySelectorAll('[data-track-status-key]').forEach(element => {
         if (element.dataset.trackStatusKey !== trackKey(song)) return;
         element.textContent = status.label;
+        element.title = status.detail || '';
         element.classList.toggle('played', status.className === 'played');
         element.classList.toggle('failed', status.className === 'failed');
     });
@@ -3980,12 +4108,13 @@ async function prepareLibraryPreviewAudio(result, token) {
         try { await ensureYouTubeAPI(); }
         catch { if (libraryPreviewSession.isCurrent(token)) await recoverLibraryPreviewAudio('YouTube播放器不可用'); return; }
         if (!libraryPreviewSession.isCurrent(token)) return;
-        ytPlayer.loadVideoById({ videoId: result.ytVideoId, startSeconds: 0 });
+        ytPlayer.loadVideoById({ videoId: result.ytVideoId, startSeconds: 0, endSeconds: 30 });
         clearTimeout(libraryPreviewTimer);
         libraryPreviewTimer = setTimeout(() => {
             if (libraryPreviewSession.isCurrent(token) && libraryPreviewState === 'loading') {
-                libraryPreviewState = 'ready';
-                updateLibraryPreviewUI();
+                gameState.youtubeUnavailableUntil = Date.now() + 60000;
+                gameState.youtubeFailureReason = 'YouTube试听连接超时';
+                recoverLibraryPreviewAudio('YouTube试听连接超时');
             }
         }, 12000);
         return;
@@ -4015,7 +4144,8 @@ async function recoverLibraryPreviewAudio(reason) {
     if (failed?.source === 'youtube') ytPlayer?.pauseVideo?.();
     $('libraryPreviewAudio').pause();
     forgetResolvedAudio(song);
-    recordLocalAudioCheck(song, 'failed', failed?.source || audioSourcePref);
+    recordLocalAudioCheck(song, 'failed', failed?.source || audioSourcePref, reason);
+    if (failed?.source === 'bilibili' && failed.bvid) bilibiliAudioCache.delete(failed.bvid);
     noteSourceFailure(song, failed?.source || audioSourcePref);
     updateLibraryTrackStatus(song);
     libraryPreviewState = 'switching';
@@ -4024,7 +4154,7 @@ async function recoverLibraryPreviewAudio(reason) {
     if (++libraryPreviewRetryCount <= 5) {
         try {
             result = await fetchAudioInner(song.title, song.artist, song.anime, `${song.title}|${song.anime}`,
-                libraryPreviewFailedSources, song.type || '', audioSourcePref, libraryPreviewFailedVideos);
+                libraryPreviewFailedSources, song.type || '', audioSourcePref, libraryPreviewFailedVideos, null, song, failed?.alternatives || []);
         } catch (error) { console.warn('[Library] preview recovery failed:', reason, error); }
     }
     if (!libraryPreviewSession.isCurrent(token)) return;
@@ -4051,10 +4181,20 @@ async function playLibraryPreview(song) {
         }
         if (libraryPreviewSource === 'youtube' && ['paused', 'ended', 'ready'].includes(libraryPreviewState)) {
             if (!ytReady || !ytPlayer) { notify('YouTube 播放器仍在加载，请稍后重试'); return; }
-            if (libraryPreviewState === 'ended') ytPlayer.loadVideoById({ videoId: libraryPreviewResult.ytVideoId, startSeconds: 0 });
-            else if (libraryPreviewState === 'ready') ytPlayer.loadVideoById({ videoId: libraryPreviewResult.ytVideoId, startSeconds: 0 });
+            if (libraryPreviewState === 'ended') ytPlayer.loadVideoById({ videoId: libraryPreviewResult.ytVideoId, startSeconds: 0, endSeconds: 30 });
+            else if (libraryPreviewState === 'ready') ytPlayer.playVideo();
             else ytPlayer.playVideo();
-            libraryPreviewState = 'loading'; updateLibraryPreviewUI(); return;
+            libraryPreviewState = 'loading';
+            clearTimeout(libraryPreviewTimer);
+            const token = libraryPreviewSession.start(key);
+            libraryPreviewTimer = setTimeout(() => {
+                if (libraryPreviewSession.isCurrent(token) && libraryPreviewState === 'loading') {
+                    gameState.youtubeUnavailableUntil = Date.now() + 60000;
+                    gameState.youtubeFailureReason = 'YouTube试听连接超时';
+                    recoverLibraryPreviewAudio('YouTube试听连接超时');
+                }
+            }, 10000);
+            updateLibraryPreviewUI(); return;
         }
         if (player.src && ['paused', 'ended', 'ready'].includes(libraryPreviewState)) {
             if (libraryPreviewState === 'ended') player.currentTime = 0;
@@ -4075,7 +4215,7 @@ async function playLibraryPreview(song) {
     } catch {
         if (!libraryPreviewSession.isCurrent(token)) return;
         libraryPreviewState = 'failed';
-        recordLocalAudioCheck(song, 'failed', audioSourcePref || 'default');
+        recordLocalAudioCheck(song, 'failed', audioSourcePref || 'default', '未找到可播放音源');
         noteSourceFailure(song, audioSourcePref);
         updateLibraryTrackStatus(song);
         updateLibraryPreviewUI();
@@ -4107,8 +4247,10 @@ function animeNativeLabel(anime) {
 function trackPlaybackStatus(song) {
     const record = audioChecks.find(entry => entry.key === trackKey(song));
     if (!record) return { label: '待试听', className: '' };
-    if (record.status === 'played') return { label: `上次可播${record.source ? ' · ' + sourceLabel(record.source) : ''}`, className: 'played' };
-    return { label: '上次失败', className: 'failed' };
+    const checked = new Date(record.at).toLocaleString('zh-CN');
+    const detail = `检查于 ${checked}${record.source ? ' · ' + sourceLabel(record.source) : ''}${record.reason ? ' · ' + record.reason : ''}`;
+    if (record.status === 'played') return { label: `上次可播${record.source ? ' · ' + sourceLabel(record.source) : ''}`, className: 'played', detail };
+    return { label: '上次失败', className: 'failed', detail };
 }
 const libraryPages = { current: 0, tracks: 0, season: 0, bangumi: 0, watch: 0 };
 const LIBRARY_PAGE_SIZE = 12;
@@ -4130,7 +4272,7 @@ function libraryCoverCard(anime) {
             const status = trackPlaybackStatus(song);
             const selected = selectedSongKeys.includes(key);
             return `<div class="library-cover-track">
-                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML(song.type || '曲目')}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small><span class="library-track-status ${status.className}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
+                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML(song.type || '曲目')}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small><span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
                 <div class="library-cover-actions"><button type="button" class="library-mini-btn library-preview-btn" data-action="previewSong" data-song-key="${escapeHTML(key)}" aria-label="试听 ${escapeHTML(song.titleCN || song.title)}">试听</button>
                     <button type="button" class="library-mini-btn library-add-btn${selected ? ' active' : ''}" data-action="toggleSelectedSong" data-song-key="${escapeHTML(key)}" aria-pressed="${selected}" aria-label="${selected ? '移出我的选歌' : '添加到我的选歌'}：${escapeHTML(song.titleCN || song.title)}">${selected ? '✓ 已添加' : '+ 添加'}</button>
                     <button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(key)}" aria-label="反馈 ${escapeHTML(song.titleCN || song.title)}">反馈</button></div>
@@ -4288,7 +4430,7 @@ function renderFeedbackLibrary() {
         <article class="library-record-card"><div class="library-record-head"><div><div class="library-record-title">${escapeHTML(entry.title || '')} · ${escapeHTML(entry.anime || '')}</div><div class="library-record-meta">${reasonNames[entry.reason] || '其他问题'}${entry.note ? ' · ' + escapeHTML(entry.note) : ''}</div></div><button type="button" class="library-mini-btn" data-action="removeFeedback" data-value="${index}">删除</button></div></article>`).join('') : '<div class="library-empty">还没有保存过反馈</div>';
     const failed = audioChecks.filter(entry => entry.status === 'failed').slice(0, 20);
     $('libraryFailedTracks').innerHTML = failed.length ? failed.map(entry => `
-        <article class="library-record-card"><div class="library-record-head"><div><div class="library-record-title">${escapeHTML(entry.title || '')}</div><div class="library-record-meta">${escapeHTML(entry.anime || '')} · 上次播放失败</div></div><button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(entry.key)}">反馈</button></div></article>`).join('') : '<div class="library-empty">暂无本机播放失败记录</div>';
+        <article class="library-record-card"><div class="library-record-head"><div><div class="library-record-title">${escapeHTML(entry.title || '')}</div><div class="library-record-meta">${escapeHTML(entry.anime || '')} · ${escapeHTML(entry.source ? sourceLabel(entry.source) : '音源搜索')} · ${escapeHTML(new Date(entry.at).toLocaleString('zh-CN'))}${entry.reason ? '<br>' + escapeHTML(entry.reason) : ''}</div></div><button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(entry.key)}">反馈</button></div></article>`).join('') : '<div class="library-empty">暂无本机播放失败记录</div>';
     document.querySelector('[data-action="copyFeedback"]').disabled = songFeedback.length === 0;
     document.querySelector('[data-action="exportFeedback"]').disabled = songFeedback.length === 0;
 }
@@ -4505,12 +4647,13 @@ function initQuestionCount() {
     const options = [10, 20, 30];
     options.forEach((n, i) => {
         const btn = document.createElement('button');
-        btn.className = 'settings-chip' + (i === 0 ? ' active' : '');
+        btn.className = 'settings-chip' + (gameState.questionCount === n ? ' active' : '');
         btn.textContent = n + '题';
         btn.addEventListener('click', () => {
             container.querySelectorAll('.settings-chip').forEach(c => c.classList.remove('active'));
             btn.classList.add('active');
             gameState.questionCount = n;
+            saveGameSettings();
         });
         container.appendChild(btn);
     });
@@ -4661,6 +4804,14 @@ document.addEventListener('click', (e) => {
             break;
         case 'copyFeedback': copySongFeedback(); break;
         case 'exportFeedback': exportSongFeedback(); break;
+        case 'exportPersonalData': exportPersonalData(); break;
+        case 'choosePersonalBackup': $('personalBackupFile').click(); break;
+        case 'confirmPersonalRestore': confirmPersonalRestore(); break;
+        case 'cancelPersonalRestore':
+            pendingPersonalBackup = null;
+            $('personalBackupActions').classList.add('hidden');
+            $('personalBackupStatus').textContent = '已取消恢复，本机数据未改变。';
+            break;
         case 'startSingle': startSingle(); break;
         case 'startMode': startMode(value); break;
         case 'showView': showView(value); break;
@@ -4725,11 +4876,19 @@ document.addEventListener('change', (e) => {
         importCustomSongsFile(e.target.files[0]);
         e.target.value = '';
     }
+    if (e.target.id === 'personalBackupFile' && e.target.files[0]) {
+        readPersonalBackupFile(e.target.files[0]);
+        e.target.value = '';
+    }
 });
 
 // =====================================================================
 // Init
 // =====================================================================
+gameState.audioPrefetch = createAudioPrefetch(({ song, preference }, signal) =>
+    fetchAudioInner(song.title, song.artist, song.anime, `${song.title}|${song.anime}`, new Set(), song.type,
+        preference, { yt: new Set(), bili: new Set() }, signal, song));
+window.addEventListener('pagehide', () => gameState.audioPrefetch.cancel(true));
 const homeGallerySeason = Object.keys(SEASONAL_POOLS).sort().reverse()[0] || '2026-07';
 const homeAnimePool = [...new Map((SEASONAL_POOLS[homeGallerySeason] || []).map(song => [song.anilistId, song])).values()]
     .filter(song => SEASONAL_COVERS[song.anilistId]);

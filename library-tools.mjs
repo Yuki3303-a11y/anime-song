@@ -44,10 +44,10 @@ export function putMistake(entries, song, selected, at = Date.now()) {
         selected: String(selected || ''), at }, ...current.filter(entry => entry.key !== key)].slice(0, 200);
 }
 
-export function putAudioCheck(entries, song, status, source = '', at = Date.now()) {
+export function putAudioCheck(entries, song, status, source = '', at = Date.now(), reason = '') {
     const current = Array.isArray(entries) ? entries : [];
     const key = trackKey(song);
-    return [{ ...trackDetails(song), status, source, at },
+    return [{ ...trackDetails(song), status, source, at, ...(reason ? { reason: String(reason).slice(0, 400) } : {}) },
         ...current.filter(entry => entry.key !== key)].slice(0, 500);
 }
 

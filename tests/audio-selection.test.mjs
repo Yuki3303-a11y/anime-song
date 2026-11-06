@@ -45,15 +45,15 @@ test('a source that failed locally loses priority for the same song', () => {
   assert.equal(rankAudioCandidates(song, candidates)[0].source, 'bilibili');
 });
 
-test('a title-only match is kept but ranks below a relation-confirmed candidate', () => {
+test('a title-only video is rejected without anime or artist evidence', () => {
   const ranked = rankAudioCandidates(song, [
     { source: 'youtube', title: song.title },
     { source: 'youtube', title: `ERASED OP ${song.title}` },
     { source: 'bilibili', title: `只有我不存在的城市 OP ${song.title} ${song.artist}` }
   ]);
-  assert.equal(ranked.length, 3);
+  assert.equal(ranked.length, 2);
   assert.equal(ranked[0].source, 'bilibili');
-  assert.equal(ranked[2].title, song.title); // title-only lands last
+  assert.ok(ranked.every(candidate => candidate.title !== song.title));
 });
 
 test('failure penalty is progressive and subtracts from the score', () => {
@@ -137,7 +137,7 @@ test('Bilibili keeps searching after unrelated results fill the first page', asy
         : [{ bvid: 'right', title: '只有我不存在的城市 OP Re:Re:', duration: 250 }] }) };
     },
     setTimeout, clearTimeout, AbortController, Set, Promise, console,
-    biliProxyState: {}, audioSearchQueries,
+    biliProxyState: {}, audioSearchQueries, rankAudioCandidates,
     BILI_QUERY_BUDGET: 7000,
     settleWithin(promise, ms, fallback = null) {
       return Promise.race([promise, new Promise(r => setTimeout(() => r(fallback), ms))]);
@@ -158,7 +158,7 @@ test('three-source search waits for the Bilibili search budget instead of discar
     getAllSongs: () => [song], SEASONAL_POOLS: {},
     searchQuizItunesCandidates: async () => [], searchQuizYouTubeCandidates: async () => [],
     searchBilibili: async () => ({ title: `ERASED OP ${song.title}`, bvid: 'right' }),
-    settleWithin: async (promise, ms) => { budget = ms; return promise; },
+    settleWithin: async (promise, ms) => { budget = Math.max(budget, ms); return promise; },
     rankAudioCandidates, audioChecks: [], trackKey: () => 'key', sourceFailurePenalty: () => 0,
     getBilibiliAudioUrl: async () => ({ url: 'https://cdn.test/right' }),
     buildBiliProxyUrl: url => url, biliProxyState: {}, Promise, Set, Object,
@@ -175,7 +175,7 @@ test('iTunes tries translated song title when the first spelling has no matching
   const searched = [];
   const localSong = { ...song, titleCN: '重放', artist: '另一个写法' };
   const context = {
-    ITUNES_TIMEOUT: 5000, audioSearchQueries,
+    ITUNES_TIMEOUT: 5000, audioSearchQueries, rankAudioCandidates,
     fetch: async url => {
       const term = new URL(url).searchParams.get('term');
       searched.push(term);
@@ -364,8 +364,7 @@ test('YouTube iframe API is requested only once when first needed', async () => 
   let appended = 0;
   const context = {
     document: { createElement: () => ({ remove() {} }), head: { appendChild() { appended++; } } },
-    window: {}, clearTimeout, setTimeout, console,
-    YT: { Player: class { constructor(_id, options) { queueMicrotask(() => options.events.onReady()); } } },
+    window: {}, gameState: {}, clearTimeout, setTimeout, console,
     applyPlayerVolume() {}, onYtStateChange() {}, onYtError() {},
   };
   vm.createContext(context);
@@ -373,6 +372,7 @@ test('YouTube iframe API is requested only once when first needed', async () => 
   const first = context.ensureYouTubeAPI();
   assert.strictEqual(context.ensureYouTubeAPI(), first);
   assert.equal(appended, 1);
+  context.YT = { Player: class { constructor(_id, options) { queueMicrotask(() => options.events.onReady()); } } };
   context.window.onYouTubeIframeAPIReady();
   await first;
   await context.ensureYouTubeAPI();

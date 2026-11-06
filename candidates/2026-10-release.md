@@ -44,3 +44,7 @@
 - #15 罗梅莉亚战记 · 番剧关联、独立 OP／ED 或封面资料未齐
 - #16 转生就是剑 第二季 · 番剧关联、独立 OP／ED 或封面资料未齐
 - #17 铁旅！meet with 铁道少女 · ED Watashi Mirai-sen missing
+
+## 2026-11-06 备用源补充
+
+`AIYOU` — Eve，ED，补充 [B 站备用](https://www.bilibili.com/video/BV1mdak62EVE/)。标题的番剧、歌曲与歌手信息已对照现有条目检查；本地取流及字节范围检查返回 HTTP 206、`audio/mp4`、1024 字节。原有 iTunes 主源保留。未将此探测描述为整首人工试听或长期可播保证。
