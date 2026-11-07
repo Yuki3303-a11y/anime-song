@@ -124,9 +124,7 @@ function allowedTargets(values) {
   });
 }
 
-async function compactVideoTargets(bvid, signal) {
-  const info = await signedGet('/x/web-interface/view', { bvid }, signal);
-  const cid = info.data?.cid;
+async function compactVideoTargets(bvid, cid, signal) {
   if (!cid) return [];
   const play = await signedGet('/x/player/playurl', {
     bvid, cid: String(cid), platform: 'html5', qn: '16', fnval: '1'
@@ -178,7 +176,8 @@ module.exports = async (req, res) => {
           triedCompact = true;
           try {
             const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]);
-            const fallback = await compactVideoTargets(bvid, signal);
+            const info = await signedGet('/x/web-interface/view', { bvid }, signal);
+            const fallback = await compactVideoTargets(bvid, info.data?.cid, signal);
             if (controller.signal.aborted) return;
             targets.push(...fallback.filter(url => !targets.some(target => target.href === url.href)));
             if (index < targets.length) return pipeTarget(index);
@@ -251,10 +250,14 @@ module.exports = async (req, res) => {
       const duration = info.data?.duration || 0;
       const play = await signedGet('/x/player/playurl', { bvid, cid: String(cid), fnval: '16', fnver: '0', fourk: '1' });
       const tracks = (play.data?.dash?.audio || []).sort((a, b) => b.id - a.id);
-      const urls = tracks.flatMap(track => [track.baseUrl, ...(track.backupUrl || [])]).flatMap(value => {
+      let urls = tracks.flatMap(track => [track.baseUrl, ...(track.backupUrl || [])]).flatMap(value => {
         try { const url = new URL(value); return isAllowedStreamUrl(url) ? [{ url, quality: track.id }] : []; }
         catch { return []; }
       }).sort((a, b) => Number(Boolean(a.url.port)) - Number(Boolean(b.url.port)));
+      if (!urls.length) {
+        const fallback = await compactVideoTargets(bvid, cid, AbortSignal.timeout(5000));
+        urls = fallback.map(url => ({ url, quality: null }));
+      }
       const first = urls[0];
       if (!first) return res.status(404).json({ error: 'no allowed audio stream' });
       const backupUrl = urls.find(item => item.url.href !== first.url.href)?.url.href || null;

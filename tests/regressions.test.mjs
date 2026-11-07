@@ -186,6 +186,50 @@ test('Vercel stream proxy retries an allowed backup CDN', async () => {
   assert.equal(res.piped, true);
 });
 
+test('Vercel resolves compact MP4 when the DASH response has no usable audio', async () => {
+  const source = fs.readFileSync(path.join(root, 'api/search.js'), 'utf8');
+  const videoUrl = 'https://upos-sz-mirrorcos.bilivideo.com/fallback.mp4';
+  const playRequests = [];
+  const https = {
+    get(options, callback) {
+      const url = new URL(options.path, 'https://api.bilibili.com');
+      const listeners = {};
+      let data = {};
+      if (url.pathname.endsWith('/view')) data = { cid: 1, duration: 91 };
+      if (url.pathname.endsWith('/playurl')) {
+        const mode = url.searchParams.get('fnval');
+        playRequests.push(mode);
+        data = mode === '16' ? { dash: { audio: [] } } : { format: 'mp4', durl: [{ url: videoUrl }] };
+      }
+      callback({ on(event, listener) { listeners[event] = listener; } });
+      listeners.data(JSON.stringify({ code: 0, data }));
+      listeners.end();
+      return { setTimeout() {}, on() {} };
+    },
+  };
+  const context = {
+    require(name) {
+      if (name === 'https') return https;
+      if (name === 'url') return { URL };
+      if (name === 'spark-md5') return { hash: () => '' };
+      throw new Error(name);
+    },
+    module: { exports: null }, process: { env: {} }, URLSearchParams, AbortSignal,
+  };
+  vm.createContext(context);
+  vm.runInContext(source, context);
+  const res = {
+    statusCode: 200, setHeader() {},
+    status(code) { this.statusCode = code; return this; },
+    json(value) { this.body = value; return this; },
+  };
+  await context.module.exports({ method: 'GET', headers: {}, query: { bvid: 'BV1y1Mh6HEB5' } }, res);
+  assert.deepEqual(playRequests, ['16', '1']);
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.body.url, videoUrl);
+  assert.equal(res.body.duration, 91);
+});
+
 test('PK room creation does not overwrite an existing four-digit room', async () => {
   const start = appSource.indexOf('let pkBusy = false;');
   const end = appSource.indexOf('async function pkJoin() {', start);
