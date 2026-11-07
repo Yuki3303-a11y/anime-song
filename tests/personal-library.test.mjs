@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   animeKey, trackKey, groupSeasonSongs, filterWatchedSongs,
-  putMistake, putAudioCheck, putFeedback
+  putMistake, putAudioCheck, putFeedback, createCatalogHistory
 } from '../library-tools.mjs';
 
 const poolSource = fs.readFileSync(fileURLToPath(new URL('../seasonal-pools.js', import.meta.url)), 'utf8');
@@ -29,6 +29,25 @@ test('watched filtering uses stable anime identity and leaves the source list in
   assert.deepEqual(filterWatchedSongs(songs, [animeKey(song)], true), songs.slice(0, 2));
   assert.deepEqual(filterWatchedSongs(songs, [], false), songs);
   assert.equal(songs.length, 3);
+});
+
+test('catalog corrections carry old selections and records to the same songs, including a split series', () => {
+  const first = { title: 'First', titleCN: '第一首', anime: '系列 第一季', type: 'ED', artist: '歌手' };
+  const second = { title: 'Second', anime: '系列 第二季', type: 'OP' };
+  const original = { title: 'First', anime: '系列', type: 'OP' };
+  const oldKey = trackKey(original);
+  const history = createCatalogHistory([first, second], {}, {
+    legacy: { 0: ['First', '系列', 'OP'], 1: ['Second', '系列', 'OP'] }
+  });
+
+  assert.deepEqual(history.watched([animeKey(original), 'anime:我的导入']), [animeKey(first), animeKey(second), 'anime:我的导入']);
+  assert.deepEqual(history.selected([oldKey, trackKey(first), 'custom']), [trackKey(first), 'custom']);
+  assert.deepEqual(history.record({ key: oldKey, count: 2 }), {
+    key: trackKey(first), title: first.titleCN, anime: first.anime, type: first.type, artist: first.artist, count: 2
+  });
+  const unrelated = { key: 'old-replacement', count: 1 };
+  assert.equal(history.record(unrelated), unrelated);
+  assert.deepEqual(history.favorite({ ...original, videoId: 'saved' }), { ...first, animeCN: '', videoId: 'saved' });
 });
 
 test('mistake book counts repeats and keeps the latest selected answer', () => {

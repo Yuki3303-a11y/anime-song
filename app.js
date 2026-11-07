@@ -1,9 +1,10 @@
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=61';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=41';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=62';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=42';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=2';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
-import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback } from './library-tools.mjs?v=2';
-import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=7';
+import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=3';
+import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=1';
+import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=8';
 import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=1';
 import { createAudioPrefetch } from './audio-prefetch.mjs?v=1';
 
@@ -193,11 +194,12 @@ function savePersonalList(key, entries) {
     try { localStorage.setItem(key, JSON.stringify(entries)); }
     catch (error) { console.warn('[Library] local save failed:', error); }
 }
-let watchedAnimeKeys = readPersonalList(PERSONAL_KEYS.watched).filter(key => typeof key === 'string');
-let mistakeBook = readPersonalList(PERSONAL_KEYS.mistakes);
-let audioChecks = readPersonalList(PERSONAL_KEYS.audio);
-let songFeedback = readPersonalList(PERSONAL_KEYS.feedback);
-let selectedSongKeys = readPersonalList(PERSONAL_KEYS.selected).filter(key => typeof key === 'string');
+const catalogHistory = createCatalogHistory(SONGS, SEASONAL_POOLS, PREVIOUS_CATALOG_KEYS);
+let watchedAnimeKeys = catalogHistory.watched(readPersonalList(PERSONAL_KEYS.watched).filter(key => typeof key === 'string'));
+let mistakeBook = readPersonalList(PERSONAL_KEYS.mistakes).map(catalogHistory.record);
+let audioChecks = readPersonalList(PERSONAL_KEYS.audio).map(catalogHistory.record);
+let songFeedback = readPersonalList(PERSONAL_KEYS.feedback).map(catalogHistory.record);
+let selectedSongKeys = catalogHistory.selected(readPersonalList(PERSONAL_KEYS.selected).filter(key => typeof key === 'string'));
 function getWatchedAnimeKeys() { return watchedAnimeKeys; }
 function recordMistake(song, selected) {
     mistakeBook = putMistake(mistakeBook, song, selected);
@@ -771,7 +773,8 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
     // Cache key: anime + type are primary differentiators
     const animeAliases = [...new Set([anime, aliases.animeCN, aliases.animeNative].filter(Boolean))];
     const titleAliases = [...new Set([title, aliases.titleCN].filter(Boolean))];
-    const cacheKey = `${animeAliases.join('/')}|${type}|${titleAliases.join('/')}`.toLowerCase().trim();
+    const artistAliases = [artist, ...(Array.isArray(aliases.artistAliases) ? aliases.artistAliases : [])];
+    const cacheKey = `${animeAliases.join('/')}|${type}|${titleAliases.join('/')}|${artistAliases.join('/')}`.toLowerCase().trim();
     const cached = bilibiliCache.get(cacheKey);
     if (cached) return cached;
 
@@ -806,7 +809,7 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
         const videoTitle = r.title || '';
         const normalizedVideo = normalizeBiliText(videoTitle);
         if (biliTitleMatches(videoTitle, animeAliases)) s += 20;
-        if (biliTitleMatches(videoTitle, [artist])) s += 12;
+        if (biliTitleMatches(videoTitle, artistAliases)) s += 12;
         const tp = (type || '').toUpperCase();
         if (tp && ['OP', 'ED'].includes(tp) && normalizedVideo.includes(tp.toLowerCase())) s += 10;
         // B站 quality / popularity
@@ -845,7 +848,8 @@ async function searchBilibili(anime, title, artist = '', type = '', aliases = {}
         }));
         scored.sort((a, b) => b._score - a._score);
         // Reject wrong versions and unrelated recordings before the five-item shortlist.
-        const identitySong = { title, titleCN: aliases.titleCN, anime, animeCN: aliases.animeCN, animeNative: aliases.animeNative, artist, type };
+        const identitySong = { title, titleCN: aliases.titleCN, anime, animeCN: aliases.animeCN,
+            animeNative: aliases.animeNative, artist, artistAliases, type };
         const viable = rankAudioCandidates(identitySong, scored.map(candidate => ({
             ...candidate, source: 'bilibili', artist: candidate.author || ''
         })), { requireRelation: true });
@@ -1114,8 +1118,7 @@ let _favoritesCache = null;
 
 function getFavorites() {
     if (_favoritesCache) return _favoritesCache;
-    try { _favoritesCache = JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
-    catch { _favoritesCache = []; }
+    _favoritesCache = readPersonalList(FAV_KEY).map(catalogHistory.favorite);
     return _favoritesCache;
 }
 
@@ -3196,7 +3199,9 @@ function buildBiliProxyUrl(cdnUrl, backupUrl = '', bvid = '') {
 async function fetchBilibiliAudio(title, artist, anime, type, cacheKey, excludedBvids = new Set()) {
     const aliases = {
         titleCN: gameState.currentSong?.titleCN || '',
-        animeCN: gameState.currentSong?.animeCN || ''
+        animeCN: gameState.currentSong?.animeCN || '',
+        animeNative: gameState.currentSong?.animeNative,
+        artistAliases: gameState.currentSong?.artistAliases
     };
     const biliResult = await searchBilibili(anime, title, artist, type, aliases);
     if (!biliResult) return null;
@@ -3364,8 +3369,7 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         }
     }
     const rawYt = useYoutube() ? searchQuizYouTubeCandidates(song, signal) : Promise.resolve([]);
-    const rawBili = useBili ? settleWithin(searchBilibili(anime, title, artist, songType,
-        { titleCN: song.titleCN, animeCN: song.animeCN, animeNative: song.animeNative }, signal), BILI_SEARCH_BUDGET)
+    const rawBili = useBili ? settleWithin(searchBilibili(anime, title, artist, songType, song, signal), BILI_SEARCH_BUDGET)
         : Promise.resolve(null);
 
     // Incremental gather: converge fast after the first source settles + a grace window,
@@ -3465,7 +3469,8 @@ function buildWrongOptions(song, guessType) {
         const artists = [...new Set(optionPool.map(s => s.artist).filter(a => a && a !== song.artist))];
         return shuffle(artists).slice(0, 3);
     }
-    return shuffle([...new Set(optionPool.filter(s => s.anime !== song.anime).map(animeLabel))]).slice(0, 3);
+    const answer = animeLabel(song);
+    return shuffle([...new Set(optionPool.map(animeLabel).filter(name => name && name !== answer))]).slice(0, 3);
 }
 
 function renderOptions(song) {

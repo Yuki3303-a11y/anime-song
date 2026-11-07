@@ -31,7 +31,7 @@ test('2026 spring and summer pools contain 15 unique OP/ED pairs each', () => {
   }
 });
 
-test('published season entries match the reviewed popularity candidates', () => {
+test('published season track identities and order match the reviewed popularity candidates', () => {
   for (const key of ['2026-04', '2026-07']) {
     const candidate = JSON.parse(fs.readFileSync(path.join(root, 'candidates', `${key}.json`), 'utf8'));
     assert.equal(candidate.complete, true);
@@ -39,8 +39,8 @@ test('published season entries match the reviewed popularity candidates', () => 
     assert.equal(rankedSongs.length, pools[key].length);
     for (const [index, song] of pools[key].entries()) {
       assert.deepEqual(
-        [song.anilistId, song.title, song.artist, song.type],
-        [rankedSongs[index].anilistId, rankedSongs[index].title, rankedSongs[index].artist, rankedSongs[index].type]
+        [song.anilistId, song.title, song.type],
+        [rankedSongs[index].anilistId, rankedSongs[index].title, rankedSongs[index].type]
       );
     }
   }

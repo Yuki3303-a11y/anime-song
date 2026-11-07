@@ -36,6 +36,43 @@ const trackDetails = song => ({
     anime: song.animeCN || song.anime, type: song.type || '', artist: song.artist || ''
 });
 
+// A different recording can carry a show follow forward without inheriting track records.
+export function createCatalogHistory(legacy, seasonal, previousKeys) {
+    const current = [...legacy, ...Object.values(seasonal).flat()];
+    const currentTracks = new Set(current.map(trackKey));
+    const currentAnime = new Set(current.map(animeKey));
+    const tracks = new Map();
+    const shows = new Map();
+    for (const [pool, entries] of Object.entries(previousKeys)) {
+        const songs = pool === 'legacy' ? legacy : seasonal[pool];
+        for (const [index, [title, anime, type, sameRecording = true]] of Object.entries(entries)) {
+            const song = songs?.[index];
+            if (!song) continue;
+            const previous = { title, anime, type, anilistId: pool === 'legacy' ? null : song.anilistId };
+            const oldTrack = trackKey(previous);
+            if (sameRecording && !currentTracks.has(oldTrack)) tracks.set(oldTrack, song);
+            const oldAnime = animeKey(previous);
+            const newAnime = animeKey(song);
+            if (oldAnime === newAnime) continue;
+            if (!shows.has(oldAnime)) shows.set(oldAnime, currentAnime.has(oldAnime) ? [oldAnime] : []);
+            shows.get(oldAnime).push(newAnime);
+        }
+    }
+    return {
+        watched: keys => [...new Set(keys.flatMap(key => shows.get(key) || [key]))],
+        selected: keys => [...new Set(keys.map(key => tracks.has(key) ? trackKey(tracks.get(key)) : key))],
+        record(entry) {
+            const song = tracks.get(entry?.key);
+            return song ? { ...entry, ...trackDetails(song) } : entry;
+        },
+        favorite(entry) {
+            const song = tracks.get(trackKey(entry));
+            return song ? { ...entry, title: song.title, titleCN: song.titleCN || song.title, anime: song.anime,
+                animeCN: song.animeCN || '', type: song.type, artist: song.artist } : entry;
+        }
+    };
+}
+
 export function putMistake(entries, song, selected, at = Date.now()) {
     const current = Array.isArray(entries) ? entries : [];
     const key = trackKey(song);

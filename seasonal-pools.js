@@ -1,5 +1,5 @@
-// Reviewed seasonal pools. Keep SONGS in songs.js unchanged.
-// Source: AniList popularity + AnimeThemes OP1/ED1; season is the January/April/July/October start month.
+// Reviewed seasonal pools. The original song pool lives in songs.js.
+// Series identities and theme placements come from AniList and AnimeThemes. Display names use Bangumi and release credits.
 export const SEASONAL_POOLS = {
   "2026-01": [
     {
@@ -34,17 +34,22 @@ export const SEASONAL_POOLS = {
       "titleCN": "PROVANT",
       "title": "PROVANT",
       "anime": "Fate/strange Fake",
-      "artist": "SawanoHiroyuki[nZk], Jean-Ken Johnny, TAKUMA",
+      "artist": "SawanoHiroyuki[nZk]:Jean-Ken Johnny & TAKUMA",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 166617,
       "animethemesUrl": "https://animethemes.moe/anime/fatestrange_fake",
       "animeCN": "Fate/strange Fake",
       "animeNative": "Fate/strange Fake",
-      "bilibiliVideoId": "BV1xYi7BnEf6"
+      "bilibiliVideoId": "BV1xYi7BnEf6",
+      "artistAliases": [
+        "SawanoHiroyuki[nZk], Jean-Ken Johnny, TAKUMA",
+        "泽野弘之",
+        "澤野弘之"
+      ]
     },
     {
-      "titleCN": "Senzaiteki na Ai",
+      "titleCN": "潜在的なアイ",
       "title": "Senzaiteki na Ai",
       "anime": "Fate/strange Fake",
       "artist": "13.3g",
@@ -57,33 +62,43 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "EqkHNYzGUPw"
     },
     {
-      "titleCN": "Megane wo Hazushite",
+      "titleCN": "メガネを外して",
       "title": "Megane wo Hazushite",
       "anime": "Seihantai na Kimi to Boku",
-      "artist": "Noa",
+      "artist": "乃紫",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 184951,
       "animethemesUrl": "https://animethemes.moe/anime/seihantai_na_kimi_to_boku",
       "animeCN": "相反的你和我",
       "animeNative": "正反対な君と僕",
-      "youtubeVideoId": "qh4fa_g4s2I"
+      "youtubeVideoId": "qh4fa_g4s2I",
+      "artistAliases": [
+        "Noa"
+      ]
     },
     {
-      "titleCN": "Pure feat. Eriko Hashimoto",
+      "titleCN": "ピュア feat. 橋本絵莉子",
       "title": "Pure feat. Eriko Hashimoto",
       "anime": "Seihantai na Kimi to Boku",
-      "artist": "PAS TASTA, Eriko Hashimoto",
+      "artist": "PAS TASTA feat. 桥本绘莉子",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 184951,
       "animethemesUrl": "https://animethemes.moe/anime/seihantai_na_kimi_to_boku",
       "animeCN": "相反的你和我",
       "animeNative": "正反対な君と僕",
-      "youtubeVideoId": "ZUTDe90QrsU"
+      "youtubeVideoId": "ZUTDe90QrsU",
+      "artistAliases": [
+        "PAS TASTA, Eriko Hashimoto",
+        "PAS TASTA",
+        "桥本绘莉子",
+        "橋本絵莉子",
+        "Eriko Hashimoto"
+      ]
     },
     {
-      "titleCN": "Sonare",
+      "titleCN": "ソナーレ",
       "title": "Sonare",
       "anime": "Ikoku Nikki",
       "artist": "TOMOO",
@@ -96,7 +111,7 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "rKtWPmUR6WI"
     },
     {
-      "titleCN": "Kotozute",
+      "titleCN": "言伝",
       "title": "Kotozute",
       "anime": "Ikoku Nikki",
       "artist": "Bialystocks",
@@ -112,7 +127,7 @@ export const SEASONAL_POOLS = {
       "titleCN": "TEST ME",
       "title": "TEST ME",
       "anime": "[Oshi no Ko] 3rd Season",
-      "artist": "CHANMINA",
+      "artist": "ちゃんみな",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 182587,
@@ -120,20 +135,26 @@ export const SEASONAL_POOLS = {
       "animeCN": "【我推的孩子】 第三季",
       "animeNative": "【推しの子】第3期",
       "youtubeVideoId": "QgIQbeRzkkc",
-      "bilibiliVideoId": "BV1kZrVBLEuY"
+      "bilibiliVideoId": "BV1kZrVBLEuY",
+      "artistAliases": [
+        "CHANMINA"
+      ]
     },
     {
-      "titleCN": "Serenade",
+      "titleCN": "セレナーデ",
       "title": "Serenade",
       "anime": "[Oshi no Ko] 3rd Season",
-      "artist": "natori",
+      "artist": "なとり",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 182587,
       "animethemesUrl": "https://animethemes.moe/anime/oshi_no_ko_3rd_season",
       "animeCN": "【我推的孩子】 第三季",
       "animeNative": "【推しの子】第3期",
-      "youtubeVideoId": "ZWvFR00t-NE"
+      "youtubeVideoId": "ZWvFR00t-NE",
+      "artistAliases": [
+        "natori"
+      ]
     },
     {
       "titleCN": "AIZO",
@@ -149,7 +170,7 @@ export const SEASONAL_POOLS = {
       "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/29/a2/1a/29a21ac0-9c04-75cc-4b46-d1ec4168c0f0/mzaf_15133126017791169575.plus.aac.p.m4a"
     },
     {
-      "titleCN": "Yoake no Uta",
+      "titleCN": "よあけのうた",
       "title": "Yoake no Uta",
       "anime": "Jujutsu Kaisen: Shimetsu Kaiyuu - Zenpen",
       "artist": "jo0ji",
@@ -188,46 +209,60 @@ export const SEASONAL_POOLS = {
       "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/74/b9/01/74b9016b-3193-95ca-ce6e-4a34aa6ad35b/mzaf_5022537311887919728.plus.aac.p.m4a"
     },
     {
-      "titleCN": "Hikari yo, Boku ni.",
+      "titleCN": "光よ、僕に。",
       "title": "Hikari yo, Boku ni.",
       "anime": "Mato Seihei no Slave 2",
-      "artist": "Akari Kitou",
+      "artist": "鬼头明里",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 176276,
       "animethemesUrl": "https://animethemes.moe/anime/mato_seihei_no_slave_2",
       "animeCN": "魔都精兵的奴隶 第二季",
       "animeNative": "魔都精兵のスレイブ2",
-      "bilibiliVideoId": "BV1NLrLBXESs"
+      "bilibiliVideoId": "BV1NLrLBXESs",
+      "artistAliases": [
+        "Akari Kitou",
+        "鬼頭明里",
+        "Akari Kito"
+      ]
     },
     {
       "titleCN": "Cipher Cipher",
       "title": "Cipher Cipher",
       "anime": "Mato Seihei no Slave 2",
-      "artist": "Kana Hanazawa",
+      "artist": "花泽香菜",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 176276,
       "animethemesUrl": "https://animethemes.moe/anime/mato_seihei_no_slave_2",
       "animeCN": "魔都精兵的奴隶 第二季",
       "animeNative": "魔都精兵のスレイブ2",
-      "bilibiliVideoId": "BV1S9kxB8ESv"
+      "bilibiliVideoId": "BV1S9kxB8ESv",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "花澤香菜"
+      ]
     },
     {
-      "titleCN": "Tsuki ni Mukatte Ute",
+      "titleCN": "月に向かって撃て",
       "title": "Tsuki ni Mukatte Ute",
       "anime": "Mayonaka Heart Tune",
-      "artist": "Suisei Hoshimachi",
+      "artist": "星街彗星",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 187942,
       "animethemesUrl": "https://animethemes.moe/anime/mayonaka_heart_tune",
       "animeCN": "午夜的倾心旋律",
       "animeNative": "真夜中ハートチューン",
-      "youtubeVideoId": "cyoKOW2w0DU"
+      "youtubeVideoId": "cyoKOW2w0DU",
+      "artistAliases": [
+        "Suisei Hoshimachi",
+        "星街すいせい",
+        "Hoshimachi Suisei"
+      ]
     },
     {
-      "titleCN": "Koe no Kiseki",
+      "titleCN": "声の軌跡",
       "title": "Koe no Kiseki",
       "anime": "Mayonaka Heart Tune",
       "artist": "Soala",
@@ -240,30 +275,40 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "gwHnBNi3UGU"
     },
     {
-      "titleCN": "Kasukana Hana",
+      "titleCN": "かすかなはな",
       "title": "Kasukana Hana",
       "anime": "Jigokuraku 2nd Season",
-      "artist": "Tatsuya Kitani, BABYMETAL",
+      "artist": "キタニタツヤ feat. BABYMETAL",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 166613,
       "animethemesUrl": "https://animethemes.moe/anime/jigokuraku_2nd_season",
       "animeCN": "地狱乐 第二季",
       "animeNative": "地獄楽 第二期",
-      "bilibiliVideoId": "BV1NgdPBtEeZ"
+      "bilibiliVideoId": "BV1NgdPBtEeZ",
+      "artistAliases": [
+        "Tatsuya Kitani, BABYMETAL",
+        "Tatsuya Kitani",
+        "キタニタツヤ",
+        "BABYMETAL"
+      ]
     },
     {
       "titleCN": "PERSONAL",
       "title": "PERSONAL",
       "anime": "Jigokuraku 2nd Season",
-      "artist": "Ziyoou-vachi",
+      "artist": "女王蜂",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 166613,
       "animethemesUrl": "https://animethemes.moe/anime/jigokuraku_2nd_season",
       "animeCN": "地狱乐 第二季",
       "animeNative": "地獄楽 第二期",
-      "bilibiliVideoId": "BV1rKrjBmEKd"
+      "bilibiliVideoId": "BV1rKrjBmEKd",
+      "artistAliases": [
+        "Ziyoou-vachi",
+        "QUEEN BEE"
+      ]
     },
     {
       "titleCN": "Sunday Morning",
@@ -279,69 +324,93 @@ export const SEASONAL_POOLS = {
       "bilibiliVideoId": "BV1ojrzBuEPc"
     },
     {
-      "titleCN": "Ohimesama ni wa Narenai",
+      "titleCN": "お姫様にはなれない",
       "title": "Ohimesama ni wa Narenai",
       "anime": "Hime-sama, \"Goumon\" no Jikan desu 2nd Season",
-      "artist": "『Yuika』",
+      "artist": "『ユイカ』",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 176370,
       "animethemesUrl": "https://animethemes.moe/anime/himesama_goumon_no_jikan_desu_2nd_season",
       "animeCN": "公主大人“拷问”的时间到了 第二季",
       "animeNative": "姫様“拷問”の時間です 第2期",
-      "youtubeVideoId": "8nSyqlJNMq4"
+      "youtubeVideoId": "8nSyqlJNMq4",
+      "artistAliases": [
+        "『Yuika』",
+        "Yuika"
+      ]
     },
     {
-      "titleCN": "I Love You ♡",
+      "titleCN": "あいらびゅ♡",
       "title": "I Love You ♡",
       "anime": "Osananajimi to wa Love Comedy ni Naranai",
-      "artist": "Yuu Serizawa, HoneyWorks, Sae Hiratsuka, Rin Kusumi, Yuuki Yamamoto",
+      "artist": "HoneyWorks meets 水萌汐・火威灯・月見るな・日向春（CV：久住琳、芹泽优、平冢纱依、山本悠有希）",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 189565,
       "animethemesUrl": "https://animethemes.moe/anime/osananajimi_to_wa_love_comedy_ni_naranai",
       "animeCN": "和青梅竹马之间不会有恋爱喜剧",
       "animeNative": "幼馴染とはラブコメにならない",
-      "bilibiliVideoId": "BV1VsqABWEYX"
+      "bilibiliVideoId": "BV1VsqABWEYX",
+      "artistAliases": [
+        "Yuu Serizawa, HoneyWorks, Sae Hiratsuka, Rin Kusumi, Yuuki Yamamoto",
+        "HoneyWorks",
+        "久住琳",
+        "芹澤優",
+        "平塚紗依",
+        "山本悠有希"
+      ]
     },
     {
-      "titleCN": "Amanojaku",
+      "titleCN": "あまのじゃく",
       "title": "Amanojaku",
       "anime": "Osananajimi to wa Love Comedy ni Naranai",
-      "artist": "Hikari Kodama",
+      "artist": "小玉ひかり",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 189565,
       "animethemesUrl": "https://animethemes.moe/anime/osananajimi_to_wa_love_comedy_ni_naranai",
       "animeCN": "和青梅竹马之间不会有恋爱喜剧",
       "animeNative": "幼馴染とはラブコメにならない",
-      "youtubeVideoId": "dMcqZI9mg3o"
+      "youtubeVideoId": "dMcqZI9mg3o",
+      "artistAliases": [
+        "Hikari Kodama"
+      ]
     },
     {
-      "titleCN": "Heart ni Hint! Meitantei Precure!",
+      "titleCN": "ハートにヒント！名探偵プリキュア！",
       "title": "Heart ni Hint! Meitantei Precure!",
       "anime": "Meitantei Precure!",
-      "artist": "Ami Ishii",
+      "artist": "石井あみ",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 202957,
       "animethemesUrl": "https://animethemes.moe/anime/meitantei_precure",
       "animeCN": "名侦探光之美少女！",
       "animeNative": "名探偵プリキュア！",
-      "youtubeVideoId": "TYDzjamhrrw"
+      "youtubeVideoId": "TYDzjamhrrw",
+      "artistAliases": [
+        "Ami Ishii"
+      ]
     },
     {
-      "titleCN": "Naze? Nazo?! ANSWER",
+      "titleCN": "なぜ？謎？！ANSWER",
       "title": "Naze? Nazo?! ANSWER",
       "anime": "Meitantei Precure!",
-      "artist": "Akane Kumada, Yuuka Masui",
+      "artist": "熊田茜音＆增井优花",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 202957,
       "animethemesUrl": "https://animethemes.moe/anime/meitantei_precure",
       "animeCN": "名侦探光之美少女！",
       "animeNative": "名探偵プリキュア！",
-      "youtubeVideoId": "Uc-DaxwEtj0"
+      "youtubeVideoId": "Uc-DaxwEtj0",
+      "artistAliases": [
+        "Akane Kumada, Yuuka Masui",
+        "熊田茜音",
+        "増井優花",
+        "Yuuka Masui"
+      ]
     },
     {
       "titleCN": "Liberator",
@@ -360,107 +429,141 @@ export const SEASONAL_POOLS = {
       "titleCN": "I need",
       "title": "I need",
       "anime": "\"Omae Gotoki ga Maou ni Kateru to Omou na\" to Yuusha Party wo Tsuihou Sareta node, Outo de Kimama ni Kurashitai",
-      "artist": "Yuki Tanaka",
+      "artist": "田中有纪",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 191718,
       "animethemesUrl": "https://animethemes.moe/anime/omae_gotoki_ga_maou_ni_kateru_to_omou_na_to_yuusha_party_wo_tsuihou_sareta_node_outo_de_kimama_ni_kurashitai",
       "animeCN": "「凭你也想讨伐魔王？」被勇者小队逐出队伍，只好在王都自在过活",
       "animeNative": "「お前ごときが魔王に勝てると思うな」と勇者パーティを追放されたので、王都で気ままに暮らしたい",
-      "bilibiliVideoId": "BV1Xh6UBoEtR"
+      "bilibiliVideoId": "BV1Xh6UBoEtR",
+      "artistAliases": [
+        "Yuki Tanaka",
+        "田中有紀"
+      ]
     },
     {
       "titleCN": "Lavish!!",
       "title": "Lavish!!",
       "anime": "Yuusha Party ni Kawaii Ko ga Ita no de, Kokuhaku Shitemita.",
-      "artist": "Yoshino",
+      "artist": "吉乃",
       "type": "OP",
       "season": "2026-01",
       "anilistId": 195515,
       "animethemesUrl": "https://animethemes.moe/anime/yuusha_party_ni_kawaii_ko_ga_ita_no_de_kokuhaku_shitemita",
       "animeCN": "身为魔族的我想向勇者小队的可爱女孩告白。",
       "animeNative": "勇者パーティーにかわいい子がいたので、告白してみた。",
-      "bilibiliVideoId": "BV1RfzVBoEPa"
+      "bilibiliVideoId": "BV1RfzVBoEPa",
+      "artistAliases": [
+        "Yoshino"
+      ]
     },
     {
-      "titleCN": "Kimi Kouryaku Game",
+      "titleCN": "キミ攻略ゲーム",
       "title": "Kimi Kouryaku Game",
       "anime": "Yuusha Party ni Kawaii Ko ga Ita no de, Kokuhaku Shitemita.",
-      "artist": "Hiyori Omiya",
+      "artist": "大宫阳和",
       "type": "ED",
       "season": "2026-01",
       "anilistId": 195515,
       "animethemesUrl": "https://animethemes.moe/anime/yuusha_party_ni_kawaii_ko_ga_ita_no_de_kokuhaku_shitemita",
       "animeCN": "身为魔族的我想向勇者小队的可爱女孩告白。",
       "animeNative": "勇者パーティーにかわいい子がいたので、告白してみた。",
-      "youtubeVideoId": "lGI6HiOhRdo"
+      "youtubeVideoId": "lGI6HiOhRdo",
+      "artistAliases": [
+        "Hiyori Omiya",
+        "大宮陽和"
+      ]
     }
   ],
   "2026-10": [
     {
-      "titleCN": "Kaze no Naka wa Hashiru kkya Nai!",
+      "titleCN": "風の中は走るっきゃないっ！",
       "title": "Kaze no Naka wa Hashiru kkya Nai!",
       "anime": "Seitokai ni mo Ana wa Aru!",
-      "artist": "Sangatsu no Phantasia",
+      "artist": "三月のパンタシア",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 191656,
       "animethemesUrl": "https://animethemes.moe/anime/seitokai_ni_mo_ana_wa_aru",
       "animeCN": "学生会也有洞！",
       "animeNative": "生徒会にも穴はある！",
-      "youtubeVideoId": "LaSvJIWT4j4"
+      "youtubeVideoId": "LaSvJIWT4j4",
+      "artistAliases": [
+        "Sangatsu no Phantasia",
+        "三月的Phantasia"
+      ]
     },
     {
-      "titleCN": "Pi",
+      "titleCN": "ぴ",
       "title": "Pi",
       "anime": "Seitokai ni mo Ana wa Aru!",
-      "artist": "Akari Nanawo",
+      "artist": "ナナヲアカリ",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 191656,
       "animethemesUrl": "https://animethemes.moe/anime/seitokai_ni_mo_ana_wa_aru",
       "animeCN": "学生会也有洞！",
       "animeNative": "生徒会にも穴はある！",
-      "youtubeVideoId": "FSJ4A9TH7YQ"
+      "youtubeVideoId": "FSJ4A9TH7YQ",
+      "artistAliases": [
+        "Akari Nanawo",
+        "Nanawo Akari"
+      ]
     },
     {
-      "titleCN": "FX Senshi Kurumi-chan",
+      "titleCN": "FX戦士くるみちゃん",
       "title": "FX Senshi Kurumi-chan",
       "anime": "FX Senshi Kurumi-chan",
-      "artist": "Aina Suzuki",
+      "artist": "福贺久留美（CV：铃木爱奈）",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 206401,
       "animethemesUrl": "https://animethemes.moe/anime/fx_senshi_kurumichan",
       "animeCN": "FX战士久留美",
       "animeNative": "FX戦士くるみちゃん",
-      "bilibiliVideoId": "BV1Yza66DECp"
+      "bilibiliVideoId": "BV1Yza66DECp",
+      "artistAliases": [
+        "Aina Suzuki",
+        "福賀くるみ",
+        "鈴木愛奈",
+        "铃木爱奈"
+      ]
     },
     {
       "titleCN": "＄・￥・€",
       "title": "＄・￥・€",
       "anime": "FX Senshi Kurumi-chan",
-      "artist": "Aina Suzuki",
+      "artist": "福贺久留美（CV：铃木爱奈）",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 206401,
       "animethemesUrl": "https://animethemes.moe/anime/fx_senshi_kurumichan",
       "animeCN": "FX战士久留美",
       "animeNative": "FX戦士くるみちゃん",
-      "bilibiliVideoId": "BV1VyHv61EK3"
+      "bilibiliVideoId": "BV1VyHv61EK3",
+      "artistAliases": [
+        "Aina Suzuki",
+        "福賀くるみ",
+        "鈴木愛奈",
+        "铃木爱奈"
+      ]
     },
     {
-      "titleCN": "Kumo wo Nuke Kazashimo e Watashi dake",
+      "titleCN": "雲を抜け風下へ私だけ",
       "title": "Kumo wo Nuke Kazashimo e Watashi dake",
       "anime": "Kusuriya no Hitorigoto 3rd Season",
-      "artist": "Yorushika",
+      "artist": "ヨルシカ",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 195516,
       "animethemesUrl": "https://animethemes.moe/anime/kusuriya_no_hitorigoto_3rd_season",
       "animeCN": "药屋少女的呢喃 第三季",
       "animeNative": "薬屋のひとりごと 第3期",
-      "youtubeVideoId": "qliLUUONgWk"
+      "youtubeVideoId": "qliLUUONgWk",
+      "artistAliases": [
+        "Yorushika"
+      ]
     },
     {
       "titleCN": "AIYOU",
@@ -490,20 +593,25 @@ export const SEASONAL_POOLS = {
       "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a2/c3/74/a2c374ba-a14e-1419-67e4-726398d60b70/mzaf_15384158245137348152.plus.aac.p.m4a"
     },
     {
-      "titleCN": "Meltdowner",
+      "titleCN": "原子崩し",
       "title": "Meltdowner",
       "anime": "Toaru Anbu no ITEM",
-      "artist": "Kishida Kyoudan & The Akeboshi Rockets",
+      "artist": "岸田教团＆THE明星ロケッツ",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 186742,
       "animethemesUrl": "https://animethemes.moe/anime/toaru_anbu_no_item",
       "animeCN": "某暗部的少女共栖",
       "animeNative": "とある暗部の少女共棲",
-      "youtubeVideoId": "gAfxIJsEoV8"
+      "youtubeVideoId": "gAfxIJsEoV8",
+      "artistAliases": [
+        "Kishida Kyoudan & The Akeboshi Rockets",
+        "岸田教団＆THE明星ロケッツ",
+        "Kisida Kyodan & The Akebosi Rockets"
+      ]
     },
     {
-      "titleCN": "Ember Torch",
+      "titleCN": "エンバートーチ",
       "title": "Ember Torch",
       "anime": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
       "artist": "sumika",
@@ -516,7 +624,7 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "jGcV4lgpMDc"
     },
     {
-      "titleCN": "Role Playing Life",
+      "titleCN": "ロールプレイングライフ",
       "title": "Role Playing Life",
       "anime": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
       "artist": "Luov",
@@ -529,33 +637,42 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "ZoEq2mDEBMg"
     },
     {
-      "titleCN": "RESPAWN!!",
+      "titleCN": "リスポーン‼",
       "title": "RESPAWN!!",
       "anime": "Kyouran Reijou Nia Liston",
-      "artist": "Watame Tsunomaki",
+      "artist": "角卷绵芽",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 206949,
       "animethemesUrl": "https://animethemes.moe/anime/kyouran_reijou_nia_liston",
       "animeCN": "乱世千金倪亚‧利斯顿转生为娇弱千金的弑神武人华丽无双录",
       "animeNative": "凶乱令嬢ニア・リストン",
-      "youtubeVideoId": "oifMOS61eeE"
+      "youtubeVideoId": "oifMOS61eeE",
+      "artistAliases": [
+        "Watame Tsunomaki",
+        "角巻わため",
+        "Tsunomaki Watame"
+      ]
     },
     {
-      "titleCN": "Tokimeki Un Deux Trois♪",
+      "titleCN": "ときめきアン・ドゥ・トロワ♪",
       "title": "Tokimeki Un Deux Trois♪",
       "anime": "Kyouran Reijou Nia Liston",
-      "artist": "Magic Vision Hirome-tai",
+      "artist": "魔法映像ひろめ隊",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 206949,
       "animethemesUrl": "https://animethemes.moe/anime/kyouran_reijou_nia_liston",
       "animeCN": "乱世千金倪亚‧利斯顿转生为娇弱千金的弑神武人华丽无双录",
       "animeNative": "凶乱令嬢ニア・リストン",
-      "youtubeVideoId": "BwXzzLDRZd0"
+      "youtubeVideoId": "BwXzzLDRZd0",
+      "artistAliases": [
+        "Magic Vision Hirome-tai",
+        "マジックビジョンひろめ隊"
+      ]
     },
     {
-      "titleCN": "Escort",
+      "titleCN": "エスコート",
       "title": "Escort",
       "anime": "Koori no Jouheki 2nd Season",
       "artist": "THE BEAT GARDEN",
@@ -568,7 +685,7 @@ export const SEASONAL_POOLS = {
       "bilibiliVideoId": "BV1kVpd6nE3x"
     },
     {
-      "titleCN": "Hanakage",
+      "titleCN": "花蔭",
       "title": "Hanakage",
       "anime": "Koori no Jouheki 2nd Season",
       "artist": "Superfly",
@@ -581,7 +698,7 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "QmKH_q6HaAk"
     },
     {
-      "titleCN": "Anata no Hana no Iro",
+      "titleCN": "あなたの花の色",
       "title": "Anata no Hana no Iro",
       "anime": "Ao no Hako Season 2",
       "artist": "aiko",
@@ -597,43 +714,55 @@ export const SEASONAL_POOLS = {
       "titleCN": "blue in",
       "title": "blue in",
       "anime": "Ao no Hako Season 2",
-      "artist": "Elsewhere Kikou",
+      "artist": "エルスウェア紀行",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 189123,
       "animethemesUrl": "https://animethemes.moe/anime/ao_no_hako_season_2",
       "animeCN": "青之箱 第二季",
       "animeNative": "アオのハコ Season２",
-      "bilibiliVideoId": "BV1Mppw61EeR"
+      "bilibiliVideoId": "BV1Mppw61EeR",
+      "artistAliases": [
+        "Elsewhere Kikou"
+      ]
     },
     {
-      "titleCN": "Eikyouryoku∞Idol",
+      "titleCN": "影響力∞アイドル",
       "title": "Eikyouryoku∞Idol",
       "anime": "Sekai Saikyou no Majo, Hajimemashita",
-      "artist": "HaKoniwalily, HoneyWorks",
+      "artist": "HoneyWorks feat. ハコニワリリィ",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 211778,
       "animethemesUrl": "https://animethemes.moe/anime/sekai_saikyou_no_majo_hajimemashita",
       "animeCN": "世界最强的魔女，就此开始",
       "animeNative": "世界最強の魔女、始めました",
-      "youtubeVideoId": "DlmFhiQCBcc"
+      "youtubeVideoId": "DlmFhiQCBcc",
+      "artistAliases": [
+        "HaKoniwalily, HoneyWorks",
+        "HoneyWorks",
+        "ハコニワリリィ",
+        "HaKoniwalily"
+      ]
     },
     {
-      "titleCN": "Hoshi wo Meguru",
+      "titleCN": "星を巡る",
       "title": "Hoshi wo Meguru",
       "anime": "Sekai Saikyou no Majo, Hajimemashita",
-      "artist": "Rokudenashi",
+      "artist": "ロクデナシ",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 211778,
       "animethemesUrl": "https://animethemes.moe/anime/sekai_saikyou_no_majo_hajimemashita",
       "animeCN": "世界最强的魔女，就此开始",
       "animeNative": "世界最強の魔女、始めました",
-      "youtubeVideoId": "mg6TMFPwJis"
+      "youtubeVideoId": "mg6TMFPwJis",
+      "artistAliases": [
+        "Rokudenashi"
+      ]
     },
     {
-      "titleCN": "Kanawanai,",
+      "titleCN": "かなわない、",
       "title": "Kanawanai,",
       "anime": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
       "artist": "centimillimental",
@@ -646,7 +775,7 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "30-FDTws9yk"
     },
     {
-      "titleCN": "Mada Uso ni Naranai",
+      "titleCN": "まだ嘘にならない",
       "title": "Mada Uso ni Naranai",
       "anime": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
       "artist": "Reini",
@@ -659,30 +788,41 @@ export const SEASONAL_POOLS = {
       "youtubeVideoId": "Z26UWNn6M94"
     },
     {
-      "titleCN": "Sugar Salt",
+      "titleCN": "シュガーソルト",
       "title": "Sugar Salt",
       "anime": "Shiotaiou no Satou-san ga Ore ni dake Amai",
-      "artist": "Masayoshi Ooishi",
+      "artist": "大石昌良",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 209502,
       "animethemesUrl": "https://animethemes.moe/anime/shiotaiou_no_satousan_ga_ore_ni_dake_amai",
       "animeCN": "冷淡的佐藤同学只对我撒娇",
       "animeNative": "塩対応の佐藤さんが俺にだけ甘い",
-      "youtubeVideoId": "c52HNHFGV08"
+      "youtubeVideoId": "c52HNHFGV08",
+      "artistAliases": [
+        "Masayoshi Ooishi",
+        "オーイシマサヨシ",
+        "Masayoshi Oishi"
+      ]
     },
     {
-      "titleCN": "Hatsukoi Reply",
+      "titleCN": "初恋リプライ",
       "title": "Hatsukoi Reply",
       "anime": "Shiotaiou no Satou-san ga Ore ni dake Amai",
-      "artist": "HoneyWorks, Sara Hoshikawa",
+      "artist": "HoneyWorks feat. 星川サラ",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 209502,
       "animethemesUrl": "https://animethemes.moe/anime/shiotaiou_no_satousan_ga_ore_ni_dake_amai",
       "animeCN": "冷淡的佐藤同学只对我撒娇",
       "animeNative": "塩対応の佐藤さんが俺にだけ甘い",
-      "youtubeVideoId": "EdhV5zKjfQk"
+      "youtubeVideoId": "EdhV5zKjfQk",
+      "artistAliases": [
+        "HoneyWorks, Sara Hoshikawa",
+        "HoneyWorks",
+        "星川サラ",
+        "Sara Hoshikawa"
+      ]
     },
     {
       "titleCN": "UNSTOPPABLE",
@@ -724,30 +864,37 @@ export const SEASONAL_POOLS = {
       "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5e/d9/94/5ed99496-c08b-8d77-9876-819ac9fc2586/mzaf_5870612191108325138.plus.aac.p.m4a"
     },
     {
-      "titleCN": "Sukipi no Okage!",
+      "titleCN": "すきぴのおかげ！",
       "title": "Sukipi no Okage!",
       "anime": "Sasaki to Pii-chan Season 2",
-      "artist": "Nonfic!",
+      "artist": "のんふぃく！",
       "type": "ED",
       "season": "2026-10",
       "anilistId": 176314,
       "animethemesUrl": "https://animethemes.moe/anime/sasaki_to_piichan_season_2",
       "animeCN": "佐佐木与文鸟小哔 第二季",
       "animeNative": "佐々木とピーちゃん シーズン２",
-      "youtubeVideoId": "MmmYK2599Ws"
+      "youtubeVideoId": "MmmYK2599Ws",
+      "artistAliases": [
+        "Nonfic!"
+      ]
     },
     {
       "titleCN": "No tears here",
       "title": "No tears here",
       "anime": "Mahou Shoujo Ikusei Keikaku: restart",
-      "artist": "Minori Chihara",
+      "artist": "茅原实里",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 160803,
       "animethemesUrl": "https://animethemes.moe/anime/mahou_shoujo_ikusei_keikaku_restart",
       "animeCN": "魔法少女育成计划 restart",
       "animeNative": "魔法少女育成計画 restart",
-      "bilibiliVideoId": "BV1HxHy6SE4Y"
+      "bilibiliVideoId": "BV1HxHy6SE4Y",
+      "artistAliases": [
+        "Minori Chihara",
+        "茅原実里"
+      ]
     },
     {
       "titleCN": "ReMind",
@@ -763,20 +910,24 @@ export const SEASONAL_POOLS = {
       "itunesPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5a/c6/2b/5ac62b89-e275-a094-de3b-615953436ed1/mzaf_1050026799629238848.plus.aac.p.m4a"
     },
     {
-      "titleCN": "Raki Raki",
+      "titleCN": "ラキラキ",
       "title": "Raki Raki",
       "anime": "#Zombie Sagashitemasu",
-      "artist": "Surii",
+      "artist": "すりぃ",
       "type": "OP",
       "season": "2026-10",
       "anilistId": 199007,
       "animethemesUrl": "https://animethemes.moe/anime/zombie_sagashitemasu",
       "animeCN": "僵尸搜寻中",
       "animeNative": "#ゾンビさがしてます",
-      "youtubeVideoId": "_mQTCTm_6PY"
+      "youtubeVideoId": "_mQTCTm_6PY",
+      "artistAliases": [
+        "Surii",
+        "Threee"
+      ]
     },
     {
-      "titleCN": "Soft Apocalypse",
+      "titleCN": "ソフトアポカリプス",
       "title": "Soft Apocalypse",
       "anime": "#Zombie Sagashitemasu",
       "artist": "cadode",
@@ -794,42 +945,58 @@ export const SEASONAL_POOLS = {
       "titleCN": "Recollect",
       "title": "Recollect",
       "anime": "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
-      "artist": "Konomi Suzuki, Ashnikko",
+      "artist": "铃木木乃美 feat. Ashnikko",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 189046,
       "animeNative": "Re:ゼロから始める異世界生活 4th season",
       "animethemesUrl": "https://animethemes.moe/anime/rezero_kara_hajimeru_isekai_seikatsu_4th_season",
       "youtubeVideoId": "6yOpDa4GsNg",
-      "animeCN": "Re：从零开始的异世界生活 第四季"
+      "animeCN": "Re：从零开始的异世界生活 第四季",
+      "artistAliases": [
+        "Konomi Suzuki, Ashnikko",
+        "鈴木このみ",
+        "Konomi Suzuki",
+        "Ashnikko"
+      ]
     },
     {
       "titleCN": "Ender Ember",
       "title": "Ender Ember",
       "anime": "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
-      "artist": "MYTH & ROID, TK from Ling tosite sigure",
+      "artist": "MYTH & ROID feat. TK from 凛冽时雨",
       "type": "ED",
       "season": "2026-04",
       "anilistId": 189046,
       "animeNative": "Re:ゼロから始める異世界生活 4th season",
       "animethemesUrl": "https://animethemes.moe/anime/rezero_kara_hajimeru_isekai_seikatsu_4th_season",
-      "animeCN": "Re：从零开始的异世界生活 第四季"
+      "animeCN": "Re：从零开始的异世界生活 第四季",
+      "artistAliases": [
+        "MYTH & ROID, TK from Ling tosite sigure",
+        "MYTH & ROID",
+        "TK（凛として時雨）",
+        "TK from Ling tosite sigure"
+      ]
     },
     {
-      "titleCN": "Esoragoto",
+      "titleCN": "絵空事",
       "title": "Esoragoto",
       "anime": "Tensei shitara Slime Datta Ken 4th Season",
-      "artist": "Eir Aoi",
+      "artist": "蓝井艾露",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 182205,
       "animeNative": "転生したらスライムだった件 第4期 第1&2クール",
       "animethemesUrl": "https://animethemes.moe/anime/tensei_shitara_slime_datta_ken_4th_season",
       "youtubeVideoId": "ILfcwl8ZKDs",
-      "animeCN": "关于我转生变成史莱姆这档事 第四季"
+      "animeCN": "关于我转生变成史莱姆这档事 第四季",
+      "artistAliases": [
+        "Eir Aoi",
+        "藍井エイル"
+      ]
     },
     {
-      "titleCN": "Katsubou",
+      "titleCN": "渇望",
       "title": "Katsubou",
       "anime": "Tensei shitara Slime Datta Ken 4th Season",
       "artist": "CiON",
@@ -841,7 +1008,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "关于我转生变成史莱姆这档事 第四季"
     },
     {
-      "titleCN": "Tobu Toki",
+      "titleCN": "飛ぶ時",
       "title": "Tobu Toki",
       "anime": "Yomi no Tsugai",
       "artist": "Vaundy",
@@ -854,7 +1021,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "黄泉使者"
     },
     {
-      "titleCN": "Tobou yo",
+      "titleCN": "飛ぼうよ",
       "title": "Tobou yo",
       "anime": "Yomi no Tsugai",
       "artist": "yama",
@@ -878,32 +1045,39 @@ export const SEASONAL_POOLS = {
       "animeCN": "杖与剑的魔剑谭 第二季"
     },
     {
-      "titleCN": "Reachlight",
+      "titleCN": "リーチライト",
       "title": "Reachlight",
       "anime": "Tsue to Tsurugi no Wistoria Season 2",
-      "artist": "Shiyui",
+      "artist": "シユイ",
       "type": "ED",
       "season": "2026-04",
       "anilistId": 182300,
       "animeNative": "杖と剣のウィストリア Season2",
       "animethemesUrl": "https://animethemes.moe/anime/tsue_to_tsurugi_no_wistoria_season_2",
       "youtubeVideoId": "Pn0c9QIiqbo",
-      "animeCN": "杖与剑的魔剑谭 第二季"
+      "animeCN": "杖与剑的魔剑谭 第二季",
+      "artistAliases": [
+        "Shiyui"
+      ]
     },
     {
       "titleCN": "MONSTER",
       "title": "MONSTER",
       "anime": "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
-      "artist": "Eir Aoi",
+      "artist": "蓝井艾露",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 180745,
       "animeNative": "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期",
       "animethemesUrl": "https://animethemes.moe/anime/youkoso_jitsuryoku_shijou_shugi_no_kyoushitsu_e_4th_season_2nenseihen_ichi_gakki",
-      "animeCN": "欢迎来到实力至上主义的教室 第四季"
+      "animeCN": "欢迎来到实力至上主义的教室 第四季",
+      "artistAliases": [
+        "Eir Aoi",
+        "藍井エイル"
+      ]
     },
     {
-      "titleCN": "Liar Veil",
+      "titleCN": "ライアーヴェール",
       "title": "Liar Veil",
       "anime": "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
       "artist": "ZAQ",
@@ -916,7 +1090,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "欢迎来到实力至上主义的教室 第四季"
     },
     {
-      "titleCN": "Submarine Youth",
+      "titleCN": "サブマリンユース",
       "title": "Submarine Youth",
       "anime": "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
       "artist": "reGretGirl",
@@ -928,32 +1102,38 @@ export const SEASONAL_POOLS = {
       "animeCN": "和班上第二可爱的女孩成为朋友"
     },
     {
-      "titleCN": "Zutto 1-ban ni Shite ne",
+      "titleCN": "ずっと１番にしてね",
       "title": "Zutto 1-ban ni Shite ne",
       "anime": "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
-      "artist": "Koresawa",
+      "artist": "コレサワ",
       "type": "ED",
       "season": "2026-04",
       "anilistId": 169580,
       "animeNative": "クラスで２番目に可愛い女の子と友だちになった",
       "animethemesUrl": "https://animethemes.moe/anime/class_de_2banme_ni_kawaii_onnanoko_to_tomodachi_ni_natta",
-      "animeCN": "和班上第二可爱的女孩成为朋友"
+      "animeCN": "和班上第二可爱的女孩成为朋友",
+      "artistAliases": [
+        "Koresawa"
+      ]
     },
     {
       "titleCN": "Kill or Kiss",
       "title": "Kill or Kiss",
       "anime": "MARRIAGETOXIN",
-      "artist": "Yurina Hirate",
+      "artist": "平手友梨奈",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 199547,
       "animeNative": "マリッジトキシン",
       "animethemesUrl": "https://animethemes.moe/anime/marriagetoxin",
       "youtubeVideoId": "M2wVo7qaeVA",
-      "animeCN": "婚姻剧毒"
+      "animeCN": "婚姻剧毒",
+      "artistAliases": [
+        "Yurina Hirate"
+      ]
     },
     {
-      "titleCN": "Shake Na Baby",
+      "titleCN": "シャケナベイベー",
       "title": "Shake Na Baby",
       "anime": "MARRIAGETOXIN",
       "artist": "AKASAKI",
@@ -965,10 +1145,10 @@ export const SEASONAL_POOLS = {
       "animeCN": "婚姻剧毒"
     },
     {
-      "titleCN": "Skins",
+      "titleCN": "スキンズ",
       "title": "Skins",
       "anime": "Dr. STONE: SCIENCE FUTURE Part 3",
-      "artist": "Asian Kung-Fu Generation",
+      "artist": "ASIAN KUNG-FU GENERATION",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 199221,
@@ -989,7 +1169,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "石纪元 科学与未来 第3部分"
     },
     {
-      "titleCN": "Toumei",
+      "titleCN": "透明",
       "title": "Toumei",
       "anime": "Koori no Jouheki",
       "artist": "Novelbright",
@@ -1001,7 +1181,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "冰之城墙"
     },
     {
-      "titleCN": "Sakasama",
+      "titleCN": "逆様",
       "title": "Sakasama",
       "anime": "Koori no Jouheki",
       "artist": "Polkadot Stingray",
@@ -1013,29 +1193,40 @@ export const SEASONAL_POOLS = {
       "animeCN": "冰之城墙"
     },
     {
-      "titleCN": "Kimi wa Koibito",
+      "titleCN": "君は恋人",
       "title": "Kimi wa Koibito",
       "anime": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
-      "artist": "Masayoshi Ooishi",
+      "artist": "大石昌良",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 170019,
       "animeNative": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
       "animethemesUrl": "https://animethemes.moe/anime/otonari_no_tenshisama_ni_itsunomanika_dame_ningen_ni_sareteita_ken_2nd_season",
-      "animeCN": "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+      "animeCN": "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季",
+      "artistAliases": [
+        "Masayoshi Ooishi",
+        "オーイシマサヨシ",
+        "Masayoshi Oishi"
+      ]
     },
     {
-      "titleCN": "Ureshii! Tanoshii! Daisuki!",
+      "titleCN": "うれしい！たのしい！大好き！",
       "title": "Ureshii! Tanoshii! Daisuki!",
       "anime": "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
-      "artist": "Manaka Iwami",
+      "artist": "椎名真昼（CV：石见舞菜香）",
       "type": "ED",
       "season": "2026-04",
       "anilistId": 170019,
       "animeNative": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
       "animethemesUrl": "https://animethemes.moe/anime/otonari_no_tenshisama_ni_itsunomanika_dame_ningen_ni_sareteita_ken_2nd_season",
       "youtubeVideoId": "sZRWkXpekDE",
-      "animeCN": "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季"
+      "animeCN": "关于邻家的天使大人不知不觉把我惯成了废人这档子事 第二季",
+      "artistAliases": [
+        "Manaka Iwami",
+        "椎名真昼",
+        "石見舞菜香",
+        "石见舞菜香"
+      ]
     },
     {
       "titleCN": "HIDE AND SEEK",
@@ -1050,31 +1241,39 @@ export const SEASONAL_POOLS = {
       "animethemesUrl": "https://animethemes.moe/anime/otaku_ni_yasashii_gal_wa_inai"
     },
     {
-      "titleCN": "Isshou Nakako",
+      "titleCN": "一生仲仔",
       "title": "Isshou Nakako",
       "anime": "Otaku ni Yasashii Gal wa Inai!?",
-      "artist": "sunsoogirl",
+      "artist": "三四少女",
       "type": "ED",
       "season": "2026-04",
       "anilistId": 199588,
       "animeCN": "没有辣妹会对阿宅温柔!?",
       "animeNative": "オタクに優しいギャルはいない!?",
-      "animethemesUrl": "https://animethemes.moe/anime/otaku_ni_yasashii_gal_wa_inai"
+      "animethemesUrl": "https://animethemes.moe/anime/otaku_ni_yasashii_gal_wa_inai",
+      "artistAliases": [
+        "sunsoogirl"
+      ]
     },
     {
-      "titleCN": "Kimi no Sei de Aishiteru",
+      "titleCN": "君のせいで愛してる",
       "title": "Kimi no Sei de Aishiteru",
       "anime": "Aishiteru Game wo Owarasetai",
-      "artist": "CHiCO, HoneyWorks",
+      "artist": "CHiCO with HoneyWorks",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 194393,
       "animeNative": "愛してるゲームを終わらせたい",
       "animethemesUrl": "https://animethemes.moe/anime/aishiteru_game_wo_owarasetai",
-      "animeCN": "想结束这场“我爱你”的游戏"
+      "animeCN": "想结束这场“我爱你”的游戏",
+      "artistAliases": [
+        "CHiCO, HoneyWorks",
+        "CHiCO",
+        "HoneyWorks"
+      ]
     },
     {
-      "titleCN": "Little World",
+      "titleCN": "リトルワールド",
       "title": "Little World",
       "anime": "Aishiteru Game wo Owarasetai",
       "artist": "PompadollS",
@@ -1089,16 +1288,20 @@ export const SEASONAL_POOLS = {
       "titleCN": "BEAUTIFUL",
       "title": "BEAUTIFUL",
       "anime": "Hime Kishi wa Barbaroi no Yome",
-      "artist": "Mayu Maeshima",
+      "artist": "前岛麻由",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 182483,
       "animeNative": "姫騎士は蛮族の嫁",
       "animethemesUrl": "https://animethemes.moe/anime/hime_kishi_wa_barbaroi_no_yome",
-      "animeCN": "女骑士成为蛮族新娘"
+      "animeCN": "女骑士成为蛮族新娘",
+      "artistAliases": [
+        "Mayu Maeshima",
+        "前島麻由"
+      ]
     },
     {
-      "titleCN": "Shirubeki Koto",
+      "titleCN": "シルベキコト",
       "title": "Shirubeki Koto",
       "anime": "Hime Kishi wa Barbaroi no Yome",
       "artist": "sajou no hana",
@@ -1113,26 +1316,40 @@ export const SEASONAL_POOLS = {
       "titleCN": "It's a beautiful story",
       "title": "It's a beautiful story",
       "anime": "Isekai Nonbiri Nouka 2",
-      "artist": "Aya Suzaki, Shino Shimoji",
+      "artist": "露露西·露（CV：下地紫野）＆蒂娅（CV：洲崎绫）",
       "type": "OP",
       "season": "2026-04",
       "anilistId": 197824,
       "animeNative": "異世界のんびり農家２",
       "animethemesUrl": "https://animethemes.moe/anime/isekai_nonbiri_nouka_2",
-      "animeCN": "异世界悠闲农家 第二季"
+      "animeCN": "异世界悠闲农家 第二季",
+      "artistAliases": [
+        "Aya Suzaki, Shino Shimoji",
+        "ルールーシー＝ルー",
+        "ティア",
+        "洲崎綾",
+        "洲崎绫",
+        "下地紫野",
+        "Aya Suzaki",
+        "Shino Shimoji"
+      ]
     },
     {
       "titleCN": "Sunny Steps",
       "title": "Sunny Steps",
       "anime": "Isekai Nonbiri Nouka 2",
-      "artist": "Yui Hizuki",
+      "artist": "绯月唯",
       "type": "ED",
       "season": "2026-04",
       "anilistId": 197824,
       "animeNative": "異世界のんびり農家２",
       "animethemesUrl": "https://animethemes.moe/anime/isekai_nonbiri_nouka_2",
       "youtubeVideoId": "40K8d9oveiY",
-      "animeCN": "异世界悠闲农家 第二季"
+      "animeCN": "异世界悠闲农家 第二季",
+      "artistAliases": [
+        "Yui Hizuki",
+        "緋月ゆい"
+      ]
     },
     {
       "titleCN": "ATTITUDE",
@@ -1161,40 +1378,54 @@ export const SEASONAL_POOLS = {
   ],
   "2026-07": [
     {
-      "titleCN": "Ketsui no Uta",
+      "titleCN": "決意の唄",
       "title": "Ketsui no Uta",
       "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
-      "artist": "Yuiko Oohara",
+      "artist": "大原由衣子",
       "type": "OP",
       "season": "2026-07",
       "anilistId": 178789,
       "animeNative": "無職転生Ⅲ ～異世界行ったら本気だす～",
       "animethemesUrl": "https://animethemes.moe/anime/mushoku_tensei_iii_isekai_ittara_honki_dasu",
-      "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～"
+      "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～",
+      "artistAliases": [
+        "Yuiko Oohara",
+        "大原ゆい子",
+        "Yuiko Ohara"
+      ]
     },
     {
-      "titleCN": "Inori, Owareba",
+      "titleCN": "祈り、終われば",
       "title": "Inori, Owareba",
       "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
-      "artist": "Mika Nakashima",
+      "artist": "中岛美嘉",
       "type": "ED",
       "season": "2026-07",
       "anilistId": 178789,
       "animeNative": "無職転生Ⅲ ～異世界行ったら本気だす～",
       "animethemesUrl": "https://animethemes.moe/anime/mushoku_tensei_iii_isekai_ittara_honki_dasu",
-      "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～"
+      "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～",
+      "artistAliases": [
+        "Mika Nakashima",
+        "中島美嘉"
+      ]
     },
     {
-      "titleCN": "Ichijiku Kemuri",
+      "titleCN": "イチジク煙",
       "title": "Ichijiku Kemuri",
       "anime": "Super no Ura de Yani Suu Futari",
-      "artist": "Zutto Mayonaka de Ii no ni.",
+      "artist": "永远是深夜有多好。",
       "type": "OP",
       "season": "2026-07",
       "anilistId": 196187,
       "animeNative": "スーパーの裏でヤニ吸うふたり",
       "animethemesUrl": "https://animethemes.moe/anime/super_no_ura_de_yani_suu_futari",
-      "animeCN": "在超市后门吸烟的二人"
+      "animeCN": "在超市后门吸烟的二人",
+      "artistAliases": [
+        "Zutto Mayonaka de Ii no ni.",
+        "ずっと真夜中でいいのに。",
+        "ZUTOMAYO"
+      ]
     },
     {
       "titleCN": "Fiction",
@@ -1224,13 +1455,18 @@ export const SEASONAL_POOLS = {
       "titleCN": "Weiter! Weiter!",
       "title": "Weiter! Weiter!",
       "anime": "Youjo Senki II",
-      "artist": "Aoi Yuuki",
+      "artist": "谭雅·提古雷查夫（CV：悠木碧）",
       "type": "ED",
       "season": "2026-07",
       "anilistId": 135865,
       "animeNative": "幼女戦記Ⅱ",
       "animethemesUrl": "https://animethemes.moe/anime/youjo_senki_ii",
-      "animeCN": "幼女战记 第二季"
+      "animeCN": "幼女战记 第二季",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "ターニャ・デグレチャフ",
+        "悠木碧"
+      ]
     },
     {
       "titleCN": "I-BULL",
@@ -1242,10 +1478,10 @@ export const SEASONAL_POOLS = {
       "anilistId": 185874,
       "animeNative": "BLEACH 千年血戦篇-禍進譚-",
       "animethemesUrl": "https://animethemes.moe/anime/bleach_sennen_kessenhen_kashintan",
-      "animeCN": "死神 千年血战篇－祸进谭－"
+      "animeCN": "死神 千年血战篇-祸进谭-"
     },
     {
-      "titleCN": "Rasen",
+      "titleCN": "螺旋",
       "title": "Rasen",
       "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
       "artist": "9Lana",
@@ -1254,31 +1490,37 @@ export const SEASONAL_POOLS = {
       "anilistId": 185874,
       "animeNative": "BLEACH 千年血戦篇-禍進譚-",
       "animethemesUrl": "https://animethemes.moe/anime/bleach_sennen_kessenhen_kashintan",
-      "animeCN": "死神 千年血战篇－祸进谭－"
+      "animeCN": "死神 千年血战篇-祸进谭-"
     },
     {
-      "titleCN": "Nanmonee",
+      "titleCN": "なんもねえ",
       "title": "Nanmonee",
       "anime": "Yani Neko",
-      "artist": "Wasureranneyo",
+      "artist": "忘れらんねえよ",
       "type": "OP",
       "season": "2026-07",
       "anilistId": 207141,
       "animeNative": "ヤニねこ",
       "animethemesUrl": "https://animethemes.moe/anime/yani_neko",
-      "animeCN": "尼古喵喵"
+      "animeCN": "尼古喵喵",
+      "artistAliases": [
+        "Wasureranneyo"
+      ]
     },
     {
-      "titleCN": "Kemuri to Blue",
+      "titleCN": "煙とブルー",
       "title": "Kemuri to Blue",
       "anime": "Yani Neko",
-      "artist": "Necry Talkie",
+      "artist": "ネクライトーキー",
       "type": "ED",
       "season": "2026-07",
       "anilistId": 207141,
       "animeNative": "ヤニねこ",
       "animethemesUrl": "https://animethemes.moe/anime/yani_neko",
-      "animeCN": "尼古喵喵"
+      "animeCN": "尼古喵喵",
+      "artistAliases": [
+        "Necry Talkie"
+      ]
     },
     {
       "titleCN": "FREEZE ME UP",
@@ -1317,7 +1559,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "遭到流放的转生重骑士凭借游戏知识大开无双"
     },
     {
-      "titleCN": "Lv.1 Shokugyou:Ningen",
+      "titleCN": "Lv.1 職業：人間",
       "title": "Lv.1 Shokugyou:Ningen",
       "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
       "artist": "ReoNa",
@@ -1330,7 +1572,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "遭到流放的转生重骑士凭借游戏知识大开无双"
     },
     {
-      "titleCN": "Nekojarashi",
+      "titleCN": "猫じゃらし",
       "title": "Nekojarashi",
       "anime": "Seihantai na Kimi to Boku 2nd Season",
       "artist": "7co",
@@ -1343,7 +1585,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "相反的你和我 第二季"
     },
     {
-      "titleCN": "Unmei no Kimi",
+      "titleCN": "運命の君",
       "title": "Unmei no Kimi",
       "anime": "Seihantai na Kimi to Boku 2nd Season",
       "artist": "Mega Shinnosuke",
@@ -1355,16 +1597,19 @@ export const SEASONAL_POOLS = {
       "animeCN": "相反的你和我 第二季"
     },
     {
-      "titleCN": "Eureka Evrika",
+      "titleCN": "ユーレカ・エヴリカ",
       "title": "Eureka Evrika",
       "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
-      "artist": "Luna Goami",
+      "artist": "五阿弥ルナ",
       "type": "OP",
       "season": "2026-07",
       "anilistId": 103303,
       "animeNative": "二十世紀電氣目録-ユーレカ・エヴリカ-",
       "animethemesUrl": "https://animethemes.moe/anime/nijusseiki_denki_mokuroku_eureka_evrika",
-      "animeCN": "二十世纪电气目录"
+      "animeCN": "二十世纪电气目录",
+      "artistAliases": [
+        "Luna Goami"
+      ]
     },
     {
       "titleCN": "Soarin'",
@@ -1391,7 +1636,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "与你相恋到生命尽头"
     },
     {
-      "titleCN": "Eternal",
+      "titleCN": "エテルネル",
       "title": "Eternal",
       "anime": "Kimi ga Shinu made Koi wo Shitai",
       "artist": "sajou no hana",
@@ -1403,7 +1648,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "与你相恋到生命尽头"
     },
     {
-      "titleCN": "Jinsei End Roll",
+      "titleCN": "人生エンドロール",
       "title": "Jinsei End Roll",
       "anime": "Otomege Sekai wa Mob ni Kibishii Sekai desu 2",
       "artist": "Ando",
@@ -1415,16 +1660,19 @@ export const SEASONAL_POOLS = {
       "animeCN": "恋爱游戏世界对路人角色很不友好 第二季"
     },
     {
-      "titleCN": "Ashita wa Ashita no Ke Sera Sera!",
+      "titleCN": "あしたはあしたのけせらせら！",
       "title": "Ashita wa Ashita no Ke Sera Sera!",
       "anime": "Otomege Sekai wa Mob ni Kibishii Sekai desu 2",
-      "artist": "MEISHOHIKOKAI",
+      "artist": "名称非公開",
       "type": "ED",
       "season": "2026-07",
       "anilistId": 159309,
       "animeNative": "乙女ゲー世界はモブに厳しい世界です2",
       "animethemesUrl": "https://animethemes.moe/anime/otomege_sekai_wa_mob_ni_kibishii_sekai_desu_2",
-      "animeCN": "恋爱游戏世界对路人角色很不友好 第二季"
+      "animeCN": "恋爱游戏世界对路人角色很不友好 第二季",
+      "artistAliases": [
+        "MEISHOHIKOKAI"
+      ]
     },
     {
       "titleCN": "GO GHOST",
@@ -1443,16 +1691,22 @@ export const SEASONAL_POOLS = {
       "titleCN": "Blue",
       "title": "Blue",
       "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
-      "artist": "millennium parade",
+      "artist": "MILLENNIUM PARADE feat. Saya Gray, Daniel Caesar",
       "type": "ED",
       "season": "2026-07",
       "anilistId": 177699,
       "animeNative": "攻殻機動隊 THE GHOST IN THE SHELL",
       "animethemesUrl": "https://animethemes.moe/anime/koukaku_kidoutai_the_ghost_in_the_shell",
-      "animeCN": "攻壳机动队 THE GHOST IN THE SHELL"
+      "animeCN": "攻壳机动队 THE GHOST IN THE SHELL",
+      "artistAliases": [
+        "millennium parade",
+        "MILLENNIUM PARADE",
+        "Saya Gray",
+        "Daniel Caesar"
+      ]
     },
     {
-      "titleCN": "Roman Kaidou, Osanpo-chuu",
+      "titleCN": "浪漫街道、お散歩中",
       "title": "Roman Kaidou, Osanpo-chuu",
       "anime": "Gaikotsu Kishi-sama, Tadaima Isekai e Odekakechuu II",
       "artist": "PelleK",
@@ -1464,7 +1718,7 @@ export const SEASONAL_POOLS = {
       "animeCN": "骸骨骑士大人异世界冒险中 第二季"
     },
     {
-      "titleCN": "Kiseki wa Okinai",
+      "titleCN": "奇跡は起きない",
       "title": "Kiseki wa Okinai",
       "anime": "Gaikotsu Kishi-sama, Tadaima Isekai e Odekakechuu II",
       "artist": "DIALOGUE+",
@@ -1476,45 +1730,55 @@ export const SEASONAL_POOLS = {
       "animeCN": "骸骨骑士大人异世界冒险中 第二季"
     },
     {
-      "titleCN": "Hitohira",
+      "titleCN": "ひとひら",
       "title": "Hitohira",
       "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
-      "artist": "Motohiro Hata",
+      "artist": "秦基博",
       "type": "OP",
       "season": "2026-07",
       "anilistId": 202269,
       "animeNative": "透明な夜に駆ける君と、目に見えない恋をした。",
       "animethemesUrl": "https://animethemes.moe/anime/toumei_na_yoru_ni_kakeru_kimi_to_me_ni_mienai_koi_wo_shita",
-      "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。"
+      "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。",
+      "artistAliases": [
+        "Motohiro Hata"
+      ]
     },
     {
-      "titleCN": "Hikari",
+      "titleCN": "光",
       "title": "Hikari",
       "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
-      "artist": "Yui Sakurai",
+      "artist": "樱井优衣",
       "type": "ED",
       "season": "2026-07",
       "anilistId": 202269,
       "animeNative": "透明な夜に駆ける君と、目に見えない恋をした。",
       "animethemesUrl": "https://animethemes.moe/anime/toumei_na_yoru_ni_kakeru_kimi_to_me_ni_mienai_koi_wo_shita",
       "youtubeVideoId": "H_Ab3nKZUfM",
-      "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。"
+      "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。",
+      "artistAliases": [
+        "Yui Sakurai",
+        "櫻井優衣"
+      ]
     },
     {
-      "titleCN": "Kurenai no Ha",
+      "titleCN": "クレナイノハ",
       "title": "Kurenai no Ha",
       "anime": "Katainaka no Ossan, Kensei ni Naru II",
-      "artist": "Unicorn",
+      "artist": "UNICORN",
       "type": "OP",
       "season": "2026-07",
       "anilistId": 194829,
       "animeNative": "片田舎のおっさん、剣聖になるII",
       "animethemesUrl": "https://animethemes.moe/anime/katainaka_no_ossan_kensei_ni_naru_ii",
       "youtubeVideoId": "IpIYElR8MZY",
-      "animeCN": "乡下大叔成为剑圣 第二季"
+      "animeCN": "乡下大叔成为剑圣 第二季",
+      "artistAliases": [
+        "ユニコーン"
+      ]
     },
     {
-      "titleCN": "Mikansei",
+      "titleCN": "未完成",
       "title": "Mikansei",
       "anime": "Katainaka no Ossan, Kensei ni Naru II",
       "artist": "BLUE ENCOUNT",

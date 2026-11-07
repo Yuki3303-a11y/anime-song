@@ -1,0 +1,2817 @@
+{
+  "season": "2026-10",
+  "targetAnime": 15,
+  "rankSource": "Bangumi heat (TV)",
+  "selected": [
+    {
+      "bangumiId": 554779,
+      "rank": 1,
+      "anime": "Seitokai ni mo Ana wa Aru!",
+      "animeCN": "学生会也有洞！",
+      "animeNative": "生徒会にも穴はある！",
+      "anilistId": 191656,
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191656-xFHtxM8SUTdU.png",
+      "songs": [
+        {
+          "title": "Kaze no Naka wa Hashiru kkya Nai!",
+          "titleCN": "Kaze no Naka wa Hashiru kkya Nai!",
+          "artist": "Sangatsu no Phantasia",
+          "anime": "Seitokai ni mo Ana wa Aru!",
+          "animeCN": "学生会也有洞！",
+          "animeNative": "生徒会にも穴はある！",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 191656,
+          "animethemesUrl": "https://animethemes.moe/anime/seitokai_ni_mo_ana_wa_aru"
+        },
+        {
+          "title": "Pi",
+          "titleCN": "Pi",
+          "artist": "Akari Nanawo",
+          "anime": "Seitokai ni mo Ana wa Aru!",
+          "animeCN": "学生会也有洞！",
+          "animeNative": "生徒会にも穴はある！",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 191656,
+          "animethemesUrl": "https://animethemes.moe/anime/seitokai_ni_mo_ana_wa_aru"
+        }
+      ]
+    },
+    {
+      "bangumiId": 622288,
+      "rank": 2,
+      "anime": "FX Senshi Kurumi-chan",
+      "animeCN": "FX战士久留美",
+      "animeNative": "FX戦士くるみちゃん",
+      "anilistId": 206401,
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206401-8cAebkI0i8BA.png",
+      "songs": [
+        {
+          "title": "FX Senshi Kurumi-chan",
+          "titleCN": "FX Senshi Kurumi-chan",
+          "artist": "Aina Suzuki",
+          "anime": "FX Senshi Kurumi-chan",
+          "animeCN": "FX战士久留美",
+          "animeNative": "FX戦士くるみちゃん",
+          "type": "OP",
+          "season": "2026-10",
+          "anilistId": 206401,
+          "animethemesUrl": "https://animethemes.moe/anime/fx_senshi_kurumichan"
+        },
+        {
+          "title": "＄・￥・€",
+          "titleCN": "＄・￥・€",
+          "artist": "Aina Suzuki",
+          "anime": "FX Senshi Kurumi-chan",
+          "animeCN": "FX战士久留美",
+          "animeNative": "FX戦士くるみちゃん",
+          "type": "ED",
+          "season": "2026-10",
+          "anilistId": 206401,
+          "animethemesUrl": "https://animethemes.moe/anime/fx_senshi_kurumichan"
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "rank": 3,
+      "bangumiId": 568244,
+      "original": "薬屋のひとりごと 第3期"
+    }
+  ],
+  "audioChecks": [
+    {
+      "anilistId": 191656,
+      "type": "OP",
+      "playable": true,
+      "source": "youtube",
+      "matchedTitle": "Seitokai ni mo Ana wa Aru Opening Full &quot;Kaze no Naka wa Hashiru kkya Nai!&quot; by Sangatsu no Phantasia",
+      "matchedArtist": "MelodyHype",
+      "videoId": "LaSvJIWT4j4",
+      "score": 79
+    },
+    {
+      "anilistId": 191656,
+      "type": "ED",
+      "playable": true,
+      "source": "youtube",
+      "matchedTitle": "Seitokai ni mo Ana wa Aru Ending Full - &quot;Pi&quot; by Akari Nanawo",
+      "matchedArtist": "MelodyHype",
+      "videoId": "FSJ4A9TH7YQ",
+      "score": 79
+    },
+    {
+      "anilistId": 206401,
+      "type": "OP",
+      "playable": true,
+      "source": "bilibili",
+      "matchedTitle": "[黒ネズミたち] FX 戰士久留美op / FX Senshi Kurumi-chan (Baha)",
+      "matchedArtist": "巴哈姆特動畫瘋编集部",
+      "bvid": "BV1Yza66DECp",
+      "score": 71
+    },
+    {
+      "source": "bilibili",
+      "bvid": "BV11aa86yE7e",
+      "anilistId": 206401,
+      "type": "ED",
+      "playable": true,
+      "matchedTitle": "人工确认",
+      "reviewUrl": "https://www.bilibili.com/video/BV11aa86yE7e/"
+    }
+  ],
+  "media": [
+    {
+      "id": 195516,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Kusuriya no Hitorigoto 3rd Season",
+        "english": "The Apothecary Diaries Season 3",
+        "native": "薬屋のひとりごと 第3期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx195516-MJpUZlOberqH.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg"
+      },
+      "popularity": 109096
+    },
+    {
+      "id": 195604,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Black Clover 2nd Season",
+        "english": "Black Clover Season 2",
+        "native": "ブラッククローバー 第2期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx195604-tSZcfKbVqSEG.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195604-tSZcfKbVqSEG.jpg"
+      },
+      "popularity": 104185
+    },
+    {
+      "id": 189123,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Ao no Hako Season 2",
+        "english": "Blue Box Season 2",
+        "native": "アオのハコ Season２"
+      },
+      "synonyms": [
+        "Ao no Hako 2nd Season",
+        "アオのハコ 第2期"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx189123-0secXELIhkIW.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx189123-0secXELIhkIW.jpg"
+      },
+      "popularity": 51677
+    },
+    {
+      "id": 205909,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Hotaru no Yomeiri",
+        "english": "Firefly Wedding",
+        "native": "ホタルの嫁入り"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx205909-DM0fAzNQulod.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx205909-DM0fAzNQulod.jpg"
+      },
+      "popularity": 49801
+    },
+    {
+      "id": 191656,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Seitokai ni mo Ana wa Aru!",
+        "english": "Even the Student Council Has Its Holes!",
+        "native": "生徒会にも穴はある！"
+      },
+      "synonyms": [
+        "生穴る",
+        "NamaAnaru",
+        "สภานักเรียนฉบับรั่ว!"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx191656-xFHtxM8SUTdU.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191656-xFHtxM8SUTdU.png"
+      },
+      "popularity": 47885
+    },
+    {
+      "id": 207329,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
+        "english": "The Laid-Off Cheat-Granting Mage Enjoys a Second Lease on Life",
+        "native": "追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。　～俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫？～"
+      },
+      "synonyms": [
+        "The Exiled Cheating Magician Enjoys an Unrestrained Second Life.: I Can Give \"Strengthening Points\" Not Only to Weapons, But Also to Everything, and I Can Unlock the Effect at Any Time of My Will, But are the Rest Okay?",
+        "Chii-Fuyo",
+        "チー付与",
+        "The Laid-Off Cheat-Granting Mage Enjoys a New Life"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/b207329-6VPeZIDfF4Sr.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/b207329-6VPeZIDfF4Sr.png"
+      },
+      "popularity": 42627
+    },
+    {
+      "id": 213805,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Koori no Jouheki 2nd Season",
+        "english": "The Ramparts of Ice Season 2",
+        "native": "氷の城壁 第2期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx213805-Nokui3uWlIlw.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx213805-Nokui3uWlIlw.png"
+      },
+      "popularity": 38559
+    },
+    {
+      "id": 178083,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Tokyo Revengers: Santen Sensou-hen",
+        "english": "Tokyo Revengers: War of the Three Titans Arc",
+        "native": "東京リベンジャーズ 三天戦争編"
+      },
+      "synonyms": [
+        "Tokyo Revengers (Sequel)"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx178083-bg7pg6TCHwtG.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx178083-bg7pg6TCHwtG.jpg"
+      },
+      "popularity": 38360
+    },
+    {
+      "id": 172192,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Kikansha no Mahou wa Tokubetsu desu 2nd Season",
+        "english": "A Returner's Magic Should be Special Season 2",
+        "native": "帰還者の魔法は特別です 第2期"
+      },
+      "synonyms": [
+        "Gwihwanjaui Mabeobeun",
+        "Teukbyeolhaeya Hamnida",
+        "귀환자의 마법은 특별해야 합니다"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx172192-W7P5xEUaxF3y.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx172192-W7P5xEUaxF3y.jpg"
+      },
+      "popularity": 33804
+    },
+    {
+      "id": 206814,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Dragon Ball Super: Beerus",
+        "english": "Dragon Ball Super: Beerus",
+        "native": "ドラゴンボール超 ビルス"
+      },
+      "synonyms": [
+        "DBS Beerus"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx206814-PVVzRbf1IQpe.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206814-PVVzRbf1IQpe.jpg"
+      },
+      "popularity": 29949
+    },
+    {
+      "id": 185756,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+        "english": "As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World Season 3",
+        "native": "転生貴族、鑑定スキルで成り上がる 第3期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx185756-xPCl0RyQ7fXD.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx185756-xPCl0RyQ7fXD.jpg"
+      },
+      "popularity": 29558
+    },
+    {
+      "id": 207191,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
+        "english": "Hello, I am a Witch and my Crush Wants me to Make a Love Potion!",
+        "native": "どうも、好きな人に惚れ薬を依頼された魔女です。"
+      },
+      "synonyms": [
+        "Hi, I'm a Witch, and My Crush Wants Me to Make a Love Potion",
+        "I'm a witch who's crush requested a love potion",
+        "惚れ魔女",
+        "Horemajo"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx207191-VgkIzfH92WoZ.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx207191-VgkIzfH92WoZ.jpg"
+      },
+      "popularity": 29342
+    },
+    {
+      "id": 186541,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Mezametara Saikyou Soubi to Uchuusen-mochi datta node, Ikkodate Mezashite Youhei to shite Jiyuu ni Ikitai",
+        "english": "Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship!",
+        "native": "目覚めたら最強装備と宇宙船持ちだったので、一戸建て目指して傭兵として自由に生きたい"
+      },
+      "synonyms": [
+        "Saikyosoubi",
+        "めざめざ"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx186541-caYpLsLmbCh7.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186541-caYpLsLmbCh7.jpg"
+      },
+      "popularity": 28381
+    },
+    {
+      "id": 206949,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Kyouran Reijou Nia Liston",
+        "english": "Nia Liston: The Merciless Maiden",
+        "native": "凶乱令嬢ニア・リストン"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx206949-4HYI3YuP0eLI.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206949-4HYI3YuP0eLI.png"
+      },
+      "popularity": 28185
+    },
+    {
+      "id": 191788,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Aoashi 2nd Season",
+        "english": "Aoashi Season 2",
+        "native": "アオアシ 第2期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx191788-XC6F24LdX6a4.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191788-XC6F24LdX6a4.jpg"
+      },
+      "popularity": 26936
+    },
+    {
+      "id": 152677,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Tantei wa mou, Shindeiru. Season 2",
+        "english": "The Detective Is Already Dead Season 2",
+        "native": "探偵はもう、死んでいる。Season2"
+      },
+      "synonyms": [
+        "The Detective Is Already Dead Season 2",
+        "La detective esta muerta. 2",
+        "Tanmoshi 2",
+        "นักสืบตายเเล้ว ภาค 2",
+        "たんもし 2"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx152677-gtJbgjE94lCN.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx152677-gtJbgjE94lCN.png"
+      },
+      "popularity": 26438
+    },
+    {
+      "id": 202250,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Kashita Maryoku wa [Revo Barai] de Kyousei Choushuu",
+        "english": "Magic Repo Man: Dumped by My Party, I’ll Cash In With a Cute Support Fairy to Become the Strongest!",
+        "native": "貸した魔力は【リボ払い】で強制徴収"
+      },
+      "synonyms": [
+        "貸した魔力は【リボ払い】で強制徴収～用済みとパーティー追放された俺は、可愛いサポート妖精と一緒に取り立てた魔力を運用して最強を目指す。～",
+        "Kashita Maryoku wa [Revo Barai] de Kyousei Choushuu ~Youzumi to Party Tsuihou sareta Ore wa, Kawaii Support Yousei to Issho ni Toritateta Maryoku wo Unyou shite Saikyou wo Mezasu.",
+        "Maryoku Revo",
+        "魔力リボ"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx202250-mpm2cvr92Au2.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx202250-mpm2cvr92Au2.jpg"
+      },
+      "popularity": 24636
+    },
+    {
+      "id": 204011,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "PSYЯEN",
+        "english": "PSYREN",
+        "native": "PSYREN -サイレン-"
+      },
+      "synonyms": [
+        "САЙРЕН"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx204011-j45RZoqYbdZK.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx204011-j45RZoqYbdZK.jpg"
+      },
+      "popularity": 23178
+    },
+    {
+      "id": 212503,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Hyouken no Majutsushi ga Sekai wo Suberu II",
+        "english": "The Iceblade Sorcerer Shall Rule the World II",
+        "native": "冰剣の魔術師が世界を統べるⅡ"
+      },
+      "synonyms": [
+        "The Iceblade Sorcerer Shall Rule the World Season 2"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx212503-sXBpRZr96c4e.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212503-sXBpRZr96c4e.jpg"
+      },
+      "popularity": 22212
+    },
+    {
+      "id": 209502,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Shiotaiou no Satou-san ga Ore ni dake Amai",
+        "english": "The Cold Sato-san is Only Sweet to Me",
+        "native": "塩対応の佐藤さんが俺にだけ甘い"
+      },
+      "synonyms": [
+        "しおあま",
+        "ShioAma",
+        "The Salty Koharu Has a Soft Spot for Me"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209502-C81oN8M4Smlo.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209502-C81oN8M4Smlo.jpg"
+      },
+      "popularity": 22131
+    },
+    {
+      "id": 204650,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Tougen Anki: Nikko・Kegon no Taki-hen",
+        "english": "TOUGEN ANKI: Nikko Kegon Falls Arc",
+        "native": "桃源暗鬼 日光・華厳の滝編"
+      },
+      "synonyms": [
+        "桃源暗鬼 2期",
+        "Tougen Anki Season 2"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx204650-cAQOzQ84Lwk8.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx204650-cAQOzQ84Lwk8.png"
+      },
+      "popularity": 20994
+    },
+    {
+      "id": 205896,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Shinja Zero no Megami-sama to Hajimeru Isekai Kouryaku",
+        "english": "Full Clearing Another World under a Goddess with Zero Believers",
+        "native": "信者ゼロの女神サマと始める異世界攻略"
+      },
+      "synonyms": [
+        "Clear the World Like a Game with the Zero Believer Goddess"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx205896-ElrV8oVAsuax.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx205896-ElrV8oVAsuax.jpg"
+      },
+      "popularity": 20513
+    },
+    {
+      "id": 211778,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Sekai Saikyou no Majo, Hajimemashita",
+        "english": "The World's Strongest Witch",
+        "native": "世界最強の魔女、始めました"
+      },
+      "synonyms": [
+        "Sekai Saikyou no Majo, Hajimemashita: Watashi dake \"Kouryaku Site\" wo Mireru Sekai de Jiyuu ni Ikimasu",
+        "世界最強の魔女、始めました　～私だけ『攻略サイト』を見れる世界で自由に生きます～",
+        "Sekamajo",
+        "せかまじょ"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx211778-0MXK5HqVFBYH.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx211778-0MXK5HqVFBYH.jpg"
+      },
+      "popularity": 19342
+    },
+    {
+      "id": 206401,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "FX Senshi Kurumi-chan",
+        "english": "FX Fighter Kurumi-chan",
+        "native": "FX戦士くるみちゃん"
+      },
+      "synonyms": [
+        "Kurumi si Pejuang Forex"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx206401-8cAebkI0i8BA.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206401-8cAebkI0i8BA.png"
+      },
+      "popularity": 18586
+    },
+    {
+      "id": 209872,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Ranma 1/2 (2024) 3rd Season",
+        "english": "Ranma1/2 (2024) Season 3",
+        "native": "らんま1/2 (2024) 第3期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209872-RBeVPqwejHFp.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209872-RBeVPqwejHFp.jpg"
+      },
+      "popularity": 18019
+    },
+    {
+      "id": 195571,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Shuiro no Kamen",
+        "english": "The Vermilion Mask",
+        "native": "朱色の仮面"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx195571-fvj7u5GI7BRT.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195571-fvj7u5GI7BRT.jpg"
+      },
+      "popularity": 16751
+    },
+    {
+      "id": 198727,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Chitose-kun wa Ramune Bin no Naka Part 2",
+        "english": "Chitose Is in the Ramune Bottle 2nd Cour",
+        "native": "千歳くんはラムネ瓶のなか 2クール"
+      },
+      "synonyms": [
+        "Chiramune",
+        "チラムネ",
+        "Chitose Is in the Ramune Bottle Part 2"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx198727-BL0JTpg0G8tq.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx198727-BL0JTpg0G8tq.jpg"
+      },
+      "popularity": 16037
+    },
+    {
+      "id": 186742,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Toaru Anbu no ITEM",
+        "english": "A Certain Dark Item",
+        "native": "とある暗部の少女共棲"
+      },
+      "synonyms": [
+        "A Certain Dark Side's Item"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx186742-v7yfbefc8fuO.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186742-v7yfbefc8fuO.png"
+      },
+      "popularity": 16013
+    },
+    {
+      "id": 176314,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Sasaki to Pii-chan Season 2",
+        "english": "Sasaki and Peeps Season 2",
+        "native": "佐々木とピーちゃん シーズン２"
+      },
+      "synonyms": [
+        "佐々木とピーちゃん 第２期",
+        "Sasaki to Pii-chan 2nd Season",
+        "ささピー 2",
+        "SasaPii 2"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx176314-lpvca6vjmkeO.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx176314-lpvca6vjmkeO.jpg"
+      },
+      "popularity": 15571
+    },
+    {
+      "id": 200455,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Yowaki MAX Reijou Nano ni, Ratsuwan Konyakusha-sama no Kake ni Notte Shimatta",
+        "english": "Even Though I'm a Super Timid Noble Girl, I Accepted the Bet From My Cunning Fiancé",
+        "native": "弱気MAX令嬢なのに、辣腕婚約者様の賭けに乗ってしまった"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx200455-P3XStRQMJ7Di.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx200455-P3XStRQMJ7Di.png"
+      },
+      "popularity": 13334
+    },
+    {
+      "id": 178868,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Magic Knight Rayearth (2026)",
+        "english": "Magic Knight Rayearth (2026)",
+        "native": "魔法騎士レイアース (2026)"
+      },
+      "synonyms": [
+        "Magical Knight Rayearth New Project"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx178868-mfp0HIHNJNAm.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx178868-mfp0HIHNJNAm.jpg"
+      },
+      "popularity": 11977
+    },
+    {
+      "id": 199007,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "#Zombie Sagashitemasu",
+        "english": "#I'm Looking For a Zombie",
+        "native": "#ゾンビさがしてます"
+      },
+      "synonyms": [
+        "Zommasu",
+        "ゾンます"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx199007-8R1HsnflnHJE.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx199007-8R1HsnflnHJE.jpg"
+      },
+      "popularity": 11373
+    },
+    {
+      "id": 213657,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Yozakura-san Chi no Daisakusen 2nd Season Part 2",
+        "english": "Mission: Yozakura Family Season 2 Part 2",
+        "native": "夜桜さんちの大作戦 第2期 第2クール"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx213657-ORNXVEBCjXaz.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx213657-ORNXVEBCjXaz.jpg"
+      },
+      "popularity": 10212
+    },
+    {
+      "id": 209499,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "TANK CHAIR: Sensha Isu",
+        "english": "TANK CHAIR",
+        "native": "TANK CHAIR-戦車椅子-"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209499-S0sWFrCpft85.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209499-S0sWFrCpft85.jpg"
+      },
+      "popularity": 9137
+    },
+    {
+      "id": 187316,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Gensou Suikoden",
+        "english": null,
+        "native": "幻想水滸伝"
+      },
+      "synonyms": [
+        "Suikoden: The Anime"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx187316-jucYCojVTjSY.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx187316-jucYCojVTjSY.jpg"
+      },
+      "popularity": 7592
+    },
+    {
+      "id": 160803,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Mahou Shoujo Ikusei Keikaku: restart",
+        "english": "MAGICAL GIRL RAISING PROJECT restart",
+        "native": "魔法少女育成計画 restart"
+      },
+      "synonyms": [
+        "まほいく",
+        "MahoIku"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx160803-Rcr3IvhE7q9c.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx160803-Rcr3IvhE7q9c.png"
+      },
+      "popularity": 7539
+    },
+    {
+      "id": 212799,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Marronnier Oukoku no Shichinin no Kishi",
+        "english": "The Seven Knights of the Marronnier Kingdom",
+        "native": "マロニエ王国の七人の騎士"
+      },
+      "synonyms": [
+        "Siedmiu Rycerzy Królestwa Marronnier",
+        "Os Sete Cavaleiros do Reino Marronnier",
+        "Los siete caballeros del Reino Marronnier"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx212799-n7WDdic7IL1z.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212799-n7WDdic7IL1z.png"
+      },
+      "popularity": 7344
+    },
+    {
+      "id": 200294,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Choujun! Choujou Senpai",
+        "english": "Super Psychic Policeman Chojo",
+        "native": "超巡！超条先輩"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx200294-E6KIgkFaJOfG.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx200294-E6KIgkFaJOfG.jpg"
+      },
+      "popularity": 7316
+    },
+    {
+      "id": 203473,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Kyoufu Collector",
+        "english": "HORROR COLLECTOR",
+        "native": "恐怖コレクター"
+      },
+      "synonyms": [
+        "Horror Collector"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/b203473-pzyaqV432Qko.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/b203473-pzyaqV432Qko.jpg"
+      },
+      "popularity": 6876
+    },
+    {
+      "id": 209463,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Kanata Kara",
+        "english": "From Far Away",
+        "native": "彼方から"
+      },
+      "synonyms": [
+        "From Far Away"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209463-Yxk2q10RXgg8.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209463-Yxk2q10RXgg8.jpg"
+      },
+      "popularity": 6151
+    },
+    {
+      "id": 203275,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Demons' Crest",
+        "english": "Devils' Crest",
+        "native": "デモンズ・クレスト"
+      },
+      "synonyms": [
+        "デモクレ",
+        "DemoKure"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/b203275-YyNHygkzIjMC.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/b203275-YyNHygkzIjMC.jpg"
+      },
+      "popularity": 6084
+    },
+    {
+      "id": 202079,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Oji-san wa Kawaii Mono ga Osuki.",
+        "english": "Uncle's Obsession with Cute Things",
+        "native": "おじさんはカワイイものがお好き。"
+      },
+      "synonyms": [
+        "Pops Loves Kawaii Stuff",
+        "Ojikawa",
+        "おじかわ",
+        "Om-Om Suka yang Unyu-Unyu"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx202079-nwBpDUms0Bab.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx202079-nwBpDUms0Bab.png"
+      },
+      "popularity": 5836
+    },
+    {
+      "id": 209562,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Vertex Force",
+        "english": "VERTEX FORCE",
+        "native": "バーテックスフォース"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209562-kQQbTKDuql9p.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209562-kQQbTKDuql9p.jpg"
+      },
+      "popularity": 4901
+    },
+    {
+      "id": 213658,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Diamond no Ace act II: Second Season Part 2",
+        "english": "Ace of the Diamond act II -Second Season-",
+        "native": "ダイヤのA actⅡ -Second Season- 第2クール"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx213658-D3BPJaqawLxS.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx213658-D3BPJaqawLxS.png"
+      },
+      "popularity": 4462
+    },
+    {
+      "id": 199594,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Tetsuryou! meet with Tetsudou Musume",
+        "english": "TETSURYO! Meet With Tetsudou Musume",
+        "native": "てつりょー！meet with 鉄道むすめ"
+      },
+      "synonyms": [
+        "TETSURYO! meet with Tetsudou Musume"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx199594-moYKzlfIH03U.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx199594-moYKzlfIH03U.jpg"
+      },
+      "popularity": 4268
+    },
+    {
+      "id": 188034,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Girls und Panzer: Motto Love Love Sakusen desu!",
+        "english": null,
+        "native": "ガールズ＆パンツァー もっとらぶらぶ作戦です！"
+      },
+      "synonyms": [
+        "Girls & Panzer - Motto Love Love Sakusen desu!"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx188034-oRwVKBMezOOk.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188034-oRwVKBMezOOk.jpg"
+      },
+      "popularity": 4115
+    },
+    {
+      "id": 199426,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Hotel Inhumans 2nd Season",
+        "english": "HOTEL INHUMANS Season 2",
+        "native": "ホテル・インヒューマンズ 第2期"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx199426-0nBgTV9BrcJn.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx199426-0nBgTV9BrcJn.jpg"
+      },
+      "popularity": 3760
+    },
+    {
+      "id": 213068,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Juuоu Mujin Dandivine",
+        "english": "Dandivine",
+        "native": "獣王武神ダンデヴァイン"
+      },
+      "synonyms": [
+        "Gattaishin: Dandivine",
+        "Gattaishin Series",
+        "DANDIVINE",
+        "Beast King War God Dandivine"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx213068-aFSedkY5bQ4m.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx213068-aFSedkY5bQ4m.png"
+      },
+      "popularity": 3207
+    },
+    {
+      "id": 179876,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "DARK MACHINE: The Animation",
+        "english": "DARK MACHINE THE ANIMATION",
+        "native": "DARK MACHINE -The Animation-"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx179876-Wg62CAzp5WQ1.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx179876-Wg62CAzp5WQ1.jpg"
+      },
+      "popularity": 2944
+    },
+    {
+      "id": 216895,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Aoki Denshou: Welsh & Shedar",
+        "english": "Welsh & Shedar",
+        "native": "蒼き伝承 ウェルシュ&シェーダー"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx216895-Ofx4FSKFa4CQ.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx216895-Ofx4FSKFa4CQ.jpg"
+      },
+      "popularity": 2857
+    },
+    {
+      "id": 187990,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Battle Spirits [Re] Zekkai no Kuu",
+        "english": "Battle Spirits [Re] Zekkai No Ku",
+        "native": "Battle Spirits [Re] 絶界の空"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx187990-tNyQPmr9TkYi.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx187990-tNyQPmr9TkYi.png"
+      },
+      "popularity": 1945
+    },
+    {
+      "id": 216557,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Keroro Gunsou☆",
+        "english": "KERORO☆",
+        "native": "ケロロ軍曹☆"
+      },
+      "synonyms": [
+        "Sgt. Frog☆"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx216557-b72dAqbVEDO7.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx216557-b72dAqbVEDO7.jpg"
+      },
+      "popularity": 1917
+    },
+    {
+      "id": 199068,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Shin Tennis no Ouji-sama: U-17 WORLD CUP Kesshou Member Ketteisen",
+        "english": "The Prince of Tennis II U-17 WORLD CUP: Final Member Selection Match",
+        "native": "新テニスの王子様 U-17 WORLD CUP 決勝メンバー決定戦"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx199068-2afNaytl50Ko.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx199068-2afNaytl50Ko.png"
+      },
+      "popularity": 1552
+    },
+    {
+      "id": 209032,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Mahou no Shimai LuluttoLilly Part 2",
+        "english": "Magical Sisters LuluttoLilly Part 2",
+        "native": "魔法の姉妹ルルットリリィ 第2クール"
+      },
+      "synonyms": [
+        "るるりり",
+        "MSLL"
+      ],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209032-R0gP5IFdk7Vd.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209032-R0gP5IFdk7Vd.jpg"
+      },
+      "popularity": 1482
+    },
+    {
+      "id": 214536,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Cardfight!! Vanguard Divinez Unmei Seisen-hen",
+        "english": "CARDFIGHT!! VANGUARD Divinez: Parallactic Fate",
+        "native": "カードファイト!! ヴァンガード Divinez 運命星戦編"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx214536-dl2KJdHcKWJl.jpg",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx214536-dl2KJdHcKWJl.jpg"
+      },
+      "popularity": 455
+    },
+    {
+      "id": 209709,
+      "season": "FALL",
+      "seasonYear": 2026,
+      "title": {
+        "romaji": "Sirotan",
+        "english": null,
+        "native": "しろたん"
+      },
+      "synonyms": [],
+      "coverImage": {
+        "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx209709-Wz8BKL1fm5MC.png",
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209709-Wz8BKL1fm5MC.png"
+      },
+      "popularity": 343
+    }
+  ],
+  "queue": [
+    {
+      "bangumiId": 554779,
+      "rank": 1,
+      "original": "生徒会にも穴はある！",
+      "animeCN": "学生会也有洞！",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/17/c7/554779_8C9JY.jpg",
+      "mediaId": 191656,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "Kaze no Naka wa Hashiru kkya Nai!",
+            "artist": "Sangatsu no Phantasia"
+          },
+          "check": {
+            "anilistId": 191656,
+            "type": "OP",
+            "playable": true,
+            "source": "youtube",
+            "matchedTitle": "Seitokai ni mo Ana wa Aru Opening Full &quot;Kaze no Naka wa Hashiru kkya Nai!&quot; by Sangatsu no Phantasia",
+            "matchedArtist": "MelodyHype",
+            "videoId": "LaSvJIWT4j4",
+            "score": 79
+          }
+        },
+        "ED": {
+          "details": {
+            "title": "Pi",
+            "artist": "Akari Nanawo"
+          },
+          "check": {
+            "anilistId": 191656,
+            "type": "ED",
+            "playable": true,
+            "source": "youtube",
+            "matchedTitle": "Seitokai ni mo Ana wa Aru Ending Full - &quot;Pi&quot; by Akari Nanawo",
+            "matchedArtist": "MelodyHype",
+            "videoId": "FSJ4A9TH7YQ",
+            "score": 79
+          }
+        }
+      }
+    },
+    {
+      "bangumiId": 622288,
+      "rank": 2,
+      "original": "FX戦士くるみちゃん",
+      "animeCN": "FX战士久留美",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/d3/99/622288_nmbC3.jpg",
+      "mediaId": 206401,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "FX Senshi Kurumi-chan",
+            "artist": "Aina Suzuki"
+          },
+          "check": {
+            "anilistId": 206401,
+            "type": "OP",
+            "playable": true,
+            "source": "bilibili",
+            "matchedTitle": "[黒ネズミたち] FX 戰士久留美op / FX Senshi Kurumi-chan (Baha)",
+            "matchedArtist": "巴哈姆特動畫瘋编集部",
+            "bvid": "BV1Yza66DECp",
+            "score": 71
+          }
+        },
+        "ED": {
+          "details": {
+            "title": "＄・￥・€",
+            "artist": "Aina Suzuki"
+          },
+          "check": {
+            "source": "bilibili",
+            "bvid": "BV11aa86yE7e",
+            "anilistId": 206401,
+            "type": "ED",
+            "playable": true,
+            "matchedTitle": "人工确认",
+            "reviewUrl": "https://www.bilibili.com/video/BV11aa86yE7e/"
+          }
+        }
+      }
+    },
+    {
+      "bangumiId": 568244,
+      "rank": 3,
+      "original": "薬屋のひとりごと 第3期",
+      "animeCN": "药屋少女的呢喃 第三季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/55/e2/568244_e64dA.jpg",
+      "mediaId": 195516,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "Kumo wo Nuke Kazashimo e Watashi dake",
+            "artist": "Yorushika"
+          },
+          "check": null
+        }
+      }
+    },
+    {
+      "bangumiId": 537738,
+      "rank": 4,
+      "original": "とある暗部の少女共棲",
+      "animeCN": "某暗部的少女共栖",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/1c/9b/537738_6rr67.jpg",
+      "mediaId": 186742,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "Ghost Sequence",
+            "artist": "East Of Eden"
+          },
+          "check": {
+            "anilistId": 186742,
+            "type": "OP",
+            "playable": true,
+            "source": "itunes",
+            "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a2/c3/74/a2c374ba-a14e-1419-67e4-726398d60b70/mzaf_15384158245137348152.plus.aac.p.m4a",
+            "matchedTitle": "Ghost Sequence",
+            "matchedArtist": "East Of Eden",
+            "matchedAlbum": "Ghost Sequence - Single",
+            "score": 83
+          }
+        },
+        "ED": {
+          "details": {
+            "title": "Meltdowner",
+            "artist": "Kishida Kyoudan & The Akeboshi Rockets"
+          },
+          "scanReason": "timeout"
+        }
+      }
+    },
+    {
+      "bangumiId": 625799,
+      "rank": 5,
+      "original": "追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。",
+      "animeCN": "被放逐的作弊赋予魔术师享受随心所欲的第二人生。",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/af/3a/625799_ycox6.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 624085,
+      "rank": 6,
+      "original": "凶乱令嬢ニア・リストン 病弱令嬢に転生した神殺しの武人の華麗なる無双録",
+      "animeCN": "乱世千金倪亚‧利斯顿转生为娇弱千金的弑神武人华丽无双录",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/c6/8d/624085_5dXDL.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 630160,
+      "rank": 7,
+      "original": "ダークサモナーとデキている",
+      "animeCN": "黑暗召唤师在地下恋爱中",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/9e/b5/630160_tL25y.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 665390,
+      "rank": 8,
+      "original": "氷の城壁 第2期",
+      "animeCN": "冰之城墙 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/e4/41/665390_UCHPM.jpg",
+      "mediaId": 213805,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "Escort",
+            "artist": "THE BEAT GARDEN"
+          },
+          "check": {
+            "anilistId": 213805,
+            "type": "OP",
+            "playable": true,
+            "source": "bilibili",
+            "matchedTitle": "【冰之城墙第二季｜NCOP】《Escort》画质修复",
+            "matchedArtist": "汀椿_D",
+            "bvid": "BV1kVpd6nE3x",
+            "score": 57
+          }
+        },
+        "ED": {
+          "details": {
+            "title": "Hanakage",
+            "artist": "Superfly"
+          },
+          "scanReason": "timeout"
+        }
+      }
+    },
+    {
+      "bangumiId": 548156,
+      "rank": 9,
+      "original": "アオのハコ Season 2",
+      "animeCN": "青之箱 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/f1/6c/548156_L3fC6.jpg",
+      "mediaId": 189123,
+      "draft": {
+        "ED": {
+          "details": {
+            "title": "blue in",
+            "artist": "Elsewhere Kikou"
+          },
+          "check": {
+            "anilistId": 189123,
+            "type": "ED",
+            "playable": true,
+            "source": "bilibili",
+            "matchedTitle": "【中字MV】エルスウェア紀行「blue in」Official Video(青之箱 第二季ED)",
+            "matchedArtist": "ちとげちゃん一生推し",
+            "bvid": "BV1Mppw61EeR",
+            "score": 71
+          }
+        },
+        "OP": {
+          "details": {
+            "title": "Anata no Hana no Iro",
+            "artist": "aiko"
+          },
+          "scanReason": "timeout"
+        }
+      }
+    },
+    {
+      "bangumiId": 637802,
+      "rank": 10,
+      "original": "らんま1/2 第3期",
+      "animeCN": "乱马1/2 第三季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/7a/49/637802_YVTam.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 646154,
+      "rank": 11,
+      "original": "世界最強の魔女、始めました",
+      "animeCN": "世界最强的魔女，就此开始",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/89/fc/646154_uQi81.jpg",
+      "mediaId": 211778,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "Eikyouryoku∞Idol",
+            "artist": "HaKoniwalily, HoneyWorks"
+          },
+          "scanReason": "timeout"
+        },
+        "ED": {
+          "details": {
+            "title": "Hoshi wo Meguru",
+            "artist": "Rokudenashi"
+          },
+          "scanReason": "timeout"
+        }
+      }
+    },
+    {
+      "bangumiId": 656083,
+      "rank": 12,
+      "original": "人付き合いが苦手な未亡人の雪女さんと呪いの指輪",
+      "animeCN": "不擅交际的未亡人雪女与诅咒戒指",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/af/7e/656083_B22Yt.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 624923,
+      "rank": 13,
+      "original": "どうも、好きな人に惚れ薬を依頼された魔女です。",
+      "animeCN": "你好，我是受心上人所托来做恋爱药的魔女。",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/73/99/624923_4u99L.jpg",
+      "mediaId": 207191,
+      "draft": {
+        "OP": {
+          "details": {
+            "title": "Kanawanai,",
+            "artist": "centimillimental"
+          },
+          "scanReason": "timeout"
+        },
+        "ED": {
+          "details": {
+            "title": "Mada Uso ni Naranai",
+            "artist": "Reini"
+          },
+          "scanReason": "timeout"
+        }
+      }
+    },
+    {
+      "bangumiId": 616808,
+      "rank": 14,
+      "original": "野生のラスボスが現れた！第2期",
+      "animeCN": "野生的大魔王出现了！第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/f9/ae/616808_F80Sl.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 511936,
+      "rank": 15,
+      "original": "ロメリア戦記",
+      "animeCN": "罗梅莉亚战记",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/dc/f7/511936_XDkXO.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 412008,
+      "rank": 16,
+      "original": "転生したら剣でしたII",
+      "animeCN": "转生就是剑 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/ee/ed/412008_vuyt4.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 590553,
+      "rank": 17,
+      "original": "てつりょー！meet with 鉄道むすめ",
+      "animeCN": "铁旅！meet with 铁道少女",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/b6/e8/590553_Xz5PO.jpg",
+      "mediaId": 199594
+    },
+    {
+      "bangumiId": 634708,
+      "rank": 18,
+      "original": "塩対応の佐藤さんが俺にだけ甘い",
+      "animeCN": "冷淡的佐藤同学只对我撒娇",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/39/84/634708_NnWAS.jpg",
+      "mediaId": 209502
+    },
+    {
+      "bangumiId": 536270,
+      "rank": 19,
+      "original": "目覚めたら最強装備と宇宙船持ちだったので 、一戸建て目指して傭兵として自由に生きたい",
+      "animeCN": "一觉醒来就有了最强装备跟太空船 决定以自家独栋建筑为目标当佣兵自由过活",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/3e/fc/536270_51P45.jpg",
+      "mediaId": 186541
+    },
+    {
+      "bangumiId": 486456,
+      "rank": 20,
+      "original": "佐々木とピーちゃん 第2期",
+      "animeCN": "佐佐木与文鸟小哔 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/fc/aa/486456_XO5B0.jpg",
+      "mediaId": 176314
+    },
+    {
+      "bangumiId": 418229,
+      "rank": 21,
+      "original": "魔法少女育成計画 restart",
+      "animeCN": "魔法少女育成计划 restart",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/52/fe/418229_gcFij.jpg",
+      "mediaId": 160803
+    },
+    {
+      "bangumiId": 586255,
+      "rank": 22,
+      "original": "#ゾンビさがしてます",
+      "animeCN": "僵尸搜寻中",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/9e/00/586255_FcfsN.jpg",
+      "mediaId": 199007
+    },
+    {
+      "bangumiId": 636512,
+      "rank": 23,
+      "original": "バーテックスフォース",
+      "animeCN": "至高之力",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/42/ae/636512_oOtDt.jpg",
+      "mediaId": 209562
+    },
+    {
+      "bangumiId": 555605,
+      "rank": 24,
+      "original": "アオアシ Season 2",
+      "animeCN": "青之芦苇 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/67/5a/555605_cLCw5.jpg",
+      "mediaId": 191788
+    },
+    {
+      "bangumiId": 636023,
+      "rank": 25,
+      "original": "TANK CHAIR-戦車椅子-",
+      "animeCN": "战车椅子",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/94/c9/636023_iF8j7.jpg",
+      "mediaId": 209499
+    },
+    {
+      "bangumiId": 567896,
+      "rank": 26,
+      "original": "ブラッククローバー 2nd Season",
+      "animeCN": "黑色五叶草 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/be/e7/567896_QqwKj.jpg",
+      "mediaId": 195604
+    },
+    {
+      "bangumiId": 606716,
+      "rank": 27,
+      "original": "貸した魔力は【リボ払い】で強制徴収",
+      "animeCN": "用【循环利息】强制收回借出的魔力",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/15/11/606716_Om183.jpg",
+      "mediaId": 202250
+    },
+    {
+      "bangumiId": 657656,
+      "rank": 28,
+      "original": "テムパル～アイテムの力～",
+      "animeCN": "装备我最强",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/82/02/657656_z4b72.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 621073,
+      "rank": 29,
+      "original": "信者ゼロの女神サマと始める異世界攻略",
+      "animeCN": "和没有信徒的女神大人一起攻略异世界",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/ec/f9/621073_oFcZ3.jpg",
+      "mediaId": 205896
+    },
+    {
+      "bangumiId": 593565,
+      "rank": 30,
+      "original": "超巡！超条先輩",
+      "animeCN": "超巡！超条前辈",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/af/c1/593565_nno0j.jpg",
+      "mediaId": 200294
+    },
+    {
+      "bangumiId": 621108,
+      "rank": 31,
+      "original": "ホタルの嫁入り",
+      "animeCN": "萤火虫的出嫁",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/5c/04/621108_guUyJ.jpg",
+      "mediaId": 205909
+    },
+    {
+      "bangumiId": 542007,
+      "rank": 32,
+      "original": "転生した大聖女は、聖女であることをひた隠す",
+      "animeCN": "转生后的大圣女，极力隐瞒圣女的身分",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/61/81/542007_wNKJa.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 502123,
+      "rank": 33,
+      "original": "魔法騎士レイアース",
+      "animeCN": "魔法骑士雷阿斯 (2026)",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/e1/6f/502123_IiVB6.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 698032,
+      "rank": 34,
+      "original": "マウスカーソルで 現実を操作できるようになったので、女の子をいっぱいクリックしまーす",
+      "animeCN": "因为鼠标光标似乎可以操控现实，所以我要疯狂点击女孩子",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/00/50/698032_1UUWe.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 471844,
+      "rank": 35,
+      "original": "帰還者の魔法は特別です 第2期",
+      "animeCN": "归还者的魔法要特别 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/1d/7c/471844_5G6H8.jpg",
+      "mediaId": 172192
+    },
+    {
+      "bangumiId": 664389,
+      "rank": 36,
+      "original": "夜桜さんちの大作戦 第2期 第2クール",
+      "animeCN": "夜樱家的大作战 第二季 第2部分",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/95/5d/664389_zP36V.jpg",
+      "mediaId": 213657
+    },
+    {
+      "bangumiId": 568525,
+      "rank": 37,
+      "original": "朱色の仮面",
+      "animeCN": "朱色假面",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/3a/11/568525_ovn2M.jpg",
+      "mediaId": 195571
+    },
+    {
+      "bangumiId": 634210,
+      "rank": 38,
+      "original": "魔法の姉妹ルルットリリィ 第2クール",
+      "animeCN": "魔法姐妹露露特莉莉 第2部分",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/44/ed/634210_O7aNK.jpg",
+      "mediaId": 209032
+    },
+    {
+      "bangumiId": 596771,
+      "rank": 39,
+      "original": "弱気MAX令嬢なのに、辣腕婚約者様の賭けに乗ってしまった",
+      "animeCN": "极致软弱千金小姐，不小心答应了精明未婚夫的赌局",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/39/bd/596771_y75Tw.jpg",
+      "mediaId": 200455
+    },
+    {
+      "bangumiId": 541538,
+      "rank": 40,
+      "original": "幻想水滸伝",
+      "animeCN": "幻想水浒传",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/ee/12/541538_LxzAg.jpg",
+      "mediaId": 187316
+    },
+    {
+      "bangumiId": 613256,
+      "rank": 41,
+      "original": "恐怖コレクター",
+      "animeCN": "恐怖收集者",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/7b/a7/613256_fxVvG.jpg",
+      "mediaId": 203473
+    },
+    {
+      "bangumiId": 617273,
+      "rank": 42,
+      "original": "ケロロ軍曹☆",
+      "animeCN": "Keroro军曹☆",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/60/14/617273_dhFwZ.jpg",
+      "mediaId": 216557
+    },
+    {
+      "bangumiId": 499474,
+      "rank": 43,
+      "original": "東京リベンジャーズ 三天戦争編",
+      "animeCN": "东京复仇者 三天战争篇",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/0f/d4/499474_bheyE.jpg",
+      "mediaId": 178083
+    },
+    {
+      "bangumiId": 614640,
+      "rank": 44,
+      "original": "PSYREN -サイレン-",
+      "animeCN": "PSYREN -决战游戏-",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/1b/1e/614640_ESMLl.jpg",
+      "mediaId": 204011
+    },
+    {
+      "bangumiId": 657084,
+      "rank": 45,
+      "original": "マロニエ王国の七人の騎士",
+      "animeCN": "七叶树王国的七名骑士",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/ed/4a/657084_PZj4J.jpg",
+      "mediaId": 212799
+    },
+    {
+      "bangumiId": 605533,
+      "rank": 46,
+      "original": "おじさんはカワイイものがお好き。",
+      "animeCN": "大叔喜欢可爱小玩意",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/d1/e7/605533_97NSn.jpg",
+      "mediaId": 202079
+    },
+    {
+      "bangumiId": 551304,
+      "rank": 47,
+      "original": "わたしの幸せな結婚 特別篇",
+      "animeCN": "我的幸福婚姻 特别篇",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/ac/40/551304_FbmZ9.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 617948,
+      "rank": 48,
+      "original": "桃源暗鬼 ～日光・華厳の滝編～",
+      "animeCN": "桃源暗鬼 ～日光・华严之泷篇～",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/70/c2/617948_Mm3mn.jpg",
+      "mediaId": 204650
+    },
+    {
+      "bangumiId": 664395,
+      "rank": 49,
+      "original": "ダイヤのA actⅡ Second Season 第2クール",
+      "animeCN": "钻石王牌 act2 第二季 第2部分",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/61/d5/664395_diPLi.jpg",
+      "mediaId": 213658
+    },
+    {
+      "bangumiId": 544378,
+      "rank": 50,
+      "original": "Battle Spirits [Re] 絶界の空",
+      "animeCN": "战斗之魂[Re] 绝界之空",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/ec/af/544378_j3ouu.jpg",
+      "mediaId": 187990
+    },
+    {
+      "bangumiId": 650428,
+      "rank": 51,
+      "original": "傷だらけ聖女より報復をこめて Season2",
+      "animeCN": "黑化吧！圣女大人 第二季",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/77/63/650428_G3GgP.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 702192,
+      "rank": 52,
+      "original": "Get Jiro!",
+      "animeCN": "极道寿司次郎！",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/27/2f/702192_311Ln.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 638081,
+      "rank": 53,
+      "original": "タヌキとキツネ",
+      "animeCN": "小狸猫与小狐狸",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/49/6a/638081_tc7A0.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 563508,
+      "rank": 54,
+      "original": "パンどろぼう",
+      "animeCN": "神秘面包小子",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/56/5e/563508_t2XEq.jpg",
+      "mediaId": null
+    },
+    {
+      "bangumiId": 688797,
+      "rank": 55,
+      "original": "僕らが選んだベストアドベンチャー",
+      "animeCN": "数码宝贝30周年纪念：我们选出的最佳冒险",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/14/2d/688797_z3waa.jpg",
+      "mediaId": null
+    }
+  ],
+  "themes": {
+    "143103": {
+      "name": "Mahoutsukai no Yoru",
+      "slug": "mahoutsukai_no_yoru",
+      "songs": {
+        "ED": {
+          "title": "Yoru no Ao",
+          "artist": "Nagi Yanagi"
+        }
+      }
+    },
+    "152677": {
+      "name": "Tantei wa mou, Shindeiru. Season 2",
+      "slug": "tantei_wa_mou_shindeiru_season_2",
+      "songs": {
+        "OP": {
+          "title": "Kono Shinzou ni Hanataba wo",
+          "artist": "Koume"
+        },
+        "ED": {
+          "title": "Hakuchuumu",
+          "artist": "Kagura Nana"
+        }
+      }
+    },
+    "159042": {
+      "name": "Tensei Shitara Ken Deshita 2nd Season",
+      "slug": "tensei_shitara_ken_deshita_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "DREAM OF BUTTERFLY",
+          "artist": "FZMZ"
+        },
+        "ED": {
+          "title": "Baribari Buddy",
+          "artist": "HANABIE."
+        }
+      }
+    },
+    "160803": {
+      "name": "Mahou Shoujo Ikusei Keikaku: restart",
+      "slug": "mahou_shoujo_ikusei_keikaku_restart",
+      "songs": {
+        "OP": {
+          "title": "No tears here",
+          "artist": "Minori Chihara"
+        },
+        "ED": {
+          "title": "ReMind",
+          "artist": "Daisy×Daisy"
+        }
+      }
+    },
+    "169581": {
+      "name": "Magical★Explorer: Eroge no Yuujin Chara ni Tensei Shitakedo, Game Chishiki Tsukatte Jiyuu ni Ikiru",
+      "slug": "magicalexplorer_eroge_no_yuujin_chara_ni_tensei_shitakedo_game_chishiki_tsukatte_jiyuu_ni_ikiru",
+      "songs": {
+        "OP": {
+          "title": "Remedy",
+          "artist": "ASCA"
+        },
+        "ED": {
+          "title": "Double Wings",
+          "artist": "ASCA"
+        }
+      }
+    },
+    "172192": {
+      "name": "Kikansha no Mahou wa Tokubetsu desu 2nd Season",
+      "slug": "kikansha_no_mahou_wa_tokubetsu_desu_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "Sorrow",
+          "artist": "FLOW"
+        },
+        "ED": {
+          "title": "Everlasting",
+          "artist": "krage"
+        }
+      }
+    },
+    "176314": {
+      "name": "Sasaki to Pii-chan Season 2",
+      "slug": "sasaki_to_piichan_season_2",
+      "songs": {
+        "OP": {
+          "title": "Unbroken",
+          "artist": "MADKID"
+        },
+        "ED": {
+          "title": "Sukipi no Okage!",
+          "artist": "Nonfic!"
+        }
+      }
+    },
+    "178083": {
+      "name": "Tokyo Revengers: Santen Sensou-hen",
+      "slug": "tokyo_revengers_santen_sensouhen",
+      "songs": {
+        "OP": {
+          "title": "IGNITE",
+          "artist": "JO1"
+        },
+        "ED": {
+          "title": "Trickster",
+          "artist": "go!go!vanillas"
+        }
+      }
+    },
+    "178868": {
+      "name": "Magic Knight Rayearth (2026)",
+      "slug": "magic_knight_rayearth_2026",
+      "songs": {
+        "OP": {
+          "title": "Otome no Tsurugi",
+          "artist": "Toaka"
+        },
+        "ED": {
+          "title": "Yuzurenai Negai",
+          "artist": "Naomi Tamura"
+        }
+      }
+    },
+    "179876": {
+      "name": "DARK MACHINE: The Animation",
+      "slug": "dark_machine_the_animation",
+      "songs": {
+        "OP": {
+          "title": "Sonzai Riyuu Aratame",
+          "artist": "BUCK∞TICK"
+        },
+        "ED": {
+          "title": "Galaxy Mode",
+          "artist": "Sandaime J SOUL BROTHERS"
+        }
+      }
+    },
+    "180894": {
+      "name": "Romeria Senki: Maou wo Taoshita nochi mo Jinrui Yabasou dakara Guntai Soshiki Shita",
+      "slug": "romeria_senki_maou_wo_taoshita_nochi_mo_jinrui_yabasou_dakara_guntai_soshiki_shita",
+      "songs": {
+        "OP": {
+          "title": "Akatsuki ni Naru",
+          "artist": "Chogakusei"
+        },
+        "ED": {
+          "title": "Nightfall feat. Maika Loubté",
+          "artist": "KOHTA YAMAMOTO, Maika Loubté"
+        }
+      }
+    },
+    "185756": {
+      "name": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+      "slug": "tensei_kizoku_kantei_skill_de_nariagaru_3rd_season",
+      "songs": {
+        "OP": {
+          "title": "Still Water",
+          "artist": "Rico Sasaki"
+        },
+        "ED": {
+          "title": "Hibi wo Koete",
+          "artist": "Akuru Yoru no Hitsuji"
+        }
+      }
+    },
+    "186541": {
+      "name": "Mezametara Saikyou Soubi to Uchuusen-mochi datta node, Ikkodate Mezashite Youhei to shite Jiyuu ni Ikitai",
+      "slug": "mezametara_saikyou_soubi_to_uchuusenmochi_datta_node_ikkodate_mezashite_youhei_to_shite_jiyuu_ni_ikitai",
+      "songs": {
+        "OP": {
+          "title": "UNSTOPPABLE",
+          "artist": "FLOW"
+        },
+        "ED": {
+          "title": "MY WAY",
+          "artist": "ASTERISM"
+        }
+      }
+    },
+    "186742": {
+      "name": "Toaru Anbu no ITEM",
+      "slug": "toaru_anbu_no_item",
+      "songs": {
+        "OP": {
+          "title": "Ghost Sequence",
+          "artist": "East Of Eden"
+        },
+        "ED": {
+          "title": "Meltdowner",
+          "artist": "Kishida Kyoudan & The Akeboshi Rockets"
+        }
+      }
+    },
+    "187316": {
+      "name": "Gensou Suikoden",
+      "slug": "gensou_suikoden",
+      "songs": {
+        "OP": {
+          "title": "Kanashimi sae Otonabite",
+          "artist": "amazarashi"
+        },
+        "ED": {
+          "title": "closed eye sun (feat. Honoka Takahashi)",
+          "artist": "Honoka Takahashi, Koji Nakamura"
+        }
+      }
+    },
+    "187402": {
+      "name": "Tensei shita Dai Seijo wa, Seijo de Aru Koto wo Hita Kakusu",
+      "slug": "tensei_shita_dai_seijo_wa_seijo_de_aru_koto_wo_hita_kakusu",
+      "songs": {
+        "OP": {
+          "title": "Flare of Soul",
+          "artist": "Kaya"
+        },
+        "ED": {
+          "title": "STELLAR",
+          "artist": "Utahime Dream All Stars"
+        }
+      }
+    },
+    "187990": {
+      "name": "Battle Spirits [Re] Zekkai No Ku",
+      "slug": "battle_spirits_re_zekkai_no_ku",
+      "songs": {
+        "OP": {
+          "title": "Here we are!",
+          "artist": "JAM Project"
+        },
+        "ED": {
+          "title": "Pulse",
+          "artist": "Himegoto"
+        }
+      }
+    },
+    "188034": {
+      "name": "Girls und Panzer: Motto Love Love Sakusen desu!",
+      "slug": "girls_und_panzer_motto_love_love_sakusen_desu",
+      "songs": {
+        "OP": {
+          "title": "Nonstop Daydream",
+          "artist": "ChouCho, Sayaka Sasaki"
+        },
+        "ED": {
+          "title": "Oyasuminasai no Tsuzuki desu!",
+          "artist": "Mai Fuchigami"
+        }
+      }
+    },
+    "189123": {
+      "name": "Ao no Hako Season 2",
+      "slug": "ao_no_hako_season_2",
+      "songs": {
+        "OP": {
+          "title": "Anata no Hana no Iro",
+          "artist": "aiko"
+        },
+        "ED": {
+          "title": "blue in",
+          "artist": "Elsewhere Kikou"
+        }
+      }
+    },
+    "190054": {
+      "name": "Watashi no Shiawase na Kekkon Tokubetsu-hen",
+      "slug": "watashi_no_shiawase_na_kekkon_tokubetsuhen",
+      "songs": {
+        "OP": {
+          "title": "Shiawase de Namida ga Deru no wa.",
+          "artist": "Riria."
+        },
+        "ED": {
+          "title": "Prelude no Temae ni ~for me&you~",
+          "artist": "Kashitarou Itou"
+        }
+      }
+    },
+    "191656": {
+      "name": "Seitokai ni mo Ana wa Aru!",
+      "slug": "seitokai_ni_mo_ana_wa_aru",
+      "songs": {
+        "OP": {
+          "title": "Kaze no Naka wa Hashiru kkya Nai!",
+          "artist": "Sangatsu no Phantasia"
+        },
+        "ED": {
+          "title": "Pi",
+          "artist": "Akari Nanawo"
+        }
+      }
+    },
+    "191788": {
+      "name": "Aoashi 2nd Season",
+      "slug": "aoashi_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "Fortress Defense",
+          "artist": "10-FEET"
+        },
+        "ED": {
+          "title": "Triangle",
+          "artist": "Ai Higuchi"
+        }
+      }
+    },
+    "194207": {
+      "name": "Pan Dorobou",
+      "slug": "pan_dorobou",
+      "songs": {
+        "OP": {
+          "title": "Pan Dorobou no Uta",
+          "artist": "Junichi Suwabe, Ayaka Asai"
+        },
+        "ED": {
+          "title": "Pang Pang Pang",
+          "artist": "Kyary Pamyu Pamyu"
+        }
+      }
+    },
+    "195516": {
+      "name": "Kusuriya no Hitorigoto 3rd Season",
+      "slug": "kusuriya_no_hitorigoto_3rd_season",
+      "songs": {
+        "OP": {
+          "title": "Kumo wo Nuke Kazashimo e Watashi dake",
+          "artist": "Yorushika"
+        },
+        "ED": {
+          "title": "AIYOU",
+          "artist": "Eve"
+        }
+      }
+    },
+    "195539": {
+      "name": "Cyberpunk: Edgerunners 2",
+      "slug": "cyberpunk_edgerunners_2",
+      "songs": {
+        "OP": {
+          "title": "10:15 SATURDAY NIGHT (REMASTERED 2020)",
+          "artist": "THE CURE"
+        },
+        "ED": {
+          "title": "WATSON - FEAT. OSLO GREEN",
+          "artist": "PETITE MELLER, OSLO GREEN"
+        }
+      }
+    },
+    "195571": {
+      "name": "Shuiro no Kamen",
+      "slug": "shuiro_no_kamen",
+      "songs": {
+        "OP": {
+          "title": "Firestarter",
+          "artist": "MAN WITH A MISSION"
+        },
+        "ED": {
+          "title": "Koe",
+          "artist": "yutori"
+        }
+      }
+    },
+    "195604": {
+      "name": "Black Clover 2nd Season",
+      "slug": "black_clover_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "Kienai Riyuu",
+          "artist": "WANIMA"
+        },
+        "ED": {
+          "title": "Yellow Brick Road",
+          "artist": "ONE OR EIGHT"
+        }
+      }
+    },
+    "198727": {
+      "name": "Chitose-kun wa Ramune Bin no Naka Part 2",
+      "slug": "chitosekun_wa_ramune_bin_no_naka_part_2",
+      "songs": {
+        "OP": {
+          "title": "Saku",
+          "artist": "Cider Girl"
+        },
+        "ED": {
+          "title": "Doko ni mo Ikenai Mama",
+          "artist": "aruma"
+        }
+      }
+    },
+    "199007": {
+      "name": "#Zombie Sagashitemasu",
+      "slug": "zombie_sagashitemasu",
+      "songs": {
+        "OP": {
+          "title": "Raki Raki",
+          "artist": "Surii"
+        },
+        "ED": {
+          "title": "Soft Apocalypse",
+          "artist": "cadode"
+        }
+      }
+    },
+    "199068": {
+      "name": "Shin Tennis no Ouji-sama: U-17 WORLD CUP Kesshou Member Ketteisen",
+      "slug": "shin_tennis_no_oujisama_u17_world_cup_kesshou_member_ketteisen",
+      "songs": {
+        "OP": {
+          "title": "Walls And Bridges",
+          "artist": "Aosu"
+        },
+        "ED": {
+          "title": "Kinkanshoku phenomenal",
+          "artist": "Junichi Suwabe, Hidenobu Kiuchi"
+        }
+      }
+    },
+    "199340": {
+      "name": "Seishun Buta Yarou wa Dear Friend no Yume wo Minai",
+      "slug": "seishun_buta_yarou_wa_dear_friend_no_yume_wo_minai",
+      "songs": {}
+    },
+    "199426": {
+      "name": "Hotel Inhumans 2nd Season",
+      "slug": "hotel_inhumans_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "Rasen",
+          "artist": "GAN (Takanori Iwata)"
+        },
+        "ED": {
+          "title": "Sweet Pea",
+          "artist": "Phantom Siita"
+        }
+      }
+    },
+    "199594": {
+      "name": "Tetsuryou! meet with Tetsudou Musume",
+      "slug": "tetsuryou_meet_with_tetsudou_musume",
+      "songs": {
+        "OP": {
+          "title": "GO! GO! RAILWAY!!",
+          "artist": "Asaka"
+        },
+        "ED": {
+          "title": "Watashi Mirai-sen",
+          "artist": "Tetsuryou-kai"
+        }
+      }
+    },
+    "200294": {
+      "name": "Choujun! Choujou Senpai",
+      "slug": "choujun_choujou_senpai",
+      "songs": {
+        "OP": {
+          "title": "That's! Choujou",
+          "artist": "M!LK"
+        },
+        "ED": {
+          "title": "Mata Ashita",
+          "artist": "shifukuponcho"
+        }
+      }
+    },
+    "200455": {
+      "name": "Yowaki MAX Reijou Nano ni, Ratsuwan Konyakusha-sama no Kake ni Notte Shimatta",
+      "slug": "yowaki_max_reijou_nano_ni_ratsuwan_konyakushasama_no_kake_ni_notte_shimatta",
+      "songs": {
+        "OP": {
+          "title": "Tsuyoki MAX Sengen",
+          "artist": "Konomi Suzuki"
+        },
+        "ED": {
+          "title": "Yoake made ni",
+          "artist": "Miku Itou"
+        }
+      }
+    },
+    "202079": {
+      "name": "Oji-san wa Kawaii Mono ga Osuki.",
+      "slug": "ojisan_wa_kawaii_mono_ga_osuki",
+      "songs": {
+        "OP": {
+          "title": "LIKE³",
+          "artist": "Yusei Yagi (FANTASTICS)"
+        },
+        "ED": {
+          "title": "Toutoi♡Kaiwai",
+          "artist": "Kaori Maeda"
+        }
+      }
+    },
+    "202250": {
+      "name": "Kashita Maryoku wa [Revo Barai] de Kyousei Choushuu",
+      "slug": "kashita_maryoku_wa_revo_barai_de_kyousei_choushuu",
+      "songs": {
+        "OP": {
+          "title": "Risk Rate",
+          "artist": "BUDDiiS"
+        },
+        "ED": {
+          "title": "Iremono",
+          "artist": "Kotani"
+        }
+      }
+    },
+    "203275": {
+      "name": "Demons' Crest",
+      "slug": "demons_crest",
+      "songs": {
+        "OP": {
+          "title": "Shinka",
+          "artist": "Ado"
+        },
+        "ED": {
+          "title": "ReaL",
+          "artist": "Soala"
+        }
+      }
+    },
+    "203473": {
+      "name": "Kyoufu Collector",
+      "slug": "kyoufu_collector",
+      "songs": {
+        "OP": {
+          "title": "Kageboushi",
+          "artist": "Shikao Suga"
+        },
+        "ED": {
+          "title": "Meiro",
+          "artist": "Shikao Suga"
+        }
+      }
+    },
+    "204011": {
+      "name": "PSYЯEN",
+      "slug": "psyen",
+      "songs": {
+        "OP": {
+          "title": "WARNING!!",
+          "artist": "CLAN QUEEN"
+        },
+        "ED": {
+          "title": "ICARUS",
+          "artist": "Who-ya Extended"
+        }
+      }
+    },
+    "204389": {
+      "name": "Yasei no Last Boss ga Arawareta! 2nd Season",
+      "slug": "yasei_no_last_boss_ga_arawareta_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "Melodic Impact",
+          "artist": "Suspended 4th"
+        },
+        "ED": {
+          "title": "Yurete Skirt",
+          "artist": "Chakura"
+        }
+      }
+    },
+    "204650": {
+      "name": "Tougen Anki: Nikko・Kegon no Taki-hen",
+      "slug": "tougen_anki_nikkokegon_no_takihen",
+      "songs": {
+        "OP": {
+          "title": "BACKLASH",
+          "artist": "Hiromitsu Kitayama"
+        },
+        "ED": {
+          "title": "Te to Te",
+          "artist": "TRACK15"
+        }
+      }
+    },
+    "205896": {
+      "name": "Shinja Zero no Megami-sama to Hajimeru Isekai Kouryaku",
+      "slug": "shinja_zero_no_megamisama_to_hajimeru_isekai_kouryaku",
+      "songs": {
+        "OP": {
+          "title": "Mirai no Ashiato",
+          "artist": "310"
+        },
+        "ED": {
+          "title": "Fall in Dream",
+          "artist": "Suupeas"
+        }
+      }
+    },
+    "205909": {
+      "name": "Hotaru no Yomeiri",
+      "slug": "hotaru_no_yomeiri",
+      "songs": {
+        "OP": {
+          "title": "Period",
+          "artist": "iri"
+        },
+        "ED": {
+          "title": "Yumegokochi",
+          "artist": "TOOBOE"
+        }
+      }
+    },
+    "206401": {
+      "name": "FX Senshi Kurumi-chan",
+      "slug": "fx_senshi_kurumichan",
+      "songs": {
+        "OP": {
+          "title": "FX Senshi Kurumi-chan",
+          "artist": "Aina Suzuki"
+        },
+        "ED": {
+          "title": "＄・￥・€",
+          "artist": "Aina Suzuki"
+        }
+      }
+    },
+    "206774": {
+      "name": "Mouse Cursor de Genjitsu wo Sousa Dekiru You ni Natta node, Onnanoko wo Ippai Click Shimasu",
+      "slug": "mouse_cursor_de_genjitsu_wo_sousa_dekiru_you_ni_natta_node_onnanoko_wo_ippai_click_shimasu",
+      "songs": {
+        "ED": {
+          "title": "MOUSE DRIVE",
+          "artist": "Maware Isogavva"
+        }
+      }
+    },
+    "206814": {
+      "name": "Dragon Ball Super: Beerus",
+      "slug": "dragon_ball_super_beerus",
+      "songs": {
+        "OP": {
+          "title": "Onogami",
+          "artist": "Megatera Zero"
+        },
+        "ED": {
+          "title": "Kanpeki no Peki",
+          "artist": "Vickeblanka"
+        }
+      }
+    },
+    "206949": {
+      "name": "Kyouran Reijou Nia Liston",
+      "slug": "kyouran_reijou_nia_liston",
+      "songs": {
+        "OP": {
+          "title": "RESPAWN!!",
+          "artist": "Watame Tsunomaki"
+        },
+        "ED": {
+          "title": "Tokimeki Un Deux Trois♪",
+          "artist": "Magic Vision Hirome-tai"
+        }
+      }
+    },
+    "207191": {
+      "name": "Doumo, Suki na Hito ni Horegusuri wo Irai Sareta Majo desu.",
+      "slug": "doumo_suki_na_hito_ni_horegusuri_wo_irai_sareta_majo_desu",
+      "songs": {
+        "OP": {
+          "title": "Kanawanai,",
+          "artist": "centimillimental"
+        },
+        "ED": {
+          "title": "Mada Uso ni Naranai",
+          "artist": "Reini"
+        }
+      }
+    },
+    "207329": {
+      "name": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.: Ore wa Buki dake ja Naku, Arayuru Mono ni \"Kyouka Point\" wo Fuyo Dekiru shi, Ore no Ishi de Itsudemo Kouka wo Kaijo Dekiru kedo, Nokotta Hitotachi Daijoubu?",
+      "slug": "chiifuyo",
+      "songs": {
+        "OP": {
+          "title": "Ember Torch",
+          "artist": "sumika"
+        },
+        "ED": {
+          "title": "Role Playing Life",
+          "artist": "Luov"
+        }
+      }
+    },
+    "208025": {
+      "name": "Dark Summoner to Dekiteiru",
+      "slug": "dark_summoner_to_dekiteiru",
+      "songs": {
+        "OP": {
+          "title": "Zettai Kansei♡Kisei Jijitsu",
+          "artist": "Ringo Coisio"
+        },
+        "ED": {
+          "title": "AKUMA♰No?☆Hime♡Goto",
+          "artist": "Mao Komiya"
+        }
+      }
+    },
+    "209032": {
+      "name": "Mahou no Shimai LuluttoLilly Part 2",
+      "slug": "mahou_no_shimai_luluttolilly_part_2",
+      "songs": {
+        "OP": {
+          "title": "Swingin' Magic",
+          "artist": "ILLIT"
+        },
+        "ED": {
+          "title": "Dream A La Mode",
+          "artist": "Lulu to Lilly"
+        }
+      }
+    },
+    "209219": {
+      "name": "Tensei Goblin Dakedo Shitsumon Aru?",
+      "slug": "tensei_goblin_dakedo_shitsumon_aru",
+      "songs": {
+        "OP": {
+          "title": "Hello",
+          "artist": "Sou"
+        },
+        "ED": {
+          "title": "Chiisana Bokura",
+          "artist": "Ahub"
+        }
+      }
+    },
+    "209463": {
+      "name": "Kanata Kara",
+      "slug": "kanata_kara",
+      "songs": {
+        "OP": {
+          "title": "Toukoukou",
+          "artist": "Genin wa Jibun ni Aru."
+        },
+        "ED": {
+          "title": "Hikari no Soba de",
+          "artist": "Nanashi no Taro"
+        }
+      }
+    },
+    "209499": {
+      "name": "TANK CHAIR",
+      "slug": "tank_chair",
+      "songs": {
+        "OP": {
+          "title": "DALALA",
+          "artist": "SiM"
+        },
+        "ED": {
+          "title": "SYNC",
+          "artist": "Daoko"
+        }
+      }
+    },
+    "209502": {
+      "name": "Shiotaiou no Satou-san ga Ore ni dake Amai",
+      "slug": "shiotaiou_no_satousan_ga_ore_ni_dake_amai",
+      "songs": {
+        "OP": {
+          "title": "Sugar Salt",
+          "artist": "Masayoshi Ooishi"
+        },
+        "ED": {
+          "title": "Hatsukoi Reply",
+          "artist": "HoneyWorks, Sara Hoshikawa"
+        }
+      }
+    },
+    "209562": {
+      "name": "VERTEX FORCE",
+      "slug": "vertex_force",
+      "songs": {
+        "OP": {
+          "title": "Synchro Blue",
+          "artist": "ClariS"
+        },
+        "ED": {
+          "title": "Emerald",
+          "artist": "Hashimero"
+        }
+      }
+    },
+    "209872": {
+      "name": "Ranma 1/2 (2024) 3rd Season",
+      "slug": "ranma_12_2024_3rd_season",
+      "songs": {
+        "OP": {
+          "title": "Sunao Miman",
+          "artist": "Fumino"
+        },
+        "ED": {
+          "title": "Kawaikunai",
+          "artist": "『Yuika』"
+        }
+      }
+    },
+    "210482": {
+      "name": "JoJo no Kimyou na Bouken Part 7: Steel Ball Run - 2nd & 3rd STAGE",
+      "slug": "jojo_no_kimyou_na_bouken_part_7_steel_ball_run_2nd_3rd_stage",
+      "songs": {
+        "OP": {
+          "title": "SPIN",
+          "artist": "Kroi"
+        },
+        "ED": {
+          "title": "Shinu ka Ikiru ka",
+          "artist": "Yuuki Chiba"
+        }
+      }
+    },
+    "211778": {
+      "name": "Sekai Saikyou no Majo, Hajimemashita",
+      "slug": "sekai_saikyou_no_majo_hajimemashita",
+      "songs": {
+        "OP": {
+          "title": "Eikyouryoku∞Idol",
+          "artist": "HaKoniwalily, HoneyWorks"
+        },
+        "ED": {
+          "title": "Hoshi wo Meguru",
+          "artist": "Rokudenashi"
+        }
+      }
+    },
+    "211877": {
+      "name": "Kanojo no Tomodachi",
+      "slug": "kanojo_no_tomodachi",
+      "songs": {
+        "OP": {
+          "title": "Gingira",
+          "artist": "Airots"
+        },
+        "ED": {
+          "title": "False Love",
+          "artist": "Ceui"
+        }
+      }
+    },
+    "212144": {
+      "name": "Kizu darake Seijo yori Houfuku wo Komete Season2",
+      "slug": "kizu_darake_seijo_yori_houfuku_wo_komete_season2",
+      "songs": {
+        "OP": {
+          "title": "Karei Naru Revenge",
+          "artist": "Juice=Juice"
+        },
+        "ED": {
+          "title": "Nagi no Soko",
+          "artist": "tsukioukanata"
+        }
+      }
+    },
+    "212503": {
+      "name": "Hyouken no Majutsushi ga Sekai wo Suberu II",
+      "slug": "hyouken_no_majutsushi_ga_sekai_wo_suberu_ii",
+      "songs": {
+        "OP": {
+          "title": "Diamond Dust",
+          "artist": "Sizuk, AYAME"
+        },
+        "ED": {
+          "title": "COMPRESSION :[",
+          "artist": "Maaya Uchida"
+        }
+      }
+    },
+    "212799": {
+      "name": "Marronnier Oukoku no Shichinin no Kishi",
+      "slug": "marronnier_oukoku_no_shichinin_no_kishi",
+      "songs": {
+        "OP": {
+          "title": "Sayonara wa Iwanai",
+          "artist": "yama"
+        }
+      }
+    },
+    "212888": {
+      "name": "Tempal: Item no Chikara",
+      "slug": "tempal_item_no_chikara",
+      "songs": {
+        "OP": {
+          "title": "SATISFY",
+          "artist": "Re:name"
+        },
+        "ED": {
+          "title": "Ray of Emotion",
+          "artist": "TAO"
+        }
+      }
+    },
+    "213068": {
+      "name": "Juuоu Mujin Dandivine",
+      "slug": "juuu_mujin_dandivine",
+      "songs": {
+        "OP": {
+          "title": "Zankyou≠Blaster",
+          "artist": "Takanori Nishikawa"
+        },
+        "ED": {
+          "title": "Mikansei Ordinary",
+          "artist": "DayRe:"
+        }
+      }
+    },
+    "213298": {
+      "name": "Yuruyuru Zukan",
+      "slug": "yuruyuru_zukan",
+      "songs": {
+        "ED": {
+          "title": "Subara Shinka!",
+          "artist": "SHY"
+        }
+      }
+    },
+    "213657": {
+      "name": "Yozakura-san Chi no Daisakusen 2nd Season Part 2",
+      "slug": "yozakurasan_chi_no_daisakusen_2nd_season_part_2",
+      "songs": {
+        "OP": {
+          "title": "Forever Song",
+          "artist": "Humbreaders"
+        },
+        "ED": {
+          "title": "I'm still breathing",
+          "artist": "KID PHENOMENON"
+        }
+      }
+    },
+    "213658": {
+      "name": "Diamond no Ace act II: Second Season Part 2",
+      "slug": "diamond_no_ace_act_ii_second_season_part_2",
+      "songs": {
+        "OP": {
+          "title": "NEVER SAY NEVER AGAIN",
+          "artist": "GLAY"
+        },
+        "ED": {
+          "title": "ROAD TO BE BLUE",
+          "artist": "OxT"
+        }
+      }
+    },
+    "213805": {
+      "name": "Koori no Jouheki 2nd Season",
+      "slug": "koori_no_jouheki_2nd_season",
+      "songs": {
+        "OP": {
+          "title": "Escort",
+          "artist": "THE BEAT GARDEN"
+        },
+        "ED": {
+          "title": "Hanakage",
+          "artist": "Superfly"
+        }
+      }
+    },
+    "216557": {
+      "name": "Keroro Gunsou☆",
+      "slug": "keroro_gunsou_2026",
+      "songs": {
+        "OP": {
+          "title": "Kirai Nochi Suki!",
+          "artist": "ano"
+        },
+        "ED": {
+          "title": "Himitsu no Panorama",
+          "artist": "PURPLE BUBBLE"
+        }
+      }
+    },
+    "216860": {
+      "name": "Punirunes Puni 4",
+      "slug": "punirunes_puni_4",
+      "songs": {
+        "ED": {
+          "title": "Puni Puni PuniRunes Punix Version",
+          "artist": "Nanahira"
+        }
+      }
+    },
+    "216895": {
+      "name": "Aoki Denshou: Welsh & Shedar",
+      "slug": "aoki_denshou_welsh_shedar",
+      "songs": {
+        "OP": {
+          "title": "Bokura no Mirai e",
+          "artist": "Hironobu Kageyama, Masami Okui"
+        },
+        "ED": {
+          "title": "Omelette",
+          "artist": "Hironobu Kageyama"
+        }
+      }
+    }
+  },
+  "complete": false,
+  "scanPending": [
+    {
+      "label": "被放逐的作弊赋予魔术师享受随心所欲的第二人生。",
+      "reason": "identity"
+    },
+    {
+      "label": "乱世千金倪亚‧利斯顿转生为娇弱千金的弑神武人华丽无双录",
+      "reason": "identity"
+    },
+    {
+      "label": "黑暗召唤师在地下恋爱中",
+      "reason": "identity"
+    },
+    {
+      "label": "乱马1/2 第三季",
+      "reason": "identity"
+    },
+    {
+      "label": "不擅交际的未亡人雪女与诅咒戒指",
+      "reason": "identity"
+    },
+    {
+      "label": "野生的大魔王出现了！第二季",
+      "reason": "identity"
+    },
+    {
+      "label": "罗梅莉亚战记",
+      "reason": "identity"
+    },
+    {
+      "label": "转生就是剑 第二季",
+      "reason": "identity"
+    },
+    {
+      "label": "某暗部的少女共栖｜片尾曲（ED） Meltdowner — Kishida Kyoudan & The Akeboshi Rockets",
+      "reason": "timeout"
+    },
+    {
+      "label": "冰之城墙 第二季｜片尾曲（ED） Hanakage — Superfly",
+      "reason": "timeout"
+    },
+    {
+      "label": "青之箱 第二季｜片头曲（OP） Anata no Hana no Iro — aiko",
+      "reason": "timeout"
+    },
+    {
+      "label": "世界最强的魔女，就此开始｜片头曲（OP） Eikyouryoku∞Idol — HaKoniwalily, HoneyWorks",
+      "reason": "timeout"
+    },
+    {
+      "label": "世界最强的魔女，就此开始｜片尾曲（ED） Hoshi wo Meguru — Rokudenashi",
+      "reason": "timeout"
+    },
+    {
+      "label": "你好，我是受心上人所托来做恋爱药的魔女。｜片头曲（OP） Kanawanai, — centimillimental",
+      "reason": "timeout"
+    },
+    {
+      "label": "你好，我是受心上人所托来做恋爱药的魔女。｜片尾曲（ED） Mada Uso ni Naranai — Reini",
+      "reason": "timeout"
+    }
+  ]
+}

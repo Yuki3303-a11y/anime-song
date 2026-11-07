@@ -1,5 +1,7 @@
 # 萌豚挑战 — 技术架构与工作原理
 
+> 历史架构记录。现行实现与运行说明见 [README.md](README.md) 和 [PROJECT_STATUS.md](PROJECT_STATUS.md)。
+
 ## 目录
 
 1. [整体架构](#1-整体架构)

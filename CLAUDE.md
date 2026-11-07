@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+> Historical notes. For current architecture and commands, see [README.md](README.md) and [PROJECT_STATUS.md](PROJECT_STATUS.md).
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
@@ -58,9 +60,9 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 - `recordModeLabel()` stamps the mode into the leaderboard entry (`g` field) and answer history (`guessType` / `correctValue`).
 
 **Library auto-update:**
-- `scripts/fetch-season.mjs` — discovers the current-season anime (AniList popularity top-N) and their OP/ED (AnimeThemes API), applies quality gates (max 2 per anime, dedupe vs existing SONGS), writes `candidates.js` + `candidates.md` for manual review. Run: `npm run discover` (or with `--season/--year/--limit`).
-- `.github/workflows/update-library.yml` — weekly scheduled workflow (Sun 03:00 UTC, manual dispatch supported) that runs discovery and opens a PR with the candidates.
-- After merging new songs into `songs.js`, bump the cache version `?v=26` → next in both `app.js` (songs.js import) and `index.html` (style.css + app.js tags) — `npm run validate` checks they match.
+- `npm run discover` writes `candidates/YYYY-MM.json` and `candidates/YYYY-MM.md` for review. See the README for the separate interactive Bangumi-based updater.
+- `.github/workflows/update-library.yml` runs on Mondays at 03:00 UTC and opens a review PR for a complete, unpublished quarter.
+- Publish reviewed quarters in `seasonal-pools.js` and `seasonal-covers.js`. Keep the index order in `songs.js` for multiplayer and update the affected module cache versions.
 
 **Custom Song Library:**
 - Stored in localStorage (`custom_songs_v1`)

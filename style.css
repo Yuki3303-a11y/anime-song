@@ -3207,7 +3207,7 @@ body {
         var(--bg-page);
 }
 .bg-deco { display: none; }
-#sakuraCanvas { display: block; z-index: 2; opacity: .86; }
+#sakuraCanvas { display: block; opacity: .55; }
 .app { align-items: flex-start; padding: clamp(14px, 3vw, 42px); }
 .container {
     width: min(1180px, 100%);
@@ -3242,14 +3242,18 @@ body {
     overflow: hidden;
 }
 .hero::before {
-    content: '♪';
-    width: auto; height: auto; inset: auto 4% 5% auto;
-    color: #f3dce4; background: none;
-    font: 900 clamp(170px, 25vw, 300px)/.8 Georgia, serif;
+    content: '';
+    width: 36%; height: 23%; inset: auto 7% 15% auto;
+    color: #e2bfcd;
+    background:
+        linear-gradient(currentColor, currentColor) top left / 20px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) top left / 1px 20px no-repeat,
+        linear-gradient(currentColor, currentColor) bottom right / 20px 1px no-repeat,
+        linear-gradient(currentColor, currentColor) bottom right / 1px 20px no-repeat;
     animation: none;
 }
 .hero::after {
-    content: '01 / LISTEN'; position: absolute; right: 20px; top: 18px;
+    content: 'CUT 01'; position: absolute; right: 20px; top: 18px;
     color: var(--text-secondary); font-size: 11px; font-weight: 900; letter-spacing: .13em;
 }
 .hero-featured-cover {
@@ -3523,7 +3527,6 @@ body {
     .hero-cover-nav { top: 161px; right: 13px; width: 91px; grid-template-columns: 26px 1fr 26px; font-size: 8px; }
     .hero-cover-nav button { min-width: 26px; min-height: 26px; font-size: 18px; }
     .hero-featured-title { position: relative; order: 2; right: auto; bottom: auto; width: 100%; margin-top: 8px; font-size: 10px; text-align: left; -webkit-line-clamp: 1; }
-    .hero::before { font-size: 160px; }
     .hero-icon { width: 58px; height: 58px; margin: 14px 0 12px; }
     .hero-title { font-size: 42px; }
     .hero-line { font-size: 20px; margin: 17px 0; }
@@ -3565,7 +3568,7 @@ body {
     .library-cover-actions { justify-content: flex-start; }
 }
 
-/* Sakura music club — artwork and presentation only; existing layout/actions remain. */
+/* Sakura music club */
 body {
     background:
         radial-gradient(ellipse at 8% 12%, #fbdce7 0, transparent 36%),
@@ -3586,12 +3589,15 @@ body {
 }
 .hero-icon {
     border: 0; background: none; box-shadow: none; overflow: visible;
-    filter: drop-shadow(0 4px 3px #9c597025);
 }
 .hero-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .hero-kicker { background: #704154; }
 .hero-title { letter-spacing: -.055em; }
-.hero-edition { border-top-width: 1px; border-top-color: #cda4b5; }
+.hero-edition {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+    gap: 4px 12px; border-top-width: 1px; border-top-color: #cda4b5;
+}
+.hero-edition-mark { color: var(--text-secondary); font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; letter-spacing: .12em; }
 .hero-featured-cover { box-shadow: 6px 6px 0 #dfb4c3; }
 .menu-library-card {
     background: linear-gradient(120deg, #fcebf0, #fff8f5);
@@ -3602,21 +3608,19 @@ body {
 .btn-group > .btn-primary { background: #f7dce7; color: var(--text-primary); }
 .btn-group > .btn:hover { background: #fbe5ed; box-shadow: 5px 5px 0 #c9a3b3; }
 .mode-art {
-    display: block; width: 54px; height: 54px; flex: 0 0 54px;
+    display: block; width: 44px; height: 44px; flex: 0 0 44px;
     object-fit: contain; pointer-events: none;
-    transition: transform .18s ease;
 }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .btn-group > .btn:hover .mode-art { transform: translateY(-2px) rotate(-4deg); }
+.home-poster-image::after {
+    content: ''; position: absolute; inset: 5px;
+    border: 1px solid #ffffff75; pointer-events: none;
 }
 .home-poster-card, .library-anime-card { box-shadow: 3px 3px 0 #e8ced8; }
 .card-modal, .detail-modal { box-shadow: 7px 7px 0 #dfb4c3; }
 button:focus-visible, a:focus-visible { outline: 3px solid #a63e68; outline-offset: 3px; }
 @media (max-width: 480px) {
     .btn-group > .btn { gap: 6px; padding: 8px; }
-    .mode-art { width: 40px; height: 40px; flex-basis: 40px; }
+    .mode-art { width: 36px; height: 36px; flex-basis: 36px; }
     .logo-icon { width: 38px; height: 38px; flex-basis: 38px; }
 }
-@media (prefers-reduced-motion: reduce) { .mode-art { transition: none; } }
-
-@media (max-width: 599px) { #sakuraCanvas { opacity: .72; } }
+@media (max-width: 599px) { #sakuraCanvas { opacity: .45; } }

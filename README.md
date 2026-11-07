@@ -34,7 +34,7 @@ node bili-proxy.mjs
 | `audio-prefetch.mjs` | 单人下一题的延后音源解析、任务接管与取消 |
 | `personal-backup.mjs` | 个人备份格式、白名单校验、歌曲导入元数据与存储恢复 |
 | `library-navigation.mjs` | 曲库来源映射、组合、搜索、分组及试听会话标记 |
-| `library-tools.mjs` | 曲目与番剧身份、追番过滤、本地错题、音源状态与反馈记录 |
+| `library-tools.mjs`、`catalog-key-history.mjs` | 曲目与番剧身份、旧曲库记录兼容、追番过滤、本地错题、音源状态与反馈 |
 | `songs.js`、`seasonal-pools.js`、`seasonal-covers.js` | 原有歌曲、已发布季度曲库和封面地址 |
 | `index_75323.json` | Bangumi 目录 75323 的本地索引 |
 | `bili-proxy.mjs`、`api/search.js` | Node.js 本地代理、Vercel B 站代理 |
@@ -42,6 +42,8 @@ node bili-proxy.mjs
 | `tests/`、`.github/workflows/` | Node 内置测试、定期生成季度候选的工作流 |
 
 前端采用原生 HTML、CSS、JavaScript 和浏览器 ES Modules。Firebase SDK 通过 CDN 加载。播放使用 HTML Audio 与 YouTube IFrame Player API。本地代理使用 Node 内置模块，Vercel 函数使用 `spark-md5` 生成 B 站 WBI 签名。
+
+曲库显示优先使用大陆授权或国内常用的番名。歌曲已有通行译名时使用通行译名，其余保留发行方使用的日文或拉丁字母写法。歌手以动画使用版本的演唱署名为准。
 
 ## 核心数据流
 

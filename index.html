@@ -6,14 +6,13 @@
     <meta name="theme-color" content="#fff3f5">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>♪ 萌豚挑战 - 二次元听歌猜番剧</title>
-    <!-- Sakura music club: generated artwork, local transparent PNG -->
-    <link rel="icon" type="image/png" href="assets/sakura/brand-64.png">
+    <link rel="icon" type="image/svg+xml" href="assets/anime-frame/brand.svg">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- Preconnect to the hottest API endpoints: saves DNS + TLS handshake on first request -->
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=61">
+    <link rel="stylesheet" href="style.css?v=62">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -34,7 +33,7 @@
             <header class="header">
                 <div class="logo">
                     <div class="logo-icon">
-                        <img src="assets/sakura/brand-128.png" alt="" width="44" height="44" decoding="async">
+                        <img src="assets/anime-frame/brand.svg" alt="" width="44" height="44" decoding="async">
                     </div>
                     <span class="logo-text">萌豚挑战</span>
                 </div>
@@ -88,12 +87,15 @@
                         </div>
                         <span id="heroFeaturedTitle" class="hero-featured-title"></span>
                         <div class="hero-icon">
-                            <img src="assets/sakura/brand-256.png" alt="" width="88" height="88" decoding="async">
+                            <img src="assets/anime-frame/brand.svg" alt="" width="88" height="88" decoding="async">
                         </div>
                         <h1 class="hero-title">萌豚挑战</h1>
                         <div class="hero-sub">二次元听歌猜番剧 · <strong id="songCount">150+</strong> 首曲库</div>
                         <p class="hero-line">熟悉的前奏响起，<br>你能认出哪一部番？</p>
-                        <span class="hero-edition">VOL. 01　♪　听歌 · 猜番 · 追番</span>
+                        <span class="hero-edition">
+                            <span>VOL. 01　♪　听歌 · 猜番 · 追番</span>
+                            <span class="hero-edition-mark" lang="ja" aria-hidden="true">アニメ音楽帖</span>
+                        </span>
                     </div>
 
                     <div class="menu-library-card">
@@ -109,19 +111,19 @@
                     <div class="mode-heading"><span>选择挑战</span><small>CHOOSE YOUR PANEL</small></div>
                     <div class="btn-group">
                         <button class="btn btn-primary" data-action="startMode" data-value="anime">
-                            <img class="mode-art" src="assets/sakura/anime-128.png" alt="" width="54" height="54" decoding="async">
+                            <img class="mode-art" src="assets/anime-frame/anime.svg" alt="" width="44" height="44" decoding="async">
                             猜番剧
                         </button>
                         <button class="btn btn-secondary" data-action="startMode" data-value="song">
-                            <img class="mode-art" src="assets/sakura/song-128.png" alt="" width="54" height="54" decoding="async">
+                            <img class="mode-art" src="assets/anime-frame/song.svg" alt="" width="44" height="44" decoding="async">
                             猜歌名
                         </button>
                         <button class="btn btn-secondary" data-action="startMode" data-value="artist">
-                            <img class="mode-art" src="assets/sakura/artist-128.png" alt="" width="54" height="54" decoding="async">
+                            <img class="mode-art" src="assets/anime-frame/artist.svg" alt="" width="44" height="44" decoding="async">
                             猜歌手
                         </button>
                         <button class="btn btn-secondary" data-action="startMode" data-value="mixed">
-                            <img class="mode-art" src="assets/sakura/mixed-128.png" alt="" width="54" height="54" decoding="async">
+                            <img class="mode-art" src="assets/anime-frame/mixed.svg" alt="" width="44" height="44" decoding="async">
                             混合模式
                         </button>
                     </div>
@@ -676,6 +678,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=61"></script>
+    <script type="module" src="app.js?v=62"></script>
 </body>
 </html>

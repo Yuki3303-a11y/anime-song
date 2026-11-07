@@ -85,8 +85,11 @@ test('source failure tracker escalates, caps, and resets on success', () => {
 });
 
 test('one challenge cannot contain the same title and anime twice', () => {
-  const pool = [song, { ...song, type: 'ED' }, { ...song }, { ...song, title: 'Other' }];
+  const legacy = { ...song, anime: song.animeCN, animeCN: undefined };
+  const other = { ...song, title: 'Other' };
+  const pool = [song, { ...song, type: 'ED' }, legacy, other];
   assert.equal(uniqueChallengePool(pool).length, 2);
+  assert.equal(pickReplacementSong([legacy, other], [song]), other);
 });
 
 test('a failed question uses an unused song from the same selected pool', () => {
