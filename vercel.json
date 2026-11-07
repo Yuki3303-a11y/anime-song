@@ -1,4 +1,5 @@
 {
+  "regions": ["hkg1"],
   "functions": {
     "api/search.js": {
       "memory": 512,

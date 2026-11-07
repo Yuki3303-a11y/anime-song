@@ -39,10 +39,10 @@ function getMixinKey(raw) {
 
 let cachedKeys = null;
 
-function biliGet(path, params) {
+function biliGet(path, params, signal) {
   return new Promise((resolve, reject) => {
     const opts = {
-      hostname: BILI_HOST, path, headers: {
+      hostname: BILI_HOST, path, signal, headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         'Referer': 'https://www.bilibili.com/', 'Cookie': BILI_COOKIE, 'Accept': 'application/json'
       }
@@ -93,10 +93,10 @@ async function withRetry(fn) {
   throw lastErr;
 }
 
-async function signedGet(path, params) {
+async function signedGet(path, params, signal) {
   if (!cachedKeys) {
     try {
-      const nav = await biliGet('/x/web-interface/nav');
+      const nav = await biliGet('/x/web-interface/nav', null, signal);
       if (nav.data?.wbi_img) {
         cachedKeys = {
           img: nav.data.wbi_img.img_url.split('/').pop().split('.')[0],
@@ -105,6 +105,7 @@ async function signedGet(path, params) {
       }
     } catch (e) { cachedKeys = { img: FALLBACK_IMG, sub: FALLBACK_SUB }; }
   }
+  if (!cachedKeys) cachedKeys = { img: FALLBACK_IMG, sub: FALLBACK_SUB };
   const mixinKey = getMixinKey(cachedKeys.img + cachedKeys.sub);
   const wts = Math.floor(Date.now() / 1000);
   const all = { ...params, wts };
@@ -113,7 +114,26 @@ async function signedGet(path, params) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(v);
   }).join('&');
   const w_rid = md5(query + mixinKey);
-  return withRetry(() => biliGet(`${path}?${query}&w_rid=${w_rid}`));
+  return withRetry(() => biliGet(`${path}?${query}&w_rid=${w_rid}`, null, signal));
+}
+
+function allowedTargets(values) {
+  return [...new Set(values.filter(Boolean))].flatMap(value => {
+    try { const target = new URL(value); return isAllowedStreamUrl(target) ? [target] : []; }
+    catch { return []; }
+  });
+}
+
+async function compactVideoTargets(bvid, signal) {
+  const info = await signedGet('/x/web-interface/view', { bvid }, signal);
+  const cid = info.data?.cid;
+  if (!cid) return [];
+  const play = await signedGet('/x/player/playurl', {
+    bvid, cid: String(cid), platform: 'html5', qn: '16', fnval: '1'
+  }, signal);
+  if (play.data?.format !== 'mp4') return [];
+  const track = play.data?.durl?.[0];
+  return allowedTargets([track?.url, ...(track?.backup_url || [])]).slice(0, 2);
 }
 
 // 统一错误响应：区分业务码 / 超时 / 其他
@@ -128,6 +148,7 @@ function sendError(res, err) {
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Range');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const { q, bvid, stream, backup } = req.query;
@@ -147,6 +168,26 @@ module.exports = async (req, res) => {
         targets.push(parsed);
       }
 
+      const controller = new AbortController();
+      res.once?.('close', () => controller.abort());
+      let triedCompact = false;
+      const nextTarget = async index => {
+        if (res.headersSent || controller.signal.aborted) return;
+        if (index < targets.length) return pipeTarget(index);
+        if (!triedCompact && typeof bvid === 'string' && /^BV[0-9A-Za-z]{10}$/.test(bvid)) {
+          triedCompact = true;
+          try {
+            const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]);
+            const fallback = await compactVideoTargets(bvid, signal);
+            if (controller.signal.aborted) return;
+            targets.push(...fallback.filter(url => !targets.some(target => target.href === url.href)));
+            if (index < targets.length) return pipeTarget(index);
+          } catch {
+            if (controller.signal.aborted) return;
+          }
+        }
+        res.status(502).json({ error: 'B站 CDN 暂未提供可用音频' });
+      };
       const pipeTarget = index => {
         const parsed = targets[index];
         const headers = {
@@ -159,12 +200,12 @@ module.exports = async (req, res) => {
           hostname: parsed.hostname,
           port: parsed.port || undefined,
           path: parsed.pathname + parsed.search,
+          signal: controller.signal,
           headers
         }, upstream => {
-          if (upstream.statusCode >= 400) {
+          if (upstream.statusCode !== 200 && upstream.statusCode !== 206) {
             upstream.resume?.();
-            if (index + 1 < targets.length && !res.headersSent) return pipeTarget(index + 1);
-            res.status(upstream.statusCode).end();
+            nextTarget(index + 1);
             return;
           }
           res.status(upstream.statusCode);
@@ -176,10 +217,10 @@ module.exports = async (req, res) => {
           res.setHeader('Cache-Control', 'public, max-age=3600');
           upstream.pipe(res);
         });
-        upstreamReq.setTimeout(15000, () => upstreamReq.destroy(new Error('音频源连接超时')));
+        upstreamReq.setTimeout(3500, () => upstreamReq.destroy(new Error('音频源连接超时')));
         upstreamReq.on('error', () => {
-          if (index + 1 < targets.length && !res.headersSent) return pipeTarget(index + 1);
-          if (!res.headersSent) res.status(502).json({ error: '音频源拉取失败' });
+          if (controller.signal.aborted) return;
+          if (!res.headersSent) nextTarget(index + 1);
           else res.end();
         });
       };

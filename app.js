@@ -1,7 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getDatabase, ref, get, onValue, update, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=60';
+import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=61';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=41';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=2';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
@@ -23,24 +20,37 @@ const firebaseConfig = {
     databaseURL: "https://animequiz-a16c1-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 let db, auth, user, roomId, roomUnsub;
+let ref, get, onValue, update, runTransaction, serverTimestamp, signInAnonymously;
+let firebaseConnection;
 
-try {
-    const app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    db = getDatabase(app);
-    signInAnonymously(auth).catch(() => {
-        document.getElementById('uidText').textContent = '离线';
-    });
-    onAuthStateChanged(auth, u => {
-        if (u) {
-            user = u;
-            document.getElementById('statusDot').classList.add('online');
-            document.getElementById('uidText').textContent = u.uid.slice(0, 6);
-            checkInvite();
+function connectFirebase() {
+    if (firebaseConnection) return firebaseConnection;
+    $('uidText').textContent = '联机连接中…';
+    firebaseConnection = (async () => {
+        if (!auth) {
+            const [appSdk, authSdk, dbSdk] = await Promise.all([
+                import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js'),
+                import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js'),
+                import('https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js')
+            ]);
+            const app = appSdk.initializeApp(firebaseConfig);
+            db = dbSdk.getDatabase(app);
+            ({ ref, get, onValue, update, runTransaction, serverTimestamp } = dbSdk);
+            signInAnonymously = authSdk.signInAnonymously;
+            auth = authSdk.getAuth(app);
         }
+        await auth.authStateReady();
+        user = auth.currentUser || (await signInAnonymously(auth)).user;
+        $('statusDot').classList.add('online');
+        $('uidText').textContent = user.uid.slice(0, 6);
+        return true;
+    })().catch(error => {
+        firebaseConnection = null;
+        $('uidText').textContent = '联机暂不可用';
+        console.warn('[PK] 无法连接联机服务', error);
+        return false;
     });
-} catch (e) {
-    document.getElementById('uidText').textContent = '离线';
+    return firebaseConnection;
 }
 
 // =====================================================================
@@ -2570,7 +2580,11 @@ function showView(viewName) {
     gameState.audioPrefetch?.cancel(true);
     if (viewName !== 'game' && $('animeDetailModal').classList.contains('show')) closeDetailModal();
     if (viewName !== 'library' && libraryPreviewSession.activeKey) stopLibraryPreview();
-    if (viewName !== 'game') gameState.fetchGeneration++;
+    if (viewName !== 'game') {
+        gameState.fetchGeneration++;
+        stopQuestionLoad();
+        clearQuizMediaTimeout();
+    }
     if (viewName !== 'library') stopLibraryPreview();
     if (roomUnsub) { roomUnsub(); roomUnsub = null; }
     stopFullPlayer();
@@ -2589,6 +2603,7 @@ function showView(viewName) {
     if (target) target.classList.remove('hidden');
     if (viewName === 'leaderboard') renderLeaderboard();
     if (viewName === 'library') renderLibrary();
+    if (viewName === 'lobby') connectFirebase();
 }
 
 // =====================================================================
@@ -2645,7 +2660,7 @@ function startSingle() {
 let pkBusy = false;
 async function pkCreate() {
     if (pkBusy) return;
-    if (!user) { notify('正在连接服务器喵~ 请稍等...'); return; }
+    if (!user) { connectFirebase(); notify('正在连接服务器，请稍等…'); return; }
     if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
     pkBusy = true;
     try {
@@ -2681,7 +2696,7 @@ async function pkCreate() {
 
 async function pkJoin() {
     if (pkBusy) return;
-    if (!user) { notify('正在连接服务器喵~ 请稍等...'); return; }
+    if (!user) { connectFirebase(); notify('正在连接服务器，请稍等…'); return; }
     if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
     const rid = $('roomIdInput').value.trim();
     if (rid.length !== 4 || !/^\d{4}$/.test(rid)) { notify('喵~ 请输入4位数字房间号哦'); return; }
@@ -2804,7 +2819,7 @@ function enterRoom(rid) {
 function checkInvite() {
     try {
         const rid = new URL(location.href).searchParams.get('room');
-        if (rid && rid.length === 4) {
+        if (rid && /^\d{4}$/.test(rid)) {
             showView('lobby');
             $('roomIdInput').value = rid;
         }
@@ -2847,10 +2862,31 @@ function setQuizMediaState(state, message) {
         retryButton.hidden = state === 'idle' || state === 'searching';
         retryButton.disabled = state === 'switching';
     }
-    if (canAnswer || state === 'awaiting-play') clearQuizMediaTimeout();
+    const skipButton = $('skipAudioBtn');
+    if (skipButton) skipButton.hidden = gameState.mode !== 'single' || gameState.isLocked ||
+        !['searching', 'switching', 'buffering', 'awaiting-play'].includes(state);
+    if (canAnswer || state === 'awaiting-play') {
+        clearQuizMediaTimeout();
+        stopQuestionLoad();
+    }
 }
 
 let quizMediaTimeout = null;
+
+function stopQuestionLoad() {
+    const load = gameState.questionLoad;
+    if (!load) return;
+    gameState.questionLoad = null;
+    clearTimeout(load.timer);
+    load.controller.abort();
+}
+
+function startQuestionLoad() {
+    if (gameState.mode !== 'single' || gameState.questionLoad) return;
+    const controller = new AbortController();
+    const timer = setTimeout(() => skipUnplayableQuestion('音频等待超时'), 15000);
+    gameState.questionLoad = { controller, timer };
+}
 
 function clearQuizMediaTimeout() {
     if (quizMediaTimeout) clearTimeout(quizMediaTimeout);
@@ -2876,6 +2912,7 @@ function loadQuestion() {
     $('gameAudioPanel').classList.remove('answered');
     stopQuizYT();
     clearQuizMediaTimeout();
+    stopQuestionLoad();
     audioRetryCount = 0; // fresh retry budget per question
     gameState.mediaRetryCount = 0;
     gameState.recoveringAudio = false;
@@ -2952,6 +2989,7 @@ function loadQuestion() {
     $('visualizer').classList.add('hidden');
     $('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
     setQuizMediaState('searching', '正在搜索音频…');
+    startQuestionLoad();
     progressFill.style.width = '0%';
     $('playerTimeCurrent').textContent = '00:00';
     $('songInfo').classList.remove('show');
@@ -2961,11 +2999,11 @@ function loadQuestion() {
     updateNavButtons();
     $('optionsGrid').innerHTML = '<div class="loading-state"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text">正在搜索音频喵~</div></div>';
 
-    const correctAnime = q.anime;  // capture now — prevents race if recursive loadQuestion overwrites gameState
     const prepared = gameState.audioPrefetch?.take(audioResultKey(q.title, q.artist, q.anime, q.type, audioSourcePref));
     gameState.audioPrefetch?.cancel();
+    const signal = gameState.questionLoad?.controller.signal;
     const resolved = prepared ? prepared.then(result => (result?.source === 'youtube' && Date.now() < (gameState.youtubeUnavailableUntil || 0) ? null : result) || (gen === gameState.fetchGeneration
-        ? fetchAudio(q.title, q.artist, q.anime, q.type) : null)) : fetchAudio(q.title, q.artist, q.anime, q.type);
+        ? fetchAudio(q.title, q.artist, q.anime, q.type, signal) : null)) : fetchAudio(q.title, q.artist, q.anime, q.type, signal);
     resolved.then(result => {
         if (gen !== gameState.fetchGeneration) return;
         if (!result) {
@@ -2974,7 +3012,7 @@ function loadQuestion() {
             if (audioSourcePref === 'bilibili-only' && biliBroken) {
                 if (!biliProxyState.notified) {
                     biliProxyState.notified = true;
-                    skipUnplayableQuestion('B站音频获取失败。请检查本地代理或设置中的代理地址');
+                    skipUnplayableQuestion('B站音频获取失败');
                 } else {
                     skipUnplayableQuestion('B站代理不可用');
                 }
@@ -3029,9 +3067,12 @@ function prepareQuestionAudio(result, generation) {
     armQuizMediaTimeout(`${label}缓冲超时`);
 }
 
-function skipUnplayableQuestion(message) {
+function skipUnplayableQuestion(message, failed = true) {
+    const generation = ++gameState.fetchGeneration;
+    stopQuestionLoad();
+    gameState.audioPrefetch?.cancel(true);
     clearQuizMediaTimeout();
-    if (gameState.mode === 'single') {
+    if (failed && gameState.mode === 'single') {
         recordLocalAudioCheck(gameState.currentSong, 'failed', gameState.lastAudioResult?.source || audioSourcePref || 'default', message);
         noteSourceFailure(gameState.currentSong, gameState.lastAudioResult?.source || audioSourcePref);
     }
@@ -3045,16 +3086,20 @@ function skipUnplayableQuestion(message) {
     else gameState.questionIndex++;
     const status = `${message}${replacement ? '，已换另一首' : '，已跳过此题'}`;
     setQuizMediaState('failed', status);
+    stopQuizYT();
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
     notify(status);
-    const generation = gameState.fetchGeneration;
     setTimeout(() => {
         if (generation === gameState.fetchGeneration) loadQuestion();
-    }, 800);
+    }, failed ? 800 : 0);
 }
 
 async function recoverQuestionAudio(reason) {
-    if (gameState.recoveringAudio || gameState.isLocked || !gameState.currentSong) return;
+    if (gameState.recoveringAudio || gameState.isLocked || gameState.mediaState === 'failed' || !gameState.currentSong) return;
     gameState.recoveringAudio = true;
+    startQuestionLoad();
     clearQuizMediaTimeout();
     const failedSource = gameState.lastAudioResult?.source || null;
     if (failedSource === 'bilibili' && gameState.lastAudioResult?.bvid) {
@@ -3087,7 +3132,7 @@ async function recoverQuestionAudio(reason) {
     try {
         result = await fetchAudioInner(
             song.title, song.artist, song.anime, cacheKey, gameState.failedAudioSources, song.type || '', audioSourcePref,
-            { yt: gameState.failedYtVideos, bili: gameState.failedBiliVideos }, null, song, gameState.lastAudioResult?.alternatives || []
+            { yt: gameState.failedYtVideos, bili: gameState.failedBiliVideos }, gameState.questionLoad?.controller.signal, song, gameState.lastAudioResult?.alternatives || []
         );
     } catch (error) {
         console.error('[Audio] automatic recovery failed:', error);
@@ -3104,6 +3149,8 @@ async function recoverQuestionAudio(reason) {
 async function retryQuestionAudio() {
     if (gameState.recoveringAudio || gameState.isLocked || !gameState.currentSong) return;
     gameState.recoveringAudio = true;
+    stopQuestionLoad();
+    startQuestionLoad();
     gameState.youtubeUnavailableUntil = 0;
     clearQuizMediaTimeout();
     const song = gameState.currentSong;
@@ -3122,7 +3169,8 @@ async function retryQuestionAudio() {
     setQuizMediaState('switching', '正在重新加载音频…');
     let result = null;
     try {
-        result = await fetchAudioInner(song.title, song.artist, song.anime, cacheKey, new Set());
+        result = await fetchAudioInner(song.title, song.artist, song.anime, cacheKey, new Set(), song.type || '',
+            audioSourcePref, undefined, gameState.questionLoad?.controller.signal);
     } catch (error) {
         console.error('[Audio] manual reload failed:', error);
     }
@@ -3135,13 +3183,14 @@ async function retryQuestionAudio() {
     prepareQuestionAudio(result, generation);
 }
 
-function buildBiliProxyUrl(cdnUrl, backupUrl = '') {
+function buildBiliProxyUrl(cdnUrl, backupUrl = '', bvid = '') {
     const base = window.BILI_WORKER_URL;
     const backup = backupUrl ? `&backup=${encodeURIComponent(backupUrl)}` : '';
     if (base.includes('localhost') || base.includes('127.0.0.1')) {
         return `${base}/stream?url=${encodeURIComponent(cdnUrl)}${backup}`;
     }
-    return `${base}/api/search?stream=${encodeURIComponent(cdnUrl)}${backup}`;
+    const video = bvid ? `&bvid=${encodeURIComponent(bvid)}` : '';
+    return `${base}/api/search?stream=${encodeURIComponent(cdnUrl)}${backup}${video}`;
 }
 
 async function fetchBilibiliAudio(title, artist, anime, type, cacheKey, excludedBvids = new Set()) {
@@ -3157,7 +3206,7 @@ async function fetchBilibiliAudio(title, artist, anime, type, cacheKey, excluded
         const audioInfo = await getBilibiliAudioUrl(candidate.bvid);
         if (!audioInfo?.url) continue;
         const e = {
-            url: buildBiliProxyUrl(audioInfo.url, audioInfo.backupUrl),
+            url: buildBiliProxyUrl(audioInfo.url, audioInfo.backupUrl, candidate.bvid),
             source: 'bilibili',
             bvid: candidate.bvid,
             biliTitle: candidate.title,
@@ -3210,7 +3259,8 @@ function sourceFailurePenalty(song, source) {
     return n >= 3 ? 30 : n === 2 ? 20 : 10;
 }
 
-async function fetchAudio(title, artist, anime, songType = '') {
+async function fetchAudio(title, artist, anime, songType = '', signal = null) {
+    if (signal?.aborted) return null;
     const cacheKey = `${title}|${anime}`;
     const type = songType || gameState.currentSong?.type || '';
     const preference = audioSourcePref;
@@ -3220,10 +3270,15 @@ async function fetchAudio(title, artist, anime, songType = '') {
     if (cached && !(cached.source === 'youtube' && Date.now() < (gameState.youtubeUnavailableUntil || 0)) &&
         Date.now() - (cached.resolvedAt || 0) < maxAge) return cached;
     if (cached) resolvedAudioCache.delete(inFlightKey);
-    if (fetchAudioInFlight.has(inFlightKey)) return fetchAudioInFlight.get(inFlightKey);
-    const p = fetchAudioInner(title, artist, anime, cacheKey, new Set(), type, preference)
-        .then(result => { if (result?.url) { result.resolvedAt = Date.now(); resolvedAudioCache.set(inFlightKey, result); } return result; })
-        .finally(() => fetchAudioInFlight.delete(inFlightKey));
+    if (!signal && fetchAudioInFlight.has(inFlightKey)) return fetchAudioInFlight.get(inFlightKey);
+    const p = fetchAudioInner(title, artist, anime, cacheKey, new Set(), type, preference, undefined, signal)
+        .then(result => {
+            if (signal?.aborted) return null;
+            if (result?.url) { result.resolvedAt = Date.now(); resolvedAudioCache.set(inFlightKey, result); }
+            return result;
+        });
+    if (signal) return p;
+    p.then(() => fetchAudioInFlight.delete(inFlightKey), () => fetchAudioInFlight.delete(inFlightKey));
     fetchAudioInFlight.set(inFlightKey, p);
     return p;
 }
@@ -3287,7 +3342,7 @@ async function fetchAudioInner(title, artist, anime, cacheKey, excludedSources =
         if (!info?.url || signal?.aborted) return null;
         biliProxyState.down = false;
         biliProxyState.reason = null;
-        return { url: buildBiliProxyUrl(info.url, info.backupUrl), source: 'bilibili', score: candidate.score,
+        return { url: buildBiliProxyUrl(info.url, info.backupUrl, candidate.bvid), source: 'bilibili', score: candidate.score,
             bvid: candidate.bvid, biliTitle: candidate.title, biliDuration: info.duration, alternatives };
     }
     const saved = [...pinned, ...rankAudioCandidates(song, preferredCandidates, { requireRelation: true })].filter(allowed);
@@ -3710,7 +3765,7 @@ audio.onstalled = () => {
 audio.onerror = () => {
     if (fpUseAudio || musicUseAudio) {
         notify(musicUseAudio || gameState.lastAudioResult?.source === 'bilibili'
-            ? '呜喵~ B站音频加载失败了，检查本地代理是否在运行（双击「启动B站代理.bat」）~'
+            ? 'B站音频线路暂不可用，请稍后重试'
             : '呜喵~ 歌曲音频加载失败了，请稍后重试~');
         return;
     }
@@ -4557,7 +4612,7 @@ function initAudioSourceFilter() {
     const proxyGroup = $('biliProxyGroup');
     const proxyInput = $('biliProxyInput');
     if (proxyInput) {
-        proxyInput.value = window.BILI_WORKER_URL || 'http://127.0.0.1:8765';
+        proxyInput.value = window.BILI_WORKER_URL;
     }
     // Show proxy input only when B站 mode is active
     if (proxyGroup) {
@@ -4572,7 +4627,18 @@ function initAudioSourceFilter() {
                 proxyInput.value = val;
                 try { localStorage.setItem('bili_proxy_url_v1', val); } catch {}
                 notify('代理地址已更新');
+            } else {
+                window.BILI_WORKER_URL = BILI_WORKER_URL_DEFAULT;
+                try { localStorage.removeItem('bili_proxy_url_v1'); } catch {}
+                proxyInput.value = BILI_WORKER_URL_DEFAULT;
+                notify('已恢复线上代理');
             }
+            bilibiliCache.clear();
+            bilibiliAudioCache.clear();
+            audioCache.clear();
+            resolvedAudioCache.clear();
+            gameState.audioPrefetch?.cancel(true);
+            stopLibraryPreview();
         });
     }
 
@@ -4820,6 +4886,9 @@ document.addEventListener('click', (e) => {
         case 'pkShare': pkShare(); break;
         case 'pkStart': pkStart(); break;
         case 'togglePlay': togglePlay(); break;
+        case 'skipQuestionAudio':
+            if (!$('skipAudioBtn').hidden) skipUnplayableQuestion('已换歌', false);
+            break;
         case 'retryQuestionAudio': retryQuestionAudio(); break;
         case 'restartGame': restartGame(); break;
         case 'clearRecords': clearRecords(); break;
@@ -4978,7 +5047,8 @@ libraryPreviewAudio.addEventListener('error', () => {
     recoverLibraryPreviewAudio('音频加载失败');
 });
 $('libraryVolRange').addEventListener('input', event => setPlayerVolume(event.target.value));
-probeLocalProxy();   // 自动探测本地 B站代理（bili-proxy.mjs），在跑就自动启用
+if (['127.0.0.1', 'localhost'].includes(location.hostname)) probeLocalProxy();
+checkInvite();
 updateCustomSongsUI();
 
 // Return focus to whichever entry point opened the panel.

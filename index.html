@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=60">
+    <link rel="stylesheet" href="style.css?v=61">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -41,7 +41,7 @@
                 <div class="header-right">
                     <div class="status-pill">
                         <div class="status-dot" id="statusDot"></div>
-                        <span id="uidText">...</span>
+                        <span id="uidText">单人模式</span>
                     </div>
                 </div>
             </header>
@@ -411,6 +411,7 @@
                     <div class="player-assist">
                         <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.93 4.93a10 10 0 0 1 14.14 0M7.76 7.76a6 6 0 0 1 8.48 0M10.59 10.59a2 2 0 0 1 2.82 0"/><circle cx="12" cy="15" r="1"/></svg>失败时自动换源，不计错题</span>
                         <button id="retryAudioBtn" type="button" data-action="retryQuestionAudio" hidden>重新加载</button>
+                        <button id="skipAudioBtn" type="button" data-action="skipQuestionAudio" hidden>换一首</button>
                     </div>
 
                     <div class="progress">
@@ -517,8 +518,9 @@
                 </div>
                 <div class="settings-group" id="biliProxyGroup" style="display:none;">
                     <div class="settings-label">B站代理地址</div>
+                    <p class="library-filter-hint">网站默认使用线上代理。留空保存可恢复默认地址。</p>
                     <div style="display:flex;gap:6px;">
-                        <input id="biliProxyInput" class="settings-input" type="url" aria-label="B站代理地址" autocomplete="off" style="flex:1;" placeholder="http://127.0.0.1:8765">
+                        <input id="biliProxyInput" class="settings-input" type="url" aria-label="B站代理地址" autocomplete="off" style="flex:1;" placeholder="默认线上代理">
                         <button class="settings-chip" id="biliProxySave">保存</button>
                     </div>
                 </div>
@@ -674,6 +676,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=60"></script>
+    <script type="module" src="app.js?v=61"></script>
 </body>
 </html>

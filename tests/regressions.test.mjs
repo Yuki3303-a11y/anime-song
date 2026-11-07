@@ -60,13 +60,13 @@ test('library preview shares the exact Bilibili-only question search', async () 
     normalizeAudioEntry: x => x, fetchAudioInFlight: new Map(),
     audioResultKey: (...parts) => parts.join('|'), resolvedAudioCache: new Map(),
     gameState: { currentSong: { type: 'OP' } },
-    fetchAudioInner: async (...args) => { calls.push(args.at(-1)); return { url: 'ok' }; },
+    fetchAudioInner: async (...args) => { calls.push(args[6]); return { url: 'ok' }; },
   };
   vm.createContext(context);
   vm.runInContext(appSource.slice(start, end), context);
   await Promise.all([
-    context.fetchAudio('Song', 'Artist', 'Anime', 'OP', false),
-    context.fetchAudio('Song', 'Artist', 'Anime', 'OP', true),
+    context.fetchAudio('Song', 'Artist', 'Anime', 'OP'),
+    context.fetchAudio('Song', 'Artist', 'Anime', 'OP'),
   ]);
   assert.deepEqual(calls, ['bilibili-only']);
 });
@@ -123,7 +123,7 @@ test('Vercel stream proxy preserves byte range response', async () => {
       if (name === 'spark-md5') return { hash: () => '' };
       throw new Error(name);
     },
-    module: { exports: null }, process: { env: {} }, URLSearchParams,
+    module: { exports: null }, process: { env: {} }, URLSearchParams, AbortController,
   };
   vm.createContext(context);
   vm.runInContext(source, context);
@@ -150,7 +150,7 @@ test('Vercel stream proxy retries an allowed backup CDN', async () => {
       hosts.push(options.hostname);
       const primary = hosts.length === 1;
       queueMicrotask(() => callback({
-        statusCode: primary ? 502 : 206,
+        statusCode: primary ? 567 : 206,
         headers: primary ? {} : { 'content-type': 'audio/mp4' },
         resume() {},
         pipe(res) { res.piped = true; },
@@ -165,7 +165,7 @@ test('Vercel stream proxy retries an allowed backup CDN', async () => {
       if (name === 'spark-md5') return { hash: () => '' };
       throw new Error(name);
     },
-    module: { exports: null }, process: { env: {} }, URLSearchParams,
+    module: { exports: null }, process: { env: {} }, URLSearchParams, AbortController,
     setTimeout, clearTimeout, queueMicrotask,
   };
   vm.createContext(context);
@@ -292,7 +292,7 @@ test('an older review audio request cannot replace the current review song', asy
   const audio = { src: '', pause() {} };
   const context = {
     gameState, audio, progressFill: { style: {} }, $, stopQuizYT() {},
-    clearQuizMediaTimeout() {}, setQuizMediaState() {},
+    clearQuizMediaTimeout() {}, stopQuestionLoad() {}, setQuizMediaState() {},
     renderHistoryOptions() {}, showSongInfo() {}, updateNavButtons() {}, animateScore() {},
     fetchAudio: () => new Promise(resolve => pending.push(resolve)),
     quizYT: {}, endGame() {},
@@ -608,7 +608,7 @@ test('automatic recovery remembers earlier failed sources and moves to a new sou
   };
   const context = {
     gameState,
-    clearQuizMediaTimeout() {}, stopQuizYT() {}, setQuizMediaState() {},
+    clearQuizMediaTimeout() {}, startQuestionLoad() {}, stopQuizYT() {}, setQuizMediaState() {},
     audio: { pause() {} }, audioCache: { delete() {} },
     forgetResolvedAudio() {}, noteSourceFailure() {}, recordLocalAudioCheck() {}, audioSourcePref: 'smart',
     fetchAudioInner: async (_title, _artist, _anime, _key, excluded) => {
@@ -638,7 +638,8 @@ test('manual reload retries the selected source even in Bilibili-only mode', asy
     failedBiliVideos: new Set(['bad']),
   };
   const context = {
-    gameState, clearQuizMediaTimeout() {}, stopQuizYT() {},
+    gameState, clearQuizMediaTimeout() {}, startQuestionLoad() {}, stopQuestionLoad() {}, stopQuizYT() {},
+    audioSourcePref: 'bilibili-only',
     audio: { pause() {} }, setQuizMediaState() {},
     audioCache: { delete() {} }, bilibiliAudioCache: { delete() {} },
     forgetResolvedAudio() {},
@@ -754,6 +755,27 @@ test('quiz media timeout triggers generation-safe automatic recovery', () => {
   context.armQuizMediaTimeout('播放启动超时', 1000);
   pending();
   assert.equal(recovered, '播放启动超时');
+});
+
+test('a solo question retains its original deadline across automatic retries', () => {
+  const start = appSource.indexOf('function stopQuestionLoad()');
+  const end = appSource.indexOf('function clearQuizMediaTimeout()', start);
+  const timers = [];
+  const context = {
+    gameState: { mode: 'single' }, AbortController,
+    setTimeout(fn, ms) { timers.push({ fn, ms }); return timers.length; },
+    clearTimeout() {},
+    skipUnplayableQuestion() { context.stopQuestionLoad(); },
+  };
+  vm.createContext(context);
+  vm.runInContext(appSource.slice(start, end), context);
+  context.startQuestionLoad();
+  const signal = context.gameState.questionLoad.controller.signal;
+  context.startQuestionLoad();
+  assert.equal(timers.length, 1);
+  assert.equal(timers[0].ms, 15000);
+  timers[0].fn();
+  assert.equal(signal.aborted, true);
 });
 
 test('quiz UI exposes clear playback state and recovery controls', () => {

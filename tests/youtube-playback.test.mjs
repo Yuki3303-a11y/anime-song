@@ -16,7 +16,7 @@ test('waiting for a user gesture stops the skip timer but keeps answers disabled
     const context = { gameState: {}, $: id => {
         if (!elements.has(id)) elements.set(id, { dataset: {} });
         return elements.get(id);
-    }, document: { querySelectorAll: () => [button] }, clearQuizMediaTimeout() { cleared++; } };
+    }, document: { querySelectorAll: () => [button] }, clearQuizMediaTimeout() { cleared++; }, stopQuestionLoad() {} };
     vm.createContext(context);
     vm.runInContext(app.slice(app.indexOf('function setQuizMediaState('), app.indexOf('let quizMediaTimeout')), context);
     context.setQuizMediaState('awaiting-play', '点击播放');

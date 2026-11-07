@@ -102,16 +102,21 @@ test('quiz replaces an unplayable question without consuming a question slot', (
   const state = { mode: 'single', currentSong: song, playlist: [song], activePool: [song, spare],
     questionIndex: 0, fetchGeneration: 1, lastAudioResult: null, failedQuestionSongs: [] };
   let loaded = 0;
+  let recorded = 0;
   const context = {
-    gameState: state, clearQuizMediaTimeout() {}, recordLocalAudioCheck() {}, noteSourceFailure() {},
+    gameState: state, clearQuizMediaTimeout() {}, stopQuestionLoad() {}, stopQuizYT() {},
+    audio: { pause() {}, removeAttribute() {}, load() {} },
+    recordLocalAudioCheck() { recorded++; }, noteSourceFailure() {},
     setQuizMediaState() {}, notify() {}, pickReplacementSong,
     audioSourcePref: 'smart', setTimeout: callback => { callback(); }, loadQuestion: () => { loaded++; },
   };
   vm.createContext(context);
   vm.runInContext(source, context);
-  context.skipUnplayableQuestion('unavailable');
+  context.skipUnplayableQuestion('已换歌', false);
   assert.equal(state.questionIndex, 0);
   assert.equal(state.playlist[0].title, 'Spare');
+  assert.equal(state.fetchGeneration, 2);
+  assert.equal(recorded, 0);
   assert.equal(loaded, 1);
 });
 
