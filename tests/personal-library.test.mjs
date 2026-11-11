@@ -15,9 +15,9 @@ const song = { title: 'Connect', anime: 'Mahou Shoujo Madoka Magica', animeCN: '
 test('season page groups reviewed OP and ED entries by anime', () => {
   for (const [season, songs] of Object.entries(SEASONAL_POOLS)) {
     const grouped = groupSeasonSongs(songs);
-    assert.equal(grouped.length, 15, season);
+    assert.equal(grouped.length, 30, season);
     assert.ok(grouped.every(anime => anime.tracks.OP && anime.tracks.ED), season);
-    assert.equal(new Set(grouped.map(anime => anime.key)).size, 15, season);
+    assert.equal(new Set(grouped.map(anime => anime.key)).size, 30, season);
   }
 });
 

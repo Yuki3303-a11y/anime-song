@@ -1,6 +1,6 @@
-import { SONGS } from './songs.js?v=65';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=42';
-import { SEASONAL_COVERS } from './seasonal-covers.js?v=2';
+import { SONGS } from './songs.js?v=66';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=43';
+import { SEASONAL_COVERS } from './seasonal-covers.js?v=3';
 import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=2';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
 import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=3';
@@ -154,13 +154,13 @@ const filterState = { types: new Set(), source: null, watchedOnly: (() => {
 })() };
 const SOURCE_MIX_KEY = 'song_source_mix_v1';
 function defaultSourceMix() {
-    return { legacy: true, seasons: Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length === 30), imported: true, watched: false, selected: true };
+    return { legacy: true, seasons: Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length >= 30), imported: true, watched: false, selected: true };
 }
 function loadSourceMix() {
     try {
         const saved = JSON.parse(localStorage.getItem(SOURCE_MIX_KEY) || 'null');
         if (!saved || !Array.isArray(saved.seasons)) return defaultSourceMix();
-        return { legacy: !!saved.legacy, seasons: saved.seasons.filter(key => SEASONAL_POOLS[key]?.length === 30),
+        return { legacy: !!saved.legacy, seasons: saved.seasons.filter(key => SEASONAL_POOLS[key]?.length >= 30),
             imported: !!saved.imported, watched: !!saved.watched, selected: saved.selected !== false };
     } catch { return defaultSourceMix(); }
 }
@@ -4046,7 +4046,7 @@ function initSourceFilter() {
         { label: '原有曲库', official: 'legacy' },
         { label: '季度新番', official: 'season' }
     ].map(option => `<button type="button" class="settings-chip" data-official-source="${option.official}">${option.label}</button>`).join('');
-    const seasons = Object.keys(SEASONAL_POOLS).sort().reverse().filter(key => SEASONAL_POOLS[key].length === 30);
+    const seasons = Object.keys(SEASONAL_POOLS).sort().reverse().filter(key => SEASONAL_POOLS[key].length >= 30);
     $('seasonSourceChips').innerHTML = seasons.map(key => `<button type="button" class="settings-chip" data-source="season:${key}">${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月</button>`).join('');
     $('mixSourceGroup').innerHTML = [
         { key: 'legacy', label: '原有曲库' },
@@ -4088,7 +4088,7 @@ function initSourceFilter() {
 // =====================================================================
 // Personal Library (local single-player data only)
 // =====================================================================
-const publishedSeasons = Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length === 30).sort().reverse();
+const publishedSeasons = Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length >= 30).sort().reverse();
 const CATALOG_LIBRARY_TABS = ['catalog', 'season', 'tracks', 'bangumi'];
 let selectedLibrarySeason = null;
 let selectedLibraryTab = 'current';

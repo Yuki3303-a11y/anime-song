@@ -55,5 +55,5 @@ jobs:
           if ! gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
             gh pr create --base "${{ github.event.repository.default_branch }}" --head "$BRANCH" \
               --title "$KEY 季度曲库候选（待人工复核）" \
-              --body "候选已凑齐 15 部番剧、30 首 OP/ED。请核对名称、歌手、类型和音源。此 PR 只包含候选；复核后另行加入 seasonal-pools.js 才会向玩家发布。"
+              --body "候选已凑齐 30 部番剧、60 首 OP/ED。请核对名称、歌手、类型和音源。此 PR 只包含候选；复核后另行加入 seasonal-pools.js 才会向玩家发布。"
           fi

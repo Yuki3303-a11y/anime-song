@@ -1,3 +1,5 @@
+import { DEFAULT_SEASON_ANIME } from './fetch-season.mjs';
+
 const QUARTERS = { winter: '01', spring: '04', summer: '07', fall: '10' };
 const VALID_SOURCES = new Set(['itunes', 'youtube', 'bilibili']);
 
@@ -12,8 +14,8 @@ export function prepareSeasonForPublish(candidate, seasonKey, chineseNamesById, 
   if (!/^\d{4}-(01|04|07|10)$/.test(seasonKey)) throw new Error(`Invalid season key: ${seasonKey}`);
   if (candidate?.season !== seasonKey) throw new Error(`Candidate season does not match ${seasonKey}`);
   if (!candidate?.complete) throw new Error(`Candidate ${seasonKey} is incomplete`);
-  if (candidate.targetAnime !== 15 || !Array.isArray(candidate.selected) || candidate.selected.length !== 15)
-    throw new Error(`Expected exactly 15 anime for ${seasonKey}`);
+  if (candidate.targetAnime !== DEFAULT_SEASON_ANIME || !Array.isArray(candidate.selected) || candidate.selected.length !== DEFAULT_SEASON_ANIME)
+    throw new Error(`Expected exactly ${DEFAULT_SEASON_ANIME} anime for ${seasonKey}`);
 
   const selectedIds = new Set();
   const songs = [];
@@ -23,7 +25,7 @@ export function prepareSeasonForPublish(candidate, seasonKey, chineseNamesById, 
 
   for (const show of candidate.selected) {
     if (!Number.isInteger(show.anilistId) || selectedIds.has(show.anilistId))
-      throw new Error(`Expected 15 unique AniList IDs; duplicate or invalid ID ${show.anilistId}`);
+      throw new Error(`Expected ${DEFAULT_SEASON_ANIME} unique AniList IDs; duplicate or invalid ID ${show.anilistId}`);
     selectedIds.add(show.anilistId);
 
     const chineseName = String(chineseNamesById?.[show.anilistId] || '').trim();
@@ -63,6 +65,7 @@ export function prepareSeasonForPublish(candidate, seasonKey, chineseNamesById, 
       if (songNames.has(songNameKey)) throw new Error(`Duplicate song entry: ${entry.title} — ${entry.anime}`);
       songNames.add(songNameKey);
       if (song.animeNative) entry.animeNative = song.animeNative;
+      if (Array.isArray(song.artistAliases)) entry.artistAliases = song.artistAliases.filter(alias => typeof alias === 'string' && alias.trim());
       if (song.youtubeVideoId && /^[A-Za-z0-9_-]{11}$/.test(song.youtubeVideoId)) entry.youtubeVideoId = song.youtubeVideoId;
       if (audio.source === 'youtube' && /^[A-Za-z0-9_-]{11}$/.test(audio.videoId || ''))
         entry.youtubeVideoId = audio.videoId;
@@ -77,9 +80,9 @@ export function prepareSeasonForPublish(candidate, seasonKey, chineseNamesById, 
     }
   }
 
-  if (songs.length !== 30) throw new Error(`Expected 30 songs; found ${songs.length}`);
+  if (songs.length !== DEFAULT_SEASON_ANIME * 2) throw new Error(`Expected ${DEFAULT_SEASON_ANIME * 2} songs; found ${songs.length}`);
   const trackIds = new Set(songs.map(song => `${song.anilistId}|${song.type}`));
-  if (trackIds.size !== 30) throw new Error('Duplicate AniList/type entries found in candidate');
+  if (trackIds.size !== DEFAULT_SEASON_ANIME * 2) throw new Error('Duplicate AniList/type entries found in candidate');
   return { songs, covers };
 }
 

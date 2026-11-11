@@ -1,0 +1,1393 @@
+{
+  "season": "2026-07",
+  "targetAnime": 30,
+  "complete": true,
+  "rankSource": "Bangumi heat (TV)",
+  "reviewedAt": "2026-11-11",
+  "selected": [
+    {
+      "rank": 1,
+      "bangumiId": 501963,
+      "anilistId": 178789,
+      "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
+      "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx178789-hNXjKFzUq7mk.jpg",
+      "songs": [
+        {
+          "titleCN": "決意の唄",
+          "title": "Ketsui no Uta",
+          "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
+          "artist": "大原由衣子",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 178789,
+          "animeNative": "無職転生Ⅲ ～異世界行ったら本気だす～",
+          "animethemesUrl": "https://animethemes.moe/anime/mushoku_tensei_iii_isekai_ittara_honki_dasu",
+          "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～",
+          "artistAliases": [
+            "大原由衣子",
+            "Yuiko Oohara",
+            "大原ゆい子",
+            "Yuiko Ohara"
+          ],
+          "youtubeVideoId": "3F8-KF40VhI"
+        },
+        {
+          "titleCN": "祈り、終われば",
+          "title": "Inori, Owareba",
+          "anime": "Mushoku Tensei III: Isekai Ittara Honki Dasu",
+          "artist": "中岛美嘉",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 178789,
+          "animeNative": "無職転生Ⅲ ～異世界行ったら本気だす～",
+          "animethemesUrl": "https://animethemes.moe/anime/mushoku_tensei_iii_isekai_ittara_honki_dasu",
+          "animeCN": "无职转生 第三季 ～到了异世界就拿出真本事～",
+          "artistAliases": [
+            "中岛美嘉",
+            "Mika Nakashima",
+            "中島美嘉"
+          ],
+          "youtubeVideoId": "1Cm5bx-XGM4"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "bangumiId": 622206,
+      "anilistId": 207141,
+      "anime": "Yani Neko",
+      "animeCN": "尼古喵喵",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx207141-h5q5KJPd6vaX.jpg",
+      "songs": [
+        {
+          "titleCN": "なんもねえ",
+          "title": "Nanmonee",
+          "anime": "Yani Neko",
+          "artist": "忘れらんねえよ",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 207141,
+          "animeNative": "ヤニねこ",
+          "animethemesUrl": "https://animethemes.moe/anime/yani_neko",
+          "animeCN": "尼古喵喵",
+          "artistAliases": [
+            "忘れらんねえよ",
+            "Wasureranneyo"
+          ],
+          "youtubeVideoId": "RhR9I9vh97A"
+        },
+        {
+          "titleCN": "煙とブルー",
+          "title": "Kemuri to Blue",
+          "anime": "Yani Neko",
+          "artist": "ネクライトーキー",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 207141,
+          "animeNative": "ヤニねこ",
+          "animethemesUrl": "https://animethemes.moe/anime/yani_neko",
+          "animeCN": "尼古喵喵",
+          "artistAliases": [
+            "ネクライトーキー",
+            "Necry Talkie"
+          ],
+          "youtubeVideoId": "T-T_GOXYvTU"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "bangumiId": 571784,
+      "anilistId": 196187,
+      "anime": "Super no Ura de Yani Suu Futari",
+      "animeCN": "在超市后门吸烟的二人",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx196187-0dgFi2CPp3xn.jpg",
+      "songs": [
+        {
+          "titleCN": "イチジク煙",
+          "title": "Ichijiku Kemuri",
+          "anime": "Super no Ura de Yani Suu Futari",
+          "artist": "永远是深夜有多好。",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 196187,
+          "animeNative": "スーパーの裏でヤニ吸うふたり",
+          "animethemesUrl": "https://animethemes.moe/anime/super_no_ura_de_yani_suu_futari",
+          "animeCN": "在超市后门吸烟的二人",
+          "artistAliases": [
+            "永远是深夜有多好。",
+            "Zutto Mayonaka de Ii no ni.",
+            "ずっと真夜中でいいのに。",
+            "ZUTOMAYO"
+          ],
+          "youtubeVideoId": "0HGEaVFajSU"
+        },
+        {
+          "titleCN": "Fiction",
+          "title": "Fiction",
+          "anime": "Super no Ura de Yani Suu Futari",
+          "artist": "imase",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 196187,
+          "animeNative": "スーパーの裏でヤニ吸うふたり",
+          "animethemesUrl": "https://animethemes.moe/anime/super_no_ura_de_yani_suu_futari",
+          "animeCN": "在超市后门吸烟的二人",
+          "artistAliases": [
+            "imase"
+          ],
+          "youtubeVideoId": "rn0QtVBIo2o"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "bangumiId": 552533,
+      "anilistId": 190569,
+      "anime": "Tenmaku no Jaadugar",
+      "animeCN": "穹庐下的魔女",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx190569-KnCQLI3Z8hPX.jpg",
+      "songs": [
+        {
+          "title": "Stella",
+          "titleCN": "Stella",
+          "artist": "SEKAI NO OWARI",
+          "anime": "Tenmaku no Jaadugar",
+          "animeCN": "穹庐下的魔女",
+          "animeNative": "天幕のジャードゥーガル",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 190569,
+          "bangumiId": 552533,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/tenmaku_no_jaadugar",
+          "artistAliases": [
+            "SEKAI NO OWARI"
+          ],
+          "youtubeVideoId": "T8jz0OzFy38"
+        },
+        {
+          "title": "Hoshi",
+          "titleCN": "Hoshi",
+          "artist": "Ziyoou-vachi",
+          "anime": "Tenmaku no Jaadugar",
+          "animeCN": "穹庐下的魔女",
+          "animeNative": "天幕のジャードゥーガル",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 190569,
+          "bangumiId": 552533,
+          "rank": 4,
+          "animethemesUrl": "https://animethemes.moe/anime/tenmaku_no_jaadugar",
+          "artistAliases": [
+            "Ziyoou-vachi"
+          ],
+          "youtubeVideoId": "r5DDjy-c64Q"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "bangumiId": 541285,
+      "anilistId": 187260,
+      "anime": "Kimi ga Shinu made Koi wo Shitai",
+      "animeCN": "与你相恋到生命尽头",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx187260-WW5RBa5NINRP.jpg",
+      "songs": [
+        {
+          "titleCN": "Amore",
+          "title": "Amore",
+          "anime": "Kimi ga Shinu made Koi wo Shitai",
+          "artist": "ReoNa",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 187260,
+          "animeNative": "きみが死ぬまで恋をしたい",
+          "animethemesUrl": "https://animethemes.moe/anime/kimi_ga_shinu_made_koi_wo_shitai",
+          "animeCN": "与你相恋到生命尽头",
+          "artistAliases": [
+            "ReoNa"
+          ],
+          "youtubeVideoId": "i7HmGev5F1Q"
+        },
+        {
+          "titleCN": "エテルネル",
+          "title": "Eternal",
+          "anime": "Kimi ga Shinu made Koi wo Shitai",
+          "artist": "sajou no hana",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 187260,
+          "animeNative": "きみが死ぬまで恋をしたい",
+          "animethemesUrl": "https://animethemes.moe/anime/kimi_ga_shinu_made_koi_wo_shitai",
+          "animeCN": "与你相恋到生命尽头",
+          "artistAliases": [
+            "sajou no hana"
+          ],
+          "youtubeVideoId": "mynL2mgKy5s"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "bangumiId": 569116,
+      "anilistId": 199111,
+      "anime": "Grand Blue Season 3",
+      "animeCN": "碧蓝之海 第三季",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx199111-gBSuBG61ElcW.jpg",
+      "songs": [
+        {
+          "title": "Natsuko",
+          "titleCN": "Natsuko",
+          "artist": "FUNKY MONKEY BΛBY'S",
+          "anime": "Grand Blue Season 3",
+          "animeCN": "碧蓝之海 第三季",
+          "animeNative": "ぐらんぶる Season 3",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 199111,
+          "bangumiId": 569116,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/grand_blue_season_3",
+          "artistAliases": [
+            "FUNKY MONKEY BΛBY'S"
+          ],
+          "youtubeVideoId": "4n4os6xnki8"
+        },
+        {
+          "title": "Hadaka no Mermaid",
+          "titleCN": "Hadaka no Mermaid",
+          "artist": "MAMESHiBA NO TAiGUN",
+          "anime": "Grand Blue Season 3",
+          "animeCN": "碧蓝之海 第三季",
+          "animeNative": "ぐらんぶる Season 3",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 199111,
+          "bangumiId": 569116,
+          "rank": 6,
+          "animethemesUrl": "https://animethemes.moe/anime/grand_blue_season_3",
+          "artistAliases": [
+            "MAMESHiBA NO TAiGUN"
+          ],
+          "youtubeVideoId": "v4gAce9zaUo"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "bangumiId": 495291,
+      "anilistId": 177637,
+      "anime": "Sayonara Lara",
+      "animeCN": "再见菈菈",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx177637-dZ8hF93HzstV.jpg",
+      "songs": [
+        {
+          "title": "Sayonara Lara",
+          "titleCN": "Sayonara Lara",
+          "artist": "Ikimonogakari",
+          "anime": "Sayonara Lara",
+          "animeCN": "再见菈菈",
+          "animeNative": "さよならララ",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 177637,
+          "bangumiId": 495291,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/sayonara_lara",
+          "artistAliases": [
+            "Ikimonogakari"
+          ],
+          "youtubeVideoId": "kpWe9nzbntA"
+        },
+        {
+          "title": "Hearts Glow",
+          "titleCN": "Hearts Glow",
+          "artist": "Hana Hope",
+          "anime": "Sayonara Lara",
+          "animeCN": "再见菈菈",
+          "animeNative": "さよならララ",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 177637,
+          "bangumiId": 495291,
+          "rank": 7,
+          "animethemesUrl": "https://animethemes.moe/anime/sayonara_lara",
+          "artistAliases": [
+            "Hana Hope"
+          ],
+          "youtubeVideoId": "SlssMahPefA"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "bangumiId": 633836,
+      "anilistId": 189046,
+      "anime": "Re:ゼロから始める異世界生活 4th season 奪還編",
+      "animeCN": "Re：从零开始的异世界生活 第四季 夺还篇",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/43/ca/633836_ql0f3.jpg",
+      "songs": [
+        {
+          "title": "Recollect",
+          "titleCN": "Recollect",
+          "artist": "铃木木乃美 feat. Ashnikko",
+          "anime": "Re:ゼロから始める異世界生活 4th season 奪還編",
+          "animeCN": "Re：从零开始的异世界生活 第四季 夺还篇",
+          "animeNative": "Re:ゼロから始める異世界生活 4th season 奪還編",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 189046,
+          "bangumiId": 633836,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/rezero_kara_hajimeru_isekai_seikatsu_4th_season",
+          "artistAliases": [
+            "铃木木乃美 feat. Ashnikko",
+            "Konomi Suzuki, Ashnikko",
+            "鈴木このみ",
+            "Konomi Suzuki",
+            "Ashnikko"
+          ],
+          "youtubeVideoId": "6yOpDa4GsNg"
+        },
+        {
+          "title": "Ender Ember",
+          "titleCN": "Ender Ember",
+          "artist": "MYTH & ROID feat. TK from 凛冽时雨",
+          "anime": "Re:ゼロから始める異世界生活 4th season 奪還編",
+          "animeCN": "Re：从零开始的异世界生活 第四季 夺还篇",
+          "animeNative": "Re:ゼロから始める異世界生活 4th season 奪還編",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 189046,
+          "bangumiId": 633836,
+          "rank": 8,
+          "animethemesUrl": "https://animethemes.moe/anime/rezero_kara_hajimeru_isekai_seikatsu_4th_season",
+          "artistAliases": [
+            "MYTH & ROID feat. TK from 凛冽时雨",
+            "MYTH & ROID, TK from Ling tosite sigure",
+            "MYTH & ROID",
+            "TK（凛として時雨）",
+            "TK from Ling tosite sigure"
+          ],
+          "youtubeVideoId": "SrwCOIe_Lhw"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "bangumiId": 638497,
+      "anilistId": 210031,
+      "anime": "Seihantai na Kimi to Boku 2nd Season",
+      "animeCN": "相反的你和我 第二季",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210031-TppgcHZh46LY.jpg",
+      "songs": [
+        {
+          "titleCN": "猫じゃらし",
+          "title": "Nekojarashi",
+          "anime": "Seihantai na Kimi to Boku 2nd Season",
+          "artist": "7co",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 210031,
+          "animeNative": "正反対な君と僕 第2期",
+          "animethemesUrl": "https://animethemes.moe/anime/seihantai_na_kimi_to_boku_2nd_season",
+          "youtubeVideoId": "UFw27xYEvbY",
+          "animeCN": "相反的你和我 第二季",
+          "artistAliases": [
+            "7co"
+          ]
+        },
+        {
+          "titleCN": "運命の君",
+          "title": "Unmei no Kimi",
+          "anime": "Seihantai na Kimi to Boku 2nd Season",
+          "artist": "Mega Shinnosuke",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 210031,
+          "animeNative": "正反対な君と僕 第2期",
+          "animethemesUrl": "https://animethemes.moe/anime/seihantai_na_kimi_to_boku_2nd_season",
+          "animeCN": "相反的你和我 第二季",
+          "artistAliases": [
+            "Mega Shinnosuke"
+          ],
+          "youtubeVideoId": "fdfd7JKJwz0"
+        }
+      ]
+    },
+    {
+      "rank": 11,
+      "bangumiId": 255209,
+      "anilistId": 103303,
+      "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
+      "animeCN": "二十世纪电气目录",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx103303-IF43hFJPPv2Y.png",
+      "songs": [
+        {
+          "titleCN": "ユーレカ・エヴリカ",
+          "title": "Eureka Evrika",
+          "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
+          "artist": "五阿弥ルナ",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 103303,
+          "animeNative": "二十世紀電氣目録-ユーレカ・エヴリカ-",
+          "animethemesUrl": "https://animethemes.moe/anime/nijusseiki_denki_mokuroku_eureka_evrika",
+          "animeCN": "二十世纪电气目录",
+          "artistAliases": [
+            "五阿弥ルナ",
+            "Luna Goami"
+          ],
+          "youtubeVideoId": "NBHauNVLJa0"
+        },
+        {
+          "titleCN": "Soarin'",
+          "title": "Soarin'",
+          "anime": "Nijusseiki Denki Mokuroku: Eureka Evrika",
+          "artist": "Ginger Root",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 103303,
+          "animeNative": "二十世紀電氣目録-ユーレカ・エヴリカ-",
+          "animethemesUrl": "https://animethemes.moe/anime/nijusseiki_denki_mokuroku_eureka_evrika",
+          "animeCN": "二十世纪电气目录",
+          "artistAliases": [
+            "Ginger Root"
+          ],
+          "youtubeVideoId": "RB66OeSBG9I"
+        }
+      ]
+    },
+    {
+      "rank": 12,
+      "bangumiId": 545917,
+      "anilistId": 188525,
+      "anime": "Kore Kaite Shine",
+      "animeCN": "画完这个再去死",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188525-uWhw4rQcqOyF.jpg",
+      "songs": [
+        {
+          "title": "Isho",
+          "titleCN": "Isho",
+          "artist": "Tatsuya Kitani",
+          "anime": "Kore Kaite Shine",
+          "animeCN": "画完这个再去死",
+          "animeNative": "これ描いて死ね",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 188525,
+          "bangumiId": 545917,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/kore_kaite_shine",
+          "artistAliases": [
+            "Tatsuya Kitani"
+          ],
+          "youtubeVideoId": "ldeP15uSZxY"
+        },
+        {
+          "title": "Conifer",
+          "titleCN": "Conifer",
+          "artist": "Regal Lily",
+          "anime": "Kore Kaite Shine",
+          "animeCN": "画完这个再去死",
+          "animeNative": "これ描いて死ね",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 188525,
+          "bangumiId": 545917,
+          "rank": 12,
+          "animethemesUrl": "https://animethemes.moe/anime/kore_kaite_shine",
+          "artistAliases": [
+            "Regal Lily"
+          ],
+          "youtubeVideoId": "0mnBRcAg3fs"
+        }
+      ]
+    },
+    {
+      "rank": 13,
+      "bangumiId": 545008,
+      "anilistId": 188139,
+      "anime": "Futsutsuka na Akujo de wa Gozaimasu ga: Suuguu Chouso Torikae Den",
+      "animeCN": "恶女不才，请多关照 ～雏宫蝶鼠换身传～",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188139-1qIJfWxym8FX.jpg",
+      "songs": [
+        {
+          "title": "Sunny",
+          "titleCN": "Sunny",
+          "artist": "milet",
+          "anime": "Futsutsuka na Akujo de wa Gozaimasu ga: Suuguu Chouso Torikae Den",
+          "animeCN": "恶女不才，请多关照 ～雏宫蝶鼠换身传～",
+          "animeNative": "ふつつかな悪女ではございますが ～雛宮蝶鼠とりかえ伝～",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 188139,
+          "bangumiId": 545008,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/futsutsuka_na_akujo_de_wa_gozaimasu_ga_suuguu_chouso_torikae_den",
+          "artistAliases": [
+            "milet"
+          ],
+          "youtubeVideoId": "LshSTzPWdLk"
+        },
+        {
+          "title": "Houkiboshi",
+          "titleCN": "Houkiboshi",
+          "artist": "Rokudenashi",
+          "anime": "Futsutsuka na Akujo de wa Gozaimasu ga: Suuguu Chouso Torikae Den",
+          "animeCN": "恶女不才，请多关照 ～雏宫蝶鼠换身传～",
+          "animeNative": "ふつつかな悪女ではございますが ～雛宮蝶鼠とりかえ伝～",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 188139,
+          "bangumiId": 545008,
+          "rank": 13,
+          "animethemesUrl": "https://animethemes.moe/anime/futsutsuka_na_akujo_de_wa_gozaimasu_ga_suuguu_chouso_torikae_den",
+          "artistAliases": [
+            "Rokudenashi"
+          ],
+          "youtubeVideoId": "-PV30Oyp0II"
+        }
+      ]
+    },
+    {
+      "rank": 14,
+      "bangumiId": 570583,
+      "anilistId": 196017,
+      "anime": "Grow Up Show: Himawari no Circus-dan",
+      "animeCN": "Grow Up Show ～向日葵马戏团～",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx196017-GynDNdbDzqzk.jpg",
+      "songs": [
+        {
+          "title": "Yurari Yureru",
+          "titleCN": "Yurari Yureru",
+          "artist": "NOMELON NOLEMON",
+          "anime": "Grow Up Show: Himawari no Circus-dan",
+          "animeCN": "Grow Up Show ～向日葵马戏团～",
+          "animeNative": "グロウアップショウ ～ひまわりのサーカス団～",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 196017,
+          "bangumiId": 570583,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/grow_up_show_himawari_no_circusdan",
+          "artistAliases": [
+            "NOMELON NOLEMON"
+          ],
+          "youtubeVideoId": "BuR8CWqo_2Y"
+        },
+        {
+          "title": "DAYS!",
+          "titleCN": "DAYS!",
+          "artist": "Aooo",
+          "anime": "Grow Up Show: Himawari no Circus-dan",
+          "animeCN": "Grow Up Show ～向日葵马戏团～",
+          "animeNative": "グロウアップショウ ～ひまわりのサーカス団～",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 196017,
+          "bangumiId": 570583,
+          "rank": 14,
+          "animethemesUrl": "https://animethemes.moe/anime/grow_up_show_himawari_no_circusdan",
+          "artistAliases": [
+            "Aooo"
+          ],
+          "youtubeVideoId": "WLlMmxxcb6c"
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "bangumiId": 325767,
+      "anilistId": 128757,
+      "anime": "Tai-Ari deshita.: Ojou-sama wa Kakutou Game nante Shinai",
+      "animeCN": "感谢对战。 ～大小姐才不玩格斗游戏～",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx128757-Iqc6hTjEYIz4.png",
+      "songs": [
+        {
+          "title": "Inochi Mijikashi Taisuru Otome yo",
+          "titleCN": "Inochi Mijikashi Taisuru Otome yo",
+          "artist": "HANABIE.",
+          "anime": "Tai-Ari deshita.: Ojou-sama wa Kakutou Game nante Shinai",
+          "animeCN": "感谢对战。 ～大小姐才不玩格斗游戏～",
+          "animeNative": "対ありでした。 ～お嬢さまは格闘ゲームなんてしない～",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 128757,
+          "bangumiId": 325767,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/taiari_deshita_ojousama_wa_kakutou_game_nante_shinai",
+          "artistAliases": [
+            "HANABIE."
+          ],
+          "youtubeVideoId": "rLdjyt9ArhI"
+        },
+        {
+          "title": "NEW GAME",
+          "titleCN": "NEW GAME",
+          "artist": "halca",
+          "anime": "Tai-Ari deshita.: Ojou-sama wa Kakutou Game nante Shinai",
+          "animeCN": "感谢对战。 ～大小姐才不玩格斗游戏～",
+          "animeNative": "対ありでした。 ～お嬢さまは格闘ゲームなんてしない～",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 128757,
+          "bangumiId": 325767,
+          "rank": 15,
+          "animethemesUrl": "https://animethemes.moe/anime/taiari_deshita_ojousama_wa_kakutou_game_nante_shinai",
+          "artistAliases": [
+            "halca"
+          ],
+          "youtubeVideoId": "0cZFkZd2-CQ"
+        }
+      ]
+    },
+    {
+      "rank": 16,
+      "bangumiId": 598058,
+      "anilistId": 200637,
+      "anime": "Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo 3rd Season",
+      "animeCN": "超超超超超喜欢你的100个女朋友 第三季",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx200637-QLR5uv9SbQ69.jpg",
+      "songs": [
+        {
+          "title": "Daisuki♡Zutto Eien ni♡",
+          "titleCN": "Daisuki♡Zutto Eien ni♡",
+          "artist": "Rentarou Family",
+          "anime": "Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo 3rd Season",
+          "animeCN": "超超超超超喜欢你的100个女朋友 第三季",
+          "animeNative": "君のことが大大大大大好きな100人の彼女 第3期",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 200637,
+          "bangumiId": 598058,
+          "rank": 16,
+          "animethemesUrl": "https://animethemes.moe/anime/kimi_no_koto_ga_dai_dai_dai_dai_daisuki_na_100nin_no_kanojo_3rd_season",
+          "artistAliases": [
+            "Rentarou Family"
+          ],
+          "youtubeVideoId": "OElAvkO0VzA"
+        },
+        {
+          "title": "Kore Koi Itare Ai",
+          "titleCN": "来れ恋・至れ愛",
+          "artist": "恋太郎ファミリー",
+          "anime": "Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo 3rd Season",
+          "animeCN": "超超超超超喜欢你的100个女朋友 第三季",
+          "animeNative": "君のことが大大大大大好きな100人の彼女 第3期",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 200637,
+          "bangumiId": 598058,
+          "rank": 16,
+          "animethemesUrl": "https://animethemes.moe/anime/kimi_no_koto_ga_dai_dai_dai_dai_daisuki_na_100nin_no_kanojo_3rd_season",
+          "artistAliases": [
+            "Rentarou Family",
+            "恋太郎ファミリー"
+          ],
+          "youtubeVideoId": "ybQpXYJWDtM"
+        }
+      ]
+    },
+    {
+      "rank": 17,
+      "bangumiId": 496276,
+      "anilistId": 177699,
+      "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
+      "animeCN": "攻壳机动队 THE GHOST IN THE SHELL",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx177699-VHMezCGf48nM.jpg",
+      "songs": [
+        {
+          "titleCN": "GO GHOST",
+          "title": "GO GHOST",
+          "bilibiliVideoId": "BV1y1Mh6HEB5",
+          "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
+          "artist": "King Gnu",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 177699,
+          "animeNative": "攻殻機動隊 THE GHOST IN THE SHELL",
+          "animethemesUrl": "https://animethemes.moe/anime/koukaku_kidoutai_the_ghost_in_the_shell",
+          "animeCN": "攻壳机动队 THE GHOST IN THE SHELL",
+          "artistAliases": [
+            "King Gnu"
+          ]
+        },
+        {
+          "titleCN": "Blue",
+          "title": "Blue",
+          "anime": "Koukaku Kidoutai: THE GHOST IN THE SHELL",
+          "artist": "MILLENNIUM PARADE feat. Saya Gray, Daniel Caesar",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 177699,
+          "animeNative": "攻殻機動隊 THE GHOST IN THE SHELL",
+          "animethemesUrl": "https://animethemes.moe/anime/koukaku_kidoutai_the_ghost_in_the_shell",
+          "animeCN": "攻壳机动队 THE GHOST IN THE SHELL",
+          "artistAliases": [
+            "MILLENNIUM PARADE feat. Saya Gray, Daniel Caesar",
+            "MILLENNIUM PARADE feat. Saya Gray",
+            "Daniel Caesar",
+            "millennium parade",
+            "MILLENNIUM PARADE",
+            "Saya Gray"
+          ],
+          "youtubeVideoId": "YSg5H6kjKCo"
+        }
+      ]
+    },
+    {
+      "rank": 18,
+      "bangumiId": 607340,
+      "anilistId": 202269,
+      "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
+      "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx202269-7KNj8s2fSsJJ.jpg",
+      "songs": [
+        {
+          "titleCN": "ひとひら",
+          "title": "Hitohira",
+          "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
+          "artist": "秦基博",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 202269,
+          "animeNative": "透明な夜に駆ける君と、目に見えない恋をした。",
+          "animethemesUrl": "https://animethemes.moe/anime/toumei_na_yoru_ni_kakeru_kimi_to_me_ni_mienai_koi_wo_shita",
+          "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。",
+          "artistAliases": [
+            "秦基博",
+            "Motohiro Hata"
+          ],
+          "youtubeVideoId": "OhRKTSgC7Es"
+        },
+        {
+          "titleCN": "光",
+          "title": "Hikari",
+          "anime": "Toumei na Yoru ni Kakeru Kimi to, Me ni Mienai Koi wo Shita.",
+          "artist": "樱井优衣",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 202269,
+          "animeNative": "透明な夜に駆ける君と、目に見えない恋をした。",
+          "animethemesUrl": "https://animethemes.moe/anime/toumei_na_yoru_ni_kakeru_kimi_to_me_ni_mienai_koi_wo_shita",
+          "youtubeVideoId": "H_Ab3nKZUfM",
+          "animeCN": "与奔驰于透明之夜的你，谈一场看不见的恋爱。",
+          "artistAliases": [
+            "樱井优衣",
+            "Yui Sakurai",
+            "櫻井優衣"
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 19,
+      "bangumiId": 615835,
+      "anilistId": 204060,
+      "anime": "Tetsunabe no Jan!",
+      "animeCN": "炒翻天",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx204060-jUYBjnn6QsXx.png",
+      "songs": [
+        {
+          "title": "Kaen",
+          "titleCN": "Kaen",
+          "artist": "Genin wa Jibun ni Aru.",
+          "anime": "Tetsunabe no Jan!",
+          "animeCN": "炒翻天",
+          "animeNative": "鉄鍋のジャン！",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 204060,
+          "bangumiId": 615835,
+          "rank": 19,
+          "animethemesUrl": "https://animethemes.moe/anime/tetsunabe_no_jan",
+          "artistAliases": [
+            "Genin wa Jibun ni Aru."
+          ],
+          "youtubeVideoId": "faEoNPAauag"
+        },
+        {
+          "title": "Naita Akuma",
+          "titleCN": "Naita Akuma",
+          "artist": "emunimini",
+          "anime": "Tetsunabe no Jan!",
+          "animeCN": "炒翻天",
+          "animeNative": "鉄鍋のジャン！",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 204060,
+          "bangumiId": 615835,
+          "rank": 19,
+          "animethemesUrl": "https://animethemes.moe/anime/tetsunabe_no_jan",
+          "artistAliases": [
+            "emunimini"
+          ],
+          "youtubeVideoId": "F0lEqfDtm74"
+        }
+      ]
+    },
+    {
+      "rank": 20,
+      "bangumiId": 339515,
+      "anilistId": 135865,
+      "anime": "Youjo Senki II",
+      "animeCN": "幼女战记 第二季",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx135865-T7XIPMAbqcxN.png",
+      "songs": [
+        {
+          "titleCN": "Why? RED induction",
+          "title": "Why? RED induction",
+          "anime": "Youjo Senki II",
+          "artist": "MYTH & ROID",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 135865,
+          "animeNative": "幼女戦記Ⅱ",
+          "animethemesUrl": "https://animethemes.moe/anime/youjo_senki_ii",
+          "animeCN": "幼女战记 第二季",
+          "artistAliases": [
+            "MYTH & ROID"
+          ],
+          "youtubeVideoId": "9hrlfMldegI"
+        },
+        {
+          "titleCN": "Weiter! Weiter!",
+          "title": "Weiter! Weiter!",
+          "anime": "Youjo Senki II",
+          "artist": "谭雅·提古雷查夫（CV：悠木碧）",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 135865,
+          "animeNative": "幼女戦記Ⅱ",
+          "animethemesUrl": "https://animethemes.moe/anime/youjo_senki_ii",
+          "animeCN": "幼女战记 第二季",
+          "artistAliases": [
+            "谭雅·提古雷查夫（CV：悠木碧）",
+            "Aoi Yuuki",
+            "ターニャ・デグレチャフ",
+            "悠木碧"
+          ],
+          "youtubeVideoId": "x2k_iYCGKvE"
+        }
+      ]
+    },
+    {
+      "rank": 21,
+      "bangumiId": 587109,
+      "anilistId": 199066,
+      "anime": "Hanaori-san wa Tensei Shite mo Kenka ga Shitai",
+      "animeCN": "花织即使是转生也想打架",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx199066-YXDVsguvFZMm.jpg",
+      "songs": [
+        {
+          "title": "High Maintenance Girl",
+          "titleCN": "High Maintenance Girl",
+          "artist": "Masayoshi Ooishi",
+          "anime": "Hanaori-san wa Tensei Shite mo Kenka ga Shitai",
+          "animeCN": "花织即使是转生也想打架",
+          "animeNative": "花織さんは転生しても喧嘩がしたい",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 199066,
+          "bangumiId": 587109,
+          "rank": 21,
+          "animethemesUrl": "https://animethemes.moe/anime/hanaorisan_wa_tensei_shite_mo_kenka_ga_shitai",
+          "artistAliases": [
+            "Masayoshi Ooishi"
+          ],
+          "youtubeVideoId": "6ipI88BMtws"
+        },
+        {
+          "title": "Very Good Encount",
+          "titleCN": "Very Good Encount",
+          "artist": "Maaya Uchida",
+          "anime": "Hanaori-san wa Tensei Shite mo Kenka ga Shitai",
+          "animeCN": "花织即使是转生也想打架",
+          "animeNative": "花織さんは転生しても喧嘩がしたい",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 199066,
+          "bangumiId": 587109,
+          "rank": 21,
+          "animethemesUrl": "https://animethemes.moe/anime/hanaorisan_wa_tensei_shite_mo_kenka_ga_shitai",
+          "artistAliases": [
+            "Maaya Uchida"
+          ],
+          "youtubeVideoId": "DiEjwMN2WFY"
+        }
+      ]
+    },
+    {
+      "rank": 22,
+      "bangumiId": 627136,
+      "anilistId": 207674,
+      "anime": "Ushiro no Shoumen Kamui-san",
+      "animeCN": "从后面来的神威先生",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/01/8f/627136_hb0Jd.jpg",
+      "songs": [
+        {
+          "title": "Joubutsu Come true",
+          "titleCN": "Joubutsu Come true",
+          "artist": "ORCALAND",
+          "anime": "Ushiro no Shoumen Kamui-san",
+          "animeCN": "从后面来的神威先生",
+          "animeNative": "うしろの正面カムイさん",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 207674,
+          "bangumiId": 627136,
+          "rank": 22,
+          "animethemesUrl": "https://animethemes.moe/anime/ushiro_no_shoumen_kamuisan",
+          "artistAliases": [
+            "ORCALAND"
+          ],
+          "youtubeVideoId": "R9uqS0_obn8"
+        },
+        {
+          "title": "SAY-BYE!!",
+          "titleCN": "SAY-BYE!!",
+          "artist": "KOTOKO",
+          "anime": "Ushiro no Shoumen Kamui-san",
+          "animeCN": "从后面来的神威先生",
+          "animeNative": "うしろの正面カムイさん",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 207674,
+          "bangumiId": 627136,
+          "rank": 22,
+          "animethemesUrl": "https://animethemes.moe/anime/ushiro_no_shoumen_kamuisan",
+          "artistAliases": [
+            "KOTOKO"
+          ],
+          "youtubeVideoId": "mcFFaGYC9JU"
+        }
+      ]
+    },
+    {
+      "rank": 23,
+      "bangumiId": 617123,
+      "anilistId": 204466,
+      "anime": "Otome Kaijuu Caramelise",
+      "animeCN": "少女怪兽焦糖味",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx204466-vXMvIs4VOoQd.png",
+      "songs": [
+        {
+          "title": "Otome Kaijuu",
+          "titleCN": "Otome Kaijuu",
+          "artist": "METANICK",
+          "anime": "Otome Kaijuu Caramelise",
+          "animeCN": "少女怪兽焦糖味",
+          "animeNative": "乙女怪獣キャラメリゼ",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 204466,
+          "bangumiId": 617123,
+          "rank": 23,
+          "animethemesUrl": "https://animethemes.moe/anime/otome_kaijuu_caramelise",
+          "artistAliases": [
+            "METANICK"
+          ],
+          "youtubeVideoId": "7JcWiuIzufc"
+        },
+        {
+          "title": "Otome no Honki",
+          "titleCN": "オトメノホンキ",
+          "artist": "HoneyWorks feat.ハコニワリリィ",
+          "anime": "Otome Kaijuu Caramelise",
+          "animeCN": "少女怪兽焦糖味",
+          "animeNative": "乙女怪獣キャラメリゼ",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 204466,
+          "bangumiId": 617123,
+          "rank": 23,
+          "animethemesUrl": "https://animethemes.moe/anime/otome_kaijuu_caramelise",
+          "artistAliases": [
+            "HaKoniwalily, HoneyWorks",
+            "HaKoniwalily",
+            "HoneyWorks",
+            "HoneyWorks feat.ハコニワリリィ"
+          ],
+          "youtubeVideoId": "uK9YgChptgg"
+        }
+      ]
+    },
+    {
+      "rank": 24,
+      "bangumiId": 538760,
+      "anilistId": 186863,
+      "anime": "Neko to Ryuu",
+      "animeCN": "猫与龙",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/c5/16/538760_T0rxN.jpg",
+      "songs": [
+        {
+          "title": "Nekohi",
+          "titleCN": "Nekohi",
+          "artist": "suis",
+          "anime": "Neko to Ryuu",
+          "animeCN": "猫与龙",
+          "animeNative": "猫と竜",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 186863,
+          "bangumiId": 538760,
+          "rank": 24,
+          "animethemesUrl": "https://animethemes.moe/anime/neko_to_ryuu",
+          "artistAliases": [
+            "suis"
+          ],
+          "youtubeVideoId": "Ss1jFA_SL0g"
+        },
+        {
+          "title": "Tadaima no Basho",
+          "titleCN": "Tadaima no Basho",
+          "artist": "shallm",
+          "anime": "Neko to Ryuu",
+          "animeCN": "猫与龙",
+          "animeNative": "猫と竜",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 186863,
+          "bangumiId": 538760,
+          "rank": 24,
+          "animethemesUrl": "https://animethemes.moe/anime/neko_to_ryuu",
+          "artistAliases": [
+            "shallm"
+          ],
+          "youtubeVideoId": "2NZFhun4MGU"
+        }
+      ]
+    },
+    {
+      "rank": 25,
+      "bangumiId": 585820,
+      "anilistId": 198946,
+      "anime": "Clevatess II: Majuu no Ou to Itsuwari no Yuusha Denshou",
+      "animeCN": "Clevatess II-魔兽之王与虚假的勇者传承-",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx198946-IGXmbqBEYRYD.jpg",
+      "songs": [
+        {
+          "title": "Foreshadow",
+          "titleCN": "Foreshadow",
+          "artist": "Mayu Maeshima",
+          "anime": "Clevatess II: Majuu no Ou to Itsuwari no Yuusha Denshou",
+          "animeCN": "Clevatess II-魔兽之王与虚假的勇者传承-",
+          "animeNative": "クレバテスⅡ-魔獣の王と偽りの勇者伝承-",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 198946,
+          "bangumiId": 585820,
+          "rank": 25,
+          "animethemesUrl": "https://animethemes.moe/anime/clevatess_ii_majuu_no_ou_to_itsuwari_no_yuusha_denshou",
+          "artistAliases": [
+            "Mayu Maeshima"
+          ],
+          "youtubeVideoId": "z5tTeKE-Nu8"
+        },
+        {
+          "title": "Awake Anew",
+          "titleCN": "Awake Anew",
+          "artist": "MYTH & ROID",
+          "anime": "Clevatess II: Majuu no Ou to Itsuwari no Yuusha Denshou",
+          "animeCN": "Clevatess II-魔兽之王与虚假的勇者传承-",
+          "animeNative": "クレバテスⅡ-魔獣の王と偽りの勇者伝承-",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 198946,
+          "bangumiId": 585820,
+          "rank": 25,
+          "animethemesUrl": "https://animethemes.moe/anime/clevatess_ii_majuu_no_ou_to_itsuwari_no_yuusha_denshou",
+          "artistAliases": [
+            "MYTH & ROID"
+          ],
+          "youtubeVideoId": "a09O2IYjvzk"
+        }
+      ]
+    },
+    {
+      "rank": 26,
+      "bangumiId": 530725,
+      "anilistId": 185874,
+      "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+      "animeCN": "死神 千年血战篇-祸进谭-",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx185874-aU3e6tBT6wwA.jpg",
+      "songs": [
+        {
+          "titleCN": "I-BULL",
+          "title": "I-BULL",
+          "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+          "artist": "jo0ji",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 185874,
+          "animeNative": "BLEACH 千年血戦篇-禍進譚-",
+          "animethemesUrl": "https://animethemes.moe/anime/bleach_sennen_kessenhen_kashintan",
+          "animeCN": "死神 千年血战篇-祸进谭-",
+          "artistAliases": [
+            "jo0ji"
+          ],
+          "youtubeVideoId": "P31CxorjHjI"
+        },
+        {
+          "titleCN": "螺旋",
+          "title": "Rasen",
+          "anime": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+          "artist": "9Lana",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 185874,
+          "animeNative": "BLEACH 千年血戦篇-禍進譚-",
+          "animethemesUrl": "https://animethemes.moe/anime/bleach_sennen_kessenhen_kashintan",
+          "animeCN": "死神 千年血战篇-祸进谭-",
+          "artistAliases": [
+            "9Lana"
+          ],
+          "youtubeVideoId": "5mUkMs-jE6c"
+        }
+      ]
+    },
+    {
+      "rank": 27,
+      "bangumiId": 456080,
+      "anilistId": 169583,
+      "anime": "Tenkousaki no Seiso Karen na Bishoujo ga, Mukashi Danshi to Omotte Issho ni Asonda Osananajimi datta Ken",
+      "animeCN": "转学后班上的清纯可爱美少女，竟是小时候玩在一起的哥们儿",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx169583-0ZTdBGrKNIbe.jpg",
+      "songs": [
+        {
+          "title": "Natsu ni Kasanete",
+          "titleCN": "Natsu ni Kasanete",
+          "artist": "DIALOGUE+",
+          "anime": "Tenkousaki no Seiso Karen na Bishoujo ga, Mukashi Danshi to Omotte Issho ni Asonda Osananajimi datta Ken",
+          "animeCN": "转学后班上的清纯可爱美少女，竟是小时候玩在一起的哥们儿",
+          "animeNative": "転校先の清楚可憐な美少女が、昔男子と思って一緒に遊んだ幼馴染だった件",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 169583,
+          "bangumiId": 456080,
+          "rank": 27,
+          "animethemesUrl": "https://animethemes.moe/anime/tenkousaki_no_seiso_karen_na_bishoujo_ga_mukashi_danshi_to_omotte_issho_ni_asonda_osananajimi_datta_ken",
+          "artistAliases": [
+            "DIALOGUE+"
+          ],
+          "youtubeVideoId": "3lS0SWT3wnc"
+        },
+        {
+          "title": "Tilt",
+          "titleCN": "Tilt",
+          "artist": "harmoe",
+          "anime": "Tenkousaki no Seiso Karen na Bishoujo ga, Mukashi Danshi to Omotte Issho ni Asonda Osananajimi datta Ken",
+          "animeCN": "转学后班上的清纯可爱美少女，竟是小时候玩在一起的哥们儿",
+          "animeNative": "転校先の清楚可憐な美少女が、昔男子と思って一緒に遊んだ幼馴染だった件",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 169583,
+          "bangumiId": 456080,
+          "rank": 27,
+          "animethemesUrl": "https://animethemes.moe/anime/tenkousaki_no_seiso_karen_na_bishoujo_ga_mukashi_danshi_to_omotte_issho_ni_asonda_osananajimi_datta_ken",
+          "artistAliases": [
+            "harmoe"
+          ],
+          "youtubeVideoId": "3MGu6eI-Tvc"
+        }
+      ]
+    },
+    {
+      "rank": 28,
+      "bangumiId": 517106,
+      "anilistId": 182616,
+      "anime": "Nige Jouzu no Wakagimi 2nd Season",
+      "animeCN": "擅长逃跑的殿下 第二季",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx182616-DymJCBpkR4qs.jpg",
+      "songs": [
+        {
+          "title": "Onigoto",
+          "titleCN": "Onigoto",
+          "artist": "Kento Nakajima",
+          "anime": "Nige Jouzu no Wakagimi 2nd Season",
+          "animeCN": "擅长逃跑的殿下 第二季",
+          "animeNative": "逃げ上手の若君 第二期",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 182616,
+          "bangumiId": 517106,
+          "rank": 28,
+          "animethemesUrl": "https://animethemes.moe/anime/nige_jouzu_no_wakagimi_2nd_season",
+          "artistAliases": [
+            "Kento Nakajima"
+          ],
+          "youtubeVideoId": "C1L3g-QGX4w"
+        },
+        {
+          "title": "Romantic ga Hoshii nara feat. Nao Kosaka, Youko Shougenji, Kaho Fujishima (Hinatazaka46)",
+          "titleCN": "ロマンティックがほしいなら feat. 小坂菜緒, 正源司陽子, 藤嶌果歩",
+          "artist": "ぼっちぼろまる feat. 小坂菜緒, 正源司陽子, 藤嶌果歩",
+          "anime": "Nige Jouzu no Wakagimi 2nd Season",
+          "animeCN": "擅长逃跑的殿下 第二季",
+          "animeNative": "逃げ上手の若君 第二期",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 182616,
+          "bangumiId": 517106,
+          "rank": 28,
+          "animethemesUrl": "https://animethemes.moe/anime/nige_jouzu_no_wakagimi_2nd_season",
+          "artistAliases": [
+            "Botchi Boromaru, Nao Kosaka, Youko Shougenji, Kaho Fujishima",
+            "Botchi Boromaru",
+            "Nao Kosaka",
+            "Youko Shougenji",
+            "Kaho Fujishima",
+            "ぼっちぼろまる feat. 小坂菜緒, 正源司陽子, 藤嶌果歩"
+          ],
+          "youtubeVideoId": "2xkn83S68sM"
+        }
+      ]
+    },
+    {
+      "rank": 29,
+      "bangumiId": 602733,
+      "anilistId": 201514,
+      "anime": "Saijo no Osewa: Takane no Hanadarake na Meimonkou de, Gakuin Ichi no Ojou-sama (Seikatsu Nouryoku Kaimu) wo Kagenagara Osewa suru Koto ni Narimashita",
+      "animeCN": "才女的侍从 在满是高岭之花的贵族学校暗中照顾（毫无生活自理能力的）学院第一大小姐",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx201514-BHAeWhSbcBrT.png",
+      "songs": [
+        {
+          "title": "Saisaisaikoukyuu no Osewa Shite",
+          "titleCN": "Saisaisaikoukyuu no Osewa Shite",
+          "artist": "angela",
+          "anime": "Saijo no Osewa: Takane no Hanadarake na Meimonkou de, Gakuin Ichi no Ojou-sama (Seikatsu Nouryoku Kaimu) wo Kagenagara Osewa suru Koto ni Narimashita",
+          "animeCN": "才女的侍从 在满是高岭之花的贵族学校暗中照顾（毫无生活自理能力的）学院第一大小姐",
+          "animeNative": "才女のお世話 高嶺の花だらけな名門校で、学院一のお嬢様（生活能力皆無）を陰ながらお世話することになりました",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 201514,
+          "bangumiId": 602733,
+          "rank": 29,
+          "animethemesUrl": "https://animethemes.moe/anime/saijo_no_osewa_takane_no_hanadarake_na_meimonkou_de_gakuin_ichi_no_ojousama_seikatsu_nouryoku_kaimu_wo_kagenagara_osewa_suru_koto_ni_narimashita",
+          "artistAliases": [
+            "angela"
+          ],
+          "youtubeVideoId": "UUZ06R6I1PE"
+        },
+        {
+          "title": "Kanpeki ja Nai Watashi",
+          "titleCN": "Kanpeki ja Nai Watashi",
+          "artist": "Ami Maeshima",
+          "anime": "Saijo no Osewa: Takane no Hanadarake na Meimonkou de, Gakuin Ichi no Ojou-sama (Seikatsu Nouryoku Kaimu) wo Kagenagara Osewa suru Koto ni Narimashita",
+          "animeCN": "才女的侍从 在满是高岭之花的贵族学校暗中照顾（毫无生活自理能力的）学院第一大小姐",
+          "animeNative": "才女のお世話 高嶺の花だらけな名門校で、学院一のお嬢様（生活能力皆無）を陰ながらお世話することになりました",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 201514,
+          "bangumiId": 602733,
+          "rank": 29,
+          "animethemesUrl": "https://animethemes.moe/anime/saijo_no_osewa_takane_no_hanadarake_na_meimonkou_de_gakuin_ichi_no_ojousama_seikatsu_nouryoku_kaimu_wo_kagenagara_osewa_suru_koto_ni_narimashita",
+          "artistAliases": [
+            "Ami Maeshima"
+          ],
+          "youtubeVideoId": "EGcrsTfdYYY"
+        }
+      ]
+    },
+    {
+      "rank": 30,
+      "bangumiId": 590786,
+      "anilistId": 199748,
+      "anime": "Koko wa Ore ni Makasete Saki ni Ike to Ittekara 10-nen ga Tattara Densetsu ni Natteita.",
+      "animeCN": "『你们先走我断后』，于是10年后我成为了传说",
+      "coverUrl": "https://lain.bgm.tv/pic/cover/l/2c/93/590786_vA6R5.jpg",
+      "songs": [
+        {
+          "title": "Soredemo Donten wo Koete Yuku",
+          "titleCN": "Soredemo Donten wo Koete Yuku",
+          "artist": "sajou no hana",
+          "anime": "Koko wa Ore ni Makasete Saki ni Ike to Ittekara 10-nen ga Tattara Densetsu ni Natteita.",
+          "animeCN": "『你们先走我断后』，于是10年后我成为了传说",
+          "animeNative": "ここは俺に任せて先に行けと言ってから10年がたったら伝説になっていた。",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 199748,
+          "bangumiId": 590786,
+          "rank": 30,
+          "animethemesUrl": "https://animethemes.moe/anime/koko_wa_ore_ni_makasete_saki_ni_ike_to_ittekara_10nen_ga_tattara_densetsu_ni_natteita",
+          "artistAliases": [
+            "sajou no hana"
+          ],
+          "youtubeVideoId": "VskPJoqu31I"
+        },
+        {
+          "title": "Arikitari na Nichijou to Kouun na Hibi e",
+          "titleCN": "在り来たりな日常と幸運な日々へ",
+          "artist": "名称非公開",
+          "anime": "Koko wa Ore ni Makasete Saki ni Ike to Ittekara 10-nen ga Tattara Densetsu ni Natteita.",
+          "animeCN": "『你们先走我断后』，于是10年后我成为了传说",
+          "animeNative": "ここは俺に任せて先に行けと言ってから10年がたったら伝説になっていた。",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 199748,
+          "bangumiId": 590786,
+          "rank": 30,
+          "animethemesUrl": "https://animethemes.moe/anime/koko_wa_ore_ni_makasete_saki_ni_ike_to_ittekara_10nen_ga_tattara_densetsu_ni_natteita",
+          "artistAliases": [
+            "MEISHOHIKOKAI",
+            "名称非公開"
+          ],
+          "bilibiliVideoId": "BV1REYB6JEMf"
+        }
+      ]
+    },
+    {
+      "rank": 31,
+      "bangumiId": 511177,
+      "anilistId": 180136,
+      "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+      "animeCN": "遭到流放的转生重骑士凭借游戏知识大开无双",
+      "coverUrl": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx180136-gtMTCRlOD4OE.jpg",
+      "songs": [
+        {
+          "titleCN": "Awake",
+          "title": "Awake",
+          "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+          "artist": "SPYAIR",
+          "type": "OP",
+          "season": "2026-07",
+          "anilistId": 180136,
+          "animeNative": "追放された転生重騎士はゲーム知識で無双する",
+          "animethemesUrl": "https://animethemes.moe/anime/tsuihou_sareta_tensei_juukishi_wa_game_chishiki_de_musou_suru",
+          "animeCN": "遭到流放的转生重骑士凭借游戏知识大开无双",
+          "artistAliases": [
+            "SPYAIR"
+          ],
+          "youtubeVideoId": "RFXecJTa_p8"
+        },
+        {
+          "titleCN": "Lv.1 職業：人間",
+          "title": "Lv.1 Shokugyou:Ningen",
+          "anime": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+          "artist": "ReoNa",
+          "type": "ED",
+          "season": "2026-07",
+          "anilistId": 180136,
+          "animeNative": "追放された転生重騎士はゲーム知識で無双する",
+          "animethemesUrl": "https://animethemes.moe/anime/tsuihou_sareta_tensei_juukishi_wa_game_chishiki_de_musou_suru",
+          "youtubeVideoId": "ylYL2rDyIHc",
+          "animeCN": "遭到流放的转生重骑士凭借游戏知识大开无双",
+          "artistAliases": [
+            "ReoNa"
+          ]
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "rank": 9,
+      "bangumiId": 583729,
+      "animeCN": "BanG Dream! YUME∞MITA",
+      "reason": "未确认作品关联"
+    }
+  ]
+}

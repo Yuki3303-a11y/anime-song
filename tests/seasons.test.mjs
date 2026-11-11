@@ -22,19 +22,19 @@ test('every published seasonal anime has a cached HTTPS cover', () => {
   assert.equal(Object.keys(covers).length, ids.size);
 });
 
-test('2026 spring and summer pools contain 15 unique OP/ED pairs each', () => {
-  for (const key of ['2026-04', '2026-07']) {
+test('all four 2026 pools contain 30 unique OP/ED pairs each', () => {
+  for (const key of ['2026-01', '2026-04', '2026-07', '2026-10']) {
     const songs = pools[key];
-    assert.equal(songs.length, 30);
+    assert.equal(songs.length, 60);
     const ids = new Set(songs.map(song => song.anilistId));
-    assert.equal(ids.size, 15);
+    assert.equal(ids.size, 30);
     for (const id of ids) assert.deepEqual(songs.filter(song => song.anilistId === id).map(song => song.type), ['OP', 'ED']);
   }
 });
 
 test('published season track identities and order match the reviewed popularity candidates', () => {
-  for (const key of ['2026-04', '2026-07']) {
-    const candidate = JSON.parse(fs.readFileSync(path.join(root, 'candidates', `${key}.json`), 'utf8'));
+  for (const key of ['2026-01', '2026-04', '2026-07', '2026-10']) {
+    const candidate = JSON.parse(fs.readFileSync(path.join(root, 'candidates', `${key}-expansion.json`), 'utf8'));
     assert.equal(candidate.complete, true);
     const rankedSongs = candidate.selected.flatMap(anime => anime.songs);
     assert.equal(rankedSongs.length, pools[key].length);
@@ -130,7 +130,7 @@ test('anime options prefer the same quarter, then closer genres inside the curre
   assert.deepEqual(Array.from(context.buildWrongOptions(question, 'anime')), ['Same quarter', 'Closest', 'Similar']);
 });
 
-test('a 30-question game uses every song in the selected season', () => {
+test('a 30-question game draws distinct songs from the larger selected season', () => {
   const start = app.indexOf('function buildPlaylist(pool, n) {');
   const end = app.indexOf('// Fetch Bangumi index', start);
   const context = { loadRecentGames: () => [], shuffle: songs => songs, uniqueChallengePool, challengeTrackKey };

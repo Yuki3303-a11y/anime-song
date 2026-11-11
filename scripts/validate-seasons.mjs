@@ -11,7 +11,7 @@ const pools = JSON.parse(match[1]);
 const errors = [];
 for (const [season, songs] of Object.entries(pools)) {
   if (!/^\d{4}-(01|04|07|10)$/.test(season)) errors.push(`Invalid season key ${season}`);
-  if (songs.length !== 30) errors.push(`${season}: expected 30 songs, found ${songs.length}`);
+  if (songs.length !== 60) errors.push(`${season}: expected 60 songs, found ${songs.length}`);
   const byAnime = new Map();
   const keys = new Set();
   for (const song of songs) {
@@ -28,7 +28,7 @@ for (const [season, songs] of Object.entries(pools)) {
     if (!byAnime.has(song.anilistId)) byAnime.set(song.anilistId, new Set());
     byAnime.get(song.anilistId).add(song.type);
   }
-  if (byAnime.size !== 15) errors.push(`${season}: expected 15 anime, found ${byAnime.size}`);
+  if (byAnime.size !== 30) errors.push(`${season}: expected 30 anime, found ${byAnime.size}`);
   for (const [id, types] of byAnime) {
     if (!types.has('OP') || !types.has('ED')) errors.push(`${season}: anime ${id} lacks OP or ED`);
   }

@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+export const DEFAULT_SEASON_ANIME = 30;
+
 const MONTH = { winter: '01', spring: '04', summer: '07', fall: '10' };
 const value = (flag, fallback) => {
   const i = process.argv.indexOf(flag);
@@ -19,7 +21,7 @@ export function seasonKey(year, season) {
 }
 export function pickThemePair(anime) {
   const pair = pickThemes(anime);
-  return pair.OP && pair.ED ? pair : null;
+  return pair.OP && pair.ED && pair.OP.song.title.trim().toLowerCase() !== pair.ED.song.title.trim().toLowerCase() ? pair : null;
 }
 export function pickThemes(anime) {
   const sorted = [...(anime.animethemes || [])]
@@ -29,7 +31,7 @@ export function pickThemes(anime) {
   const ED = sorted.find(t => t.type === 'ED');
   return { OP, ED };
 }
-export function selectSeasonSongs(ranked, themeAnime, target = 15) {
+export function selectSeasonSongs(ranked, themeAnime, target = DEFAULT_SEASON_ANIME) {
   const byId = new Map();
   for (const anime of themeAnime) for (const resource of anime.resources || []) {
     if (resource.site === 'AniList' && resource.external_id != null && Number.isInteger(Number(resource.external_id)))
@@ -83,6 +85,50 @@ export async function fetchAniList(year, season, limit) {
   return all;
 }
 export async function fetchAnimeThemes(year, season) {
+  try {
+    return await fetchAnimeThemesApi(year, season);
+  } catch (error) {
+    console.warn(`AnimeThemes API 暂不可用（${error.message}），尝试读取官方季度页面。`);
+    const page = async url => {
+      const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+      if (!response.ok) throw new Error(`AnimeThemes page HTTP ${response.status}`);
+      const html = await response.text();
+      const match = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+      if (!match) throw new Error('AnimeThemes 官方页面数据格式已变化');
+      return JSON.parse(match[1]).props.pageProps;
+    };
+    const index = await page(`https://animethemes.moe/year/${year}/${season}`);
+    const queue = index.season?.anime?.nodes;
+    if (!Array.isArray(queue)) throw new Error('AnimeThemes 季度页面缺少番剧数据');
+    const results = new Array(queue.length);
+    let cursor = 0;
+    await Promise.all(Array.from({ length: Math.min(4, queue.length) }, async () => {
+      while (cursor < queue.length) {
+        const position = cursor++;
+        try {
+          const { anime } = await page(`https://animethemes.moe/anime/${queue[position].slug}`);
+          results[position] = {
+            name: anime.title.romaji, slug: anime.slug,
+            resources: anime.resources.edges.filter(edge => edge.node.site === 'ANILIST').map(edge => ({
+              site: 'AniList', external_id: Number(edge.node.link.match(/\/anime\/(\d+)/)?.[1])
+            })),
+            animethemes: anime.themes.map(theme => ({
+              type: theme.type, slug: `${theme.type}${theme.sequence || 1}`,
+              song: { title: theme.song?.title.romaji, artists: (theme.song?.staff || [])
+                .filter(staff => ['Performance', 'Featuring'].includes(staff.role))
+                .map(staff => ({ name: typeof staff.alias === 'string' ? staff.alias : staff.artist.name.main })) }
+            }))
+          };
+        } catch (pageError) {
+          console.warn(`待复核：${queue[position].slug} 页面未能读取（${pageError.message}）。`);
+        }
+      }
+    }));
+    return results.filter(Boolean);
+  }
+}
+
+async function fetchAnimeThemesApi(year, season) {
   const all = [];
   for (let page = 1; page <= 30; page++) {
     const params = new URLSearchParams({
@@ -106,22 +152,29 @@ async function main() {
   const season = value('--season', today.season);
   const year = Number(value('--year', String(today.year)));
   const key = seasonKey(year, season);
-  const target = Number(value('--top-anime', '15'));
+  const target = Number(value('--top-anime', String(DEFAULT_SEASON_ANIME)));
   const limit = Number(value('--limit', '100'));
   if (!Number.isInteger(target) || target < 1 || !Number.isInteger(limit) || limit < target || limit > 200)
     throw new Error('Invalid target or limit');
   const out = path.resolve(value('--out', `candidates/${key}`));
-  const [ranked, themes] = await Promise.all([fetchAniList(year, season, limit), fetchAnimeThemes(year, season)]);
-  const result = selectSeasonSongs(ranked, themes, target);
-  const data = { season: key, rankSource: 'AniList POPULARITY_DESC TV', targetAnime: target, complete: result.complete, selected: result.selected, skipped: result.skipped };
+  const useAniList = value('--rank-source', 'bangumi') === 'anilist';
+  let result;
+  if (useAniList) {
+    const [ranked, themes] = await Promise.all([fetchAniList(year, season, limit), fetchAnimeThemes(year, season)]);
+    result = selectSeasonSongs(ranked, themes, target);
+  } else {
+    const { discoverBangumiSeason, selectBangumiSeasonSongs } = await import('./bangumi-season.mjs');
+    result = selectBangumiSeasonSongs(await discoverBangumiSeason(year, season), target);
+  }
+  const data = { season: key, rankSource: useAniList ? 'AniList POPULARITY_DESC TV' : 'Bangumi heat (TV)', targetAnime: target, complete: result.complete, selected: result.selected, skipped: result.skipped };
   const report = [
     `# ${key} 季度曲库候选`, '',
-    `状态：${result.complete ? '30 首元数据齐全，待人工复核音源' : `仅 ${result.selected.length}/${target} 部完整，暂不可发布`}`,
-    `选入：${result.selected.length} 部 / ${result.songs.length} 首。AniList 排名，AnimeThemes 歌曲，AniList ID 关联。`,
+    `状态：${result.complete ? `${target * 2} 首元数据齐全，待人工复核音源` : `仅 ${result.selected.length}/${target} 部完整，暂不可发布`}`,
+    `选入：${result.selected.length} 部 / ${result.songs.length} 首。${data.rankSource} 排名，AnimeThemes 歌曲，AniList ID 关联。`,
     '', '| 排名 | 番剧 | OP | ED | 人气 | 来源 |', '|---:|---|---|---|---:|---|',
-    ...result.selected.map(x => `| ${x.rank} | ${x.anime} | ${x.songs[0].title} — ${x.songs[0].artist} | ${x.songs[1].title} — ${x.songs[1].artist} | ${x.songs[0].popularity} | [AnimeThemes](${x.songs[0].animethemesUrl}) |`),
-    '', '## 跳过的更热门番剧', '', ...result.skipped.map(x => `- ${x.rank}. ${x.anime}（${x.reason}）`),
-    '', '## 发布前复核', '', '- 核对中文番名、歌名、歌手与 OP/ED。', '- 逐首试听，确认至少一个现有音频源可播放且音频与题目相符。', '- 仅将复核后的完整 30 首加入季度静态曲库；候选不会被网页加载。', ''
+    ...result.selected.map(x => `| ${x.rank} | ${x.anime} | ${x.songs[0].title} — ${x.songs[0].artist} | ${x.songs[1].title} — ${x.songs[1].artist} | ${x.songs[0].popularity ?? '—'} | [AnimeThemes](${x.songs[0].animethemesUrl}) |`),
+    '', '## 跳过的更热门番剧', '', ...result.skipped.map(x => `- ${x.rank}. ${x.anime || x.animeCN || x.original}（${x.reason}）`),
+    '', '## 发布前复核', '', '- 核对中文番名、歌名、歌手与 OP/ED。', '- 逐首试听，确认至少一个现有音频源可播放且音频与题目相符。', `- 仅将复核后的完整 ${target * 2} 首加入季度静态曲库；候选不会被网页加载。`, ''
   ].join('\n');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(`${out}.json`, JSON.stringify(data, null, 2) + '\n');

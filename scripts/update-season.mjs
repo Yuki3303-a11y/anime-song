@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { DEFAULT_SEASON_ANIME } from './fetch-season.mjs';
 // One-click local seasonal update. Publishes only complete, metadata-enriched,
 // source-checked pools, then runs the project's full tests and validators.
 import fs from 'node:fs';
@@ -320,10 +321,11 @@ async function scanCandidateLinks(candidate, rows, getBases, onResult) {
 
 function renderReport(candidate, checks, seasonKey) {
   const byId = new Map(checks.map(check => [`${check.anilistId}|${check.type}`, check]));
-  const passed = checks.filter(check => check.playable).length;
+  const passed = candidate.selected.flatMap(show => show.songs)
+    .filter(song => byId.get(`${song.anilistId}|${song.type}`)?.playable).length;
   const translated = candidate.selected.filter(show => show.animeCN).length;
   const covered = candidate.selected.filter(show => /^https:\/\//.test(show.coverUrl || '')).length;
-  const ready = passed === 30 && translated === 15 && covered === 15;
+  const ready = passed === DEFAULT_SEASON_ANIME * 2 && translated === DEFAULT_SEASON_ANIME && covered === DEFAULT_SEASON_ANIME;
   const cell = value => String(value || '').replace(/\|/g, '\\|').replace(/[\r\n]+/g, ' ');
   const rows = candidate.selected.flatMap(show => show.songs.map(song => {
     const check = byId.get(`${song.anilistId}|${song.type}`);
@@ -335,9 +337,9 @@ function renderReport(candidate, checks, seasonKey) {
   }));
   return [
     `# ${seasonKey} 季度曲库一键更新检查`, '',
-    `- AniList/AnimeThemes 候选：${candidate.selected.length}/15 部，${candidate.selected.reduce((sum, show) => sum + show.songs.length, 0)} 首。`,
+    `- AniList/AnimeThemes 候选：${candidate.selected.length}/${DEFAULT_SEASON_ANIME} 部，${candidate.selected.reduce((sum, show) => sum + show.songs.length, 0)} 首。`,
     `- Bangumi 中文名或人工确认显示名：${translated}/${candidate.selected.length} 部；HTTPS 封面：${covered}/${candidate.selected.length} 部。`,
-    `- 音源检查：${passed}/30 首。自动结果需要歌名与番剧或歌手证据。人工结果由用户试听确认，脚本检查链接。`,
+    `- 音源检查：${passed}/${DEFAULT_SEASON_ANIME * 2} 首。自动结果需要歌名与番剧或歌手证据。人工结果由用户试听确认，脚本检查链接。`,
     `- 发布状态：${ready ? '准备运行测试并写入本地季度曲库' : '未发布；请检查缺项后再运行'}.`,
     '', '| 番剧 | 类型 | 歌曲 | 歌手 | 通过音源 | 命中结果与分数 | 试听链接 |', '|---|---|---|---|---|---|---|', ...rows,
     '', '## 最近批量检查的待处理项',
@@ -398,11 +400,12 @@ async function main() {
   if (auditFlag !== -1) {
     const arg = process.argv[auditFlag + 1];
     const count = arg && !arg.startsWith('--') ? Number(arg) : 8;
-    if (!Number.isInteger(count) || count < 1 || count > 30) throw new Error('抽查部数须为 1 到 30。');
+    if (!Number.isInteger(count) || count < 1 || count > DEFAULT_SEASON_ANIME) throw new Error(`抽查部数须为 1 到 ${DEFAULT_SEASON_ANIME}。`);
     console.log(`抽查榜单前 ${count} 部。只检查音源，不改复核进度。`);
     await scanCandidateLinks(candidate, candidate.queue.slice(0, count), getBases);
     return;
   }
+  candidate.targetAnime = DEFAULT_SEASON_ANIME;
   const checks = candidate.audioChecks;
   const reportPath = `${candidateBase}.md`;
   if (process.argv.includes('--retry-skipped')) {
@@ -412,12 +415,12 @@ async function main() {
     console.log(`有 ${candidate.skipped.length} 部已跳过。如需补回，可加 --retry-skipped 再运行。`);
   }
   const save = () => {
-    candidate.complete = candidate.selected.length === 15;
+    candidate.complete = candidate.selected.length === DEFAULT_SEASON_ANIME;
     writeAtomic(candidatePath, JSON.stringify(candidate, null, 2) + '\n');
     writeAtomic(reportPath, renderReport(candidate, checks, key));
   };
   save();
-  console.log(`已取得 ${candidate.queue.length} 部候选，当前完成 ${candidate.selected.length}/15。报告：${reportPath}`);
+  console.log(`已取得 ${candidate.queue.length} 部候选，当前完成 ${candidate.selected.length}/${DEFAULT_SEASON_ANIME}。报告：${reportPath}`);
   const input = createInterface({ input: process.stdin, output: process.stdout });
   const lines = input[Symbol.asyncIterator]();
   const ask = async prompt => {
@@ -429,7 +432,7 @@ async function main() {
   try {
     const pendingRows = candidate.queue.filter(row =>
       !candidate.selected.some(show => show.bangumiId === row.bangumiId) &&
-      !candidate.skipped.some(show => show.bangumiId === row.bangumiId)).slice(0, 15 - candidate.selected.length);
+      !candidate.skipped.some(show => show.bangumiId === row.bangumiId)).slice(0, DEFAULT_SEASON_ANIME - candidate.selected.length);
     const saveScan = ({ row, type, details }, result) => {
       row.draft ||= {};
       row.draft[type] = { details, check: result.check, scanReason: result.reason };
@@ -451,7 +454,7 @@ async function main() {
       }
     }
     for (const row of candidate.queue) {
-      if (candidate.selected.length === 15) break;
+      if (candidate.selected.length === DEFAULT_SEASON_ANIME) break;
       if (candidate.selected.some(show => show.bangumiId === row.bangumiId) ||
           candidate.skipped.some(show => show.bangumiId === row.bangumiId)) continue;
       const skip = () => { candidate.skipped.push({ rank: row.rank, bangumiId: row.bangumiId, original: row.original }); save(); };
@@ -529,7 +532,7 @@ async function main() {
       candidate.selected.push(show);
       save();
     }
-    if (!candidate.complete) throw new Error(`仅完成 ${candidate.selected.length}/15 部，已保存，未发布。`);
+    if (!candidate.complete) throw new Error(`仅完成 ${candidate.selected.length}/${DEFAULT_SEASON_ANIME} 部，已保存，未发布。`);
     console.log(candidate.selected.map(show => `${show.animeCN} | ${show.songs.map(song => `${song.type} ${song.title}`).join(' / ')}`).join('\n'));
     console.log(`逐首检查报告：${reportPath}`);
     if ((await ask('确认加入本地曲库？输入 Y 发布，N 保存退出 [y/N]：')).toLowerCase() !== 'y') {
@@ -578,7 +581,7 @@ async function main() {
     throw error;
   }
 
-  console.log(`\n✅ ${key} 已加入本地季度曲库：15 部番剧、30 首歌曲。`);
+  console.log(`\n✅ ${key} 已加入本地季度曲库：${DEFAULT_SEASON_ANIME} 部番剧、${DEFAULT_SEASON_ANIME * 2} 首歌曲。`);
   fs.appendFileSync(reportPath, '\n已发布到本地。npm test 和 npm run validate 均通过。\n');
   console.log('刷新 http://127.0.0.1:8080/ 查看新季度。');
   console.log('本脚本只更新本地文件，不会提交或推送到 GitHub/Vercel。');

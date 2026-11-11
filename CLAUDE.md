@@ -24,7 +24,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 
 - `index.html` — All views in one HTML (menu, lobby, room, game, leaderboard). Views toggled via `.hidden` class on direct children of `main.content`. Event delegation on `[data-action]` attributes. Bangumi import UI is in a `position:fixed` bottom bar, **outside** the view system — do NOT put interactive elements (inputs) inside `.container` or `.content`.
 - `app.js` — ES module. All game logic, Firebase multiplayer, AniList API, iTunes API, YouTube API, sakura canvas, audio playback, custom songs CRUD, Bangumi index import.
-- `songs.js` — Exports `SONGS` array (285 entries / 188 anime), `ALL_ANIME`, `AVAILABLE_TYPES`. Each song: `{ titleCN, title, anime, artist, type }`. `title` field is the iTunes search term and cache key.
+- `songs.js` — Exports `SONGS` array (324 entries / 238 anime), `ALL_ANIME`, `AVAILABLE_TYPES`. Each song: `{ titleCN, title, anime, artist, type }`. `title` field is the iTunes search term and cache key.
 - `style.css` — All styles. CSS custom properties for theming. Note: `.container` must NOT use `overflow: hidden` (causes invisible text in inputs).
 - `index_75323.json` — Pre-fetched Bangumi index #75323 (108 anime). Format: `{ total, items: [{ id, name, name_cn, date }] }`. The import flow checks for `index_{id}.json` first before trying proxy.
 
@@ -62,6 +62,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 **Library auto-update:**
 - `npm run discover` writes `candidates/YYYY-MM.json` and `candidates/YYYY-MM.md` for review. See the README for the separate interactive Bangumi-based updater.
 - `.github/workflows/update-library.yml` runs on Mondays at 03:00 UTC and opens a review PR for a complete, unpublished quarter.
+- Seasonal discovery defaults to Bangumi TV heat, 30 anime / 60 distinct OP/ED tracks. Missing metadata or unverified sources require documented replacements by rank. Ranking snapshots are in candidates/*-expansion.json.
 - Publish reviewed quarters in `seasonal-pools.js` and `seasonal-covers.js`. Keep the index order in `songs.js` for multiplayer and update the affected module cache versions.
 
 **Custom Song Library:**
