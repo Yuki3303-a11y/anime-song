@@ -660,6 +660,34 @@ export const SONGS = [
     // ===== 欢迎来到实力至上主义教室 =====
     { titleCN: "MONSTER", title: "MONSTER", anime: "欢迎来到实力至上主义的教室 第四季", artist: "蓝井艾露", type: "OP", artistAliases: ["藍井エイル","Eir Aoi"], animeNative: "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期" },
 
+    // ===== 小小佐仓千代 2026 TOP150 补录（BV1bHZLBiEQx，按视频顺序） =====
+    { titleCN: "Wishing", title: "Wishing", anime: "Re:从零开始的异世界生活", artist: "水濑祈", type: "IN", animeNative: "Re:ゼロから始める異世界生活", artistAliases: ["水瀬いのり", "Inori Minase", "レム"] },
+    { titleCN: "皮卡丘之歌", title: "ピカチュウのうた", anime: "精灵宝可梦 XY&Z", artist: "大谷育江", type: "ED", animeNative: "ポケットモンスター XY＆Z", artistAliases: ["Ikue Otani", "ピカチュウ"] },
+    { titleCN: "Sign", title: "Sign", anime: "火影忍者疾风传", artist: "FLOW", type: "OP", animeNative: "NARUTO -ナルト- 疾風伝" },
+    { titleCN: "我爱你", title: "愛してる", anime: "夏目友人帐 第二季", artist: "高铃", type: "ED", animeNative: "続 夏目友人帳", artistAliases: ["高鈴", "Callin'"] },
+    { titleCN: "春逝", title: "春はゆく", anime: "命运之夜——天之杯Ⅲ：春之歌", artist: "Aimer", type: "ED", animeNative: "劇場版 Fate/stay night [Heaven's Feel] III. spring song" },
+    { titleCN: "我的战争", title: "僕の戦争", anime: "进击的巨人 最终季 Part.1", artist: "神圣放逐乐队", type: "OP", animeNative: "進撃の巨人 The Final Season", artistAliases: ["神聖かまってちゃん", "Shinsei Kamattechan"] },
+    { titleCN: "Stay Alive", title: "Stay Alive", anime: "Re:从零开始的异世界生活", artist: "高桥李依", type: "ED", animeNative: "Re:ゼロから始める異世界生活", artistAliases: ["高橋李依", "Rie Takahashi", "エミリア"] },
+    { titleCN: "LOST IN PARADISE", title: "LOST IN PARADISE", anime: "咒术回战", artist: "ALI feat. AKLO", type: "ED", animeNative: "呪術廻戦", artistAliases: ["ALI", "AKLO"] },
+    { titleCN: "炎", title: "Homura", anime: "鬼灭之刃 剧场版 无限列车篇", artist: "LiSA", type: "ED", animeNative: "劇場版 鬼滅の刃 無限列車編", itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0b/4a/47/0b4a47b3-159e-fdb0-c2a2-608a1c3a8bb1/mzaf_4434592051303284611.plus.aac.p.m4a", youtubeVideoId: "4DxL6IKmXx4", bilibiliVideoId: "BV1uy4y1r7Av" },
+    { titleCN: "欧忒耳佩", title: "エウテルペ", anime: "罪恶王冠", artist: "EGOIST", type: "IN", animeNative: "ギルティクラウン", itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/43/a6/91/43a69198-a217-c183-3b37-c1050fe5261f/mzaf_2991523995651803984.plus.aac.p.m4a" },
+    { titleCN: "残响散歌", title: "残響散歌", anime: "鬼灭之刃 游郭篇", artist: "Aimer", type: "OP", animeNative: "鬼滅の刃 遊郭編" },
+    { titleCN: "Beautiful World", title: "Beautiful World", anime: "新世纪福音战士新剧场版：序", artist: "宇多田光", type: "ED", animeNative: "ヱヴァンゲリヲン新劇場版：序", artistAliases: ["宇多田ヒカル", "Hikaru Utada"], itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/11/ba/8d/11ba8d9b-d7ed-09d8-3a35-3e0f0af7738d/mzaf_4214191427029148428.plus.aac.p.m4a" },
+    { titleCN: "Call your name", title: "Call your name", anime: "进击的巨人", artist: "mpi & CASG", type: "IN", animeNative: "進撃の巨人", artistAliases: ["mpi", "CASG", "Caramel Apple Sound Gadget", "澤野弘之"], itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/83/7a/58/837a5831-f698-4ea3-1dd6-66c544654703/mzaf_12479007966529835639.plus.aac.p.m4a" },
+    { titleCN: "Departures ～赠予你的爱之歌～", title: "Departures ～あなたにおくるアイの歌～", anime: "罪恶王冠", artist: "EGOIST", type: "ED", animeNative: "ギルティクラウン" },
+    { titleCN: "Zero Eclipse", title: "Zero Eclipse", anime: "进击的巨人 第三季", artist: "Laco", type: "IN", animeNative: "進撃の巨人 Season 3", artistAliases: ["澤野弘之"] },
+    { titleCN: "剪影", title: "シルエット", anime: "火影忍者疾风传", artist: "KANA-BOON", type: "OP", animeNative: "NARUTO -ナルト- 疾風伝" },
+    { titleCN: "灶门炭治郎之歌", title: "竈門炭治郎のうた", anime: "鬼灭之刃", artist: "椎名豪 feat. 中川奈美", type: "IN", animeNative: "鬼滅の刃", artistAliases: ["椎名豪", "中川奈美", "Go Shiina", "Nami Nakagawa"] },
+    { titleCN: "献出心脏！", title: "心臓を捧げよ！", anime: "进击的巨人 第二季", artist: "Linked Horizon", type: "OP", animeNative: "進撃の巨人 Season 2" },
+    { titleCN: "恶魔之子", title: "悪魔の子", anime: "进击的巨人 最终季 Part.2", artist: "樋口爱", type: "ED", animeNative: "進撃の巨人 The Final Season Part 2", artistAliases: ["ヒグチアイ", "Ai Higuchi"] },
+    { titleCN: "转动命运之轮", title: "運命のルーレット廻して", anime: "名侦探柯南", artist: "ZARD", type: "OP", animeNative: "名探偵コナン" },
+    { titleCN: "SPECIALZ", title: "SPECIALZ", anime: "咒术回战 涩谷事变", artist: "King Gnu", type: "OP", animeNative: "呪術廻戦 渋谷事変" },
+    { titleCN: "还有爱能够做到的事吗？", title: "愛にできることはまだあるかい", anime: "天气之子", artist: "RADWIMPS", type: "ED", animeNative: "天気の子" },
+    { titleCN: "Call your name <Gv>", title: "Call your name <Gv>", anime: "进击的巨人 LOST GIRLS", artist: "Gemie", type: "ED", animeNative: "進撃の巨人 LOST GIRLS", artistAliases: ["澤野弘之"], itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c2/3d/84/c23d8417-8686-761a-5340-975d6c60e634/mzaf_2663334990691897550.plus.aac.p.m4a" },
+    { titleCN: "Barricades", title: "Barricades", anime: "进击的巨人 第二季", artist: "yosh、Gemie、mpi", type: "IN", animeNative: "進撃の巨人 Season 2", artistAliases: ["yosh", "Gemie", "mpi", "澤野弘之"], itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/dd/6b/49/dd6b4912-a693-b2d3-0618-f57242ef56ba/mzaf_17231142919549879938.plus.aac.p.m4a" },
+    { titleCN: "梦灯笼", title: "夢灯籠", anime: "你的名字。", artist: "RADWIMPS", type: "OP", animeNative: "君の名は。" },
+    { titleCN: "没什么大不了 (movie ver.)", title: "なんでもないや (movie ver.)", anime: "你的名字。", artist: "RADWIMPS", type: "ED", animeNative: "君の名は。" },
+    { titleCN: "Call of Silence", title: "Call of Silence", anime: "进击的巨人 第二季", artist: "Gemie", type: "IN", animeNative: "進撃の巨人 Season 2", artistAliases: ["澤野弘之"], itunesPreviewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/76/59/64/765964cb-e2b8-ade6-2da7-b763e690bc4b/mzaf_14367184108675549599.plus.aac.p.m4a" },
 ];
 
 export const ALL_ANIME = [...new Set(SONGS.map(s => s.anime))];

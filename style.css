@@ -3384,13 +3384,12 @@ body {
 .q-nav-btn { width: 34px; height: 34px; border-radius: 0; border: 2px solid var(--text-primary); }
 .q-num { font-size: 26px; }
 .score { font-size: 34px; }
-.combo { text-align: left; }
+.answer-heading .combo { height: auto; margin: 0; line-height: 1; }
 .combo:empty { display: none; }
-.game-play-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: 24px; align-items: start; }
+.game-play-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
 .game-audio-panel { min-width: 0; }
 @media (min-width: 901px) {
     .game-play-grid:has(> .game-audio-panel.answered) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         align-items: stretch;
     }
 }
@@ -3416,7 +3415,7 @@ body {
 .game-audio-panel.answered .progress { height: 5px; margin: 0 0 10px; }
 .game-answer-panel { min-width: 0; border: 3px solid var(--text-primary); padding: 16px; background: var(--bg-card); }
 .answer-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 3px solid var(--text-primary); font-size: 20px; font-weight: 900; }
-.answer-heading span { font-size: 10px; letter-spacing: .12em; color: var(--text-secondary); }
+.answer-heading .combo-text { font-size: 12px; white-space: nowrap; }
 .player-box {
     min-height: 260px; margin-bottom: 10px; padding: 28px 18px;
     border: 3px solid var(--text-primary); border-radius: 0; background: #f9e7ed;
@@ -3433,7 +3432,9 @@ body {
 .progress { height: 6px; border-radius: 0; background: #e9ced8; }
 .progress-fill { border-radius: 0; }
 .song-info { border: 2px solid var(--text-primary); border-radius: 0; }
-.answer-next-btn { width: 100%; min-height: 42px; margin-top: 14px; }
+.game-answer-panel .song-info { margin: 14px 0 0; }
+.answer-actions { margin-top: 14px; }
+.answer-next-btn { width: 100%; min-height: 44px; }
 .review-detail-btn { width: auto; height: auto; min-height: 33px; padding: 5px 8px; white-space: nowrap; font-size: 12px; }
 #inlineDetailHost .detail-modal-bg { position: static; inset: auto; display: none; padding: 0; margin: 0 0 10px; opacity: 1; pointer-events: auto; background: none; backdrop-filter: none; transition: none; }
 #inlineDetailHost .detail-modal-bg.show { display: block; }
@@ -3459,6 +3460,12 @@ body {
 .options { gap: 10px; }
 .opt-btn { min-height: 86px; padding: 13px 12px 13px 48px; border: 2px solid var(--text-primary); border-radius: 0; background: var(--bg-card); box-shadow: 3px 3px 0 var(--text-primary); backdrop-filter: none; font-size: 14px; font-weight: 800; }
 .opt-btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--text-primary); }
+.game-answer-panel .opt-btn::after {
+    content: attr(data-answer-mark); display: block; position: static;
+    width: auto; height: 1.4em; margin-top: 3px; transform: none;
+    background: none; color: var(--text-primary); font-size: 11px;
+}
+.opt-btn:is(.correct, .reveal, .wrong):disabled { opacity: 1; }
 .library-heading { margin: 8px 0 18px; border-bottom: 3px solid var(--text-primary); padding-bottom: 13px; }
 .library-heading h1 { font-size: 34px; letter-spacing: -.06em; }
 .library-tabs { gap: 0; margin-bottom: 18px; border: 2px solid var(--text-primary); }
@@ -3470,6 +3477,12 @@ body {
 .library-main-tabs.library-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .library-section-links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .library-section-links .active { background: var(--text-primary); color: #fff; }
+.library-catalog-controls .library-search-label { margin-top: 0; }
+.library-catalog-controls .library-search { margin-bottom: 10px; }
+.library-track-source {
+    justify-self: start; padding: 1px 5px; border: 1px solid var(--border);
+    color: var(--text-secondary); background: var(--bg-card); font-size: 10px;
+}
 .library-tools-menu { margin: 0 0 16px; color: var(--text-secondary); font-size: 13px; }
 .library-tools-menu summary { cursor: pointer; width: fit-content; padding: 5px 0; }
 .library-tools-menu .library-section-links { margin: 8px 0 0; }
@@ -3533,6 +3546,12 @@ body {
     .hero-edition { font-size: 9px; }
     .game-play-grid { grid-template-columns: 1fr; gap: 18px; }
     .game-audio-panel { max-width: none; }
+    #v-game { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+    .answer-actions {
+        position: fixed; z-index: 10; inset: auto 0 0; margin: 0;
+        padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+        border-top: 2px solid var(--text-primary); background: var(--bg-card);
+    }
     .player-box { min-height: 210px; }
     .library-cover-grid { grid-template-columns: 1fr; }
     .home-anime-posters { grid-template-columns: repeat(2, minmax(0, 1fr)); }

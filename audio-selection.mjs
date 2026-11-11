@@ -116,7 +116,7 @@ export function rankAudioCandidates(song, candidates, options) {
         .sort((a, b) => b.score - a.score);
 }
 
-const challengeTrackKey = song => `${normalize(song.title)}|${normalize(song.animeCN || song.anime)}`;
+export const challengeTrackKey = song => `${normalize(song.title)}|${normalize(song.animeCN || song.anime)}`;
 
 export function uniqueChallengePool(pool) {
     const seen = new Set();
@@ -128,7 +128,10 @@ export function uniqueChallengePool(pool) {
     });
 }
 
-export function pickReplacementSong(pool, playlist, failedSongs = []) {
+export function pickReplacementSong(pool, playlist, failedSongs = [], lastPlayed) {
     const used = new Set([...playlist, ...failedSongs].map(challengeTrackKey));
-    return uniqueChallengePool(pool).find(song => !used.has(challengeTrackKey(song))) || null;
+    return uniqueChallengePool(pool).find(song => {
+        const key = challengeTrackKey(song);
+        return !used.has(key) && key !== lastPlayed && `${song.title}|${song.anime}` !== lastPlayed;
+    }) || null;
 }

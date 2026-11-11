@@ -50,10 +50,10 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 - `filterState.source` — `null` (all), `'builtin'` (only SONGS), `'custom'` (only custom)
 - Applied via `getFilteredSongs()` → calls `getAllSongs()` which merges `SONGS` + `getCustomSongs()`
 
-**Anti-repeat question selection:** `buildPlaylist(pool, n)` (app.js) keeps a sliding window of recently played song keys in localStorage (`played_history_v1`) so each song is picked once per full-library cycle before any repeats. Used by single-player (`startMode`) and PK host (`pkCreate`).
+**Anti-repeat question selection:** `buildPlaylist(pool, n)` prefers tracks absent from the five most recent single-player rounds in `played_games_v1`, shuffles the selected tracks, and avoids starting with the last presented track when possible. `recordPresentedQuestion()` records tracks whose audio reached an answerable state.
 
 **Game modes & hints:**
-- `startMode(mode)` starts single-player with `gameMode` = `'anime'` / `'song'` / `'artist'` / `'mixed'`. `startSingle()` is kept as an alias for `startMode('anime')`.
+- `startMode(mode)` starts single-player with `gameMode` = `'anime'` / `'song'` / `'artist'` / `'mixed'`.
 - Each question sets `guessType` (`'anime'` / `'song'` / `'artist'`) — fixed by mode, random in mixed, always `'anime'` in PK.
 - `getGuessValue(q, guessType)` extracts the target answer; `buildWrongOptions(q, guessType)` builds 3 distractors — for song mode it excludes same-anime and same-artist songs (relaxed to same-anime only when pool is short), artist mode draws from the ALL_ARTISTS equivalent pool, anime mode from ALL_ANIME.
 - `renderHintBar()` / `useHint()` — two hints per question, labels adapt to guessType (`song` → artist/anime hints, `artist` → title/anime hints). Scoring multiplier: `hintMult` starts at 1, one hint ×0.6, both hints ×0.36. Hints disabled in review mode and in PK.

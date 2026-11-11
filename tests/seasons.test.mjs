@@ -6,7 +6,8 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { selectSeasonSongs } from '../scripts/fetch-season.mjs';
 import { filterWatchedSongs } from '../library-tools.mjs';
-import { uniqueChallengePool } from '../audio-selection.mjs';
+import { challengeTrackKey, uniqueChallengePool } from '../audio-selection.mjs';
+import { ANIME_PREMIERE_YEARS, ANIME_QUESTION_CONTEXT } from '../anime-question-context.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
@@ -96,7 +97,7 @@ test('seasonal wrong answers come from the active question pool', () => {
   const start = app.indexOf('function buildWrongOptions(song, guessType) {');
   const end = app.indexOf('function renderOptions(song) {', start);
   const context = {
-    SONGS: [{ anime: 'legacy', title: 'old', artist: 'old' }],
+    SONGS: [{ anime: 'legacy', title: 'old', artist: 'old' }], ANIME_QUESTION_CONTEXT: {},
     gameState: { mode: 'single', activePool: [
       { anime: 'A', title: 'a', artist: 'a' }, { anime: 'B', title: 'b', artist: 'b' },
       { anime: 'C', title: 'c', artist: 'c' }, { anime: 'D', title: 'd', artist: 'd' }
@@ -109,10 +110,30 @@ test('seasonal wrong answers come from the active question pool', () => {
   assert.deepEqual(Array.from(context.buildWrongOptions(context.gameState.activePool[0], 'anime')), ['B', 'C', 'D']);
 });
 
+test('anime options prefer the same quarter, then closer genres inside the current pool', () => {
+  const start = app.indexOf('function buildWrongOptions(song, guessType) {');
+  const end = app.indexOf('function renderOptions(song) {', start);
+  const question = { anime: 'Question', season: '2026-07' };
+  const other = ['Unrelated', 'Similar', 'Same quarter', 'Closest', 'Same quarter', 'Question'].map(anime => ({ anime }));
+  const context = {
+    SONGS: [], gameState: { mode: 'single', activePool: [question, ...other] },
+    shuffle: choices => choices, animeLabel: song => song.anime,
+    ANIME_QUESTION_CONTEXT: {
+      Question: ['2026-07', 'Drama', 'School'],
+      'Same quarter': ['2026-07', 'Action'],
+      Similar: ['2026-01', 'School', 'Comedy'],
+      Closest: ['2025-10', 'Drama', 'School'],
+    }
+  };
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end), context);
+  assert.deepEqual(Array.from(context.buildWrongOptions(question, 'anime')), ['Same quarter', 'Closest', 'Similar']);
+});
+
 test('a 30-question game uses every song in the selected season', () => {
   const start = app.indexOf('function buildPlaylist(pool, n) {');
   const end = app.indexOf('// Fetch Bangumi index', start);
-  const context = { loadRecentGames: () => [], saveRecentGames: () => {}, shuffle: songs => songs, uniqueChallengePool };
+  const context = { loadRecentGames: () => [], shuffle: songs => songs, uniqueChallengePool, challengeTrackKey };
   vm.createContext(context);
   vm.runInContext(app.slice(start, end), context);
   for (const key of ['2026-04', '2026-07']) {
@@ -123,12 +144,63 @@ test('a 30-question game uses every song in the selected season', () => {
   }
 });
 
+test('starting a round avoids the last playable song even when drawing the entire pool', () => {
+  const start = app.indexOf('function buildPlaylist(pool, n) {');
+  const end = app.indexOf('// Fetch Bangumi index', start);
+  const first = { title: 'First', anime: '日本語', animeCN: 'Anime' };
+  const second = { title: 'Second', anime: 'Anime' };
+  const context = { loadRecentGames: () => [[challengeTrackKey({ title: 'First', anime: 'Anime' })]],
+    uniqueChallengePool, shuffle: songs => songs, challengeTrackKey };
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end), context);
+  assert.deepEqual(Array.from(context.buildPlaylist([first, second], 2)), [second, first]);
+  assert.deepEqual(Array.from(context.buildPlaylist([first], 1)), [first]);
+});
+
+test('drawing from another pool does not discard recent song history or mark unheard picks', () => {
+  const start = app.indexOf('function buildPlaylist(pool, n) {');
+  const end = app.indexOf('// Fetch Bangumi index', start);
+  const song = { title: 'Same', anime: 'Japanese', animeCN: 'Anime' };
+  const other = { title: 'New', anime: 'Other' };
+  let history = [['Same|Japanese', 'Another|Old']];
+  const gameState = { recentQuestions: [], currentSong: other };
+  const context = { loadRecentGames: () => history.slice(), saveRecentGames: value => { history = Array.from(value); },
+    uniqueChallengePool, shuffle: songs => songs, challengeTrackKey, gameState };
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end), context);
+  assert.deepEqual(Array.from(context.buildPlaylist([song, other], 1)), [other]);
+  assert.deepEqual(history, [['Same|Japanese', 'Another|Old']]);
+  context.recordPresentedQuestion();
+  context.recordPresentedQuestion();
+  gameState.currentSong = song;
+  context.recordPresentedQuestion();
+  assert.deepEqual(history, [['Same|Japanese', 'Another|Old'], [other, song].map(challengeTrackKey)]);
+});
+
+test('anime hints reveal the artist and premiere year without exposing the song name', () => {
+  const start = app.indexOf('const HINT_LABELS =');
+  const end = app.indexOf('function markAnswerOption(', start);
+  const unknown = { artist: 'Singer', title: 'Song', anime: 'Unknown' };
+  const gameState = { currentSong: unknown, guessType: 'anime', hints: { h1: false, h2: false } };
+  const context = { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS, animeLabel: s => s.animeCN || s.anime,
+    gameState, $: () => ({}) };
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end), context);
+  const song = { artist: 'Singer', title: 'Song', anime: '青之壬生浪 -芹泽暗杀篇-', season: '2026-01' };
+  assert.equal(context.getHintContent(song, 'anime', 'h1'), '歌手：Singer');
+  assert.equal(context.getHintContent(song, 'anime', 'h2'), '番剧年份：2025 年');
+  assert.equal(context.getHintContent(song, 'song', 'h2'), '番剧：青之壬生浪 -芹泽暗杀篇-');
+  assert.equal(context.getHintContent(unknown, 'anime', 'h2'), '');
+  context.useHint('h2');
+  assert.equal(gameState.hints.h2, false);
+});
+
 test('seasonal answer choices are distinct and stay within the selected season', () => {
   const start = app.indexOf('function buildWrongOptions(song, guessType) {');
   const end = app.indexOf('function renderOptions(song) {', start);
   for (const key of ['2026-04', '2026-07']) {
     const context = {
-      SONGS: [], gameState: { mode: 'single', activePool: pools[key] },
+      SONGS: [], ANIME_QUESTION_CONTEXT: {}, gameState: { mode: 'single', activePool: pools[key] },
       shuffle: choices => choices, animeLabel: song => song.animeCN || song.anime
     };
     vm.createContext(context);

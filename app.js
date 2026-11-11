@@ -1,10 +1,11 @@
-import { SONGS, ALL_ANIME, AVAILABLE_TYPES } from './songs.js?v=62';
+import { SONGS } from './songs.js?v=65';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=42';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=2';
+import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=2';
 import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
 import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=3';
 import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=1';
-import { rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=8';
+import { rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=9';
 import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=1';
 import { createAudioPrefetch } from './audio-prefetch.mjs?v=1';
 
@@ -1567,23 +1568,15 @@ let playerVolume = (() => {
         return Number.isFinite(saved) && saved >= 0 && saved <= 100 ? saved : 50;
     } catch { return 50; }
 })();
-let volumeMuted = false;
-
 function toggleVolumeSlider() {
     const slider = $('fpVolSlider');
     if (slider) slider.classList.toggle('open');
 }
 
-function toggleMute() {
-    volumeMuted = !volumeMuted;
-    applyPlayerVolume();
-}
-
 function applyPlayerVolume() {
-    const effectiveVolume = volumeMuted ? 0 : playerVolume;
-    audio.volume = effectiveVolume / 100;
-    $('libraryPreviewAudio').volume = effectiveVolume / 100;
-    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(effectiveVolume);
+    audio.volume = playerVolume / 100;
+    $('libraryPreviewAudio').volume = playerVolume / 100;
+    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(playerVolume);
     for (const id of ['volSlider', 'fpVolRange', 'musicVolRange', 'libraryVolRange']) {
         const slider = $(id);
         if (slider) slider.value = String(playerVolume);
@@ -1596,13 +1589,12 @@ function applyPlayerVolume() {
 function setPlayerVolume(value) {
     const numeric = Number(value);
     playerVolume = Math.max(0, Math.min(100, Number.isFinite(numeric) ? Math.round(numeric) : 50));
-    volumeMuted = false;
     try { localStorage.setItem(PLAYER_VOLUME_KEY, String(playerVolume)); } catch {}
     applyPlayerVolume();
 }
 
 function updateVolIcon() {
-    const muted = volumeMuted || playerVolume === 0;
+    const muted = playerVolume === 0;
     const low = playerVolume < 50;
     const svgMuted = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
     const svgLow = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
@@ -1680,18 +1672,15 @@ function getFilteredSongs() {
     return filterWatchedSongs(filtered, getWatchedAnimeKeys(), filterState.watchedOnly);
 }
 
-// Anti-repeat question selection: remembers recently played songs across games.
-// Sliding window over the pool — every song is picked once per cycle before any
-// song can repeat, so repeated games cover the whole library instead of the
-// same few songs (birthday-paradox repeats from independent random draws).
+// Anti-repeat question selection: prioritize songs least recently presented.
 const PLAYED_GAMES_KEY = 'played_games_v1';
-const RECENT_GAME_COUNT = 5;   // 同一首歌在最近 N 局内不重复（用户要求：5 局）
+const RECENT_GAME_COUNT = 5;
 
 function loadRecentGames() {
     try {
         const v = JSON.parse(localStorage.getItem(PLAYED_GAMES_KEY));
         if (!Array.isArray(v)) return [];
-        return v.filter(g => Array.isArray(g)).slice(-RECENT_GAME_COUNT);
+        return v.filter(g => Array.isArray(g) && g.length).slice(-RECENT_GAME_COUNT);
     } catch { return []; }
 }
 
@@ -1700,29 +1689,30 @@ function saveRecentGames(games) {
 }
 
 function buildPlaylist(pool, n) {
-    const songKey = s => s.title + '|' + s.anime;
     pool = uniqueChallengePool(pool);
-    n = Math.min(n, pool.length);
-    const poolKeys = new Set(pool.map(songKey));
-    // recentGames: oldest → newest, each a list of song keys (only those still in this pool).
-    const recentGames = loadRecentGames().map(g => g.filter(k => poolKeys.has(k)));
-
-    // Exclude songs used in the last N games; if not enough remain, relax by dropping the
-    // oldest game first, until we can fill n songs.
-    let picks = null;
-    for (let keep = recentGames.length; keep >= 0; keep--) {
-        const excluded = new Set();
-        for (let i = recentGames.length - keep; i < recentGames.length; i++)
-            for (const k of recentGames[i]) excluded.add(k);
-        const eligible = pool.filter(s => !excluded.has(songKey(s)));
-        if (eligible.length >= n) { picks = shuffle(eligible).slice(0, n); break; }
-        if (keep === 0) picks = shuffle(eligible).slice(0, n);
+    // Accept raw title/anime keys written by older versions and backups.
+    const oldKeys = new Map(pool.map(song => [`${song.title}|${song.anime}`, challengeTrackKey(song)]));
+    const history = loadRecentGames().flat().map(key => oldKeys.get(key) ?? key);
+    const positions = new Map(history.map((key, index) => [key, index]));
+    const lastPlayed = history.at(-1);
+    const priority = song => positions.get(challengeTrackKey(song)) ?? -1;
+    const picks = shuffle(shuffle(pool).sort((a, b) => priority(a) - priority(b)).slice(0, n));
+    if (picks.length > 1 && challengeTrackKey(picks[0]) === lastPlayed) {
+        const alternate = 1 + Math.floor(Math.random() * (picks.length - 1));
+        [picks[0], picks[alternate]] = [picks[alternate], picks[0]];
     }
-
-    // Record this game and keep only the last RECENT_GAME_COUNT games.
-    recentGames.push(picks.map(songKey));
-    saveRecentGames(recentGames);
     return picks;
+}
+
+function recordPresentedQuestion() {
+    const key = challengeTrackKey(gameState.currentSong);
+    const round = gameState.recentQuestions;
+    if (round.includes(key)) return;
+    const games = loadRecentGames();
+    const previous = games.at(-1);
+    if (previous?.length === round.length && round.every((item, i) => item === previous[i])) games.pop();
+    round.push(key);
+    saveRecentGames([...games, round]);
 }
 
 // Fetch Bangumi index via CORS proxy
@@ -2152,23 +2142,6 @@ const ANIME_ALT_NAMES = {
     'Free!': 'Free 男子游泳部',
     '绊のAllelle': '绊のアリル',
 };
-
-// Check if a Bangumi result is a good match for the anime name
-function isGoodMatch(result, animeName) {
-    if (!result) return false;
-    const cn = result.name_cn || '';
-    const jp = result.name || '';
-    // Exact match
-    if (cn === animeName || jp === animeName) return true;
-    // Starts with (prefix match)
-    if (cn.startsWith(animeName) || jp.startsWith(animeName)) return true;
-    // The result name is contained in the search term
-    if (animeName.includes(cn) || animeName.includes(jp)) return true;
-    // The search term is a significant part of the result (not just 3 chars in a long name)
-    if (cn.includes(animeName) && animeName.length >= cn.length * 0.4) return true;
-    if (jp.includes(animeName) && animeName.length >= jp.length * 0.4) return true;
-    return false;
-}
 
 // Is this a high-confidence match?
 function isHighConfidenceMatch(result, animeName) {
@@ -2629,6 +2602,7 @@ function startMode(mode, practiceSongs = null, poolName = '') {
     gameState.correctCount = 0;
     gameState.answerHistory = [];
     gameState.failedQuestionSongs = [];
+    gameState.recentQuestions = [];
     gameState.viewingHistory = false;
     const pool = practiceSongs || getFilteredSongs();
     if (pool.length === 0) {
@@ -2650,11 +2624,6 @@ function startMode(mode, practiceSongs = null, poolName = '') {
     $('totalQ').textContent = gameState.playlist.length;
     showView('game');
     loadQuestion();
-}
-
-// 兼容旧入口（默认猜番剧）
-function startSingle() {
-    startMode('anime');
 }
 
 // =====================================================================
@@ -2857,9 +2826,12 @@ function setQuizMediaState(state, message) {
     }
     const canPlay = state === 'awaiting-play' || state === 'ready' || state === 'playing' || (state === 'buffering' && gameState.isPlaying);
     const canAnswer = state === 'ready' || state === 'playing';
+    if (canAnswer && gameState.mode === 'single' && !gameState.viewingHistory && gameState.recentQuestions) {
+        recordPresentedQuestion();
+    }
     const playButton = $('playBtn');
     if (playButton) playButton.disabled = !canPlay;
-    document.querySelectorAll('.opt-btn').forEach(button => { button.disabled = !canAnswer; });
+    document.querySelectorAll('.opt-btn').forEach(button => { button.disabled = gameState.isLocked || !canAnswer; });
     const retryButton = $('retryAudioBtn');
     if (retryButton) {
         retryButton.hidden = state === 'idle' || state === 'searching';
@@ -3083,7 +3055,9 @@ function skipUnplayableQuestion(message, failed = true) {
     if (gameState.mode === 'single') {
         gameState.failedQuestionSongs ||= [];
         gameState.failedQuestionSongs.push(gameState.currentSong);
-        replacement = pickReplacementSong(gameState.activePool, gameState.playlist, gameState.failedQuestionSongs);
+        const lastPlayed = loadRecentGames().at(-1)?.at(-1);
+        replacement = pickReplacementSong(shuffle([...gameState.activePool]), gameState.playlist,
+            gameState.failedQuestionSongs, lastPlayed);
     }
     if (replacement) gameState.playlist[gameState.questionIndex] = replacement;
     else gameState.questionIndex++;
@@ -3470,7 +3444,30 @@ function buildWrongOptions(song, guessType) {
         return shuffle(artists).slice(0, 3);
     }
     const answer = animeLabel(song);
-    return shuffle([...new Set(optionPool.map(animeLabel).filter(name => name && name !== answer))]).slice(0, 3);
+    if (gameState.mode !== 'single') {
+        return shuffle([...new Set(optionPool.map(animeLabel).filter(name => name && name !== answer))]).slice(0, 3);
+    }
+    const contextFor = entry => {
+        const value = ANIME_QUESTION_CONTEXT[entry.anilistId] ?? ANIME_QUESTION_CONTEXT[animeLabel(entry)];
+        return Array.isArray(value) ? value : [];
+    };
+    const [quarter, ...themes] = contextFor(song);
+    const answerQuarter = song.season || quarter;
+    const answerKey = answer.normalize('NFKC');
+    const candidates = new Map();
+    for (const entry of optionPool) {
+        const label = animeLabel(entry);
+        if (!label) continue;
+        const key = label.normalize('NFKC');
+        if (key === answerKey) continue;
+        const [release, ...otherThemes] = contextFor(entry);
+        const sameQuarter = answerQuarter && answerQuarter === (entry.season || release);
+        const overlap = otherThemes.filter(theme => themes.includes(theme)).length;
+        const similarity = overlap ? overlap / (themes.length + otherThemes.length - overlap) : 0;
+        const score = (sameQuarter ? 2 : 0) + similarity;
+        if (score > (candidates.get(key)?.score ?? -1)) candidates.set(key, { label, score });
+    }
+    return shuffle([...candidates.values()]).sort((a, b) => b.score - a.score).slice(0, 3).map(item => item.label);
 }
 
 function renderOptions(song) {
@@ -3494,23 +3491,22 @@ function renderOptions(song) {
 // Hint System（提示系统：每题 2 个提示，使用后本题得分打折）
 // =====================================================================
 const HINT_LABELS = {
-    anime: { h1: '歌手', h2: '歌名' },
+    anime: { h1: '歌手', h2: '番剧年份' },
     song:  { h1: '歌手', h2: '番剧' },
     artist:{ h1: '歌名', h2: '番剧' },
 };
 
 function getHintContent(song, guessType, which) {
-    if (which === 'h1') {
-        const label = HINT_LABELS[guessType].h1;
-        if (label === '歌手') return '歌手：' + song.artist;
-        if (label === '歌名') return '歌名：' + (song.titleCN || song.title);
-        return '番剧：' + animeLabel(song);
+    const label = HINT_LABELS[guessType][which];
+    if (label === '番剧年份') {
+        const name = animeLabel(song);
+        const context = ANIME_QUESTION_CONTEXT[song.anilistId] ?? ANIME_QUESTION_CONTEXT[name];
+        const year = ANIME_PREMIERE_YEARS[name] ?? (context?.[0] || song.season || '').slice(0, 4);
+        return /^\d{4}$/.test(year) ? `番剧年份：${year} 年` : '';
     }
-    const label = HINT_LABELS[guessType].h2;
     if (label === '歌手') return '歌手：' + song.artist;
-    if (label === '番剧') return '番剧：' + animeLabel(song);
-    const t = song.titleCN || song.title;
-    return '歌名首字「' + t.slice(0, 1) + '」· 共 ' + t.length + ' 字';
+    if (label === '歌名') return '歌名：' + (song.titleCN || song.title);
+    return '番剧：' + animeLabel(song);
 }
 
 function renderHintBar() {
@@ -3518,10 +3514,12 @@ function renderHintBar() {
     if (!bar) return;
     if (gameState.mode === 'pk') { bar.classList.add('hidden'); return; }
     bar.classList.remove('hidden');
-    const labels = HINT_LABELS[gameState.guessType] || HINT_LABELS.anime;
+    const { currentSong, guessType } = gameState;
+    const labels = HINT_LABELS[guessType];
+    const hasSecondHint = !!getHintContent(currentSong, guessType, 'h2');
     bar.innerHTML = '<span class="hint-label">提示</span>'
         + '<button class="hint-btn" id="hintBtn1">💡 ' + labels.h1 + '</button>'
-        + '<button class="hint-btn" id="hintBtn2">💡 ' + labels.h2 + '</button>';
+        + '<button class="hint-btn" id="hintBtn2"' + (hasSecondHint ? '>💡 ' + labels.h2 : ' disabled>首播年份未知') + '</button>';
     $('hintBtn1').onclick = () => useHint('h1');
     $('hintBtn2').onclick = () => useHint('h2');
 }
@@ -3530,12 +3528,25 @@ function useHint(which) {
     if (gameState.isLocked || gameState.hints[which]) return;
     const btn = $(which === 'h1' ? 'hintBtn1' : 'hintBtn2');
     if (!btn) return;
+    const content = getHintContent(gameState.currentSong, gameState.guessType, which);
+    if (!content) return;
     gameState.hints[which] = true;
-    btn.textContent = getHintContent(gameState.currentSong, gameState.guessType, which);
+    btn.textContent = content;
     btn.classList.add('used');
     btn.disabled = true;
     const mult = (gameState.hints.h1 && gameState.hints.h2) ? 0.36 : 0.6;
     notify('提示已使用，本题得分 ×' + mult);
+}
+
+function markAnswerOption(button, correctValue, selected) {
+    button.disabled = true;
+    const correct = button.textContent === correctValue;
+    if (!correct && !selected) return;
+    if (correct) button.classList.add(selected ? 'correct' : 'reveal');
+    else button.classList.add('wrong');
+    const mark = [correct && '正确答案', selected && '你选的'].filter(Boolean).join(' · ');
+    button.dataset.answerMark = mark;
+    button.setAttribute('aria-label', `${button.textContent}，${mark}`);
 }
 
 function handleAnswer(btn, selected) {
@@ -3554,6 +3565,7 @@ function handleAnswer(btn, selected) {
 
     const correctValue = getGuessValue(gameState.currentSong, gameState.guessType);
     const isCorrect = selected === correctValue;
+    const options = [...document.querySelectorAll('.opt-btn')];
     if (!isCorrect && gameState.mode === 'single') recordMistake(gameState.currentSong, selected);
     gameState.answerHistory.push({
         song: gameState.currentSong,
@@ -3561,13 +3573,13 @@ function handleAnswer(btn, selected) {
         correctValue: correctValue,
         selected: selected,
         isCorrect: isCorrect,
-        options: Array.from(document.querySelectorAll('.opt-btn')).map(b => b.textContent),
+        options: options.map(option => option.textContent),
         scoreSnapshot: gameState.score
     });
     showSongInfo(isCorrect);
+    options.forEach(option => markAnswerOption(option, correctValue, option === btn));
 
     if (isCorrect) {
-        btn.classList.add('correct');
         beep(523, 0.3);
         flashScreen('#7BC47F'); // Warm green flash for correct answer
         gameState.combo++;
@@ -3585,14 +3597,10 @@ function handleAnswer(btn, selected) {
             });
         }
     } else {
-        btn.classList.add('wrong');
         beep(200, 0.3, 'sawtooth');
         flashScreen('#E87D7D'); // Warm red flash for wrong answer
         gameState.combo = 0;
         $('comboArea').innerHTML = '';
-        document.querySelectorAll('.opt-btn').forEach(b => {
-            if (b.textContent === correctValue) b.classList.add('reveal');
-        });
     }
 
     animateScore($('scoreText'), gameState.correctCount);
@@ -3618,8 +3626,6 @@ function showSongInfo(isCorrect) {
     }
     $('songInfo').classList.add('show');
     $('reviewDetailBtn').style.display = '';
-    $('answerNextBtn').textContent = gameState.questionIndex + 1 >= gameState.playlist.length && !gameState.viewingHistory
-        ? '查看结果 →' : '下一题 →';
     $('gameAudioPanel').classList.add('answered');
     showAnimeDetail(song, { auto: true });
 }
@@ -3844,6 +3850,7 @@ function closeDetailModal() {
 }
 
 function nextQuestion() {
+    if (!gameState.isLocked && !gameState.viewingHistory) return;
     closeDetailModal();
     if (gameState.viewingHistory) {
         gameState.questionIndex++;
@@ -3871,11 +3878,13 @@ function prevQuestion() {
 function updateNavButtons() {
     const prevBtn = $('prevQuestionBtn');
     const nextBtn = $('nextQuestionBtn');
-    // Show prev when not on first question
     if (prevBtn) prevBtn.style.display = gameState.questionIndex > 0 ? '' : 'none';
-    // Show next when: in review mode, OR answered current question and not on last question
-    const hasMore = gameState.questionIndex < gameState.playlist.length;
-    if (nextBtn) nextBtn.style.display = (gameState.viewingHistory || (gameState.isLocked && hasMore)) ? '' : 'none';
+    if (nextBtn) nextBtn.style.display = gameState.viewingHistory ? '' : 'none';
+    const primary = $('answerNextBtn');
+    primary.disabled = !gameState.isLocked && !gameState.viewingHistory;
+    const nextIndex = gameState.questionIndex + 1;
+    primary.textContent = nextIndex >= gameState.playlist.length ? '查看结果 →'
+        : gameState.viewingHistory && nextIndex >= gameState.answerHistory.length ? '返回当前题 →' : '下一题 →';
 }
 
 function renderHistoryOptions(record) {
@@ -3889,8 +3898,7 @@ function renderHistoryOptions(record) {
         btn.textContent = opt;
         btn.dataset.key = i + 1;
         btn.style.animationDelay = (i * 0.06) + 's';
-        if (opt === correctValue) btn.classList.add('correct');
-        else if (opt === record.selected && !record.isCorrect) btn.classList.add('wrong');
+        markAnswerOption(btn, correctValue, opt === record.selected);
         grid.appendChild(btn);
     });
 }
@@ -4081,7 +4089,8 @@ function initSourceFilter() {
 // Personal Library (local single-player data only)
 // =====================================================================
 const publishedSeasons = Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length === 30).sort().reverse();
-let selectedLibrarySeason = publishedSeasons[0] || null;
+const CATALOG_LIBRARY_TABS = ['catalog', 'season', 'tracks', 'bangumi'];
+let selectedLibrarySeason = null;
 let selectedLibraryTab = 'current';
 let feedbackTargetSong = null;
 const libraryPreviewSession = createPreviewSession();
@@ -4181,7 +4190,7 @@ async function prepareLibraryPreviewAudio(result, token) {
     }
     const player = $('libraryPreviewAudio');
     player.src = result.url;
-    player.volume = (volumeMuted ? 0 : playerVolume) / 100;
+    player.volume = playerVolume / 100;
     try { await player.play(); }
     catch (error) {
         if (!libraryPreviewSession.isCurrent(token) || libraryPreviewRecovering) return;
@@ -4282,18 +4291,6 @@ async function playLibraryPreview(song) {
     }
 }
 
-function catalogAnime() {
-    const byKey = new Map();
-    for (const song of getAllSongs()) {
-        const key = animeKey(song);
-        if (!byKey.has(key)) byKey.set(key, {
-            key, title: animeLabel(song), originalTitle: song.animeNative || song.anime,
-            song
-        });
-    }
-    return [...byKey.values()];
-}
-
 function findCatalogSong(key) { return getAllSongs().find(song => trackKey(song) === key) || null; }
 function seasonLabel(key) { return `${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月`; }
 function watchButton(key) {
@@ -4312,12 +4309,17 @@ function trackPlaybackStatus(song) {
     if (record.status === 'played') return { label: `上次可播${record.source ? ' · ' + sourceLabel(record.source) : ''}`, className: 'played', detail };
     return { label: '上次失败', className: 'failed', detail };
 }
-const libraryPages = { current: 0, tracks: 0, season: 0, bangumi: 0, watch: 0 };
+const libraryPages = { current: 0, catalog: 0, tracks: 0, season: 0, bangumi: 0, watch: 0 };
 const LIBRARY_PAGE_SIZE = 12;
 const libraryCoverCache = new Map();
 const libraryCoverRequests = new Map();
 let libraryCoverObserver = null;
-function libraryCoverCard(anime) {
+function libraryTrackSource(song) {
+    if (SEASONAL_POOLS[song.season]?.includes(song)) return seasonLabel(song.season);
+    if (SONGS.includes(song)) return '自带曲库';
+    return isBangumiSong(song) ? 'Bangumi 导入' : '自定义导入';
+}
+function libraryCoverCard(anime, showSource) {
     const posterSongKey = trackKey(anime.song);
     return `<article class="library-cover-card">
         <div class="library-cover-main">
@@ -4332,7 +4334,7 @@ function libraryCoverCard(anime) {
             const status = trackPlaybackStatus(song);
             const selected = selectedSongKeys.includes(key);
             return `<div class="library-cover-track">
-                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML(song.type || '曲目')}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small><span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
+                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML(song.type || '曲目')}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small>${showSource ? `<span class="library-track-source">${escapeHTML(libraryTrackSource(song))}</span>` : ''}<span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
                 <div class="library-cover-actions"><button type="button" class="library-mini-btn library-preview-btn" data-action="previewSong" data-song-key="${escapeHTML(key)}" aria-label="试听 ${escapeHTML(song.titleCN || song.title)}">试听</button>
                     <button type="button" class="library-mini-btn library-add-btn${selected ? ' active' : ''}" data-action="toggleSelectedSong" data-song-key="${escapeHTML(key)}" aria-pressed="${selected}" aria-label="${selected ? '移出我的选歌' : '添加到我的选歌'}：${escapeHTML(song.titleCN || song.title)}">${selected ? '✓ 已添加' : '+ 添加'}</button>
                     <button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(key)}" aria-label="反馈 ${escapeHTML(song.titleCN || song.title)}">反馈</button></div>
@@ -4350,7 +4352,8 @@ function renderLibraryCoverGrid(id, groups, tab, emptyMessage) {
         <span>第 ${page + 1} / ${totalPages} 页 · 共 ${groups.length} 部</span>
         <button type="button" class="library-mini-btn" data-action="libraryPage" data-value="${tab}:${page + 1}" ${page === totalPages - 1 ? 'disabled' : ''}>下一页</button>
     </nav>` : '';
-    $(id).innerHTML = visible.length ? visible.map(libraryCoverCard).join('') + pager : `<div class="library-empty">${escapeHTML(emptyMessage)}</div>`;
+    const showSource = CATALOG_LIBRARY_TABS.includes(tab);
+    $(id).innerHTML = visible.length ? visible.map(anime => libraryCoverCard(anime, showSource)).join('') + pager : `<div class="library-empty">${escapeHTML(emptyMessage)}</div>`;
     observeLibraryCovers($(id));
     updateLibraryPreviewUI();
 }
@@ -4413,48 +4416,58 @@ function renderCurrentLibrary() {
     $('libraryCurrentSummary').textContent = `当前可出 ${pool.length} 首 · 搜索找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲`;
     renderLibraryCoverGrid('libraryCurrentResults', groups, 'current', '当前曲库没有匹配的歌曲。可以清除搜索词，或浏览全部曲库。');
 }
+function renderCatalogLibrary() {
+    const matches = searchLibraryTracks(getAllSongs(), $('libraryCatalogSearch').value);
+    const groups = groupLibrarySongs(matches, animeKey);
+    $('libraryCatalogSummary').textContent = `找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲`;
+    renderLibraryCoverGrid('libraryCatalogResults', groups, 'catalog', '没有找到对应歌曲，试试更短的歌名、番剧名或歌手');
+}
 function renderTracksLibrary() {
-    const matches = searchLibraryTracks(SONGS, $('libraryTrackSearch').value);
+    const matches = searchLibraryTracks(SONGS, $('libraryCatalogSearch').value);
     const groups = groupLibrarySongs(matches, animeKey);
     $('libraryTrackSummary').textContent = `找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲 · 已添加 ${selectedSongKeys.length} 首到我的选歌`;
     renderLibraryCoverGrid('libraryTrackResults', groups, 'tracks', '没有找到对应歌曲，试试更短的歌名、番剧名或歌手');
 }
 function renderSeasonLibrary() {
     const tabs = $('librarySeasonTabs');
-    if (!selectedLibrarySeason) {
+    const startButton = document.querySelector('[data-action="startSelectedSeason"]');
+    startButton.disabled = !selectedLibrarySeason;
+    startButton.textContent = selectedLibrarySeason ? '用这个季度开始猜番剧' : '选择季度后开始猜番剧';
+    if (!publishedSeasons.length) {
         tabs.innerHTML = '';
         $('librarySeasonSummary').textContent = '暂无已发布的季度曲库';
         $('librarySeasonAnime').innerHTML = '';
         return;
     }
-    tabs.innerHTML = publishedSeasons.map(key => `<button type="button" class="library-season-tab${key === selectedLibrarySeason ? ' active' : ''}" data-action="selectLibrarySeason" data-value="${key}">${seasonLabel(key)}</button>`).join('');
-    const songs = SEASONAL_POOLS[selectedLibrarySeason];
+    tabs.innerHTML = [null, ...publishedSeasons].map(key => `<button type="button" class="library-season-tab${key === selectedLibrarySeason ? ' active' : ''}" aria-pressed="${key === selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="${key || ''}">${key ? seasonLabel(key) : '所有季度'}</button>`).join('');
+    const songs = selectedLibrarySeason ? SEASONAL_POOLS[selectedLibrarySeason] : publishedSeasons.flatMap(key => SEASONAL_POOLS[key]);
     const groups = groupLibrarySongs(songs, animeKey);
-    const query = ($('librarySeasonSearch').value || '').normalize('NFKC').trim().toLowerCase();
-    const visibleGroups = groups.filter(anime => !query || [anime.title, anime.originalTitle,
-        ...anime.tracks.flatMap(song => [song.title, song.titleCN, song.artist])]
-        .join(' ').normalize('NFKC').toLowerCase().includes(query));
+    const query = $('libraryCatalogSearch').value.trim();
+    const matches = new Set(searchLibraryTracks(songs, query).map(animeKey));
+    const visibleGroups = groups.filter(anime => matches.has(anime.key));
     const played = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'played')).length;
     const failed = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'failed')).length;
     const eligible = filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly).length;
     $('librarySeasonSummary').textContent = `${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
-    renderLibraryCoverGrid('librarySeasonAnime', visibleGroups, 'season', '没有找到本季曲目，试试番剧名、歌名或歌手');
+    renderLibraryCoverGrid('librarySeasonAnime', visibleGroups, 'season', '这个季度范围内没有匹配的曲目');
 }
 
 function getBangumiSongs() {
-    return getCustomSongs().filter(song => song.origin === 'bangumi' || song._importScore !== undefined);
+    return getCustomSongs().filter(isBangumiSong);
+}
+function isBangumiSong(song) {
+    return song.origin === 'bangumi' || song._importScore !== undefined;
 }
 function renderBangumiLibrary() {
     const songs = getBangumiSongs();
-    const query = ($('libraryBangumiSearch').value || '').normalize('NFKC').trim().toLowerCase();
+    const query = $('libraryCatalogSearch').value.trim();
     const groups = groupLibrarySongs(songs, animeKey);
-    const visible = groups.filter(group => !query || [group.title, group.originalTitle,
-        ...group.tracks.flatMap(song => [song.title, song.titleCN, song.artist])]
-        .join(' ').normalize('NFKC').toLowerCase().includes(query));
+    const matches = new Set(searchLibraryTracks(songs, query).map(animeKey));
+    const visible = groups.filter(group => matches.has(group.key));
     const eligible = filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly);
     $('libraryBangumiSummary').textContent = `${groups.length} 部番剧 · ${songs.length} 首歌曲 · 当前类型和追番筛选可出 ${uniqueChallengePool(eligible).length} 题${query ? ` · 搜索找到 ${visible.length} 部` : ''}`;
     document.querySelector('[data-action="startBangumiSongs"]').disabled = eligible.length === 0;
-    renderLibraryCoverGrid('libraryBangumiAnime', visible, 'bangumi', '还没有导入歌曲。点击「继续导入」添加 Bangumi 目录，或试试其他关键词。');
+    renderLibraryCoverGrid('libraryBangumiAnime', visible, 'bangumi', songs.length ? '没有找到匹配的 Bangumi 导入歌曲' : '还没有导入歌曲。点击「继续导入」添加 Bangumi 目录。');
 }
 function startBangumiSongs() {
     const songs = filterWatchedSongs(getBangumiSongs().filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly);
@@ -4496,17 +4509,18 @@ function renderFeedbackLibrary() {
 }
 
 function renderLibrary() {
-    const inCatalog = ['tracks', 'season', 'bangumi'].includes(selectedLibraryTab);
+    const inCatalog = CATALOG_LIBRARY_TABS.includes(selectedLibraryTab);
     $('libraryCatalogTabs').classList.toggle('hidden', !inCatalog);
     document.querySelectorAll('.library-main-tabs button, .library-section-links button').forEach(tab => {
         const active = tab.dataset.value === 'all' ? inCatalog : tab.dataset.value === selectedLibraryTab;
         tab.classList.toggle('active', active);
         tab.setAttribute('aria-pressed', String(active));
     });
-    for (const name of ['current', 'tracks', 'season', 'bangumi', 'watch', 'mistakes', 'feedback']) {
+    for (const name of ['current', ...CATALOG_LIBRARY_TABS, 'watch', 'mistakes', 'feedback']) {
         $(`library${name[0].toUpperCase() + name.slice(1)}Panel`).classList.toggle('hidden', name !== selectedLibraryTab);
     }
     if (selectedLibraryTab === 'current') renderCurrentLibrary();
+    if (selectedLibraryTab === 'catalog') renderCatalogLibrary();
     if (selectedLibraryTab === 'tracks') renderTracksLibrary();
     if (selectedLibraryTab === 'season') renderSeasonLibrary();
     if (selectedLibraryTab === 'bangumi') renderBangumiLibrary();
@@ -4819,19 +4833,23 @@ document.addEventListener('click', (e) => {
     const action = actionEl.dataset.action;
     const value = actionEl.dataset.value;
     switch (action) {
-        case 'showLibrary': selectedLibraryTab = 'current'; showView('library'); break;
+        case 'showLibrary':
+            selectedLibraryTab = value === 'catalog' ? 'catalog' : 'current';
+            if (selectedLibraryTab === 'catalog') selectedLibrarySeason = null;
+            showView('library');
+            break;
         case 'showSeasonLibrary':
             selectedLibraryTab = 'season';
             selectedLibrarySeason = homeGallerySeason;
-            $('librarySeasonSearch').value = value || '';
-            libraryPages.season = 0;
+            $('libraryCatalogSearch').value = value || '';
+            CATALOG_LIBRARY_TABS.forEach(tab => { libraryPages[tab] = 0; });
             showView('library');
             break;
         case 'shiftHomeHero': shiftHomeAnime('hero', Number(value)); break;
         case 'shiftHomeGallery': shiftHomeAnime('gallery', Number(value)); break;
         case 'openSourceSettings': openSettings(); $('sourceChips').scrollIntoView({ block: 'center' }); break;
         case 'libraryTab':
-            selectedLibraryTab = value === 'all' ? 'season' : value;
+            selectedLibraryTab = value === 'all' ? 'catalog' : value;
             if (!['watch', 'mistakes', 'feedback'].includes(selectedLibraryTab)) $('libraryTools').open = false;
             renderLibrary();
             break;
@@ -4845,7 +4863,11 @@ document.addEventListener('click', (e) => {
             }
             break;
         }
-        case 'selectLibrarySeason': selectedLibrarySeason = value; renderLibrary(); break;
+        case 'selectLibrarySeason':
+            selectedLibrarySeason = publishedSeasons.includes(value) ? value : null;
+            libraryPages.season = 0;
+            renderLibrary();
+            break;
         case 'startBangumiSongs': startBangumiSongs(); break;
         case 'openBangumi': openBangumiPanel(actionEl); break;
         case 'toggleWatchedAnime': toggleWatchedAnime(value); break;
@@ -4883,7 +4905,6 @@ document.addEventListener('click', (e) => {
             $('personalBackupActions').classList.add('hidden');
             $('personalBackupStatus').textContent = '已取消恢复，本机数据未改变。';
             break;
-        case 'startSingle': startSingle(); break;
         case 'startMode': startMode(value); break;
         case 'showView': showView(value); break;
         case 'pkCreate': pkCreate(); break;
@@ -5024,9 +5045,10 @@ $('libraryAnimeSearch').addEventListener('input', () => {
     libraryPages.watch = 0;
     if (selectedLibraryTab === 'watch') renderWatchLibrary();
 });
-$('librarySeasonSearch').addEventListener('input', () => { libraryPages.season = 0; renderSeasonLibrary(); });
-$('libraryBangumiSearch').addEventListener('input', () => { libraryPages.bangumi = 0; renderBangumiLibrary(); });
-$('libraryTrackSearch').addEventListener('input', () => { libraryPages.tracks = 0; renderTracksLibrary(); });
+$('libraryCatalogSearch').addEventListener('input', () => {
+    CATALOG_LIBRARY_TABS.forEach(tab => { libraryPages[tab] = 0; });
+    renderLibrary();
+});
 $('libraryCurrentSearch').addEventListener('input', () => { libraryPages.current = 0; renderCurrentLibrary(); });
 $('libraryOnlyWatched').checked = filterState.watchedOnly;
 $('libraryOnlyWatched').addEventListener('change', () => {

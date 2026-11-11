@@ -51,7 +51,7 @@ test('one-song mistake practice can still offer three other anime answers', () =
   const question = { title: 'Q', anime: 'Question' };
   const others = ['A', 'B', 'C'].map(anime => ({ title: anime, anime }));
   const context = {
-    SONGS: [], gameState: { mode: 'single', activePool: [question], optionPool: [question, ...others] },
+    SONGS: [], ANIME_QUESTION_CONTEXT: {}, gameState: { mode: 'single', activePool: [question], optionPool: [question, ...others] },
     shuffle: values => values, animeLabel: song => song.anime,
   };
   vm.createContext(context);
@@ -60,7 +60,7 @@ test('one-song mistake practice can still offer three other anime answers', () =
 });
 
 test('watched-only season questions keep answer choices in that season', () => {
-  const start = app.indexOf("function startMode(mode, practiceSongs = null, poolName = '') {"), end = app.indexOf('function startSingle()', start);
+  const start = app.indexOf("function startMode(mode, practiceSongs = null, poolName = '') {"), end = app.indexOf('let pkBusy = false;', start);
   const season = ['A', 'B', 'C', 'D'].map((anime, i) => ({ title: `Song ${i}`, anime, artist: `Artist ${i}` }));
   const elements = new Map();
   const element = id => {
@@ -81,7 +81,7 @@ test('watched-only season questions keep answer choices in that season', () => {
 });
 
 test('wrong single-player answers enter the mistake book but PK answers do not', () => {
-  const start = app.indexOf('function handleAnswer(btn, selected) {');
+  const start = app.indexOf('function markAnswerOption(button, correctValue, selected) {');
   const end = app.indexOf('function showSongInfo(', start);
   let recorded = 0;
   const song = { title: 'Q', anime: 'Correct', artist: 'Singer' };
@@ -96,7 +96,7 @@ test('wrong single-player answers enter the mistake book but PK answers do not',
       gameState: state, $: () => element, audio: { pause() {} }, stopQuizYT() {},
       beep() {}, flashScreen() {}, showSongInfo() {}, animateScore() {},
       updateNavButtons() {}, getGuessValue: s => s.anime,
-      document: { querySelectorAll: selector => selector === '.opt-btn' ? [{ textContent: 'Correct', classList: { add() {} } }] : [] },
+      document: { querySelectorAll: selector => selector === '.opt-btn' ? [{ textContent: 'Correct', dataset: {}, classList: { add() {} }, setAttribute() {} }] : [] },
       setTimeout() {}, recordMistake() { recorded++; },
     };
     vm.createContext(context);

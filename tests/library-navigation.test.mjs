@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
 import { sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, mixForAddedSong } from '../library-navigation.mjs';
 
 test('all six source meanings map to an intuitive group and back', () => {
@@ -29,6 +31,32 @@ test('track browser searches old and seasonal titles and deduplicates copies', (
   assert.deepEqual(searchLibraryTracks([old, summer, { ...old }], '火影'), [old]);
   assert.deepEqual(searchLibraryTracks([old, summer], 'imase'), [summer]);
   assert.deepEqual(searchLibraryTracks([old, summer], ''), [summer, old]);
+});
+
+test('all catalog sources share one query and can search across releases and imports', () => {
+  const app = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(html, /id="libraryCatalogSearch"/);
+  assert.doesNotMatch(html, /id="library(?:Track|Season|Bangumi)Search"/);
+  const legacy = { title: 'Moon', anime: 'Old', artist: 'Singer', type: 'OP' };
+  const quarter = { title: 'Sky', anime: 'New', artist: 'Singer', type: 'ED', season: '2026-04' };
+  const imported = { title: 'Star', anime: 'Imported', artist: 'Singer', type: 'ED' };
+  const input = { value: 'Singer' };
+  let groups;
+  const context = {
+    $: id => id === 'libraryCatalogSearch' ? input : {}, getAllSongs: () => [legacy, quarter, imported],
+    SONGS: [legacy], searchLibraryTracks, groupLibrarySongs, animeKey: song => song.anime,
+    selectedSongKeys: [], renderLibraryCoverGrid: (_id, matches) => { groups = matches; },
+  };
+  const start = app.indexOf('function renderCatalogLibrary() {');
+  const end = app.indexOf('function renderSeasonLibrary()', start);
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end), context);
+  context.renderCatalogLibrary();
+  assert.deepEqual(groups.flatMap(group => group.tracks), [quarter, legacy, imported]);
+  context.renderTracksLibrary();
+  assert.deepEqual(groups.flatMap(group => group.tracks), [legacy]);
+  assert.equal(input.value, 'Singer');
 });
 
 test('free combination unions imported, chosen quarter and followed anime without duplicates', () => {

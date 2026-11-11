@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=62">
+    <link rel="stylesheet" href="style.css?v=65">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -104,7 +104,7 @@
                         <p class="menu-library-hint">先确定本局会出的歌曲，再选择挑战方式。</p>
                         <div class="menu-library-actions">
                             <button type="button" class="menu-library-link" data-action="showLibrary">查看当前歌曲</button>
-                            <button type="button" class="menu-library-link" data-action="showSeasonLibrary">更换曲库</button>
+                            <button type="button" class="menu-library-link" data-action="showLibrary" data-value="catalog">更换曲库</button>
                         </div>
                     </div>
 
@@ -218,10 +218,15 @@
                         <button type="button" class="library-tab active" aria-pressed="true" aria-controls="libraryCurrentPanel" data-action="libraryTab" data-value="current">当前曲库</button>
                         <button type="button" class="library-tab" aria-pressed="false" aria-controls="libraryCatalogTabs" data-action="libraryTab" data-value="all">全部曲库</button>
                     </div>
-                    <div id="libraryCatalogTabs" class="library-section-links hidden" role="group" aria-label="全部曲库分类">
-                        <button type="button" class="library-mini-btn" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度曲库</button>
-                        <button type="button" class="library-mini-btn" aria-controls="libraryTracksPanel" data-action="libraryTab" data-value="tracks">自带曲库</button>
-                        <button type="button" class="library-mini-btn" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
+                    <div id="libraryCatalogTabs" class="library-catalog-controls hidden">
+                        <label class="library-search-label" for="libraryCatalogSearch">搜索全部曲库</label>
+                        <input id="libraryCatalogSearch" class="settings-input library-search" type="search" autocomplete="off" placeholder="搜索番剧、歌名或歌手…">
+                        <div class="library-section-links" role="group" aria-label="曲库来源筛选">
+                            <button type="button" class="library-mini-btn" aria-controls="libraryCatalogPanel" data-action="libraryTab" data-value="catalog">全部来源</button>
+                            <button type="button" class="library-mini-btn" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度曲库</button>
+                            <button type="button" class="library-mini-btn" aria-controls="libraryTracksPanel" data-action="libraryTab" data-value="tracks">自带曲库</button>
+                            <button type="button" class="library-mini-btn" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
+                        </div>
                     </div>
                     <details id="libraryTools" class="library-tools-menu">
                         <summary>曲库工具</summary>
@@ -246,10 +251,13 @@
                         <div id="libraryCurrentSummary" class="library-summary"></div>
                         <div id="libraryCurrentResults" class="library-cover-grid"></div>
                     </section>
+                    <section id="libraryCatalogPanel" class="library-panel hidden" aria-label="全部来源的曲目">
+                        <div id="libraryCatalogSummary" class="library-summary" role="status"></div>
+                        <div id="libraryCatalogResults" class="library-cover-grid"></div>
+                    </section>
                     <section id="libraryTracksPanel" class="library-panel hidden" role="tabpanel">
                         <p class="library-help">按番剧浏览网站原有曲库；点“添加”可把单曲加入我的选歌。</p>
                         <div class="library-quick-tools">
-                            <input id="libraryTrackSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索自带曲库" placeholder="搜索番剧、歌名或歌手…">
                             <button type="button" class="library-mini-btn" data-action="useSelectedSongs">只用我的选歌</button>
                         </div>
                         <div id="libraryTrackSummary" class="library-summary"></div>
@@ -260,7 +268,6 @@
                         <div id="librarySeasonTabs" class="library-season-tabs"></div>
                         <div id="librarySeasonSummary" class="library-summary"></div>
                         <div class="library-quick-tools">
-                            <input id="librarySeasonSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索本季番剧、歌曲或歌手" placeholder="搜索本季番剧、歌曲或歌手…">
                             <label class="library-watch-filter" for="libraryOnlyWatched"><input type="checkbox" id="libraryOnlyWatched">只猜我追的番</label>
                         </div>
                         <button type="button" class="btn btn-primary library-start-btn" data-action="startSelectedSeason">用这个季度开始猜番剧</button>
@@ -269,7 +276,6 @@
                     <section id="libraryBangumiPanel" class="library-panel hidden" role="tabpanel">
                         <p class="library-help">按番剧查看从 Bangumi 导入的 OP / ED，试听确认后可以直接挑战。</p>
                         <div class="library-quick-tools">
-                            <input id="libraryBangumiSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索 Bangumi 导入的歌曲" placeholder="搜索番剧、歌名或歌手…">
                             <button type="button" class="library-mini-btn" data-action="openBangumi">继续导入</button>
                         </div>
                         <div id="libraryBangumiSummary" class="library-summary"></div>
@@ -378,8 +384,6 @@
                         </div>
                     </div>
 
-                    <div id="comboArea" class="combo"></div>
-
                     <div class="game-play-grid">
                     <div id="gameAudioPanel" class="game-audio-panel">
                     <div id="inlineDetailHost"></div>
@@ -422,7 +426,12 @@
                     </div>
 
                     <div class="game-answer-panel">
-                    <div class="answer-heading">选择答案 <span>SELECT ONE</span></div>
+                    <div class="answer-heading">选择答案 <div id="comboArea" class="combo"></div></div>
+                    <div id="hintBar" class="hint-bar hidden"></div>
+                    <div id="optionsGrid" class="options"></div>
+                    <div class="answer-actions">
+                        <button id="answerNextBtn" class="btn btn-primary answer-next-btn" type="button" data-action="nextQuestion" disabled>下一题 →</button>
+                    </div>
                     <div id="songInfo" class="song-info">
                         <div class="song-info-top">
                             <span id="resultBadge" class="result-badge correct"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><polyline points="20 6 9 17 4 12"/></svg>正确</span>
@@ -437,10 +446,7 @@
                             <button id="reviewDetailBtn" class="review-detail-btn" data-action="showAnimeDetail" style="display:none;">番剧详情</button>
                             <button class="review-detail-btn song-feedback-btn" data-action="reportCurrentSong" aria-label="反馈这首歌曲的问题">反馈</button>
                         </div>
-                        <button id="answerNextBtn" class="btn btn-primary answer-next-btn" data-action="nextQuestion">下一题 →</button>
                     </div>
-                    <div id="hintBar" class="hint-bar hidden"></div>
-                    <div id="optionsGrid" class="options"></div>
                     </div>
                     </div>
                 </div>
@@ -678,6 +684,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=62"></script>
+    <script type="module" src="app.js?v=65"></script>
 </body>
 </html>

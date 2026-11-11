@@ -354,7 +354,7 @@ test('an older review audio request cannot replace the current review song', asy
 });
 
 test('answer shows inline result and navigation without waiting for detail popup', () => {
-  const start = appSource.indexOf('function handleAnswer(btn, selected) {');
+  const start = appSource.indexOf('function markAnswerOption(button, correctValue, selected) {');
   const end = appSource.indexOf('function showSongInfo(', start);
   const fn = appSource.slice(start, end);
   const firstSong = { anime: 'A', title: 'first', artist: 'one' };
@@ -370,19 +370,25 @@ test('answer shows inline result and navigation without waiting for detail popup
   };
   let resultCount = 0;
   let navUpdates = 0;
+  const option = textContent => ({ textContent, dataset: {}, classList: { add() {} }, setAttribute() {} });
+  const correct = option('A');
+  const picked = option('B');
   const context = {
     gameState, $, audio: { pause() {} }, stopQuizYT() {}, beep() {}, flashScreen() {},
     showSongInfo() { resultCount++; }, animateScore() {}, updateNavButtons() { navUpdates++; },
     getGuessValue: song => song.anime,
-    document: { querySelectorAll: selector => selector === '.opt-btn' ? [{ textContent: 'B', classList: { add() {} } }] : [] },
+    document: { querySelectorAll: selector => selector === '.opt-btn' ? [correct, picked] : [] },
     setTimeout: () => assert.fail('answer should not wait for a timer'),
     showAnimeDetail: () => assert.fail('answer should not open the detail panel automatically'),
   };
   vm.createContext(context);
   vm.runInContext(fn, context);
-  context.handleAnswer({ classList: { add() {} } }, 'B');
+  context.handleAnswer(picked, 'B');
   assert.equal(resultCount, 1);
   assert.equal(navUpdates, 1);
+  assert.equal(picked.dataset.answerMark, '你选的');
+  assert.equal(correct.dataset.answerMark, '正确答案');
+  assert.ok(picked.disabled && correct.disabled);
 });
 
 test('answer immediately reveals the left detail while leaving the question player intact', () => {
@@ -413,7 +419,28 @@ test('answer immediately reveals the left detail while leaving the question play
   assert.equal(detailCalls.length, 1);
   assert.equal(detailCalls[0].value, song);
   assert.equal(detailCalls[0].options.auto, true);
-  assert.equal($('answerNextBtn').textContent, '查看结果 →');
+});
+
+test('the next button exists outside the answer reveal and unlocks only after answering', () => {
+  const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.ok(html.indexOf('id="optionsGrid"') < html.indexOf('id="answerNextBtn"'));
+  assert.ok(html.indexOf('id="answerNextBtn"') < html.indexOf('id="songInfo"'));
+  const start = appSource.indexOf('function updateNavButtons() {');
+  const end = appSource.indexOf('function renderHistoryOptions(', start);
+  const primary = {};
+  const gameState = { playlist: ['first', 'last'], questionIndex: 0, isLocked: false, viewingHistory: false };
+  const context = { gameState, $: id => id === 'answerNextBtn' ? primary : null };
+  vm.createContext(context);
+  vm.runInContext(appSource.slice(start, end), context);
+  context.updateNavButtons();
+  assert.equal(primary.disabled, true);
+  gameState.isLocked = true;
+  context.updateNavButtons();
+  assert.equal(primary.disabled, false);
+  assert.equal(primary.textContent, '下一题 →');
+  gameState.questionIndex = 1;
+  context.updateNavButtons();
+  assert.equal(primary.textContent, '查看结果 →');
 });
 
 test('home cover controls rotate hero and page through all seasonal posters', () => {

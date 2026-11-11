@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { scoreAudioCandidate, rankAudioCandidates, uniqueChallengePool, audioSearchQueries, pickReplacementSong } from '../audio-selection.mjs';
+import { scoreAudioCandidate, rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from '../audio-selection.mjs';
 
 const song = { title: 'Re:Re:', artist: 'ASIAN KUNG-FU GENERATION', anime: 'ERASED', animeCN: '只有我不存在的城市', type: 'OP' };
 
@@ -97,6 +97,7 @@ test('a failed question uses an unused song from the same selected pool', () => 
   const playlist = pool.slice(0, 2);
   assert.equal(pickReplacementSong(pool, playlist, [song])?.title, 'Third');
   assert.equal(pickReplacementSong(pool, pool, [song]), null);
+  assert.equal(pickReplacementSong(pool, playlist, [song], challengeTrackKey(pool[2])), null);
 });
 
 test('quiz replaces an unplayable question without consuming a question slot', () => {
@@ -110,7 +111,8 @@ test('quiz replaces an unplayable question without consuming a question slot', (
     gameState: state, clearQuizMediaTimeout() {}, stopQuestionLoad() {}, stopQuizYT() {},
     audio: { pause() {}, removeAttribute() {}, load() {} },
     recordLocalAudioCheck() { recorded++; }, noteSourceFailure() {},
-    setQuizMediaState() {}, notify() {}, pickReplacementSong,
+    setQuizMediaState() {}, notify() {}, pickReplacementSong, loadRecentGames: () => [],
+    shuffle: songs => songs,
     audioSourcePref: 'smart', setTimeout: callback => { callback(); }, loadQuestion: () => { loaded++; },
   };
   vm.createContext(context);
