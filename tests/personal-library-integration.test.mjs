@@ -33,16 +33,39 @@ test('historical quarter browser shows years, all four months and every theme', 
   vm.runInContext(app.slice(start, end), context);
   context.renderSeasonLibrary();
   assert.deepEqual(groups.flatMap(group => group.tracks), tracks);
-  assert.match(element('librarySeasonTabs').innerHTML, /1995 年/);
-  for (const month of ['01', '04', '07', '10']) assert.ok(element('librarySeasonTabs').innerHTML.includes(`${month} 月`));
-  assert.match(element('librarySeasonTabs').innerHTML, /data-value="1995-01" disabled/);
+  assert.match(element('librarySeasonTabs').innerHTML, /2010 年及以前/);
+  assert.doesNotMatch(element('librarySeasonTabs').innerHTML, /1995 年|<select/);
   assert.match(element('librarySeasonSummary').textContent, /1 首 IN/);
   assert.equal(startButton.disabled, false);
   context.selectedLibrarySeason = null;
+  context.selectedLibraryYear = 'early';
+  context.renderSeasonLibrary();
+  assert.deepEqual(groups.flatMap(group => group.tracks), tracks);
+  assert.equal(startButton.disabled, false);
+  assert.match(element('librarySeasonSummary').textContent, /^2010 年及以前/);
   context.selectedLibraryYear = '2026';
   context.renderSeasonLibrary();
   assert.deepEqual(groups.flatMap(group => group.tracks), [recent]);
+  for (const month of ['01', '04', '07', '10']) assert.ok(element('librarySeasonTabs').innerHTML.includes(`${month} 月`));
+  assert.match(element('librarySeasonTabs').innerHTML, /data-value="2026-01" disabled/);
   assert.equal(startButton.disabled, true);
+});
+
+test('early anime can start a challenge using the grouped range and current type filter', () => {
+  const old = { title: 'Old', anime: 'Classic', type: 'OP', season: '1995-10' };
+  const insert = { ...old, title: 'Insert', type: 'IN' };
+  let started;
+  const context = { selectedLibrarySeason: null, selectedLibraryYear: 'early',
+    publishedSeasons: ['2026-07', '1995-10'], QUARTER_CATALOG: { '2026-07': [{ ...old, season: '2026-07', title: 'Recent' }], '1995-10': [old, insert] },
+    filterState: { types: new Set(['OP']), watchedOnly: false }, watchedAnimeKeys: [], filterWatchedSongs,
+    startMode: (...args) => { started = args; } };
+  vm.createContext(context);
+  const start = app.indexOf('function startSelectedSeason() {');
+  vm.runInContext(app.slice(start, app.indexOf('function startMistakePractice()', start)), context);
+  context.startSelectedSeason();
+  assert.equal(started[0], 'anime');
+  assert.deepEqual(Array.from(started[1]), [old]);
+  assert.equal(started[2], '2010 年及以前');
 });
 
 test('legacy-only saved settings migrate to an exact compatible mix', () => {

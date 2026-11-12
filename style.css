@@ -3508,7 +3508,6 @@ body {
 .library-season-tabs { display: grid; gap: 0; overflow: visible; padding: 0; border-top: 1px solid var(--text-primary); }
 .library-season-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
 .library-season-label { flex: 0 0 30px; padding-top: 8px; font-size: 12px; font-weight: 800; }
-.library-year-select { width: 180px; max-width: 100%; }
 .library-year-options, .library-quarter-options { display: flex; flex-wrap: wrap; gap: 6px; }
 .library-season-tab { padding: 7px 10px; font-size: 12px; }
 .library-season-tab:disabled { opacity: .35; cursor: not-allowed; }

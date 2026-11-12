@@ -1,4 +1,4 @@
-import { SONGS } from './songs.js?v=67';
+import { SONGS } from './songs.js?v=68';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=44';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=4';
 import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=2';
@@ -4440,23 +4440,27 @@ function renderCatalogLibrary() {
 function renderSeasonLibrary() {
     const tabs = $('librarySeasonTabs');
     const startButton = document.querySelector('[data-action="startSelectedSeason"]');
-    startButton.disabled = !selectedLibrarySeason;
-    startButton.textContent = selectedLibrarySeason ? '用这个季度开始猜番剧' : '选择季度后开始猜番剧';
     if (!publishedSeasons.length) {
+        startButton.disabled = true;
         tabs.innerHTML = '';
         $('librarySeasonSummary').textContent = '暂无已发布的季度曲库';
         $('librarySeasonAnime').innerHTML = '';
         return;
     }
     if (selectedLibrarySeason) selectedLibraryYear = selectedLibrarySeason.slice(0, 4);
-    const years = [...new Set(publishedSeasons.map(key => key.slice(0, 4)))];
-    tabs.innerHTML = `<div class="library-season-row"><label class="library-season-label" for="libraryYearSelect">年份</label><select id="libraryYearSelect" class="settings-input library-year-select">${[null, ...years].map(year => `<option value="${year || ''}" ${year === selectedLibraryYear ? 'selected' : ''}>${year ? `${year} 年` : '全部年份'}</option>`).join('')}</select></div>` +
-        (selectedLibraryYear ? `<div class="library-season-row"><span class="library-season-label">季度</span><div class="library-quarter-options" role="group" aria-label="选择季度"><button type="button" class="library-season-tab${!selectedLibrarySeason ? ' active' : ''}" aria-pressed="${!selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="">全年</button>${['01', '04', '07', '10'].map(month => {
+    if (selectedLibraryYear && Number(selectedLibraryYear) <= 2010) selectedLibraryYear = 'early';
+    startButton.disabled = !selectedLibrarySeason && selectedLibraryYear !== 'early';
+    startButton.textContent = selectedLibrarySeason ? '用这个季度开始猜番剧' : selectedLibraryYear === 'early' ? '用早期番剧开始猜番剧' : '选择季度后开始猜番剧';
+    const years = [...new Set(publishedSeasons.map(key => key.slice(0, 4)))].filter(year => Number(year) > 2010);
+    const yearOptions = [null, ...years, ...(publishedSeasons.some(key => Number(key.slice(0, 4)) <= 2010) ? ['early'] : [])];
+    tabs.innerHTML = `<div class="library-season-row"><span class="library-season-label">年份</span><div class="library-year-options" role="group" aria-label="选择年份">${yearOptions.map(year => `<button type="button" class="library-season-tab${year === selectedLibraryYear ? ' active' : ''}" aria-pressed="${year === selectedLibraryYear}" data-action="selectLibraryYear" data-value="${year || ''}">${year === 'early' ? '2010 年及以前' : year ? `${year} 年` : '全部年份'}</button>`).join('')}</div></div>` +
+        (selectedLibraryYear && selectedLibraryYear !== 'early' ? `<div class="library-season-row"><span class="library-season-label">季度</span><div class="library-quarter-options" role="group" aria-label="选择季度"><button type="button" class="library-season-tab${!selectedLibrarySeason ? ' active' : ''}" aria-pressed="${!selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="">全年</button>${['01', '04', '07', '10'].map(month => {
             const key = `${selectedLibraryYear}-${month}`;
             const available = !!QUARTER_CATALOG[key]?.length;
             return `<button type="button" class="library-season-tab${key === selectedLibrarySeason ? ' active' : ''}" aria-pressed="${key === selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="${key}" ${available ? '' : 'disabled'}>${month} 月</button>`;
         }).join('')}</div></div>` : '');
-    const seasons = selectedLibrarySeason ? [selectedLibrarySeason] : publishedSeasons.filter(key => !selectedLibraryYear || key.startsWith(`${selectedLibraryYear}-`));
+    const seasons = selectedLibrarySeason ? [selectedLibrarySeason] : publishedSeasons.filter(key => !selectedLibraryYear ||
+        (selectedLibraryYear === 'early' ? Number(key.slice(0, 4)) <= 2010 : key.startsWith(`${selectedLibraryYear}-`)));
     const songs = seasons.flatMap(key => QUARTER_CATALOG[key]);
     const groups = groupLibrarySongs(songs, animeKey);
     const query = $('libraryCatalogSearch').value.trim();
@@ -4465,7 +4469,7 @@ function renderSeasonLibrary() {
     const played = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'played')).length;
     const failed = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'failed')).length;
     const eligible = uniqueChallengePool(filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly)).length;
-    $('librarySeasonSummary').textContent = `${selectedLibrarySeason ? seasonLabel(selectedLibrarySeason) : selectedLibraryYear ? `${selectedLibraryYear} 年` : '全部年份'} · ${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED${songs.some(song => song.type === 'IN') ? ` · ${songs.filter(song => song.type === 'IN').length} 首 IN` : ''} · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
+    $('librarySeasonSummary').textContent = `${selectedLibrarySeason ? seasonLabel(selectedLibrarySeason) : selectedLibraryYear === 'early' ? '2010 年及以前' : selectedLibraryYear ? `${selectedLibraryYear} 年` : '全部年份'} · ${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED${songs.some(song => song.type === 'IN') ? ` · ${songs.filter(song => song.type === 'IN').length} 首 IN` : ''} · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
     renderLibraryCoverGrid('librarySeasonAnime', visibleGroups, 'season', '这个季度范围内没有匹配的曲目');
 }
 
@@ -4579,6 +4583,12 @@ function useSelectedSongs() {
     notify('当前曲库已切换为我的选歌');
 }
 function startSelectedSeason() {
+    if (!selectedLibrarySeason && selectedLibraryYear === 'early') {
+        const songs = publishedSeasons.filter(key => Number(key.slice(0, 4)) <= 2010).flatMap(key => QUARTER_CATALOG[key]);
+        const filtered = filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly);
+        startMode('anime', filtered, '2010 年及以前');
+        return;
+    }
     if (!selectedLibrarySeason) return;
     setSourceFilter(`season:${selectedLibrarySeason}`);
     startMode('anime');
@@ -4884,6 +4894,12 @@ document.addEventListener('click', (e) => {
             libraryPages.season = 0;
             renderLibrary();
             break;
+        case 'selectLibraryYear':
+            selectedLibraryYear = value === 'early' ? 'early' : publishedSeasons.some(key => key.startsWith(`${value}-`)) ? value : null;
+            selectedLibrarySeason = null;
+            libraryPages.season = 0;
+            renderLibrary();
+            break;
         case 'startBangumiSongs': startBangumiSongs(); break;
         case 'openBangumi': openBangumiPanel(actionEl); break;
         case 'toggleWatchedAnime': toggleWatchedAnime(value); break;
@@ -4994,13 +5010,6 @@ document.addEventListener('click', (e) => {
 
 // Handle file input for importing custom songs
 document.addEventListener('change', (e) => {
-    if (e.target.id === 'libraryYearSelect') {
-        const year = e.target.value;
-        selectedLibraryYear = publishedSeasons.some(key => key.startsWith(`${year}-`)) ? year : null;
-        selectedLibrarySeason = null;
-        libraryPages.season = 0;
-        renderLibrary();
-    }
     if (e.target.id === 'importFileInput' && e.target.files[0]) {
         importCustomSongsFile(e.target.files[0]);
         e.target.value = '';
