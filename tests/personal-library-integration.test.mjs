@@ -4,9 +4,63 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { animeKey, trackKey, filterWatchedSongs } from '../library-tools.mjs';
-import { selectMixedSongs } from '../library-navigation.mjs';
+import { buildQuarterCatalog, groupLibrarySongs, searchLibraryTracks, selectMixedSongs } from '../library-navigation.mjs';
+import { uniqueChallengePool } from '../audio-selection.mjs';
 
 const app = fs.readFileSync(fileURLToPath(new URL('../app.js', import.meta.url)), 'utf8').replace(/\r\n/g, '\n');
+
+test('historical quarter browser shows years, all four months and every theme', () => {
+  const old = { title: 'Old OP', anime: 'Old show', type: 'OP', season: '1995-10' };
+  const tracks = [old, { ...old, title: 'Second OP' }, { ...old, title: 'Insert', type: 'IN' }];
+  const recent = { title: 'Recent ED', anime: 'Recent show', type: 'ED', season: '2026-07' };
+  const catalog = buildQuarterCatalog(tracks, { '2026-07': [recent] });
+  const elements = new Map();
+  const element = id => {
+    if (!elements.has(id)) elements.set(id, { textContent: '', innerHTML: '', value: '' });
+    return elements.get(id);
+  };
+  const startButton = {};
+  let groups;
+  const context = {
+    QUARTER_CATALOG: catalog, publishedSeasons: Object.keys(catalog).sort().reverse(), selectedLibrarySeason: '1995-10', selectedLibraryYear: '1995',
+    $: element, document: { querySelector: () => startButton }, groupLibrarySongs, searchLibraryTracks, animeKey, trackKey,
+    filterWatchedSongs, uniqueChallengePool, filterState: { types: new Set(), watchedOnly: false }, watchedAnimeKeys: [], audioChecks: [],
+    seasonLabel: key => key, renderLibraryCoverGrid: (_id, values) => { groups = values; },
+  };
+  const start = app.indexOf('function renderSeasonLibrary() {');
+  const end = app.indexOf('function getBangumiSongs()', start);
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end), context);
+  context.renderSeasonLibrary();
+  assert.deepEqual(groups.flatMap(group => group.tracks), tracks);
+  assert.match(element('librarySeasonTabs').innerHTML, /1995 年/);
+  for (const month of ['01', '04', '07', '10']) assert.ok(element('librarySeasonTabs').innerHTML.includes(`${month} 月`));
+  assert.match(element('librarySeasonTabs').innerHTML, /data-value="1995-01" disabled/);
+  assert.match(element('librarySeasonSummary').textContent, /1 首 IN/);
+  assert.equal(startButton.disabled, false);
+  context.selectedLibrarySeason = null;
+  context.selectedLibraryYear = '2026';
+  context.renderSeasonLibrary();
+  assert.deepEqual(groups.flatMap(group => group.tracks), [recent]);
+  assert.equal(startButton.disabled, true);
+});
+
+test('legacy-only saved settings migrate to an exact compatible mix', () => {
+  const storage = new Map([['game_settings_v1', JSON.stringify({ questionCount: 20, types: ['IN'], source: 'legacy' })]]);
+  const context = {
+    gameState: {}, QUARTER_CATALOG: { '1995-10': [{}] }, publishedSeasons: ['1995-10'], parsePersonalBackup() {},
+    localStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value) },
+  };
+  const start = app.indexOf('const filterState =');
+  const end = app.indexOf('function saveGameSettings()', start);
+  vm.createContext(context);
+  vm.runInContext(app.slice(start, end) + '\nglobalThis.loadedState = filterState;', context);
+  assert.equal(context.loadedState.source, 'mix');
+  assert.deepEqual(JSON.parse(JSON.stringify(context.loadedState.mix)), { legacy: true, seasons: [], imported: false, watched: false, selected: false });
+  assert.equal(context.gameState.questionCount, 20);
+  assert.deepEqual(Array.from(context.loadedState.types), ['IN']);
+  assert.equal(JSON.parse(storage.get('song_source_mix_v1')).legacy, true);
+});
 
 test('watched-only selection composes with quarter and type filters', () => {
   const start = app.indexOf('function getFilteredSongs() {');
@@ -16,7 +70,7 @@ test('watched-only selection composes with quarter and type filters', () => {
   const unwatched = { title: 'New ED', anime: 'Other Anime', type: 'ED', season: '2026-07', anilistId: 2 };
   const otherOp = { title: 'Other OP', anime: 'Other Anime', type: 'OP', season: '2026-07', anilistId: 2 };
   const context = {
-    SONGS: [old], SEASONAL_POOLS: { '2026-07': [watched, unwatched, otherOp] },
+    SONGS: [old], QUARTER_CATALOG: { '2026-07': [watched, unwatched, otherOp] }, builtinSongs: [old, watched, unwatched, otherOp],
     getCustomSongs: () => [], filterWatchedSongs,
     getWatchedAnimeKeys: () => [animeKey(watched)],
     filterState: { types: new Set(['OP']), source: 'season:2026-07', watchedOnly: true },
@@ -32,7 +86,8 @@ test('current challenge pool combines imported songs, one quarter and followed a
   const summer = { title: 'Summer OP', anime: 'Summer', type: 'OP', season: '2026-07' };
   const imported = { title: 'Imported OP', anime: 'Imported', type: 'OP' };
   const context = {
-    SONGS: [old], SEASONAL_POOLS: { '2026-04': [spring], '2026-07': [summer] },
+    SONGS: [old], QUARTER_CATALOG: { '2026-04': [spring], '2026-07': [summer] },
+    builtinSongs: [old, spring, summer],
     getCustomSongs: () => [imported], getWatchedAnimeKeys: () => [animeKey(old)],
     filterWatchedSongs, selectMixedSongs, animeKey, trackKey, selectedSongKeys: [],
     filterState: { types: new Set(['OP']), source: 'mix', watchedOnly: false,
@@ -69,7 +124,7 @@ test('watched-only season questions keep answer choices in that season', () => {
   };
   const context = {
     gameState: { questionCount: 10 }, filterState: { source: 'season:2026-07', types: new Set(), watchedOnly: true },
-    SEASONAL_POOLS: { '2026-07': season }, $: element,
+    QUARTER_CATALOG: { '2026-07': season }, $: element,
     getFilteredSongs: () => [season[0]], getAllSongs: () => [...season, { title: 'Outside', anime: 'Other', artist: 'Other' }],
     animeLabel: s => s.anime, buildPlaylist: songs => songs, showView() {}, loadQuestion() {},
   };

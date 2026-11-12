@@ -19,10 +19,11 @@ export function normalizeImportedSong(value) {
     const result = { title: value.title, titleCN: text(value.titleCN) && value.titleCN || value.title,
         anime: value.anime, artist: text(value.artist) && value.artist || 'Unknown',
         type: ['OP', 'ED', 'IN'].includes(value.type) ? value.type : 'OP' };
-    for (const key of ['animeCN', 'animeNative', 'origin']) if (text(value[key])) result[key] = value[key];
+    for (const key of ['animeCN', 'animeNative', 'origin', 'recordingId']) if (text(value[key])) result[key] = value[key];
     if (/^\d{4}-(01|04|07|10)$/.test(value.season)) result.season = value.season;
     if (Number.isSafeInteger(value.anilistId) && value.anilistId > 0) result.anilistId = value.anilistId;
     if (Number.isSafeInteger(value.bangumiId) && value.bangumiId > 0) result.bangumiId = value.bangumiId;
+    if (Number.isInteger(value.releaseYear) && value.releaseYear >= 1900 && value.releaseYear <= 2200) result.releaseYear = value.releaseYear;
     if (Number.isFinite(value._importScore)) result._importScore = value._importScore;
     if (text(value.coverImage) && https(value.coverImage)) result.coverImage = value.coverImage;
     if (/^[\w-]{11}$/.test(value.youtubeVideoId)) result.youtubeVideoId = value.youtubeVideoId;
@@ -39,7 +40,7 @@ function validSetting(key, value) {
     if (key === 'player_volume_v1') return value.trim() !== '' && Number.isFinite(Number(value)) && Number(value) >= 0 && Number(value) <= 100;
     const data = JSON.parse(value);
     if (!object(data)) return false;
-    if (key === 'song_source_mix_v1') return Array.isArray(data.seasons) && data.seasons.length <= 100 &&
+    if (key === 'song_source_mix_v1') return Array.isArray(data.seasons) && data.seasons.length <= 400 &&
         data.seasons.every(season => typeof season === 'string' && /^\d{4}-(01|04|07|10)$/.test(season)) &&
         ['legacy', 'imported', 'watched'].every(field => typeof data[field] === 'boolean') &&
         (data.selected === undefined || typeof data.selected === 'boolean');

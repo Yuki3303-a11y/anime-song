@@ -62,7 +62,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 **Library auto-update:**
 - `npm run discover` writes `candidates/YYYY-MM.json` and `candidates/YYYY-MM.md` for review. See the README for the separate interactive Bangumi-based updater.
 - `.github/workflows/update-library.yml` runs on Mondays at 03:00 UTC and opens a review PR for a complete, unpublished quarter.
-- Seasonal discovery defaults to Bangumi TV heat, 30 anime / 60 distinct OP/ED tracks. Missing metadata or unverified sources require documented replacements by rank. Ranking snapshots are in candidates/*-expansion.json.
+- Seasonal discovery defaults to Bangumi TV heat, up to30 anime candidates, retaining all regular OP/ED tracks. Missing metadata stays documented without forced replacements. Ranking snapshots are in candidates/*-expansion.json.
 - Publish reviewed quarters in `seasonal-pools.js` and `seasonal-covers.js`. Keep the index order in `songs.js` for multiplayer and update the affected module cache versions.
 
 **Custom Song Library:**

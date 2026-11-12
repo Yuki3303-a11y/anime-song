@@ -8,6 +8,7 @@
     "audit": "node scripts/audit-integrity.mjs && node scripts/audit-romaji.mjs",
     "discover": "node scripts/fetch-season.mjs",
     "update-season": "node scripts/update-season.mjs",
+    "build-archive": "node scripts/build-season-archive.mjs",
     "serve": "python -m http.server 8080",
     "test": "node --test tests/*.test.mjs"
   },

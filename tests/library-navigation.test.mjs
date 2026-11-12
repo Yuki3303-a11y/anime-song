@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, mixForAddedSong } from '../library-navigation.mjs';
+import { buildQuarterCatalog, sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, mixForAddedSong } from '../library-navigation.mjs';
 
 test('all six source meanings map to an intuitive group and back', () => {
   for (const source of [null, 'builtin', 'legacy', 'custom', 'season:2026-04', 'season:2026-07']) {
@@ -54,9 +54,25 @@ test('all catalog sources share one query and can search across releases and imp
   vm.runInContext(app.slice(start, end), context);
   context.renderCatalogLibrary();
   assert.deepEqual(groups.flatMap(group => group.tracks), [quarter, legacy, imported]);
-  context.renderTracksLibrary();
-  assert.deepEqual(groups.flatMap(group => group.tracks), [legacy]);
   assert.equal(input.value, 'Singer');
+  assert.doesNotMatch(html, /data-value="tracks"|libraryTracksPanel/);
+  for (const label of ['全部番剧', '季度番剧', 'Bangumi 导入']) assert.ok(html.includes(label));
+});
+
+test('quarter catalog includes small historical quarters and preserves every distinct theme', () => {
+  const old = { title: 'First OP', anime: 'Old show', type: 'OP', season: '1995-10', anilistId: 1 };
+  const anotherOp = { ...old, title: 'Second OP' };
+  const insert = { ...old, title: 'Insert', type: 'IN' };
+  const ending = { title: 'Ending', anime: 'New show', type: 'ED', season: '2020-01', anilistId: 2 };
+  const duplicate = { ...old, anime: 'Old show alternate name' };
+  const catalog = buildQuarterCatalog([old, anotherOp, insert], { '1995-10': [duplicate], '2020-01': [ending], '2099-01': [] });
+  assert.deepEqual(Object.keys(catalog), ['1995-10', '2020-01']);
+  assert.deepEqual(catalog['1995-10'], [old, anotherOp, insert]);
+  assert.equal(catalog['1995-10'][0], old);
+  assert.deepEqual(catalog['2020-01'], [ending]);
+  const selected = selectMixedSongs({ legacy: [old, anotherOp, insert], seasons: catalog, imported: [],
+    watchedKeys: [], animeKey: song => song.anime, mix: { seasons: ['1995-10'] } });
+  assert.deepEqual(selected, [old, anotherOp, insert]);
 });
 
 test('free combination unions imported, chosen quarter and followed anime without duplicates', () => {

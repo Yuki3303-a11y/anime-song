@@ -22,23 +22,25 @@ test('every published seasonal anime has a cached HTTPS cover', () => {
   assert.equal(Object.keys(covers).length, ids.size);
 });
 
-test('all four 2026 pools contain 30 unique OP/ED pairs each', () => {
-  for (const key of ['2026-01', '2026-04', '2026-07', '2026-10']) {
+test('every quarter since 2020 contains verified themes without a fixed track count', () => {
+  assert.equal(Object.keys(pools).length, 28);
+  for (const key of Object.keys(pools)) {
     const songs = pools[key];
-    assert.equal(songs.length, 60);
+    assert.ok(songs.length > 0);
     const ids = new Set(songs.map(song => song.anilistId));
-    assert.equal(ids.size, 30);
-    for (const id of ids) assert.deepEqual(songs.filter(song => song.anilistId === id).map(song => song.type), ['OP', 'ED']);
+    assert.ok(ids.size > 0);
+    assert.ok(songs.every(song => ['OP', 'ED'].includes(song.type) && song.artist && song.animethemesUrl));
+    assert.equal(new Set(songs.map(song => `${song.anilistId}|${song.type}|${song.title}|${song.artist}`)).size, songs.length);
   }
 });
 
-test('published season track identities and order match the reviewed popularity candidates', () => {
+test('previously published seasonal tracks keep their original identities and order', () => {
   for (const key of ['2026-01', '2026-04', '2026-07', '2026-10']) {
     const candidate = JSON.parse(fs.readFileSync(path.join(root, 'candidates', `${key}-expansion.json`), 'utf8'));
     assert.equal(candidate.complete, true);
     const rankedSongs = candidate.selected.flatMap(anime => anime.songs);
-    assert.equal(rankedSongs.length, pools[key].length);
-    for (const [index, song] of pools[key].entries()) {
+    assert.ok(rankedSongs.length <= pools[key].length);
+    for (const [index, song] of pools[key].slice(0, rankedSongs.length).entries()) {
       assert.deepEqual(
         [song.anilistId, song.title, song.type],
         [rankedSongs[index].anilistId, rankedSongs[index].title, rankedSongs[index].type]
@@ -47,7 +49,7 @@ test('published season track identities and order match the reviewed popularity 
   }
 });
 
-test('discovery matches by AniList ID and skips incomplete higher ranked anime', () => {
+test('discovery matches by AniList ID and keeps known themes inside the ranked cutoff', () => {
   const media = (id, name) => ({ id, title: { romaji: name }, season: 'SPRING', seasonYear: 2026, popularity: 100 - id });
   const theme = (id, name, types) => ({
     name, slug: name, resources: [{ site: 'AniList', external_id: id }],
@@ -59,10 +61,10 @@ test('discovery matches by AniList ID and skips incomplete higher ranked anime',
     2
   );
   assert.equal(result.complete, true);
-  assert.deepEqual(result.selected.map(x => x.anilistId), [1, 3]);
-  assert.deepEqual(result.skipped.map(x => x.anilistId), [2]);
-  assert.equal(result.songs.length, 4);
-  assert.equal(selectSeasonSongs([media(2, 'missing ED')], [theme(2, 'incomplete', ['OP'])], 1).complete, false);
+  assert.deepEqual(result.selected.map(x => x.anilistId), [1, 2]);
+  assert.deepEqual(result.skipped.map(x => x.anilistId), []);
+  assert.equal(result.songs.length, 3);
+  assert.equal(selectSeasonSongs([media(2, 'no metadata')], [], 1).complete, false);
 });
 
 test('single-player filters include old, seasonal and custom pools without changing PK source', () => {
@@ -73,7 +75,7 @@ test('single-player filters include old, seasonal and custom pools without chang
   const seasonal = { title: 'new', anime: 'new anime', type: 'ED', season: '2026-07' };
   const custom = { title: 'custom', anime: 'custom anime', type: 'OP' };
   const context = {
-    SONGS: [legacy], SEASONAL_POOLS: { '2026-07': [seasonal] },
+    SONGS: [legacy], builtinSongs: [legacy, seasonal], QUARTER_CATALOG: { '2026-07': [seasonal] },
     getCustomSongs: () => [custom], filterWatchedSongs, getWatchedAnimeKeys: () => [],
     filterState: { types: new Set(), source: null, watchedOnly: false }
   };

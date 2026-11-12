@@ -9,7 +9,7 @@ export function animeKey(song) {
 }
 
 export function trackKey(song) {
-    return [song?.title || '', song?.anime || '', song?.type || ''].map(normalizedName).join('|');
+    return [song?.title || '', song?.anime || '', song?.type || '', ...(song?.recordingId ? [song.recordingId] : [])].map(normalizedName).join('|');
 }
 
 export function groupSeasonSongs(songs) {
@@ -18,9 +18,13 @@ export function groupSeasonSongs(songs) {
         const key = animeKey(song);
         if (!groups.has(key)) groups.set(key, {
             key, title: song.animeCN || song.anime, originalTitle: song.animeNative || song.anime,
-            anilistId: song.anilistId || null, tracks: {}
+            anilistId: song.anilistId || null, tracks: {}, tracksByType: {}, songs: []
         });
-        if (song.type === 'OP' || song.type === 'ED') groups.get(key).tracks[song.type] = song;
+        const group = groups.get(key);
+        group.songs.push(song);
+        (group.tracksByType[song.type || 'OTHER'] ||= []).push(song);
+        // Retain the first OP/ED convenience fields used by older consumers.
+        if (song.type === 'OP' || song.type === 'ED') group.tracks[song.type] ||= song;
     }
     return [...groups.values()];
 }
@@ -43,6 +47,18 @@ export function createCatalogHistory(legacy, seasonal, previousKeys) {
     const currentAnime = new Set(current.map(animeKey));
     const tracks = new Map();
     const shows = new Map();
+    const recordings = new Map();
+    for (const song of current) {
+        if (!song.anilistId) continue;
+        const recording = `${song.anilistId}|${trackKey({ title: song.title, type: song.type, recordingId: song.recordingId })}`;
+        if (!recordings.has(recording)) recordings.set(recording, song);
+        const canonical = recordings.get(recording);
+        if (trackKey(song) !== trackKey(canonical)) tracks.set(trackKey(song), canonical);
+        const oldAnime = animeKey({ ...song, anilistId: null });
+        const newAnime = animeKey(song);
+        if (!shows.has(oldAnime)) shows.set(oldAnime, currentAnime.has(oldAnime) ? [oldAnime] : []);
+        shows.get(oldAnime).push(newAnime);
+    }
     for (const [pool, entries] of Object.entries(previousKeys)) {
         const songs = pool === 'legacy' ? legacy : seasonal[pool];
         for (const [index, [title, anime, type, sameRecording = true]] of Object.entries(entries)) {

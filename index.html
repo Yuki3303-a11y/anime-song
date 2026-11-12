@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=66">
+    <link rel="stylesheet" href="style.css?v=67">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -222,11 +222,11 @@
                         <label class="library-search-label" for="libraryCatalogSearch">搜索全部曲库</label>
                         <input id="libraryCatalogSearch" class="settings-input library-search" type="search" autocomplete="off" placeholder="搜索番剧、歌名或歌手…">
                         <div class="library-section-links" role="group" aria-label="曲库来源筛选">
-                            <button type="button" class="library-mini-btn" aria-controls="libraryCatalogPanel" data-action="libraryTab" data-value="catalog">全部来源</button>
-                            <button type="button" class="library-mini-btn" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度曲库</button>
-                            <button type="button" class="library-mini-btn" aria-controls="libraryTracksPanel" data-action="libraryTab" data-value="tracks">自带曲库</button>
+                            <button type="button" class="library-mini-btn" aria-controls="libraryCatalogPanel" data-action="libraryTab" data-value="catalog">全部番剧</button>
+                            <button type="button" class="library-mini-btn" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度番剧</button>
                             <button type="button" class="library-mini-btn" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
                         </div>
+                        <button type="button" class="library-mini-btn" data-action="useSelectedSongs">只用我的选歌</button>
                     </div>
                     <details id="libraryTools" class="library-tools-menu">
                         <summary>曲库工具</summary>
@@ -251,18 +251,9 @@
                         <div id="libraryCurrentSummary" class="library-summary"></div>
                         <div id="libraryCurrentResults" class="library-cover-grid"></div>
                     </section>
-                    <section id="libraryCatalogPanel" class="library-panel hidden" aria-label="全部来源的曲目">
+                    <section id="libraryCatalogPanel" class="library-panel hidden" aria-label="全部番剧的曲目">
                         <div id="libraryCatalogSummary" class="library-summary" role="status"></div>
                         <div id="libraryCatalogResults" class="library-cover-grid"></div>
-                    </section>
-                    <section id="libraryTracksPanel" class="library-panel hidden" role="tabpanel">
-                        <p class="library-help">按番剧浏览网站原有曲库；点“添加”可把单曲加入我的选歌。</p>
-                        <div class="library-quick-tools">
-                            <button type="button" class="library-mini-btn" data-action="useSelectedSongs">只用我的选歌</button>
-                        </div>
-                        <div id="libraryTrackSummary" class="library-summary"></div>
-                        <button type="button" class="btn btn-primary library-start-btn" data-action="startLegacyLibrary">用自带曲库开始猜番剧</button>
-                        <div id="libraryTrackResults" class="library-cover-grid"></div>
                     </section>
                     <section id="librarySeasonPanel" class="library-panel hidden" role="tabpanel">
                         <div id="librarySeasonTabs" class="library-season-tabs"></div>
@@ -684,6 +675,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=66"></script>
+    <script type="module" src="app.js?v=67"></script>
 </body>
 </html>

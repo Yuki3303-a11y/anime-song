@@ -8,7 +8,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { audioSearchQueries, rankAudioCandidates } from '../audio-selection.mjs';
-import { currentLocalSeason, mergeSeasonData, prepareSeasonForPublish } from './season-updater-tools.mjs';
+import { currentLocalSeason, mergeSeasonData, prepareSeasonForPublish, seasonAudioKey } from './season-updater-tools.mjs';
 import { discoverBangumiSeason } from './bangumi-season.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -272,12 +272,18 @@ export async function findVerifiedAudio(song, getBases) {
     return await Promise.race([deadline, Promise.any(checks.map(async check => {
       const result = await check;
       if (!result) throw new Error('no verified match');
-      return { check: result };
+      return { check: { ...result, songTitle: song.title } };
     })).catch(() => ({ reason: evidence.matched ? 'stream' : evidence.searched ? 'missing' : 'network' }))]);
   } finally {
     clearTimeout(timer);
     controller.abort();
   }
+}
+
+function themeDraftEntries(theme) {
+  const songs = theme?.allSongs?.length ? theme.allSongs : ['OP', 'ED'].map(type => ({ ...theme?.songs[type], type }));
+  return songs.map(song => ({ type: song.type, details: song.title ? song : null,
+    draftKey: songs.filter(item => item.type === song.type).length > 1 ? `${song.type}:${song.title}` : song.type }));
 }
 
 async function scanCandidateLinks(candidate, rows, getBases, onResult) {
@@ -288,18 +294,19 @@ async function scanCandidateLinks(candidate, rows, getBases, onResult) {
     const theme = candidate.themes[row.mediaId];
     const name = row.animeCN || row.original;
     if (!media) { results.push({ label: name, reason: 'identity' }); continue; }
-    for (const type of ['OP', 'ED']) {
-      const details = row.draft?.[type]?.details || theme?.songs[type];
+    for (const entry of themeDraftEntries(theme)) {
+      const { type, draftKey } = entry;
+      const details = row.draft?.[draftKey]?.details || entry.details;
       if (!details) { results.push({ label: `${name}｜${typeLabel[type]}`, reason: 'metadata' }); continue; }
       const song = { ...details, type, anilistId: media.id, anime: theme?.name || media.title.romaji,
         animeCN: name, animeNative: media.title.native };
       const label = `${name}｜${typeLabel[type]} ${song.title} — ${song.artist}`;
-      const draft = row.draft?.[type];
+      const draft = row.draft?.[draftKey];
       if (onResult && (draft?.check || draft?.scanReason)) {
         results.push({ label, check: draft.check, reason: draft.scanReason });
       } else if (details.manual) {
         results.push({ label, reason: 'title' });
-      } else tasks.push({ row, type, details, song, label });
+      } else tasks.push({ row, type, draftKey, details, song, label });
     }
   }
   let cursor = 0;
@@ -320,15 +327,20 @@ async function scanCandidateLinks(candidate, rows, getBases, onResult) {
 }
 
 function renderReport(candidate, checks, seasonKey) {
-  const byId = new Map(checks.map(check => [`${check.anilistId}|${check.type}`, check]));
+  const byId = new Map(checks.map(check => [seasonAudioKey(check), check]));
+  const allSongs = candidate.selected.flatMap(show => show.songs);
+  const checkFor = song => byId.get(seasonAudioKey(song)) ||
+    (allSongs.filter(item => item.anilistId === song.anilistId && item.type === song.type).length === 1 &&
+      byId.get(`${song.anilistId}|${song.type}|`));
+  const totalSongs = allSongs.length;
   const passed = candidate.selected.flatMap(show => show.songs)
-    .filter(song => byId.get(`${song.anilistId}|${song.type}`)?.playable).length;
+    .filter(song => checkFor(song)?.playable).length;
   const translated = candidate.selected.filter(show => show.animeCN).length;
   const covered = candidate.selected.filter(show => /^https:\/\//.test(show.coverUrl || '')).length;
-  const ready = passed === DEFAULT_SEASON_ANIME * 2 && translated === DEFAULT_SEASON_ANIME && covered === DEFAULT_SEASON_ANIME;
+  const ready = totalSongs > 0 && passed === totalSongs && translated === candidate.selected.length && covered === candidate.selected.length;
   const cell = value => String(value || '').replace(/\|/g, '\\|').replace(/[\r\n]+/g, ' ');
   const rows = candidate.selected.flatMap(show => show.songs.map(song => {
-    const check = byId.get(`${song.anilistId}|${song.type}`);
+    const check = checkFor(song);
     const match = check?.matchedTitle ? `${check.matchedTitle}${check.matchedArtist ? ` — ${check.matchedArtist}` : ''}${check.score == null ? '' : ` (${check.score})`}` : '未匹配';
     const link = check?.reviewUrl || (check?.videoId ? `https://www.youtube.com/watch?v=${check.videoId}` :
       check?.bvid ? `https://www.bilibili.com/video/${check.bvid}` : check?.url);
@@ -339,7 +351,7 @@ function renderReport(candidate, checks, seasonKey) {
     `# ${seasonKey} 季度曲库一键更新检查`, '',
     `- AniList/AnimeThemes 候选：${candidate.selected.length}/${DEFAULT_SEASON_ANIME} 部，${candidate.selected.reduce((sum, show) => sum + show.songs.length, 0)} 首。`,
     `- Bangumi 中文名或人工确认显示名：${translated}/${candidate.selected.length} 部；HTTPS 封面：${covered}/${candidate.selected.length} 部。`,
-    `- 音源检查：${passed}/${DEFAULT_SEASON_ANIME * 2} 首。自动结果需要歌名与番剧或歌手证据。人工结果由用户试听确认，脚本检查链接。`,
+    `- 音源检查：${passed}/${totalSongs} 首。自动结果需要歌名与番剧或歌手证据。人工结果由用户试听确认，脚本检查链接。`,
     `- 发布状态：${ready ? '准备运行测试并写入本地季度曲库' : '未发布；请检查缺项后再运行'}.`,
     '', '| 番剧 | 类型 | 歌曲 | 歌手 | 通过音源 | 命中结果与分数 | 试听链接 |', '|---|---|---|---|---|---|---|', ...rows,
     '', '## 最近批量检查的待处理项',
@@ -415,7 +427,7 @@ async function main() {
     console.log(`有 ${candidate.skipped.length} 部已跳过。如需补回，可加 --retry-skipped 再运行。`);
   }
   const save = () => {
-    candidate.complete = candidate.selected.length === DEFAULT_SEASON_ANIME;
+    candidate.complete = candidate.selected.length > 0;
     writeAtomic(candidatePath, JSON.stringify(candidate, null, 2) + '\n');
     writeAtomic(reportPath, renderReport(candidate, checks, key));
   };
@@ -433,9 +445,9 @@ async function main() {
     const pendingRows = candidate.queue.filter(row =>
       !candidate.selected.some(show => show.bangumiId === row.bangumiId) &&
       !candidate.skipped.some(show => show.bangumiId === row.bangumiId)).slice(0, DEFAULT_SEASON_ANIME - candidate.selected.length);
-    const saveScan = ({ row, type, details }, result) => {
+    const saveScan = ({ row, draftKey, details }, result) => {
       row.draft ||= {};
-      row.draft[type] = { details, check: result.check, scanReason: result.reason };
+      row.draft[draftKey] = { details, check: result.check, scanReason: result.reason };
       save();
     };
     if (pendingRows.length) {
@@ -481,8 +493,9 @@ async function main() {
       row.draft ||= {};
       save();
       const accepted = [];
-      for (const type of ['OP', 'ED']) {
-        let details = row.draft[type]?.details || theme?.songs[type];
+      for (const entry of themeDraftEntries(theme)) {
+        const { type, draftKey } = entry;
+        let details = row.draft[draftKey]?.details || entry.details;
         if (!details) {
           const title = await ask(`缺 ${type}。请输入歌名，Enter 跳过这部，/quit 退出：`);
           if (!title) break;
@@ -490,11 +503,11 @@ async function main() {
           while (!artist) artist = await ask('歌手：');
           details = { title, artist, manual: true };
         }
-        const draft = row.draft[type] ||= { details };
+        const draft = row.draft[draftKey] ||= { details };
         save();
         const song = { title: details.title, titleCN: details.title, artist: details.artist,
           anime: show.anime, animeCN: show.animeCN, animeNative: show.animeNative,
-          type, season: key, anilistId: media.id,
+          type, themeSequence: details.themeSequence || 1, season: key, anilistId: media.id,
           animethemesUrl: theme?.slug ? `https://animethemes.moe/anime/${theme.slug}` : undefined };
         console.log(`  ${type} ${song.title} — ${song.artist}`);
         if (!draft.check && !draft.scanReason && !details.manual) {
@@ -524,10 +537,10 @@ async function main() {
           console.log(`链接已保存：${sourceLabel[source.source]}`);
         }
         if (!draft.check) break;
-        accepted.push(draft.check);
+        accepted.push({ ...draft.check, songTitle: song.title });
         show.songs.push(song);
       }
-      if (show.songs.length !== 2) { skip(); continue; }
+      if (!show.songs.length) { skip(); continue; }
       checks.push(...accepted);
       candidate.selected.push(show);
       save();
@@ -581,7 +594,7 @@ async function main() {
     throw error;
   }
 
-  console.log(`\n✅ ${key} 已加入本地季度曲库：${DEFAULT_SEASON_ANIME} 部番剧、${DEFAULT_SEASON_ANIME * 2} 首歌曲。`);
+  console.log(`\n✅ ${key} 已加入本地季度曲库：${candidate.selected.length} 部番剧、${prepared.songs.length} 首歌曲。`);
   fs.appendFileSync(reportPath, '\n已发布到本地。npm test 和 npm run validate 均通过。\n');
   console.log('刷新 http://127.0.0.1:8080/ 查看新季度。');
   console.log('本脚本只更新本地文件，不会提交或推送到 GitHub/Vercel。');

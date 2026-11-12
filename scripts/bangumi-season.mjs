@@ -1,4 +1,4 @@
-import { DEFAULT_SEASON_ANIME, fetchAniList, fetchAnimeThemes, pickThemes, seasonKey } from './fetch-season.mjs';
+import { DEFAULT_SEASON_ANIME, fetchAniList, fetchAnimeThemes, pickThemes, pickAllThemes, seasonKey } from './fetch-season.mjs';
 
 const titleKey = title => String(title || '').normalize('NFKC').toLowerCase()
   .replace(/(?:第\s*(\d+)\s*期|(\d+)(?:st|nd|rd|th)\s+season|season\s+(\d+))/g,
@@ -56,7 +56,7 @@ export async function discoverBangumiSeason(year, season) {
   return {
     season: key, targetAnime: DEFAULT_SEASON_ANIME, rankSource: 'Bangumi heat (TV)', selected: [], skipped: [], audioChecks: [],
     media,
-    queue: ranking.map((show, index) => ({
+    queue: ranking.slice(0, DEFAULT_SEASON_ANIME).map((show, index) => ({
       bangumiId: show.id, rank: index + 1, original: show.name, animeCN: show.name_cn,
       coverUrl: show.images?.large || show.images?.common,
       mediaId: matchBangumiShow(show, media, themes)?.id || null
@@ -65,7 +65,10 @@ export async function discoverBangumiSeason(year, season) {
       const id = theme.resources?.find(resource => resource.site === 'AniList')?.external_id;
       if (!id) return [];
       const pair = pickThemes(theme);
-      return [[id, { name: theme.name, slug: theme.slug, songs: Object.fromEntries(
+      const allSongs = pickAllThemes(theme).map(item => ({ type: item.type,
+        themeSequence: Number(item.slug?.match(/\d+/)?.[0]) || 1,
+        title: item.song.title.trim(), artist: item.song.artists.map(a => a.name).filter(Boolean).join(', ') }));
+      return [[id, { name: theme.name, slug: theme.slug, allSongs, songs: Object.fromEntries(
         Object.entries(pair).filter(([, item]) => item).map(([type, item]) => [type, {
           title: item.song.title.trim(), artist: item.song.artists.map(a => a.name).filter(Boolean).join(', ')
         }])
@@ -76,21 +79,20 @@ export async function discoverBangumiSeason(year, season) {
 
 export function selectBangumiSeasonSongs(discovery, target = DEFAULT_SEASON_ANIME) {
   const selected = [], skipped = [];
-  for (const row of discovery.queue) {
-    if (selected.length === target) break;
+  for (const row of discovery.queue.slice(0, target)) {
     const media = discovery.media.find(item => item.id === row.mediaId);
     const theme = discovery.themes[row.mediaId];
-    if (!media || !theme?.songs.OP || !theme?.songs.ED ||
-        theme.songs.OP.title.trim().toLowerCase() === theme.songs.ED.title.trim().toLowerCase()) {
+    const entries = theme?.allSongs || Object.entries(theme?.songs || {}).map(([type, song]) => ({ ...song, type }));
+    if (!media || !entries.length) {
       skipped.push({ ...row, reason: !media ? '未确认作品关联' : 'OP/ED 元数据不全' });
       continue;
     }
-    const songs = ['OP', 'ED'].map(type => ({ ...theme.songs[type],
-      titleCN: theme.songs[type].title, anime: theme.name, animeCN: row.animeCN,
+    const songs = entries.map(entry => ({ ...entry,
+      titleCN: entry.title, anime: theme.name, animeCN: row.animeCN,
       animeNative: row.original, anilistId: media.id, bangumiId: row.bangumiId,
-      type, season: discovery.season, rank: row.rank,
+      season: discovery.season, rank: row.rank,
       animethemesUrl: `https://animethemes.moe/anime/${theme.slug}` }));
     selected.push({ ...row, anime: theme.name, anilistId: media.id, songs });
   }
-  return { complete: selected.length === target, selected, skipped, songs: selected.flatMap(show => show.songs) };
+  return { complete: selected.length > 0, targetReached: selected.length === target, selected, skipped, songs: selected.flatMap(show => show.songs) };
 }

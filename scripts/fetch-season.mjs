@@ -24,12 +24,23 @@ export function pickThemePair(anime) {
   return pair.OP && pair.ED && pair.OP.song.title.trim().toLowerCase() !== pair.ED.song.title.trim().toLowerCase() ? pair : null;
 }
 export function pickThemes(anime) {
-  const sorted = [...(anime.animethemes || [])]
-    .filter(t => ['OP', 'ED'].includes(t.type) && t.song?.title?.trim() && t.song?.artists?.some(a => a.name))
-    .sort((a, b) => (a.slug || '').localeCompare(b.slug || '', undefined, { numeric: true }));
+  const sorted = pickAllThemes(anime);
   const OP = sorted.find(t => t.type === 'OP');
   const ED = sorted.find(t => t.type === 'ED');
   return { OP, ED };
+}
+export function pickAllThemes(anime) {
+  const seen = new Set();
+  return [...(anime.animethemes || [])]
+    .filter(t => !t.group)
+    .filter(t => ['OP', 'ED'].includes(t.type) && t.song?.title?.trim() && t.song?.artists?.some(a => a.name))
+    .sort((a, b) => (a.slug || '').localeCompare(b.slug || '', undefined, { numeric: true }))
+    .filter(theme => {
+      const key = `${theme.song.title.trim().toLowerCase()}|${theme.song.artists.map(a => a.name).join('|')}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 }
 export function selectSeasonSongs(ranked, themeAnime, target = DEFAULT_SEASON_ANIME) {
   const byId = new Map();
@@ -38,19 +49,19 @@ export function selectSeasonSongs(ranked, themeAnime, target = DEFAULT_SEASON_AN
       byId.set(Number(resource.external_id), anime);
   }
   const selected = [], skipped = [];
-  for (const [index, media] of ranked.entries()) {
-    if (selected.length === target) break;
+  for (const [index, media] of ranked.slice(0, target).entries()) {
     const anime = byId.get(media.id);
-    const pair = anime && pickThemePair(anime);
-    if (!pair) {
+    const themes = anime && pickAllThemes(anime);
+    if (!themes?.length) {
       skipped.push({ rank: index + 1, anilistId: media.id, anime: media.title?.romaji || '', reason: anime ? 'missing OP/ED metadata' : 'no AnimeThemes ID match' });
       continue;
     }
-    const songs = ['OP', 'ED'].map(type => ({
-      titleCN: pair[type].song.title.trim(), title: pair[type].song.title.trim(),
+    const songs = themes.map(theme => ({
+      titleCN: theme.song.title.trim(), title: theme.song.title.trim(),
       anime: anime.name, animeCN: '', animeNative: media.title?.native || '',
-      artist: pair[type].song.artists.map(a => a.name).filter(Boolean).join(', '),
-      type, season: seasonKey(media.seasonYear, media.season.toLowerCase()), anilistId: media.id,
+      artist: theme.song.artists.map(a => a.name).filter(Boolean).join(', '),
+      type: theme.type, themeSequence: Number(theme.slug?.match(/\d+/)?.[0]) || 1,
+      season: seasonKey(media.seasonYear, media.season.toLowerCase()), anilistId: media.id,
       popularity: media.popularity || 0, rank: index + 1,
       animethemesUrl: `https://animethemes.moe/anime/${anime.slug}`
     }));
@@ -58,7 +69,7 @@ export function selectSeasonSongs(ranked, themeAnime, target = DEFAULT_SEASON_AN
       animeNative: media.title?.native || '', animeEnglish: media.title?.english || '',
       coverUrl: media.coverImage?.medium || '', songs });
   }
-  return { complete: selected.length === target, selected, skipped, songs: selected.flatMap(x => x.songs) };
+  return { complete: selected.length > 0, targetReached: selected.length === target, selected, skipped, songs: selected.flatMap(x => x.songs) };
 }
 export async function fetchAniList(year, season, limit) {
   const query = `query ($page: Int, $perPage: Int, $year: Int, $season: MediaSeason) {
@@ -90,7 +101,7 @@ export async function fetchAnimeThemes(year, season) {
   } catch (error) {
     console.warn(`AnimeThemes API 暂不可用（${error.message}），尝试读取官方季度页面。`);
     const page = async url => {
-      const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+      const response = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0', Accept: 'text/html' }, signal: AbortSignal.timeout(20000) });
       if (!response.ok) throw new Error(`AnimeThemes page HTTP ${response.status}`);
       const html = await response.text();
       const match = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
@@ -113,7 +124,7 @@ export async function fetchAnimeThemes(year, season) {
               site: 'AniList', external_id: Number(edge.node.link.match(/\/anime\/(\d+)/)?.[1])
             })),
             animethemes: anime.themes.map(theme => ({
-              type: theme.type, slug: `${theme.type}${theme.sequence || 1}`,
+            type: theme.type, slug: `${theme.type}${theme.sequence || 1}`, group: theme.group,
               song: { title: theme.song?.title.romaji, artists: (theme.song?.staff || [])
                 .filter(staff => ['Performance', 'Featuring'].includes(staff.role))
                 .map(staff => ({ name: typeof staff.alias === 'string' ? staff.alias : staff.artist.name.main })) }
@@ -169,12 +180,12 @@ async function main() {
   const data = { season: key, rankSource: useAniList ? 'AniList POPULARITY_DESC TV' : 'Bangumi heat (TV)', targetAnime: target, complete: result.complete, selected: result.selected, skipped: result.skipped };
   const report = [
     `# ${key} 季度曲库候选`, '',
-    `状态：${result.complete ? `${target * 2} 首元数据齐全，待人工复核音源` : `仅 ${result.selected.length}/${target} 部完整，暂不可发布`}`,
+    `状态：${result.complete ? `${result.songs.length} 首已确认元数据，待复核音源` : `仅 ${result.selected.length}/${target} 部完整，暂不可发布`}`,
     `选入：${result.selected.length} 部 / ${result.songs.length} 首。${data.rankSource} 排名，AnimeThemes 歌曲，AniList ID 关联。`,
     '', '| 排名 | 番剧 | OP | ED | 人气 | 来源 |', '|---:|---|---|---|---:|---|',
-    ...result.selected.map(x => `| ${x.rank} | ${x.anime} | ${x.songs[0].title} — ${x.songs[0].artist} | ${x.songs[1].title} — ${x.songs[1].artist} | ${x.songs[0].popularity ?? '—'} | [AnimeThemes](${x.songs[0].animethemesUrl}) |`),
+    ...result.selected.map(x => `| ${x.rank} | ${x.anime} | ${x.songs.filter(song => song.type === 'OP').map(song => song.title + ' — ' + song.artist).join('<br>') || '—'} | ${x.songs.filter(song => song.type === 'ED').map(song => song.title + ' — ' + song.artist).join('<br>') || '—'} | ${x.songs[0].popularity ?? '—'} | [AnimeThemes](${x.songs[0].animethemesUrl}) |`),
     '', '## 跳过的更热门番剧', '', ...result.skipped.map(x => `- ${x.rank}. ${x.anime || x.animeCN || x.original}（${x.reason}）`),
-    '', '## 发布前复核', '', '- 核对中文番名、歌名、歌手与 OP/ED。', '- 逐首试听，确认至少一个现有音频源可播放且音频与题目相符。', `- 仅将复核后的完整 ${target * 2} 首加入季度静态曲库；候选不会被网页加载。`, ''
+    '', '## 发布前复核', '', '- 核对中文番名、歌名、歌手与 OP/ED。', '- 逐首试听，确认至少一个现有音频源可播放且音频与题目相符。', '- 按实际可核实曲目发布，不强补番剧或歌曲数量；长篇作品保留多首 OP/ED。候选不会被网页加载。', ''
   ].join('\n');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(`${out}.json`, JSON.stringify(data, null, 2) + '\n');

@@ -90,7 +90,7 @@ test('publish preparation requires 30 AniList shows, 60 paired songs, covers, Ch
   assert.equal(youtubePrepared.songs[2].itunesPreviewUrl, youtubeChecks[2].url);
 });
 
-test('publish preparation rejects duplicate IDs, broken OP/ED pairs and invalid covers', () => {
+test('publish preparation rejects duplicate IDs, empty theme lists and invalid covers', () => {
   const candidate = candidateFor();
   const names = namesFor(candidate);
   const playable = playableFor(candidate);
@@ -98,8 +98,8 @@ test('publish preparation rejects duplicate IDs, broken OP/ED pairs and invalid 
   duplicate.selected[1].anilistId = duplicate.selected[0].anilistId;
   assert.throws(() => prepareSeasonForPublish(duplicate, '2026-10', names, playable), /unique|15/i);
   const missingEd = structuredClone(candidate);
-  missingEd.selected[0].songs.pop();
-  assert.throws(() => prepareSeasonForPublish(missingEd, '2026-10', names, playable), /OP.*ED|two songs/i);
+  missingEd.selected[0].songs = [];
+  assert.throws(() => prepareSeasonForPublish(missingEd, '2026-10', names, playable), /OP.*ED/i);
   const badCover = structuredClone(candidate);
   badCover.selected[0].coverUrl = 'http://example.test/cover.jpg';
   assert.throws(() => prepareSeasonForPublish(badCover, '2026-10', names, playable), /cover|HTTPS/i);

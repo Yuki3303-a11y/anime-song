@@ -1,3 +1,5 @@
+import { trackKey as catalogTrackKey } from './library-tools.mjs';
+
 export function sourceSelection(source) {
     if (source === 'mix') return { group: 'mix', official: 'all', season: null };
     if (source === 'custom') return { group: 'custom', official: 'all', season: null };
@@ -19,7 +21,7 @@ export function sourceFromSelection({ group, official = 'all', season = null }) 
 export function mixForAddedSong(source, seasons) {
     const season = source?.startsWith('season:') ? source.slice(7) : null;
     return {
-        legacy: source === null || source === 'builtin' || source === 'legacy',
+        legacy: source === 'legacy',
         seasons: season ? [season] : source === null || source === 'builtin' ? [...seasons] : [],
         imported: source === null || source === 'custom',
         watched: false,
@@ -31,7 +33,7 @@ export function searchLibraryTracks(songs, query = '') {
     const term = String(query).normalize('NFKC').trim().toLowerCase();
     const seen = new Set();
     return songs.filter(song => {
-        const key = [song.title, song.anime, song.type].map(value => String(value || '').normalize('NFKC').toLowerCase()).join('|');
+        const key = catalogTrackKey(song);
         if (seen.has(key)) return false;
         seen.add(key);
         return !term || [song.title, song.titleCN, song.anime, song.animeCN, song.animeNative, song.artist]
@@ -58,14 +60,15 @@ export function selectMixedSongs({ legacy, seasons, imported, watchedKeys, anime
     const chosenTracks = new Set(selectedKeys);
     const seen = new Set();
     const seasonalSongs = Object.values(seasons).flat();
+    const selectedSeasonalSongs = new Set([...chosenSeasons].flatMap(season => seasons[season] || []));
     return [...legacy, ...seasonalSongs, ...imported].filter(song => {
         const included = (mix.legacy && legacy.includes(song)) ||
-            (seasonalSongs.includes(song) && chosenSeasons.has(song.season)) ||
+            selectedSeasonalSongs.has(song) ||
             (mix.imported && imported.includes(song)) ||
             (mix.watched && watched.has(animeKey(song))) ||
             (mix.selected && trackKey && chosenTracks.has(trackKey(song)));
         if (!included) return false;
-        const key = [song.title, song.anime, song.type].map(value => String(value || '').normalize('NFKC').toLowerCase()).join('|');
+        const key = catalogTrackKey(song);
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
@@ -81,4 +84,26 @@ export function createPreviewSession() {
         isCurrent(token) { return token === generation && activeKey !== null; },
         stop() { activeKey = null; generation++; }
     };
+}
+// Keep the original objects so saved song keys and legacy PK indices stay valid.
+export function buildQuarterCatalog(legacy, pools) {
+    const catalog = {};
+    const tracks = new Set();
+    const recordings = new Set();
+    const add = (song, season = song.season) => {
+        if (!/^\d{4}-(01|04|07|10)$/.test(season)) return;
+        const key = catalogTrackKey(song);
+        const recording = song.anilistId ? `${song.anilistId}|${catalogTrackKey({ title: song.title, type: song.type, recordingId: song.recordingId })}` : null;
+        if (tracks.has(key) || recording && recordings.has(recording)) {
+            tracks.add(key);
+            if (recording) recordings.add(recording);
+            return;
+        }
+        tracks.add(key);
+        if (recording) recordings.add(recording);
+        (catalog[season] ||= []).push(song);
+    };
+    legacy.forEach(song => add(song));
+    Object.entries(pools).forEach(([season, songs]) => songs.forEach(song => add(song, song.season || season)));
+    return catalog;
 }

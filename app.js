@@ -1,13 +1,17 @@
-import { SONGS } from './songs.js?v=66';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=43';
-import { SEASONAL_COVERS } from './seasonal-covers.js?v=3';
+import { SONGS } from './songs.js?v=67';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=44';
+import { SEASONAL_COVERS } from './seasonal-covers.js?v=4';
 import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=2';
-import { sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=6';
-import { animeKey, trackKey, groupSeasonSongs, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=3';
+import { buildQuarterCatalog, sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=7';
+import { animeKey, trackKey, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=4';
 import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=1';
 import { rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=9';
-import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=1';
+import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=2';
 import { createAudioPrefetch } from './audio-prefetch.mjs?v=1';
+
+const QUARTER_CATALOG = buildQuarterCatalog(SONGS, SEASONAL_POOLS);
+const publishedSeasons = Object.keys(QUARTER_CATALOG).sort().reverse();
+const builtinSongs = Object.values(QUARTER_CATALOG).flat();
 
 // =====================================================================
 // Firebase
@@ -154,13 +158,13 @@ const filterState = { types: new Set(), source: null, watchedOnly: (() => {
 })() };
 const SOURCE_MIX_KEY = 'song_source_mix_v1';
 function defaultSourceMix() {
-    return { legacy: true, seasons: Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length >= 30), imported: true, watched: false, selected: true };
+    return { legacy: false, seasons: [...publishedSeasons], imported: true, watched: false, selected: true };
 }
 function loadSourceMix() {
     try {
         const saved = JSON.parse(localStorage.getItem(SOURCE_MIX_KEY) || 'null');
         if (!saved || !Array.isArray(saved.seasons)) return defaultSourceMix();
-        return { legacy: !!saved.legacy, seasons: saved.seasons.filter(key => SEASONAL_POOLS[key]?.length >= 30),
+        return { legacy: !!saved.legacy, seasons: saved.seasons.filter(key => QUARTER_CATALOG[key]?.length),
             imported: !!saved.imported, watched: !!saved.watched, selected: saved.selected !== false };
     } catch { return defaultSourceMix(); }
 }
@@ -173,7 +177,12 @@ try {
         const saved = JSON.parse(raw);
         gameState.questionCount = saved.questionCount;
         filterState.types = new Set(saved.types);
-        filterState.source = saved.source?.startsWith('season:') && !SEASONAL_POOLS[saved.source.slice(7)] ? null : saved.source;
+        filterState.source = saved.source?.startsWith('season:') && !QUARTER_CATALOG[saved.source.slice(7)] ? null : saved.source;
+        if (filterState.source === 'legacy') {
+            filterState.mix = { legacy: true, seasons: [], imported: false, watched: false, selected: false };
+            filterState.source = 'mix';
+            localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix));
+        }
     }
 } catch { /* Ignore invalid saved preferences; keep defaults. */ }
 function saveGameSettings() {
@@ -236,7 +245,7 @@ function updateFilterCount() {
     $('songCount').textContent = count + '+';
     const selected = sourceSelection(filterState.source);
     const sourceName = selected.group === 'mix' ? '自由组合' : selected.group === 'all' ? '全部歌曲' : selected.group === 'custom' ? '我的导入' :
-        selected.official === 'legacy' ? '原有曲库' : selected.official === 'season' ? `${selected.season.slice(0, 4)} 年 ${Number(selected.season.slice(5))} 月新番` : '全部官方曲库';
+        selected.official === 'season' ? `${selected.season.slice(0, 4)} 年 ${Number(selected.season.slice(5))} 月番剧` : '全部季度番剧';
     $('menuSourceSummary').textContent = `${sourceName}${filterState.watchedOnly ? ' · 仅追番' : ''} · ${count} 首`;
     if (typeof selectedLibraryTab !== 'undefined' && selectedLibraryTab === 'current' &&
         !$('v-library').classList.contains('hidden')) renderCurrentLibrary();
@@ -1646,19 +1655,19 @@ function removeCustomSong(index) {
 }
 
 function getAllSongs() {
-    return [...SONGS, ...Object.values(SEASONAL_POOLS).flat(), ...getCustomSongs()];
+    return [...builtinSongs, ...getCustomSongs()];
 }
 
 function getFilteredSongs() {
     const customSongs = getCustomSongs();
     if (filterState.source === 'mix') {
-        const mixed = selectMixedSongs({ legacy: SONGS, seasons: SEASONAL_POOLS, imported: customSongs,
+        const mixed = selectMixedSongs({ legacy: SONGS.filter(song => builtinSongs.includes(song)), seasons: QUARTER_CATALOG, imported: customSongs,
             watchedKeys: getWatchedAnimeKeys(), animeKey, trackKey, selectedKeys: selectedSongKeys, mix: filterState.mix });
         return filterWatchedSongs(mixed.filter(song => !filterState.types.size || filterState.types.has(song.type)),
             getWatchedAnimeKeys(), filterState.watchedOnly);
     }
-    const builtinCount = SONGS.length + Object.values(SEASONAL_POOLS).reduce((n, songs) => n + songs.length, 0);
-    const all = [...SONGS, ...Object.values(SEASONAL_POOLS).flat(), ...customSongs];
+    const builtinCount = builtinSongs.length;
+    const all = [...builtinSongs, ...customSongs];
     const filtered = all.filter((s, index) => {
         if (filterState.types.size > 0 && !filterState.types.has(s.type)) return false;
         const custom = index >= builtinCount;
@@ -1666,7 +1675,7 @@ function getFilteredSongs() {
         if (filterState.source === 'custom' && !custom) return false;
         if (filterState.source === 'legacy' && !SONGS.includes(s)) return false;
         if (filterState.source?.startsWith('season:') &&
-            (custom || s.season !== filterState.source.slice(7))) return false;
+            (custom || !QUARTER_CATALOG[filterState.source.slice(7)]?.includes(s))) return false;
         return true;
     });
     return filterWatchedSongs(filtered, getWatchedAnimeKeys(), filterState.watchedOnly);
@@ -2613,7 +2622,7 @@ function startMode(mode, practiceSongs = null, poolName = '') {
     const enoughAnime = new Set(pool.map(animeLabel)).size >= 4;
     const enoughArtists = new Set(pool.map(s => s.artist)).size >= 4;
     const seasonDistractors = !gameState.practiceMode && filterState.source?.startsWith('season:')
-        ? (SEASONAL_POOLS[filterState.source.slice(7)] || []).filter(song => !filterState.types.size || filterState.types.has(song.type))
+        ? (QUARTER_CATALOG[filterState.source.slice(7)] || []).filter(song => !filterState.types.size || filterState.types.has(song.type))
         : null;
     gameState.optionPool = pool.length >= 4 && enoughAnime && enoughArtists ? pool : (seasonDistractors || getAllSongs());
     gameState.playlist = buildPlaylist(pool, gameState.questionCount);
@@ -3501,7 +3510,7 @@ function getHintContent(song, guessType, which) {
     if (label === '番剧年份') {
         const name = animeLabel(song);
         const context = ANIME_QUESTION_CONTEXT[song.anilistId] ?? ANIME_QUESTION_CONTEXT[name];
-        const year = ANIME_PREMIERE_YEARS[name] ?? (context?.[0] || song.season || '').slice(0, 4);
+        const year = song.releaseYear ?? ANIME_PREMIERE_YEARS[name] ?? (context?.[0] || song.season || '').slice(0, 4);
         return /^\d{4}$/.test(year) ? `番剧年份：${year} 年` : '';
     }
     if (label === '歌手') return '歌手：' + song.artist;
@@ -4004,7 +4013,10 @@ function setSourceFilter(source) {
     filterState.source = source;
     if (source && source !== 'custom' && source !== 'mix') lastOfficialSource = source;
     try { localStorage.setItem('song_source_mode_v1', source === 'mix' ? 'mix' : 'single'); } catch {}
-    if (source?.startsWith('season:')) selectedLibrarySeason = source.slice(7);
+    if (source?.startsWith('season:')) {
+        selectedLibrarySeason = source.slice(7);
+        selectedLibraryYear = selectedLibrarySeason.slice(0, 4);
+    }
     renderSourceFilter();
     updateFilterCount();
 }
@@ -4032,29 +4044,32 @@ function renderSourceFilter() {
         const key = input.dataset.mixSource;
         input.checked = key.startsWith('season:') ? filterState.mix.seasons.includes(key.slice(7)) : !!filterState.mix[key];
     });
+    document.querySelectorAll('[data-mix-year]').forEach(group => {
+        const quarters = publishedSeasons.filter(key => key.startsWith(`${group.dataset.mixYear}-`));
+        group.querySelector('.mix-year-count').textContent = `${quarters.filter(key => filterState.mix.seasons.includes(key)).length} / ${quarters.length} 季度`;
+    });
+    $('legacyMixNotice').classList.toggle('hidden', !filterState.mix.legacy);
 }
 function initSourceFilter() {
     const primary = [
         { label: '全部歌曲', group: 'all' },
-        { label: '官方曲库', group: 'official' },
+        { label: '季度番剧', group: 'official' },
         { label: '我的导入', group: 'custom' },
         { label: '自由组合', group: 'mix' }
     ];
     $('sourceChips').innerHTML = primary.map(option => `<button type="button" class="settings-chip" data-source-group="${option.group}">${option.label}</button>`).join('');
     $('officialSourceChips').innerHTML = [
-        { label: '全部官方', official: 'all' },
-        { label: '原有曲库', official: 'legacy' },
-        { label: '季度新番', official: 'season' }
+        { label: '全部季度', official: 'all' },
+        { label: '选择季度', official: 'season' }
     ].map(option => `<button type="button" class="settings-chip" data-official-source="${option.official}">${option.label}</button>`).join('');
-    const seasons = Object.keys(SEASONAL_POOLS).sort().reverse().filter(key => SEASONAL_POOLS[key].length >= 30);
-    $('seasonSourceChips').innerHTML = seasons.map(key => `<button type="button" class="settings-chip" data-source="season:${key}">${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月</button>`).join('');
-    $('mixSourceGroup').innerHTML = [
-        { key: 'legacy', label: '原有曲库' },
-        ...seasons.map(key => ({ key: `season:${key}`, label: `${key.slice(0, 4)} 年 ${Number(key.slice(5))} 月新番` })),
+    const seasons = publishedSeasons;
+    const years = [...new Set(seasons.map(key => key.slice(0, 4)))];
+    $('seasonSourceChips').innerHTML = years.map((year, index) => `<details class="source-year-group" ${index === 0 ? 'open' : ''}><summary>${year} 年</summary><div class="source-year-quarters">${seasons.filter(key => key.startsWith(`${year}-`)).map(key => `<button type="button" class="settings-chip" data-source="season:${key}">${key.slice(5)} 月</button>`).join('')}</div></details>`).join('');
+    $('mixSourceGroup').innerHTML = `<p id="legacyMixNotice" class="library-filter-hint hidden">已保留此前选择的歌曲范围。<button type="button" class="library-mini-btn" data-action="clearLegacyMix">清除这部分歌曲</button></p><div class="mix-general-sources">` + [
         { key: 'imported', label: '我的导入（含 Bangumi）' },
         { key: 'watched', label: '我的追番歌曲' },
         { key: 'selected', label: '我挑选的歌曲' }
-    ].map(option => `<label class="library-watch-filter mix-source-option"><input type="checkbox" data-mix-source="${option.key}">${option.label}</label>`).join('');
+    ].map(option => `<label class="library-watch-filter mix-source-option"><input type="checkbox" data-mix-source="${option.key}">${option.label}</label>`).join('') + `</div><div class="library-quick-tools"><span class="library-help">季度组合</span><button type="button" class="library-mini-btn" data-action="setMixQuarters" data-value="all">全选季度</button><button type="button" class="library-mini-btn" data-action="setMixQuarters" data-value="none">清空季度</button></div><div class="mix-season-list" aria-label="按年份组合季度">${years.map((year, index) => `<details class="mix-year-group" data-mix-year="${year}" ${index === 0 ? 'open' : ''}><summary>${year} 年 <span class="mix-year-count"></span></summary><div class="source-year-quarters">${seasons.filter(key => key.startsWith(`${year}-`)).map(key => `<label class="library-watch-filter"><input type="checkbox" data-mix-source="season:${key}">${key.slice(5)} 月</label>`).join('')}</div></details>`).join('')}</div>`;
     $('sourceChips').addEventListener('click', event => {
         const group = event.target.closest('[data-source-group]')?.dataset.sourceGroup;
         if (!group) return;
@@ -4080,6 +4095,7 @@ function initSourceFilter() {
                 : filterState.mix.seasons.filter(value => value !== season);
         } else filterState.mix[key] = event.target.checked;
         try { localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix)); } catch {}
+        renderSourceFilter();
         updateFilterCount();
     });
     renderSourceFilter();
@@ -4088,9 +4104,9 @@ function initSourceFilter() {
 // =====================================================================
 // Personal Library (local single-player data only)
 // =====================================================================
-const publishedSeasons = Object.keys(SEASONAL_POOLS).filter(key => SEASONAL_POOLS[key].length >= 30).sort().reverse();
-const CATALOG_LIBRARY_TABS = ['catalog', 'season', 'tracks', 'bangumi'];
+const CATALOG_LIBRARY_TABS = ['catalog', 'season', 'bangumi'];
 let selectedLibrarySeason = null;
+let selectedLibraryYear = publishedSeasons[0]?.slice(0, 4) || null;
 let selectedLibraryTab = 'current';
 let feedbackTargetSong = null;
 const libraryPreviewSession = createPreviewSession();
@@ -4309,14 +4325,13 @@ function trackPlaybackStatus(song) {
     if (record.status === 'played') return { label: `上次可播${record.source ? ' · ' + sourceLabel(record.source) : ''}`, className: 'played', detail };
     return { label: '上次失败', className: 'failed', detail };
 }
-const libraryPages = { current: 0, catalog: 0, tracks: 0, season: 0, bangumi: 0, watch: 0 };
-const LIBRARY_PAGE_SIZE = 12;
+const libraryPages = { current: 0, catalog: 0, season: 0, bangumi: 0, watch: 0 };
+const LIBRARY_PAGE_SIZE = 24;
 const libraryCoverCache = new Map();
 const libraryCoverRequests = new Map();
 let libraryCoverObserver = null;
 function libraryTrackSource(song) {
-    if (SEASONAL_POOLS[song.season]?.includes(song)) return seasonLabel(song.season);
-    if (SONGS.includes(song)) return '自带曲库';
+    if (QUARTER_CATALOG[song.season]?.includes(song)) return seasonLabel(song.season);
     return isBangumiSong(song) ? 'Bangumi 导入' : '自定义导入';
 }
 function libraryCoverCard(anime, showSource) {
@@ -4334,7 +4349,7 @@ function libraryCoverCard(anime, showSource) {
             const status = trackPlaybackStatus(song);
             const selected = selectedSongKeys.includes(key);
             return `<div class="library-cover-track">
-                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML(song.type || '曲目')}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small>${showSource ? `<span class="library-track-source">${escapeHTML(libraryTrackSource(song))}</span>` : ''}<span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
+                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML((song.type || '曲目') + (song.themeSequence > 1 ? song.themeSequence : ''))}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small>${showSource ? `<span class="library-track-source">${escapeHTML(libraryTrackSource(song))}</span>` : ''}<span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
                 <div class="library-cover-actions"><button type="button" class="library-mini-btn library-preview-btn" data-action="previewSong" data-song-key="${escapeHTML(key)}" aria-label="试听 ${escapeHTML(song.titleCN || song.title)}">试听</button>
                     <button type="button" class="library-mini-btn library-add-btn${selected ? ' active' : ''}" data-action="toggleSelectedSong" data-song-key="${escapeHTML(key)}" aria-pressed="${selected}" aria-label="${selected ? '移出我的选歌' : '添加到我的选歌'}：${escapeHTML(song.titleCN || song.title)}">${selected ? '✓ 已添加' : '+ 添加'}</button>
                     <button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(key)}" aria-label="反馈 ${escapeHTML(song.titleCN || song.title)}">反馈</button></div>
@@ -4422,12 +4437,6 @@ function renderCatalogLibrary() {
     $('libraryCatalogSummary').textContent = `找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲`;
     renderLibraryCoverGrid('libraryCatalogResults', groups, 'catalog', '没有找到对应歌曲，试试更短的歌名、番剧名或歌手');
 }
-function renderTracksLibrary() {
-    const matches = searchLibraryTracks(SONGS, $('libraryCatalogSearch').value);
-    const groups = groupLibrarySongs(matches, animeKey);
-    $('libraryTrackSummary').textContent = `找到 ${groups.length} 部番剧 / ${matches.length} 首歌曲 · 已添加 ${selectedSongKeys.length} 首到我的选歌`;
-    renderLibraryCoverGrid('libraryTrackResults', groups, 'tracks', '没有找到对应歌曲，试试更短的歌名、番剧名或歌手');
-}
 function renderSeasonLibrary() {
     const tabs = $('librarySeasonTabs');
     const startButton = document.querySelector('[data-action="startSelectedSeason"]');
@@ -4439,16 +4448,24 @@ function renderSeasonLibrary() {
         $('librarySeasonAnime').innerHTML = '';
         return;
     }
-    tabs.innerHTML = [null, ...publishedSeasons].map(key => `<button type="button" class="library-season-tab${key === selectedLibrarySeason ? ' active' : ''}" aria-pressed="${key === selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="${key || ''}">${key ? seasonLabel(key) : '所有季度'}</button>`).join('');
-    const songs = selectedLibrarySeason ? SEASONAL_POOLS[selectedLibrarySeason] : publishedSeasons.flatMap(key => SEASONAL_POOLS[key]);
+    if (selectedLibrarySeason) selectedLibraryYear = selectedLibrarySeason.slice(0, 4);
+    const years = [...new Set(publishedSeasons.map(key => key.slice(0, 4)))];
+    tabs.innerHTML = `<div class="library-season-row"><label class="library-season-label" for="libraryYearSelect">年份</label><select id="libraryYearSelect" class="settings-input library-year-select">${[null, ...years].map(year => `<option value="${year || ''}" ${year === selectedLibraryYear ? 'selected' : ''}>${year ? `${year} 年` : '全部年份'}</option>`).join('')}</select></div>` +
+        (selectedLibraryYear ? `<div class="library-season-row"><span class="library-season-label">季度</span><div class="library-quarter-options" role="group" aria-label="选择季度"><button type="button" class="library-season-tab${!selectedLibrarySeason ? ' active' : ''}" aria-pressed="${!selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="">全年</button>${['01', '04', '07', '10'].map(month => {
+            const key = `${selectedLibraryYear}-${month}`;
+            const available = !!QUARTER_CATALOG[key]?.length;
+            return `<button type="button" class="library-season-tab${key === selectedLibrarySeason ? ' active' : ''}" aria-pressed="${key === selectedLibrarySeason}" data-action="selectLibrarySeason" data-value="${key}" ${available ? '' : 'disabled'}>${month} 月</button>`;
+        }).join('')}</div></div>` : '');
+    const seasons = selectedLibrarySeason ? [selectedLibrarySeason] : publishedSeasons.filter(key => !selectedLibraryYear || key.startsWith(`${selectedLibraryYear}-`));
+    const songs = seasons.flatMap(key => QUARTER_CATALOG[key]);
     const groups = groupLibrarySongs(songs, animeKey);
     const query = $('libraryCatalogSearch').value.trim();
     const matches = new Set(searchLibraryTracks(songs, query).map(animeKey));
     const visibleGroups = groups.filter(anime => matches.has(anime.key));
     const played = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'played')).length;
     const failed = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'failed')).length;
-    const eligible = filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly).length;
-    $('librarySeasonSummary').textContent = `${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
+    const eligible = uniqueChallengePool(filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly)).length;
+    $('librarySeasonSummary').textContent = `${selectedLibrarySeason ? seasonLabel(selectedLibrarySeason) : selectedLibraryYear ? `${selectedLibraryYear} 年` : '全部年份'} · ${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED${songs.some(song => song.type === 'IN') ? ` · ${songs.filter(song => song.type === 'IN').length} 首 IN` : ''} · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
     renderLibraryCoverGrid('librarySeasonAnime', visibleGroups, 'season', '这个季度范围内没有匹配的曲目');
 }
 
@@ -4521,7 +4538,6 @@ function renderLibrary() {
     }
     if (selectedLibraryTab === 'current') renderCurrentLibrary();
     if (selectedLibraryTab === 'catalog') renderCatalogLibrary();
-    if (selectedLibraryTab === 'tracks') renderTracksLibrary();
     if (selectedLibraryTab === 'season') renderSeasonLibrary();
     if (selectedLibraryTab === 'bangumi') renderBangumiLibrary();
     if (selectedLibraryTab === 'watch') renderWatchLibrary();
@@ -4874,7 +4890,18 @@ document.addEventListener('click', (e) => {
         case 'toggleSelectedSong': toggleSelectedSong(actionEl.dataset.songKey); break;
         case 'useSelectedSongs': useSelectedSongs(); break;
         case 'startSelectedSeason': startSelectedSeason(); break;
-        case 'startLegacyLibrary': setSourceFilter('legacy'); startMode('anime'); break;
+        case 'setMixQuarters':
+            filterState.mix.seasons = value === 'all' ? [...publishedSeasons] : [];
+            try { localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix)); } catch {}
+            renderSourceFilter();
+            updateFilterCount();
+            break;
+        case 'clearLegacyMix':
+            filterState.mix.legacy = false;
+            try { localStorage.setItem(SOURCE_MIX_KEY, JSON.stringify(filterState.mix)); } catch {}
+            renderSourceFilter();
+            updateFilterCount();
+            break;
         case 'practiceMistakes': startMistakePractice(); break;
         case 'removeMistake':
             if (confirm('把这首歌从错题本移出吗？')) {
@@ -4967,6 +4994,13 @@ document.addEventListener('click', (e) => {
 
 // Handle file input for importing custom songs
 document.addEventListener('change', (e) => {
+    if (e.target.id === 'libraryYearSelect') {
+        const year = e.target.value;
+        selectedLibraryYear = publishedSeasons.some(key => key.startsWith(`${year}-`)) ? year : null;
+        selectedLibrarySeason = null;
+        libraryPages.season = 0;
+        renderLibrary();
+    }
     if (e.target.id === 'importFileInput' && e.target.files[0]) {
         importCustomSongsFile(e.target.files[0]);
         e.target.value = '';

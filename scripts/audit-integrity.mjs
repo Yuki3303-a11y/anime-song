@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { buildQuarterCatalog } from '../library-navigation.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'audit-'));
@@ -16,7 +17,7 @@ const { SEASONAL_POOLS } = await import(pathToFileURL(path.join(tmp, 'seasonal-p
 const { SEASONAL_COVERS } = await import(pathToFileURL(path.join(tmp, 'seasonal-covers.mjs')).href);
 
 const norm = v => String(v || '').normalize('NFKC').toLowerCase().replace(/\s+/g, ' ');
-const tkey = s => [norm(s.title), norm(s.anime), norm(s.type)].join('|');
+const tkey = s => [norm(s.title), norm(s.anime), norm(s.type), norm(s.recordingId)].join('|');
 const issues = [];
 
 // 1. Required fields on SONGS
@@ -55,23 +56,16 @@ for (const key of seasonKeys) {
   }
 }
 
-// 4. Cross-pool duplicates (legacy vs seasons)
-const legacyKeys = new Set(SONGS.map(tkey));
-for (const key of seasonKeys) {
-  for (const s of SEASONAL_POOLS[key]) {
-    if (legacyKeys.has(tkey(s))) issues.push(`Cross duplicate legacy vs ${key}: ${tkey(s)}`);
-  }
+// Original and seasonal backing files may share recordings. Validate the catalog players actually use.
+const catalog = buildQuarterCatalog(SONGS, SEASONAL_POOLS);
+const catalogTracks = new Set();
+for (const [season, songs] of Object.entries(catalog)) for (const song of songs) {
+  const key = tkey(song);
+  if (catalogTracks.has(key)) issues.push(`Visible catalog duplicate: ${key}`);
+  catalogTracks.add(key);
+  if (song.season !== season) issues.push(`Visible catalog quarter mismatch: ${key}`);
 }
-
-// 5. Cross-season duplicates
-for (let i = 0; i < seasonKeys.length; i++) {
-  for (let j = i + 1; j < seasonKeys.length; j++) {
-    const b = new Set(SEASONAL_POOLS[seasonKeys[j]].map(tkey));
-    for (const s of SEASONAL_POOLS[seasonKeys[i]]) {
-      if (b.has(tkey(s))) issues.push(`Cross season duplicate ${seasonKeys[i]} vs ${seasonKeys[j]}: ${tkey(s)}`);
-    }
-  }
-}
+console.log(`\nVisible catalog: ${Object.keys(catalog).length} quarters / ${catalogTracks.size} tracks`);
 
 // 6. Seasonal cover keys vs anilist IDs
 const coverCount = Object.keys(SEASONAL_COVERS).length;
