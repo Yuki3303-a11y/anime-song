@@ -26,6 +26,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 - `app.js` — ES module. All game logic, Firebase multiplayer, AniList API, iTunes API, YouTube API, sakura canvas, audio playback, custom songs CRUD, Bangumi index import.
 - `songs.js` — Exports active `SONGS` array (315 entries / 232 anime), `ALL_ANIME`, `AVAILABLE_TYPES`, and `PK_SONGS`. Each song: `{ titleCN, title, anime, artist, type }`. `title` field is the iTunes search term and cache key. PK_SONGS preserves published room indices with null retired slots; never reuse slots or reorder SONGS, append new songs only.
 - `legacy-covers.js` — Static HTTPS covers for all 232 original work IDs. Library and answer details prefer exact static covers; failed metadata lookups are not cached permanently. Pre-2020 additions and reviewed credit sources are in `candidates/pre2020-expansion.json`.
+- `historical-ranks.js` — Bangumi annual/early TV heat order for historical browsing. Targets are 60 distinct anime per year (2011–2019) and 100 distinct anime through 2010, never 60/100 songs. Multiple OP/ED tracks do not increase the anime count. Preserve existing works outside the ranking.
 - `style.css` — All styles. CSS custom properties for theming. Note: `.container` must NOT use `overflow: hidden` (causes invisible text in inputs).
 - `index_75323.json` — Pre-fetched Bangumi index #75323 (108 anime). Format: `{ total, items: [{ id, name, name_cn, date }] }`. The import flow checks for `index_{id}.json` first before trying proxy.
 

@@ -1,9 +1,10 @@
-import { SONGS, PK_SONGS } from './songs.js?v=70';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=45';
-import { SEASONAL_COVERS } from './seasonal-covers.js?v=5';
+import { SONGS, PK_SONGS } from './songs.js?v=71';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=46';
+import { SEASONAL_COVERS } from './seasonal-covers.js?v=6';
 import { LEGACY_COVERS } from './legacy-covers.js?v=1';
+import { HISTORICAL_ANIME_RANKS } from './historical-ranks.js?v=1';
 import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=3';
-import { buildQuarterCatalog, sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=7';
+import { buildQuarterCatalog, sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong, sortAnimeByHeat } from './library-navigation.mjs?v=8';
 import { animeKey, trackKey, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=4';
 import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=2';
 import { rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=9';
@@ -4491,14 +4492,15 @@ function renderSeasonLibrary() {
     const seasons = selectedLibrarySeason ? [selectedLibrarySeason] : publishedSeasons.filter(key => !selectedLibraryYear ||
         (selectedLibraryYear === 'early' ? Number(key.slice(0, 4)) <= 2010 : key.startsWith(`${selectedLibraryYear}-`)));
     const songs = seasons.flatMap(key => QUARTER_CATALOG[key]);
-    const groups = groupLibrarySongs(songs, animeKey);
+    const rankedBangumiIds = HISTORICAL_ANIME_RANKS[selectedLibraryYear];
+    const groups = sortAnimeByHeat(groupLibrarySongs(songs, animeKey), rankedBangumiIds);
     const query = $('libraryCatalogSearch').value.trim();
     const matches = new Set(searchLibraryTracks(songs, query).map(animeKey));
     const visibleGroups = groups.filter(anime => matches.has(anime.key));
     const played = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'played')).length;
     const failed = songs.filter(song => audioChecks.some(entry => entry.key === trackKey(song) && entry.status === 'failed')).length;
     const eligible = uniqueChallengePool(filterWatchedSongs(songs.filter(song => !filterState.types.size || filterState.types.has(song.type)), watchedAnimeKeys, filterState.watchedOnly)).length;
-    $('librarySeasonSummary').textContent = `${selectedLibrarySeason ? seasonLabel(selectedLibrarySeason) : selectedLibraryYear === 'early' ? '2010 年及以前' : selectedLibraryYear ? `${selectedLibraryYear} 年` : '全部年份'} · ${groups.length} 部番剧 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED${songs.some(song => song.type === 'IN') ? ` · ${songs.filter(song => song.type === 'IN').length} 首 IN` : ''} · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
+    $('librarySeasonSummary').textContent = `${selectedLibrarySeason ? seasonLabel(selectedLibrarySeason) : selectedLibraryYear === 'early' ? '2010 年及以前' : selectedLibraryYear ? `${selectedLibraryYear} 年` : '全部年份'} · ${groups.length} 部番剧 · ${songs.length} 首歌曲 · ${songs.filter(song => song.type === 'OP').length} 首 OP · ${songs.filter(song => song.type === 'ED').length} 首 ED${songs.some(song => song.type === 'IN') ? ` · ${songs.filter(song => song.type === 'IN').length} 首 IN` : ''}${rankedBangumiIds?.length ? ' · 按 Bangumi 热度排序' : ''} · 当前筛选可出 ${eligible} 题${query ? ` · 搜索找到 ${visibleGroups.length} 部` : ''} · 本机上次可播 ${played} 首 / 失败 ${failed} 首`;
     renderLibraryCoverGrid('librarySeasonAnime', visibleGroups, 'season', '这个季度范围内没有匹配的曲目');
 }
 

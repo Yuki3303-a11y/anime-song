@@ -50,17 +50,17 @@ test('historical and recent quarters contain verified themes without a fixed tra
   }
 });
 
-test('pre-2020 expansion reaches annual targets with exact work and theme references', async () => {
+test('pre-2020 targets count distinct anime rather than song entries', async () => {
   const { SONGS } = await import(`data:text/javascript;base64,${fs.readFileSync(path.join(root, 'songs.js')).toString('base64')}`);
   const catalog = buildQuarterCatalog(SONGS, pools);
-  const songsForYear = year => uniqueChallengePool(Object.entries(catalog)
-    .filter(([key]) => Number(key.slice(0, 4)) === year).flatMap(([, songs]) => songs));
+  const songsForYear = year => Object.entries(catalog)
+    .filter(([key]) => Number(key.slice(0, 4)) === year).flatMap(([, songs]) => songs);
   for (let year = 2011; year <= 2019; year++) {
-    assert.ok(songsForYear(year).length >= 55, `${year} has too few songs`);
-    assert.ok(songsForYear(year).length <= 80, `${year} exceeds the reviewed annual range`);
+    const animeIds = new Set(songsForYear(year).map(song => song.anilistId));
+    assert.ok(animeIds.size >= 60, `${year} has ${animeIds.size} anime; target is 60 anime, not songs`);
   }
-  const early = uniqueChallengePool(Object.entries(catalog).filter(([key]) => Number(key.slice(0, 4)) <= 2010).flatMap(([, songs]) => songs));
-  assert.ok(early.length >= 100 && early.length <= 120);
+  const early = Object.entries(catalog).filter(([key]) => Number(key.slice(0, 4)) <= 2010).flatMap(([, songs]) => songs);
+  assert.ok(new Set(early.map(song => song.anilistId)).size >= 100, 'Early range requires 100 anime, not songs');
   for (const [season, songs] of Object.entries(pools).filter(([key]) => Number(key.slice(0, 4)) < 2020)) {
     for (const song of songs) {
       assert.equal(song.season, season);

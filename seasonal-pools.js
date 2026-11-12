@@ -1,4 +1,4 @@
-// Archived quarterly themes; provenance and gaps are in candidates/season-archive-manifest.json and candidates/pre2020-expansion.json.
+// Published quarterly themes; historical provenance is in candidates/pre2020-expansion.json.
 export const SEASONAL_POOLS = {
   "2026-01": [
     {
@@ -40748,6 +40748,217 @@ export const SEASONAL_POOLS = {
       "themeId": 3460,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/k_on"
+    },
+    {
+      "title": "Hologram",
+      "titleCN": "Hologram",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "OP",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3435,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Golden Time Lover",
+      "titleCN": "Golden Time Lover",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "Sukima Switch",
+      "artistAliases": [
+        "Sukima Switch"
+      ],
+      "type": "OP",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3436,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Period",
+      "titleCN": "Period",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "CHEMISTRY",
+      "artistAliases": [
+        "CHEMISTRY"
+      ],
+      "type": "OP",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3437,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Rain",
+      "titleCN": "Rain",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "SID",
+      "artistAliases": [
+        "SID"
+      ],
+      "type": "OP",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3438,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Uso",
+      "titleCN": "Uso",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "SID",
+      "artistAliases": [
+        "SID"
+      ],
+      "type": "ED",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3439,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "LET IT OUT",
+      "titleCN": "LET IT OUT",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "Miho Fukuhara",
+      "artistAliases": [
+        "Miho Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3440,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Tsunaida Te",
+      "titleCN": "Tsunaida Te",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "Lil`B",
+      "artistAliases": [
+        "Lil`B"
+      ],
+      "type": "ED",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3441,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Shunkan Sentimental",
+      "titleCN": "Shunkan Sentimental",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "SCANDAL",
+      "artistAliases": [
+        "SCANDAL"
+      ],
+      "type": "ED",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3442,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "RAY OF LIGHT",
+      "titleCN": "RAY OF LIGHT",
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "animeCN": "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "animeNative": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "artist": "Shouko Nakagawa",
+      "artistAliases": [
+        "Shouko Nakagawa"
+      ],
+      "type": "ED",
+      "season": "2009-04",
+      "anilistId": 5114,
+      "bangumiId": 1428,
+      "releaseYear": 2009,
+      "themeId": 3443,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist_brotherhood"
+    },
+    {
+      "title": "Super Driver",
+      "titleCN": "Super Driver",
+      "anime": "Suzumiya Haruhi no Yuuutsu",
+      "animeCN": "凉宫春日的忧郁 2009",
+      "animeNative": "涼宮ハルヒの憂鬱",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "OP",
+      "season": "2009-04",
+      "anilistId": 4382,
+      "bangumiId": 1606,
+      "releaseYear": 2009,
+      "themeId": 3504,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/suzumiya_haruhi_no_yuuutsu_2009"
+    },
+    {
+      "title": "Tomare!",
+      "titleCN": "Tomare!",
+      "anime": "Suzumiya Haruhi no Yuuutsu",
+      "animeCN": "凉宫春日的忧郁 2009",
+      "animeNative": "涼宮ハルヒの憂鬱",
+      "artist": "Aya Hirano, Minori Chihara, Yuuko Gotou",
+      "artistAliases": [
+        "Aya Hirano",
+        "Minori Chihara",
+        "Yuuko Gotou"
+      ],
+      "type": "ED",
+      "season": "2009-04",
+      "anilistId": 4382,
+      "bangumiId": 1606,
+      "releaseYear": 2009,
+      "themeId": 3505,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/suzumiya_haruhi_no_yuuutsu_2009"
     }
   ],
   "2008-10": [
@@ -40856,6 +41067,63 @@ export const SEASONAL_POOLS = {
       "themeId": 3044,
       "themeSequence": 3,
       "animethemesUrl": "https://animethemes.moe/anime/toradora"
+    },
+    {
+      "title": "masterpiece",
+      "titleCN": "masterpiece",
+      "anime": "Toaru Majutsu no Index",
+      "animeCN": "魔法禁书目录",
+      "animeNative": "とある魔術の禁書目録",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "OP",
+      "season": "2008-10",
+      "anilistId": 4654,
+      "bangumiId": 1014,
+      "releaseYear": 2008,
+      "themeId": 3037,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index"
+    },
+    {
+      "title": "I'm ALIVE!",
+      "titleCN": "I'm ALIVE!",
+      "anime": "Kuroshitsuji",
+      "animeCN": "黑执事",
+      "animeNative": "黒執事",
+      "artist": "BECCA",
+      "artistAliases": [
+        "BECCA"
+      ],
+      "type": "ED",
+      "season": "2008-10",
+      "anilistId": 4898,
+      "bangumiId": 883,
+      "releaseYear": 2008,
+      "themeId": 2996,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kuroshitsuji"
+    },
+    {
+      "title": "Lacrimosa",
+      "titleCN": "Lacrimosa",
+      "anime": "Kuroshitsuji",
+      "animeCN": "黑执事",
+      "animeNative": "黒執事",
+      "artist": "Kalafina",
+      "artistAliases": [
+        "Kalafina"
+      ],
+      "type": "ED",
+      "season": "2008-10",
+      "anilistId": 4898,
+      "bangumiId": 883,
+      "releaseYear": 2008,
+      "themeId": 2997,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kuroshitsuji"
     }
   ],
   "2007-10": [
@@ -40877,6 +41145,141 @@ export const SEASONAL_POOLS = {
       "themeId": 2605,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/clannad"
+    },
+    {
+      "title": "euphoric field",
+      "titleCN": "euphoric field",
+      "anime": "ef: A Tale of Memories.",
+      "animeCN": "悠久之翼",
+      "animeNative": "ef - a tale of memories.",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "OP",
+      "season": "2007-10",
+      "anilistId": 2924,
+      "bangumiId": 799,
+      "releaseYear": 2007,
+      "themeId": 2610,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ef_a_tale_of_memories"
+    },
+    {
+      "title": "I'm here",
+      "titleCN": "I'm here",
+      "anime": "ef: A Tale of Memories.",
+      "animeCN": "悠久之翼",
+      "animeNative": "ef - a tale of memories.",
+      "artist": "Hiroko Taguchi",
+      "artistAliases": [
+        "Hiroko Taguchi"
+      ],
+      "type": "ED",
+      "season": "2007-10",
+      "anilistId": 2924,
+      "bangumiId": 799,
+      "releaseYear": 2007,
+      "themeId": 2612,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ef_a_tale_of_memories"
+    },
+    {
+      "title": "Kizamu Kisetsu",
+      "titleCN": "Kizamu Kisetsu",
+      "anime": "ef: A Tale of Memories.",
+      "animeCN": "悠久之翼",
+      "animeNative": "ef - a tale of memories.",
+      "artist": "Junko Okada",
+      "artistAliases": [
+        "Junko Okada"
+      ],
+      "type": "ED",
+      "season": "2007-10",
+      "anilistId": 2924,
+      "bangumiId": 799,
+      "releaseYear": 2007,
+      "themeId": 2613,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ef_a_tale_of_memories"
+    },
+    {
+      "title": "Sora no Yume",
+      "titleCN": "Sora no Yume",
+      "anime": "ef: A Tale of Memories.",
+      "animeCN": "悠久之翼",
+      "animeNative": "ef - a tale of memories.",
+      "artist": "Natsumi Yanase",
+      "artistAliases": [
+        "Natsumi Yanase"
+      ],
+      "type": "ED",
+      "season": "2007-10",
+      "anilistId": 2924,
+      "bangumiId": 799,
+      "releaseYear": 2007,
+      "themeId": 2614,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/ef_a_tale_of_memories"
+    },
+    {
+      "title": "Yuukyuu no Tsubasa 07mix",
+      "titleCN": "Yuukyuu no Tsubasa 07mix",
+      "anime": "ef: A Tale of Memories.",
+      "animeCN": "悠久之翼",
+      "animeNative": "ef - a tale of memories.",
+      "artist": "Yumiko Nakajima",
+      "artistAliases": [
+        "Yumiko Nakajima"
+      ],
+      "type": "ED",
+      "season": "2007-10",
+      "anilistId": 2924,
+      "bangumiId": 799,
+      "releaseYear": 2007,
+      "themeId": 2615,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/ef_a_tale_of_memories"
+    },
+    {
+      "title": "Keikenchi Joushouchuu☆",
+      "titleCN": "Keikenchi Joushouchuu☆",
+      "anime": "Minami-ke",
+      "animeCN": "南家三姐妹",
+      "animeNative": "みなみけ",
+      "artist": "Marina Inoue, Minori Chihara",
+      "artistAliases": [
+        "Marina Inoue",
+        "Minori Chihara"
+      ],
+      "type": "OP",
+      "season": "2007-10",
+      "anilistId": 2963,
+      "bangumiId": 283,
+      "releaseYear": 2007,
+      "themeId": 2649,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/minami_ke"
+    },
+    {
+      "title": "Colorful DAYS",
+      "titleCN": "Colorful DAYS",
+      "anime": "Minami-ke",
+      "animeCN": "南家三姐妹",
+      "animeNative": "みなみけ",
+      "artist": "Marina Inoue, Minori Chihara",
+      "artistAliases": [
+        "Marina Inoue",
+        "Minori Chihara"
+      ],
+      "type": "ED",
+      "season": "2007-10",
+      "anilistId": 2963,
+      "bangumiId": 283,
+      "releaseYear": 2007,
+      "themeId": 2650,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/minami_ke"
     }
   ],
   "2006-10": [
@@ -40937,6 +41340,82 @@ export const SEASONAL_POOLS = {
       "themeId": 2282,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/death_note"
+    },
+    {
+      "title": "Kaidoku Funou",
+      "titleCN": "Kaidoku Funou",
+      "anime": "Code Geass: Hangyaku no Lelouch",
+      "animeCN": "Code Geass 反叛的鲁路修",
+      "animeNative": "コードギアス 反逆のルルーシュ",
+      "artist": "Jinn",
+      "artistAliases": [
+        "Jinn"
+      ],
+      "type": "OP",
+      "season": "2006-10",
+      "anilistId": 1575,
+      "bangumiId": 793,
+      "releaseYear": 2006,
+      "themeId": 2263,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch"
+    },
+    {
+      "title": "Hitomi no Tsubasa",
+      "titleCN": "Hitomi no Tsubasa",
+      "anime": "Code Geass: Hangyaku no Lelouch",
+      "animeCN": "Code Geass 反叛的鲁路修",
+      "animeNative": "コードギアス 反逆のルルーシュ",
+      "artist": "access",
+      "artistAliases": [
+        "access"
+      ],
+      "type": "OP",
+      "season": "2006-10",
+      "anilistId": 1575,
+      "bangumiId": 793,
+      "releaseYear": 2006,
+      "themeId": 2264,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch"
+    },
+    {
+      "title": "Yuukyou Seishunka",
+      "titleCN": "Yuukyou Seishunka",
+      "anime": "Code Geass: Hangyaku no Lelouch",
+      "animeCN": "Code Geass 反叛的鲁路修",
+      "animeNative": "コードギアス 反逆のルルーシュ",
+      "artist": "ALI PROJECT",
+      "artistAliases": [
+        "ALI PROJECT"
+      ],
+      "type": "ED",
+      "season": "2006-10",
+      "anilistId": 1575,
+      "bangumiId": 793,
+      "releaseYear": 2006,
+      "themeId": 2265,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch"
+    },
+    {
+      "title": "Mosaic Kakera",
+      "titleCN": "Mosaic Kakera",
+      "anime": "Code Geass: Hangyaku no Lelouch",
+      "animeCN": "Code Geass 反叛的鲁路修",
+      "animeNative": "コードギアス 反逆のルルーシュ",
+      "artist": "SunSet Swish",
+      "artistAliases": [
+        "SunSet Swish"
+      ],
+      "type": "ED",
+      "season": "2006-10",
+      "anilistId": 1575,
+      "bangumiId": 793,
+      "releaseYear": 2006,
+      "themeId": 2266,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch"
     }
   ],
   "2010-04": [
@@ -40979,6 +41458,158 @@ export const SEASONAL_POOLS = {
       "themeId": 3876,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/yojouhan_shinwa_taikei"
+    },
+    {
+      "title": "GO! GO! MANIAC",
+      "titleCN": "GO! GO! MANIAC",
+      "anime": "K-On!!",
+      "animeCN": "轻音少女 第二季",
+      "animeNative": "けいおん!!",
+      "artist": "Houkago Tea Time",
+      "artistAliases": [
+        "Houkago Tea Time"
+      ],
+      "type": "OP",
+      "season": "2010-04",
+      "anilistId": 7791,
+      "bangumiId": 3774,
+      "releaseYear": 2010,
+      "themeId": 3834,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/k_on_2010"
+    },
+    {
+      "title": "Utauyo!! MIRACLE",
+      "titleCN": "Utauyo!! MIRACLE",
+      "anime": "K-On!!",
+      "animeCN": "轻音少女 第二季",
+      "animeNative": "けいおん!!",
+      "artist": "Houkago Tea Time",
+      "artistAliases": [
+        "Houkago Tea Time"
+      ],
+      "type": "OP",
+      "season": "2010-04",
+      "anilistId": 7791,
+      "bangumiId": 3774,
+      "releaseYear": 2010,
+      "themeId": 3835,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/k_on_2010"
+    },
+    {
+      "title": "Listen!!",
+      "titleCN": "Listen!!",
+      "anime": "K-On!!",
+      "animeCN": "轻音少女 第二季",
+      "animeNative": "けいおん!!",
+      "artist": "Houkago Tea Time",
+      "artistAliases": [
+        "Houkago Tea Time"
+      ],
+      "type": "ED",
+      "season": "2010-04",
+      "anilistId": 7791,
+      "bangumiId": 3774,
+      "releaseYear": 2010,
+      "themeId": 3836,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/k_on_2010"
+    },
+    {
+      "title": "NO, Thank You!",
+      "titleCN": "NO, Thank You!",
+      "anime": "K-On!!",
+      "animeCN": "轻音少女 第二季",
+      "animeNative": "けいおん!!",
+      "artist": "Houkago Tea Time",
+      "artistAliases": [
+        "Houkago Tea Time"
+      ],
+      "type": "ED",
+      "season": "2010-04",
+      "anilistId": 7791,
+      "bangumiId": 3774,
+      "releaseYear": 2010,
+      "themeId": 3837,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/k_on_2010"
+    },
+    {
+      "title": "Ichiban no Takaramono",
+      "titleCN": "Ichiban no Takaramono",
+      "anime": "Angel Beats!",
+      "animeCN": "天使的心跳！",
+      "animeNative": "Angel Beats!",
+      "artist": "Karuta",
+      "artistAliases": [
+        "Karuta"
+      ],
+      "type": "ED",
+      "season": "2010-04",
+      "anilistId": 6547,
+      "bangumiId": 1851,
+      "releaseYear": 2010,
+      "themeId": 3799,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/angel_beats"
+    },
+    {
+      "title": "Venus to Jesus",
+      "titleCN": "Venus to Jesus",
+      "anime": "Arakawa Under the Bridge",
+      "animeCN": "荒川爆笑团",
+      "animeNative": "荒川アンダー ザ ブリッジ",
+      "artist": "Etsuko Yakushimaru",
+      "artistAliases": [
+        "Etsuko Yakushimaru"
+      ],
+      "type": "OP",
+      "season": "2010-04",
+      "anilistId": 7647,
+      "bangumiId": 2464,
+      "releaseYear": 2010,
+      "themeId": 3800,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/arakawa_under_the_bridge"
+    },
+    {
+      "title": "Title nante Jibun de Kangaenasaina",
+      "titleCN": "Title nante Jibun de Kangaenasaina",
+      "anime": "Arakawa Under the Bridge",
+      "animeCN": "荒川爆笑团",
+      "animeNative": "荒川アンダー ザ ブリッジ",
+      "artist": "Miyuki Sawashiro",
+      "artistAliases": [
+        "Miyuki Sawashiro"
+      ],
+      "type": "OP",
+      "season": "2010-04",
+      "anilistId": 7647,
+      "bangumiId": 2464,
+      "releaseYear": 2010,
+      "themeId": 3801,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/arakawa_under_the_bridge"
+    },
+    {
+      "title": "Sakasama Bridge",
+      "titleCN": "Sakasama Bridge",
+      "anime": "Arakawa Under the Bridge",
+      "animeCN": "荒川爆笑团",
+      "animeNative": "荒川アンダー ザ ブリッジ",
+      "artist": "Suneohair",
+      "artistAliases": [
+        "Suneohair"
+      ],
+      "type": "ED",
+      "season": "2010-04",
+      "anilistId": 7647,
+      "bangumiId": 2464,
+      "releaseYear": 2010,
+      "themeId": 3802,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/arakawa_under_the_bridge"
     }
   ],
   "2011-04": [
@@ -41498,6 +42129,747 @@ export const SEASONAL_POOLS = {
       "themeId": 4239,
       "themeSequence": 4,
       "animethemesUrl": "https://animethemes.moe/anime/gintama_2011"
+    },
+    {
+      "title": "Hana no Iro",
+      "titleCN": "Hana no Iro",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4242,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Omokage Warp",
+      "titleCN": "Omokage Warp",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4243,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Hazy",
+      "titleCN": "Hazy",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "Sphere",
+      "artistAliases": [
+        "Sphere"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4245,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Tsukikage to Buranko",
+      "titleCN": "Tsukikage to Buranko",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4246,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Yumeji",
+      "titleCN": "Yumeji",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4247,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Saibou Kioku",
+      "titleCN": "Saibou Kioku",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4248,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Hanasaku Iroha",
+      "titleCN": "Hanasaku Iroha",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "Clammbon",
+      "artistAliases": [
+        "Clammbon"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4249,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Hi Leap",
+      "titleCN": "Hi Leap",
+      "anime": "Hanasaku Iroha",
+      "animeCN": "花开伊吕波",
+      "animeNative": "花咲くいろは",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9289,
+      "bangumiId": 22759,
+      "releaseYear": 2011,
+      "themeId": 4250,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/hanasaku_iroha"
+    },
+    {
+      "title": "Os-Uchuujin",
+      "titleCN": "Os-Uchuujin",
+      "anime": "Denpa Onna to Seishun Otoko",
+      "animeCN": "电波女与青春男",
+      "animeNative": "電波女と青春男",
+      "artist": "Asuka Oogame",
+      "artistAliases": [
+        "Asuka Oogame"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9379,
+      "bangumiId": 10377,
+      "releaseYear": 2011,
+      "themeId": 4226,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/denpa_onna_to_seishun_otoko"
+    },
+    {
+      "title": "Ruru",
+      "titleCN": "Ruru",
+      "anime": "Denpa Onna to Seishun Otoko",
+      "animeCN": "电波女与青春男",
+      "animeNative": "電波女と青春男",
+      "artist": "Etsuko Yakushimaru",
+      "artistAliases": [
+        "Etsuko Yakushimaru"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9379,
+      "bangumiId": 10377,
+      "releaseYear": 2011,
+      "themeId": 4227,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/denpa_onna_to_seishun_otoko"
+    },
+    {
+      "title": "Scarlet Ballet",
+      "titleCN": "Scarlet Ballet",
+      "anime": "Hidan no Aria",
+      "animeCN": "绯弹的亚里亚",
+      "animeNative": "緋弾のアリア",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 8630,
+      "bangumiId": 10226,
+      "releaseYear": 2011,
+      "themeId": 4252,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hidan_no_aria"
+    },
+    {
+      "title": "Camellia no Hitomi",
+      "titleCN": "カメリアの瞳",
+      "anime": "Hidan no Aria",
+      "animeCN": "绯弹的亚里亚",
+      "animeNative": "緋弾のアリア",
+      "artist": "中野愛子",
+      "artistAliases": [
+        "中野愛子"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 8630,
+      "bangumiId": 10226,
+      "releaseYear": 2011,
+      "themeId": 4253,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hidan_no_aria"
+    },
+    {
+      "title": "Take off",
+      "titleCN": "Take off",
+      "anime": "Ao no Exorcist",
+      "animeCN": "青之驱魔师",
+      "animeNative": "青の祓魔師",
+      "artist": "2PM",
+      "artistAliases": [
+        "2PM"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9919,
+      "bangumiId": 10339,
+      "releaseYear": 2011,
+      "themeId": 4214,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ao_no_exorcist"
+    },
+    {
+      "title": "Wired Life",
+      "titleCN": "Wired Life",
+      "anime": "Ao no Exorcist",
+      "animeCN": "青之驱魔师",
+      "animeNative": "青の祓魔師",
+      "artist": "黒木メイサ",
+      "artistAliases": [
+        "黒木メイサ"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9919,
+      "bangumiId": 10339,
+      "releaseYear": 2011,
+      "themeId": 4215,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ao_no_exorcist"
+    },
+    {
+      "title": "A Whole New World God Only Knows",
+      "titleCN": "A Whole New World God Only Knows",
+      "anime": "Kami nomi zo Shiru Sekai II",
+      "animeCN": "只有神知道的世界 第二季",
+      "animeNative": "神のみぞ知るセカイⅡ",
+      "artist": "ELISA, Lia, Oratorio The World God Only Knows",
+      "artistAliases": [
+        "ELISA",
+        "Lia",
+        "Oratorio The World God Only Knows"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 10080,
+      "bangumiId": 10739,
+      "releaseYear": 2011,
+      "themeId": 4259,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_ii"
+    },
+    {
+      "title": "Ai no Yokan",
+      "titleCN": "Ai no Yokan",
+      "anime": "Kami nomi zo Shiru Sekai II",
+      "animeCN": "只有神知道的世界 第二季",
+      "animeNative": "神のみぞ知るセカイⅡ",
+      "artist": "Aki Toyosaki, Kana Asumi, Kanae Itou, Saori Hayami",
+      "artistAliases": [
+        "Aki Toyosaki",
+        "Kana Asumi",
+        "Kanae Itou",
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 10080,
+      "bangumiId": 10739,
+      "releaseYear": 2011,
+      "themeId": 4260,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_ii"
+    },
+    {
+      "title": "God only knows Daisanmaku",
+      "titleCN": "God only knows Daisanmaku",
+      "anime": "Kami nomi zo Shiru Sekai II",
+      "animeCN": "只有神知道的世界 第二季",
+      "animeNative": "神のみぞ知るセカイⅡ",
+      "artist": "ELISA, Oratorio The World God Only Knows",
+      "artistAliases": [
+        "ELISA",
+        "Oratorio The World God Only Knows"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 10080,
+      "bangumiId": 10739,
+      "releaseYear": 2011,
+      "themeId": 4262,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_ii"
+    },
+    {
+      "title": "Pandemic!!",
+      "titleCN": "Pandemic!!",
+      "anime": "Yondemasu yo, Azazel-san.",
+      "animeCN": "恶魔阿萨谢尔在召唤你",
+      "animeNative": "よんでますよ、アザゼルさん。",
+      "artist": "Chihiro Yonekura",
+      "artistAliases": [
+        "Chihiro Yonekura"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 10216,
+      "bangumiId": 10742,
+      "releaseYear": 2011,
+      "themeId": 4337,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yondemasu_yo_azazel_san"
+    },
+    {
+      "title": "Like a Party",
+      "titleCN": "Like a Party",
+      "anime": "Yondemasu yo, Azazel-san.",
+      "animeCN": "恶魔阿萨谢尔在召唤你",
+      "animeNative": "よんでますよ、アザゼルさん。",
+      "artist": "Chihiro Yonekura",
+      "artistAliases": [
+        "Chihiro Yonekura"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 10216,
+      "bangumiId": 10742,
+      "releaseYear": 2011,
+      "themeId": 4338,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yondemasu_yo_azazel_san"
+    },
+    {
+      "title": "Chase the Light!",
+      "titleCN": "Chase the Light!",
+      "anime": "Gyakkyou Burai Kaiji: Hakairoku Hen",
+      "animeCN": "赌博默示录 破戒录篇",
+      "animeNative": "逆境無頼カイジ 破戒録篇",
+      "artist": "Fear, and Loathing in Las Vegas",
+      "artistAliases": [
+        "Fear, and Loathing in Las Vegas"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 10271,
+      "bangumiId": 12317,
+      "releaseYear": 2011,
+      "themeId": 4241,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gyakkyou_burai_kaiji_hakairoku_hen"
+    },
+    {
+      "title": "C Kara Hajimaru ABC",
+      "titleCN": "CからはじまるABC",
+      "anime": "Gyakkyou Burai Kaiji: Hakairoku Hen",
+      "animeCN": "赌博默示录 破戒录篇",
+      "animeNative": "逆境無頼カイジ 破戒録篇",
+      "artist": "忘れらんねえよ",
+      "artistAliases": [
+        "忘れらんねえよ"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 10271,
+      "bangumiId": 12317,
+      "releaseYear": 2011,
+      "themeId": 10226,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gyakkyou_burai_kaiji_hakairoku_hen"
+    },
+    {
+      "title": "Matryoshka",
+      "titleCN": "Matryoshka",
+      "anime": "C: The Money of Soul and Possibility Control",
+      "animeCN": "金钱掌控",
+      "animeNative": "「C」 THE MONEY OF SOUL AND POSSIBILITY CONTROL",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 10163,
+      "bangumiId": 10844,
+      "releaseYear": 2011,
+      "themeId": 4218,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/c_the_money_of_soul_and_possibility_control"
+    },
+    {
+      "title": "RPG",
+      "titleCN": "RPG",
+      "anime": "C: The Money of Soul and Possibility Control",
+      "animeCN": "金钱掌控",
+      "animeNative": "「C」 THE MONEY OF SOUL AND POSSIBILITY CONTROL",
+      "artist": "School Food Punishment",
+      "artistAliases": [
+        "School Food Punishment"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 10163,
+      "bangumiId": 10844,
+      "releaseYear": 2011,
+      "themeId": 4219,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/c_the_money_of_soul_and_possibility_control"
+    },
+    {
+      "title": "Hoshikaze no Horoscope",
+      "titleCN": "Hoshikaze no Horoscope",
+      "anime": "Hoshizora e Kakaru Hashi",
+      "animeCN": "架向星空之桥",
+      "animeNative": "星空へ架かる橋",
+      "artist": "Nomico",
+      "artistAliases": [
+        "Nomico"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 10079,
+      "bangumiId": 10609,
+      "releaseYear": 2011,
+      "themeId": 4254,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hoshizora_e_kakaru_hashi"
+    },
+    {
+      "title": "Orion wo Nazoru",
+      "titleCN": "Orion wo Nazoru",
+      "anime": "Tiger & Bunny",
+      "animeCN": "TIGER & BUNNY",
+      "animeNative": "TIGER & BUNNY",
+      "artist": "UNISON SQUARE GARDEN",
+      "artistAliases": [
+        "UNISON SQUARE GARDEN"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9941,
+      "bangumiId": 10385,
+      "releaseYear": 2011,
+      "themeId": 4330,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tiger_bunny"
+    },
+    {
+      "title": "Missing Link",
+      "titleCN": "ミッシングリンク",
+      "anime": "Tiger & Bunny",
+      "animeCN": "TIGER & BUNNY",
+      "animeNative": "TIGER & BUNNY",
+      "artist": "NOVELS",
+      "artistAliases": [
+        "NOVELS"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9941,
+      "bangumiId": 10385,
+      "releaseYear": 2011,
+      "themeId": 4331,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tiger_bunny"
+    },
+    {
+      "title": "Hoshi no Sumika",
+      "titleCN": "星のすみか",
+      "anime": "Tiger & Bunny",
+      "animeCN": "TIGER & BUNNY",
+      "animeNative": "TIGER & BUNNY",
+      "artist": "藍坊主",
+      "artistAliases": [
+        "藍坊主"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9941,
+      "bangumiId": 10385,
+      "releaseYear": 2011,
+      "themeId": 4332,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tiger_bunny"
+    },
+    {
+      "title": "Mind Game",
+      "titleCN": "マインドゲーム",
+      "anime": "Tiger & Bunny",
+      "animeCN": "TIGER & BUNNY",
+      "animeNative": "TIGER & BUNNY",
+      "artist": "珠妃",
+      "artistAliases": [
+        "珠妃"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9941,
+      "bangumiId": 10385,
+      "releaseYear": 2011,
+      "themeId": 4333,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tiger_bunny"
+    },
+    {
+      "title": "Morning Arch",
+      "titleCN": "Morning Arch",
+      "anime": "A-Channel",
+      "animeCN": "A频道",
+      "animeNative": "Aチャンネル",
+      "artist": "河野 マリナ",
+      "artistAliases": [
+        "河野マリナ",
+        "河野万里奈",
+        "河野 マリナ"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9776,
+      "bangumiId": 10227,
+      "releaseYear": 2011,
+      "themeId": 4202,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/a_channel"
+    },
+    {
+      "title": "Humming Girl",
+      "titleCN": "Humming Girl",
+      "anime": "A-Channel",
+      "animeCN": "A频道",
+      "animeNative": "Aチャンネル",
+      "artist": "Aoi Yuuki, Minako Kotobuki, Kaori Fukuhara, Yumi Uchiyama",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Minako Kotobuki",
+        "Kaori Fukuhara",
+        "Yumi Uchiyama"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9776,
+      "bangumiId": 10227,
+      "releaseYear": 2011,
+      "themeId": 4203,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/a_channel"
+    },
+    {
+      "title": "Harukaze no Kagaku",
+      "titleCN": "Harukaze no Kagaku",
+      "anime": "A-Channel",
+      "animeCN": "A频道",
+      "animeNative": "Aチャンネル",
+      "artist": "Aoi Yuuki, Minako Kotobuki, Kaori Fukuhara, Yumi Uchiyama",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Minako Kotobuki",
+        "Kaori Fukuhara",
+        "Yumi Uchiyama"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9776,
+      "bangumiId": 10227,
+      "releaseYear": 2011,
+      "themeId": 4204,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/a_channel"
+    },
+    {
+      "title": "One Reason",
+      "titleCN": "One Reason",
+      "anime": "Deadman Wonderland",
+      "animeCN": "死囚乐园",
+      "animeNative": "デッドマン・ワンダーランド",
+      "artist": "DWB feat. fade",
+      "artistAliases": [
+        "DWB",
+        "fade",
+        "DWB feat. fade"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 6880,
+      "bangumiId": 10381,
+      "releaseYear": 2011,
+      "themeId": 4224,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/deadman_wonderland"
+    },
+    {
+      "title": "SHINY SHINY",
+      "titleCN": "SHINY SHINY",
+      "anime": "Deadman Wonderland",
+      "animeCN": "死囚乐园",
+      "animeNative": "デッドマン・ワンダーランド",
+      "artist": "DWB feat.ニルギリス",
+      "artistAliases": [
+        "DWB",
+        "ニルギリス",
+        "NIRGILIS",
+        "DWB feat.ニルギリス"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 6880,
+      "bangumiId": 10381,
+      "releaseYear": 2011,
+      "themeId": 4225,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/deadman_wonderland"
+    },
+    {
+      "title": "Spread Wings",
+      "titleCN": "Spread Wings",
+      "anime": "Oretachi ni Tsubasa wa Nai: Under the Innocent Sky.",
+      "animeCN": "我们没有翅膀",
+      "animeNative": "俺たちに翼はない -under the innocent sky.",
+      "artist": "Aki Misato",
+      "artistAliases": [
+        "Aki Misato"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 9922,
+      "bangumiId": 10213,
+      "releaseYear": 2011,
+      "themeId": 4290,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oretachi_ni_tsubasa_wa_nai_under_the_innocent_sky"
+    },
+    {
+      "title": "PARANoiA",
+      "titleCN": "PARANoiA",
+      "anime": "Oretachi ni Tsubasa wa Nai: Under the Innocent Sky.",
+      "animeCN": "我们没有翅膀",
+      "animeNative": "俺たちに翼はない -under the innocent sky.",
+      "artist": "Aki Misato",
+      "artistAliases": [
+        "Aki Misato"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9922,
+      "bangumiId": 10213,
+      "releaseYear": 2011,
+      "themeId": 4291,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oretachi_ni_tsubasa_wa_nai_under_the_innocent_sky"
+    },
+    {
+      "title": "NEVERLAND",
+      "titleCN": "NEVERLAND",
+      "anime": "Oretachi ni Tsubasa wa Nai: Under the Innocent Sky.",
+      "animeCN": "我们没有翅膀",
+      "animeNative": "俺たちに翼はない -under the innocent sky.",
+      "artist": "Miyuki Hashimoto",
+      "artistAliases": [
+        "Miyuki Hashimoto"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 9922,
+      "bangumiId": 10213,
+      "releaseYear": 2011,
+      "themeId": 4292,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/oretachi_ni_tsubasa_wa_nai_under_the_innocent_sky"
+    },
+    {
+      "title": "Scarlet Knight",
+      "titleCN": "Scarlet Knight",
+      "anime": "Dog Days",
+      "animeCN": "DOG DAYS",
+      "animeNative": "DOG DAYS",
+      "artist": "Nana Mizuki",
+      "artistAliases": [
+        "Nana Mizuki"
+      ],
+      "type": "OP",
+      "season": "2011-04",
+      "anilistId": 10155,
+      "bangumiId": 10278,
+      "releaseYear": 2011,
+      "themeId": 4228,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dog_days"
+    },
+    {
+      "title": "Presenter",
+      "titleCN": "Presenter",
+      "anime": "Dog Days",
+      "animeCN": "DOG DAYS",
+      "animeNative": "DOG DAYS",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "ED",
+      "season": "2011-04",
+      "anilistId": 10155,
+      "bangumiId": 10278,
+      "releaseYear": 2011,
+      "themeId": 4229,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dog_days"
     }
   ],
   "2011-01": [
@@ -41539,6 +42911,471 @@ export const SEASONAL_POOLS = {
       "themeId": 4400,
       "themeSequence": 3,
       "animethemesUrl": "https://animethemes.moe/anime/mahou_shoujo_madokamagica"
+    },
+    {
+      "title": "Destin Histoire",
+      "titleCN": "Destin Histoire",
+      "anime": "Gosick",
+      "animeCN": "GOSICK",
+      "animeNative": "GOSICK -ゴシック-",
+      "artist": "yoshiki*lisa",
+      "artistAliases": [
+        "yoshiki*lisa",
+        "yoshiki＊lisa"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 8425,
+      "bangumiId": 9781,
+      "releaseYear": 2011,
+      "themeId": 4377,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gosick"
+    },
+    {
+      "title": "unity",
+      "titleCN": "unity",
+      "anime": "Gosick",
+      "animeCN": "GOSICK",
+      "animeNative": "GOSICK -ゴシック-",
+      "artist": "コミネリサ",
+      "artistAliases": [
+        "コミネリサ"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 8425,
+      "bangumiId": 9781,
+      "releaseYear": 2011,
+      "themeId": 4379,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gosick"
+    },
+    {
+      "title": "Ma·Ka·Se·Te Tonight",
+      "titleCN": "Ma·Ka·Se·Te Tonight",
+      "anime": "Kore wa Zombie Desu ka?",
+      "animeCN": "这个是僵尸吗？",
+      "animeNative": "これはゾンビですか?",
+      "artist": "Iori Nomizu",
+      "artistAliases": [
+        "Iori Nomizu"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 8841,
+      "bangumiId": 9774,
+      "releaseYear": 2011,
+      "themeId": 4393,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kore_wa_zombie_desu_ka"
+    },
+    {
+      "title": "Kizuite Zombie-sama, Watashi wa Classmate desu",
+      "titleCN": "気づいてゾンビさま、私はクラスメイトです (with manzo)",
+      "anime": "Kore wa Zombie Desu ka?",
+      "animeCN": "这个是僵尸吗？",
+      "animeNative": "これはゾンビですか?",
+      "artist": "山口理恵 with manzo",
+      "artistAliases": [
+        "山口理恵",
+        "Rie Yamaguchi",
+        "manzo",
+        "山口理恵 with manzo"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 8841,
+      "bangumiId": 9774,
+      "releaseYear": 2011,
+      "themeId": 4394,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kore_wa_zombie_desu_ka"
+    },
+    {
+      "title": "STRAIGHT JET",
+      "titleCN": "STRAIGHT JET",
+      "anime": "IS: Infinite Stratos",
+      "animeCN": "IS〈无限斯特拉托斯〉",
+      "animeNative": "IS〈インフィニット・ストラトス〉",
+      "artist": "Minami Kuribayashi",
+      "artistAliases": [
+        "Minami Kuribayashi"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9041,
+      "bangumiId": 9800,
+      "releaseYear": 2011,
+      "themeId": 4382,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/is_infinite_stratos"
+    },
+    {
+      "title": "SUPER∞STREAM",
+      "titleCN": "SUPER∞STREAM",
+      "anime": "IS: Infinite Stratos",
+      "animeCN": "IS〈无限斯特拉托斯〉",
+      "animeNative": "IS〈インフィニット・ストラトス〉",
+      "artist": "Youko Hikasa",
+      "artistAliases": [
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9041,
+      "bangumiId": 9800,
+      "releaseYear": 2011,
+      "themeId": 4383,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/is_infinite_stratos"
+    },
+    {
+      "title": "Sawakaze",
+      "titleCN": "Sawakaze",
+      "anime": "Kimi ni Todoke 2nd Season",
+      "animeCN": "好想告诉你 第二季",
+      "animeNative": "君に届け 2ND SEASON",
+      "artist": "タニザワトモフミ",
+      "artistAliases": [
+        "タニザワトモフミ",
+        "Tomofumi Tanizawa"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9656,
+      "bangumiId": 9757,
+      "releaseYear": 2011,
+      "themeId": 4391,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kimi_ni_todoke_2nd_season"
+    },
+    {
+      "title": "Kimi ni Todoke...",
+      "titleCN": "Kimi ni Todoke...",
+      "anime": "Kimi ni Todoke 2nd Season",
+      "animeCN": "好想告诉你 第二季",
+      "animeNative": "君に届け 2ND SEASON",
+      "artist": "MAY'S",
+      "artistAliases": [
+        "MAY'S"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9656,
+      "bangumiId": 9757,
+      "releaseYear": 2011,
+      "themeId": 4392,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kimi_ni_todoke_2nd_season"
+    },
+    {
+      "title": "Itsudatte",
+      "titleCN": "いつだって。",
+      "anime": "Hourou Musuko",
+      "animeCN": "放浪男孩",
+      "animeNative": "放浪息子",
+      "artist": "ダイスケ",
+      "artistAliases": [
+        "ダイスケ"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 8426,
+      "bangumiId": 8474,
+      "releaseYear": 2011,
+      "themeId": 4380,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hourou_musuko"
+    },
+    {
+      "title": "For You",
+      "titleCN": "For You",
+      "anime": "Hourou Musuko",
+      "animeCN": "放浪男孩",
+      "animeNative": "放浪息子",
+      "artist": "Rie fu",
+      "artistAliases": [
+        "Rie fu"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 8426,
+      "bangumiId": 8474,
+      "releaseYear": 2011,
+      "themeId": 4381,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hourou_musuko"
+    },
+    {
+      "title": "Cold Finger Girl",
+      "titleCN": "コールドフィンガーガール",
+      "anime": "Level E",
+      "animeCN": "灵异E接触",
+      "animeNative": "レベルE",
+      "artist": "栗山千明",
+      "artistAliases": [
+        "栗山千明"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9834,
+      "bangumiId": 9853,
+      "releaseYear": 2011,
+      "themeId": 4395,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/level_e"
+    },
+    {
+      "title": "Yume~Mugen no Kanata~",
+      "titleCN": "Yume~Mugen no Kanata~",
+      "anime": "Level E",
+      "animeCN": "灵异E接触",
+      "animeNative": "レベルE",
+      "artist": "ViViD",
+      "artistAliases": [
+        "ViViD"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9834,
+      "bangumiId": 9853,
+      "releaseYear": 2011,
+      "themeId": 4396,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/level_e"
+    },
+    {
+      "title": "Dadada",
+      "titleCN": "だだだ",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "グループ魂",
+      "artistAliases": [
+        "グループ魂"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4347,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Hajimaru no wa, Sayonara",
+      "titleCN": "始まるのは、サヨナラ",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "ON/OFF",
+      "artistAliases": [
+        "ON/OFF"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4348,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Hey!!!",
+      "titleCN": "Hey!!!",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "FLOW",
+      "artistAliases": [
+        "FLOW"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4349,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Baby U!",
+      "titleCN": "Baby U!",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "MBLAQ",
+      "artistAliases": [
+        "MBLAQ"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4350,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Only you- Kimi tono Kizuna -",
+      "titleCN": "Only you -キミとのキヅナ-",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "Lc5",
+      "artistAliases": [
+        "Lc5"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4351,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Answer",
+      "titleCN": "Answer",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "ノースリーブス",
+      "artistAliases": [
+        "ノースリーブス"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4352,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Tsuyogari",
+      "titleCN": "Tsuyogari",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "Shouko Nakagawa",
+      "artistAliases": [
+        "Shouko Nakagawa"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4353,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Nanairo Namida",
+      "titleCN": "なないろ☆ナミダ",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "Tomato n’ Pine",
+      "artistAliases": [
+        "Tomato n Pine",
+        "Tomato n' Pine",
+        "Tomato n’ Pine"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4354,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Papepipu♪ Papipepu♪ Papepipupo♪",
+      "titleCN": "パペピプ♪パピペプ♪パペピプポ♪",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "佐々木 希",
+      "artistAliases": [
+        "佐々木希",
+        "佐々木 希"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4355,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Shojo Traveler",
+      "titleCN": "Shojo Traveler",
+      "anime": "Beelzebub",
+      "animeCN": "恶魔奶爸",
+      "animeNative": "べるぜバブ",
+      "artist": "9nine",
+      "artistAliases": [
+        "9nine"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9513,
+      "bangumiId": 9779,
+      "releaseYear": 2011,
+      "themeId": 4356,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/beelzebub"
+    },
+    {
+      "title": "Taste of Paradise",
+      "titleCN": "Taste of Paradise",
+      "anime": "Oniichan no Koto nanka Zenzen Suki ja Nai n da kara ne!!",
+      "animeCN": "腹黑妹妹控兄记",
+      "animeNative": "お兄ちゃんのことなんかぜんぜん好きじゃないんだからねっ!!",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "OP",
+      "season": "2011-01",
+      "anilistId": 9587,
+      "bangumiId": 9801,
+      "releaseYear": 2011,
+      "themeId": 4406,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oniichan_no_koto_nanka_zenzen_suki_ja_nai_n_da_kara_ne"
+    },
+    {
+      "title": "Ari Ari Mirai",
+      "titleCN": "Ari Ari Mirai",
+      "anime": "Oniichan no Koto nanka Zenzen Suki ja Nai n da kara ne!!",
+      "animeCN": "腹黑妹妹控兄记",
+      "animeNative": "お兄ちゃんのことなんかぜんぜん好きじゃないんだからねっ!!",
+      "artist": "Eri Kitamura, Marina Inoue",
+      "artistAliases": [
+        "Eri Kitamura",
+        "Marina Inoue"
+      ],
+      "type": "ED",
+      "season": "2011-01",
+      "anilistId": 9587,
+      "bangumiId": 9801,
+      "releaseYear": 2011,
+      "themeId": 4407,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oniichan_no_koto_nanka_zenzen_suki_ja_nai_n_da_kara_ne"
     }
   ],
   "2011-10": [
@@ -41640,6 +43477,1030 @@ export const SEASONAL_POOLS = {
       "themeId": 4030,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/mirai_nikki"
+    },
+    {
+      "title": "Zannenkei Rinjinbu (Hoshi Futatsu Han)",
+      "titleCN": "Zannenkei Rinjinbu (Hoshi Futatsu Han)",
+      "anime": "Boku wa Tomodachi ga Sukunai",
+      "animeCN": "我的朋友很少",
+      "animeNative": "僕は友達が少ない",
+      "artist": "Kana Hanazawa, Kanae Itou, Marina Inoue, Misato Fukuen, Nozomi Yamamoto, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Kanae Itou",
+        "Marina Inoue",
+        "Misato Fukuen",
+        "Nozomi Yamamoto",
+        "Yuka Iguchi"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10719,
+      "bangumiId": 17883,
+      "releaseYear": 2011,
+      "themeId": 3970,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_wa_tomodachi_ga_sukunai"
+    },
+    {
+      "title": "Watashi no Kimochi",
+      "titleCN": "Watashi no Kimochi",
+      "anime": "Boku wa Tomodachi ga Sukunai",
+      "animeCN": "我的朋友很少",
+      "animeNative": "僕は友達が少ない",
+      "artist": "Marina Inoue",
+      "artistAliases": [
+        "Marina Inoue"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10719,
+      "bangumiId": 17883,
+      "releaseYear": 2011,
+      "themeId": 3971,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_wa_tomodachi_ga_sukunai"
+    },
+    {
+      "title": "departure!",
+      "titleCN": "departure!",
+      "anime": "Hunter x Hunter",
+      "animeCN": "猎人",
+      "animeNative": "HUNTER×HUNTER (2011)",
+      "artist": "小野正利",
+      "artistAliases": [
+        "小野正利"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 11061,
+      "bangumiId": 21032,
+      "releaseYear": 2011,
+      "themeId": 3990,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hunter_x_hunter_2011"
+    },
+    {
+      "title": "Just Awake",
+      "titleCN": "Just Awake",
+      "anime": "Hunter x Hunter",
+      "animeCN": "猎人",
+      "animeNative": "HUNTER×HUNTER (2011)",
+      "artist": "Fear, and Loathing in Las Vegas",
+      "artistAliases": [
+        "Fear, and Loathing in Las Vegas"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 11061,
+      "bangumiId": 21032,
+      "releaseYear": 2011,
+      "themeId": 3991,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hunter_x_hunter_2011"
+    },
+    {
+      "title": "Hunting for Your Dream.",
+      "titleCN": "HUNTING FOR YOUR DREAM",
+      "anime": "Hunter x Hunter",
+      "animeCN": "猎人",
+      "animeNative": "HUNTER×HUNTER (2011)",
+      "artist": "GALNERYUS",
+      "artistAliases": [
+        "GALNERYUS"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 11061,
+      "bangumiId": 21032,
+      "releaseYear": 2011,
+      "themeId": 3992,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hunter_x_hunter_2011"
+    },
+    {
+      "title": "REASON",
+      "titleCN": "REASON",
+      "anime": "Hunter x Hunter",
+      "animeCN": "猎人",
+      "animeNative": "HUNTER×HUNTER (2011)",
+      "artist": "ゆず",
+      "artistAliases": [
+        "ゆず"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 11061,
+      "bangumiId": 21032,
+      "releaseYear": 2011,
+      "themeId": 3993,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/hunter_x_hunter_2011"
+    },
+    {
+      "title": "Hyoriittai",
+      "titleCN": "表裏一体",
+      "anime": "Hunter x Hunter",
+      "animeCN": "猎人",
+      "animeNative": "HUNTER×HUNTER (2011)",
+      "artist": "ゆず",
+      "artistAliases": [
+        "ゆず"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 11061,
+      "bangumiId": 21032,
+      "releaseYear": 2011,
+      "themeId": 3995,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/hunter_x_hunter_2011"
+    },
+    {
+      "title": "YOUTHFUL",
+      "titleCN": "YOUTHFUL",
+      "anime": "Chihayafuru",
+      "animeCN": "歌牌情缘",
+      "animeNative": "ちはやふる",
+      "artist": "99RadioService",
+      "artistAliases": [
+        "99RadioService"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10800,
+      "bangumiId": 18294,
+      "releaseYear": 2011,
+      "themeId": 3976,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/chihayafuru"
+    },
+    {
+      "title": "Soshite Ima",
+      "titleCN": "Soshite Ima",
+      "anime": "Chihayafuru",
+      "animeCN": "歌牌情缘",
+      "animeNative": "ちはやふる",
+      "artist": "Asami Seto",
+      "artistAliases": [
+        "Asami Seto"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10800,
+      "bangumiId": 18294,
+      "releaseYear": 2011,
+      "themeId": 3977,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/chihayafuru"
+    },
+    {
+      "title": "Light My Fire",
+      "titleCN": "Light My Fire",
+      "anime": "Shakugan no Shana III (Final)",
+      "animeCN": "灼眼的夏娜III -Final-",
+      "animeNative": "灼眼のシャナIII (Final)",
+      "artist": "KOTOKO",
+      "artistAliases": [
+        "KOTOKO"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 6773,
+      "bangumiId": 18631,
+      "releaseYear": 2011,
+      "themeId": 4055,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana_iii_final"
+    },
+    {
+      "title": "Serment",
+      "titleCN": "Serment",
+      "anime": "Shakugan no Shana III (Final)",
+      "animeCN": "灼眼的夏娜III -Final-",
+      "animeNative": "灼眼のシャナIII (Final)",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 6773,
+      "bangumiId": 18631,
+      "releaseYear": 2011,
+      "themeId": 4056,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana_iii_final"
+    },
+    {
+      "title": "I'll believe",
+      "titleCN": "I'll believe",
+      "anime": "Shakugan no Shana III (Final)",
+      "animeCN": "灼眼的夏娜III -Final-",
+      "animeNative": "灼眼のシャナIII (Final)",
+      "artist": "ALTIMA",
+      "artistAliases": [
+        "ALTIMA"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 6773,
+      "bangumiId": 18631,
+      "releaseYear": 2011,
+      "themeId": 4057,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana_iii_final"
+    },
+    {
+      "title": "ONE",
+      "titleCN": "ONE",
+      "anime": "Shakugan no Shana III (Final)",
+      "animeCN": "灼眼的夏娜III -Final-",
+      "animeNative": "灼眼のシャナIII (Final)",
+      "artist": "ALTIMA",
+      "artistAliases": [
+        "ALTIMA"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 6773,
+      "bangumiId": 18631,
+      "releaseYear": 2011,
+      "themeId": 4058,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana_iii_final"
+    },
+    {
+      "title": "u\\/n",
+      "titleCN": "u\\/n",
+      "anime": "Shakugan no Shana III (Final)",
+      "animeCN": "灼眼的夏娜III -Final-",
+      "animeNative": "灼眼のシャナIII (Final)",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 6773,
+      "bangumiId": 18631,
+      "releaseYear": 2011,
+      "themeId": 4059,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana_iii_final"
+    },
+    {
+      "title": "Koubou",
+      "titleCN": "Koubou",
+      "anime": "Shakugan no Shana III (Final)",
+      "animeCN": "灼眼的夏娜III -Final-",
+      "animeNative": "灼眼のシャナIII (Final)",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 6773,
+      "bangumiId": 18631,
+      "releaseYear": 2011,
+      "themeId": 4060,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana_iii_final"
+    },
+    {
+      "title": "Terminated",
+      "titleCN": "Terminated",
+      "anime": "Kyoukaisenjou no Horizon",
+      "animeCN": "境界线上的地平线",
+      "animeNative": "境界線上のホライゾン",
+      "artist": "Minori Chihara",
+      "artistAliases": [
+        "Minori Chihara"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10456,
+      "bangumiId": 12703,
+      "releaseYear": 2011,
+      "themeId": 4006,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kyoukaisenjou_no_horizon"
+    },
+    {
+      "title": "Pieces",
+      "titleCN": "Pieces",
+      "anime": "Kyoukaisenjou no Horizon",
+      "animeCN": "境界线上的地平线",
+      "animeNative": "境界線上のホライゾン",
+      "artist": "AiRI",
+      "artistAliases": [
+        "AiRI"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10456,
+      "bangumiId": 12703,
+      "releaseYear": 2011,
+      "themeId": 4007,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kyoukaisenjou_no_horizon"
+    },
+    {
+      "title": "Stardust Melodia",
+      "titleCN": "Stardust Melodia",
+      "anime": "Kyoukaisenjou no Horizon",
+      "animeCN": "境界线上的地平线",
+      "animeNative": "境界線上のホライゾン",
+      "artist": "Ceui",
+      "artistAliases": [
+        "Ceui"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10456,
+      "bangumiId": 12703,
+      "releaseYear": 2011,
+      "themeId": 4008,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kyoukaisenjou_no_horizon"
+    },
+    {
+      "title": "COOLISH WALK",
+      "titleCN": "COOLISH WALK",
+      "anime": "Working'!!",
+      "animeCN": "迷糊餐厅 第二季",
+      "animeNative": "WORKING'!!",
+      "artist": "Eri Kitamura, Kana Asumi, Saki Fujita",
+      "artistAliases": [
+        "Eri Kitamura",
+        "Kana Asumi",
+        "Saki Fujita"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10521,
+      "bangumiId": 20547,
+      "releaseYear": 2011,
+      "themeId": 4078,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/working_2011"
+    },
+    {
+      "title": "Itsumo no Youni LOVE & PEACE!!",
+      "titleCN": "Itsumo no Youni LOVE & PEACE!!",
+      "anime": "Working'!!",
+      "animeCN": "迷糊餐厅 第二季",
+      "animeNative": "WORKING'!!",
+      "artist": "Hiroshi Kamiya, Daisuke Ono, Jun Fukuyama",
+      "artistAliases": [
+        "Hiroshi Kamiya",
+        "Daisuke Ono",
+        "Jun Fukuyama"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10521,
+      "bangumiId": 20547,
+      "releaseYear": 2011,
+      "themeId": 4079,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/working_2011"
+    },
+    {
+      "title": "Dream of Life",
+      "titleCN": "Dream of Life",
+      "anime": "Bakuman. 2",
+      "animeCN": "爆漫王。2",
+      "animeNative": "バクマン。2",
+      "artist": "伊藤祥平",
+      "artistAliases": [
+        "伊藤祥平"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10030,
+      "bangumiId": 22588,
+      "releaseYear": 2011,
+      "themeId": 3964,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman_2"
+    },
+    {
+      "title": "monochrome rainbow",
+      "titleCN": "monochrome rainbow",
+      "anime": "Bakuman. 2",
+      "animeCN": "爆漫王。2",
+      "animeNative": "バクマン。2",
+      "artist": "Tommy heavenly⁶",
+      "artistAliases": [
+        "Tommy heavenly⁶"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10030,
+      "bangumiId": 22588,
+      "releaseYear": 2011,
+      "themeId": 3965,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman_2"
+    },
+    {
+      "title": "HIGH POWERED",
+      "titleCN": "HIGH POWERED",
+      "anime": "Shinryaku!? Ika Musume",
+      "animeCN": "侵略!?乌贼娘",
+      "animeNative": "侵略!?イカ娘",
+      "artist": "Sphere",
+      "artistAliases": [
+        "Sphere"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10378,
+      "bangumiId": 18004,
+      "releaseYear": 2011,
+      "themeId": 4061,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shinryaku_ika_musume_2011"
+    },
+    {
+      "title": "Kimi wo Shirukoto",
+      "titleCN": "Kimi wo Shirukoto",
+      "anime": "Shinryaku!? Ika Musume",
+      "animeCN": "侵略!?乌贼娘",
+      "animeNative": "侵略!?イカ娘",
+      "artist": "Hisako Kanemoto",
+      "artistAliases": [
+        "Hisako Kanemoto"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10378,
+      "bangumiId": 18004,
+      "releaseYear": 2011,
+      "themeId": 4062,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shinryaku_ika_musume_2011"
+    },
+    {
+      "title": "LIVE for LIFE ~Ookamitachi no Yoru~",
+      "titleCN": "LIVE for LIFE ~狼たちの夜~",
+      "anime": "Ben-To",
+      "animeCN": "便・当",
+      "animeNative": "ベン・トー",
+      "artist": "愛美",
+      "artistAliases": [
+        "愛美",
+        "Aimi"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10396,
+      "bangumiId": 19540,
+      "releaseYear": 2011,
+      "themeId": 3967,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ben_to"
+    },
+    {
+      "title": "Treasure",
+      "titleCN": "Treasure",
+      "anime": "Ben-To",
+      "animeCN": "便・当",
+      "animeNative": "ベン・トー",
+      "artist": "Emiri Katou",
+      "artistAliases": [
+        "Emiri Katou"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10396,
+      "bangumiId": 19540,
+      "releaseYear": 2011,
+      "themeId": 3968,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ben_to"
+    },
+    {
+      "title": "Egao no Housoku",
+      "titleCN": "Egao no Housoku",
+      "anime": "Ben-To",
+      "animeCN": "便・当",
+      "animeNative": "ベン・トー",
+      "artist": "Mariya Ise",
+      "artistAliases": [
+        "Mariya Ise"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10396,
+      "bangumiId": 19540,
+      "releaseYear": 2011,
+      "themeId": 3969,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ben_to"
+    },
+    {
+      "title": "Authentic symphony",
+      "titleCN": "Authentic symphony",
+      "anime": "Mashiro-iro Symphony: The Color of Lovers",
+      "animeCN": "纯白交响曲",
+      "animeNative": "ましろ色シンフォニー -The color of lovers-",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10397,
+      "bangumiId": 12557,
+      "releaseYear": 2011,
+      "themeId": 4026,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mashiro_iro_symphony_the_color_of_lovers"
+    },
+    {
+      "title": "Suisai Candy",
+      "titleCN": "Suisai Candy",
+      "anime": "Mashiro-iro Symphony: The Color of Lovers",
+      "animeCN": "纯白交响曲",
+      "animeNative": "ましろ色シンフォニー -The color of lovers-",
+      "artist": "marble",
+      "artistAliases": [
+        "marble"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10397,
+      "bangumiId": 12557,
+      "releaseYear": 2011,
+      "themeId": 4027,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mashiro_iro_symphony_the_color_of_lovers"
+    },
+    {
+      "title": "Pursuing My True Self",
+      "titleCN": "Pursuing My True Self",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Shihoko Hirata",
+      "artistAliases": [
+        "Shihoko Hirata"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4040,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "sky's the limit",
+      "titleCN": "sky's the limit",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Shihoko Hirata",
+      "artistAliases": [
+        "Shihoko Hirata"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4041,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "True Story",
+      "titleCN": "True Story",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Rie Kugimiya",
+      "artistAliases": [
+        "Rie Kugimiya"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4042,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "key plus words",
+      "titleCN": "key plus words",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Yumi Kawamura, Shihoko Hirata",
+      "artistAliases": [
+        "Yumi Kawamura",
+        "Shihoko Hirata"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4043,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "Burn My Dread",
+      "titleCN": "Burn My Dread",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Yumi Kawamura",
+      "artistAliases": [
+        "Yumi Kawamura"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4044,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "Beauty of Destiny",
+      "titleCN": "Beauty of Destiny",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Shihoko Hirata",
+      "artistAliases": [
+        "Shihoko Hirata"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4045,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "Koisuru Meitantei",
+      "titleCN": "Koisuru Meitantei",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4046,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "The way of Memories -Kizuna no Chikara-",
+      "titleCN": "The way of Memories -Kizuna no Chikara-",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Shihoko Hirata",
+      "artistAliases": [
+        "Shihoko Hirata"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4047,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "Honto no Kimochi",
+      "titleCN": "Honto no Kimochi",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Shihoko Hirata",
+      "artistAliases": [
+        "Shihoko Hirata"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4048,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "Never More",
+      "titleCN": "Never More",
+      "anime": "Persona 4 The Animation",
+      "animeCN": "女神异闻录4",
+      "animeNative": "ペルソナ4アニメーション",
+      "artist": "Shihoko Hirata",
+      "artistAliases": [
+        "Shihoko Hirata"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10588,
+      "bangumiId": 15489,
+      "releaseYear": 2011,
+      "themeId": 4049,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/persona_4_the_animation"
+    },
+    {
+      "title": "Endless Story",
+      "titleCN": "Endless Story",
+      "anime": "C³",
+      "animeCN": "C3 -魔方少女-",
+      "animeNative": "シーキューブ",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10578,
+      "bangumiId": 18629,
+      "releaseYear": 2011,
+      "themeId": 3972,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/c3"
+    },
+    {
+      "title": "Shirushi",
+      "titleCN": "Shirushi",
+      "anime": "C³",
+      "animeCN": "C3 -魔方少女-",
+      "animeNative": "シーキューブ",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10578,
+      "bangumiId": 18629,
+      "releaseYear": 2011,
+      "themeId": 3973,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/c3"
+    },
+    {
+      "title": "Hana",
+      "titleCN": "Hana",
+      "anime": "C³",
+      "animeCN": "C3 -魔方少女-",
+      "animeNative": "シーキューブ",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10578,
+      "bangumiId": 18629,
+      "releaseYear": 2011,
+      "themeId": 3974,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/c3"
+    },
+    {
+      "title": "Sympathy of Love",
+      "titleCN": "Sympathy of Love",
+      "anime": "C³",
+      "animeCN": "C3 -魔方少女-",
+      "animeNative": "シーキューブ",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10578,
+      "bangumiId": 18629,
+      "releaseYear": 2011,
+      "themeId": 3975,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/c3"
+    },
+    {
+      "title": "Bye Bye",
+      "titleCN": "Bye Bye",
+      "anime": "Kimi to Boku.",
+      "animeCN": "少年同盟",
+      "animeNative": "君と僕。",
+      "artist": "7!!",
+      "artistAliases": [
+        "7!!",
+        "Seven Oops",
+        "セブンウップス"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10460,
+      "bangumiId": 14220,
+      "releaseYear": 2011,
+      "themeId": 4004,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kimi_to_boku"
+    },
+    {
+      "title": "Nakimushi.",
+      "titleCN": "Nakimushi.",
+      "anime": "Kimi to Boku.",
+      "animeCN": "少年同盟",
+      "animeNative": "君と僕。",
+      "artist": "沢井美空",
+      "artistAliases": [
+        "沢井美空",
+        "Miku Sawai"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10460,
+      "bangumiId": 14220,
+      "releaseYear": 2011,
+      "themeId": 4005,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kimi_to_boku"
+    },
+    {
+      "title": "How to go",
+      "titleCN": "How to go",
+      "anime": "UN-GO",
+      "animeCN": "UN-GO",
+      "animeNative": "UN-GO",
+      "artist": "School Food Punishment",
+      "artistAliases": [
+        "School Food Punishment"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10798,
+      "bangumiId": 18636,
+      "releaseYear": 2011,
+      "themeId": 4076,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/un_go"
+    },
+    {
+      "title": "Fantasy",
+      "titleCN": "Fantasy",
+      "anime": "UN-GO",
+      "animeCN": "UN-GO",
+      "animeNative": "UN-GO",
+      "artist": "Lama",
+      "artistAliases": [
+        "LAMA",
+        "Lama"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10798,
+      "bangumiId": 18636,
+      "releaseYear": 2011,
+      "themeId": 4077,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/un_go"
+    },
+    {
+      "title": "Okaerinasai",
+      "titleCN": "Okaerinasai",
+      "anime": "Tamayura: Hitotose",
+      "animeCN": "玉响～hitotose～",
+      "animeNative": "たまゆら～hitotose～",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "OP",
+      "season": "2011-10",
+      "anilistId": 10232,
+      "bangumiId": 18605,
+      "releaseYear": 2011,
+      "themeId": 4070,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tamayura_hitotose"
+    },
+    {
+      "title": "Kamisama no Itazura",
+      "titleCN": "Kamisama no Itazura",
+      "anime": "Tamayura: Hitotose",
+      "animeCN": "玉响～hitotose～",
+      "animeNative": "たまゆら～hitotose～",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10232,
+      "bangumiId": 18605,
+      "releaseYear": 2011,
+      "themeId": 4071,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tamayura_hitotose"
+    },
+    {
+      "title": "Natsutori -Uta to Piano-",
+      "titleCN": "Natsutori -Uta to Piano-",
+      "anime": "Tamayura: Hitotose",
+      "animeCN": "玉响～hitotose～",
+      "animeNative": "たまゆら～hitotose～",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10232,
+      "bangumiId": 18605,
+      "releaseYear": 2011,
+      "themeId": 4072,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tamayura_hitotose"
+    },
+    {
+      "title": "Hoshizora",
+      "titleCN": "Hoshizora",
+      "anime": "Tamayura: Hitotose",
+      "animeCN": "玉响～hitotose～",
+      "animeNative": "たまゆら～hitotose～",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10232,
+      "bangumiId": 18605,
+      "releaseYear": 2011,
+      "themeId": 4073,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/tamayura_hitotose"
+    },
+    {
+      "title": "Ashita no Hidamari",
+      "titleCN": "Ashita no Hidamari",
+      "anime": "Tamayura: Hitotose",
+      "animeCN": "玉响～hitotose～",
+      "animeNative": "たまゆら～hitotose～",
+      "artist": "Ayana Taketatsu, Kana Asumi, Yuka Iguchi",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Kana Asumi",
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10232,
+      "bangumiId": 18605,
+      "releaseYear": 2011,
+      "themeId": 4074,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/tamayura_hitotose"
+    },
+    {
+      "title": "A HAPPY NEW YEAR",
+      "titleCN": "A HAPPY NEW YEAR",
+      "anime": "Tamayura: Hitotose",
+      "animeCN": "玉响～hitotose～",
+      "animeNative": "たまゆら～hitotose～",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "ED",
+      "season": "2011-10",
+      "anilistId": 10232,
+      "bangumiId": 18605,
+      "releaseYear": 2011,
+      "themeId": 4075,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/tamayura_hitotose"
     }
   ],
   "2011-07": [
@@ -41921,6 +44782,1042 @@ export const SEASONAL_POOLS = {
       "themeId": 4143,
       "themeSequence": 10,
       "animethemesUrl": "https://animethemes.moe/anime/mawaru_penguindrum"
+    },
+    {
+      "title": "Kimi + Nazo + Watashi de JUMP!!",
+      "titleCN": "君+謎+私でJUMP!!",
+      "anime": "Baka to Test to Shoukanjuu Ni!",
+      "animeCN": "笨蛋，测验，召唤兽2！",
+      "animeNative": "バカとテストと召喚獣 にっ！",
+      "artist": "Larval Stage Planning",
+      "artistAliases": [
+        "Larval Stage Planning"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 8516,
+      "bangumiId": 11145,
+      "releaseYear": 2011,
+      "themeId": 4080,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/baka_to_test_to_shoukanjuu_ni"
+    },
+    {
+      "title": "Eureka Baby",
+      "titleCN": "エウレカベイビー",
+      "anime": "Baka to Test to Shoukanjuu Ni!",
+      "animeCN": "笨蛋，测验，召唤兽2！",
+      "animeNative": "バカとテストと召喚獣 にっ！",
+      "artist": "麻生夏子",
+      "artistAliases": [
+        "麻生夏子"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 8516,
+      "bangumiId": 11145,
+      "releaseYear": 2011,
+      "themeId": 4081,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/baka_to_test_to_shoukanjuu_ni"
+    },
+    {
+      "title": "Baka to Koshitsu to Kodokumeshi",
+      "titleCN": "Baka to Koshitsu to Kodokumeshi",
+      "anime": "Baka to Test to Shoukanjuu Ni!",
+      "animeCN": "笨蛋，测验，召唤兽2！",
+      "animeNative": "バカとテストと召喚獣 にっ！",
+      "artist": "milktub",
+      "artistAliases": [
+        "milktub"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 8516,
+      "bangumiId": 11145,
+      "releaseYear": 2011,
+      "themeId": 4082,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/baka_to_test_to_shoukanjuu_ni"
+    },
+    {
+      "title": "Hi-Ho!!",
+      "titleCN": "Hi-Ho!!",
+      "anime": "Baka to Test to Shoukanjuu Ni!",
+      "animeCN": "笨蛋，测验，召唤兽2！",
+      "animeNative": "バカとテストと召喚獣 にっ！",
+      "artist": "milktub",
+      "artistAliases": [
+        "milktub"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 8516,
+      "bangumiId": 11145,
+      "releaseYear": 2011,
+      "themeId": 4083,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/baka_to_test_to_shoukanjuu_ni"
+    },
+    {
+      "title": "Yuriyurarararayuruyuri Daijiken",
+      "titleCN": "Yuriyurarararayuruyuri Daijiken",
+      "anime": "Yuru Yuri",
+      "animeCN": "摇曳百合",
+      "animeNative": "ゆるゆり",
+      "artist": "Minami Tsuda, Rumi Ookubo, Shiori Mikami, Yuka Ootsubo",
+      "artistAliases": [
+        "Minami Tsuda",
+        "Rumi Ookubo",
+        "Shiori Mikami",
+        "Yuka Ootsubo"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10495,
+      "bangumiId": 14588,
+      "releaseYear": 2011,
+      "themeId": 4198,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuru_yuri"
+    },
+    {
+      "title": "My Pace de Ikimashou",
+      "titleCN": "My Pace de Ikimashou",
+      "anime": "Yuru Yuri",
+      "animeCN": "摇曳百合",
+      "animeNative": "ゆるゆり",
+      "artist": "Minami Tsuda, Rumi Ookubo, Shiori Mikami, Yuka Ootsubo",
+      "artistAliases": [
+        "Minami Tsuda",
+        "Rumi Ookubo",
+        "Shiori Mikami",
+        "Yuka Ootsubo"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10495,
+      "bangumiId": 14588,
+      "releaseYear": 2011,
+      "themeId": 4199,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuru_yuri"
+    },
+    {
+      "title": "CHANGE!!!!",
+      "titleCN": "CHANGE!!!!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4170,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "The world is all one!!",
+      "titleCN": "The world is all one!!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4171,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Positive!",
+      "titleCN": "Positive!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Rie Kugimiya",
+      "artistAliases": [
+        "Rie Kugimiya"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4172,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "First Stage",
+      "titleCN": "First Stage",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "萩原雪歩（浅倉杏美）、菊地真（平田宏美）",
+      "artistAliases": [
+        "浅倉杏美",
+        "Azumi Asakura",
+        "平田宏美",
+        "Hiromi Hirata",
+        "萩原雪歩（浅倉杏美）、菊地真（平田宏美）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4173,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Aoi Tori",
+      "titleCN": "Aoi Tori",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Asami Imai",
+      "artistAliases": [
+        "Asami Imai"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4174,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "MOONY",
+      "titleCN": "MOONY",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Manami Numakura, Asami Imai",
+      "artistAliases": [
+        "Manami Numakura",
+        "Asami Imai"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4175,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "THE IDOLM@STER",
+      "titleCN": "THE IDOLM@STER",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4176,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Ohayou!! Asagohan",
+      "titleCN": "Ohayou!! Asagohan",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "高槻やよい（仁後真耶子）",
+      "artistAliases": [
+        "仁後真耶子",
+        "Mayako Nigo",
+        "高槻やよい（仁後真耶子）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4177,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Hanikami! First Bite",
+      "titleCN": "Hanikami! First Bite",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Rie Kugimiya",
+      "artistAliases": [
+        "Rie Kugimiya"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4178,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Reimei Starline",
+      "titleCN": "Reimei Starline",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "双海亜美／真美（下田麻美）",
+      "artistAliases": [
+        "下田麻美",
+        "Asami Shimoda",
+        "双海亜美／真美（下田麻美）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4179,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "GO MY WAY!!",
+      "titleCN": "GO MY WAY!!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars, 876 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars",
+        "876 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4180,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "START!!",
+      "titleCN": "START!!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "天海春香（中村繪里子）",
+      "artistAliases": [
+        "中村繪里子",
+        "Eriko Nakamura",
+        "天海春香（中村繪里子）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4181,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Shocking na Kare!",
+      "titleCN": "Shocking na Kare!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "星井美希（長谷川明子）",
+      "artistAliases": [
+        "長谷川明子",
+        "Akiko Hasegawa",
+        "星井美希（長谷川明子）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4182,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "i",
+      "titleCN": "i",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4183,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Colorful Days",
+      "titleCN": "Colorful Days",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Manami Numakura, Yumi Hara, Asami Imai",
+      "artistAliases": [
+        "Manami Numakura",
+        "Yumi Hara",
+        "Asami Imai"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4184,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "MEGARE!",
+      "titleCN": "MEGARE!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4185,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Brand New Day!",
+      "titleCN": "Brand New Day!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Manami Numakura",
+      "artistAliases": [
+        "Manami Numakura"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4186,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Cheering Letter",
+      "titleCN": "Cheering Letter",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "菊地真（平田宏美）",
+      "artistAliases": [
+        "平田宏美",
+        "Hiromi Hirata",
+        "菊地真（平田宏美）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4187,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Mahou wo Kakete!",
+      "titleCN": "Mahou wo Kakete!",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "秋月律子（若林直美）",
+      "artistAliases": [
+        "若林直美",
+        "Naomi Wakabayashi",
+        "秋月律子（若林直美）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4188,
+      "themeSequence": 18,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Kazahana",
+      "titleCN": "Kazahana",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Yumi Hara",
+      "artistAliases": [
+        "Yumi Hara"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4189,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Yakusoku",
+      "titleCN": "Yakusoku",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Manami Numakura, Rie Kugimiya, Asami Imai",
+      "artistAliases": [
+        "Manami Numakura",
+        "Rie Kugimiya",
+        "Asami Imai"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4190,
+      "themeSequence": 20,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Sora",
+      "titleCN": "Sora",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "音無小鳥（滝田樹里）",
+      "artistAliases": [
+        "滝田樹里",
+        "Juri Takita",
+        "音無小鳥（滝田樹里）"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4191,
+      "themeSequence": 21,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Happy Christmas",
+      "titleCN": "Happy Christmas",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "Manami Numakura, Yumi Hara, Asami Imai",
+      "artistAliases": [
+        "Manami Numakura",
+        "Yumi Hara",
+        "Asami Imai"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4192,
+      "themeSequence": 22,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Massugu",
+      "titleCN": "Massugu",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4194,
+      "themeSequence": 24,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Watashi-tachi wa Zutto...Deshou?",
+      "titleCN": "Watashi-tachi wa Zutto...Deshou?",
+      "anime": "The iDOLM@STER",
+      "animeCN": "偶像大师",
+      "animeNative": "アイドルマスター",
+      "artist": "765 Pro Allstars",
+      "artistAliases": [
+        "765 Pro Allstars"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10278,
+      "bangumiId": 11577,
+      "releaseYear": 2011,
+      "themeId": 4195,
+      "themeSequence": 25,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster"
+    },
+    {
+      "title": "Boku ni Dekiru Koto",
+      "titleCN": "Boku ni Dekiru Koto",
+      "anime": "Natsume Yuujinchou San",
+      "animeCN": "夏目友人帐 叁",
+      "animeNative": "夏目友人帳 参",
+      "artist": "HOW MERRY MARRY",
+      "artistAliases": [
+        "HOW MERRY MARRY"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10379,
+      "bangumiId": 12536,
+      "releaseYear": 2011,
+      "themeId": 4146,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou_san"
+    },
+    {
+      "title": "Kimi no Kakera feat. Miyamoto Emiri",
+      "titleCN": "Kimi no Kakera feat. Miyamoto Emiri",
+      "anime": "Natsume Yuujinchou San",
+      "animeCN": "夏目友人帐 叁",
+      "animeNative": "夏目友人帳 参",
+      "artist": "中孝介 feat.宮本笑里",
+      "artistAliases": [
+        "中孝介",
+        "Kousuke Atari",
+        "宮本笑里",
+        "Emiri Miyamoto",
+        "中孝介 feat.宮本笑里"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10379,
+      "bangumiId": 12536,
+      "releaseYear": 2011,
+      "themeId": 4147,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou_san"
+    },
+    {
+      "title": "Sweet Drops",
+      "titleCN": "Sweet Drops",
+      "anime": "Usagi Drop",
+      "animeCN": "白兔糖",
+      "animeNative": "うさぎドロップ",
+      "artist": "PUFFY",
+      "artistAliases": [
+        "PUFFY"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10162,
+      "bangumiId": 10843,
+      "releaseYear": 2011,
+      "themeId": 4196,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/usagi_drop"
+    },
+    {
+      "title": "High High High",
+      "titleCN": "High High High",
+      "anime": "Usagi Drop",
+      "animeCN": "白兔糖",
+      "animeNative": "うさぎドロップ",
+      "artist": "カサリンチュ",
+      "artistAliases": [
+        "カサリンチュ",
+        "KASARINCHU"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10162,
+      "bangumiId": 10843,
+      "releaseYear": 2011,
+      "themeId": 4197,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/usagi_drop"
+    },
+    {
+      "title": "Kawaru Mirai",
+      "titleCN": "Kawaru Mirai",
+      "anime": "Kamisama no Memochou",
+      "animeCN": "神的记事本",
+      "animeNative": "神様のメモ帳",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10568,
+      "bangumiId": 15237,
+      "releaseYear": 2011,
+      "themeId": 4127,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_no_memochou"
+    },
+    {
+      "title": "Colorado Bulldog",
+      "titleCN": "Colorado Bulldog",
+      "anime": "Kamisama no Memochou",
+      "animeCN": "神的记事本",
+      "animeNative": "神様のメモ帳",
+      "artist": "Mr. Big",
+      "artistAliases": [
+        "Mr. Big"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10568,
+      "bangumiId": 15237,
+      "releaseYear": 2011,
+      "themeId": 4128,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_no_memochou"
+    },
+    {
+      "title": "Asunaro",
+      "titleCN": "あすなろ",
+      "anime": "Kamisama no Memochou",
+      "animeCN": "神的记事本",
+      "animeNative": "神様のメモ帳",
+      "artist": "鈴村健一",
+      "artistAliases": [
+        "鈴村健一"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10568,
+      "bangumiId": 15237,
+      "releaseYear": 2011,
+      "themeId": 4129,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_no_memochou"
+    },
+    {
+      "title": "Cras numquam scire",
+      "titleCN": "Cras numquam scire",
+      "anime": "Dantalian no Shoka",
+      "animeCN": "丹特丽安的书架",
+      "animeNative": "ダンタリアンの書架",
+      "artist": "Daisuke Ono",
+      "artistAliases": [
+        "Daisuke Ono"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 8915,
+      "bangumiId": 14667,
+      "releaseYear": 2011,
+      "themeId": 4091,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dantalian_no_shoka"
+    },
+    {
+      "title": "Be Starters!",
+      "titleCN": "Be Starters!",
+      "anime": "Mayo Chiki!",
+      "animeCN": "迷茫管家与懦弱的我",
+      "animeNative": "まよチキ！",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10110,
+      "bangumiId": 10459,
+      "releaseYear": 2011,
+      "themeId": 4144,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mayo_chiki"
+    },
+    {
+      "title": "Kimi ni Gohoushi",
+      "titleCN": "Kimi ni Gohoushi",
+      "anime": "Mayo Chiki!",
+      "animeCN": "迷茫管家与懦弱的我",
+      "animeNative": "まよチキ！",
+      "artist": "Eri Kitamura, Mariya Ise, Yuka Iguchi",
+      "artistAliases": [
+        "Eri Kitamura",
+        "Mariya Ise",
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10110,
+      "bangumiId": 10459,
+      "releaseYear": 2011,
+      "themeId": 4145,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mayo_chiki"
+    },
+    {
+      "title": "Spell",
+      "titleCN": "Spell",
+      "anime": "No.6",
+      "animeCN": "未来都市NO.6",
+      "animeNative": "NO.6",
+      "artist": "Lama",
+      "artistAliases": [
+        "LAMA",
+        "Lama"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10161,
+      "bangumiId": 10842,
+      "releaseYear": 2011,
+      "themeId": 4151,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/no6"
+    },
+    {
+      "title": "spiral",
+      "titleCN": "spiral",
+      "anime": "Blood-C",
+      "animeCN": "BLOOD-C",
+      "animeNative": "BLOOD-C",
+      "artist": "DUSTZ",
+      "artistAliases": [
+        "DUSTZ"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10490,
+      "bangumiId": 14427,
+      "releaseYear": 2011,
+      "themeId": 4084,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blood_c"
+    },
+    {
+      "title": "Junketsu Paradox",
+      "titleCN": "Junketsu Paradox",
+      "anime": "Blood-C",
+      "animeCN": "BLOOD-C",
+      "animeNative": "BLOOD-C",
+      "artist": "Nana Mizuki",
+      "artistAliases": [
+        "Nana Mizuki"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10490,
+      "bangumiId": 14427,
+      "releaseYear": 2011,
+      "themeId": 4085,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blood_c"
+    },
+    {
+      "title": "SHOOT!",
+      "titleCN": "SHOOT!",
+      "anime": "Ro-Kyu-Bu!",
+      "animeCN": "萝球社！",
+      "animeNative": "ロウきゅーぶ!",
+      "artist": "Kana Hanazawa, Youko Hikasa, Yui Ogura, Yuka Iguchi, Rina Hidaka",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Youko Hikasa",
+        "Yui Ogura",
+        "Yuka Iguchi",
+        "Rina Hidaka"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10572,
+      "bangumiId": 13485,
+      "releaseYear": 2011,
+      "themeId": 4159,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ro_kyu_bu"
+    },
+    {
+      "title": "Party Love ~Okkiku Naritai~",
+      "titleCN": "Party Love ~Okkiku Naritai~",
+      "anime": "Ro-Kyu-Bu!",
+      "animeCN": "萝球社！",
+      "animeNative": "ロウきゅーぶ!",
+      "artist": "Kana Hanazawa, Youko Hikasa, Yui Ogura, Yuka Iguchi, Rina Hidaka",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Youko Hikasa",
+        "Yui Ogura",
+        "Yuka Iguchi",
+        "Rina Hidaka"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10572,
+      "bangumiId": 13485,
+      "releaseYear": 2011,
+      "themeId": 4160,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ro_kyu_bu"
+    },
+    {
+      "title": "Sekai wa Odoru yo, Kimi to.",
+      "titleCN": "世界は踊るよ、君と。",
+      "anime": "Ikoku Meiro no Croisée",
+      "animeCN": "异国迷宫的十字路口",
+      "animeNative": "異国迷路のクロワーゼ",
+      "artist": "羊毛とおはな",
+      "artistAliases": [
+        "羊毛とおはな"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 9938,
+      "bangumiId": 10261,
+      "releaseYear": 2011,
+      "themeId": 4118,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ikoku_meiro_no_croisee"
+    },
+    {
+      "title": "Koko kara Hajimaru Monogatari",
+      "titleCN": "Koko kara Hajimaru Monogatari",
+      "anime": "Ikoku Meiro no Croisée",
+      "animeCN": "异国迷宫的十字路口",
+      "animeNative": "異国迷路のクロワーゼ",
+      "artist": "Nao Touyama",
+      "artistAliases": [
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 9938,
+      "bangumiId": 10261,
+      "releaseYear": 2011,
+      "themeId": 4119,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ikoku_meiro_no_croisee"
+    },
+    {
+      "title": "Hoshi no Arika.",
+      "titleCN": "Hoshi no Arika.",
+      "anime": "Nurarihyon no Mago: Sennen Makyou",
+      "animeCN": "滑头鬼之孙～千年魔京～",
+      "animeNative": "ぬらりひょんの孫 千年魔京",
+      "artist": "LM.C",
+      "artistAliases": [
+        "LM.C"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10049,
+      "bangumiId": 12192,
+      "releaseYear": 2011,
+      "themeId": 4153,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nurarihyon_no_mago_sennen_makyou"
+    },
+    {
+      "title": "The LOVE SONG",
+      "titleCN": "The LOVE SONG",
+      "anime": "Nurarihyon no Mago: Sennen Makyou",
+      "animeCN": "滑头鬼之孙～千年魔京～",
+      "animeNative": "ぬらりひょんの孫 千年魔京",
+      "artist": "LM.C",
+      "artistAliases": [
+        "LM.C"
+      ],
+      "type": "OP",
+      "season": "2011-07",
+      "anilistId": 10049,
+      "bangumiId": 12192,
+      "releaseYear": 2011,
+      "themeId": 4154,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nurarihyon_no_mago_sennen_makyou"
+    },
+    {
+      "title": "Orange Smile",
+      "titleCN": "Orange Smile",
+      "anime": "Nurarihyon no Mago: Sennen Makyou",
+      "animeCN": "滑头鬼之孙～千年魔京～",
+      "animeNative": "ぬらりひょんの孫 千年魔京",
+      "artist": "Katate☆SIZE",
+      "artistAliases": [
+        "Katate☆SIZE"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10049,
+      "bangumiId": 12192,
+      "releaseYear": 2011,
+      "themeId": 4155,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nurarihyon_no_mago_sennen_makyou"
+    },
+    {
+      "title": "Departure",
+      "titleCN": "Departure",
+      "anime": "Nurarihyon no Mago: Sennen Makyou",
+      "animeCN": "滑头鬼之孙～千年魔京～",
+      "animeNative": "ぬらりひょんの孫 千年魔京",
+      "artist": "Katate☆SIZE",
+      "artistAliases": [
+        "Katate☆SIZE"
+      ],
+      "type": "ED",
+      "season": "2011-07",
+      "anilistId": 10049,
+      "bangumiId": 12192,
+      "releaseYear": 2011,
+      "themeId": 4156,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nurarihyon_no_mago_sennen_makyou"
     }
   ],
   "2012-04": [
@@ -42125,6 +46022,678 @@ export const SEASONAL_POOLS = {
       "themeId": 4684,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/accel_world"
+    },
+    {
+      "title": "Acchi de Kocchi de",
+      "titleCN": "Acchi de Kocchi de",
+      "anime": "Acchi Kocchi (TV)",
+      "animeCN": "一起一起这里那里",
+      "animeNative": "あっちこっち",
+      "artist": "Rumi Ookubo, Nobuhiko Okamoto, Shintarou Asanuma",
+      "artistAliases": [
+        "Rumi Ookubo",
+        "Nobuhiko Okamoto",
+        "Shintarou Asanuma"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12291,
+      "bangumiId": 28431,
+      "releaseYear": 2012,
+      "themeId": 4685,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/acchi_kocchi_tv"
+    },
+    {
+      "title": "Te wo Gyu Shite ne",
+      "titleCN": "Te wo Gyu Shite ne",
+      "anime": "Acchi Kocchi (TV)",
+      "animeCN": "一起一起这里那里",
+      "animeNative": "あっちこっち",
+      "artist": "Rumi Ookubo",
+      "artistAliases": [
+        "Rumi Ookubo"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12291,
+      "bangumiId": 28431,
+      "releaseYear": 2012,
+      "themeId": 4686,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/acchi_kocchi_tv"
+    },
+    {
+      "title": "*** Passionate",
+      "titleCN": "*** Passionate",
+      "anime": "Kore wa Zombie desu ka? OF THE DEAD",
+      "animeCN": "这个是僵尸吗？OF THE DEAD",
+      "animeNative": "これはゾンビですか？オブ・ザ・デッド",
+      "artist": "Iori Nomizu",
+      "artistAliases": [
+        "Iori Nomizu"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 10790,
+      "bangumiId": 18797,
+      "releaseYear": 2012,
+      "themeId": 4719,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kore_wa_zombie_desu_ka_of_the_dead"
+    },
+    {
+      "title": "Koi no Beginner Nan Desu (T_T)",
+      "titleCN": "恋のビギナーなんです(T_T)",
+      "anime": "Kore wa Zombie desu ka? OF THE DEAD",
+      "animeCN": "这个是僵尸吗？OF THE DEAD",
+      "animeNative": "これはゾンビですか？オブ・ザ・デッド",
+      "artist": "山口理恵",
+      "artistAliases": [
+        "山口理恵"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 10790,
+      "bangumiId": 18797,
+      "releaseYear": 2012,
+      "themeId": 4720,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kore_wa_zombie_desu_ka_of_the_dead"
+    },
+    {
+      "title": "Can Do",
+      "titleCN": "Can Do",
+      "anime": "Kuroko no Basket",
+      "animeCN": "黑子的篮球",
+      "animeNative": "黒子のバスケ",
+      "artist": "GRANRODEO",
+      "artistAliases": [
+        "GRANRODEO"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 11771,
+      "bangumiId": 23684,
+      "releaseYear": 2012,
+      "themeId": 4721,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kuroko_no_basket"
+    },
+    {
+      "title": "RIMFIRE",
+      "titleCN": "RIMFIRE",
+      "anime": "Kuroko no Basket",
+      "animeCN": "黑子的篮球",
+      "animeNative": "黒子のバスケ",
+      "artist": "GRANRODEO",
+      "artistAliases": [
+        "GRANRODEO"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 11771,
+      "bangumiId": 23684,
+      "releaseYear": 2012,
+      "themeId": 4722,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kuroko_no_basket"
+    },
+    {
+      "title": "Start it right away",
+      "titleCN": "Start it right away",
+      "anime": "Kuroko no Basket",
+      "animeCN": "黑子的篮球",
+      "animeNative": "黒子のバスケ",
+      "artist": "Hyadain",
+      "artistAliases": [
+        "Hyadain"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 11771,
+      "bangumiId": 23684,
+      "releaseYear": 2012,
+      "themeId": 4723,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kuroko_no_basket"
+    },
+    {
+      "title": "Catal Rhythm",
+      "titleCN": "Catal Rhythm",
+      "anime": "Kuroko no Basket",
+      "animeCN": "黑子的篮球",
+      "animeNative": "黒子のバスケ",
+      "artist": "OLDCODEX",
+      "artistAliases": [
+        "OLDCODEX"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 11771,
+      "bangumiId": 23684,
+      "releaseYear": 2012,
+      "themeId": 4724,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kuroko_no_basket"
+    },
+    {
+      "title": "Borderland",
+      "titleCN": "Borderland",
+      "anime": "Jormungand",
+      "animeCN": "军火女王",
+      "animeNative": "ヨルムンガンド",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12413,
+      "bangumiId": 29073,
+      "releaseYear": 2012,
+      "themeId": 4714,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jormungand"
+    },
+    {
+      "title": "Ambivalentidea",
+      "titleCN": "Ambivalentidea",
+      "anime": "Jormungand",
+      "animeCN": "军火女王",
+      "animeNative": "ヨルムンガンド",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12413,
+      "bangumiId": 29073,
+      "releaseYear": 2012,
+      "themeId": 4715,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jormungand"
+    },
+    {
+      "title": "Shiroku Yawaraka na Hana",
+      "titleCN": "Shiroku Yawaraka na Hana",
+      "anime": "Jormungand",
+      "animeCN": "军火女王",
+      "animeNative": "ヨルムンガンド",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12413,
+      "bangumiId": 29073,
+      "releaseYear": 2012,
+      "themeId": 4716,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/jormungand"
+    },
+    {
+      "title": "MIRACLE RUSH",
+      "titleCN": "MIRACLE RUSH",
+      "anime": "Saki Achiga-hen: Episode of Side-A",
+      "animeCN": "天才麻将少女 阿知贺篇",
+      "animeNative": "咲-Saki-阿知賀編 episode of side-A",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 10884,
+      "bangumiId": 24165,
+      "releaseYear": 2012,
+      "themeId": 4748,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_achiga_hen_episode_of_side_a"
+    },
+    {
+      "title": "SquarePanicSerenade",
+      "titleCN": "SquarePanicSerenade",
+      "anime": "Saki Achiga-hen: Episode of Side-A",
+      "animeCN": "天才麻将少女 阿知贺篇",
+      "animeNative": "咲-Saki-阿知賀編 episode of side-A",
+      "artist": "Aoi Yuuki, Kana Hanazawa, Nao Touyama, Yumi Uchiyama",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Kana Hanazawa",
+        "Nao Touyama",
+        "Yumi Uchiyama"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 10884,
+      "bangumiId": 24165,
+      "releaseYear": 2012,
+      "themeId": 4749,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_achiga_hen_episode_of_side_a"
+    },
+    {
+      "title": "Futuristic Player",
+      "titleCN": "Futuristic Player",
+      "anime": "Saki Achiga-hen: Episode of Side-A",
+      "animeCN": "天才麻将少女 阿知贺篇",
+      "animeNative": "咲-Saki-阿知賀編 episode of side-A",
+      "artist": "Miyuki Hashimoto",
+      "artistAliases": [
+        "Miyuki Hashimoto"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 10884,
+      "bangumiId": 24165,
+      "releaseYear": 2012,
+      "themeId": 4750,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_achiga_hen_episode_of_side_a"
+    },
+    {
+      "title": "CHOIR JAIL",
+      "titleCN": "CHOIR JAIL",
+      "anime": "Tasogare Otome x Amnesia",
+      "animeCN": "黄昏少女×失忆",
+      "animeNative": "黄昏乙女×アムネジア",
+      "artist": "Konomi Suzuki",
+      "artistAliases": [
+        "Konomi Suzuki"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12445,
+      "bangumiId": 29060,
+      "releaseYear": 2012,
+      "themeId": 4776,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tasogare_otome_x_amnesia"
+    },
+    {
+      "title": "Calendrier",
+      "titleCN": "カランドリエ",
+      "anime": "Tasogare Otome x Amnesia",
+      "animeCN": "黄昏少女×失忆",
+      "animeNative": "黄昏乙女×アムネジア",
+      "artist": "奥井亜紀",
+      "artistAliases": [
+        "奥井亜紀"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12445,
+      "bangumiId": 29060,
+      "releaseYear": 2012,
+      "themeId": 4777,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tasogare_otome_x_amnesia"
+    },
+    {
+      "title": "Sakamichi no Melody",
+      "titleCN": "Sakamichi no Melody",
+      "anime": "Sakamichi no Apollon",
+      "animeCN": "坂道上的阿波罗",
+      "animeNative": "坂道のアポロン",
+      "artist": "YUKI",
+      "artistAliases": [
+        "YUKI"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12531,
+      "bangumiId": 29426,
+      "releaseYear": 2012,
+      "themeId": 4746,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakamichi_no_apollon"
+    },
+    {
+      "title": "Altair",
+      "titleCN": "Altair",
+      "anime": "Sakamichi no Apollon",
+      "animeCN": "坂道上的阿波罗",
+      "animeNative": "坂道のアポロン",
+      "artist": "Motohiro Hata meets Sakamichi no Apollon",
+      "artistAliases": [
+        "Motohiro Hata meets Sakamichi no Apollon"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12531,
+      "bangumiId": 29426,
+      "releaseYear": 2012,
+      "themeId": 4747,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakamichi_no_apollon"
+    },
+    {
+      "title": "Rough & Laugh",
+      "titleCN": "Rough & Laugh",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Clammbon",
+      "artistAliases": [
+        "Clammbon"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4760,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "You&Me",
+      "titleCN": "You&Me",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Rie fu",
+      "artistAliases": [
+        "Rie fu"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4761,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "Bamboo☆Scramble",
+      "titleCN": "Bamboo☆Scramble",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Jun Fukuyama",
+      "artistAliases": [
+        "Jun Fukuyama"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4762,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "Mizuiro",
+      "titleCN": "Mizuiro",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Aya Endou",
+      "artistAliases": [
+        "Aya Endou"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4764,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "ZOO tto ne!",
+      "titleCN": "ZOO tto ne!",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Katsuyuki Konishi",
+      "artistAliases": [
+        "Katsuyuki Konishi"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4765,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "Michinoku Shiiku Blues",
+      "titleCN": "Michinoku Shiiku Blues",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Wataru Hatano",
+      "artistAliases": [
+        "Wataru Hatano"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4766,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "Zokkon! Penko-san",
+      "titleCN": "Zokkon! Penko-san",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Hiroshi Kamiya",
+      "artistAliases": [
+        "Hiroshi Kamiya"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4767,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "Bamboo rendezvous ♥",
+      "titleCN": "Bamboo rendezvous ♥",
+      "anime": "Shirokuma Cafe",
+      "animeCN": "白熊咖啡馆",
+      "animeNative": "しろくまカフェ",
+      "artist": "Kana Hanazawa",
+      "artistAliases": [
+        "Kana Hanazawa"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12815,
+      "bangumiId": 32318,
+      "releaseYear": 2012,
+      "themeId": 4771,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/shirokuma_cafe"
+    },
+    {
+      "title": "Koi no Orchestra",
+      "titleCN": "Koi no Orchestra",
+      "anime": "Nazo no Kanojo X",
+      "animeCN": "谜样女友X",
+      "animeNative": "謎の彼女X",
+      "artist": "吉谷彩子",
+      "artistAliases": [
+        "吉谷彩子",
+        "Ayako Yoshitani"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12467,
+      "bangumiId": 29323,
+      "releaseYear": 2012,
+      "themeId": 4733,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nazo_no_kanojo_x"
+    },
+    {
+      "title": "Houkago no Yakusoku",
+      "titleCN": "Houkago no Yakusoku",
+      "anime": "Nazo no Kanojo X",
+      "animeCN": "谜样女友X",
+      "animeNative": "謎の彼女X",
+      "artist": "吉谷彩子",
+      "artistAliases": [
+        "吉谷彩子",
+        "Ayako Yoshitani"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12467,
+      "bangumiId": 29323,
+      "releaseYear": 2012,
+      "themeId": 4734,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nazo_no_kanojo_x"
+    },
+    {
+      "title": "Feel So Moon",
+      "titleCN": "Feel So Moon",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "Unicorn",
+      "artistAliases": [
+        "Unicorn"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4781,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
+    },
+    {
+      "title": "Eureka",
+      "titleCN": "Eureka",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "Sukima Switch",
+      "artistAliases": [
+        "Sukima Switch"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4782,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
+    },
+    {
+      "title": "Yume Miru Sekai",
+      "titleCN": "Yume Miru Sekai",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "DOES",
+      "artistAliases": [
+        "DOES"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4783,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
+    },
+    {
+      "title": "Small World",
+      "titleCN": "Small World",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "Fujifabric",
+      "artistAliases": [
+        "Fujifabric"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4784,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
+    },
+    {
+      "title": "Crater",
+      "titleCN": "Crater",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "Merengue",
+      "artistAliases": [
+        "Merengue"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4786,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
+    },
+    {
+      "title": "HALO",
+      "titleCN": "HALO",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "tacica",
+      "artistAliases": [
+        "tacica"
+      ],
+      "type": "OP",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4787,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
+    },
+    {
+      "title": "BEYOND",
+      "titleCN": "BEYOND",
+      "anime": "Uchuu Kyoudai",
+      "animeCN": "宇宙兄弟",
+      "animeNative": "宇宙兄弟",
+      "artist": "Miho Fukuhara",
+      "artistAliases": [
+        "Miho Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2012-04",
+      "anilistId": 12431,
+      "bangumiId": 28533,
+      "releaseYear": 2012,
+      "themeId": 4793,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_kyoudai"
     }
   ],
   "2012-10": [
@@ -42500,6 +47069,751 @@ export const SEASONAL_POOLS = {
       "themeId": 4472,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/girls_und_panzer"
+    },
+    {
+      "title": "Little Busters! ~TV animation ver.~",
+      "titleCN": "Little Busters! ~TV animation ver.~",
+      "anime": "Little Busters!",
+      "animeCN": "Little Busters!",
+      "animeNative": "リトルバスターズ！",
+      "artist": "Rita",
+      "artistAliases": [
+        "Rita"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 13655,
+      "bangumiId": 38040,
+      "releaseYear": 2012,
+      "themeId": 4502,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters"
+    },
+    {
+      "title": "Alicemagic ~TV animation ver.~",
+      "titleCN": "Alicemagic ~TV animation ver.~",
+      "anime": "Little Busters!",
+      "animeCN": "Little Busters!",
+      "animeNative": "リトルバスターズ！",
+      "artist": "Rita",
+      "artistAliases": [
+        "Rita"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13655,
+      "bangumiId": 38040,
+      "releaseYear": 2012,
+      "themeId": 4503,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters"
+    },
+    {
+      "title": "Alicemagic",
+      "titleCN": "Alicemagic",
+      "anime": "Little Busters!",
+      "animeCN": "Little Busters!",
+      "animeNative": "リトルバスターズ！",
+      "artist": "Rita",
+      "artistAliases": [
+        "Rita"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13655,
+      "bangumiId": 38040,
+      "releaseYear": 2012,
+      "themeId": 4504,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters"
+    },
+    {
+      "title": "Ame nochi Hare",
+      "titleCN": "Ame nochi Hare",
+      "anime": "Little Busters!",
+      "animeCN": "Little Busters!",
+      "animeNative": "リトルバスターズ！",
+      "artist": "Rita",
+      "artistAliases": [
+        "Rita"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13655,
+      "bangumiId": 38040,
+      "releaseYear": 2012,
+      "themeId": 4505,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters"
+    },
+    {
+      "title": "RAKUEN PROJECT",
+      "titleCN": "RAKUEN PROJECT",
+      "anime": "To LOVE-Ru Darkness",
+      "animeCN": "出包王女Darkness",
+      "animeNative": "To LOVEる -とらぶる- ダークネス",
+      "artist": "Ray",
+      "artistAliases": [
+        "Ray"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 13663,
+      "bangumiId": 37694,
+      "releaseYear": 2012,
+      "themeId": 4559,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/to_love_ru_darkness"
+    },
+    {
+      "title": "Foul Play ni Kurari",
+      "titleCN": "Foul Play ni Kurari",
+      "anime": "To LOVE-Ru Darkness",
+      "animeCN": "出包王女Darkness",
+      "animeNative": "To LOVEる -とらぶる- ダークネス",
+      "artist": "Kanon Wakeshima",
+      "artistAliases": [
+        "Kanon Wakeshima"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13663,
+      "bangumiId": 37694,
+      "releaseYear": 2012,
+      "themeId": 4560,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/to_love_ru_darkness"
+    },
+    {
+      "title": "KINGS",
+      "titleCN": "KINGS",
+      "anime": "K",
+      "animeCN": "「K」",
+      "animeNative": "K",
+      "artist": "angela",
+      "artistAliases": [
+        "angela"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14467,
+      "bangumiId": 38069,
+      "releaseYear": 2012,
+      "themeId": 4491,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/k"
+    },
+    {
+      "title": "Tsumetai Heya, Hitori",
+      "titleCN": "冷たい部屋、一人",
+      "anime": "K",
+      "animeCN": "「K」",
+      "animeNative": "K",
+      "artist": "小松未可子",
+      "artistAliases": [
+        "小松未可子"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14467,
+      "bangumiId": 38069,
+      "releaseYear": 2012,
+      "themeId": 4492,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/k"
+    },
+    {
+      "title": "Circle of Friends",
+      "titleCN": "Circle of Friends",
+      "anime": "K",
+      "animeCN": "「K」",
+      "animeNative": "K",
+      "artist": "Yuuki Kaji",
+      "artistAliases": [
+        "Yuuki Kaji"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14467,
+      "bangumiId": 38069,
+      "releaseYear": 2012,
+      "themeId": 4493,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/k"
+    },
+    {
+      "title": "To be with U!",
+      "titleCN": "To be with U!",
+      "anime": "K",
+      "animeCN": "「K」",
+      "animeNative": "K",
+      "artist": "angela",
+      "artistAliases": [
+        "angela"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14467,
+      "bangumiId": 38069,
+      "releaseYear": 2012,
+      "themeId": 4494,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/k"
+    },
+    {
+      "title": "Spirit Inspiration",
+      "titleCN": "Spirit Inspiration",
+      "anime": "Zetsuen no Tempest",
+      "animeCN": "绝园的暴风雨",
+      "animeNative": "絶園のテンペスト",
+      "artist": "Nothing's Carved in Stone",
+      "artistAliases": [
+        "Nothing's Carved in Stone"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14075,
+      "bangumiId": 39794,
+      "releaseYear": 2012,
+      "themeId": 4570,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zetsuen_no_tempest"
+    },
+    {
+      "title": "Daisuki nano ni",
+      "titleCN": "Daisuki nano ni",
+      "anime": "Zetsuen no Tempest",
+      "animeCN": "绝园的暴风雨",
+      "animeNative": "絶園のテンペスト",
+      "artist": "Kylee",
+      "artistAliases": [
+        "Kylee"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14075,
+      "bangumiId": 39794,
+      "releaseYear": 2012,
+      "themeId": 4571,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/zetsuen_no_tempest"
+    },
+    {
+      "title": "happy endings",
+      "titleCN": "happy endings",
+      "anime": "Zetsuen no Tempest",
+      "animeCN": "绝园的暴风雨",
+      "animeNative": "絶園のテンペスト",
+      "artist": "Kana Hanazawa",
+      "artistAliases": [
+        "Kana Hanazawa"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14075,
+      "bangumiId": 39794,
+      "releaseYear": 2012,
+      "themeId": 4572,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zetsuen_no_tempest"
+    },
+    {
+      "title": "Boku-tachi no Uta",
+      "titleCN": "僕たちの歌",
+      "anime": "Zetsuen no Tempest",
+      "animeCN": "绝园的暴风雨",
+      "animeNative": "絶園のテンペスト",
+      "artist": "佐香 智久",
+      "artistAliases": [
+        "佐香智久",
+        "佐香 智久"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14075,
+      "bangumiId": 39794,
+      "releaseYear": 2012,
+      "themeId": 4573,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/zetsuen_no_tempest"
+    },
+    {
+      "title": "SELF PRODUCER",
+      "titleCN": "SELF PRODUCER",
+      "anime": "Oniichan dakedo Ai Sae Areba Kankeinai yo ne!",
+      "animeCN": "就算是哥哥只要有爱就没问题对吧",
+      "animeNative": "お兄ちゃんだけど愛さえあれば関係ないよねっ",
+      "artist": "Minori Chihara",
+      "artistAliases": [
+        "Minori Chihara"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14199,
+      "bangumiId": 40339,
+      "releaseYear": 2012,
+      "themeId": 4524,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oniichan_dakedo_ai_sae_areba_kankeinai_yo_ne"
+    },
+    {
+      "title": "Life-Ru is LOVE-Ru!!",
+      "titleCN": "Life-Ru is LOVE-Ru!!",
+      "anime": "Oniichan dakedo Ai Sae Areba Kankeinai yo ne!",
+      "animeCN": "就算是哥哥只要有爱就没问题对吧",
+      "animeNative": "お兄ちゃんだけど愛さえあれば関係ないよねっ",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14199,
+      "bangumiId": 40339,
+      "releaseYear": 2012,
+      "themeId": 4525,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oniichan_dakedo_ai_sae_areba_kankeinai_yo_ne"
+    },
+    {
+      "title": "Moshimo no Hanashi",
+      "titleCN": "Moshimo no Hanashi",
+      "anime": "Bakuman. 3",
+      "animeCN": "爆漫王。3",
+      "animeNative": "バクマン。3",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 12365,
+      "bangumiId": 33352,
+      "releaseYear": 2012,
+      "themeId": 4444,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman_3"
+    },
+    {
+      "title": "23:40",
+      "titleCN": "23:40",
+      "anime": "Bakuman. 3",
+      "animeCN": "爆漫王。3",
+      "animeNative": "バクマン。3",
+      "artist": "Hyadain, Base Ball Bear",
+      "artistAliases": [
+        "Hyadain",
+        "Base Ball Bear"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 12365,
+      "bangumiId": 33352,
+      "releaseYear": 2012,
+      "themeId": 4445,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman_3"
+    },
+    {
+      "title": "Pride on Everyday",
+      "titleCN": "Pride on Everyday",
+      "anime": "Bakuman. 3",
+      "animeCN": "爆漫王。3",
+      "animeNative": "バクマン。3",
+      "artist": "Sphere",
+      "artistAliases": [
+        "Sphere"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 12365,
+      "bangumiId": 33352,
+      "releaseYear": 2012,
+      "themeId": 4446,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman_3"
+    },
+    {
+      "title": "Yume Sketch",
+      "titleCN": "Yume Sketch",
+      "anime": "Bakuman. 3",
+      "animeCN": "爆漫王。3",
+      "animeNative": "バクマン。3",
+      "artist": "JAM Project",
+      "artistAliases": [
+        "JAM Project"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 12365,
+      "bangumiId": 33352,
+      "releaseYear": 2012,
+      "themeId": 4447,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman_3"
+    },
+    {
+      "title": "LET'S GO OUT",
+      "titleCN": "LET'S GO OUT",
+      "anime": "Gintama': Enchousen",
+      "animeCN": "银魂' 延长战",
+      "animeNative": "銀魂’延長戦",
+      "artist": "AMOYAMO",
+      "artistAliases": [
+        "AMOYAMO"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 15417,
+      "bangumiId": 47576,
+      "releaseYear": 2012,
+      "themeId": 4464,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_enchousen"
+    },
+    {
+      "title": "Sakura Mitsutsuki",
+      "titleCN": "Sakura Mitsutsuki",
+      "anime": "Gintama': Enchousen",
+      "animeCN": "银魂' 延长战",
+      "animeNative": "銀魂’延長戦",
+      "artist": "SPYAIR",
+      "artistAliases": [
+        "SPYAIR"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 15417,
+      "bangumiId": 47576,
+      "releaseYear": 2012,
+      "themeId": 4466,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_enchousen"
+    },
+    {
+      "title": "Moonwalk",
+      "titleCN": "Moonwalk",
+      "anime": "Gintama': Enchousen",
+      "animeCN": "银魂' 延长战",
+      "animeNative": "銀魂’延長戦",
+      "artist": "MONOBRIGHT",
+      "artistAliases": [
+        "MONOBRIGHT"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 15417,
+      "bangumiId": 47576,
+      "releaseYear": 2012,
+      "themeId": 4467,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_enchousen"
+    },
+    {
+      "title": "Expect",
+      "titleCN": "エクスペクト",
+      "anime": "Gintama': Enchousen",
+      "animeCN": "银魂' 延长战",
+      "animeNative": "銀魂’延長戦",
+      "artist": "PAGE",
+      "artistAliases": [
+        "PAGE"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 15417,
+      "bangumiId": 47576,
+      "releaseYear": 2012,
+      "themeId": 4469,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_enchousen"
+    },
+    {
+      "title": "Kamisama Hajimemashita",
+      "titleCN": "Kamisama Hajimemashita",
+      "anime": "Kamisama Hajimemashita",
+      "animeCN": "元气少女缘结神",
+      "animeNative": "神様はじめました",
+      "artist": "ハナエ",
+      "artistAliases": [
+        "ハナエ",
+        "Hanae"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14713,
+      "bangumiId": 43525,
+      "releaseYear": 2012,
+      "themeId": 4497,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_hajimemashita"
+    },
+    {
+      "title": "Kamisama Onegai",
+      "titleCN": "Kamisama Onegai",
+      "anime": "Kamisama Hajimemashita",
+      "animeCN": "元气少女缘结神",
+      "animeNative": "神様はじめました",
+      "artist": "ハナエ",
+      "artistAliases": [
+        "ハナエ",
+        "Hanae"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14713,
+      "bangumiId": 43525,
+      "releaseYear": 2012,
+      "themeId": 4498,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_hajimemashita"
+    },
+    {
+      "title": "No pain, No game",
+      "titleCN": "No pain, No game",
+      "anime": "Btooom!",
+      "animeCN": "惊爆游戏!",
+      "animeNative": "BTOOOM！",
+      "artist": "nano",
+      "artistAliases": [
+        "nano"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14345,
+      "bangumiId": 41529,
+      "releaseYear": 2012,
+      "themeId": 4448,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/btooom"
+    },
+    {
+      "title": "Exist",
+      "titleCN": "Exist",
+      "anime": "Btooom!",
+      "animeCN": "惊爆游戏!",
+      "animeNative": "BTOOOM！",
+      "artist": "nano",
+      "artistAliases": [
+        "nano"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14345,
+      "bangumiId": 41529,
+      "releaseYear": 2012,
+      "themeId": 4449,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/btooom"
+    },
+    {
+      "title": "Aozora",
+      "titleCN": "Aozora",
+      "anime": "Btooom!",
+      "animeCN": "惊爆游戏!",
+      "animeNative": "BTOOOM！",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14345,
+      "bangumiId": 41529,
+      "releaseYear": 2012,
+      "themeId": 4450,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/btooom"
+    },
+    {
+      "title": "V.I.P",
+      "titleCN": "V.I.P",
+      "anime": "Magi: The Labyrinth of Magic",
+      "animeCN": "天方魔谭MAGI",
+      "animeNative": "マギ The labyrinth of magic",
+      "artist": "SID",
+      "artistAliases": [
+        "SID"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14513,
+      "bangumiId": 42786,
+      "releaseYear": 2012,
+      "themeId": 4507,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/magi_the_labyrinth_of_magic"
+    },
+    {
+      "title": "Matataku Hoshi no Shita de",
+      "titleCN": "Matataku Hoshi no Shita de",
+      "anime": "Magi: The Labyrinth of Magic",
+      "animeCN": "天方魔谭MAGI",
+      "animeNative": "マギ The labyrinth of magic",
+      "artist": "Porno Graffitti",
+      "artistAliases": [
+        "Porno Graffitti"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 14513,
+      "bangumiId": 42786,
+      "releaseYear": 2012,
+      "themeId": 4508,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/magi_the_labyrinth_of_magic"
+    },
+    {
+      "title": "Yubi Bouenkyou",
+      "titleCN": "Yubi Bouenkyou",
+      "anime": "Magi: The Labyrinth of Magic",
+      "animeCN": "天方魔谭MAGI",
+      "animeNative": "マギ The labyrinth of magic",
+      "artist": "Nogizaka46",
+      "artistAliases": [
+        "Nogizaka46"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14513,
+      "bangumiId": 42786,
+      "releaseYear": 2012,
+      "themeId": 4509,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/magi_the_labyrinth_of_magic"
+    },
+    {
+      "title": "The Bravery",
+      "titleCN": "The Bravery",
+      "anime": "Magi: The Labyrinth of Magic",
+      "animeCN": "天方魔谭MAGI",
+      "animeNative": "マギ The labyrinth of magic",
+      "artist": "supercell",
+      "artistAliases": [
+        "supercell"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 14513,
+      "bangumiId": 42786,
+      "releaseYear": 2012,
+      "themeId": 4510,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/magi_the_labyrinth_of_magic"
+    },
+    {
+      "title": "Houkyou no Messiah",
+      "titleCN": "咆筺のメシア",
+      "anime": "Robotics;Notes",
+      "animeCN": "机器人笔记",
+      "animeNative": "ROBOTICS;NOTES",
+      "artist": "HARUKI",
+      "artistAliases": [
+        "HARUKI"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 13599,
+      "bangumiId": 37673,
+      "releaseYear": 2012,
+      "themeId": 4531,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/roboticsnotes"
+    },
+    {
+      "title": "Umikaze no Brave",
+      "titleCN": "海風のブレイブ",
+      "anime": "Robotics;Notes",
+      "animeCN": "机器人笔记",
+      "animeNative": "ROBOTICS;NOTES",
+      "artist": "fumika",
+      "artistAliases": [
+        "fumika"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13599,
+      "bangumiId": 37673,
+      "releaseYear": 2012,
+      "themeId": 4532,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/roboticsnotes"
+    },
+    {
+      "title": "Topology",
+      "titleCN": "Topology",
+      "anime": "Robotics;Notes",
+      "animeCN": "机器人笔记",
+      "animeNative": "ROBOTICS;NOTES",
+      "artist": "Kanako Itou",
+      "artistAliases": [
+        "Kanako Itou"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13599,
+      "bangumiId": 37673,
+      "releaseYear": 2012,
+      "themeId": 4533,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/roboticsnotes"
+    },
+    {
+      "title": "UNDER/SHAFT",
+      "titleCN": "UNDER/SHAFT",
+      "anime": "Jormungand: Perfect Order",
+      "animeCN": "军火女王 PERFECT ORDER",
+      "animeNative": "ヨルムンガンド PERFECT ORDER",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2012-10",
+      "anilistId": 13331,
+      "bangumiId": 42339,
+      "releaseYear": 2012,
+      "themeId": 4487,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jormungand_perfect_order"
+    },
+    {
+      "title": "Laterality",
+      "titleCN": "Laterality",
+      "anime": "Jormungand: Perfect Order",
+      "animeCN": "军火女王 PERFECT ORDER",
+      "animeNative": "ヨルムンガンド PERFECT ORDER",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13331,
+      "bangumiId": 42339,
+      "releaseYear": 2012,
+      "themeId": 4488,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jormungand_perfect_order"
+    },
+    {
+      "title": "Shinjitsu no Hane",
+      "titleCN": "Shinjitsu no Hane",
+      "anime": "Jormungand: Perfect Order",
+      "animeCN": "军火女王 PERFECT ORDER",
+      "animeNative": "ヨルムンガンド PERFECT ORDER",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2012-10",
+      "anilistId": 13331,
+      "bangumiId": 42339,
+      "releaseYear": 2012,
+      "themeId": 4489,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/jormungand_perfect_order"
     }
   ],
   "2012-07": [
@@ -42789,6 +48103,413 @@ export const SEASONAL_POOLS = {
       "themeId": 4680,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/yuru_yuri_2012"
+    },
+    {
+      "title": "Dreamer",
+      "titleCN": "Dreamer",
+      "anime": "Tari Tari",
+      "animeCN": "TARI TARI",
+      "animeNative": "TARI TARI",
+      "artist": "AiRI",
+      "artistAliases": [
+        "AiRI"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 13333,
+      "bangumiId": 37137,
+      "releaseYear": 2012,
+      "themeId": 4669,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tari_tari"
+    },
+    {
+      "title": "Shiokaze no Harmony",
+      "titleCN": "Shiokaze no Harmony",
+      "anime": "Tari Tari",
+      "animeCN": "TARI TARI",
+      "animeNative": "TARI TARI",
+      "artist": "Shirahamazaka Koukou Gasshou-bu",
+      "artistAliases": [
+        "Shirahamazaka Koukou Gasshou-bu"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 13333,
+      "bangumiId": 37137,
+      "releaseYear": 2012,
+      "themeId": 4670,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tari_tari"
+    },
+    {
+      "title": "Oato ga Yoroshikutte... yo!",
+      "titleCN": "Oato ga Yoroshikutte... yo!",
+      "anime": "Joshiraku",
+      "animeCN": "女子落语",
+      "animeNative": "じょしらく",
+      "artist": "Ayane Sakura, Nozomi Yamamoto, Yoshino Nanjou, Kotori Koiwai",
+      "artistAliases": [
+        "Ayane Sakura",
+        "Nozomi Yamamoto",
+        "Yoshino Nanjou",
+        "Kotori Koiwai"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 12679,
+      "bangumiId": 37897,
+      "releaseYear": 2012,
+      "themeId": 4612,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/joshiraku"
+    },
+    {
+      "title": "Nippon Egao Hyakkei",
+      "titleCN": "Nippon Egao Hyakkei",
+      "anime": "Joshiraku",
+      "animeCN": "女子落语",
+      "animeNative": "じょしらく",
+      "artist": "Momoiro Clover Z",
+      "artistAliases": [
+        "Momoiro Clover Z"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 12679,
+      "bangumiId": 37897,
+      "releaseYear": 2012,
+      "themeId": 4613,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/joshiraku"
+    },
+    {
+      "title": "Signal Graph",
+      "titleCN": "シグナルグラフ",
+      "anime": "Koi to Senkyo to Chocolate",
+      "animeCN": "恋爱与选举与巧克力",
+      "animeNative": "恋と選挙とチョコレート",
+      "artist": "Annabel",
+      "artistAliases": [
+        "Annabel"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 12175,
+      "bangumiId": 27236,
+      "releaseYear": 2012,
+      "themeId": 4618,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/koi_to_senkyo_to_chocolate"
+    },
+    {
+      "title": "Kaze no Naka no Primrose",
+      "titleCN": "Kaze no Naka no Primrose",
+      "anime": "Koi to Senkyo to Chocolate",
+      "animeCN": "恋爱与选举与巧克力",
+      "animeNative": "恋と選挙とチョコレート",
+      "artist": "Ceui",
+      "artistAliases": [
+        "Ceui"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 12175,
+      "bangumiId": 27236,
+      "releaseYear": 2012,
+      "themeId": 4619,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/koi_to_senkyo_to_chocolate"
+    },
+    {
+      "title": "Make My Day!",
+      "titleCN": "Make My Day!",
+      "anime": "Binbougami ga!",
+      "animeCN": "穷神",
+      "animeNative": "貧乏神が!",
+      "artist": "Piko",
+      "artistAliases": [
+        "Piko"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 13535,
+      "bangumiId": 37722,
+      "releaseYear": 2012,
+      "themeId": 4580,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/binbougami_ga"
+    },
+    {
+      "title": "Koi Boudou",
+      "titleCN": "恋暴動",
+      "anime": "Binbougami ga!",
+      "animeCN": "穷神",
+      "animeNative": "貧乏神が!",
+      "artist": "HAPPY BIRTHDAY",
+      "artistAliases": [
+        "HAPPY BIRTHDAY"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 13535,
+      "bangumiId": 37722,
+      "releaseYear": 2012,
+      "themeId": 4581,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/binbougami_ga"
+    },
+    {
+      "title": "ZONE//ALONE",
+      "titleCN": "ZONE//ALONE",
+      "anime": "Kyoukaisenjou no Horizon II",
+      "animeCN": "境界线上的地平线 第二季",
+      "animeNative": "境界線上のホライゾンII",
+      "artist": "Minori Chihara",
+      "artistAliases": [
+        "Minori Chihara"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 12487,
+      "bangumiId": 29307,
+      "releaseYear": 2012,
+      "themeId": 4633,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kyoukaisenjou_no_horizon_ii"
+    },
+    {
+      "title": "-Side SunSet- Kanashimi wa Dare no Negai Demo nai",
+      "titleCN": "-Side SunSet- Kanashimi wa Dare no Negai Demo nai",
+      "anime": "Kyoukaisenjou no Horizon II",
+      "animeCN": "境界线上的地平线 第二季",
+      "animeNative": "境界線上のホライゾンII",
+      "artist": "Aira Yuuki",
+      "artistAliases": [
+        "Aira Yuuki"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 12487,
+      "bangumiId": 29307,
+      "releaseYear": 2012,
+      "themeId": 4634,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kyoukaisenjou_no_horizon_ii"
+    },
+    {
+      "title": "-Side SunRise- Sora no Uta",
+      "titleCN": "-Side SunRise- Sora no Uta",
+      "anime": "Kyoukaisenjou no Horizon II",
+      "animeCN": "境界线上的地平线 第二季",
+      "animeNative": "境界線上のホライゾンII",
+      "artist": "Masami Okui",
+      "artistAliases": [
+        "Masami Okui"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 12487,
+      "bangumiId": 29307,
+      "releaseYear": 2012,
+      "themeId": 4635,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kyoukaisenjou_no_horizon_ii"
+    },
+    {
+      "title": "Choose me♡Darling",
+      "titleCN": "Choose me♡Darling",
+      "anime": "Kono Naka ni Hitori, Imouto ga Iru!",
+      "animeCN": "三人行必有我妹",
+      "animeNative": "この中に1人、妹がいる！",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 13367,
+      "bangumiId": 41028,
+      "releaseYear": 2012,
+      "themeId": 4630,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kono_naka_ni_hitori_imouto_ga_iru"
+    },
+    {
+      "title": "Heavenly Lover",
+      "titleCN": "Heavenly Lover",
+      "anime": "Kono Naka ni Hitori, Imouto ga Iru!",
+      "animeCN": "三人行必有我妹",
+      "animeNative": "この中に1人、妹がいる！",
+      "artist": "Asuka Oogame, Ayana Taketatsu, Ayane Sakura, Kaori Ishihara, Rina Hidaka",
+      "artistAliases": [
+        "Asuka Oogame",
+        "Ayana Taketatsu",
+        "Ayane Sakura",
+        "Kaori Ishihara",
+        "Rina Hidaka"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 13367,
+      "bangumiId": 41028,
+      "releaseYear": 2012,
+      "themeId": 4631,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kono_naka_ni_hitori_imouto_ga_iru"
+    },
+    {
+      "title": "Link",
+      "titleCN": "Link",
+      "anime": "Oda Nobuna no Yabou",
+      "animeCN": "织田信奈的野望",
+      "animeNative": "織田信奈の野望",
+      "artist": "愛美",
+      "artistAliases": [
+        "愛美",
+        "Aimi"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 11933,
+      "bangumiId": 31413,
+      "releaseYear": 2012,
+      "themeId": 4647,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oda_nobuna_no_yabou"
+    },
+    {
+      "title": "Hikari",
+      "titleCN": "Hikari",
+      "anime": "Oda Nobuna no Yabou",
+      "animeCN": "织田信奈的野望",
+      "animeNative": "織田信奈の野望",
+      "artist": "みずたまきの",
+      "artistAliases": [
+        "みずたまきの"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 11933,
+      "bangumiId": 31413,
+      "releaseYear": 2012,
+      "themeId": 4648,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/oda_nobuna_no_yabou"
+    },
+    {
+      "title": "Reason why XXX",
+      "titleCN": "Reason why XXX",
+      "anime": "Dakara Boku wa, H ga Dekinai.",
+      "animeCN": "美少女死神 还我H之魂",
+      "animeNative": "だから僕は、Hができない。",
+      "artist": "Sayaka Sasaki",
+      "artistAliases": [
+        "Sayaka Sasaki"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 12549,
+      "bangumiId": 29650,
+      "releaseYear": 2012,
+      "themeId": 4591,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dakara_boku_wa_h_ga_dekinai"
+    },
+    {
+      "title": "Platinum 17",
+      "titleCN": "Platinum 17",
+      "anime": "Dakara Boku wa, H ga Dekinai.",
+      "animeCN": "美少女死神 还我H之魂",
+      "animeNative": "だから僕は、Hができない。",
+      "artist": "yozuca*",
+      "artistAliases": [
+        "yozuca*"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 12549,
+      "bangumiId": 29650,
+      "releaseYear": 2012,
+      "themeId": 4592,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dakara_boku_wa_h_ga_dekinai"
+    },
+    {
+      "title": "Realization",
+      "titleCN": "Realization",
+      "anime": "Hagure Yuusha no Aesthetica",
+      "animeCN": "无赖勇者的鬼畜美学",
+      "animeNative": "はぐれ勇者の鬼畜美学 (エステティカ)",
+      "artist": "Faylan",
+      "artistAliases": [
+        "Faylan"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 13161,
+      "bangumiId": 27566,
+      "releaseYear": 2012,
+      "themeId": 4606,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hagure_yuusha_no_aesthetica"
+    },
+    {
+      "title": "Ai no Sei de Nemurenai",
+      "titleCN": "Ai no Sei de Nemurenai",
+      "anime": "Hagure Yuusha no Aesthetica",
+      "animeCN": "无赖勇者的鬼畜美学",
+      "animeNative": "はぐれ勇者の鬼畜美学 (エステティカ)",
+      "artist": "Aki Misato",
+      "artistAliases": [
+        "Aki Misato"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 13161,
+      "bangumiId": 27566,
+      "releaseYear": 2012,
+      "themeId": 4607,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hagure_yuusha_no_aesthetica"
+    },
+    {
+      "title": "BRAVE BLADE!",
+      "titleCN": "BRAVE BLADE!",
+      "anime": "Campione!: Matsurowanu Kamigami to Kamigoroshi no Maou",
+      "animeCN": "弒神者！～不顺从之神与弑神的魔王～",
+      "animeNative": "カンピオーネ！ ～まつろわぬ神々と神殺しの魔王～",
+      "artist": "Megu Sakuragawa",
+      "artistAliases": [
+        "Megu Sakuragawa"
+      ],
+      "type": "OP",
+      "season": "2012-07",
+      "anilistId": 12293,
+      "bangumiId": 29075,
+      "releaseYear": 2012,
+      "themeId": 4584,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/campione_matsurowanu_kamigami_to_kamigoroshi_no_maou"
+    },
+    {
+      "title": "Raise",
+      "titleCN": "Raise",
+      "anime": "Campione!: Matsurowanu Kamigami to Kamigoroshi no Maou",
+      "animeCN": "弒神者！～不顺从之神与弑神的魔王～",
+      "animeNative": "カンピオーネ！ ～まつろわぬ神々と神殺しの魔王～",
+      "artist": "Yui Ogura",
+      "artistAliases": [
+        "Yui Ogura"
+      ],
+      "type": "ED",
+      "season": "2012-07",
+      "anilistId": 12293,
+      "bangumiId": 29075,
+      "releaseYear": 2012,
+      "themeId": 4585,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/campione_matsurowanu_kamigami_to_kamigoroshi_no_maou"
     }
   ],
   "2012-01": [
@@ -42925,6 +48646,373 @@ export const SEASONAL_POOLS = {
       "themeId": 4833,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd"
+    },
+    {
+      "title": "Ima, Kono Toki.",
+      "titleCN": "Ima, Kono Toki.",
+      "anime": "Natsume Yuujinchou Shi",
+      "animeCN": "夏目友人帐 肆",
+      "animeNative": "夏目友人帳 肆",
+      "artist": "ひいらぎ",
+      "artistAliases": [
+        "ひいらぎ",
+        "Hiiragi"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11665,
+      "bangumiId": 23495,
+      "releaseYear": 2012,
+      "themeId": 4849,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou_shi"
+    },
+    {
+      "title": "Takaramono",
+      "titleCN": "Takaramono",
+      "anime": "Natsume Yuujinchou Shi",
+      "animeCN": "夏目友人帐 肆",
+      "animeNative": "夏目友人帳 肆",
+      "artist": "河野マリナ",
+      "artistAliases": [
+        "河野マリナ",
+        "河野万里奈",
+        "Marina Kawano"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11665,
+      "bangumiId": 23495,
+      "releaseYear": 2012,
+      "themeId": 4850,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou_shi"
+    },
+    {
+      "title": "Nirvana",
+      "titleCN": "Nirvana",
+      "anime": "Inu x Boku SS",
+      "animeCN": "妖狐×仆SS",
+      "animeNative": "妖狐×僕SS",
+      "artist": "MUCC",
+      "artistAliases": [
+        "MUCC"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11013,
+      "bangumiId": 20582,
+      "releaseYear": 2012,
+      "themeId": 4834,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_x_boku_ss"
+    },
+    {
+      "title": "Kimi wa",
+      "titleCN": "Kimi wa",
+      "anime": "Inu x Boku SS",
+      "animeCN": "妖狐×仆SS",
+      "animeNative": "妖狐×僕SS",
+      "artist": "Rina Hidaka",
+      "artistAliases": [
+        "Rina Hidaka"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11013,
+      "bangumiId": 20582,
+      "releaseYear": 2012,
+      "themeId": 4836,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_x_boku_ss"
+    },
+    {
+      "title": "one way",
+      "titleCN": "one way",
+      "anime": "Inu x Boku SS",
+      "animeCN": "妖狐×仆SS",
+      "animeNative": "妖狐×僕SS",
+      "artist": "Mamoru Miyano",
+      "artistAliases": [
+        "Mamoru Miyano"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11013,
+      "bangumiId": 20582,
+      "releaseYear": 2012,
+      "themeId": 4837,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_x_boku_ss"
+    },
+    {
+      "title": "SM Hantei Forum",
+      "titleCN": "SM Hantei Forum",
+      "anime": "Inu x Boku SS",
+      "animeCN": "妖狐×仆SS",
+      "animeNative": "妖狐×僕SS",
+      "artist": "Tomokazu Sugita",
+      "artistAliases": [
+        "Tomokazu Sugita"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11013,
+      "bangumiId": 20582,
+      "releaseYear": 2012,
+      "themeId": 4838,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_x_boku_ss"
+    },
+    {
+      "title": "Taiyou to Tsuki",
+      "titleCN": "Taiyou to Tsuki",
+      "anime": "Inu x Boku SS",
+      "animeCN": "妖狐×仆SS",
+      "animeNative": "妖狐×僕SS",
+      "artist": "Youko Hikasa",
+      "artistAliases": [
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11013,
+      "bangumiId": 20582,
+      "releaseYear": 2012,
+      "themeId": 4840,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_x_boku_ss"
+    },
+    {
+      "title": "Black★Rock Shooter",
+      "titleCN": "Black★Rock Shooter",
+      "anime": "Black★Rock Shooter (TV)",
+      "animeCN": "黑岩射手",
+      "animeNative": "ブラック★ロックシューター (TV)",
+      "artist": "supercell, Miku Hatsune",
+      "artistAliases": [
+        "supercell",
+        "Miku Hatsune"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11285,
+      "bangumiId": 22179,
+      "releaseYear": 2012,
+      "themeId": 4825,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blackrock_shooter_tv"
+    },
+    {
+      "title": "Bokura no Ashiato",
+      "titleCN": "Bokura no Ashiato",
+      "anime": "Black★Rock Shooter (TV)",
+      "animeCN": "黑岩射手",
+      "animeNative": "ブラック★ロックシューター (TV)",
+      "artist": "supercell",
+      "artistAliases": [
+        "supercell"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11285,
+      "bangumiId": 22179,
+      "releaseYear": 2012,
+      "themeId": 4826,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blackrock_shooter_tv"
+    },
+    {
+      "title": "Kill Me no Baby!",
+      "titleCN": "Kill Me no Baby!",
+      "anime": "Kill Me Baby",
+      "animeCN": "爱杀宝贝",
+      "animeNative": "キルミーベイベー",
+      "artist": "Chinatsu Akasaki, Mutsumi Tamura",
+      "artistAliases": [
+        "Chinatsu Akasaki",
+        "Mutsumi Tamura"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11079,
+      "bangumiId": 20799,
+      "releaseYear": 2012,
+      "themeId": 4841,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kill_me_baby"
+    },
+    {
+      "title": "Futari no Kimochi no Honto no Himitsu",
+      "titleCN": "Futari no Kimochi no Honto no Himitsu",
+      "anime": "Kill Me Baby",
+      "animeCN": "爱杀宝贝",
+      "animeNative": "キルミーベイベー",
+      "artist": "Chinatsu Akasaki, Mutsumi Tamura",
+      "artistAliases": [
+        "Chinatsu Akasaki",
+        "Mutsumi Tamura"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11079,
+      "bangumiId": 20799,
+      "releaseYear": 2012,
+      "themeId": 4842,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kill_me_baby"
+    },
+    {
+      "title": "I'll Be There For You",
+      "titleCN": "I'll Be There For You",
+      "anime": "Zero no Tsukaima F",
+      "animeCN": "零之使魔F",
+      "animeNative": "ゼロの使い魔F",
+      "artist": "Ichiko",
+      "artistAliases": [
+        "Ichiko"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11319,
+      "bangumiId": 25823,
+      "releaseYear": 2012,
+      "themeId": 4878,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zero_no_tsukaima_f"
+    },
+    {
+      "title": "Kiss Shite↑Agenai↓",
+      "titleCN": "Kiss Shite↑Agenai↓",
+      "anime": "Zero no Tsukaima F",
+      "animeCN": "零之使魔F",
+      "animeNative": "ゼロの使い魔F",
+      "artist": "Rie Kugimiya",
+      "artistAliases": [
+        "Rie Kugimiya"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11319,
+      "bangumiId": 25823,
+      "releaseYear": 2012,
+      "themeId": 4879,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zero_no_tsukaima_f"
+    },
+    {
+      "title": "sign",
+      "titleCN": "sign",
+      "anime": "Ano Natsu de Matteru",
+      "animeCN": "在盛夏等待",
+      "animeNative": "あの夏で待ってる",
+      "artist": "Ray",
+      "artistAliases": [
+        "Ray"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11433,
+      "bangumiId": 22657,
+      "releaseYear": 2012,
+      "themeId": 4813,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ano_natsu_de_matteru"
+    },
+    {
+      "title": "Vidro Moyou",
+      "titleCN": "Vidro Moyou",
+      "anime": "Ano Natsu de Matteru",
+      "animeCN": "在盛夏等待",
+      "animeNative": "あの夏で待ってる",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11433,
+      "bangumiId": 22657,
+      "releaseYear": 2012,
+      "themeId": 4814,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ano_natsu_de_matteru"
+    },
+    {
+      "title": "Happy Girl",
+      "titleCN": "Happy Girl",
+      "anime": "Papa no Iukoto wo Kikinasai!",
+      "animeCN": "听爸爸的话！",
+      "animeNative": "パパのいうことを聞きなさい！",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11179,
+      "bangumiId": 25444,
+      "releaseYear": 2012,
+      "themeId": 4855,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/papa_no_iukoto_wo_kikinasai"
+    },
+    {
+      "title": "Coloring",
+      "titleCN": "Coloring",
+      "anime": "Papa no Iukoto wo Kikinasai!",
+      "animeCN": "听爸爸的话！",
+      "animeNative": "パパのいうことを聞きなさい！",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11179,
+      "bangumiId": 25444,
+      "releaseYear": 2012,
+      "themeId": 4856,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/papa_no_iukoto_wo_kikinasai"
+    },
+    {
+      "title": "Check My Soul",
+      "titleCN": "Check My Soul",
+      "anime": "Amagami SS+ Plus",
+      "animeCN": "圣诞之吻SS+ plus",
+      "animeNative": "アマガミSS+ plus",
+      "artist": "azusa",
+      "artistAliases": [
+        "azusa"
+      ],
+      "type": "OP",
+      "season": "2012-01",
+      "anilistId": 11235,
+      "bangumiId": 24649,
+      "releaseYear": 2012,
+      "themeId": 4811,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/amagami_ss_plus"
+    },
+    {
+      "title": "Kokuhaku",
+      "titleCN": "Kokuhaku",
+      "anime": "Amagami SS+ Plus",
+      "animeCN": "圣诞之吻SS+ plus",
+      "animeNative": "アマガミSS+ plus",
+      "artist": "azusa",
+      "artistAliases": [
+        "azusa"
+      ],
+      "type": "ED",
+      "season": "2012-01",
+      "anilistId": 11235,
+      "bangumiId": 24649,
+      "releaseYear": 2012,
+      "themeId": 4812,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/amagami_ss_plus"
     }
   ],
   "2013-04": [
@@ -43568,6 +49656,441 @@ export const SEASONAL_POOLS = {
       "themeId": 5211,
       "themeSequence": 3,
       "animethemesUrl": "https://animethemes.moe/anime/hataraku_maou_sama"
+    },
+    {
+      "title": "Fantastic future",
+      "titleCN": "Fantastic future",
+      "anime": "Hentai Ouji to Warawanai Neko.",
+      "animeCN": "变态王子与不笑猫。",
+      "animeNative": "変態王子と笑わない猫。",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 15225,
+      "bangumiId": 45842,
+      "releaseYear": 2013,
+      "themeId": 5225,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hentai_ouji_to_warawanai_neko"
+    },
+    {
+      "title": "Baby Sweet Berry Love",
+      "titleCN": "Baby Sweet Berry Love",
+      "anime": "Hentai Ouji to Warawanai Neko.",
+      "animeCN": "变态王子与不笑猫。",
+      "animeNative": "変態王子と笑わない猫。",
+      "artist": "Yui Ogura",
+      "artistAliases": [
+        "Yui Ogura"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 15225,
+      "bangumiId": 45842,
+      "releaseYear": 2013,
+      "themeId": 5226,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hentai_ouji_to_warawanai_neko"
+    },
+    {
+      "title": "Koi wa Chaos wo Shimobenari",
+      "titleCN": "Koi wa Chaos wo Shimobenari",
+      "anime": "Haiyore! Nyaruko-san W",
+      "animeCN": "潜行吧！奈亚子W",
+      "animeNative": "這いよれ！ニャル子さん W",
+      "artist": "Kana Asumi, Yuka Ootsubo",
+      "artistAliases": [
+        "Kana Asumi",
+        "Yuka Ootsubo"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 15699,
+      "bangumiId": 58015,
+      "releaseYear": 2013,
+      "themeId": 5201,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haiyore_nyaruko_san_w"
+    },
+    {
+      "title": "Yotte S.O.S",
+      "titleCN": "Yotte S.O.S",
+      "anime": "Haiyore! Nyaruko-san W",
+      "animeCN": "潜行吧！奈亚子W",
+      "animeNative": "這いよれ！ニャル子さん W",
+      "artist": "Kana Asumi",
+      "artistAliases": [
+        "Kana Asumi"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 15699,
+      "bangumiId": 58015,
+      "releaseYear": 2013,
+      "themeId": 5202,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haiyore_nyaruko_san_w"
+    },
+    {
+      "title": "Wonder Nanda? Kataomoi",
+      "titleCN": "Wonder Nanda? Kataomoi",
+      "anime": "Haiyore! Nyaruko-san W",
+      "animeCN": "潜行吧！奈亚子W",
+      "animeNative": "這いよれ！ニャル子さん W",
+      "artist": "Kana Asumi, Rie Kugimiya",
+      "artistAliases": [
+        "Kana Asumi",
+        "Rie Kugimiya"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 15699,
+      "bangumiId": 58015,
+      "releaseYear": 2013,
+      "themeId": 5203,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/haiyore_nyaruko_san_w"
+    },
+    {
+      "title": "Kiraina Wake Lychee",
+      "titleCN": "Kiraina Wake Lychee",
+      "anime": "Haiyore! Nyaruko-san W",
+      "animeCN": "潜行吧！奈亚子W",
+      "animeNative": "這いよれ！ニャル子さん W",
+      "artist": "Yuka Ootsubo",
+      "artistAliases": [
+        "Yuka Ootsubo"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 15699,
+      "bangumiId": 58015,
+      "releaseYear": 2013,
+      "themeId": 5204,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/haiyore_nyaruko_san_w"
+    },
+    {
+      "title": "Ai Crusaders†Striver",
+      "titleCN": "Ai Crusaders†Striver",
+      "anime": "Haiyore! Nyaruko-san W",
+      "animeCN": "潜行吧！奈亚子W",
+      "animeNative": "這いよれ！ニャル子さん W",
+      "artist": "Eri Kitamura, Wataru Hatano",
+      "artistAliases": [
+        "Eri Kitamura",
+        "Wataru Hatano"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 15699,
+      "bangumiId": 58015,
+      "releaseYear": 2013,
+      "themeId": 5206,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/haiyore_nyaruko_san_w"
+    },
+    {
+      "title": "Kimi no Tonari de",
+      "titleCN": "Kimi no Tonari de",
+      "anime": "Haiyore! Nyaruko-san W",
+      "animeCN": "潜行吧！奈亚子W",
+      "animeNative": "這いよれ！ニャル子さん W",
+      "artist": "Kana Asumi",
+      "artistAliases": [
+        "Kana Asumi"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 15699,
+      "bangumiId": 58015,
+      "releaseYear": 2013,
+      "themeId": 5207,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/haiyore_nyaruko_san_w"
+    },
+    {
+      "title": "Kono Sekai wa Bokura wo Matteita",
+      "titleCN": "Kono Sekai wa Bokura wo Matteita",
+      "anime": "Suisei no Gargantia",
+      "animeCN": "翠星之加尔刚蒂亚",
+      "animeNative": "翠星のガルガンティア",
+      "artist": "Minori Chihara",
+      "artistAliases": [
+        "Minori Chihara"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16524,
+      "bangumiId": 56091,
+      "releaseYear": 2013,
+      "themeId": 5285,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/suisei_no_gargantia"
+    },
+    {
+      "title": "Sora to Kimi no Message",
+      "titleCN": "Sora to Kimi no Message",
+      "anime": "Suisei no Gargantia",
+      "animeCN": "翠星之加尔刚蒂亚",
+      "animeNative": "翠星のガルガンティア",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16524,
+      "bangumiId": 56091,
+      "releaseYear": 2013,
+      "themeId": 5286,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/suisei_no_gargantia"
+    },
+    {
+      "title": "Preserved Roses",
+      "titleCN": "Preserved Roses",
+      "anime": "Kakumeiki Valvrave",
+      "animeCN": "革命机Valvrave",
+      "animeNative": "革命機ヴァルヴレイヴ",
+      "artist": "Nana Mizuki, T.M.Revolution",
+      "artistAliases": [
+        "Nana Mizuki",
+        "T.M.Revolution"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16668,
+      "bangumiId": 56951,
+      "releaseYear": 2013,
+      "themeId": 5230,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kakumeiki_valvrave"
+    },
+    {
+      "title": "Boku ja nai",
+      "titleCN": "Boku ja nai",
+      "anime": "Kakumeiki Valvrave",
+      "animeCN": "革命机Valvrave",
+      "animeNative": "革命機ヴァルヴレイヴ",
+      "artist": "angela",
+      "artistAliases": [
+        "angela"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16668,
+      "bangumiId": 56951,
+      "releaseYear": 2013,
+      "themeId": 5231,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kakumeiki_valvrave"
+    },
+    {
+      "title": "Soba ni Iru yo",
+      "titleCN": "Soba ni Iru yo",
+      "anime": "Kakumeiki Valvrave",
+      "animeCN": "革命机Valvrave",
+      "animeNative": "革命機ヴァルヴレイヴ",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16668,
+      "bangumiId": 56951,
+      "releaseYear": 2013,
+      "themeId": 5232,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kakumeiki_valvrave"
+    },
+    {
+      "title": "Revival!",
+      "titleCN": "Revival!",
+      "anime": "Yondemasu yo, Azazel-san. Z",
+      "animeCN": "恶魔阿萨谢尔在召唤你Z",
+      "animeNative": "よんでますよ、アザゼルさん。Z",
+      "artist": "Chihiro Yonekura",
+      "artistAliases": [
+        "Chihiro Yonekura"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16241,
+      "bangumiId": 53984,
+      "releaseYear": 2013,
+      "themeId": 5297,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yondemasu_yo_azazel_san_z"
+    },
+    {
+      "title": "Sticky Lucky Stupids (Yonekura Chihiro Ver.)",
+      "titleCN": "Sticky Lucky Stupids (Yonekura Chihiro Ver.)",
+      "anime": "Yondemasu yo, Azazel-san. Z",
+      "animeCN": "恶魔阿萨谢尔在召唤你Z",
+      "animeNative": "よんでますよ、アザゼルさん。Z",
+      "artist": "Chihiro Yonekura",
+      "artistAliases": [
+        "Chihiro Yonekura"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16241,
+      "bangumiId": 53984,
+      "releaseYear": 2013,
+      "themeId": 5298,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yondemasu_yo_azazel_san_z"
+    },
+    {
+      "title": "Sticky Lucky Stupids (Sakuma Rinko Ver.)",
+      "titleCN": "Sticky Lucky Stupids (Sakuma Rinko Ver.)",
+      "anime": "Yondemasu yo, Azazel-san. Z",
+      "animeCN": "恶魔阿萨谢尔在召唤你Z",
+      "animeNative": "よんでますよ、アザゼルさん。Z",
+      "artist": "Rina Satou",
+      "artistAliases": [
+        "Rina Satou"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16241,
+      "bangumiId": 53984,
+      "releaseYear": 2013,
+      "themeId": 11471,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/yondemasu_yo_azazel_san_z"
+    },
+    {
+      "title": "Sticky Lucky Stupids (Azazel & Beelzebub Ver.)",
+      "titleCN": "Sticky Lucky Stupids (Azazel & Beelzebub Ver.)",
+      "anime": "Yondemasu yo, Azazel-san. Z",
+      "animeCN": "恶魔阿萨谢尔在召唤你Z",
+      "animeNative": "よんでますよ、アザゼルさん。Z",
+      "artist": "Hiroshi Kamiya, Masaya Onosaka",
+      "artistAliases": [
+        "Hiroshi Kamiya",
+        "Masaya Onosaka"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16241,
+      "bangumiId": 53984,
+      "releaseYear": 2013,
+      "themeId": 11472,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/yondemasu_yo_azazel_san_z"
+    },
+    {
+      "title": "Aku no Hana -Kasuga Takao-",
+      "titleCN": "Aku no Hana -Kasuga Takao-",
+      "anime": "Aku no Hana",
+      "animeCN": "恶之华",
+      "animeNative": "惡の華",
+      "artist": "宇宙人 feat.の子",
+      "artistAliases": [
+        "宇宙人",
+        "の子",
+        "Noko",
+        "宇宙人 feat.の子"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16201,
+      "bangumiId": 46307,
+      "releaseYear": 2013,
+      "themeId": 5172,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aku_no_hana"
+    },
+    {
+      "title": "Aku no Hana -Nakamura Sawa-",
+      "titleCN": "Aku no Hana -Nakamura Sawa-",
+      "anime": "Aku no Hana",
+      "animeCN": "恶之华",
+      "animeNative": "惡の華",
+      "artist": "宇宙人 feat.後藤まりこ",
+      "artistAliases": [
+        "宇宙人",
+        "後藤まりこ",
+        "Mariko Goto",
+        "宇宙人 feat.後藤まりこ"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16201,
+      "bangumiId": 46307,
+      "releaseYear": 2013,
+      "themeId": 5173,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/aku_no_hana"
+    },
+    {
+      "title": "Aku no Hana -Saeki Nanako-",
+      "titleCN": "Aku no Hana -Saeki Nanako-",
+      "anime": "Aku no Hana",
+      "animeCN": "恶之华",
+      "animeNative": "惡の華",
+      "artist": "宇宙人 feat.南波志帆",
+      "artistAliases": [
+        "宇宙人",
+        "南波志帆",
+        "Shiho Nanba",
+        "宇宙人 feat.南波志帆"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16201,
+      "bangumiId": 46307,
+      "releaseYear": 2013,
+      "themeId": 5174,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/aku_no_hana"
+    },
+    {
+      "title": "Aku no Hana -Gunma Ken Kiryuu Shi-",
+      "titleCN": "Aku no Hana -Gunma Ken Kiryuu Shi-",
+      "anime": "Aku no Hana",
+      "animeCN": "恶之华",
+      "animeNative": "惡の華",
+      "artist": "宇宙人",
+      "artistAliases": [
+        "宇宙人",
+        "しのさきあさこ",
+        "Asako Shinosaki"
+      ],
+      "type": "OP",
+      "season": "2013-04",
+      "anilistId": 16201,
+      "bangumiId": 46307,
+      "releaseYear": 2013,
+      "themeId": 5175,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/aku_no_hana"
+    },
+    {
+      "title": "Hana -a last flower-",
+      "titleCN": "Hana -a last flower-",
+      "anime": "Aku no Hana",
+      "animeCN": "恶之华",
+      "animeNative": "惡の華",
+      "artist": "ASA-CHANG&巡礼",
+      "artistAliases": [
+        "ASA-CHANG&巡礼",
+        "ASA-CHANG & JUNRAY"
+      ],
+      "type": "ED",
+      "season": "2013-04",
+      "anilistId": 16201,
+      "bangumiId": 46307,
+      "releaseYear": 2013,
+      "themeId": 5176,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aku_no_hana"
     }
   ],
   "2013-10": [
@@ -43786,6 +50309,732 @@ export const SEASONAL_POOLS = {
       "themeId": 4972,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/nagi_no_asukara"
+    },
+    {
+      "title": "Todokanai Koi '13",
+      "titleCN": "Todokanai Koi '13",
+      "anime": "White Album 2",
+      "animeCN": "白色相簿2",
+      "animeNative": "WHITE ALBUM2",
+      "artist": "Rena Uehara",
+      "artistAliases": [
+        "Rena Uehara"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18245,
+      "bangumiId": 69496,
+      "releaseYear": 2013,
+      "themeId": 5016,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/white_album_2"
+    },
+    {
+      "title": "WHITE ALBUM",
+      "titleCN": "WHITE ALBUM",
+      "anime": "White Album 2",
+      "animeCN": "白色相簿2",
+      "animeNative": "WHITE ALBUM2",
+      "artist": "Madoka Yonezawa",
+      "artistAliases": [
+        "Madoka Yonezawa"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18245,
+      "bangumiId": 69496,
+      "releaseYear": 2013,
+      "themeId": 5017,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/white_album_2"
+    },
+    {
+      "title": "closing '13",
+      "titleCN": "closing '13",
+      "anime": "White Album 2",
+      "animeCN": "白色相簿2",
+      "animeNative": "WHITE ALBUM2",
+      "artist": "Rena Uehara",
+      "artistAliases": [
+        "Rena Uehara"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18245,
+      "bangumiId": 69496,
+      "releaseYear": 2013,
+      "themeId": 5018,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/white_album_2"
+    },
+    {
+      "title": "Sayonara no Koto",
+      "titleCN": "Sayonara no Koto",
+      "anime": "White Album 2",
+      "animeCN": "白色相簿2",
+      "animeNative": "WHITE ALBUM2",
+      "artist": "Rena Uehara",
+      "artistAliases": [
+        "Rena Uehara"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18245,
+      "bangumiId": 69496,
+      "releaseYear": 2013,
+      "themeId": 5019,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/white_album_2"
+    },
+    {
+      "title": "database feat. TAKUMA (10 Feet)",
+      "titleCN": "database feat. TAKUMA (10 Feet)",
+      "anime": "Log Horizon",
+      "animeCN": "记录的地平线",
+      "animeNative": "ログ・ホライズン",
+      "artist": "MAN WITH A MISSION",
+      "artistAliases": [
+        "MAN WITH A MISSION"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 17265,
+      "bangumiId": 64140,
+      "releaseYear": 2013,
+      "themeId": 4958,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/log_horizon"
+    },
+    {
+      "title": "Your song*",
+      "titleCN": "Your song*",
+      "anime": "Log Horizon",
+      "animeCN": "记录的地平线",
+      "animeNative": "ログ・ホライズン",
+      "artist": "Yun*chi",
+      "artistAliases": [
+        "Yun*chi"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 17265,
+      "bangumiId": 64140,
+      "releaseYear": 2013,
+      "themeId": 4959,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/log_horizon"
+    },
+    {
+      "title": "Anicca",
+      "titleCN": "Anicca",
+      "anime": "Machine-Doll wa Kizutsukanai",
+      "animeCN": "机巧少女不会受伤",
+      "animeNative": "機巧少女は傷つかない",
+      "artist": "Hitomi Harada",
+      "artistAliases": [
+        "Hitomi Harada"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 17247,
+      "bangumiId": 61962,
+      "releaseYear": 2013,
+      "themeId": 4960,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/machine_doll_wa_kizutsukanai"
+    },
+    {
+      "title": "S・M・L☆",
+      "titleCN": "S・M・L☆",
+      "anime": "Ore no Nounai Sentakushi ga, Gakuen Love Comedy wo Zenryoku de Jama Shiteiru",
+      "animeCN": "我的脑内选项正在全力妨碍学园恋爱喜剧",
+      "animeNative": "俺の脳内選択肢が、学園ラブコメを全力で邪魔している",
+      "artist": "Junjou no Afilia",
+      "artistAliases": [
+        "Junjou no Afilia"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 19221,
+      "bangumiId": 77570,
+      "releaseYear": 2013,
+      "themeId": 4975,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_nounai_sentakushi_ga_gakuen_love_comedy_wo_zenryoku_de_jama_shiteiru"
+    },
+    {
+      "title": "Taiyou to Tsuki no Cross",
+      "titleCN": "Taiyou to Tsuki no Cross",
+      "anime": "Ore no Nounai Sentakushi ga, Gakuen Love Comedy wo Zenryoku de Jama Shiteiru",
+      "animeCN": "我的脑内选项正在全力妨碍学园恋爱喜剧",
+      "animeNative": "俺の脳内選択肢が、学園ラブコメを全力で邪魔している",
+      "artist": "TWO-FORMULA",
+      "artistAliases": [
+        "TWO-FORMULA"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 19221,
+      "bangumiId": 77570,
+      "releaseYear": 2013,
+      "themeId": 4976,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_nounai_sentakushi_ga_gakuen_love_comedy_wo_zenryoku_de_jama_shiteiru"
+    },
+    {
+      "title": "Strike the Blood",
+      "titleCN": "Strike the Blood",
+      "anime": "Strike the Blood",
+      "animeCN": "噬血狂袭",
+      "animeNative": "ストライク・ザ・ブラッド",
+      "artist": "Kishida Kyoudan & The Akeboshi Rockets",
+      "artistAliases": [
+        "Kishida Kyoudan & The Akeboshi Rockets"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18277,
+      "bangumiId": 67826,
+      "releaseYear": 2013,
+      "themeId": 5003,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/strike_the_blood"
+    },
+    {
+      "title": "Fight 4 Real",
+      "titleCN": "Fight 4 Real",
+      "anime": "Strike the Blood",
+      "animeCN": "噬血狂袭",
+      "animeNative": "ストライク・ザ・ブラッド",
+      "artist": "ALTIMA",
+      "artistAliases": [
+        "ALTIMA"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18277,
+      "bangumiId": 67826,
+      "releaseYear": 2013,
+      "themeId": 5004,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/strike_the_blood"
+    },
+    {
+      "title": "Strike my soul",
+      "titleCN": "Strike my soul",
+      "anime": "Strike the Blood",
+      "animeCN": "噬血狂袭",
+      "animeNative": "ストライク・ザ・ブラッド",
+      "artist": "Yuka Iguchi",
+      "artistAliases": [
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18277,
+      "bangumiId": 67826,
+      "releaseYear": 2013,
+      "themeId": 5005,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/strike_the_blood"
+    },
+    {
+      "title": "signal",
+      "titleCN": "signal",
+      "anime": "Strike the Blood",
+      "animeCN": "噬血狂袭",
+      "animeNative": "ストライク・ザ・ブラッド",
+      "artist": "Kanon Wakeshima",
+      "artistAliases": [
+        "Kanon Wakeshima"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18277,
+      "bangumiId": 67826,
+      "releaseYear": 2013,
+      "themeId": 5006,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/strike_the_blood"
+    },
+    {
+      "title": "Boys be Smile",
+      "titleCN": "Boys be Smile",
+      "anime": "Little Busters!: Refrain",
+      "animeCN": "Little Busters! 〜Refrain〜",
+      "animeNative": "リトルバスターズ! ~Refrain~",
+      "artist": "Suzuyu",
+      "artistAliases": [
+        "Suzuyu"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18195,
+      "bangumiId": 69484,
+      "releaseYear": 2013,
+      "themeId": 4952,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters_refrain"
+    },
+    {
+      "title": "Kimi to no Nakushi Mono",
+      "titleCN": "Kimi to no Nakushi Mono",
+      "anime": "Little Busters!: Refrain",
+      "animeCN": "Little Busters! 〜Refrain〜",
+      "animeNative": "リトルバスターズ! ~Refrain~",
+      "artist": "Ayaka Kitazawa",
+      "artistAliases": [
+        "Ayaka Kitazawa"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18195,
+      "bangumiId": 69484,
+      "releaseYear": 2013,
+      "themeId": 4953,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters_refrain"
+    },
+    {
+      "title": "Song for friends",
+      "titleCN": "Song for friends",
+      "anime": "Little Busters!: Refrain",
+      "animeCN": "Little Busters! 〜Refrain〜",
+      "animeNative": "リトルバスターズ! ~Refrain~",
+      "artist": "Rita",
+      "artistAliases": [
+        "Rita"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18195,
+      "bangumiId": 69484,
+      "releaseYear": 2013,
+      "themeId": 4954,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters_refrain"
+    },
+    {
+      "title": "Hanabi",
+      "titleCN": "Hanabi",
+      "anime": "Little Busters!: Refrain",
+      "animeCN": "Little Busters! 〜Refrain〜",
+      "animeNative": "リトルバスターズ! ~Refrain~",
+      "artist": "Lia",
+      "artistAliases": [
+        "Lia"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18195,
+      "bangumiId": 69484,
+      "releaseYear": 2013,
+      "themeId": 4955,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters_refrain"
+    },
+    {
+      "title": "Little Busters! -Little Jumper Ver.-",
+      "titleCN": "Little Busters! -Little Jumper Ver.-",
+      "anime": "Little Busters!: Refrain",
+      "animeCN": "Little Busters! 〜Refrain〜",
+      "animeNative": "リトルバスターズ! ~Refrain~",
+      "artist": "Rita",
+      "artistAliases": [
+        "Rita"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18195,
+      "bangumiId": 69484,
+      "releaseYear": 2013,
+      "themeId": 4957,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/little_busters_refrain"
+    },
+    {
+      "title": "X-encounter",
+      "titleCN": "X-encounter",
+      "anime": "Tokyo Ravens",
+      "animeCN": "东京暗鸦",
+      "animeNative": "東京レイヴンズ",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 16011,
+      "bangumiId": 78542,
+      "releaseYear": 2013,
+      "themeId": 5010,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ravens"
+    },
+    {
+      "title": "~Outgrow~",
+      "titleCN": "~Outgrow~",
+      "anime": "Tokyo Ravens",
+      "animeCN": "东京暗鸦",
+      "animeNative": "東京レイヴンズ",
+      "artist": "Gero",
+      "artistAliases": [
+        "Gero"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 16011,
+      "bangumiId": 78542,
+      "releaseYear": 2013,
+      "themeId": 5011,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ravens"
+    },
+    {
+      "title": "Kimi ga Emu Yuugure",
+      "titleCN": "Kimi ga Emu Yuugure",
+      "anime": "Tokyo Ravens",
+      "animeCN": "东京暗鸦",
+      "animeNative": "東京レイヴンズ",
+      "artist": "Yoshino Nanjou",
+      "artistAliases": [
+        "Yoshino Nanjou"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 16011,
+      "bangumiId": 78542,
+      "releaseYear": 2013,
+      "themeId": 5012,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ravens"
+    },
+    {
+      "title": "Break a spell",
+      "titleCN": "Break a spell",
+      "anime": "Tokyo Ravens",
+      "animeCN": "东京暗鸦",
+      "animeNative": "東京レイヴンズ",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 16011,
+      "bangumiId": 78542,
+      "releaseYear": 2013,
+      "themeId": 5013,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ravens"
+    },
+    {
+      "title": "Golden Time",
+      "titleCN": "Golden Time",
+      "anime": "Golden Time",
+      "animeCN": "青春纪行",
+      "animeNative": "ゴールデンタイム",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 17895,
+      "bangumiId": 68031,
+      "releaseYear": 2013,
+      "themeId": 4910,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/golden_time"
+    },
+    {
+      "title": "The♡World's♡End",
+      "titleCN": "The♡World's♡End",
+      "anime": "Golden Time",
+      "animeCN": "青春纪行",
+      "animeNative": "ゴールデンタイム",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 17895,
+      "bangumiId": 68031,
+      "releaseYear": 2013,
+      "themeId": 4911,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/golden_time"
+    },
+    {
+      "title": "Sweet & Sweet CHERRY",
+      "titleCN": "Sweet & Sweet CHERRY",
+      "anime": "Golden Time",
+      "animeCN": "青春纪行",
+      "animeNative": "ゴールデンタイム",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 17895,
+      "bangumiId": 68031,
+      "releaseYear": 2013,
+      "themeId": 4912,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/golden_time"
+    },
+    {
+      "title": "Hanneikyuuteki ni Aishite yo♡",
+      "titleCN": "Hanneikyuuteki ni Aishite yo♡",
+      "anime": "Golden Time",
+      "animeCN": "青春纪行",
+      "animeNative": "ゴールデンタイム",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 17895,
+      "bangumiId": 68031,
+      "releaseYear": 2013,
+      "themeId": 4913,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/golden_time"
+    },
+    {
+      "title": "True Blue Traveler",
+      "titleCN": "True Blue Traveler",
+      "anime": "IS: Infinite Stratos 2",
+      "animeCN": "IS〈无限斯特拉托斯〉第二季",
+      "animeNative": "IS〈インフィニット・ストラトス〉2",
+      "artist": "Minami Kuribayashi",
+      "artistAliases": [
+        "Minami Kuribayashi"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18247,
+      "bangumiId": 68022,
+      "releaseYear": 2013,
+      "themeId": 4923,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/is_infinite_stratos_2"
+    },
+    {
+      "title": "BEAUTIFUL SKY",
+      "titleCN": "BEAUTIFUL SKY",
+      "anime": "IS: Infinite Stratos 2",
+      "animeCN": "IS〈无限斯特拉托斯〉第二季",
+      "animeNative": "IS〈インフィニット・ストラトス〉2",
+      "artist": "Kana Hanazawa, Marina Inoue, Youko Hikasa",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Marina Inoue",
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18247,
+      "bangumiId": 68022,
+      "releaseYear": 2013,
+      "themeId": 4924,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/is_infinite_stratos_2"
+    },
+    {
+      "title": "Univer Page",
+      "titleCN": "Univer Page",
+      "anime": "Outbreak Company",
+      "animeCN": "萌萌侵略者",
+      "animeNative": "アウトブレイク・カンパニー",
+      "artist": "Suzuko Mimori",
+      "artistAliases": [
+        "Suzuko Mimori"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 19369,
+      "bangumiId": 78406,
+      "releaseYear": 2013,
+      "themeId": 4978,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/outbreak_company"
+    },
+    {
+      "title": "Watashi no Houseibako",
+      "titleCN": "Watashi no Houseibako",
+      "anime": "Outbreak Company",
+      "animeCN": "萌萌侵略者",
+      "animeNative": "アウトブレイク・カンパニー",
+      "artist": "Mai Fuchigami",
+      "artistAliases": [
+        "Mai Fuchigami"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 19369,
+      "bangumiId": 78406,
+      "releaseYear": 2013,
+      "themeId": 4979,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/outbreak_company"
+    },
+    {
+      "title": "Savior of Song",
+      "titleCN": "Savior of Song",
+      "anime": "Aoki Hagane no Arpeggio: Ars Nova",
+      "animeCN": "苍蓝钢铁的琶音",
+      "animeNative": "蒼き鋼のアルペジオ",
+      "artist": "MY FIRST STORY, nano",
+      "artistAliases": [
+        "MY FIRST STORY",
+        "nano"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18893,
+      "bangumiId": 74663,
+      "releaseYear": 2013,
+      "themeId": 4880,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aoki_hagane_no_arpeggio_ars_nova"
+    },
+    {
+      "title": "Blue Field",
+      "titleCN": "Blue Field",
+      "anime": "Aoki Hagane no Arpeggio: Ars Nova",
+      "animeCN": "苍蓝钢铁的琶音",
+      "animeNative": "蒼き鋼のアルペジオ",
+      "artist": "Trident",
+      "artistAliases": [
+        "Trident"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18893,
+      "bangumiId": 74663,
+      "releaseYear": 2013,
+      "themeId": 4881,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aoki_hagane_no_arpeggio_ars_nova"
+    },
+    {
+      "title": "Innocent Blue",
+      "titleCN": "Innocent Blue",
+      "anime": "Aoki Hagane no Arpeggio: Ars Nova",
+      "animeCN": "苍蓝钢铁的琶音",
+      "animeNative": "蒼き鋼のアルペジオ",
+      "artist": "Trident",
+      "artistAliases": [
+        "Trident"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18893,
+      "bangumiId": 74663,
+      "releaseYear": 2013,
+      "themeId": 4882,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/aoki_hagane_no_arpeggio_ars_nova"
+    },
+    {
+      "title": "Our Story",
+      "titleCN": "Our Story",
+      "anime": "Aoki Hagane no Arpeggio: Ars Nova",
+      "animeCN": "苍蓝钢铁的琶音",
+      "animeNative": "蒼き鋼のアルペジオ",
+      "artist": "nano",
+      "artistAliases": [
+        "nano"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18893,
+      "bangumiId": 74663,
+      "releaseYear": 2013,
+      "themeId": 4883,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/aoki_hagane_no_arpeggio_ars_nova"
+    },
+    {
+      "title": "Koko",
+      "titleCN": "Koko",
+      "anime": "Kyousou Giga (TV)",
+      "animeCN": "京骚戏画",
+      "animeNative": "京騒戯画 (TV)",
+      "artist": "たむらぱん",
+      "artistAliases": [
+        "たむらぱん",
+        "Tamurapan"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 19703,
+      "bangumiId": 79114,
+      "releaseYear": 2013,
+      "themeId": 4950,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kyousou_giga_tv"
+    },
+    {
+      "title": "Shissou Ginga",
+      "titleCN": "Shissou Ginga",
+      "anime": "Kyousou Giga (TV)",
+      "animeCN": "京骚戏画",
+      "animeNative": "京騒戯画 (TV)",
+      "artist": "TEPPAN",
+      "artistAliases": [
+        "TEPPAN"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 19703,
+      "bangumiId": 79114,
+      "releaseYear": 2013,
+      "themeId": 4951,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kyousou_giga_tv"
+    },
+    {
+      "title": "Extra Revolution",
+      "titleCN": "Extra Revolution",
+      "anime": "Yuusha ni Narenakatta Ore wa Shibushibu Shuushoku wo Ketsui Shimashita.",
+      "animeCN": "当不成勇者的我，只好认真找工作了。",
+      "animeNative": "勇者になれなかった俺はしぶしぶ就職を決意しました。",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2013-10",
+      "anilistId": 18677,
+      "bangumiId": 73440,
+      "releaseYear": 2013,
+      "themeId": 5034,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuusha_ni_narenakatta_ore_wa_shibushibu_shuushoku_wo_ketsui_shimashita"
+    },
+    {
+      "title": "Sticking Places",
+      "titleCN": "Sticking Places",
+      "anime": "Yuusha ni Narenakatta Ore wa Shibushibu Shuushoku wo Ketsui Shimashita.",
+      "animeCN": "当不成勇者的我，只好认真找工作了。",
+      "animeNative": "勇者になれなかった俺はしぶしぶ就職を決意しました。",
+      "artist": "Sphere",
+      "artistAliases": [
+        "Sphere"
+      ],
+      "type": "ED",
+      "season": "2013-10",
+      "anilistId": 18677,
+      "bangumiId": 73440,
+      "releaseYear": 2013,
+      "themeId": 5035,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuusha_ni_narenakatta_ore_wa_shibushibu_shuushoku_wo_ketsui_shimashita"
     }
   ],
   "2013-01": [
@@ -43826,6 +51075,545 @@ export const SEASONAL_POOLS = {
       "themeId": 5390,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/tamako_market"
+    },
+    {
+      "title": "Susume→Tomorrow",
+      "titleCN": "Susume→Tomorrow",
+      "anime": "Love Live! School Idol Project",
+      "animeCN": "Love Live!",
+      "animeNative": "ラブライブ!",
+      "artist": "Aya Uchida, Suzuko Mimori, Emi Nitta",
+      "artistAliases": [
+        "Aya Uchida",
+        "Suzuko Mimori",
+        "Emi Nitta"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 15051,
+      "bangumiId": 49294,
+      "releaseYear": 2013,
+      "themeId": 5349,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_school_idol_project"
+    },
+    {
+      "title": "Kitto Seishun ga Kikoeru",
+      "titleCN": "Kitto Seishun ga Kikoeru",
+      "anime": "Love Live! School Idol Project",
+      "animeCN": "Love Live!",
+      "animeNative": "ラブライブ!",
+      "artist": "Aya Uchida, Suzuko Mimori, Emi Nitta",
+      "artistAliases": [
+        "Aya Uchida",
+        "Suzuko Mimori",
+        "Emi Nitta"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 15051,
+      "bangumiId": 49294,
+      "releaseYear": 2013,
+      "themeId": 5350,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_school_idol_project"
+    },
+    {
+      "title": "Girlish Lover",
+      "titleCN": "Girlish Lover",
+      "anime": "Ore no Kanojo to Osananajimi ga Shuraba Sugiru",
+      "animeCN": "我女友与青梅竹马的惨烈修罗场",
+      "animeNative": "俺の彼女と幼なじみが修羅場すぎる",
+      "artist": "Ai Kayano, Yukari Tamura, Hisako Kanemoto, Chinatsu Akasaki",
+      "artistAliases": [
+        "Ai Kayano",
+        "Yukari Tamura",
+        "Hisako Kanemoto",
+        "Chinatsu Akasaki"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14749,
+      "bangumiId": 43557,
+      "releaseYear": 2013,
+      "themeId": 5368,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_kanojo_to_osananajimi_ga_shuraba_sugiru"
+    },
+    {
+      "title": "W:Wonder tale",
+      "titleCN": "W:Wonder tale",
+      "anime": "Ore no Kanojo to Osananajimi ga Shuraba Sugiru",
+      "animeCN": "我女友与青梅竹马的惨烈修罗场",
+      "animeNative": "俺の彼女と幼なじみが修羅場すぎる",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14749,
+      "bangumiId": 43557,
+      "releaseYear": 2013,
+      "themeId": 5369,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_kanojo_to_osananajimi_ga_shuraba_sugiru"
+    },
+    {
+      "title": "Be My Friend",
+      "titleCN": "Be My Friend",
+      "anime": "Boku wa Tomodachi ga Sukunai Next",
+      "animeCN": "我的朋友很少NEXT",
+      "animeNative": "僕は友達が少ない NEXT",
+      "artist": "Kana Hanazawa, Kanae Itou, Marina Inoue, Misato Fukuen, Nozomi Yamamoto, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Kanae Itou",
+        "Marina Inoue",
+        "Misato Fukuen",
+        "Nozomi Yamamoto",
+        "Yuka Iguchi"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14967,
+      "bangumiId": 46011,
+      "releaseYear": 2013,
+      "themeId": 5315,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_wa_tomodachi_ga_sukunai_next"
+    },
+    {
+      "title": "Bokura no Tsubasa",
+      "titleCN": "Bokura no Tsubasa",
+      "anime": "Boku wa Tomodachi ga Sukunai Next",
+      "animeCN": "我的朋友很少NEXT",
+      "animeNative": "僕は友達が少ない NEXT",
+      "artist": "Kana Hanazawa, Kanae Itou, Marina Inoue, Misato Fukuen, Nozomi Yamamoto, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Kanae Itou",
+        "Marina Inoue",
+        "Misato Fukuen",
+        "Nozomi Yamamoto",
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14967,
+      "bangumiId": 46011,
+      "releaseYear": 2013,
+      "themeId": 5316,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_wa_tomodachi_ga_sukunai_next"
+    },
+    {
+      "title": "Black † White",
+      "titleCN": "Black † White",
+      "anime": "Mondaiji-tachi ga Isekai kara Kuru Sou Desu yo?",
+      "animeCN": "问题儿童都来自异世界？",
+      "animeNative": "問題児たちが異世界から来るそうですよ?",
+      "artist": "Iori Nomizu",
+      "artistAliases": [
+        "Iori Nomizu"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 15315,
+      "bangumiId": 52170,
+      "releaseYear": 2013,
+      "themeId": 5364,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mondaiji_tachi_ga_isekai_kara_kuru_sou_desu_yo"
+    },
+    {
+      "title": "To Be Continued?",
+      "titleCN": "To Be Continued?",
+      "anime": "Mondaiji-tachi ga Isekai kara Kuru Sou Desu yo?",
+      "animeCN": "问题儿童都来自异世界？",
+      "animeNative": "問題児たちが異世界から来るそうですよ?",
+      "artist": "佐土原かおり",
+      "artistAliases": [
+        "佐土原かおり"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 15315,
+      "bangumiId": 52170,
+      "releaseYear": 2013,
+      "themeId": 5365,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mondaiji_tachi_ga_isekai_kara_kuru_sou_desu_yo"
+    },
+    {
+      "title": "Staccato Days",
+      "titleCN": "Staccato Days",
+      "anime": "Yama no Susume",
+      "animeCN": "向山进发",
+      "animeNative": "ヤマノススメ",
+      "artist": "Kana Asumi, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Asumi",
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14355,
+      "bangumiId": 41658,
+      "releaseYear": 2013,
+      "themeId": 5398,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume"
+    },
+    {
+      "title": "Mukai Kaze",
+      "titleCN": "Mukai Kaze",
+      "anime": "Maoyuu Maou Yuusha",
+      "animeCN": "魔王勇者",
+      "animeNative": "まおゆう魔王勇者",
+      "artist": "YOHKO",
+      "artistAliases": [
+        "YOHKO"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14833,
+      "bangumiId": 43197,
+      "releaseYear": 2013,
+      "themeId": 5359,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/maoyuu_maou_yuusha"
+    },
+    {
+      "title": "Unknown Vision",
+      "titleCN": "Unknown Vision",
+      "anime": "Maoyuu Maou Yuusha",
+      "animeCN": "魔王勇者",
+      "animeNative": "まおゆう魔王勇者",
+      "artist": "AKINO Arai",
+      "artistAliases": [
+        "AKINO Arai"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14833,
+      "bangumiId": 43197,
+      "releaseYear": 2013,
+      "themeId": 5360,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/maoyuu_maou_yuusha"
+    },
+    {
+      "title": "Mousou★Koukan Nikki",
+      "titleCN": "Mousou★Koukan Nikki",
+      "anime": "GJ-bu",
+      "animeCN": "GJ部",
+      "animeNative": "GJ部",
+      "artist": "Otome Shinto",
+      "artistAliases": [
+        "Otome Shinto"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14811,
+      "bangumiId": 48031,
+      "releaseYear": 2013,
+      "themeId": 5337,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gj_bu"
+    },
+    {
+      "title": "I wish ~Tokimeki no Mahou~",
+      "titleCN": "I wish ~Tokimeki no Mahou~",
+      "anime": "GJ-bu",
+      "animeCN": "GJ部",
+      "animeNative": "GJ部",
+      "artist": "Maaya Uchida, Yume Miyamoto",
+      "artistAliases": [
+        "Maaya Uchida",
+        "Yume Miyamoto"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14811,
+      "bangumiId": 48031,
+      "releaseYear": 2013,
+      "themeId": 5338,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gj_bu"
+    },
+    {
+      "title": "balance unbalance ~Hontou no Watashi~",
+      "titleCN": "balance unbalance ~Hontou no Watashi~",
+      "anime": "GJ-bu",
+      "animeCN": "GJ部",
+      "animeNative": "GJ部",
+      "artist": "Suzuko Mimori",
+      "artistAliases": [
+        "Suzuko Mimori"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14811,
+      "bangumiId": 48031,
+      "releaseYear": 2013,
+      "themeId": 5339,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gj_bu"
+    },
+    {
+      "title": "Purely Sky ~Watashi Dake no Sora~",
+      "titleCN": "Purely Sky ~Watashi Dake no Sora~",
+      "anime": "GJ-bu",
+      "animeCN": "GJ部",
+      "animeNative": "GJ部",
+      "artist": "Chika Arakawa",
+      "artistAliases": [
+        "Chika Arakawa"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14811,
+      "bangumiId": 48031,
+      "releaseYear": 2013,
+      "themeId": 5340,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/gj_bu"
+    },
+    {
+      "title": "Hashiridasou!",
+      "titleCN": "Hashiridasou!",
+      "anime": "GJ-bu",
+      "animeCN": "GJ部",
+      "animeNative": "GJ部",
+      "artist": "Maaya Uchida, Suzuko Mimori, Yume Miyamoto, Chika Arakawa",
+      "artistAliases": [
+        "Maaya Uchida",
+        "Suzuko Mimori",
+        "Yume Miyamoto",
+        "Chika Arakawa"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14811,
+      "bangumiId": 48031,
+      "releaseYear": 2013,
+      "themeId": 5341,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/gj_bu"
+    },
+    {
+      "title": "Shiawase☆High Tension↑↑",
+      "titleCN": "Shiawase☆High Tension↑↑",
+      "anime": "Minami-ke Tadaima",
+      "animeCN": "南家三姐妹 我回来了",
+      "animeNative": "みなみけ ただいま",
+      "artist": "Marina Inoue, Minori Chihara",
+      "artistAliases": [
+        "Marina Inoue",
+        "Minori Chihara"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14511,
+      "bangumiId": 47685,
+      "releaseYear": 2013,
+      "themeId": 5361,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/minami_ke_tadaima"
+    },
+    {
+      "title": "Kyuusekkin Lucky DAYS",
+      "titleCN": "Kyuusekkin Lucky DAYS",
+      "anime": "Minami-ke Tadaima",
+      "animeCN": "南家三姐妹 我回来了",
+      "animeNative": "みなみけ ただいま",
+      "artist": "Marina Inoue, Minori Chihara, Daisuke Ono",
+      "artistAliases": [
+        "Marina Inoue",
+        "Minori Chihara",
+        "Daisuke Ono"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14511,
+      "bangumiId": 47685,
+      "releaseYear": 2013,
+      "themeId": 5362,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/minami_ke_tadaima"
+    },
+    {
+      "title": "STAR",
+      "titleCN": "STAR",
+      "anime": "Chihayafuru 2",
+      "animeCN": "歌牌情缘 第二季",
+      "animeNative": "ちはやふる2",
+      "artist": "99RadioService",
+      "artistAliases": [
+        "99RadioService"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14397,
+      "bangumiId": 41568,
+      "releaseYear": 2013,
+      "themeId": 5324,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/chihayafuru_2"
+    },
+    {
+      "title": "Akanezora",
+      "titleCN": "Akanezora",
+      "anime": "Chihayafuru 2",
+      "animeCN": "歌牌情缘 第二季",
+      "animeNative": "ちはやふる2",
+      "artist": "Asami Seto",
+      "artistAliases": [
+        "Asami Seto"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14397,
+      "bangumiId": 41568,
+      "releaseYear": 2013,
+      "themeId": 5325,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/chihayafuru_2"
+    },
+    {
+      "title": "YOUTHFUL",
+      "titleCN": "YOUTHFUL",
+      "anime": "Chihayafuru 2",
+      "animeCN": "歌牌情缘 第二季",
+      "animeNative": "ちはやふる2",
+      "artist": "99RadioService",
+      "artistAliases": [
+        "99RadioService"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14397,
+      "bangumiId": 41568,
+      "releaseYear": 2013,
+      "themeId": 5326,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/chihayafuru_2"
+    },
+    {
+      "title": "Alteration",
+      "titleCN": "Alteration",
+      "anime": "Sasami-san@Ganbaranai",
+      "animeCN": "锁锁美同学@提不起劲",
+      "animeNative": "ささみさん@がんばらない",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 14515,
+      "bangumiId": 29074,
+      "releaseYear": 2013,
+      "themeId": 5380,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sasami_san_at_ganbaranai"
+    },
+    {
+      "title": "Shintouatsu Symphony",
+      "titleCN": "Shintouatsu Symphony",
+      "anime": "Sasami-san@Ganbaranai",
+      "animeCN": "锁锁美同学@提不起劲",
+      "animeNative": "ささみさん@がんばらない",
+      "artist": "Kana Asumi",
+      "artistAliases": [
+        "Kana Asumi"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 14515,
+      "bangumiId": 29074,
+      "releaseYear": 2013,
+      "themeId": 5381,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sasami_san_at_ganbaranai"
+    },
+    {
+      "title": "Sonna Koto Ura no Mata Urabanashi Desho?",
+      "titleCN": "Sonna Koto Ura no Mata Urabanashi Desho?",
+      "anime": "Kotoura-san",
+      "animeCN": "琴浦小姐",
+      "animeNative": "琴浦さん",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "OP",
+      "season": "2013-01",
+      "anilistId": 15379,
+      "bangumiId": 48034,
+      "releaseYear": 2013,
+      "themeId": 5344,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kotoura_san"
+    },
+    {
+      "title": "Kibou no Hana",
+      "titleCN": "Kibou no Hana",
+      "anime": "Kotoura-san",
+      "animeCN": "琴浦小姐",
+      "animeNative": "琴浦さん",
+      "artist": "Haruka Chisuga",
+      "artistAliases": [
+        "Haruka Chisuga"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 15379,
+      "bangumiId": 48034,
+      "releaseYear": 2013,
+      "themeId": 5345,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kotoura_san"
+    },
+    {
+      "title": "ESP Ken no Theme",
+      "titleCN": "ESP Ken no Theme",
+      "anime": "Kotoura-san",
+      "animeCN": "琴浦小姐",
+      "animeNative": "琴浦さん",
+      "artist": "Hisako Kanemoto, Hiro Shimono",
+      "artistAliases": [
+        "Hisako Kanemoto",
+        "Hiro Shimono"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 15379,
+      "bangumiId": 48034,
+      "releaseYear": 2013,
+      "themeId": 5346,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kotoura_san"
+    },
+    {
+      "title": "Tsurupeta",
+      "titleCN": "Tsurupeta",
+      "anime": "Kotoura-san",
+      "animeCN": "琴浦小姐",
+      "animeNative": "琴浦さん",
+      "artist": "Hisako Kanemoto",
+      "artistAliases": [
+        "Hisako Kanemoto"
+      ],
+      "type": "ED",
+      "season": "2013-01",
+      "anilistId": 15379,
+      "bangumiId": 48034,
+      "releaseYear": 2013,
+      "themeId": 5347,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/kotoura_san"
     }
   ],
   "2013-07": [
@@ -43964,6 +51752,971 @@ export const SEASONAL_POOLS = {
       "themeId": 5120,
       "themeSequence": 4,
       "animethemesUrl": "https://animethemes.moe/anime/monogatari_series_second_season"
+    },
+    {
+      "title": "Never Say Never",
+      "titleCN": "Never Say Never (The Animation)",
+      "anime": "Danganronpa: Kibou no Gakuen to Zetsubou no Koukousei The Animation",
+      "animeCN": "弹丸论破 希望学园与绝望高中生",
+      "animeNative": "ダンガンロンパ 希望の学園と絶望の高校生 The Animation",
+      "artist": "TKDz2b",
+      "artistAliases": [
+        "TKDz2b"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16592,
+      "bangumiId": 56093,
+      "releaseYear": 2013,
+      "themeId": 5046,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/danganronpa_kibou_no_gakuen_to_zetsubou_no_koukousei_the_animation"
+    },
+    {
+      "title": "Zetsubousei: Hero Chiryouyaku",
+      "titleCN": "Zetsubousei: Hero Chiryouyaku",
+      "anime": "Danganronpa: Kibou no Gakuen to Zetsubou no Koukousei The Animation",
+      "animeCN": "弹丸论破 希望学园与绝望高中生",
+      "animeNative": "ダンガンロンパ 希望の学園と絶望の高校生 The Animation",
+      "artist": "Soraru",
+      "artistAliases": [
+        "Soraru"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16592,
+      "bangumiId": 56093,
+      "releaseYear": 2013,
+      "themeId": 5047,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/danganronpa_kibou_no_gakuen_to_zetsubou_no_koukousei_the_animation"
+    },
+    {
+      "title": "Watashi ga Motenai no wa Dou Kangaete mo Omaera ga Warui",
+      "titleCN": "Watashi ga Motenai no wa Dou Kangaete mo Omaera ga Warui",
+      "anime": "Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!",
+      "animeCN": "我不受欢迎，怎么想都是你们的错！",
+      "animeNative": "私がモテないのはどう考えてもお前らが悪い!",
+      "artist": "Konomi Suzuki",
+      "artistAliases": [
+        "Konomi Suzuki"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16742,
+      "bangumiId": 69214,
+      "releaseYear": 2013,
+      "themeId": 5162,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/watashi_ga_motenai_no_wa_dou_kangaetemo_omaera_ga_warui"
+    },
+    {
+      "title": "Dou Kangaete mo Watashi wa Warukunai",
+      "titleCN": "どう考えても私は悪くない",
+      "anime": "Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!",
+      "animeCN": "我不受欢迎，怎么想都是你们的错！",
+      "animeNative": "私がモテないのはどう考えてもお前らが悪い!",
+      "artist": "黒木智子(CV:橘田いずみ)",
+      "artistAliases": [
+        "黒木智子",
+        "橘田いずみ",
+        "Izumi Kitta",
+        "黒木智子(CV:橘田いずみ)"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16742,
+      "bangumiId": 69214,
+      "releaseYear": 2013,
+      "themeId": 5163,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/watashi_ga_motenai_no_wa_dou_kangaetemo_omaera_ga_warui"
+    },
+    {
+      "title": "Natsu Matsuri",
+      "titleCN": "Natsu Matsuri",
+      "anime": "Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!",
+      "animeCN": "我不受欢迎，怎么想都是你们的错！",
+      "animeNative": "私がモテないのはどう考えてもお前らが悪い!",
+      "artist": "Miku Hatsune",
+      "artistAliases": [
+        "Miku Hatsune"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16742,
+      "bangumiId": 69214,
+      "releaseYear": 2013,
+      "themeId": 5166,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/watashi_ga_motenai_no_wa_dou_kangaetemo_omaera_ga_warui"
+    },
+    {
+      "title": "Uchouten Jinsei",
+      "titleCN": "Uchouten Jinsei",
+      "anime": "Uchouten Kazoku",
+      "animeCN": "有顶天家族",
+      "animeNative": "有頂天家族",
+      "artist": "milktub",
+      "artistAliases": [
+        "milktub"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 17909,
+      "bangumiId": 68035,
+      "releaseYear": 2013,
+      "themeId": 5159,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchouten_kazoku"
+    },
+    {
+      "title": "Qué Será, Será",
+      "titleCN": "Qué Será, Será",
+      "anime": "Uchouten Kazoku",
+      "animeCN": "有顶天家族",
+      "animeNative": "有頂天家族",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 17909,
+      "bangumiId": 68035,
+      "releaseYear": 2013,
+      "themeId": 5160,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchouten_kazoku"
+    },
+    {
+      "title": "starlog",
+      "titleCN": "starlog",
+      "anime": "Fate/kaleid liner Prisma☆Illya",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 14829,
+      "bangumiId": 43951,
+      "releaseYear": 2013,
+      "themeId": 5051,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya"
+    },
+    {
+      "title": "Prism Sympathy",
+      "titleCN": "Prism Sympathy",
+      "anime": "Fate/kaleid liner Prisma☆Illya",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 14829,
+      "bangumiId": 43951,
+      "releaseYear": 2013,
+      "themeId": 5052,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya"
+    },
+    {
+      "title": "Tsunagu Kizuna Tsutsumu Kodoku",
+      "titleCN": "Tsunagu Kizuna Tsutsumu Kodoku",
+      "anime": "Fate/kaleid liner Prisma☆Illya",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 14829,
+      "bangumiId": 43951,
+      "releaseYear": 2013,
+      "themeId": 5053,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya"
+    },
+    {
+      "title": "Kiss you",
+      "titleCN": "Kiss you",
+      "anime": "Gin no Saji",
+      "animeCN": "银之匙 Silver Spoon",
+      "animeNative": "銀の匙",
+      "artist": "miwa",
+      "artistAliases": [
+        "miwa"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16918,
+      "bangumiId": 59664,
+      "releaseYear": 2013,
+      "themeId": 5065,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gin_no_saji"
+    },
+    {
+      "title": "Hello Especially",
+      "titleCN": "Hello Especially",
+      "anime": "Gin no Saji",
+      "animeCN": "银之匙 Silver Spoon",
+      "animeNative": "銀の匙",
+      "artist": "Sukima Switch",
+      "artistAliases": [
+        "Sukima Switch"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16918,
+      "bangumiId": 59664,
+      "releaseYear": 2013,
+      "themeId": 5066,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gin_no_saji"
+    },
+    {
+      "title": "Jumping!!",
+      "titleCN": "Jumping!!",
+      "anime": "Kiniro Mosaic",
+      "animeCN": "黄金拼图",
+      "animeNative": "きんいろモザイク",
+      "artist": "Nao Touyama, Risa Taneda, Yumi Uchiyama",
+      "artistAliases": [
+        "Nao Touyama",
+        "Risa Taneda",
+        "Yumi Uchiyama"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16732,
+      "bangumiId": 57978,
+      "releaseYear": 2013,
+      "themeId": 5101,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kiniro_mosaic"
+    },
+    {
+      "title": "Your Voice",
+      "titleCN": "Your Voice",
+      "anime": "Kiniro Mosaic",
+      "animeCN": "黄金拼图",
+      "animeNative": "きんいろモザイク",
+      "artist": "Nao Touyama, Risa Taneda, Yumi Uchiyama",
+      "artistAliases": [
+        "Nao Touyama",
+        "Risa Taneda",
+        "Yumi Uchiyama"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16732,
+      "bangumiId": 57978,
+      "releaseYear": 2013,
+      "themeId": 5102,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kiniro_mosaic"
+    },
+    {
+      "title": "God only knows -Secrets of the Goddess-",
+      "titleCN": "God only knows -Secrets of the Goddess-",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Saori Hayami, Oratorio The World God Only Knows",
+      "artistAliases": [
+        "Saori Hayami",
+        "Oratorio The World God Only Knows"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5078,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Kizuna no Yukue feat. Kanon Nakagawa",
+      "titleCN": "Kizuna no Yukue feat. Kanon Nakagawa",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Nao Touyama",
+      "artistAliases": [
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5079,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Kizuna no Yukue feat. Tsukiyo Kujou",
+      "titleCN": "Kizuna no Yukue feat. Tsukiyo Kujou",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Yuka Iguchi",
+      "artistAliases": [
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5081,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Kizuna no Yukue feat. Shiori Shinomiya",
+      "titleCN": "Kizuna no Yukue feat. Shiori Shinomiya",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Ayahi Takagaki, Kana Hanazawa",
+      "artistAliases": [
+        "Ayahi Takagaki",
+        "Kana Hanazawa"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5083,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Hajimete Koi wo Shita Kioku ~Piano Bansou~",
+      "titleCN": "Hajimete Koi wo Shita Kioku ~Piano Bansou~",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Kana Asumi",
+      "artistAliases": [
+        "Kana Asumi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5084,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Hitomi kara Snow",
+      "titleCN": "Hitomi kara Snow",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Nao Touyama",
+      "artistAliases": [
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5085,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Kizuna no Yukue feat. Ayumi Takahara",
+      "titleCN": "Kizuna no Yukue feat. Ayumi Takahara",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5086,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "With...you...",
+      "titleCN": "With...you...",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5087,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Kizuna no Yukue feat. Jupiter Sisters",
+      "titleCN": "Kizuna no Yukue feat. Jupiter Sisters",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Ayana Taketatsu, Nao Touyama, Yuka Iguchi",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Nao Touyama",
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5088,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Hajimete Koi wo Shita Kioku",
+      "titleCN": "Hajimete Koi wo Shita Kioku",
+      "anime": "Kami nomi zo Shiru Sekai: Megami-hen",
+      "animeCN": "只有神知道的世界 女神篇",
+      "animeNative": "神のみぞ知るセカイ 女神篇",
+      "artist": "Ayahi Takagaki, Kana Asumi, Kana Hanazawa, Nao Touyama",
+      "artistAliases": [
+        "Ayahi Takagaki",
+        "Kana Asumi",
+        "Kana Hanazawa",
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16706,
+      "bangumiId": 56112,
+      "releaseYear": 2013,
+      "themeId": 5089,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai_megami_hen"
+    },
+    {
+      "title": "Love Shitai!",
+      "titleCN": "Love Shitai!",
+      "anime": "Love Lab",
+      "animeCN": "恋爱研究所",
+      "animeNative": "恋愛ラボ",
+      "artist": "Ayane Sakura, Inori Minase, Manami Numakura, You Taichi",
+      "artistAliases": [
+        "Ayane Sakura",
+        "Inori Minase",
+        "Manami Numakura",
+        "You Taichi"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16353,
+      "bangumiId": 58850,
+      "releaseYear": 2013,
+      "themeId": 5109,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/love_lab"
+    },
+    {
+      "title": "Best FriendS",
+      "titleCN": "Best FriendS",
+      "anime": "Love Lab",
+      "animeCN": "恋爱研究所",
+      "animeNative": "恋愛ラボ",
+      "artist": "Ayane Sakura, Inori Minase, Manami Numakura, You Taichi",
+      "artistAliases": [
+        "Ayane Sakura",
+        "Inori Minase",
+        "Manami Numakura",
+        "You Taichi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16353,
+      "bangumiId": 58850,
+      "releaseYear": 2013,
+      "themeId": 5110,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/love_lab"
+    },
+    {
+      "title": "Sympathy",
+      "titleCN": "Sympathy",
+      "anime": "High School DxD New",
+      "animeCN": "恶魔高校 D×D NEW",
+      "animeNative": "ハイスクールD×D NEW",
+      "artist": "Larval Stage Planning",
+      "artistAliases": [
+        "Larval Stage Planning"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 15451,
+      "bangumiId": 48700,
+      "releaseYear": 2013,
+      "themeId": 5071,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_new"
+    },
+    {
+      "title": "Gekijouron",
+      "titleCN": "Gekijouron",
+      "anime": "High School DxD New",
+      "animeCN": "恶魔高校 D×D NEW",
+      "animeNative": "ハイスクールD×D NEW",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 15451,
+      "bangumiId": 48700,
+      "releaseYear": 2013,
+      "themeId": 5072,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_new"
+    },
+    {
+      "title": "Houteishiki wa Kotaenai",
+      "titleCN": "Houteishiki wa Kotaenai",
+      "anime": "High School DxD New",
+      "animeCN": "恶魔高校 D×D NEW",
+      "animeNative": "ハイスクールD×D NEW",
+      "artist": "Ayana Taketatsu, Shizuka Itou, Youko Hikasa",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Shizuka Itou",
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 15451,
+      "bangumiId": 48700,
+      "releaseYear": 2013,
+      "themeId": 5073,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_new"
+    },
+    {
+      "title": "Lovely ♥ Devil",
+      "titleCN": "Lovely ♥ Devil",
+      "anime": "High School DxD New",
+      "animeCN": "恶魔高校 D×D NEW",
+      "animeNative": "ハイスクールD×D NEW",
+      "artist": "Ayana Taketatsu, Ayane Sakura, Risa Taneda, Shizuka Itou, Youko Hikasa",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Ayane Sakura",
+        "Risa Taneda",
+        "Shizuka Itou",
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 15451,
+      "bangumiId": 48700,
+      "releaseYear": 2013,
+      "themeId": 5074,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_new"
+    },
+    {
+      "title": "Wan Wan Wan Wan N_1!!",
+      "titleCN": "Wan Wan Wan Wan N_1!!",
+      "anime": "Inu to Hasami wa Tsukaiyou",
+      "animeCN": "狗与剪刀的正确用法",
+      "animeNative": "犬とハサミは使いよう",
+      "artist": "Ai Kakuma, Kana Asumi, Marina Inoue, Shizuka Itou, Yuu Serizawa",
+      "artistAliases": [
+        "Ai Kakuma",
+        "Kana Asumi",
+        "Marina Inoue",
+        "Shizuka Itou",
+        "Yuu Serizawa"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 17831,
+      "bangumiId": 72940,
+      "releaseYear": 2013,
+      "themeId": 5076,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_to_hasami_wa_tsukaiyou"
+    },
+    {
+      "title": "Lemonade Scandal",
+      "titleCN": "Lemonade Scandal",
+      "anime": "Inu to Hasami wa Tsukaiyou",
+      "animeCN": "狗与剪刀的正确用法",
+      "animeNative": "犬とハサミは使いよう",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 17831,
+      "bangumiId": 72940,
+      "releaseYear": 2013,
+      "themeId": 5077,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/inu_to_hasami_wa_tsukaiyou"
+    },
+    {
+      "title": "Birth",
+      "titleCN": "Birth",
+      "anime": "Kamisama no Inai Nichiyoubi",
+      "animeCN": "神不在的星期天",
+      "animeNative": "神さまのいない日曜日",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 16009,
+      "bangumiId": 51943,
+      "releaseYear": 2013,
+      "themeId": 5090,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_no_inai_nichiyoubi"
+    },
+    {
+      "title": "Owaranai Melody wo Utaidashimashita",
+      "titleCN": "終わらないメロディーを歌いだしました。",
+      "anime": "Kamisama no Inai Nichiyoubi",
+      "animeCN": "神不在的星期天",
+      "animeNative": "神さまのいない日曜日",
+      "artist": "小松未可子",
+      "artistAliases": [
+        "小松未可子"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16009,
+      "bangumiId": 51943,
+      "releaseYear": 2013,
+      "themeId": 5091,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kamisama_no_inai_nichiyoubi"
+    },
+    {
+      "title": "SPLASH FREE",
+      "titleCN": "SPLASH FREE",
+      "anime": "Free!",
+      "animeCN": "Free!",
+      "animeNative": "Free!",
+      "artist": "Mamoru Miyano, Nobunaga Shimazaki",
+      "artistAliases": [
+        "Mamoru Miyano",
+        "Nobunaga Shimazaki"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18507,
+      "bangumiId": 72109,
+      "releaseYear": 2013,
+      "themeId": 5055,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/free"
+    },
+    {
+      "title": "EVER BLUE",
+      "titleCN": "EVER BLUE",
+      "anime": "Free!",
+      "animeCN": "Free!",
+      "animeNative": "Free!",
+      "artist": "Mamoru Miyano, Nobunaga Shimazaki",
+      "artistAliases": [
+        "Mamoru Miyano",
+        "Nobunaga Shimazaki"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18507,
+      "bangumiId": 72109,
+      "releaseYear": 2013,
+      "themeId": 5056,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/free"
+    },
+    {
+      "title": "May I Help You?",
+      "titleCN": "May I Help You?",
+      "anime": "Servant x Service",
+      "animeCN": "跟班×服务",
+      "animeNative": "サーバント×サービス",
+      "artist": "Ai Kayano, Aki Toyosaki, Mai Nakahara",
+      "artistAliases": [
+        "Ai Kayano",
+        "Aki Toyosaki",
+        "Mai Nakahara"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 18119,
+      "bangumiId": 69944,
+      "releaseYear": 2013,
+      "themeId": 5149,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/servant_x_service"
+    },
+    {
+      "title": "Hachimitsu Doki",
+      "titleCN": "Hachimitsu Doki",
+      "anime": "Servant x Service",
+      "animeCN": "跟班×服务",
+      "animeNative": "サーバント×サービス",
+      "artist": "Ai Kayano",
+      "artistAliases": [
+        "Ai Kayano"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18119,
+      "bangumiId": 69944,
+      "releaseYear": 2013,
+      "themeId": 5150,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/servant_x_service"
+    },
+    {
+      "title": "Watashi no Bara wo Haminasai",
+      "titleCN": "Watashi no Bara wo Haminasai",
+      "anime": "Rozen Maiden",
+      "animeCN": "新蔷薇少女",
+      "animeNative": "ローゼンメイデン (2013)",
+      "artist": "ALI PROJECT",
+      "artistAliases": [
+        "ALI PROJECT"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 18041,
+      "bangumiId": 69942,
+      "releaseYear": 2013,
+      "themeId": 5137,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rozen_maiden_2013"
+    },
+    {
+      "title": "Alternative",
+      "titleCN": "Alternative",
+      "anime": "Rozen Maiden",
+      "animeCN": "新蔷薇少女",
+      "animeNative": "ローゼンメイデン (2013)",
+      "artist": "Annabel",
+      "artistAliases": [
+        "Annabel"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18041,
+      "bangumiId": 69942,
+      "releaseYear": 2013,
+      "themeId": 5138,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rozen_maiden_2013"
+    },
+    {
+      "title": "Hanabi",
+      "titleCN": "Hanabi",
+      "anime": "Kitakubu Katsudou Kiroku",
+      "animeCN": "归宅部活动记录",
+      "animeNative": "帰宅部活動記録",
+      "artist": "Mao Ichimichi",
+      "artistAliases": [
+        "Mao Ichimichi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18495,
+      "bangumiId": 75702,
+      "releaseYear": 2013,
+      "themeId": 5105,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kitakubu_katsudou_kiroku"
+    },
+    {
+      "title": "Kimi ni Tsuite Ieru Koto",
+      "titleCN": "Kimi ni Tsuite Ieru Koto",
+      "anime": "Kitakubu Katsudou Kiroku",
+      "animeCN": "归宅部活动记录",
+      "animeNative": "帰宅部活動記録",
+      "artist": "Sayaka Senbongi",
+      "artistAliases": [
+        "Sayaka Senbongi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18495,
+      "bangumiId": 75702,
+      "releaseYear": 2013,
+      "themeId": 5106,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/kitakubu_katsudou_kiroku"
+    },
+    {
+      "title": "Best Friend",
+      "titleCN": "Best Friend",
+      "anime": "Kitakubu Katsudou Kiroku",
+      "animeCN": "归宅部活动记录",
+      "animeNative": "帰宅部活動記録",
+      "artist": "Sayaka Senbongi",
+      "artistAliases": [
+        "Sayaka Senbongi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18495,
+      "bangumiId": 75702,
+      "releaseYear": 2013,
+      "themeId": 5107,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/kitakubu_katsudou_kiroku"
+    },
+    {
+      "title": "Wakuwaku DAYS☆",
+      "titleCN": "Wakuwaku DAYS☆",
+      "anime": "Kitakubu Katsudou Kiroku",
+      "animeCN": "归宅部活动记录",
+      "animeNative": "帰宅部活動記録",
+      "artist": "Sayaka Senbongi",
+      "artistAliases": [
+        "Sayaka Senbongi"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 18495,
+      "bangumiId": 75702,
+      "releaseYear": 2013,
+      "themeId": 5108,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/kitakubu_katsudou_kiroku"
+    },
+    {
+      "title": "Neptune☆Sagashite",
+      "titleCN": "Neptune☆Sagashite",
+      "anime": "Choujigen Game Neptune The Animation",
+      "animeCN": "超次元游戏 海王星",
+      "animeNative": "超次元ゲイム ネプテューヌ THE ANIMATION",
+      "artist": "Junjou no Afilia",
+      "artistAliases": [
+        "Junjou no Afilia"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16157,
+      "bangumiId": 47957,
+      "releaseYear": 2013,
+      "themeId": 5041,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/choujigen_game_neptune_the_animation"
+    },
+    {
+      "title": "Go→Love & Peace",
+      "titleCN": "Go→Love & Peace",
+      "anime": "Choujigen Game Neptune The Animation",
+      "animeCN": "超次元游戏 海王星",
+      "animeNative": "超次元ゲイム ネプテューヌ THE ANIMATION",
+      "artist": "Ayane",
+      "artistAliases": [
+        "Ayane"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16157,
+      "bangumiId": 47957,
+      "releaseYear": 2013,
+      "themeId": 5042,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/choujigen_game_neptune_the_animation"
+    },
+    {
+      "title": "Ito",
+      "titleCN": "Ito",
+      "anime": "Choujigen Game Neptune The Animation",
+      "animeCN": "超次元游戏 海王星",
+      "animeNative": "超次元ゲイム ネプテューヌ THE ANIMATION",
+      "artist": "Junjou no Afilia",
+      "artistAliases": [
+        "Junjou no Afilia"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 16157,
+      "bangumiId": 47957,
+      "releaseYear": 2013,
+      "themeId": 5043,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/choujigen_game_neptune_the_animation"
+    },
+    {
+      "title": "ViViD",
+      "titleCN": "ViViD",
+      "anime": "Blood Lad",
+      "animeCN": "血意少年",
+      "animeNative": "ブラッドラッド",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "OP",
+      "season": "2013-07",
+      "anilistId": 11633,
+      "bangumiId": 48065,
+      "releaseYear": 2013,
+      "themeId": 5036,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blood_lad"
+    },
+    {
+      "title": "BLOODY HOLIC",
+      "titleCN": "BLOODY HOLIC",
+      "anime": "Blood Lad",
+      "animeCN": "血意少年",
+      "animeNative": "ブラッドラッド",
+      "artist": "Yuuka Nanri",
+      "artistAliases": [
+        "Yuuka Nanri"
+      ],
+      "type": "ED",
+      "season": "2013-07",
+      "anilistId": 11633,
+      "bangumiId": 48065,
+      "releaseYear": 2013,
+      "themeId": 5037,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blood_lad"
     }
   ],
   "2014-04": [
@@ -44083,6 +52836,715 @@ export const SEASONAL_POOLS = {
       "themeId": 5838,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/ping_pong_the_animation"
+    },
+    {
+      "title": "Nichijou Decoration",
+      "titleCN": "Nichijou Decoration",
+      "anime": "Gochuumon wa Usagi Desu ka?",
+      "animeCN": "请问您今天要来点兔子吗？",
+      "animeNative": "ご注文はうさぎですか？",
+      "artist": "Ayane Sakura, Inori Minase, Maaya Uchida, Risa Taneda, Satomi Satou",
+      "artistAliases": [
+        "Ayane Sakura",
+        "Inori Minase",
+        "Maaya Uchida",
+        "Risa Taneda",
+        "Satomi Satou"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20517,
+      "bangumiId": 88287,
+      "releaseYear": 2014,
+      "themeId": 5770,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gochuumon_wa_usagi_desu_ka"
+    },
+    {
+      "title": "Trust in you",
+      "titleCN": "Trust in you",
+      "anime": "Date A Live II",
+      "animeCN": "约会大作战 第二季",
+      "animeNative": "デート・ア・ライブII",
+      "artist": "sweet ARMS",
+      "artistAliases": [
+        "sweet ARMS"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 19163,
+      "bangumiId": 76325,
+      "releaseYear": 2014,
+      "themeId": 5738,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/date_a_live_ii"
+    },
+    {
+      "title": "Day to Story",
+      "titleCN": "Day to Story",
+      "anime": "Date A Live II",
+      "animeCN": "约会大作战 第二季",
+      "animeNative": "デート・ア・ライブII",
+      "artist": "Kaori Sadohara",
+      "artistAliases": [
+        "Kaori Sadohara"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 19163,
+      "bangumiId": 76325,
+      "releaseYear": 2014,
+      "themeId": 5739,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/date_a_live_ii"
+    },
+    {
+      "title": "My Treasure",
+      "titleCN": "My Treasure",
+      "anime": "Date A Live II",
+      "animeCN": "约会大作战 第二季",
+      "animeNative": "デート・ア・ライブII",
+      "artist": "Minori Chihara",
+      "artistAliases": [
+        "Minori Chihara"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 19163,
+      "bangumiId": 76325,
+      "releaseYear": 2014,
+      "themeId": 14428,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/date_a_live_ii"
+    },
+    {
+      "title": "Ah Yeah!!",
+      "titleCN": "Ah Yeah!!",
+      "anime": "Haikyuu!!",
+      "animeCN": "排球少年",
+      "animeNative": "ハイキュー!!",
+      "artist": "Sukima Switch",
+      "artistAliases": [
+        "Sukima Switch"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20464,
+      "bangumiId": 84171,
+      "releaseYear": 2014,
+      "themeId": 5775,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu"
+    },
+    {
+      "title": "Tenchi Geshi",
+      "titleCN": "Tenchi Geshi",
+      "anime": "Haikyuu!!",
+      "animeCN": "排球少年",
+      "animeNative": "ハイキュー!!",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20464,
+      "bangumiId": 84171,
+      "releaseYear": 2014,
+      "themeId": 5776,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu"
+    },
+    {
+      "title": "LEO",
+      "titleCN": "LEO",
+      "anime": "Haikyuu!!",
+      "animeCN": "排球少年",
+      "animeNative": "ハイキュー!!",
+      "artist": "tacica",
+      "artistAliases": [
+        "tacica"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20464,
+      "bangumiId": 84171,
+      "releaseYear": 2014,
+      "themeId": 5777,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu"
+    },
+    {
+      "title": "black bullet",
+      "titleCN": "black bullet",
+      "anime": "Black Bullet",
+      "animeCN": "漆黑的子弹",
+      "animeNative": "ブラック・ブレット",
+      "artist": "fripSide",
+      "artistAliases": [
+        "fripSide"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20457,
+      "bangumiId": 84873,
+      "releaseYear": 2014,
+      "themeId": 5720,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/black_bullet"
+    },
+    {
+      "title": "Tokohana",
+      "titleCN": "Tokohana",
+      "anime": "Black Bullet",
+      "animeCN": "漆黑的子弹",
+      "animeNative": "ブラック・ブレット",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20457,
+      "bangumiId": 84873,
+      "releaseYear": 2014,
+      "themeId": 5721,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/black_bullet"
+    },
+    {
+      "title": "Wasurenai Tame ni",
+      "titleCN": "Wasurenai Tame ni",
+      "anime": "Black Bullet",
+      "animeCN": "漆黑的子弹",
+      "animeNative": "ブラック・ブレット",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20457,
+      "bangumiId": 84873,
+      "releaseYear": 2014,
+      "themeId": 5722,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/black_bullet"
+    },
+    {
+      "title": "Wasurenai Tame ni for lotus",
+      "titleCN": "Wasurenai Tame ni for lotus",
+      "anime": "Black Bullet",
+      "animeCN": "漆黑的子弹",
+      "animeNative": "ブラック・ブレット",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20457,
+      "bangumiId": 84873,
+      "releaseYear": 2014,
+      "themeId": 5723,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/black_bullet"
+    },
+    {
+      "title": "Millenario",
+      "titleCN": "Millenario",
+      "anime": "Mahouka Koukou no Rettousei",
+      "animeCN": "魔法科高校的劣等生",
+      "animeNative": "魔法科高校の劣等生",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20458,
+      "bangumiId": 84872,
+      "releaseYear": 2014,
+      "themeId": 5819,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mahouka_koukou_no_rettousei"
+    },
+    {
+      "title": "Mirror",
+      "titleCN": "Mirror",
+      "anime": "Mahouka Koukou no Rettousei",
+      "animeCN": "魔法科高校的劣等生",
+      "animeNative": "魔法科高校の劣等生",
+      "artist": "Rei Yasuda",
+      "artistAliases": [
+        "Rei Yasuda"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20458,
+      "bangumiId": 84872,
+      "releaseYear": 2014,
+      "themeId": 5820,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/mahouka_koukou_no_rettousei"
+    },
+    {
+      "title": "Niji no Kakera",
+      "titleCN": "虹のかけら",
+      "anime": "Isshuukan Friends.",
+      "animeCN": "一周的朋友。",
+      "animeNative": "一週間フレンズ。",
+      "artist": "昆夏美",
+      "artistAliases": [
+        "昆夏美"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20527,
+      "bangumiId": 88493,
+      "releaseYear": 2014,
+      "themeId": 5784,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isshuukan_friends"
+    },
+    {
+      "title": "Kanade",
+      "titleCN": "Kanade",
+      "anime": "Isshuukan Friends.",
+      "animeCN": "一周的朋友。",
+      "animeNative": "一週間フレンズ。",
+      "artist": "Sora Amamiya",
+      "artistAliases": [
+        "Sora Amamiya"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20527,
+      "bangumiId": 88493,
+      "releaseYear": 2014,
+      "themeId": 5785,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isshuukan_friends"
+    },
+    {
+      "title": "Sore wa Bokutachi no Kiseki",
+      "titleCN": "Sore wa Bokutachi no Kiseki",
+      "anime": "Love Live! School Idol Project 2nd Season",
+      "animeCN": "Love Live! 第二季",
+      "animeNative": "ラブライブ! 第2期",
+      "artist": "μ's",
+      "artistAliases": [
+        "μ's"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 19111,
+      "bangumiId": 75989,
+      "releaseYear": 2014,
+      "themeId": 5798,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_school_idol_project_2nd_season"
+    },
+    {
+      "title": "Donna Toki mo Zutto",
+      "titleCN": "Donna Toki mo Zutto",
+      "anime": "Love Live! School Idol Project 2nd Season",
+      "animeCN": "Love Live! 第二季",
+      "animeNative": "ラブライブ! 第2期",
+      "artist": "Sora Tokui, Yoshino Nanjou, Aina Kusuda",
+      "artistAliases": [
+        "Sora Tokui",
+        "Yoshino Nanjou",
+        "Aina Kusuda"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 19111,
+      "bangumiId": 75989,
+      "releaseYear": 2014,
+      "themeId": 5799,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_school_idol_project_2nd_season"
+    },
+    {
+      "title": "Bokura wa Ima no Naka de",
+      "titleCN": "Bokura wa Ima no Naka de",
+      "anime": "Love Live! School Idol Project 2nd Season",
+      "animeCN": "Love Live! 第二季",
+      "animeNative": "ラブライブ! 第2期",
+      "artist": "μ's",
+      "artistAliases": [
+        "μ's"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 19111,
+      "bangumiId": 75989,
+      "releaseYear": 2014,
+      "themeId": 5808,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_school_idol_project_2nd_season"
+    },
+    {
+      "title": "Happy maker!",
+      "titleCN": "Happy maker!",
+      "anime": "Love Live! School Idol Project 2nd Season",
+      "animeCN": "Love Live! 第二季",
+      "animeNative": "ラブライブ! 第2期",
+      "artist": "μ's",
+      "artistAliases": [
+        "μ's"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 19111,
+      "bangumiId": 75989,
+      "releaseYear": 2014,
+      "themeId": 5809,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_school_idol_project_2nd_season"
+    },
+    {
+      "title": "Sidonia",
+      "titleCN": "Sidonia",
+      "anime": "Sidonia no Kishi",
+      "animeCN": "希德尼娅的骑士",
+      "animeNative": "シドニアの騎士",
+      "artist": "angela",
+      "artistAliases": [
+        "angela"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 19775,
+      "bangumiId": 77476,
+      "releaseYear": 2014,
+      "themeId": 5854,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sidonia_no_kishi"
+    },
+    {
+      "title": "show",
+      "titleCN": "show",
+      "anime": "Sidonia no Kishi",
+      "animeCN": "希德尼娅的骑士",
+      "animeNative": "シドニアの騎士",
+      "artist": "Eri Kitamura",
+      "artistAliases": [
+        "Eri Kitamura"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 19775,
+      "bangumiId": 77476,
+      "releaseYear": 2014,
+      "themeId": 5855,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sidonia_no_kishi"
+    },
+    {
+      "title": "Junsui na Fujunbutsu",
+      "titleCN": "Junsui na Fujunbutsu",
+      "anime": "Mangaka-san to Assistant-san to The Animation",
+      "animeCN": "漫画家和助手",
+      "animeNative": "マンガ家さんとアシスタントさんと THE ANIMATION",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20537,
+      "bangumiId": 89751,
+      "releaseYear": 2014,
+      "themeId": 5821,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mangaka_san_to_assistant_san_to_the_animation"
+    },
+    {
+      "title": "Spica.",
+      "titleCN": "Spica.",
+      "anime": "Mangaka-san to Assistant-san to The Animation",
+      "animeCN": "漫画家和助手",
+      "animeNative": "マンガ家さんとアシスタントさんと THE ANIMATION",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20537,
+      "bangumiId": 89751,
+      "releaseYear": 2014,
+      "themeId": 5822,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mangaka_san_to_assistant_san_to_the_animation"
+    },
+    {
+      "title": "Owarinaki Pantsu",
+      "titleCN": "Owarinaki Pantsu",
+      "anime": "Mangaka-san to Assistant-san to The Animation",
+      "animeCN": "漫画家和助手",
+      "animeNative": "マンガ家さんとアシスタントさんと THE ANIMATION",
+      "artist": "Yoshitsugu Matsuoka",
+      "artistAliases": [
+        "Yoshitsugu Matsuoka"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20537,
+      "bangumiId": 89751,
+      "releaseYear": 2014,
+      "themeId": 5823,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/mangaka_san_to_assistant_san_to_the_animation"
+    },
+    {
+      "title": "Shiver",
+      "titleCN": "Shiver",
+      "anime": "Mushishi Zoku Shou",
+      "animeCN": "虫师 续章",
+      "animeNative": "蟲師 続章",
+      "artist": "Lucy Rose",
+      "artistAliases": [
+        "Lucy Rose"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20595,
+      "bangumiId": 92705,
+      "releaseYear": 2014,
+      "themeId": 5831,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mushishi_zoku_shou"
+    },
+    {
+      "title": "daze",
+      "titleCN": "daze",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "じん ft.メイリア from GARNiDELiA",
+      "artistAliases": [
+        "じん",
+        "JIN",
+        "メイリア",
+        "MARiA",
+        "GARNiDELiA",
+        "じん ft.メイリア from GARNiDELiA"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5824,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "Headphone Actor",
+      "titleCN": "Headphone Actor",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "LiSA",
+      "artistAliases": [
+        "LiSA"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5825,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "Ayano no Koufuku Riron",
+      "titleCN": "Ayano no Koufuku Riron",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "じん ft.奥井亜紀",
+      "artistAliases": [
+        "じん",
+        "JIN",
+        "奥井亜紀",
+        "Aki Okui",
+        "じん ft.奥井亜紀"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5826,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "days",
+      "titleCN": "days",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "Lia",
+      "artistAliases": [
+        "Lia"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5827,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "Yuukei Yesterday",
+      "titleCN": "Yuukei Yesterday",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "LiSA",
+      "artistAliases": [
+        "LiSA"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5828,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "Lost Time Memory",
+      "titleCN": "Lost Time Memory",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "じん ft.松山晃太（BYEE the ROUND）",
+      "artistAliases": [
+        "じん",
+        "JIN",
+        "松山晃太",
+        "Kohta Matsuyama",
+        "BYEE the ROUND",
+        "じん ft.松山晃太（BYEE the ROUND）"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5829,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "Summertime Record",
+      "titleCN": "Summertime Record",
+      "anime": "Mekakucity Actors",
+      "animeCN": "目隐都市的演绎者",
+      "animeNative": "メカクシティアクターズ",
+      "artist": "じん",
+      "artistAliases": [
+        "じん",
+        "JIN"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20541,
+      "bangumiId": 81186,
+      "releaseYear": 2014,
+      "themeId": 5830,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/mekakucity_actors"
+    },
+    {
+      "title": "Virtue and Vice",
+      "titleCN": "Virtue and Vice",
+      "anime": "Gokukoku no Brynhildr",
+      "animeCN": "极黑的布伦希尔德",
+      "animeNative": "極黒のブリュンヒルデ",
+      "artist": "Fear, and Loathing in Las Vegas",
+      "artistAliases": [
+        "Fear, and Loathing in Las Vegas"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20534,
+      "bangumiId": 89485,
+      "releaseYear": 2014,
+      "themeId": 5772,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gokukoku_no_brynhildr"
+    },
+    {
+      "title": "Ichiban Boshi",
+      "titleCN": "Ichiban Boshi",
+      "anime": "Gokukoku no Brynhildr",
+      "animeCN": "极黑的布伦希尔德",
+      "animeNative": "極黒のブリュンヒルデ",
+      "artist": "Azusa Tadokoro, Mao Ichimichi, Risa Taneda, Aya Suzaki",
+      "artistAliases": [
+        "Azusa Tadokoro",
+        "Mao Ichimichi",
+        "Risa Taneda",
+        "Aya Suzaki"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20534,
+      "bangumiId": 89485,
+      "releaseYear": 2014,
+      "themeId": 5773,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gokukoku_no_brynhildr"
+    },
+    {
+      "title": "Itsuka no, Ikutsuka no Kimi to no Sekai",
+      "titleCN": "Itsuka no, Ikutsuka no Kimi to no Sekai",
+      "anime": "Bokura wa Minna Kawaisou",
+      "animeCN": "我们大家的河合庄",
+      "animeNative": "僕らはみんな河合荘",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "OP",
+      "season": "2014-04",
+      "anilistId": 20529,
+      "bangumiId": 89216,
+      "releaseYear": 2014,
+      "themeId": 5726,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bokura_wa_minna_kawaisou"
+    },
+    {
+      "title": "My Sweet Shelter",
+      "titleCN": "My Sweet Shelter",
+      "anime": "Bokura wa Minna Kawaisou",
+      "animeCN": "我们大家的河合庄",
+      "animeNative": "僕らはみんな河合荘",
+      "artist": "Kana Hanazawa, Hisako Kanemoto",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Hisako Kanemoto"
+      ],
+      "type": "ED",
+      "season": "2014-04",
+      "anilistId": 20529,
+      "bangumiId": 89216,
+      "releaseYear": 2014,
+      "themeId": 5727,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bokura_wa_minna_kawaisou"
     }
   ],
   "2014-10": [
@@ -44358,6 +53820,703 @@ export const SEASONAL_POOLS = {
       "themeId": 5425,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/amagi_brilliant_park"
+    },
+    {
+      "title": "Orange Mint",
+      "titleCN": "Orange Mint",
+      "anime": "Tsukimonogatari",
+      "animeCN": "凭物语",
+      "animeNative": "憑物語",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20918,
+      "bangumiId": 115932,
+      "releaseYear": 2014,
+      "themeId": 5561,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tsukimonogatari"
+    },
+    {
+      "title": "border",
+      "titleCN": "border",
+      "anime": "Tsukimonogatari",
+      "animeCN": "凭物语",
+      "animeNative": "憑物語",
+      "artist": "ClariS",
+      "artistAliases": [
+        "ClariS"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20918,
+      "bangumiId": 115932,
+      "releaseYear": 2014,
+      "themeId": 5562,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tsukimonogatari"
+    },
+    {
+      "title": "Rakuen no Tsubasa",
+      "titleCN": "Rakuen no Tsubasa",
+      "anime": "Grisaia no Kajitsu",
+      "animeCN": "灰色的果实",
+      "animeNative": "グリザイアの果実",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 17729,
+      "bangumiId": 67376,
+      "releaseYear": 2014,
+      "themeId": 5455,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_kajitsu"
+    },
+    {
+      "title": "Shuumatsu no Fractal",
+      "titleCN": "終末のフラクタル",
+      "anime": "Grisaia no Kajitsu",
+      "animeCN": "灰色的果实",
+      "animeNative": "グリザイアの果実",
+      "artist": "飛蘭",
+      "artistAliases": [
+        "飛蘭",
+        "Faylan"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 17729,
+      "bangumiId": 67376,
+      "releaseYear": 2014,
+      "themeId": 5456,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_kajitsu"
+    },
+    {
+      "title": "Anata no Aishita Sekai",
+      "titleCN": "Anata no Aishita Sekai",
+      "anime": "Grisaia no Kajitsu",
+      "animeCN": "灰色的果实",
+      "animeNative": "グリザイアの果実",
+      "artist": "Yoshino Nanjou",
+      "artistAliases": [
+        "Yoshino Nanjou"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 17729,
+      "bangumiId": 67376,
+      "releaseYear": 2014,
+      "themeId": 5458,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_kajitsu"
+    },
+    {
+      "title": "SKIP",
+      "titleCN": "SKIP",
+      "anime": "Grisaia no Kajitsu",
+      "animeCN": "灰色的果实",
+      "animeNative": "グリザイアの果実",
+      "artist": "Chata",
+      "artistAliases": [
+        "Chata"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 17729,
+      "bangumiId": 67376,
+      "releaseYear": 2014,
+      "themeId": 5459,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_kajitsu"
+    },
+    {
+      "title": "Rainy veil",
+      "titleCN": "Rainy veil",
+      "anime": "Grisaia no Kajitsu",
+      "animeCN": "灰色的果实",
+      "animeNative": "グリザイアの果実",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 17729,
+      "bangumiId": 67376,
+      "releaseYear": 2014,
+      "themeId": 5460,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_kajitsu"
+    },
+    {
+      "title": "Sousei no Thanatos",
+      "titleCN": "Sousei no Thanatos",
+      "anime": "Grisaia no Kajitsu",
+      "animeCN": "灰色的果实",
+      "animeNative": "グリザイアの果実",
+      "artist": "Faylan",
+      "artistAliases": [
+        "Faylan"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 17729,
+      "bangumiId": 67376,
+      "releaseYear": 2014,
+      "themeId": 5461,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_kajitsu"
+    },
+    {
+      "title": "Iikagen ni Shite, Anata",
+      "titleCN": "Iikagen ni Shite, Anata",
+      "anime": "Danna ga Nani wo Itteiru ka Wakaranai Ken",
+      "animeCN": "关于完全听不懂老公在说什么的事",
+      "animeNative": "旦那が何を言っているかわからない件",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20735,
+      "bangumiId": 105426,
+      "releaseYear": 2014,
+      "themeId": 5440,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/danna_ga_nani_wo_itteiru_ka_wakaranai_ken"
+    },
+    {
+      "title": "Okusama no Blues",
+      "titleCN": "Okusama no Blues",
+      "anime": "Danna ga Nani wo Itteiru ka Wakaranai Ken",
+      "animeCN": "关于完全听不懂老公在说什么的事",
+      "animeNative": "旦那が何を言っているかわからない件",
+      "artist": "Rie Kugimiya, Yukari Tamura",
+      "artistAliases": [
+        "Rie Kugimiya",
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20735,
+      "bangumiId": 105426,
+      "releaseYear": 2014,
+      "themeId": 5441,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/danna_ga_nani_wo_itteiru_ka_wakaranai_ken"
+    },
+    {
+      "title": "OVERLAPPERS",
+      "titleCN": "OVERLAPPERS",
+      "anime": "Inou-Battle wa Nichijou-kei no Naka de",
+      "animeCN": "日常系的异能战斗",
+      "animeNative": "異能バトルは日常系のなかで",
+      "artist": "Qverktett:||",
+      "artistAliases": [
+        "Qverktett:||"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20646,
+      "bangumiId": 99538,
+      "releaseYear": 2014,
+      "themeId": 5477,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/inou_battle_wa_nichijou_kei_no_naka_de"
+    },
+    {
+      "title": "You Gotta Love Me!",
+      "titleCN": "You Gotta Love Me!",
+      "anime": "Inou-Battle wa Nichijou-kei no Naka de",
+      "animeCN": "日常系的异能战斗",
+      "animeNative": "異能バトルは日常系のなかで",
+      "artist": "かと*ふく",
+      "artistAliases": [
+        "かと*ふく",
+        "かと＊ふく"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20646,
+      "bangumiId": 99538,
+      "releaseYear": 2014,
+      "themeId": 5478,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/inou_battle_wa_nichijou_kei_no_naka_de"
+    },
+    {
+      "title": "Hoshi to Hana",
+      "titleCN": "Hoshi to Hana",
+      "anime": "Yuuki Yuuna wa Yuusha de Aru",
+      "animeCN": "结城友奈是勇者",
+      "animeNative": "結城友奈は勇者である",
+      "artist": "Suzuko Mimori, Tomoyo Kurosawa, Yumi Uchiyama",
+      "artistAliases": [
+        "Suzuko Mimori",
+        "Tomoyo Kurosawa",
+        "Yumi Uchiyama"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20800,
+      "bangumiId": 109328,
+      "releaseYear": 2014,
+      "themeId": 5573,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuuki_yuuna_wa_yuusha_de_aru"
+    },
+    {
+      "title": "Aurora Days",
+      "titleCN": "Aurora Days",
+      "anime": "Yuuki Yuuna wa Yuusha de Aru",
+      "animeCN": "结城友奈是勇者",
+      "animeNative": "結城友奈は勇者である",
+      "artist": "Suzuko Mimori, Tomoyo Kurosawa, Yumi Uchiyama",
+      "artistAliases": [
+        "Suzuko Mimori",
+        "Tomoyo Kurosawa",
+        "Yumi Uchiyama"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20800,
+      "bangumiId": 109328,
+      "releaseYear": 2014,
+      "themeId": 5574,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuuki_yuuna_wa_yuusha_de_aru"
+    },
+    {
+      "title": "Inori no Uta",
+      "titleCN": "Inori no Uta",
+      "anime": "Yuuki Yuuna wa Yuusha de Aru",
+      "animeCN": "结城友奈是勇者",
+      "animeNative": "結城友奈は勇者である",
+      "artist": "Tomoyo Kurosawa",
+      "artistAliases": [
+        "Tomoyo Kurosawa"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20800,
+      "bangumiId": 109328,
+      "releaseYear": 2014,
+      "themeId": 10313,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/yuuki_yuuna_wa_yuusha_de_aru"
+    },
+    {
+      "title": "Enigmatic Feeling",
+      "titleCN": "Enigmatic Feeling",
+      "anime": "Psycho Pass 2",
+      "animeCN": "心理测量者2",
+      "animeNative": "PSYCHO-PASS サイコパス2",
+      "artist": "Ling Tosite Sigure",
+      "artistAliases": [
+        "Ling Tosite Sigure"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20513,
+      "bangumiId": 77625,
+      "releaseYear": 2014,
+      "themeId": 5511,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/psycho_pass_2"
+    },
+    {
+      "title": "Fallen",
+      "titleCN": "Fallen",
+      "anime": "Psycho Pass 2",
+      "animeCN": "心理测量者2",
+      "animeNative": "PSYCHO-PASS サイコパス2",
+      "artist": "EGOIST",
+      "artistAliases": [
+        "EGOIST"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20513,
+      "bangumiId": 77625,
+      "releaseYear": 2014,
+      "themeId": 5512,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/psycho_pass_2"
+    },
+    {
+      "title": "Netsujou no Spectrum",
+      "titleCN": "Netsujou no Spectrum",
+      "anime": "Nanatsu no Taizai",
+      "animeCN": "七大罪",
+      "animeNative": "七つの大罪",
+      "artist": "Ikimonogakari",
+      "artistAliases": [
+        "Ikimonogakari"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20789,
+      "bangumiId": 101820,
+      "releaseYear": 2014,
+      "themeId": 5492,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nanatsu_no_taizai"
+    },
+    {
+      "title": "Seven Deadly Sins",
+      "titleCN": "Seven Deadly Sins",
+      "anime": "Nanatsu no Taizai",
+      "animeCN": "七大罪",
+      "animeNative": "七つの大罪",
+      "artist": "MAN WITH A MISSION",
+      "artistAliases": [
+        "MAN WITH A MISSION"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20789,
+      "bangumiId": 101820,
+      "releaseYear": 2014,
+      "themeId": 5493,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nanatsu_no_taizai"
+    },
+    {
+      "title": "7 -seven-",
+      "titleCN": "7 -seven-",
+      "anime": "Nanatsu no Taizai",
+      "animeCN": "七大罪",
+      "animeNative": "七つの大罪",
+      "artist": "FLOW, GRANRODEO",
+      "artistAliases": [
+        "FLOW",
+        "GRANRODEO"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20789,
+      "bangumiId": 101820,
+      "releaseYear": 2014,
+      "themeId": 5494,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nanatsu_no_taizai"
+    },
+    {
+      "title": "Season",
+      "titleCN": "Season",
+      "anime": "Nanatsu no Taizai",
+      "animeCN": "七大罪",
+      "animeNative": "七つの大罪",
+      "artist": "Alisa Takigawa",
+      "artistAliases": [
+        "Alisa Takigawa"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20789,
+      "bangumiId": 101820,
+      "releaseYear": 2014,
+      "themeId": 5495,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nanatsu_no_taizai"
+    },
+    {
+      "title": "database feat. TAKUMA (10 Feet)",
+      "titleCN": "database feat. TAKUMA (10 Feet)",
+      "anime": "Log Horizon 2nd Season",
+      "animeCN": "记录的地平线 第二季",
+      "animeNative": "ログ・ホライズン 2",
+      "artist": "MAN WITH A MISSION",
+      "artistAliases": [
+        "MAN WITH A MISSION"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20671,
+      "bangumiId": 100517,
+      "releaseYear": 2014,
+      "themeId": 5483,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/log_horizon_2nd_season"
+    },
+    {
+      "title": "Wonderful Wonder World",
+      "titleCN": "Wonderful Wonder World*",
+      "anime": "Log Horizon 2nd Season",
+      "animeCN": "记录的地平线 第二季",
+      "animeNative": "ログ・ホライズン 2",
+      "artist": "Yun*chi",
+      "artistAliases": [
+        "Yun*chi"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20671,
+      "bangumiId": 100517,
+      "releaseYear": 2014,
+      "themeId": 5484,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/log_horizon_2nd_season"
+    },
+    {
+      "title": "Seven Doors",
+      "titleCN": "Seven Doors",
+      "anime": "Trinity Seven",
+      "animeCN": "七人魔法使",
+      "animeNative": "トリニティセブン",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20631,
+      "bangumiId": 96977,
+      "releaseYear": 2014,
+      "themeId": 5556,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/trinity_seven"
+    },
+    {
+      "title": "BEAUTIFUL≒SENTENCE",
+      "titleCN": "BEAUTIFUL≒SENTENCE",
+      "anime": "Trinity Seven",
+      "animeCN": "七人魔法使",
+      "animeNative": "トリニティセブン",
+      "artist": "Aya Uchida",
+      "artistAliases": [
+        "Aya Uchida"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20631,
+      "bangumiId": 96977,
+      "releaseYear": 2014,
+      "themeId": 5557,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/trinity_seven"
+    },
+    {
+      "title": "SHaVaDaVa in AMAZING♪",
+      "titleCN": "SHaVaDaVa in AMAZING♪",
+      "anime": "Trinity Seven",
+      "animeCN": "七人魔法使",
+      "animeNative": "トリニティセブン",
+      "artist": "Ayane Sakura, Rie Murakawa",
+      "artistAliases": [
+        "Ayane Sakura",
+        "Rie Murakawa"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20631,
+      "bangumiId": 96977,
+      "releaseYear": 2014,
+      "themeId": 5558,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/trinity_seven"
+    },
+    {
+      "title": "ReSTART 'THE WORLD'",
+      "titleCN": "ReSTART 'THE WORLD'",
+      "anime": "Trinity Seven",
+      "animeCN": "七人魔法使",
+      "animeNative": "トリニティセブン",
+      "artist": "Nao Touyama, Aya Suzaki",
+      "artistAliases": [
+        "Nao Touyama",
+        "Aya Suzaki"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20631,
+      "bangumiId": 96977,
+      "releaseYear": 2014,
+      "themeId": 5559,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/trinity_seven"
+    },
+    {
+      "title": "TRINITY×SEVENTH+HEAVEN",
+      "titleCN": "TRINITY×SEVENTH+HEAVEN",
+      "anime": "Trinity Seven",
+      "animeCN": "七人魔法使",
+      "animeNative": "トリニティセブン",
+      "artist": "Youko Hikasa",
+      "artistAliases": [
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20631,
+      "bangumiId": 96977,
+      "releaseYear": 2014,
+      "themeId": 5560,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/trinity_seven"
+    },
+    {
+      "title": "Stargazer",
+      "titleCN": "Stargazer",
+      "anime": "Sora no Method",
+      "animeCN": "天体的秩序",
+      "animeNative": "天体のメソッド",
+      "artist": "Larval Stage Planning",
+      "artistAliases": [
+        "Larval Stage Planning"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20672,
+      "bangumiId": 100040,
+      "releaseYear": 2014,
+      "themeId": 5545,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_method"
+    },
+    {
+      "title": "Hoshikuzu no Interlude",
+      "titleCN": "Hoshikuzu no Interlude",
+      "anime": "Sora no Method",
+      "animeCN": "天体的秩序",
+      "animeNative": "天体のメソッド",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20672,
+      "bangumiId": 100040,
+      "releaseYear": 2014,
+      "themeId": 5546,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_method"
+    },
+    {
+      "title": "Hoshi no Kakera",
+      "titleCN": "Hoshi no Kakera",
+      "anime": "Sora no Method",
+      "animeCN": "天体的秩序",
+      "animeNative": "天体のメソッド",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20672,
+      "bangumiId": 100040,
+      "releaseYear": 2014,
+      "themeId": 5547,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_method"
+    },
+    {
+      "title": "Sora no Method",
+      "titleCN": "Sora no Method",
+      "anime": "Sora no Method",
+      "animeCN": "天体的秩序",
+      "animeNative": "天体のメソッド",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20672,
+      "bangumiId": 100040,
+      "releaseYear": 2014,
+      "themeId": 5548,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_method"
+    },
+    {
+      "title": "Gimmie! Revolution",
+      "titleCN": "Gimmie! Revolution",
+      "anime": "Ore, Twintails ni Narimasu.",
+      "animeCN": "我，要成为双马尾",
+      "animeNative": "俺、ツインテールになります。",
+      "artist": "Maaya Uchida",
+      "artistAliases": [
+        "Maaya Uchida"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20565,
+      "bangumiId": 92429,
+      "releaseYear": 2014,
+      "themeId": 5509,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_twintails_ni_narimasu"
+    },
+    {
+      "title": "Twintails Dreamer!",
+      "titleCN": "Twintails Dreamer!",
+      "anime": "Ore, Twintails ni Narimasu.",
+      "animeCN": "我，要成为双马尾",
+      "animeNative": "俺、ツインテールになります。",
+      "artist": "Sumire Uesaka, Chinatsu Akasaki, Yuuka Aisaka",
+      "artistAliases": [
+        "Sumire Uesaka",
+        "Chinatsu Akasaki",
+        "Yuuka Aisaka"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20565,
+      "bangumiId": 92429,
+      "releaseYear": 2014,
+      "themeId": 5510,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_twintails_ni_narimasu"
+    },
+    {
+      "title": "Kajirikake no Ringo",
+      "titleCN": "Kajirikake no Ringo",
+      "anime": "Denki-gai no Honya-san",
+      "animeCN": "电器街的漫画店",
+      "animeNative": "デンキ街の本屋さん",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "OP",
+      "season": "2014-10",
+      "anilistId": 20710,
+      "bangumiId": 103127,
+      "releaseYear": 2014,
+      "themeId": 5442,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/denki_gai_no_honya_san"
+    },
+    {
+      "title": "two-Dimension's Love",
+      "titleCN": "two-Dimension's Love",
+      "anime": "Denki-gai no Honya-san",
+      "animeCN": "电器街的漫画店",
+      "animeNative": "デンキ街の本屋さん",
+      "artist": "Ayana Taketatsu, Minami Tsuda",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Minami Tsuda"
+      ],
+      "type": "ED",
+      "season": "2014-10",
+      "anilistId": 20710,
+      "bangumiId": 103127,
+      "releaseYear": 2014,
+      "themeId": 5443,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/denki_gai_no_honya_san"
     }
   ],
   "2014-07": [
@@ -44610,6 +54769,440 @@ export const SEASONAL_POOLS = {
       "themeId": 5579,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/akame_ga_kill"
+    },
+    {
+      "title": "the last day of my adolescence",
+      "titleCN": "the last day of my adolescence",
+      "anime": "Hanamonogatari",
+      "animeCN": "花物语",
+      "animeNative": "花物語",
+      "artist": "Miyuki Sawashiro",
+      "artistAliases": [
+        "Miyuki Sawashiro"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20593,
+      "bangumiId": 82322,
+      "releaseYear": 2014,
+      "themeId": 5616,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hanamonogatari"
+    },
+    {
+      "title": "Hana Ato: Shirushi",
+      "titleCN": "Hana Ato: Shirushi",
+      "anime": "Hanamonogatari",
+      "animeCN": "花物语",
+      "animeNative": "花物語",
+      "artist": "Marina Kawano",
+      "artistAliases": [
+        "Marina Kawano"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20593,
+      "bangumiId": 82322,
+      "releaseYear": 2014,
+      "themeId": 5617,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hanamonogatari"
+    },
+    {
+      "title": "Trigger",
+      "titleCN": "Trigger",
+      "anime": "Zankyou no Terror",
+      "animeCN": "东京残响",
+      "animeNative": "残響のテロル",
+      "artist": "Yuuki Ozaki（from Galileo Galilei）",
+      "artistAliases": [
+        "尾崎雄貴",
+        "Yuuki Ozaki",
+        "Galileo Galilei",
+        "Yuuki Ozaki（from Galileo Galilei）"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20661,
+      "bangumiId": 100443,
+      "releaseYear": 2014,
+      "themeId": 5703,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zankyou_no_terror"
+    },
+    {
+      "title": "Dare ka, Umi wo.",
+      "titleCN": "Dare ka, Umi wo.",
+      "anime": "Zankyou no Terror",
+      "animeCN": "东京残响",
+      "animeNative": "残響のテロル",
+      "artist": "Aimer",
+      "artistAliases": [
+        "Aimer"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20661,
+      "bangumiId": 100443,
+      "releaseYear": 2014,
+      "themeId": 5704,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zankyou_no_terror"
+    },
+    {
+      "title": "heavenly blue",
+      "titleCN": "heavenly blue",
+      "anime": "Aldnoah.Zero",
+      "animeCN": "ALDNOAH.ZERO",
+      "animeNative": "アルドノア・ゼロ",
+      "artist": "Kalafina",
+      "artistAliases": [
+        "Kalafina"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20632,
+      "bangumiId": 96918,
+      "releaseYear": 2014,
+      "themeId": 5580,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aldnoahzero"
+    },
+    {
+      "title": "A/Z",
+      "titleCN": "A/Z",
+      "anime": "Aldnoah.Zero",
+      "animeCN": "ALDNOAH.ZERO",
+      "animeNative": "アルドノア・ゼロ",
+      "artist": "SawanoHiroyuki[nZk], Mizuki",
+      "artistAliases": [
+        "SawanoHiroyuki[nZk]",
+        "Mizuki"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20632,
+      "bangumiId": 96918,
+      "releaseYear": 2014,
+      "themeId": 5581,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aldnoahzero"
+    },
+    {
+      "title": "Rashisa",
+      "titleCN": "Rashisa",
+      "anime": "Barakamon",
+      "animeCN": "元气囝仔",
+      "animeNative": "ばらかもん",
+      "artist": "SUPER BEAVER",
+      "artistAliases": [
+        "SUPER BEAVER"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20722,
+      "bangumiId": 83868,
+      "releaseYear": 2014,
+      "themeId": 5587,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/barakamon"
+    },
+    {
+      "title": "Innocence",
+      "titleCN": "Innocence",
+      "anime": "Barakamon",
+      "animeCN": "元气囝仔",
+      "animeNative": "ばらかもん",
+      "artist": "NoisyCell",
+      "artistAliases": [
+        "NoisyCell"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20722,
+      "bangumiId": 83868,
+      "releaseYear": 2014,
+      "themeId": 5588,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/barakamon"
+    },
+    {
+      "title": "moving soul",
+      "titleCN": "moving soul",
+      "anime": "Fate/kaleid liner Prisma☆Illya 2wei!",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅 2wei!",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ ツヴァイ!",
+      "artist": "Minami Kuribayashi",
+      "artistAliases": [
+        "Minami Kuribayashi"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20467,
+      "bangumiId": 83402,
+      "releaseYear": 2014,
+      "themeId": 5597,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya_2wei"
+    },
+    {
+      "title": "TWO BY TWO",
+      "titleCN": "TWO BY TWO",
+      "anime": "Fate/kaleid liner Prisma☆Illya 2wei!",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅 2wei!",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ ツヴァイ!",
+      "artist": "幸田夢波",
+      "artistAliases": [
+        "幸田夢波",
+        "Yumeha Kouda"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20467,
+      "bangumiId": 83402,
+      "releaseYear": 2014,
+      "themeId": 5598,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya_2wei"
+    },
+    {
+      "title": "Kyoumei no True Force",
+      "titleCN": "Kyoumei no True Force",
+      "anime": "Seirei Tsukai no Blade Dance",
+      "animeCN": "精灵使的剑舞",
+      "animeNative": "精霊使いの剣舞【ブレイドダンス】",
+      "artist": "Hitomi Harada",
+      "artistAliases": [
+        "Hitomi Harada"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20663,
+      "bangumiId": 79226,
+      "releaseYear": 2014,
+      "themeId": 5671,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seirei_tsukai_no_blade_dance"
+    },
+    {
+      "title": "Blade Dance",
+      "titleCN": "Blade Dance",
+      "anime": "Seirei Tsukai no Blade Dance",
+      "animeCN": "精灵使的剑舞",
+      "animeNative": "精霊使いの剣舞【ブレイドダンス】",
+      "artist": "Ai Kakuma, Saori Oonishi, Shizuka Ishigami, Kana Yuuki",
+      "artistAliases": [
+        "Ai Kakuma",
+        "Saori Oonishi",
+        "Shizuka Ishigami",
+        "Kana Yuuki"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20663,
+      "bangumiId": 79226,
+      "releaseYear": 2014,
+      "themeId": 5672,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seirei_tsukai_no_blade_dance"
+    },
+    {
+      "title": "Koukan win-win Mujouken",
+      "titleCN": "Koukan win-win Mujouken",
+      "anime": "Rokujouma no Shinryakusha!?",
+      "animeCN": "三坪房间的侵略者!?",
+      "animeNative": "六畳間の侵略者!?",
+      "artist": "Eri Suzuki, Maria Naganawa, Masumi Tazawa",
+      "artistAliases": [
+        "Eri Suzuki",
+        "Maria Naganawa",
+        "Masumi Tazawa"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20638,
+      "bangumiId": 98286,
+      "releaseYear": 2014,
+      "themeId": 5667,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rokujouma_no_shinryakusha"
+    },
+    {
+      "title": "Koi wa Milk Tea",
+      "titleCN": "Koi wa Milk Tea",
+      "anime": "Rokujouma no Shinryakusha!?",
+      "animeCN": "三坪房间的侵略者!?",
+      "animeNative": "六畳間の侵略者!?",
+      "artist": "Eri Suzuki, petit milady",
+      "artistAliases": [
+        "Eri Suzuki",
+        "petit milady"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20638,
+      "bangumiId": 98286,
+      "releaseYear": 2014,
+      "themeId": 5668,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rokujouma_no_shinryakusha"
+    },
+    {
+      "title": "Natsu-iro Present",
+      "titleCN": "Natsu-iro Present",
+      "anime": "Yama no Susume Second Season",
+      "animeCN": "向山进发 第二季",
+      "animeNative": "ヤマノススメ セカンドシーズン",
+      "artist": "Kana Asumi, Youko Hikasa, Yui Ogura, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Asumi",
+        "Youko Hikasa",
+        "Yui Ogura",
+        "Yuka Iguchi"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20485,
+      "bangumiId": 86670,
+      "releaseYear": 2014,
+      "themeId": 5697,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume_second_season"
+    },
+    {
+      "title": "Mainichi Koharu Biyori",
+      "titleCN": "Mainichi Koharu Biyori",
+      "anime": "Yama no Susume Second Season",
+      "animeCN": "向山进发 第二季",
+      "animeNative": "ヤマノススメ セカンドシーズン",
+      "artist": "Kana Asumi, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Asumi",
+        "Yuka Iguchi"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20485,
+      "bangumiId": 86670,
+      "releaseYear": 2014,
+      "themeId": 5698,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume_second_season"
+    },
+    {
+      "title": "Tinkling Smile",
+      "titleCN": "Tinkling Smile",
+      "anime": "Yama no Susume Second Season",
+      "animeCN": "向山进发 第二季",
+      "animeNative": "ヤマノススメ セカンドシーズン",
+      "artist": "Yui Ogura",
+      "artistAliases": [
+        "Yui Ogura"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20485,
+      "bangumiId": 86670,
+      "releaseYear": 2014,
+      "themeId": 5699,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume_second_season"
+    },
+    {
+      "title": "Staccato Days",
+      "titleCN": "Staccato Days",
+      "anime": "Yama no Susume Second Season",
+      "animeCN": "向山进发 第二季",
+      "animeNative": "ヤマノススメ セカンドシーズン",
+      "artist": "Kana Asumi, Yuka Iguchi",
+      "artistAliases": [
+        "Kana Asumi",
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20485,
+      "bangumiId": 86670,
+      "releaseYear": 2014,
+      "themeId": 5700,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume_second_season"
+    },
+    {
+      "title": "Cocoiro Rainbow",
+      "titleCN": "Cocoiro Rainbow",
+      "anime": "Yama no Susume Second Season",
+      "animeCN": "向山进发 第二季",
+      "animeNative": "ヤマノススメ セカンドシーズン",
+      "artist": "鳴海杏子",
+      "artistAliases": [
+        "鳴海杏子"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20485,
+      "bangumiId": 86670,
+      "releaseYear": 2014,
+      "themeId": 5701,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume_second_season"
+    },
+    {
+      "title": "Viva Namida",
+      "titleCN": "Viva Namida",
+      "anime": "Space☆Dandy 2nd Season",
+      "animeCN": "太空丹迪 第二季",
+      "animeNative": "スペース☆ダンディ 2",
+      "artist": "Yasuyuki Okamura",
+      "artistAliases": [
+        "Yasuyuki Okamura"
+      ],
+      "type": "OP",
+      "season": "2014-07",
+      "anilistId": 20666,
+      "bangumiId": 100501,
+      "releaseYear": 2014,
+      "themeId": 5679,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/spacedandy_2nd_season"
+    },
+    {
+      "title": "X Jigen e Youkoso",
+      "titleCN": "X Jigen e Youkoso",
+      "anime": "Space☆Dandy 2nd Season",
+      "animeCN": "太空丹迪 第二季",
+      "animeNative": "スペース☆ダンディ 2",
+      "artist": "Etsuko Yakushimaru",
+      "artistAliases": [
+        "Etsuko Yakushimaru"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20666,
+      "bangumiId": 100501,
+      "releaseYear": 2014,
+      "themeId": 5680,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/spacedandy_2nd_season"
+    },
+    {
+      "title": "Kanchigai Lonely Night",
+      "titleCN": "Kanchigai Lonely Night",
+      "anime": "Space☆Dandy 2nd Season",
+      "animeCN": "太空丹迪 第二季",
+      "animeNative": "スペース☆ダンディ 2",
+      "artist": "Junichi Suwabe",
+      "artistAliases": [
+        "Junichi Suwabe"
+      ],
+      "type": "ED",
+      "season": "2014-07",
+      "anilistId": 20666,
+      "bangumiId": 100501,
+      "releaseYear": 2014,
+      "themeId": 5681,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/spacedandy_2nd_season"
     }
   ],
   "2014-01": [
@@ -44872,6 +55465,544 @@ export const SEASONAL_POOLS = {
       "themeId": 5931,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/noragami"
+    },
+    {
+      "title": "Hanasaku☆Saikyou Legend Days",
+      "titleCN": "Hanasaku☆Saikyou Legend Days",
+      "anime": "Seitokai Yakuindomo*",
+      "animeCN": "妄想学生会＊",
+      "animeNative": "生徒会役員共＊",
+      "artist": "Triple Booking",
+      "artistAliases": [
+        "Triple Booking"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 20448,
+      "bangumiId": 85204,
+      "releaseYear": 2014,
+      "themeId": 5957,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seitokai_yakuindomo_2014"
+    },
+    {
+      "title": "Mirai Night",
+      "titleCN": "Mirai Night",
+      "anime": "Seitokai Yakuindomo*",
+      "animeCN": "妄想学生会＊",
+      "animeNative": "生徒会役員共＊",
+      "artist": "Satomi Satou",
+      "artistAliases": [
+        "Satomi Satou"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20448,
+      "bangumiId": 85204,
+      "releaseYear": 2014,
+      "themeId": 5958,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seitokai_yakuindomo_2014"
+    },
+    {
+      "title": "Viva Namida",
+      "titleCN": "Viva Namida",
+      "anime": "Space☆Dandy",
+      "animeCN": "太空丹迪",
+      "animeNative": "スペース☆ダンディ",
+      "artist": "Yasuyuki Okamura",
+      "artistAliases": [
+        "Yasuyuki Okamura"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 20057,
+      "bangumiId": 80864,
+      "releaseYear": 2014,
+      "themeId": 5975,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/spacedandy"
+    },
+    {
+      "title": "X Jigen e Youkoso",
+      "titleCN": "X Jigen e Youkoso",
+      "anime": "Space☆Dandy",
+      "animeCN": "太空丹迪",
+      "animeNative": "スペース☆ダンディ",
+      "artist": "Etsuko Yakushimaru",
+      "artistAliases": [
+        "Etsuko Yakushimaru"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20057,
+      "bangumiId": 80864,
+      "releaseYear": 2014,
+      "themeId": 5976,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/spacedandy"
+    },
+    {
+      "title": "Himitsu no Tobira kara Ai ni Kite",
+      "titleCN": "Himitsu no Tobira kara Ai ni Kite",
+      "anime": "Nourin",
+      "animeCN": "农林",
+      "animeNative": "のうりん",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 18095,
+      "bangumiId": 68756,
+      "releaseYear": 2014,
+      "themeId": 5932,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nourin"
+    },
+    {
+      "title": "Mogitate ♥ Fruit Girls",
+      "titleCN": "Mogitate ♥ Fruit Girls",
+      "anime": "Nourin",
+      "animeCN": "农林",
+      "animeNative": "のうりん",
+      "artist": "Kana Hanazawa, Yukari Tamura",
+      "artistAliases": [
+        "Kana Hanazawa",
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 18095,
+      "bangumiId": 68756,
+      "releaseYear": 2014,
+      "themeId": 5933,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nourin"
+    },
+    {
+      "title": "Minori no Zokkon Mirai Yohou",
+      "titleCN": "Minori no Zokkon Mirai Yohou",
+      "anime": "Nourin",
+      "animeCN": "农林",
+      "animeNative": "のうりん",
+      "artist": "Kana Hanazawa",
+      "artistAliases": [
+        "Kana Hanazawa"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 18095,
+      "bangumiId": 68756,
+      "releaseYear": 2014,
+      "themeId": 5934,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nourin"
+    },
+    {
+      "title": "Ponytail no Yonjuu",
+      "titleCN": "Ponytail no Yonjuu",
+      "anime": "Nourin",
+      "animeCN": "农林",
+      "animeNative": "のうりん",
+      "artist": "Chiwa Saitou",
+      "artistAliases": [
+        "Chiwa Saitou"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 18095,
+      "bangumiId": 68756,
+      "releaseYear": 2014,
+      "themeId": 5935,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/nourin"
+    },
+    {
+      "title": "Kimi\\*to\\*New\\*Day",
+      "titleCN": "Kimi\\*to\\*New\\*Day",
+      "anime": "Nourin",
+      "animeCN": "农林",
+      "animeNative": "のうりん",
+      "artist": "Marina Inoue",
+      "artistAliases": [
+        "Marina Inoue"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 18095,
+      "bangumiId": 68756,
+      "releaseYear": 2014,
+      "themeId": 5936,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/nourin"
+    },
+    {
+      "title": "Cordless☆Dere☆PHONE",
+      "titleCN": "Cordless☆Dere☆PHONE",
+      "anime": "Nourin",
+      "animeCN": "农林",
+      "animeNative": "のうりん",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 18095,
+      "bangumiId": 68756,
+      "releaseYear": 2014,
+      "themeId": 5937,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/nourin"
+    },
+    {
+      "title": "Won(*3*)Chu KissMe!",
+      "titleCN": "Won(*3*)Chu KissMe!",
+      "anime": "Sakura Trick",
+      "animeCN": "樱Trick",
+      "animeNative": "桜Trick",
+      "artist": "SAKURA*TRICK",
+      "artistAliases": [
+        "SAKURA*TRICK"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 20047,
+      "bangumiId": 80838,
+      "releaseYear": 2014,
+      "themeId": 5954,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_trick"
+    },
+    {
+      "title": "Kiss(and)Love",
+      "titleCN": "Kiss(and)Love",
+      "anime": "Sakura Trick",
+      "animeCN": "樱Trick",
+      "animeNative": "桜Trick",
+      "artist": "SAKURA*TRICK",
+      "artistAliases": [
+        "SAKURA*TRICK"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20047,
+      "bangumiId": 80838,
+      "releaseYear": 2014,
+      "themeId": 5955,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_trick"
+    },
+    {
+      "title": "Sakura Sweet Kiss",
+      "titleCN": "Sakura Sweet Kiss",
+      "anime": "Sakura Trick",
+      "animeCN": "樱Trick",
+      "animeNative": "桜Trick",
+      "artist": "SAKURA*TRICK",
+      "artistAliases": [
+        "SAKURA*TRICK"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20047,
+      "bangumiId": 80838,
+      "releaseYear": 2014,
+      "themeId": 5956,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_trick"
+    },
+    {
+      "title": "Tomadoi→Recipe",
+      "titleCN": "Tomadoi→Recipe",
+      "anime": "Mikakunin de Shinkoukei",
+      "animeCN": "未确认进行式",
+      "animeNative": "未確認で進行形",
+      "artist": "Mikakuning!",
+      "artistAliases": [
+        "Mikakuning!"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 20483,
+      "bangumiId": 83869,
+      "releaseYear": 2014,
+      "themeId": 5912,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mikakunin_de_shinkoukei"
+    },
+    {
+      "title": "Masshiro World",
+      "titleCN": "Masshiro World",
+      "anime": "Mikakunin de Shinkoukei",
+      "animeCN": "未确认进行式",
+      "animeNative": "未確認で進行形",
+      "artist": "Mikakuning!",
+      "artistAliases": [
+        "Mikakuning!"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20483,
+      "bangumiId": 83869,
+      "releaseYear": 2014,
+      "themeId": 5913,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mikakunin_de_shinkoukei"
+    },
+    {
+      "title": "BINKAN♡Attention",
+      "titleCN": "BINKAN♡Attention",
+      "anime": "Saikin, Imouto no Yousu ga Chotto Okashiinda ga.",
+      "animeCN": "最近，妹妹的样子有点怪？",
+      "animeNative": "最近、妹のようすがちょっとおかしいんだが。",
+      "artist": "Yui Ogura, Hisako Kanemoto, Chinami Hashimoto",
+      "artistAliases": [
+        "Yui Ogura",
+        "Hisako Kanemoto",
+        "Chinami Hashimoto"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 17777,
+      "bangumiId": 55703,
+      "releaseYear": 2014,
+      "themeId": 5945,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saikin_imouto_no_yousu_ga_chotto_okashiinda_ga"
+    },
+    {
+      "title": "Charming Do!",
+      "titleCN": "Charming Do!",
+      "anime": "Saikin, Imouto no Yousu ga Chotto Okashiinda ga.",
+      "animeCN": "最近，妹妹的样子有点怪？",
+      "animeNative": "最近、妹のようすがちょっとおかしいんだが。",
+      "artist": "Yui Ogura",
+      "artistAliases": [
+        "Yui Ogura"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 17777,
+      "bangumiId": 55703,
+      "releaseYear": 2014,
+      "themeId": 5946,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saikin_imouto_no_yousu_ga_chotto_okashiinda_ga"
+    },
+    {
+      "title": "New SPARKS!",
+      "titleCN": "New SPARKS!",
+      "anime": "Saki Zenkoku-hen",
+      "animeCN": "天才麻将少女 全国篇",
+      "animeNative": "咲-Saki-全国編",
+      "artist": "Miyuki Hashimoto",
+      "artistAliases": [
+        "Miyuki Hashimoto"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 16123,
+      "bangumiId": 52606,
+      "releaseYear": 2014,
+      "themeId": 5947,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_zenkoku_hen"
+    },
+    {
+      "title": "TRUE GATE",
+      "titleCN": "TRUE GATE",
+      "anime": "Saki Zenkoku-hen",
+      "animeCN": "天才麻将少女 全国篇",
+      "animeNative": "咲-Saki-全国編",
+      "artist": "Miyuki Hashimoto",
+      "artistAliases": [
+        "Miyuki Hashimoto"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 16123,
+      "bangumiId": 52606,
+      "releaseYear": 2014,
+      "themeId": 5949,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_zenkoku_hen"
+    },
+    {
+      "title": "Kono Te ga Kiseki wo Eranderu Miyamori Joshi Koukou ver.",
+      "titleCN": "Kono Te ga Kiseki wo Eranderu Miyamori Joshi Koukou ver.",
+      "anime": "Saki Zenkoku-hen",
+      "animeCN": "天才麻将少女 全国篇",
+      "animeNative": "咲-Saki-全国編",
+      "artist": "Maaya Uchida, Moe Toyota",
+      "artistAliases": [
+        "Maaya Uchida",
+        "Moe Toyota"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 16123,
+      "bangumiId": 52606,
+      "releaseYear": 2014,
+      "themeId": 5950,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_zenkoku_hen"
+    },
+    {
+      "title": "Kono Te ga Kiseki wo Eranderu Eisui Joshi Koukou ver.",
+      "titleCN": "Kono Te ga Kiseki wo Eranderu Eisui Joshi Koukou ver.",
+      "anime": "Saki Zenkoku-hen",
+      "animeCN": "天才麻将少女 全国篇",
+      "animeNative": "咲-Saki-全国編",
+      "artist": "Saori Hayami, Chinatsu Akasaki",
+      "artistAliases": [
+        "Saori Hayami",
+        "Chinatsu Akasaki"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 16123,
+      "bangumiId": 52606,
+      "releaseYear": 2014,
+      "themeId": 5951,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_zenkoku_hen"
+    },
+    {
+      "title": "Kono Te ga Kiseki wo Eranderu Himematsu Joshi Koukou ver.",
+      "titleCN": "Kono Te ga Kiseki wo Eranderu Himematsu Joshi Koukou ver.",
+      "anime": "Saki Zenkoku-hen",
+      "animeCN": "天才麻将少女 全国篇",
+      "animeNative": "咲-Saki-全国編",
+      "artist": "Minako Kotobuki",
+      "artistAliases": [
+        "Minako Kotobuki"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 16123,
+      "bangumiId": 52606,
+      "releaseYear": 2014,
+      "themeId": 5952,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_zenkoku_hen"
+    },
+    {
+      "title": "Glossy:MMM",
+      "titleCN": "Glossy:MMM",
+      "anime": "Saki Zenkoku-hen",
+      "animeCN": "天才麻将少女 全国篇",
+      "animeNative": "咲-Saki-全国編",
+      "artist": "Miyuki Hashimoto",
+      "artistAliases": [
+        "Miyuki Hashimoto"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 16123,
+      "bangumiId": 52606,
+      "releaseYear": 2014,
+      "themeId": 5953,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/saki_zenkoku_hen"
+    },
+    {
+      "title": "LIFE",
+      "titleCN": "LIFE",
+      "anime": "Gin no Saji 2nd Season",
+      "animeCN": "银之匙 Silver Spoon 第二季",
+      "animeNative": "銀の匙 2",
+      "artist": "Fujifabric",
+      "artistAliases": [
+        "Fujifabric"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 19363,
+      "bangumiId": 77480,
+      "releaseYear": 2014,
+      "themeId": 5887,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gin_no_saji_2nd_season"
+    },
+    {
+      "title": "Oto no Naru Hou e→",
+      "titleCN": "オトノナルホウヘ→",
+      "anime": "Gin no Saji 2nd Season",
+      "animeCN": "银之匙 Silver Spoon 第二季",
+      "animeNative": "銀の匙 2",
+      "artist": "Goose house",
+      "artistAliases": [
+        "Goose house"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 19363,
+      "bangumiId": 77480,
+      "releaseYear": 2014,
+      "themeId": 5888,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gin_no_saji_2nd_season"
+    },
+    {
+      "title": "Jigoku no Sata mo Kimi Shidai",
+      "titleCN": "Jigoku no Sata mo Kimi Shidai",
+      "anime": "Hoozuki no Reitetsu",
+      "animeCN": "鬼灯的冷彻",
+      "animeNative": "鬼灯の冷徹",
+      "artist": "Eri Kitamura, Hiroki Yasumoto",
+      "artistAliases": [
+        "Eri Kitamura",
+        "Hiroki Yasumoto"
+      ],
+      "type": "OP",
+      "season": "2014-01",
+      "anilistId": 20431,
+      "bangumiId": 77188,
+      "releaseYear": 2014,
+      "themeId": 5896,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hoozuki_no_reitetsu"
+    },
+    {
+      "title": "Parallax View",
+      "titleCN": "Parallax View",
+      "anime": "Hoozuki no Reitetsu",
+      "animeCN": "鬼灯的冷彻",
+      "animeNative": "鬼灯の冷徹",
+      "artist": "Sumire Uesaka",
+      "artistAliases": [
+        "Sumire Uesaka"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20431,
+      "bangumiId": 77188,
+      "releaseYear": 2014,
+      "themeId": 5898,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hoozuki_no_reitetsu"
+    },
+    {
+      "title": "Caramel Peach Jam 120%",
+      "titleCN": "Caramel Peach Jam 120%",
+      "anime": "Hoozuki no Reitetsu",
+      "animeCN": "鬼灯的冷彻",
+      "animeNative": "鬼灯の冷徹",
+      "artist": "Sumire Uesaka",
+      "artistAliases": [
+        "Sumire Uesaka"
+      ],
+      "type": "ED",
+      "season": "2014-01",
+      "anilistId": 20431,
+      "bangumiId": 77188,
+      "releaseYear": 2014,
+      "themeId": 5899,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/hoozuki_no_reitetsu"
     }
   ],
   "2015-01": [
@@ -44969,6 +56100,565 @@ export const SEASONAL_POOLS = {
       "themeId": 6468,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/ansatsu_kyoushitsu_tv"
+    },
+    {
+      "title": "JoJo: Sono Chi no Kioku ~end of THE WORLD~",
+      "titleCN": "ジョジョ その血の記憶～end of THE WORLD～",
+      "anime": "JoJo no Kimyou na Bouken Part 3: Stardust Crusaders 2nd Season",
+      "animeCN": "JOJO的奇妙冒险 星尘斗士 埃及篇",
+      "animeNative": "ジョジョの奇妙な冒険 スターダストクルセイダース エジプト編",
+      "artist": "JO☆STARS ～TOMMY, Coda, JIN～",
+      "artistAliases": [
+        "JO☆STARS ～TOMMY, Coda, JIN～",
+        "JO☆STARS",
+        "TOMMY",
+        "Coda",
+        "JIN"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20799,
+      "bangumiId": 113292,
+      "releaseYear": 2015,
+      "themeId": 6482,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jojo_no_kimyou_na_bouken_part_3_stardust_crusaders_2nd_season"
+    },
+    {
+      "title": "Kisetsu wa Tsugitsugi Shindeiku",
+      "titleCN": "Kisetsu wa Tsugitsugi Shindeiku",
+      "anime": "Tokyo Ghoul √A",
+      "animeCN": "东京喰种√A",
+      "animeNative": "東京喰種トーキョーグール √A",
+      "artist": "amazarashi",
+      "artistAliases": [
+        "amazarashi"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20850,
+      "bangumiId": 115292,
+      "releaseYear": 2015,
+      "themeId": 6540,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ghoul_a"
+    },
+    {
+      "title": "Blade of Hope",
+      "titleCN": "Blade of Hope",
+      "anime": "Shinmai Maou no Testament",
+      "animeCN": "新妹魔王的契约者",
+      "animeNative": "新妹魔王の契約者",
+      "artist": "sweet ARMS",
+      "artistAliases": [
+        "sweet ARMS"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20678,
+      "bangumiId": 100205,
+      "releaseYear": 2015,
+      "themeId": 6519,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shinmai_maou_no_testament"
+    },
+    {
+      "title": "HEADHUNT",
+      "titleCN": "HEADHUNT",
+      "anime": "Durarara!!x2 Shou",
+      "animeCN": "无头骑士异闻录×2 承",
+      "animeNative": "デュラララ!!×２ 承",
+      "artist": "OKAMOTO'S",
+      "artistAliases": [
+        "OKAMOTO'S"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20652,
+      "bangumiId": 99941,
+      "releaseYear": 2015,
+      "themeId": 6475,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/durararax2_shou"
+    },
+    {
+      "title": "Absolute Soul",
+      "titleCN": "Absolute Soul",
+      "anime": "Absolute Duo",
+      "animeCN": "绝对双刃",
+      "animeNative": "アブソリュート・デュオ",
+      "artist": "Konomi Suzuki",
+      "artistAliases": [
+        "Konomi Suzuki"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20785,
+      "bangumiId": 108757,
+      "releaseYear": 2015,
+      "themeId": 6459,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/absolute_duo"
+    },
+    {
+      "title": "Believe×Believe",
+      "titleCN": "Believe×Believe",
+      "anime": "Absolute Duo",
+      "animeCN": "绝对双刃",
+      "animeNative": "アブソリュート・デュオ",
+      "artist": "Nozomi Yamamoto",
+      "artistAliases": [
+        "Nozomi Yamamoto"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20785,
+      "bangumiId": 108757,
+      "releaseYear": 2015,
+      "themeId": 6460,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/absolute_duo"
+    },
+    {
+      "title": "Apple Tea no Aji",
+      "titleCN": "Apple Tea no Aji",
+      "anime": "Absolute Duo",
+      "animeCN": "绝对双刃",
+      "animeNative": "アブソリュート・デュオ",
+      "artist": "Haruka Yamazaki, Nozomi Yamamoto",
+      "artistAliases": [
+        "Haruka Yamazaki",
+        "Nozomi Yamamoto"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20785,
+      "bangumiId": 108757,
+      "releaseYear": 2015,
+      "themeId": 6461,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/absolute_duo"
+    },
+    {
+      "title": "Miiro",
+      "titleCN": "Miiro",
+      "anime": "Kantai Collection: Kan Colle",
+      "animeCN": "舰队Collection",
+      "animeNative": "艦隊これくしょん -艦これ-",
+      "artist": "AKINO from bless4",
+      "artistAliases": [
+        "AKINO from bless4"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20553,
+      "bangumiId": 84386,
+      "releaseYear": 2015,
+      "themeId": 6493,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kantai_collection_kan_colle"
+    },
+    {
+      "title": "Fubuki",
+      "titleCN": "Fubuki",
+      "anime": "Kantai Collection: Kan Colle",
+      "animeCN": "舰队Collection",
+      "animeNative": "艦隊これくしょん -艦これ-",
+      "artist": "Shiena Nishizawa",
+      "artistAliases": [
+        "Shiena Nishizawa"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20553,
+      "bangumiId": 84386,
+      "releaseYear": 2015,
+      "themeId": 6494,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kantai_collection_kan_colle"
+    },
+    {
+      "title": "Ano Mori de Matteru",
+      "titleCN": "Ano Mori de Matteru",
+      "anime": "Yuri Kuma Arashi",
+      "animeCN": "百合熊风暴",
+      "animeNative": "ユリ熊嵐",
+      "artist": "Bonjour Suzuki",
+      "artistAliases": [
+        "Bonjour Suzuki"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20827,
+      "bangumiId": 59825,
+      "releaseYear": 2015,
+      "themeId": 6543,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuri_kuma_arashi"
+    },
+    {
+      "title": "Flyers",
+      "titleCN": "Flyers",
+      "anime": "Death Parade",
+      "animeCN": "死亡游行",
+      "animeNative": "デス・パレード",
+      "artist": "BRADIO",
+      "artistAliases": [
+        "BRADIO"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20931,
+      "bangumiId": 116742,
+      "releaseYear": 2015,
+      "themeId": 6471,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/death_parade"
+    },
+    {
+      "title": "Last Theater",
+      "titleCN": "Last Theater",
+      "anime": "Death Parade",
+      "animeCN": "死亡游行",
+      "animeNative": "デス・パレード",
+      "artist": "NoisyCell",
+      "artistAliases": [
+        "NoisyCell"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20931,
+      "bangumiId": 116742,
+      "releaseYear": 2015,
+      "themeId": 6472,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/death_parade"
+    },
+    {
+      "title": "Hito ni Yasashiku",
+      "titleCN": "Hito ni Yasashiku",
+      "anime": "Rolling☆Girls",
+      "animeCN": "旋转少女",
+      "animeNative": "ローリング☆ガールズ",
+      "artist": "Ari Ozawa, Risa Taneda",
+      "artistAliases": [
+        "Ari Ozawa",
+        "Risa Taneda"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20815,
+      "bangumiId": 110600,
+      "releaseYear": 2015,
+      "themeId": 6509,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rollinggirls"
+    },
+    {
+      "title": "Tsuki no Bakugekiki",
+      "titleCN": "Tsuki no Bakugekiki",
+      "anime": "Rolling☆Girls",
+      "animeCN": "旋转少女",
+      "animeNative": "ローリング☆ガールズ",
+      "artist": "Ari Ozawa, Risa Taneda",
+      "artistAliases": [
+        "Ari Ozawa",
+        "Risa Taneda"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20815,
+      "bangumiId": 110600,
+      "releaseYear": 2015,
+      "themeId": 6510,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rollinggirls"
+    },
+    {
+      "title": "Noutenki",
+      "titleCN": "Noutenki",
+      "anime": "Rolling☆Girls",
+      "animeCN": "旋转少女",
+      "animeNative": "ローリング☆ガールズ",
+      "artist": "Ari Ozawa, Risa Taneda",
+      "artistAliases": [
+        "Ari Ozawa",
+        "Risa Taneda"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20815,
+      "bangumiId": 110600,
+      "releaseYear": 2015,
+      "themeId": 6511,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/rollinggirls"
+    },
+    {
+      "title": "&Z",
+      "titleCN": "&Z",
+      "anime": "Aldnoah.Zero 2nd Season",
+      "animeCN": "ALDNOAH.ZERO 第二季",
+      "animeNative": "アルドノア・ゼロ 2",
+      "artist": "SawanoHiroyuki[nZk], Mizuki",
+      "artistAliases": [
+        "SawanoHiroyuki[nZk]",
+        "Mizuki"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20853,
+      "bangumiId": 107835,
+      "releaseYear": 2015,
+      "themeId": 6463,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aldnoahzero_2nd_season"
+    },
+    {
+      "title": "GENESIS",
+      "titleCN": "GENESIS",
+      "anime": "Aldnoah.Zero 2nd Season",
+      "animeCN": "ALDNOAH.ZERO 第二季",
+      "animeNative": "アルドノア・ゼロ 2",
+      "artist": "Eir Aoi",
+      "artistAliases": [
+        "Eir Aoi"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20853,
+      "bangumiId": 107835,
+      "releaseYear": 2015,
+      "themeId": 6464,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aldnoahzero_2nd_season"
+    },
+    {
+      "title": "Harmonious",
+      "titleCN": "Harmonious",
+      "anime": "Aldnoah.Zero 2nd Season",
+      "animeCN": "ALDNOAH.ZERO 第二季",
+      "animeNative": "アルドノア・ゼロ 2",
+      "artist": "Sora Amamiya",
+      "artistAliases": [
+        "Sora Amamiya"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20853,
+      "bangumiId": 107835,
+      "releaseYear": 2015,
+      "themeId": 6465,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/aldnoahzero_2nd_season"
+    },
+    {
+      "title": "Onegai! Cinderella",
+      "titleCN": "Onegai! Cinderella",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Ayana Taketatsu, Hitomi Harada, Minami Tsuda, Nao Touyama, Saori Hayami, Yui Makino, Chinatsu Akasaki",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Hitomi Harada",
+        "Minami Tsuda",
+        "Nao Touyama",
+        "Saori Hayami",
+        "Yui Makino",
+        "Chinatsu Akasaki"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6529,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "Star!!",
+      "titleCN": "Star!!",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Ayaka Oohashi, Maaya Uchida, Nozomi Yamamoto, Sumire Uesaka, Tomoyo Kurosawa, Yuka Ootsubo, Hiromi Igarashi, Natsumi Takamori, Aya Suzaki, Ruriko Aoki, Rei Matsuzaki, Naomi Oozora, Ayaka Fukuhara",
+      "artistAliases": [
+        "Ayaka Oohashi",
+        "Maaya Uchida",
+        "Nozomi Yamamoto",
+        "Sumire Uesaka",
+        "Tomoyo Kurosawa",
+        "Yuka Ootsubo",
+        "Hiromi Igarashi",
+        "Natsumi Takamori",
+        "Aya Suzaki",
+        "Ruriko Aoki",
+        "Rei Matsuzaki",
+        "Naomi Oozora",
+        "Ayaka Fukuhara"
+      ],
+      "type": "OP",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6530,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "Message",
+      "titleCN": "Message",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Ayaka Oohashi, Ayaka Fukuhara",
+      "artistAliases": [
+        "Ayaka Oohashi",
+        "Ayaka Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6531,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "Yuubae Present",
+      "titleCN": "Yuubae Present",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Ayaka Oohashi, Maaya Uchida, Nozomi Yamamoto, Sumire Uesaka, Tomoyo Kurosawa, Yuka Ootsubo, Hiromi Igarashi, Natsumi Takamori, Aya Suzaki, Ruriko Aoki, Rei Matsuzaki, Naomi Oozora, Ayaka Fukuhara",
+      "artistAliases": [
+        "Ayaka Oohashi",
+        "Maaya Uchida",
+        "Nozomi Yamamoto",
+        "Sumire Uesaka",
+        "Tomoyo Kurosawa",
+        "Yuka Ootsubo",
+        "Hiromi Igarashi",
+        "Natsumi Takamori",
+        "Aya Suzaki",
+        "Ruriko Aoki",
+        "Rei Matsuzaki",
+        "Naomi Oozora",
+        "Ayaka Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6532,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "-LEGNE- Adanasu Tsurugi Hikari no Shirabe",
+      "titleCN": "-LEGNE- Adanasu Tsurugi Hikari no Shirabe",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Maaya Uchida",
+      "artistAliases": [
+        "Maaya Uchida"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6534,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "Happy×2 Days",
+      "titleCN": "Happy×2 Days",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Yuka Ootsubo, Hiromi Igarashi, Naomi Oozora",
+      "artistAliases": [
+        "Yuka Ootsubo",
+        "Hiromi Igarashi",
+        "Naomi Oozora"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6535,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "LET'S GO HAPPY!!",
+      "titleCN": "LET'S GO HAPPY!!",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Dekoration",
+      "artistAliases": [
+        "Dekoration"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6536,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "ØωØver!!",
+      "titleCN": "ØωØver!!",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "*(Asterisk)",
+      "artistAliases": [
+        "*(Asterisk)"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6537,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
+    },
+    {
+      "title": "Nation Blue",
+      "titleCN": "Nation Blue",
+      "anime": "The iDOLM@STER Cinderella Girls",
+      "animeCN": "偶像大师 灰姑娘女孩",
+      "animeNative": "アイドルマスターシンデレラガールズ",
+      "artist": "Maaya Uchida, Sumire Uesaka, Aya Suzaki, Ruriko Aoki, Ayaka Fukuhara",
+      "artistAliases": [
+        "Maaya Uchida",
+        "Sumire Uesaka",
+        "Aya Suzaki",
+        "Ruriko Aoki",
+        "Ayaka Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2015-01",
+      "anilistId": 20693,
+      "bangumiId": 101399,
+      "releaseYear": 2015,
+      "themeId": 6538,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/the_idolm_at_ster_cinderella_girls"
     }
   ],
   "2015-04": [
@@ -45324,6 +57014,469 @@ export const SEASONAL_POOLS = {
       "themeId": 6411,
       "themeSequence": 7,
       "animethemesUrl": "https://animethemes.moe/anime/nisekoi_2015"
+    },
+    {
+      "title": "X.U.",
+      "titleCN": "X.U.",
+      "anime": "Owari no Seraph",
+      "animeCN": "终结的炽天使",
+      "animeNative": "終わりのセラフ",
+      "artist": "SawanoHiroyuki[nZk], Gemie",
+      "artistAliases": [
+        "SawanoHiroyuki[nZk]",
+        "Gemie"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20829,
+      "bangumiId": 112151,
+      "releaseYear": 2015,
+      "themeId": 10487,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/owari_no_seraph"
+    },
+    {
+      "title": "scaPEGoat",
+      "titleCN": "scaPEGoat",
+      "anime": "Owari no Seraph",
+      "animeCN": "终结的炽天使",
+      "animeNative": "終わりのセラフ",
+      "artist": "SawanoHiroyuki[nZk], Yosh",
+      "artistAliases": [
+        "SawanoHiroyuki[nZk]",
+        "Yosh"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20829,
+      "bangumiId": 112151,
+      "releaseYear": 2015,
+      "themeId": 10488,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/owari_no_seraph"
+    },
+    {
+      "title": "Setsuna no Kajitsu",
+      "titleCN": "Setsuna no Kajitsu",
+      "anime": "Grisaia no Rakuen",
+      "animeCN": "灰色的乐园",
+      "animeNative": "グリザイアの楽園",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 21006,
+      "bangumiId": 130234,
+      "releaseYear": 2015,
+      "themeId": 6342,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_rakuen"
+    },
+    {
+      "title": "Tasogare no Starlight",
+      "titleCN": "Tasogare no Starlight",
+      "anime": "Grisaia no Rakuen",
+      "animeCN": "灰色的乐园",
+      "animeNative": "グリザイアの楽園",
+      "artist": "Yoshino Nanjou",
+      "artistAliases": [
+        "Yoshino Nanjou"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 21006,
+      "bangumiId": 130234,
+      "releaseYear": 2015,
+      "themeId": 6343,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_rakuen"
+    },
+    {
+      "title": "Kimi wo Sagashi ni",
+      "titleCN": "Kimi wo Sagashi ni",
+      "anime": "Grisaia no Rakuen",
+      "animeCN": "灰色的乐园",
+      "animeNative": "グリザイアの楽園",
+      "artist": "Yoshino Nanjou",
+      "artistAliases": [
+        "Yoshino Nanjou"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 21006,
+      "bangumiId": 130234,
+      "releaseYear": 2015,
+      "themeId": 6345,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_rakuen"
+    },
+    {
+      "title": "DAYxDAY",
+      "titleCN": "DAYxDAY",
+      "anime": "Gintama°",
+      "animeCN": "银魂°",
+      "animeNative": "銀魂°",
+      "artist": "BLUE ENCOUNT",
+      "artistAliases": [
+        "BLUE ENCOUNT"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20996,
+      "bangumiId": 120791,
+      "releaseYear": 2015,
+      "themeId": 6333,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_2015"
+    },
+    {
+      "title": "Pride Kakumei",
+      "titleCN": "Pride Kakumei",
+      "anime": "Gintama°",
+      "animeCN": "银魂°",
+      "animeNative": "銀魂°",
+      "artist": "CHiCO, HoneyWorks",
+      "artistAliases": [
+        "CHiCO",
+        "HoneyWorks"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20996,
+      "bangumiId": 120791,
+      "releaseYear": 2015,
+      "themeId": 6334,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_2015"
+    },
+    {
+      "title": "Beautiful Days",
+      "titleCN": "Beautiful Days",
+      "anime": "Gintama°",
+      "animeCN": "银魂°",
+      "animeNative": "銀魂°",
+      "artist": "OKAMOTO'S",
+      "artistAliases": [
+        "OKAMOTO'S"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20996,
+      "bangumiId": 120791,
+      "releaseYear": 2015,
+      "themeId": 6335,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_2015"
+    },
+    {
+      "title": "Know Know Know",
+      "titleCN": "Know Know Know",
+      "anime": "Gintama°",
+      "animeCN": "银魂°",
+      "animeNative": "銀魂°",
+      "artist": "DOES",
+      "artistAliases": [
+        "DOES"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20996,
+      "bangumiId": 120791,
+      "releaseYear": 2015,
+      "themeId": 6336,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_2015"
+    },
+    {
+      "title": "Saigomade II",
+      "titleCN": "Saigomade II",
+      "anime": "Gintama°",
+      "animeCN": "银魂°",
+      "animeNative": "銀魂°",
+      "artist": "Aqua Timez",
+      "artistAliases": [
+        "Aqua Timez"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20996,
+      "bangumiId": 120791,
+      "releaseYear": 2015,
+      "themeId": 6338,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama_2015"
+    },
+    {
+      "title": "Kuchizuke Diamond",
+      "titleCN": "くちづけDiamond",
+      "anime": "Yamada-kun to 7-nin no Majo (TV)",
+      "animeCN": "山田君与7个魔女",
+      "animeNative": "山田くんと7人の魔女",
+      "artist": "WEAVER",
+      "artistAliases": [
+        "WEAVER"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20966,
+      "bangumiId": 118906,
+      "releaseYear": 2015,
+      "themeId": 6457,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yamada_kun_to_7_nin_no_majo_tv"
+    },
+    {
+      "title": "CANDY MAGIC",
+      "titleCN": "CANDY MAGIC",
+      "anime": "Yamada-kun to 7-nin no Majo (TV)",
+      "animeCN": "山田君与7个魔女",
+      "animeNative": "山田くんと7人の魔女",
+      "artist": "みみめめMIMI",
+      "artistAliases": [
+        "みみめめMIMI",
+        "mimimememimi"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20966,
+      "bangumiId": 118906,
+      "releaseYear": 2015,
+      "themeId": 6458,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yamada_kun_to_7_nin_no_majo_tv"
+    },
+    {
+      "title": "Yuruganu Futari ~Ai no Sanka~",
+      "titleCN": "Yuruganu Futari ~Ai no Sanka~",
+      "anime": "Danna ga Nani wo Itteiru ka Wakaranai Ken 2 Sure-me",
+      "animeCN": "关于完全听不懂老公在说什么的事 第二季",
+      "animeNative": "旦那が何を言っているかわからない件2スレ目",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 21000,
+      "bangumiId": 121108,
+      "releaseYear": 2015,
+      "themeId": 6288,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/danna_ga_nani_wo_itteiru_ka_wakaranai_ken_2_sure_me"
+    },
+    {
+      "title": "Okusama no Blues",
+      "titleCN": "Okusama no Blues",
+      "anime": "Danna ga Nani wo Itteiru ka Wakaranai Ken 2 Sure-me",
+      "animeCN": "关于完全听不懂老公在说什么的事 第二季",
+      "animeNative": "旦那が何を言っているかわからない件2スレ目",
+      "artist": "Rie Kugimiya, Yukari Tamura",
+      "artistAliases": [
+        "Rie Kugimiya",
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 21000,
+      "bangumiId": 121108,
+      "releaseYear": 2015,
+      "themeId": 6289,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/danna_ga_nani_wo_itteiru_ka_wakaranai_ken_2_sure_me"
+    },
+    {
+      "title": "Iikagen ni Shite, Anata (Acoustic ver.)",
+      "titleCN": "Iikagen ni Shite, Anata (Acoustic ver.)",
+      "anime": "Danna ga Nani wo Itteiru ka Wakaranai Ken 2 Sure-me",
+      "animeCN": "关于完全听不懂老公在说什么的事 第二季",
+      "animeNative": "旦那が何を言っているかわからない件2スレ目",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 21000,
+      "bangumiId": 121108,
+      "releaseYear": 2015,
+      "themeId": 6290,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/danna_ga_nani_wo_itteiru_ka_wakaranai_ken_2_sure_me"
+    },
+    {
+      "title": "Grimm",
+      "titleCN": "Grimm",
+      "anime": "Grisaia no Meikyuu: Caprice no Mayu 0",
+      "animeCN": "灰色的迷宫",
+      "animeNative": "グリザイアの迷宮",
+      "artist": "Faylan",
+      "artistAliases": [
+        "Faylan"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 21005,
+      "bangumiId": 121187,
+      "releaseYear": 2015,
+      "themeId": 6341,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/grisaia_no_meikyuu_caprice_no_mayu_0"
+    },
+    {
+      "title": "Fure Fure Mirai",
+      "titleCN": "Fure Fure Mirai",
+      "anime": "Nagato Yuki-chan no Shoushitsu",
+      "animeCN": "长门有希酱的消失",
+      "animeNative": "長門有希ちゃんの消失",
+      "artist": "Aya Hirano, Minori Chihara, Yuuko Gotou",
+      "artistAliases": [
+        "Aya Hirano",
+        "Minori Chihara",
+        "Yuuko Gotou"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20566,
+      "bangumiId": 90815,
+      "releaseYear": 2015,
+      "themeId": 6375,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nagato_yuki_chan_no_shoushitsu"
+    },
+    {
+      "title": "Arigatou, Daisuki",
+      "titleCN": "Arigatou, Daisuki",
+      "anime": "Nagato Yuki-chan no Shoushitsu",
+      "animeCN": "长门有希酱的消失",
+      "animeNative": "長門有希ちゃんの消失",
+      "artist": "Minori Chihara",
+      "artistAliases": [
+        "Minori Chihara"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20566,
+      "bangumiId": 90815,
+      "releaseYear": 2015,
+      "themeId": 6376,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nagato_yuki_chan_no_shoushitsu"
+    },
+    {
+      "title": "Kishi Shinkoukyoku",
+      "titleCN": "Kishi Shinkoukyoku",
+      "anime": "Sidonia no Kishi: Daikyuu Wakusei Seneki",
+      "animeCN": "希德尼娅的骑士 第九惑星战役",
+      "animeNative": "シドニアの騎士　第九惑星戦役",
+      "artist": "angela",
+      "artistAliases": [
+        "angela"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20762,
+      "bangumiId": 105255,
+      "releaseYear": 2015,
+      "themeId": 6436,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sidonia_no_kishi_daikyuu_wakusei_seneki"
+    },
+    {
+      "title": "Miraikei Answer",
+      "titleCN": "未来形 Answer",
+      "anime": "Ore Monogatari!!",
+      "animeCN": "俺物语!!",
+      "animeNative": "俺物語!!",
+      "artist": "TRUSTRICK",
+      "artistAliases": [
+        "TRUSTRICK"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20946,
+      "bangumiId": 117153,
+      "releaseYear": 2015,
+      "themeId": 6412,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_monogatari"
+    },
+    {
+      "title": "Shiawase no Arika",
+      "titleCN": "幸せのありか",
+      "anime": "Ore Monogatari!!",
+      "animeCN": "俺物语!!",
+      "animeNative": "俺物語!!",
+      "artist": "LOCAL CONNECT",
+      "artistAliases": [
+        "LOCAL CONNECT"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20946,
+      "bangumiId": 117153,
+      "releaseYear": 2015,
+      "themeId": 6413,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_monogatari"
+    },
+    {
+      "title": "BLESS YoUr NAME",
+      "titleCN": "BLESS YoUr NAME",
+      "anime": "High School DxD BorN",
+      "animeCN": "恶魔高校 D×D BorN",
+      "animeNative": "ハイスクールD×D BorN",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "OP",
+      "season": "2015-04",
+      "anilistId": 20745,
+      "bangumiId": 106212,
+      "releaseYear": 2015,
+      "themeId": 6358,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_born"
+    },
+    {
+      "title": "Give Me Secret",
+      "titleCN": "Give Me Secret",
+      "anime": "High School DxD BorN",
+      "animeCN": "恶魔高校 D×D BorN",
+      "animeNative": "ハイスクールD×D BorN",
+      "artist": "StylipS",
+      "artistAliases": [
+        "StylipS"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20745,
+      "bangumiId": 106212,
+      "releaseYear": 2015,
+      "themeId": 6359,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_born"
+    },
+    {
+      "title": "Oppai Dragon no Uta",
+      "titleCN": "Oppai Dragon no Uta",
+      "anime": "High School DxD BorN",
+      "animeCN": "恶魔高校 D×D BorN",
+      "animeNative": "ハイスクールD×D BorN",
+      "artist": "Yuuki Kaji",
+      "artistAliases": [
+        "Yuuki Kaji"
+      ],
+      "type": "ED",
+      "season": "2015-04",
+      "anilistId": 20745,
+      "bangumiId": 106212,
+      "releaseYear": 2015,
+      "themeId": 6360,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/high_school_dxd_born"
     }
   ],
   "2015-10": [
@@ -45546,6 +57699,302 @@ export const SEASONAL_POOLS = {
       "themeId": 6096,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/noragami_aragoto"
+    },
+    {
+      "title": "Haramitsu Renka",
+      "titleCN": "Haramitsu Renka",
+      "anime": "Rakudai Kishi no Cavalry",
+      "animeCN": "落第骑士英雄谭",
+      "animeNative": "落第騎士の英雄譚（キャバルリィ）",
+      "artist": "ALI PROJECT",
+      "artistAliases": [
+        "ALI PROJECT"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 21092,
+      "bangumiId": 127724,
+      "releaseYear": 2015,
+      "themeId": 6122,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rakudai_kishi_no_cavalry"
+    },
+    {
+      "title": "I'm A Believer",
+      "titleCN": "I'm A Believer",
+      "anime": "Haikyuu!! Second Season",
+      "animeCN": "排球少年 第二季",
+      "animeNative": "ハイキュー!! セカンドシーズン",
+      "artist": "SPYAIR",
+      "artistAliases": [
+        "SPYAIR"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 20992,
+      "bangumiId": 120236,
+      "releaseYear": 2015,
+      "themeId": 6054,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu_second_season"
+    },
+    {
+      "title": "Climber",
+      "titleCN": "Climber",
+      "anime": "Haikyuu!! Second Season",
+      "animeCN": "排球少年 第二季",
+      "animeNative": "ハイキュー!! セカンドシーズン",
+      "artist": "Galileo Galilei",
+      "artistAliases": [
+        "Galileo Galilei"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 20992,
+      "bangumiId": 120236,
+      "releaseYear": 2015,
+      "themeId": 6056,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu_second_season"
+    },
+    {
+      "title": "Hatsunetsu",
+      "titleCN": "Hatsunetsu",
+      "anime": "Haikyuu!! Second Season",
+      "animeCN": "排球少年 第二季",
+      "animeNative": "ハイキュー!! セカンドシーズン",
+      "artist": "tacica",
+      "artistAliases": [
+        "tacica"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 20992,
+      "bangumiId": 120236,
+      "releaseYear": 2015,
+      "themeId": 6057,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu_second_season"
+    },
+    {
+      "title": "Chochocho! Yuru Yuri☆Capriccio!!!",
+      "titleCN": "Chochocho! Yuru Yuri☆Capriccio!!!",
+      "anime": "Yuru Yuri San☆Hai!",
+      "animeCN": "摇曳百合 3☆High!",
+      "animeNative": "ゆるゆり さん☆はい！",
+      "artist": "Minami Tsuda, Rumi Ookubo, Shiori Mikami, Yuka Ootsubo",
+      "artistAliases": [
+        "Minami Tsuda",
+        "Rumi Ookubo",
+        "Shiori Mikami",
+        "Yuka Ootsubo"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 21088,
+      "bangumiId": 127573,
+      "releaseYear": 2015,
+      "themeId": 6155,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuru_yuri_sanhai"
+    },
+    {
+      "title": "Acchu~ma Seishun!",
+      "titleCN": "Acchu~ma Seishun!",
+      "anime": "Yuru Yuri San☆Hai!",
+      "animeCN": "摇曳百合 3☆High!",
+      "animeNative": "ゆるゆり さん☆はい！",
+      "artist": "Minami Tsuda, Rumi Ookubo, Shiori Mikami, Yuka Ootsubo",
+      "artistAliases": [
+        "Minami Tsuda",
+        "Rumi Ookubo",
+        "Shiori Mikami",
+        "Yuka Ootsubo"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 21088,
+      "bangumiId": 127573,
+      "releaseYear": 2015,
+      "themeId": 6156,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuru_yuri_sanhai"
+    },
+    {
+      "title": "Kimi ga Kureta Shiny Story",
+      "titleCN": "Kimi ga Kureta Shiny Story",
+      "anime": "Yuru Yuri San☆Hai!",
+      "animeCN": "摇曳百合 3☆High!",
+      "animeNative": "ゆるゆり さん☆はい！",
+      "artist": "Minami Tsuda, Rumi Ookubo, Shiori Mikami, Yuka Ootsubo",
+      "artistAliases": [
+        "Minami Tsuda",
+        "Rumi Ookubo",
+        "Shiori Mikami",
+        "Yuka Ootsubo"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 21088,
+      "bangumiId": 127573,
+      "releaseYear": 2015,
+      "themeId": 6157,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/yuru_yuri_sanhai"
+    },
+    {
+      "title": "Dear Answer",
+      "titleCN": "Dear Answer",
+      "anime": "Sakurako-san no Ashimoto ni wa Shitai ga Umatteiru",
+      "animeCN": "樱子小姐的脚下埋着尸体",
+      "animeNative": "櫻子さんの足下には死体が埋まっている",
+      "artist": "TRUE",
+      "artistAliases": [
+        "TRUE"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 21066,
+      "bangumiId": 126461,
+      "releaseYear": 2015,
+      "themeId": 6123,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakurako_san_no_ashimoto_ni_wa_shitai_ga_umatteiru"
+    },
+    {
+      "title": "Brand-new World",
+      "titleCN": "Brand-new World",
+      "anime": "Gakusen Toshi Asterisk",
+      "animeCN": "学战都市 六芒星",
+      "animeNative": "学戦都市アスタリスク",
+      "artist": "Shiena Nishizawa",
+      "artistAliases": [
+        "Shiena Nishizawa"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 21131,
+      "bangumiId": 130250,
+      "releaseYear": 2015,
+      "themeId": 6037,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gakusen_toshi_asterisk"
+    },
+    {
+      "title": "Waiting for the rain",
+      "titleCN": "Waiting for the rain",
+      "anime": "Gakusen Toshi Asterisk",
+      "animeCN": "学战都市 六芒星",
+      "animeNative": "学戦都市アスタリスク",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 21131,
+      "bangumiId": 130250,
+      "releaseYear": 2015,
+      "themeId": 6038,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gakusen_toshi_asterisk"
+    },
+    {
+      "title": "Two souls -toward the truth-",
+      "titleCN": "Two souls -toward the truth-",
+      "anime": "Owari no Seraph: Nagoya Kessen-hen",
+      "animeCN": "终结的炽天使 名古屋决战篇",
+      "animeNative": "終わりのセラフ　名古屋決戦編",
+      "artist": "fripSide",
+      "artistAliases": [
+        "fripSide"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 20993,
+      "bangumiId": 120705,
+      "releaseYear": 2015,
+      "themeId": 6111,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/owari_no_seraph_nagoya_kessen_hen"
+    },
+    {
+      "title": "Orarion",
+      "titleCN": "Orarion",
+      "anime": "Owari no Seraph: Nagoya Kessen-hen",
+      "animeCN": "终结的炽天使 名古屋决战篇",
+      "animeNative": "終わりのセラフ　名古屋決戦編",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 20993,
+      "bangumiId": 120705,
+      "releaseYear": 2015,
+      "themeId": 6112,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/owari_no_seraph_nagoya_kessen_hen"
+    },
+    {
+      "title": "Ichizu Recipe",
+      "titleCN": "イチズレシピ",
+      "anime": "Ore ga Ojousama Gakkou ni \"Shomin Sample\" Toshite Gets♥Sareta Ken",
+      "animeCN": "我被绑架到贵族女校当「庶民样本」",
+      "animeNative": "俺がお嬢様学校に「庶民サンプル」としてゲッツされた件",
+      "artist": "アイドルカレッジ",
+      "artistAliases": [
+        "アイドルカレッジ",
+        "Idol College"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 20771,
+      "bangumiId": 107671,
+      "releaseYear": 2015,
+      "themeId": 6104,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_ga_ojousama_gakkou_ni_shomin_sample_toshite_getssareta_ken"
+    },
+    {
+      "title": "Twilight ni Kienaide",
+      "titleCN": "トワイライトに消えないで",
+      "anime": "Ore ga Ojousama Gakkou ni \"Shomin Sample\" Toshite Gets♥Sareta Ken",
+      "animeCN": "我被绑架到贵族女校当「庶民样本」",
+      "animeNative": "俺がお嬢様学校に「庶民サンプル」としてゲッツされた件",
+      "artist": "原由実",
+      "artistAliases": [
+        "原由実",
+        "Yumi Hara"
+      ],
+      "type": "ED",
+      "season": "2015-10",
+      "anilistId": 20771,
+      "bangumiId": 107671,
+      "releaseYear": 2015,
+      "themeId": 6105,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_ga_ojousama_gakkou_ni_shomin_sample_toshite_getssareta_ken"
+    },
+    {
+      "title": "Katararezu Tomo",
+      "titleCN": "Katararezu Tomo",
+      "anime": "Concrete Revolutio: Choujin Gensou",
+      "animeCN": "Concrete Revolutio 超人幻想",
+      "animeNative": "コンクリート・レボルティオ～超人幻想～",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2015-10",
+      "anilistId": 21249,
+      "bangumiId": 139022,
+      "releaseYear": 2015,
+      "themeId": 6029,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/concrete_revolutio_choujin_gensou"
     }
   ],
   "2015-07": [
@@ -45846,6 +58295,396 @@ export const SEASONAL_POOLS = {
       "themeId": 6233,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/non_non_biyori_repeat"
+    },
+    {
+      "title": "secret arms",
+      "titleCN": "secret arms",
+      "anime": "To LOVE-Ru Darkness 2nd",
+      "animeCN": "出包王女Darkness 第二季",
+      "animeNative": "To LOVEる -とらぶる- ダークネス2nd",
+      "artist": "Ray",
+      "artistAliases": [
+        "Ray"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 20995,
+      "bangumiId": 120763,
+      "releaseYear": 2015,
+      "themeId": 6269,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/to_love_ru_darkness_2nd"
+    },
+    {
+      "title": "Gardens",
+      "titleCN": "Gardens",
+      "anime": "To LOVE-Ru Darkness 2nd",
+      "animeCN": "出包王女Darkness 第二季",
+      "animeNative": "To LOVEる -とらぶる- ダークネス2nd",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20995,
+      "bangumiId": 120763,
+      "releaseYear": 2015,
+      "themeId": 6270,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/to_love_ru_darkness_2nd"
+    },
+    {
+      "title": "Wonder Stella",
+      "titleCN": "Wonder Stella",
+      "anime": "Fate/kaleid liner Prisma☆Illya 2wei Herz!",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅 2wei Herz!",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ ツヴァイ ヘルツ！",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 20845,
+      "bangumiId": 113134,
+      "releaseYear": 2015,
+      "themeId": 6198,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya_2wei_herz"
+    },
+    {
+      "title": "Day you laugh",
+      "titleCN": "Day you laugh",
+      "anime": "Durarara!!x2 Ten",
+      "animeCN": "无头骑士异闻录×2 转",
+      "animeNative": "デュラララ!!×２ 転",
+      "artist": "豊永利行",
+      "artistAliases": [
+        "豊永利行",
+        "Toshiyuki Toyonaga"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 20879,
+      "bangumiId": 114967,
+      "releaseYear": 2015,
+      "themeId": 6196,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/durararax2_ten"
+    },
+    {
+      "title": "EXIT",
+      "titleCN": "EXIT",
+      "anime": "Durarara!!x2 Ten",
+      "animeCN": "无头骑士异闻录×2 转",
+      "animeNative": "デュラララ!!×２ 転",
+      "artist": "REVALCY",
+      "artistAliases": [
+        "REVALCY"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20879,
+      "bangumiId": 114967,
+      "releaseYear": 2015,
+      "themeId": 6197,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/durararax2_ten"
+    },
+    {
+      "title": "Koisuru☆Hiyoko",
+      "titleCN": "Koisuru☆Hiyoko",
+      "anime": "Okusama ga Seitokaichou!",
+      "animeCN": "我老婆是学生会长",
+      "animeNative": "おくさまが生徒会長!",
+      "artist": "Rekka Katakiri",
+      "artistAliases": [
+        "Rekka Katakiri"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 20984,
+      "bangumiId": 119889,
+      "releaseYear": 2015,
+      "themeId": 6234,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/okusama_ga_seitokaichou"
+    },
+    {
+      "title": "Ren×Ai＝Equation",
+      "titleCN": "Ren×Ai＝Equation",
+      "anime": "Okusama ga Seitokaichou!",
+      "animeCN": "我老婆是学生会长",
+      "animeNative": "おくさまが生徒会長!",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20984,
+      "bangumiId": 119889,
+      "releaseYear": 2015,
+      "themeId": 6235,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/okusama_ga_seitokaichou"
+    },
+    {
+      "title": "Realize",
+      "titleCN": "Realize",
+      "anime": "Okusama ga Seitokaichou!",
+      "animeCN": "我老婆是学生会长",
+      "animeNative": "おくさまが生徒会長!",
+      "artist": "Minami Tsuda",
+      "artistAliases": [
+        "Minami Tsuda"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20984,
+      "bangumiId": 119889,
+      "releaseYear": 2015,
+      "themeId": 6236,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/okusama_ga_seitokaichou"
+    },
+    {
+      "title": "Saikousoku Fall in Love",
+      "titleCN": "Saikousoku Fall in Love",
+      "anime": "Monster Musume no Iru Nichijou",
+      "animeCN": "魔物娘的同居日常",
+      "animeNative": "モンスター娘のいる日常",
+      "artist": "Ari Ozawa, Haruka Yamazaki, Sora Amamiya",
+      "artistAliases": [
+        "Ari Ozawa",
+        "Haruka Yamazaki",
+        "Sora Amamiya"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 21093,
+      "bangumiId": 127979,
+      "releaseYear": 2015,
+      "themeId": 6230,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/monster_musume_no_iru_nichijou"
+    },
+    {
+      "title": "Hey! Smith!!",
+      "titleCN": "Hey! Smith!!",
+      "anime": "Monster Musume no Iru Nichijou",
+      "animeCN": "魔物娘的同居日常",
+      "animeNative": "モンスター娘のいる日常",
+      "artist": "Momo Asakura, Saori Oonishi, Yurika Kubo, Yuu Kobayashi",
+      "artistAliases": [
+        "Momo Asakura",
+        "Saori Oonishi",
+        "Yurika Kubo",
+        "Yuu Kobayashi"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 21093,
+      "bangumiId": 127979,
+      "releaseYear": 2015,
+      "themeId": 6231,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/monster_musume_no_iru_nichijou"
+    },
+    {
+      "title": "Yasashii Kibou",
+      "titleCN": "Yasashii Kibou",
+      "anime": "Akagami no Shirayuki-hime",
+      "animeCN": "赤发白雪姬",
+      "animeNative": "赤髪の白雪姫",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 21058,
+      "bangumiId": 126034,
+      "releaseYear": 2015,
+      "themeId": 6158,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/akagami_no_shirayuki_hime"
+    },
+    {
+      "title": "Kizuna ni Nosete",
+      "titleCN": "Kizuna ni Nosete",
+      "anime": "Akagami no Shirayuki-hime",
+      "animeCN": "赤发白雪姬",
+      "animeNative": "赤髪の白雪姫",
+      "artist": "Eyelis",
+      "artistAliases": [
+        "Eyelis"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 21058,
+      "bangumiId": 126034,
+      "releaseYear": 2015,
+      "themeId": 6159,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/akagami_no_shirayuki_hime"
+    },
+    {
+      "title": "NOW!!!GAMBLE",
+      "titleCN": "NOW!!!GAMBLE",
+      "anime": "Working!!!",
+      "animeCN": "迷糊餐厅 第三季",
+      "animeNative": "WORKING!!!",
+      "artist": "Eri Kitamura, Kana Asumi, Saki Fujita",
+      "artistAliases": [
+        "Eri Kitamura",
+        "Kana Asumi",
+        "Saki Fujita"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 20819,
+      "bangumiId": 110648,
+      "releaseYear": 2015,
+      "themeId": 6279,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/working_2015"
+    },
+    {
+      "title": "Matsuge ni LOCK",
+      "titleCN": "Matsuge ni LOCK",
+      "anime": "Working!!!",
+      "animeCN": "迷糊餐厅 第三季",
+      "animeNative": "WORKING!!!",
+      "artist": "Hiroshi Kamiya, Daisuke Ono, Jun Fukuyama",
+      "artistAliases": [
+        "Hiroshi Kamiya",
+        "Daisuke Ono",
+        "Jun Fukuyama"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20819,
+      "bangumiId": 110648,
+      "releaseYear": 2015,
+      "themeId": 6280,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/working_2015"
+    },
+    {
+      "title": "Cry for the Truth",
+      "titleCN": "Cry for the Truth",
+      "anime": "Rokka no Yuusha",
+      "animeCN": "六花的勇者",
+      "animeNative": "六花の勇者",
+      "artist": "MICHI",
+      "artistAliases": [
+        "MICHI"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 20955,
+      "bangumiId": 118067,
+      "releaseYear": 2015,
+      "themeId": 6243,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rokka_no_yuusha"
+    },
+    {
+      "title": "Secret Sky",
+      "titleCN": "Secret Sky",
+      "anime": "Rokka no Yuusha",
+      "animeCN": "六花的勇者",
+      "animeNative": "六花の勇者",
+      "artist": "MICHI",
+      "artistAliases": [
+        "MICHI"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20955,
+      "bangumiId": 118067,
+      "releaseYear": 2015,
+      "themeId": 6245,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rokka_no_yuusha"
+    },
+    {
+      "title": "Dance in the Fake",
+      "titleCN": "Dance in the Fake",
+      "anime": "Rokka no Yuusha",
+      "animeCN": "六花的勇者",
+      "animeNative": "六花の勇者",
+      "artist": "Youko Hikasa",
+      "artistAliases": [
+        "Youko Hikasa"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20955,
+      "bangumiId": 118067,
+      "releaseYear": 2015,
+      "themeId": 6246,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/rokka_no_yuusha"
+    },
+    {
+      "title": "Nameless Heart",
+      "titleCN": "Nameless Heart",
+      "anime": "Rokka no Yuusha",
+      "animeCN": "六花的勇者",
+      "animeNative": "六花の勇者",
+      "artist": "Aoi Yuuki",
+      "artistAliases": [
+        "Aoi Yuuki"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 20955,
+      "bangumiId": 118067,
+      "releaseYear": 2015,
+      "themeId": 6247,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/rokka_no_yuusha"
+    },
+    {
+      "title": "Speed to Masatsu",
+      "titleCN": "Speed to Masatsu",
+      "anime": "Ranpo Kitan: Game of Laplace",
+      "animeCN": "乱步奇谭 拉普拉斯的游戏",
+      "animeNative": "乱歩奇譚 Game of Laplace",
+      "artist": "amazarashi",
+      "artistAliases": [
+        "amazarashi"
+      ],
+      "type": "OP",
+      "season": "2015-07",
+      "anilistId": 21189,
+      "bangumiId": 118785,
+      "releaseYear": 2015,
+      "themeId": 6241,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ranpo_kitan_game_of_laplace"
+    },
+    {
+      "title": "Mikazuki",
+      "titleCN": "Mikazuki",
+      "anime": "Ranpo Kitan: Game of Laplace",
+      "animeCN": "乱步奇谭 拉普拉斯的游戏",
+      "animeNative": "乱歩奇譚 Game of Laplace",
+      "artist": "Sayuri",
+      "artistAliases": [
+        "Sayuri"
+      ],
+      "type": "ED",
+      "season": "2015-07",
+      "anilistId": 21189,
+      "bangumiId": 118785,
+      "releaseYear": 2015,
+      "themeId": 6242,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ranpo_kitan_game_of_laplace"
     }
   ],
   "2016-04": [
@@ -46039,6 +58878,534 @@ export const SEASONAL_POOLS = {
       "themeId": 7050,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/netoge_no_yome_wa_onnanoko_ja_nai_to_omotta"
+    },
+    {
+      "title": "HEROES",
+      "titleCN": "HEROES",
+      "anime": "Boku no Hero Academia",
+      "animeCN": "我的英雄学院",
+      "animeNative": "僕のヒーローアカデミア",
+      "artist": "Brian the Sun",
+      "artistAliases": [
+        "Brian the Sun"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21459,
+      "bangumiId": 150955,
+      "releaseYear": 2016,
+      "themeId": 6973,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia"
+    },
+    {
+      "title": "Namae wo Yobu yo",
+      "titleCN": "Namae wo Yobu yo",
+      "anime": "Bungou Stray Dogs",
+      "animeCN": "文豪野犬",
+      "animeNative": "文豪ストレイドッグス",
+      "artist": "Luck Life",
+      "artistAliases": [
+        "Luck Life"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21311,
+      "bangumiId": 144357,
+      "releaseYear": 2016,
+      "themeId": 6976,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bungou_stray_dogs"
+    },
+    {
+      "title": "Sharanran feat. 96 Neko",
+      "titleCN": "Sharanran feat. 96 Neko",
+      "anime": "Flying Witch",
+      "animeCN": "飞翔的魔女",
+      "animeNative": "ふらいんぐうぃっち",
+      "artist": "miwa, 96neko",
+      "artistAliases": [
+        "miwa",
+        "96neko"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21284,
+      "bangumiId": 141799,
+      "releaseYear": 2016,
+      "themeId": 6986,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/flying_witch"
+    },
+    {
+      "title": "Nichijou no Mahou",
+      "titleCN": "Nichijou no Mahou",
+      "anime": "Flying Witch",
+      "animeCN": "飞翔的魔女",
+      "animeNative": "ふらいんぐうぃっち",
+      "artist": "Eri Suzuki",
+      "artistAliases": [
+        "Eri Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21284,
+      "bangumiId": 141799,
+      "releaseYear": 2016,
+      "themeId": 6987,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/flying_witch"
+    },
+    {
+      "title": "Pipo Password",
+      "titleCN": "Pipo Password",
+      "anime": "Uchuu Patrol Luluco",
+      "animeCN": "宇宙巡警露露子",
+      "animeNative": "宇宙パトロールルル子",
+      "artist": "TeddyLoid, Bonjour Suzuki",
+      "artistAliases": [
+        "TeddyLoid",
+        "Bonjour Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21637,
+      "bangumiId": 168204,
+      "releaseYear": 2016,
+      "themeId": 7094,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchuu_patrol_luluco"
+    },
+    {
+      "title": "Gensou Drive",
+      "titleCN": "Gensou Drive",
+      "anime": "Mayoiga",
+      "animeCN": "迷家",
+      "animeNative": "迷家-マヨイガ-",
+      "artist": "Ami Wajima",
+      "artistAliases": [
+        "Ami Wajima"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21567,
+      "bangumiId": 163046,
+      "releaseYear": 2016,
+      "themeId": 7041,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mayoiga"
+    },
+    {
+      "title": "BON-BON",
+      "titleCN": "BON-BON",
+      "anime": "Tanaka-kun wa Itsumo Kedaruge",
+      "animeCN": "田中君总是如此慵懒",
+      "animeNative": "田中くんはいつもけだるげ",
+      "artist": "CooRie",
+      "artistAliases": [
+        "CooRie"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21495,
+      "bangumiId": 155704,
+      "releaseYear": 2016,
+      "themeId": 7086,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tanaka_kun_wa_itsumo_kedaruge"
+    },
+    {
+      "title": "Zettai Reido θ Novatic",
+      "titleCN": "Zettai Reido θ Novatic",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7029,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "Ikenai Borderline",
+      "titleCN": "Ikenai Borderline",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7030,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "Rune ga Pikatto Hikattara",
+      "titleCN": "Rune ga Pikatto Hikattara",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7031,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "AXIA~Daisuki de Daikirai~",
+      "titleCN": "AXIA~Daisuki de Daikirai~",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7032,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "GIRAFFE BLUES",
+      "titleCN": "GIRAFFE BLUES",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7033,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "Hametsu no Junjou",
+      "titleCN": "Hametsu no Junjou",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7034,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "God Bless You",
+      "titleCN": "God Bless You",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7035,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "LOVE! THUNDER GROW",
+      "titleCN": "LOVE! THUNDER GROW",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7036,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "Zettai Reido θ Novatick",
+      "titleCN": "Zettai Reido θ Novatick",
+      "anime": "Macross Δ",
+      "animeCN": "超时空要塞Δ",
+      "animeNative": "マクロスΔ",
+      "artist": "JUNNA, Minori Suzuki",
+      "artistAliases": [
+        "JUNNA",
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 20680,
+      "bangumiId": 100858,
+      "releaseYear": 2016,
+      "themeId": 7037,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_d"
+    },
+    {
+      "title": "High Free Spirits",
+      "titleCN": "High Free Spirits",
+      "anime": "Haifuri",
+      "animeCN": "高校舰队",
+      "animeNative": "ハイスクール・フリート",
+      "artist": "TrySail",
+      "artistAliases": [
+        "TrySail"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21316,
+      "bangumiId": 144843,
+      "releaseYear": 2016,
+      "themeId": 6999,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haifuri"
+    },
+    {
+      "title": "Ripple Effect",
+      "titleCN": "Ripple Effect",
+      "anime": "Haifuri",
+      "animeCN": "高校舰队",
+      "animeNative": "ハイスクール・フリート",
+      "artist": "Luna Haruna",
+      "artistAliases": [
+        "Luna Haruna"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21316,
+      "bangumiId": 144843,
+      "releaseYear": 2016,
+      "themeId": 7000,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haifuri"
+    },
+    {
+      "title": "LAY YOUR HANDS ON ME",
+      "titleCN": "LAY YOUR HANDS ON ME",
+      "anime": "Kiznaiver",
+      "animeCN": "羁绊者",
+      "animeNative": "キズナイーバー",
+      "artist": "Boom Boom Satellites",
+      "artistAliases": [
+        "Boom Boom Satellites"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21421,
+      "bangumiId": 148281,
+      "releaseYear": 2016,
+      "themeId": 7013,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kiznaiver"
+    },
+    {
+      "title": "Hajimari no Sokudo",
+      "titleCN": "Hajimari no Sokudo",
+      "anime": "Kiznaiver",
+      "animeCN": "羁绊者",
+      "animeNative": "キズナイーバー",
+      "artist": "Sangatsu no Phantasia",
+      "artistAliases": [
+        "Sangatsu no Phantasia"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21421,
+      "bangumiId": 148281,
+      "releaseYear": 2016,
+      "themeId": 7014,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kiznaiver"
+    },
+    {
+      "title": "The Asterisk War",
+      "titleCN": "The Asterisk War",
+      "anime": "Gakusen Toshi Asterisk 2nd Season",
+      "animeCN": "学战都市 六芒星 第二季",
+      "animeNative": "学戦都市アスタリスク 2",
+      "artist": "Shiena Nishizawa",
+      "artistAliases": [
+        "Shiena Nishizawa"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21390,
+      "bangumiId": 147613,
+      "releaseYear": 2016,
+      "themeId": 6991,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gakusen_toshi_asterisk_2nd_season"
+    },
+    {
+      "title": "Ai no Uta -words of love-",
+      "titleCN": "Ai no Uta -words of love-",
+      "anime": "Gakusen Toshi Asterisk 2nd Season",
+      "animeCN": "学战都市 六芒星 第二季",
+      "animeNative": "学戦都市アスタリスク 2",
+      "artist": "Haruka Chisuga",
+      "artistAliases": [
+        "Haruka Chisuga"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21390,
+      "bangumiId": 147613,
+      "releaseYear": 2016,
+      "themeId": 6992,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gakusen_toshi_asterisk_2nd_season"
+    },
+    {
+      "title": "PUNCH☆MIND☆HAPPINESS",
+      "titleCN": "PUNCH☆MIND☆HAPPINESS",
+      "anime": "Anne Happy♪",
+      "animeCN": "Anne Happy♪",
+      "animeNative": "あんハピ♪",
+      "artist": "Haruka Shiraishi, Hibiku Yamamura, Kiyono Yasuno",
+      "artistAliases": [
+        "Haruka Shiraishi",
+        "Hibiku Yamamura",
+        "Kiyono Yasuno"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21238,
+      "bangumiId": 138053,
+      "releaseYear": 2016,
+      "themeId": 6947,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/anne_happy"
+    },
+    {
+      "title": "Ashita de Ii kara",
+      "titleCN": "Ashita de Ii kara",
+      "anime": "Anne Happy♪",
+      "animeCN": "Anne Happy♪",
+      "animeNative": "あんハピ♪",
+      "artist": "Haruka Shiraishi, Hibiku Yamamura, Kiyono Yasuno",
+      "artistAliases": [
+        "Haruka Shiraishi",
+        "Hibiku Yamamura",
+        "Kiyono Yasuno"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21238,
+      "bangumiId": 138053,
+      "releaseYear": 2016,
+      "themeId": 6948,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/anne_happy"
+    },
+    {
+      "title": "Re:Call",
+      "titleCN": "Re:Call",
+      "anime": "Sousei no Onmyouji",
+      "animeCN": "双星之阴阳师",
+      "animeNative": "双星の陰陽師",
+      "artist": "i☆Ris",
+      "artistAliases": [
+        "i☆Ris"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21499,
+      "bangumiId": 155778,
+      "releaseYear": 2016,
+      "themeId": 7073,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sousei_no_onmyouji"
+    },
+    {
+      "title": "Kanadeai",
+      "titleCN": "Kanadeai",
+      "anime": "Sousei no Onmyouji",
+      "animeCN": "双星之阴阳师",
+      "animeNative": "双星の陰陽師",
+      "artist": "Itowokashi",
+      "artistAliases": [
+        "Itowokashi"
+      ],
+      "type": "OP",
+      "season": "2016-04",
+      "anilistId": 21499,
+      "bangumiId": 155778,
+      "releaseYear": 2016,
+      "themeId": 7075,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/sousei_no_onmyouji"
+    },
+    {
+      "title": "Yadoriboshi",
+      "titleCN": "Yadoriboshi",
+      "anime": "Sousei no Onmyouji",
+      "animeCN": "双星之阴阳师",
+      "animeNative": "双星の陰陽師",
+      "artist": "Itowokashi",
+      "artistAliases": [
+        "Itowokashi"
+      ],
+      "type": "ED",
+      "season": "2016-04",
+      "anilistId": 21499,
+      "bangumiId": 155778,
+      "releaseYear": 2016,
+      "themeId": 7077,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sousei_no_onmyouji"
     }
   ],
   "2016-07": [
@@ -46334,6 +59701,429 @@ export const SEASONAL_POOLS = {
       "themeId": 6856,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/new_game"
+    },
+    {
+      "title": "ROUGH DIAMONDS",
+      "titleCN": "ROUGH DIAMONDS",
+      "anime": "Shokugeki no Souma: Ni no Sara",
+      "animeCN": "食戟之灵 贰之皿",
+      "animeNative": "食戟のソーマ 弍ノ皿",
+      "artist": "SCREEN mode",
+      "artistAliases": [
+        "SCREEN mode"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21518,
+      "bangumiId": 160124,
+      "releaseYear": 2016,
+      "themeId": 6911,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shokugeki_no_souma_ni_no_sara"
+    },
+    {
+      "title": "Snow Drop",
+      "titleCN": "Snow Drop",
+      "anime": "Shokugeki no Souma: Ni no Sara",
+      "animeCN": "食戟之灵 贰之皿",
+      "animeNative": "食戟のソーマ 弍ノ皿",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21518,
+      "bangumiId": 160124,
+      "releaseYear": 2016,
+      "themeId": 6912,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shokugeki_no_souma_ni_no_sara"
+    },
+    {
+      "title": "Philosophyz",
+      "titleCN": "Philosophyz",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Runa Mizutani (NanosizeMir)",
+      "artistAliases": [
+        "Runa Mizutani (NanosizeMir)"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6892,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "End of the World",
+      "titleCN": "End of the World",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Anri Kumaki",
+      "artistAliases": [
+        "Anri Kumaki"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6893,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "Sasayaki na Hajimari",
+      "titleCN": "Sasayaki na Hajimari",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Runa Mizutani (NanosizeMir)",
+      "artistAliases": [
+        "Runa Mizutani (NanosizeMir)"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6894,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "Koibumi",
+      "titleCN": "Koibumi",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6895,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "Sunbright",
+      "titleCN": "Sunbright",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Ayaka Kitazawa",
+      "artistAliases": [
+        "Ayaka Kitazawa"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6896,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "Word of Dawn",
+      "titleCN": "Word of Dawn",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Aoi Tada",
+      "artistAliases": [
+        "Aoi Tada"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6897,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "Itsuwaranai Kimi e",
+      "titleCN": "Itsuwaranai Kimi e",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6898,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "Yami no Kanata e",
+      "titleCN": "Yami no Kanata e",
+      "anime": "Rewrite",
+      "animeCN": "Rewrite",
+      "animeNative": "Rewrite",
+      "artist": "Runa Mizutani (NanosizeMir)",
+      "artistAliases": [
+        "Runa Mizutani (NanosizeMir)"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21382,
+      "bangumiId": 147568,
+      "releaseYear": 2016,
+      "themeId": 6899,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/rewrite"
+    },
+    {
+      "title": "DEAD OR LIE",
+      "titleCN": "DEAD OR LIE",
+      "anime": "Danganronpa 3: The End of Kibougamine Gakuen - Mirai-hen",
+      "animeCN": "弹丸论破3 -The End of 希望之峰学园- 未来篇",
+      "animeNative": "ダンガンロンパ３ –The End of 希望ヶ峰学園– 未来編",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21509,
+      "bangumiId": 158415,
+      "releaseYear": 2016,
+      "themeId": 6799,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/danganronpa_3_the_end_of_kibougamine_gakuen_mirai_hen"
+    },
+    {
+      "title": "Kami-iro Awase",
+      "titleCN": "Kami-iro Awase",
+      "anime": "Danganronpa 3: The End of Kibougamine Gakuen - Zetsubou-hen",
+      "animeCN": "弹丸论破3 -The End of 希望之峰学园- 绝望篇",
+      "animeNative": "ダンガンロンパ3 -The End of 希望ヶ峰学園-　絶望編",
+      "artist": "binaria",
+      "artistAliases": [
+        "binaria"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21825,
+      "bangumiId": 177092,
+      "releaseYear": 2016,
+      "themeId": 6801,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/danganronpa_3_the_end_of_kibougamine_gakuen_zetsubou_hen"
+    },
+    {
+      "title": "Zettai Kibou Birthday",
+      "titleCN": "Zettai Kibou Birthday",
+      "anime": "Danganronpa 3: The End of Kibougamine Gakuen - Zetsubou-hen",
+      "animeCN": "弹丸论破3 -The End of 希望之峰学园- 绝望篇",
+      "animeNative": "ダンガンロンパ3 -The End of 希望ヶ峰学園-　絶望編",
+      "artist": "Megumi Ogata",
+      "artistAliases": [
+        "Megumi Ogata"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21825,
+      "bangumiId": 177092,
+      "releaseYear": 2016,
+      "themeId": 6802,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/danganronpa_3_the_end_of_kibougamine_gakuen_zetsubou_hen"
+    },
+    {
+      "title": "Asterism",
+      "titleCN": "Asterism",
+      "anime": "Fate/kaleid liner Prisma☆Illya 3rei!!",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅 3rei!!",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ ドライ!!",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21379,
+      "bangumiId": 147466,
+      "releaseYear": 2016,
+      "themeId": 6808,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya_3rei"
+    },
+    {
+      "title": "cuddle",
+      "titleCN": "cuddle",
+      "anime": "Fate/kaleid liner Prisma☆Illya 3rei!!",
+      "animeCN": "Fate/kaleid liner 魔法少女☆伊莉雅 3rei!!",
+      "animeNative": "Fate/kaleid liner プリズマ☆イリヤ ドライ!!",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21379,
+      "bangumiId": 147466,
+      "releaseYear": 2016,
+      "themeId": 6810,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fatekaleid_liner_prismaillya_3rei"
+    },
+    {
+      "title": "Kimeta yo Hand in Hand",
+      "titleCN": "Kimeta yo Hand in Hand",
+      "anime": "Love Live! Sunshine!!",
+      "animeCN": "LoveLive! Sunshine!!",
+      "animeNative": "ラブライブ! サンシャイン!!",
+      "artist": "Shuka Saitou, Anju Inami, Rikako Aida",
+      "artistAliases": [
+        "Shuka Saitou",
+        "Anju Inami",
+        "Rikako Aida"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21584,
+      "bangumiId": 165553,
+      "releaseYear": 2016,
+      "themeId": 6829,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_sunshine"
+    },
+    {
+      "title": "Yume Kataru Yori Yume Utaou",
+      "titleCN": "Yume Kataru Yori Yume Utaou",
+      "anime": "Love Live! Sunshine!!",
+      "animeCN": "LoveLive! Sunshine!!",
+      "animeNative": "ラブライブ! サンシャイン!!",
+      "artist": "Shuka Saitou, Anju Inami, Rikako Aida",
+      "artistAliases": [
+        "Shuka Saitou",
+        "Anju Inami",
+        "Rikako Aida"
+      ],
+      "type": "ED",
+      "recordingId": "animethemes:6830",
+      "season": "2016-07",
+      "anilistId": 21584,
+      "bangumiId": 165553,
+      "releaseYear": 2016,
+      "themeId": 6830,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_sunshine"
+    },
+    {
+      "title": "Mijuku DREAMER",
+      "titleCN": "Mijuku DREAMER",
+      "anime": "Love Live! Sunshine!!",
+      "animeCN": "LoveLive! Sunshine!!",
+      "animeNative": "ラブライブ! サンシャイン!!",
+      "artist": "Aqours",
+      "artistAliases": [
+        "Aqours"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21584,
+      "bangumiId": 165553,
+      "releaseYear": 2016,
+      "themeId": 6837,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_sunshine"
+    },
+    {
+      "title": "MIRAI TICKET",
+      "titleCN": "MIRAI TICKET",
+      "anime": "Love Live! Sunshine!!",
+      "animeCN": "LoveLive! Sunshine!!",
+      "animeNative": "ラブライブ! サンシャイン!!",
+      "artist": "Aqours",
+      "artistAliases": [
+        "Aqours"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21584,
+      "bangumiId": 165553,
+      "releaseYear": 2016,
+      "themeId": 6840,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/love_live_sunshine"
+    },
+    {
+      "title": "Maybe",
+      "titleCN": "Maybe",
+      "anime": "Amaama to Inazuma",
+      "animeCN": "天真与闪电",
+      "animeNative": "甘々と稲妻",
+      "artist": "Brian the Sun",
+      "artistAliases": [
+        "Brian the Sun"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21659,
+      "bangumiId": 170261,
+      "releaseYear": 2016,
+      "themeId": 6776,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/amaama_to_inazuma"
+    },
+    {
+      "title": "Signal",
+      "titleCN": "Signal",
+      "anime": "91 Days",
+      "animeCN": "91天",
+      "animeNative": "91Days",
+      "artist": "TK from Ling tosite sigure",
+      "artistAliases": [
+        "TK from Ling tosite sigure"
+      ],
+      "type": "OP",
+      "season": "2016-07",
+      "anilistId": 21711,
+      "bangumiId": 175198,
+      "releaseYear": 2016,
+      "themeId": 6769,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/91_days"
+    },
+    {
+      "title": "Rain or Shine",
+      "titleCN": "Rain or Shine",
+      "anime": "91 Days",
+      "animeCN": "91天",
+      "animeNative": "91Days",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "ED",
+      "season": "2016-07",
+      "anilistId": 21711,
+      "bangumiId": 175198,
+      "releaseYear": 2016,
+      "themeId": 6770,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/91_days"
     }
   ],
   "2016-10": [
@@ -46472,6 +60262,449 @@ export const SEASONAL_POOLS = {
       "themeId": 6553,
       "themeSequence": 3,
       "animethemesUrl": "https://animethemes.moe/anime/3_gatsu_no_lion"
+    },
+    {
+      "title": "Hikari Are",
+      "titleCN": "Hikari Are",
+      "anime": "Haikyuu!!: Karasuno Koukou VS Shiratorizawa Gakuen Koukou",
+      "animeCN": "排球少年 乌野高校 VS 白鸟泽学园高校",
+      "animeNative": "ハイキュー!! 烏野高校 VS 白鳥沢学園高校",
+      "artist": "BURNOUT SYNDROMES",
+      "artistAliases": [
+        "BURNOUT SYNDROMES"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21698,
+      "bangumiId": 173849,
+      "releaseYear": 2016,
+      "themeId": 6645,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu_karasuno_koukou_vs_shiratorizawa_gakuen_koukou"
+    },
+    {
+      "title": "Mashi Mashi",
+      "titleCN": "Mashi Mashi",
+      "anime": "Haikyuu!!: Karasuno Koukou VS Shiratorizawa Gakuen Koukou",
+      "animeCN": "排球少年 乌野高校 VS 白鸟泽学园高校",
+      "animeNative": "ハイキュー!! 烏野高校 VS 白鳥沢学園高校",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21698,
+      "bangumiId": 173849,
+      "releaseYear": 2016,
+      "themeId": 6646,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/haikyuu_karasuno_koukou_vs_shiratorizawa_gakuen_koukou"
+    },
+    {
+      "title": "Ketsui no Diamond",
+      "titleCN": "Ketsui no Diamond",
+      "anime": "Gi(a)rlish Number",
+      "animeCN": "少女编号",
+      "animeNative": "ガーリッシュ ナンバー",
+      "artist": "Eri Suzuki, Saori Oonishi",
+      "artistAliases": [
+        "Eri Suzuki",
+        "Saori Oonishi"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21627,
+      "bangumiId": 167434,
+      "releaseYear": 2016,
+      "themeId": 6641,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/giarlish_number"
+    },
+    {
+      "title": "Bloom",
+      "titleCN": "Bloom",
+      "anime": "Gi(a)rlish Number",
+      "animeCN": "少女编号",
+      "animeNative": "ガーリッシュ ナンバー",
+      "artist": "Girlish Number",
+      "artistAliases": [
+        "Girlish Number"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21627,
+      "bangumiId": 167434,
+      "releaseYear": 2016,
+      "themeId": 6642,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/giarlish_number"
+    },
+    {
+      "title": "Ima wa Mijikashi Yumemi yo Otome",
+      "titleCN": "Ima wa Mijikashi Yumemi yo Otome",
+      "anime": "Gi(a)rlish Number",
+      "animeCN": "少女编号",
+      "animeNative": "ガーリッシュ ナンバー",
+      "artist": "Girlish Number",
+      "artistAliases": [
+        "Girlish Number"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21627,
+      "bangumiId": 167434,
+      "releaseYear": 2016,
+      "themeId": 6643,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/giarlish_number"
+    },
+    {
+      "title": "Asu e no Tochuu de",
+      "titleCN": "Asu e no Tochuu de",
+      "anime": "Gi(a)rlish Number",
+      "animeCN": "少女编号",
+      "animeNative": "ガーリッシュ ナンバー",
+      "artist": "Girlish Number",
+      "artistAliases": [
+        "Girlish Number"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21627,
+      "bangumiId": 167434,
+      "releaseYear": 2016,
+      "themeId": 6644,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/giarlish_number"
+    },
+    {
+      "title": "Serendipity",
+      "titleCN": "Serendipity",
+      "anime": "Flip Flappers",
+      "animeCN": "轻拍翻转小魔女",
+      "animeNative": "フリップフラッパーズ",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21714,
+      "bangumiId": 174584,
+      "releaseYear": 2016,
+      "themeId": 6633,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/flip_flappers"
+    },
+    {
+      "title": "Sensuu 3 no Nijou",
+      "titleCN": "Sensuu 3 no Nijou",
+      "anime": "Occultic;Nine",
+      "animeCN": "超自然9人组",
+      "animeNative": "Occultic;Nine -オカルティック・ナイン-",
+      "artist": "Kanako Itou",
+      "artistAliases": [
+        "Kanako Itou"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21708,
+      "bangumiId": 203861,
+      "releaseYear": 2016,
+      "themeId": 6694,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/occulticnine"
+    },
+    {
+      "title": "Open your eyes",
+      "titleCN": "Open your eyes",
+      "anime": "Occultic;Nine",
+      "animeCN": "超自然9人组",
+      "animeNative": "Occultic;Nine -オカルティック・ナイン-",
+      "artist": "Asaka",
+      "artistAliases": [
+        "Asaka"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21708,
+      "bangumiId": 203861,
+      "releaseYear": 2016,
+      "themeId": 6695,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/occulticnine"
+    },
+    {
+      "title": "Takarabako",
+      "titleCN": "Takarabako",
+      "anime": "Natsume Yuujinchou Go",
+      "animeCN": "夏目友人帐 伍",
+      "animeNative": "夏目友人帳 伍",
+      "artist": "Sasanomaly",
+      "artistAliases": [
+        "Sasanomaly"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21710,
+      "bangumiId": 174638,
+      "releaseYear": 2016,
+      "themeId": 6687,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou_go"
+    },
+    {
+      "title": "Shikisai",
+      "titleCN": "Shikisai",
+      "anime": "Fate/Grand Order: First Order",
+      "animeCN": "Fate/Grand Order -First Order-",
+      "animeNative": "Fate/Grand Order -First Order-",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 97815,
+      "bangumiId": 196773,
+      "releaseYear": 2016,
+      "themeId": 6632,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fategrand_order_first_order"
+    },
+    {
+      "title": "Reason Living",
+      "titleCN": "Reason Living",
+      "anime": "Bungou Stray Dogs 2nd Season",
+      "animeCN": "文豪野犬 第二季",
+      "animeNative": "文豪ストレイドッグス 第2シーズン",
+      "artist": "SCREEN mode",
+      "artistAliases": [
+        "SCREEN mode"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21679,
+      "bangumiId": 171068,
+      "releaseYear": 2016,
+      "themeId": 6584,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bungou_stray_dogs_2nd_season"
+    },
+    {
+      "title": "Kaze ga Fuku Machi",
+      "titleCN": "Kaze ga Fuku Machi",
+      "anime": "Bungou Stray Dogs 2nd Season",
+      "animeCN": "文豪野犬 第二季",
+      "animeNative": "文豪ストレイドッグス 第2シーズン",
+      "artist": "Luck Life",
+      "artistAliases": [
+        "Luck Life"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21679,
+      "bangumiId": 171068,
+      "releaseYear": 2016,
+      "themeId": 6585,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bungou_stray_dogs_2nd_season"
+    },
+    {
+      "title": "You Only Live Once",
+      "titleCN": "You Only Live Once",
+      "anime": "YURI!!! on ICE",
+      "animeCN": "冰上的尤里",
+      "animeNative": "ユーリ!!! on ICE",
+      "artist": "Wataru Hatano",
+      "artistAliases": [
+        "Wataru Hatano"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21709,
+      "bangumiId": 174998,
+      "releaseYear": 2016,
+      "themeId": 6766,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yuri_on_ice"
+    },
+    {
+      "title": "Shiokaze",
+      "titleCN": "Shiokaze",
+      "anime": "Fune wo Amu",
+      "animeCN": "编舟记",
+      "animeNative": "舟を編む",
+      "artist": "Taiiku Okazaki",
+      "artistAliases": [
+        "Taiiku Okazaki"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21703,
+      "bangumiId": 174142,
+      "releaseYear": 2016,
+      "themeId": 6635,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fune_wo_amu"
+    },
+    {
+      "title": "Boku wa Boku de Atte",
+      "titleCN": "Boku wa Boku de Atte",
+      "anime": "Ajin 2nd Season",
+      "animeCN": "亚人 第2部分",
+      "animeNative": "亜人 2",
+      "artist": "angela, fripSide",
+      "artistAliases": [
+        "angela",
+        "fripSide"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21799,
+      "bangumiId": 181640,
+      "releaseYear": 2016,
+      "themeId": 6554,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ajin_2nd_season"
+    },
+    {
+      "title": "The end of escape",
+      "titleCN": "The end of escape",
+      "anime": "Ajin 2nd Season",
+      "animeCN": "亚人 第2部分",
+      "animeNative": "亜人 2",
+      "artist": "angela, fripSide",
+      "artistAliases": [
+        "angela",
+        "fripSide"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21799,
+      "bangumiId": 181640,
+      "releaseYear": 2016,
+      "themeId": 6555,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ajin_2nd_season"
+    },
+    {
+      "title": "Eyecatch! Too much!",
+      "titleCN": "Eyecatch! Too much!",
+      "anime": "WWW.Working!!",
+      "animeCN": "WWW.迷糊餐厅",
+      "animeNative": "WWW.WORKING!!",
+      "artist": "Haruka Tomatsu, Sora Amamiya, Youko Hikasa",
+      "artistAliases": [
+        "Haruka Tomatsu",
+        "Sora Amamiya",
+        "Youko Hikasa"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21764,
+      "bangumiId": 176599,
+      "releaseYear": 2016,
+      "themeId": 6763,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/wwwworking"
+    },
+    {
+      "title": "Mujuuryoku Fever",
+      "titleCN": "Mujuuryoku Fever",
+      "anime": "WWW.Working!!",
+      "animeCN": "WWW.迷糊餐厅",
+      "animeNative": "WWW.WORKING!!",
+      "artist": "Kenshou Ono, Kouki Uchiyama",
+      "artistAliases": [
+        "Kenshou Ono",
+        "Kouki Uchiyama"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21764,
+      "bangumiId": 176599,
+      "releaseYear": 2016,
+      "themeId": 6764,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/wwwworking"
+    },
+    {
+      "title": "cross the line",
+      "titleCN": "cross the line",
+      "anime": "Shuumatsu no Izetta",
+      "animeCN": "终末的伊泽塔",
+      "animeNative": "終末のイゼッタ",
+      "artist": "bless4",
+      "artistAliases": [
+        "bless4"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21838,
+      "bangumiId": 184840,
+      "releaseYear": 2016,
+      "themeId": 6717,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shuumatsu_no_izetta"
+    },
+    {
+      "title": "Hikari Aru Basho e",
+      "titleCN": "Hikari Aru Basho e",
+      "anime": "Shuumatsu no Izetta",
+      "animeCN": "终末的伊泽塔",
+      "animeNative": "終末のイゼッタ",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21838,
+      "bangumiId": 184840,
+      "releaseYear": 2016,
+      "themeId": 6718,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shuumatsu_no_izetta"
+    },
+    {
+      "title": "Sakebe",
+      "titleCN": "Sakebe",
+      "anime": "Mahou Shoujo Ikusei Keikaku",
+      "animeCN": "魔法少女育成计划",
+      "animeNative": "魔法少女育成計画",
+      "artist": "Manami Numakura",
+      "artistAliases": [
+        "Manami Numakura"
+      ],
+      "type": "OP",
+      "season": "2016-10",
+      "anilistId": 21340,
+      "bangumiId": 145946,
+      "releaseYear": 2016,
+      "themeId": 6675,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mahou_shoujo_ikusei_keikaku"
+    },
+    {
+      "title": "DREAMCATCHER",
+      "titleCN": "DREAMCATCHER",
+      "anime": "Mahou Shoujo Ikusei Keikaku",
+      "animeCN": "魔法少女育成计划",
+      "animeNative": "魔法少女育成計画",
+      "artist": "nano",
+      "artistAliases": [
+        "nano"
+      ],
+      "type": "ED",
+      "season": "2016-10",
+      "anilistId": 21340,
+      "bangumiId": 145946,
+      "releaseYear": 2016,
+      "themeId": 6676,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mahou_shoujo_ikusei_keikaku"
     }
   ],
   "2016-01": [
@@ -46588,6 +60821,272 @@ export const SEASONAL_POOLS = {
       "themeId": 7110,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/ansatsu_kyoushitsu_tv_2nd_season"
+    },
+    {
+      "title": "Yoru wa Nemureru kai?",
+      "titleCN": "Yoru wa Nemureru kai?",
+      "anime": "Ajin",
+      "animeCN": "亚人",
+      "animeNative": "亜人",
+      "artist": "flumpool",
+      "artistAliases": [
+        "flumpool"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 21341,
+      "bangumiId": 146093,
+      "releaseYear": 2016,
+      "themeId": 7103,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ajin"
+    },
+    {
+      "title": "HOW CLOSE YOU ARE",
+      "titleCN": "HOW CLOSE YOU ARE",
+      "anime": "Ajin",
+      "animeCN": "亚人",
+      "animeNative": "亜人",
+      "artist": "Mamoru Miyano",
+      "artistAliases": [
+        "Mamoru Miyano"
+      ],
+      "type": "ED",
+      "season": "2016-01",
+      "anilistId": 21341,
+      "bangumiId": 146093,
+      "releaseYear": 2016,
+      "themeId": 7104,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ajin"
+    },
+    {
+      "title": "Naked Dive",
+      "titleCN": "Naked Dive",
+      "anime": "Musaigen no Phantom World",
+      "animeCN": "无彩限的怪灵世界",
+      "animeNative": "無彩限のファントム・ワールド",
+      "artist": "SCREEN mode",
+      "artistAliases": [
+        "SCREEN mode"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 21306,
+      "bangumiId": 94040,
+      "releaseYear": 2016,
+      "themeId": 7155,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/musaigen_no_phantom_world"
+    },
+    {
+      "title": "Junshin Always",
+      "titleCN": "Junshin Always",
+      "anime": "Musaigen no Phantom World",
+      "animeCN": "无彩限的怪灵世界",
+      "animeNative": "無彩限のファントム・ワールド",
+      "artist": "Azusa Tadokoro",
+      "artistAliases": [
+        "Azusa Tadokoro"
+      ],
+      "type": "ED",
+      "season": "2016-01",
+      "anilistId": 21306,
+      "bangumiId": 94040,
+      "releaseYear": 2016,
+      "themeId": 7156,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/musaigen_no_phantom_world"
+    },
+    {
+      "title": "Checkmate!?",
+      "titleCN": "Checkmate!?",
+      "anime": "Dagashi Kashi",
+      "animeCN": "粗点心战争",
+      "animeNative": "だがしかし",
+      "artist": "MICHI",
+      "artistAliases": [
+        "MICHI"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 21365,
+      "bangumiId": 146994,
+      "releaseYear": 2016,
+      "themeId": 7119,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dagashi_kashi"
+    },
+    {
+      "title": "Hey! Calorie Queen",
+      "titleCN": "Hey! Calorie Queen",
+      "anime": "Dagashi Kashi",
+      "animeCN": "粗点心战争",
+      "animeNative": "だがしかし",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2016-01",
+      "anilistId": 21365,
+      "bangumiId": 146994,
+      "releaseYear": 2016,
+      "themeId": 7120,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dagashi_kashi"
+    },
+    {
+      "title": "Usurahi Shinjuu",
+      "titleCN": "Usurahi Shinjuu",
+      "anime": "Shouwa Genroku Rakugo Shinjuu",
+      "animeCN": "昭和元禄落语心中",
+      "animeNative": "昭和元禄落語心中",
+      "artist": "Megumi Hayashibara",
+      "artistAliases": [
+        "Megumi Hayashibara"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 20972,
+      "bangumiId": 119394,
+      "releaseYear": 2016,
+      "themeId": 7195,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shouwa_genroku_rakugo_shinjuu"
+    },
+    {
+      "title": "Steppin' out",
+      "titleCN": "Steppin' out",
+      "anime": "Durarara!!x2 Ketsu",
+      "animeCN": "无头骑士异闻录×2 结",
+      "animeNative": "デュラララ!!×２ 結",
+      "artist": "FLOW",
+      "artistAliases": [
+        "FLOW"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 20880,
+      "bangumiId": 114968,
+      "releaseYear": 2016,
+      "themeId": 7127,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/durararax2_ketsu"
+    },
+    {
+      "title": "Joker ni Yoroshiku",
+      "titleCN": "Joker ni Yoroshiku",
+      "anime": "Durarara!!x2 Ketsu",
+      "animeCN": "无头骑士异闻录×2 结",
+      "animeNative": "デュラララ!!×２ 結",
+      "artist": "PENGUIN RESEARCH",
+      "artistAliases": [
+        "PENGUIN RESEARCH"
+      ],
+      "type": "ED",
+      "season": "2016-01",
+      "anilistId": 20880,
+      "bangumiId": 114968,
+      "releaseYear": 2016,
+      "themeId": 7128,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/durararax2_ketsu"
+    },
+    {
+      "title": "Hiryuu no Kishi",
+      "titleCN": "Hiryuu no Kishi",
+      "anime": "Saijaku Muhai no Bahamut",
+      "animeCN": "最弱无败神装机龙",
+      "animeNative": "最弱無敗の神装機竜《バハムート》",
+      "artist": "TRUE",
+      "artistAliases": [
+        "TRUE"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 21188,
+      "bangumiId": 133387,
+      "releaseYear": 2016,
+      "themeId": 7186,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saijaku_muhai_no_bahamut"
+    },
+    {
+      "title": "Lime Tree",
+      "titleCN": "Lime Tree",
+      "anime": "Saijaku Muhai no Bahamut",
+      "animeCN": "最弱无败神装机龙",
+      "animeNative": "最弱無敗の神装機竜《バハムート》",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2016-01",
+      "anilistId": 21188,
+      "bangumiId": 133387,
+      "releaseYear": 2016,
+      "themeId": 7187,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saijaku_muhai_no_bahamut"
+    },
+    {
+      "title": "Garasu no Hitomi",
+      "titleCN": "Garasu no Hitomi",
+      "anime": "Kanojo to Kanojo no Neko: Everything Flows",
+      "animeCN": "她和她的猫 -Everything Flows-",
+      "animeNative": "彼女と彼女の猫 -Everything Flows-",
+      "artist": "Masumi Itou",
+      "artistAliases": [
+        "Masumi Itou"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 21577,
+      "bangumiId": 164649,
+      "releaseYear": 2016,
+      "themeId": 7136,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kanojo_to_kanojo_no_neko_everything_flows"
+    },
+    {
+      "title": "Sonata",
+      "titleCN": "Sonata",
+      "anime": "Kanojo to Kanojo no Neko: Everything Flows",
+      "animeCN": "她和她的猫 -Everything Flows-",
+      "animeNative": "彼女と彼女の猫 -Everything Flows-",
+      "artist": "Clammbon",
+      "artistAliases": [
+        "Clammbon"
+      ],
+      "type": "ED",
+      "season": "2016-01",
+      "anilistId": 21577,
+      "bangumiId": 164649,
+      "releaseYear": 2016,
+      "themeId": 7137,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kanojo_to_kanojo_no_neko_everything_flows"
+    },
+    {
+      "title": "Shining Sky",
+      "titleCN": "Shining Sky",
+      "anime": "Ooyasan wa Shishunki!",
+      "animeCN": "房东妹子青春期",
+      "animeNative": "大家さんは思春期！",
+      "artist": "every♥ing!",
+      "artistAliases": [
+        "every♥ing!"
+      ],
+      "type": "OP",
+      "season": "2016-01",
+      "anilistId": 21359,
+      "bangumiId": 146611,
+      "releaseYear": 2016,
+      "themeId": 7175,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ooyasan_wa_shishunki"
     }
   ],
   "2017-01": [
@@ -46866,6 +61365,350 @@ export const SEASONAL_POOLS = {
       "themeId": 7938,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/youjo_senki"
+    },
+    {
+      "title": "Uso no Hibana",
+      "titleCN": "Uso no Hibana",
+      "anime": "Kuzu no Honkai",
+      "animeCN": "人渣的本愿",
+      "animeNative": "クズの本懐",
+      "artist": "96neko",
+      "artistAliases": [
+        "96neko"
+      ],
+      "type": "OP",
+      "season": "2017-01",
+      "anilistId": 21701,
+      "bangumiId": 174143,
+      "releaseYear": 2017,
+      "themeId": 7869,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kuzu_no_honkai"
+    },
+    {
+      "title": "Wagamama MIRROR HEART",
+      "titleCN": "Wagamama MIRROR HEART",
+      "anime": "Masamune-kun no Revenge",
+      "animeCN": "政宗君的复仇",
+      "animeNative": "政宗くんのリベンジ",
+      "artist": "Ayaka Oohashi",
+      "artistAliases": [
+        "Ayaka Oohashi"
+      ],
+      "type": "OP",
+      "season": "2017-01",
+      "anilistId": 21857,
+      "bangumiId": 185762,
+      "releaseYear": 2017,
+      "themeId": 7876,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/masamune_kun_no_revenge"
+    },
+    {
+      "title": "Harumachi Clover",
+      "titleCN": "Harumachi Clover",
+      "anime": "One Room",
+      "animeCN": "One Room",
+      "animeNative": "One Room",
+      "artist": "Mao Ichimichi",
+      "artistAliases": [
+        "Mao Ichimichi"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97857,
+      "bangumiId": 198395,
+      "releaseYear": 2017,
+      "themeId": 7888,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/one_room"
+    },
+    {
+      "title": "Natsuzora Yell",
+      "titleCN": "Natsuzora Yell",
+      "anime": "One Room",
+      "animeCN": "One Room",
+      "animeNative": "One Room",
+      "artist": "Rie Murakawa",
+      "artistAliases": [
+        "Rie Murakawa"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97857,
+      "bangumiId": 198395,
+      "releaseYear": 2017,
+      "themeId": 7889,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/one_room"
+    },
+    {
+      "title": "Kibou Refrain",
+      "titleCN": "Kibou Refrain",
+      "anime": "One Room",
+      "animeCN": "One Room",
+      "animeNative": "One Room",
+      "artist": "Suzuko Mimori",
+      "artistAliases": [
+        "Suzuko Mimori"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97857,
+      "bangumiId": 198395,
+      "releaseYear": 2017,
+      "themeId": 7890,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/one_room"
+    },
+    {
+      "title": "Youkoso Japari Park e",
+      "titleCN": "Youkoso Japari Park e",
+      "anime": "Kemono Friends",
+      "animeCN": "兽娘动物园",
+      "animeNative": "けものフレンズ",
+      "artist": "Aina Aiba, Mikoi Sasaki",
+      "artistAliases": [
+        "Aina Aiba",
+        "Mikoi Sasaki"
+      ],
+      "type": "OP",
+      "season": "2017-01",
+      "anilistId": 87496,
+      "bangumiId": 176478,
+      "releaseYear": 2017,
+      "themeId": 7854,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kemono_friends"
+    },
+    {
+      "title": "Yumeji Labyrinth",
+      "titleCN": "Yumeji Labyrinth",
+      "anime": "Urara Meirochou",
+      "animeCN": "Urara迷路帖",
+      "animeNative": "うらら迷路帖",
+      "artist": "Kaede Hondo, Yurika Kubo",
+      "artistAliases": [
+        "Kaede Hondo",
+        "Yurika Kubo"
+      ],
+      "type": "OP",
+      "season": "2017-01",
+      "anilistId": 21696,
+      "bangumiId": 173303,
+      "releaseYear": 2017,
+      "themeId": 7933,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/urara_meirochou"
+    },
+    {
+      "title": "go to Romance>>>>>",
+      "titleCN": "go to Romance>>>>>",
+      "anime": "Urara Meirochou",
+      "animeCN": "Urara迷路帖",
+      "animeNative": "うらら迷路帖",
+      "artist": "Luce Twinkle Wink☆",
+      "artistAliases": [
+        "Luce Twinkle Wink☆"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 21696,
+      "bangumiId": 173303,
+      "releaseYear": 2017,
+      "themeId": 7934,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/urara_meirochou"
+    },
+    {
+      "title": "Tokimeki Experience!",
+      "titleCN": "Tokimeki Experience!",
+      "anime": "BanG Dream!",
+      "animeCN": "BanG Dream!",
+      "animeNative": "BanG Dream!",
+      "artist": "Poppin'Party",
+      "artistAliases": [
+        "Poppin'Party"
+      ],
+      "type": "OP",
+      "season": "2017-01",
+      "anilistId": 87435,
+      "bangumiId": 186515,
+      "releaseYear": 2017,
+      "themeId": 7826,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream"
+    },
+    {
+      "title": "Don't be afraid",
+      "titleCN": "Don't be afraid",
+      "anime": "BanG Dream!",
+      "animeCN": "BanG Dream!",
+      "animeNative": "BanG Dream!",
+      "artist": "Glitter*Green",
+      "artistAliases": [
+        "Glitter*Green"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 87435,
+      "bangumiId": 186515,
+      "releaseYear": 2017,
+      "themeId": 7827,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream"
+    },
+    {
+      "title": "Kira Kira datoka Yume datoka ~Sing Girls~",
+      "titleCN": "Kira Kira datoka Yume datoka ~Sing Girls~",
+      "anime": "BanG Dream!",
+      "animeCN": "BanG Dream!",
+      "animeNative": "BanG Dream!",
+      "artist": "Poppin'Party",
+      "artistAliases": [
+        "Poppin'Party"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 87435,
+      "bangumiId": 186515,
+      "releaseYear": 2017,
+      "themeId": 7828,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream"
+    },
+    {
+      "title": "Yumemiru Sunflower",
+      "titleCN": "Yumemiru Sunflower",
+      "anime": "BanG Dream!",
+      "animeCN": "BanG Dream!",
+      "animeNative": "BanG Dream!",
+      "artist": "Poppin'Party",
+      "artistAliases": [
+        "Poppin'Party"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 87435,
+      "bangumiId": 186515,
+      "releaseYear": 2017,
+      "themeId": 12170,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream"
+    },
+    {
+      "title": "Pale Moon ga Yureteru",
+      "titleCN": "Pale Moon ga Yureteru",
+      "anime": "ACCA: 13-ku Kansatsu-ka",
+      "animeCN": "ACCA13区监察课",
+      "animeNative": "ACCA 13区監察課",
+      "artist": "Aira Yuuki",
+      "artistAliases": [
+        "Aira Yuuki"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 21823,
+      "bangumiId": 183492,
+      "releaseYear": 2017,
+      "themeId": 7810,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/acca_13_ku_kansatsu_ka"
+    },
+    {
+      "title": "Shunkan Happening",
+      "titleCN": "Shunkan Happening",
+      "anime": "Seiren",
+      "animeCN": "清恋",
+      "animeNative": "セイレン",
+      "artist": "Ayane Sakura",
+      "artistAliases": [
+        "Ayane Sakura"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97730,
+      "bangumiId": 195229,
+      "releaseYear": 2017,
+      "themeId": 7909,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seiren"
+    },
+    {
+      "title": "Akane-iro ni Kakushite",
+      "titleCN": "Akane-iro ni Kakushite",
+      "anime": "Seiren",
+      "animeCN": "清恋",
+      "animeNative": "セイレン",
+      "artist": "Ayane Sakura",
+      "artistAliases": [
+        "Ayane Sakura"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97730,
+      "bangumiId": 195229,
+      "releaseYear": 2017,
+      "themeId": 7910,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/seiren"
+    },
+    {
+      "title": "Muteki no Megami",
+      "titleCN": "Muteki no Megami",
+      "anime": "Seiren",
+      "animeCN": "清恋",
+      "animeNative": "セイレン",
+      "artist": "Shino Shimoji",
+      "artistAliases": [
+        "Shino Shimoji"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97730,
+      "bangumiId": 195229,
+      "releaseYear": 2017,
+      "themeId": 7911,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/seiren"
+    },
+    {
+      "title": "Kimi to Yozora to Fortune to",
+      "titleCN": "Kimi to Yozora to Fortune to",
+      "anime": "Seiren",
+      "animeCN": "清恋",
+      "animeNative": "セイレン",
+      "artist": "Shino Shimoji",
+      "artistAliases": [
+        "Shino Shimoji"
+      ],
+      "type": "ED",
+      "season": "2017-01",
+      "anilistId": 97730,
+      "bangumiId": 195229,
+      "releaseYear": 2017,
+      "themeId": 7912,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/seiren"
+    },
+    {
+      "title": "Imawa no Shinigami",
+      "titleCN": "Imawa no Shinigami",
+      "anime": "Shouwa Genroku Rakugo Shinjuu: Sukeroku Futatabi-hen",
+      "animeCN": "昭和元禄落语心中 -助六再临篇-",
+      "animeNative": "昭和元禄落語心中～助六再び篇～",
+      "artist": "Megumi Hayashibara",
+      "artistAliases": [
+        "Megumi Hayashibara"
+      ],
+      "type": "OP",
+      "season": "2017-01",
+      "anilistId": 21733,
+      "bangumiId": 176615,
+      "releaseYear": 2017,
+      "themeId": 7915,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shouwa_genroku_rakugo_shinjuu_sukeroku_futatabi_hen"
     }
   ],
   "2017-04": [
@@ -47116,6 +61959,396 @@ export const SEASONAL_POOLS = {
       "themeId": 7766,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/sakurada_reset"
+    },
+    {
+      "title": "sh0ut",
+      "titleCN": "sh0ut",
+      "anime": "Re:Creators",
+      "animeCN": "Re：创世主们",
+      "animeNative": "Re:CREATORS",
+      "artist": "SawanoHiroyuki[nZk], Tielle, Gemie",
+      "artistAliases": [
+        "SawanoHiroyuki[nZk]",
+        "Tielle",
+        "Gemie"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 97980,
+      "bangumiId": 202419,
+      "releaseYear": 2017,
+      "themeId": 7743,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/recreators"
+    },
+    {
+      "title": "NEWLOOK",
+      "titleCN": "NEWLOOK",
+      "anime": "Re:Creators",
+      "animeCN": "Re：创世主们",
+      "animeNative": "Re:CREATORS",
+      "artist": "Mashiro Ayano",
+      "artistAliases": [
+        "Mashiro Ayano"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97980,
+      "bangumiId": 202419,
+      "releaseYear": 2017,
+      "themeId": 7744,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/recreators"
+    },
+    {
+      "title": "world Étude",
+      "titleCN": "world Étude",
+      "anime": "Re:Creators",
+      "animeCN": "Re：创世主们",
+      "animeNative": "Re:CREATORS",
+      "artist": "Aki Toyosaki",
+      "artistAliases": [
+        "Aki Toyosaki"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97980,
+      "bangumiId": 202419,
+      "releaseYear": 2017,
+      "themeId": 7745,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/recreators"
+    },
+    {
+      "title": "Rubikon",
+      "titleCN": "Rubikon",
+      "anime": "Re:Creators",
+      "animeCN": "Re：创世主们",
+      "animeNative": "Re:CREATORS",
+      "artist": "Sangatsu no Phantasia",
+      "artistAliases": [
+        "Sangatsu no Phantasia"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97980,
+      "bangumiId": 202419,
+      "releaseYear": 2017,
+      "themeId": 7746,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/recreators"
+    },
+    {
+      "title": "Blow out",
+      "titleCN": "Blow out",
+      "anime": "Rokudenashi Majutsu Koushi to Akashic Records",
+      "animeCN": "不正经的魔术讲师与禁忌教典",
+      "animeNative": "ロクでなし魔術講師と禁忌教典(アカシックレコード)",
+      "artist": "Konomi Suzuki",
+      "artistAliases": [
+        "Konomi Suzuki"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 21700,
+      "bangumiId": 174138,
+      "releaseYear": 2017,
+      "themeId": 7750,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rokudenashi_majutsu_koushi_to_akashic_records"
+    },
+    {
+      "title": "Precious You☆",
+      "titleCN": "Precious You☆",
+      "anime": "Rokudenashi Majutsu Koushi to Akashic Records",
+      "animeCN": "不正经的魔术讲师与禁忌教典",
+      "animeNative": "ロクでなし魔術講師と禁忌教典(アカシックレコード)",
+      "artist": "Ari Ozawa, Yume Miyamoto, Akane Fujita",
+      "artistAliases": [
+        "Ari Ozawa",
+        "Yume Miyamoto",
+        "Akane Fujita"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 21700,
+      "bangumiId": 174138,
+      "releaseYear": 2017,
+      "themeId": 7751,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rokudenashi_majutsu_koushi_to_akashic_records"
+    },
+    {
+      "title": "Sora ni Utaeba",
+      "titleCN": "Sora ni Utaeba",
+      "anime": "Boku no Hero Academia 2nd Season",
+      "animeCN": "我的英雄学院 第二季",
+      "animeNative": "僕のヒーローアカデミア２",
+      "artist": "amazarashi",
+      "artistAliases": [
+        "amazarashi"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 21856,
+      "bangumiId": 185761,
+      "releaseYear": 2017,
+      "themeId": 7639,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_2nd_season"
+    },
+    {
+      "title": "Dakara, Hitori Janai",
+      "titleCN": "Dakara, Hitori Janai",
+      "anime": "Boku no Hero Academia 2nd Season",
+      "animeCN": "我的英雄学院 第二季",
+      "animeNative": "僕のヒーローアカデミア２",
+      "artist": "Little Glee Monster",
+      "artistAliases": [
+        "Little Glee Monster"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 21856,
+      "bangumiId": 185761,
+      "releaseYear": 2017,
+      "themeId": 7640,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_2nd_season"
+    },
+    {
+      "title": "Datte Atashi no Hero.",
+      "titleCN": "Datte Atashi no Hero.",
+      "anime": "Boku no Hero Academia 2nd Season",
+      "animeCN": "我的英雄学院 第二季",
+      "animeNative": "僕のヒーローアカデミア２",
+      "artist": "LiSA",
+      "artistAliases": [
+        "LiSA"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 21856,
+      "bangumiId": 185761,
+      "releaseYear": 2017,
+      "themeId": 7641,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_2nd_season"
+    },
+    {
+      "title": "Morning Glory",
+      "titleCN": "Morning Glory",
+      "anime": "Sakura Quest",
+      "animeCN": "樱花任务",
+      "animeNative": "サクラクエスト",
+      "artist": "(K)NoW_NAME",
+      "artistAliases": [
+        "(K)NoW_NAME"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 97903,
+      "bangumiId": 200547,
+      "releaseYear": 2017,
+      "themeId": 7758,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_quest"
+    },
+    {
+      "title": "Lupinus",
+      "titleCN": "Lupinus",
+      "anime": "Sakura Quest",
+      "animeCN": "樱花任务",
+      "animeNative": "サクラクエスト",
+      "artist": "(K)NoW_NAME",
+      "artistAliases": [
+        "(K)NoW_NAME"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 97903,
+      "bangumiId": 200547,
+      "releaseYear": 2017,
+      "themeId": 7759,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_quest"
+    },
+    {
+      "title": "Freesia",
+      "titleCN": "Freesia",
+      "anime": "Sakura Quest",
+      "animeCN": "樱花任务",
+      "animeNative": "サクラクエスト",
+      "artist": "(K)NoW_NAME",
+      "artistAliases": [
+        "(K)NoW_NAME"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97903,
+      "bangumiId": 200547,
+      "releaseYear": 2017,
+      "themeId": 7760,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_quest"
+    },
+    {
+      "title": "Baby's Breath",
+      "titleCN": "Baby's Breath",
+      "anime": "Sakura Quest",
+      "animeCN": "樱花任务",
+      "animeNative": "サクラクエスト",
+      "artist": "(K)NoW_NAME",
+      "artistAliases": [
+        "(K)NoW_NAME"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97903,
+      "bangumiId": 200547,
+      "releaseYear": 2017,
+      "themeId": 7761,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sakura_quest"
+    },
+    {
+      "title": "Kimi no Uta",
+      "titleCN": "Kimi no Uta",
+      "anime": "Natsume Yuujinchou Roku",
+      "animeCN": "夏目友人帐 陆",
+      "animeNative": "夏目友人帳 陸",
+      "artist": "Rei Yasuda",
+      "artistAliases": [
+        "Rei Yasuda"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97983,
+      "bangumiId": 203387,
+      "releaseYear": 2017,
+      "themeId": 7731,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou_roku"
+    },
+    {
+      "title": "RE-ILLUSION",
+      "titleCN": "RE-ILLUSION",
+      "anime": "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka Gaiden: Sword Oratoria",
+      "animeCN": "在地下城寻求邂逅是否搞错了什么 外传 剑姬神圣谭",
+      "animeNative": "ダンジョンに出会いを求めるのは間違っているだろうか外伝 ソード・オラトリア",
+      "artist": "Yuka Iguchi",
+      "artistAliases": [
+        "Yuka Iguchi"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 21676,
+      "bangumiId": 172155,
+      "releaseYear": 2017,
+      "themeId": 7676,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dungeon_ni_deai_wo_motomeru_no_wa_machigatteiru_darou_ka_gaiden_sword_oratoria"
+    },
+    {
+      "title": "day by day",
+      "titleCN": "day by day",
+      "anime": "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka Gaiden: Sword Oratoria",
+      "animeCN": "在地下城寻求邂逅是否搞错了什么 外传 剑姬神圣谭",
+      "animeNative": "ダンジョンに出会いを求めるのは間違っているだろうか外伝 ソード・オラトリア",
+      "artist": "Kano",
+      "artistAliases": [
+        "Kano"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 21676,
+      "bangumiId": 172155,
+      "releaseYear": 2017,
+      "themeId": 7677,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dungeon_ni_deai_wo_motomeru_no_wa_machigatteiru_darou_ka_gaiden_sword_oratoria"
+    },
+    {
+      "title": "Nasagumama, Sawagumama",
+      "titleCN": "Nasagumama, Sawagumama",
+      "anime": "Uchouten Kazoku 2",
+      "animeCN": "有顶天家族 第二季",
+      "animeNative": "有頂天家族 2",
+      "artist": "milktub",
+      "artistAliases": [
+        "milktub"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 97642,
+      "bangumiId": 193042,
+      "releaseYear": 2017,
+      "themeId": 7791,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchouten_kazoku_2"
+    },
+    {
+      "title": "Moon River",
+      "titleCN": "Moon River",
+      "anime": "Uchouten Kazoku 2",
+      "animeCN": "有顶天家族 第二季",
+      "animeNative": "有頂天家族 2",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 97642,
+      "bangumiId": 193042,
+      "releaseYear": 2017,
+      "themeId": 7792,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchouten_kazoku_2"
+    },
+    {
+      "title": "A E I U E O Ao!",
+      "titleCN": "A E I U E O Ao!",
+      "anime": "Hinako Note",
+      "animeCN": "雏子的笔记",
+      "animeNative": "ひなこのーと",
+      "artist": "Mao Ichimichi, Marika Kouno, Miyu Tomita, Yui Ogura",
+      "artistAliases": [
+        "Mao Ichimichi",
+        "Marika Kouno",
+        "Miyu Tomita",
+        "Yui Ogura"
+      ],
+      "type": "OP",
+      "season": "2017-04",
+      "anilistId": 87517,
+      "bangumiId": 190907,
+      "releaseYear": 2017,
+      "themeId": 7704,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hinako_note"
+    },
+    {
+      "title": "Curtain Call!!!!!",
+      "titleCN": "Curtain Call!!!!!",
+      "anime": "Hinako Note",
+      "animeCN": "雏子的笔记",
+      "animeNative": "ひなこのーと",
+      "artist": "Mao Ichimichi, Marika Kouno, Miyu Tomita, Yui Ogura",
+      "artistAliases": [
+        "Mao Ichimichi",
+        "Marika Kouno",
+        "Miyu Tomita",
+        "Yui Ogura"
+      ],
+      "type": "ED",
+      "season": "2017-04",
+      "anilistId": 87517,
+      "bangumiId": 190907,
+      "releaseYear": 2017,
+      "themeId": 7705,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hinako_note"
     }
   ],
   "2017-07": [
@@ -47274,6 +62507,533 @@ export const SEASONAL_POOLS = {
       "themeId": 7548,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/kakegurui"
+    },
+    {
+      "title": "terminal terminal",
+      "titleCN": "terminal terminal",
+      "anime": "Owarimonogatari 2nd Season",
+      "animeCN": "终物语（下）",
+      "animeNative": "終物語（下）",
+      "artist": "Emiri Katou",
+      "artistAliases": [
+        "Emiri Katou"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 21745,
+      "bangumiId": 175596,
+      "releaseYear": 2017,
+      "themeId": 7584,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/owarimonogatari_2nd_season"
+    },
+    {
+      "title": "dreamy date drive",
+      "titleCN": "dreamy date drive",
+      "anime": "Owarimonogatari 2nd Season",
+      "animeCN": "终物语（下）",
+      "animeNative": "終物語（下）",
+      "artist": "Chiwa Saitou",
+      "artistAliases": [
+        "Chiwa Saitou"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 21745,
+      "bangumiId": 175596,
+      "releaseYear": 2017,
+      "themeId": 7585,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/owarimonogatari_2nd_season"
+    },
+    {
+      "title": "dark cherry mystery",
+      "titleCN": "dark cherry mystery",
+      "anime": "Owarimonogatari 2nd Season",
+      "animeCN": "终物语（下）",
+      "animeNative": "終物語（下）",
+      "artist": "Kaori Mizuhashi",
+      "artistAliases": [
+        "Kaori Mizuhashi"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 21745,
+      "bangumiId": 175596,
+      "releaseYear": 2017,
+      "themeId": 7586,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/owarimonogatari_2nd_season"
+    },
+    {
+      "title": "SHIORI",
+      "titleCN": "SHIORI",
+      "anime": "Owarimonogatari 2nd Season",
+      "animeCN": "终物语（下）",
+      "animeNative": "終物語（下）",
+      "artist": "ClariS",
+      "artistAliases": [
+        "ClariS"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 21745,
+      "bangumiId": 175596,
+      "releaseYear": 2017,
+      "themeId": 7587,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/owarimonogatari_2nd_season"
+    },
+    {
+      "title": "STEP by STEP UP↑↑↑↑",
+      "titleCN": "STEP by STEP UP↑↑↑↑",
+      "anime": "New Game!!",
+      "animeCN": "NEW GAME!!",
+      "animeNative": "NEW GAME!!",
+      "artist": "fourfolium",
+      "artistAliases": [
+        "fourfolium"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 98292,
+      "bangumiId": 208908,
+      "releaseYear": 2017,
+      "themeId": 7579,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/new_game_2017"
+    },
+    {
+      "title": "JUMPin' JUMP UP!!!!",
+      "titleCN": "JUMPin' JUMP UP!!!!",
+      "anime": "New Game!!",
+      "animeCN": "NEW GAME!!",
+      "animeNative": "NEW GAME!!",
+      "artist": "fourfolium",
+      "artistAliases": [
+        "fourfolium"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 98292,
+      "bangumiId": 208908,
+      "releaseYear": 2017,
+      "themeId": 7580,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/new_game_2017"
+    },
+    {
+      "title": "Yumeiro Compass",
+      "titleCN": "Yumeiro Compass",
+      "anime": "New Game!!",
+      "animeCN": "NEW GAME!!",
+      "animeNative": "NEW GAME!!",
+      "artist": "fourfolium, KOCHO",
+      "artistAliases": [
+        "fourfolium",
+        "KOCHO"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 98292,
+      "bangumiId": 208908,
+      "releaseYear": 2017,
+      "themeId": 7581,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/new_game_2017"
+    },
+    {
+      "title": "GAMERS!",
+      "titleCN": "GAMERS!",
+      "anime": "Gamers!",
+      "animeCN": "GAMERS电玩咖",
+      "animeNative": "ゲーマーズ!",
+      "artist": "Rumi Ookubo, Hisako Kanemoto, Manaka Iwami",
+      "artistAliases": [
+        "Rumi Ookubo",
+        "Hisako Kanemoto",
+        "Manaka Iwami"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 97766,
+      "bangumiId": 195816,
+      "releaseYear": 2017,
+      "themeId": 7512,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gamers"
+    },
+    {
+      "title": "Fight on!",
+      "titleCN": "Fight on!",
+      "anime": "Gamers!",
+      "animeCN": "GAMERS电玩咖",
+      "animeNative": "ゲーマーズ!",
+      "artist": "Luce Twinkle Wink☆",
+      "artistAliases": [
+        "Luce Twinkle Wink☆"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97766,
+      "bangumiId": 195816,
+      "releaseYear": 2017,
+      "themeId": 7513,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gamers"
+    },
+    {
+      "title": "Koi no prologue＊",
+      "titleCN": "Koi no prologue＊",
+      "anime": "Gamers!",
+      "animeCN": "GAMERS电玩咖",
+      "animeNative": "ゲーマーズ!",
+      "artist": "Luce Twinkle Wink☆, Rumi Ookubo",
+      "artistAliases": [
+        "Luce Twinkle Wink☆",
+        "Rumi Ookubo"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97766,
+      "bangumiId": 195816,
+      "releaseYear": 2017,
+      "themeId": 7514,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gamers"
+    },
+    {
+      "title": "Eiyuu Unmei no Uta",
+      "titleCN": "Eiyuu Unmei no Uta",
+      "anime": "Fate/Apocrypha",
+      "animeCN": "Fate/Apocrypha",
+      "animeNative": "Fate/Apocrypha",
+      "artist": "EGOIST",
+      "artistAliases": [
+        "EGOIST"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 98035,
+      "bangumiId": 204855,
+      "releaseYear": 2017,
+      "themeId": 7507,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fateapocrypha"
+    },
+    {
+      "title": "ASH",
+      "titleCN": "ASH",
+      "anime": "Fate/Apocrypha",
+      "animeCN": "Fate/Apocrypha",
+      "animeNative": "Fate/Apocrypha",
+      "artist": "LiSA",
+      "artistAliases": [
+        "LiSA"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 98035,
+      "bangumiId": 204855,
+      "releaseYear": 2017,
+      "themeId": 7508,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fateapocrypha"
+    },
+    {
+      "title": "Désir",
+      "titleCN": "Désir",
+      "anime": "Fate/Apocrypha",
+      "animeCN": "Fate/Apocrypha",
+      "animeNative": "Fate/Apocrypha",
+      "artist": "GARNiDELiA",
+      "artistAliases": [
+        "GARNiDELiA"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 98035,
+      "bangumiId": 204855,
+      "releaseYear": 2017,
+      "themeId": 7509,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fateapocrypha"
+    },
+    {
+      "title": "KOE",
+      "titleCN": "KOE",
+      "anime": "Fate/Apocrypha",
+      "animeCN": "Fate/Apocrypha",
+      "animeNative": "Fate/Apocrypha",
+      "artist": "ASCA",
+      "artistAliases": [
+        "ASCA"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 98035,
+      "bangumiId": 204855,
+      "releaseYear": 2017,
+      "themeId": 7510,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fateapocrypha"
+    },
+    {
+      "title": "The Other Side of the Wall",
+      "titleCN": "The Other Side of the Wall",
+      "anime": "Princess Principal",
+      "animeCN": "Princess Principal",
+      "animeNative": "プリンセス・プリンシパル",
+      "artist": "Void_Chords",
+      "artistAliases": [
+        "Void_Chords"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 98505,
+      "bangumiId": 211936,
+      "releaseYear": 2017,
+      "themeId": 7588,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/princess_principal"
+    },
+    {
+      "title": "A Page of My Story",
+      "titleCN": "A Page of My Story",
+      "anime": "Princess Principal",
+      "animeCN": "Princess Principal",
+      "animeNative": "プリンセス・プリンシパル",
+      "artist": "Akira Sekine, You Taichi",
+      "artistAliases": [
+        "Akira Sekine",
+        "You Taichi"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 98505,
+      "bangumiId": 211936,
+      "releaseYear": 2017,
+      "themeId": 7589,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/princess_principal"
+    },
+    {
+      "title": "One In A Billion",
+      "titleCN": "One In A Billion",
+      "anime": "Isekai Shokudou",
+      "animeCN": "异世界食堂",
+      "animeNative": "異世界食堂",
+      "artist": "May'n, Wake Up, Girls!",
+      "artistAliases": [
+        "May'n",
+        "Wake Up, Girls!"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 97617,
+      "bangumiId": 192252,
+      "releaseYear": 2017,
+      "themeId": 7531,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_shokudou"
+    },
+    {
+      "title": "Chiisana Hitotsubu",
+      "titleCN": "Chiisana Hitotsubu",
+      "anime": "Isekai Shokudou",
+      "animeCN": "异世界食堂",
+      "animeNative": "異世界食堂",
+      "artist": "Kiyono Yasuno",
+      "artistAliases": [
+        "Kiyono Yasuno"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97617,
+      "bangumiId": 192252,
+      "releaseYear": 2017,
+      "themeId": 7532,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_shokudou"
+    },
+    {
+      "title": "Another World",
+      "titleCN": "Another World",
+      "anime": "Isekai wa Smartphone to Tomo ni.",
+      "animeCN": "带着智能手机闯荡异世界。",
+      "animeNative": "異世界はスマートフォンとともに。",
+      "artist": "AOP",
+      "artistAliases": [
+        "AOP"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 98491,
+      "bangumiId": 211723,
+      "releaseYear": 2017,
+      "themeId": 7533,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_wa_smartphone_to_tomo_ni"
+    },
+    {
+      "title": "Junjou Emotional",
+      "titleCN": "Junjou Emotional",
+      "anime": "Isekai wa Smartphone to Tomo ni.",
+      "animeCN": "带着智能手机闯荡异世界。",
+      "animeNative": "異世界はスマートフォンとともに。",
+      "artist": "Maaya Uchida, Yui Fukuo, Nanami Yamashita",
+      "artistAliases": [
+        "Maaya Uchida",
+        "Yui Fukuo",
+        "Nanami Yamashita"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 98491,
+      "bangumiId": 211723,
+      "releaseYear": 2017,
+      "themeId": 7534,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_wa_smartphone_to_tomo_ni"
+    },
+    {
+      "title": "Hello! My World!!",
+      "titleCN": "Hello! My World!!",
+      "anime": "Knight's & Magic",
+      "animeCN": "骑士&魔法",
+      "animeNative": "ナイツ＆マジック",
+      "artist": "fhána",
+      "artistAliases": [
+        "fhána"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 97663,
+      "bangumiId": 193445,
+      "releaseYear": 2017,
+      "themeId": 7555,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/knights_magic"
+    },
+    {
+      "title": "You & I",
+      "titleCN": "You & I",
+      "anime": "Knight's & Magic",
+      "animeCN": "骑士&魔法",
+      "animeNative": "ナイツ＆マジック",
+      "artist": "Ayaka Oohashi",
+      "artistAliases": [
+        "Ayaka Oohashi"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97663,
+      "bangumiId": 193445,
+      "releaseYear": 2017,
+      "themeId": 7556,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/knights_magic"
+    },
+    {
+      "title": "Habataki no Birthday",
+      "titleCN": "Habataki no Birthday",
+      "anime": "Tenshi no 3P!",
+      "animeCN": "天使的3P!",
+      "animeNative": "天使の3P！〈スリーピース〉",
+      "artist": "Baby's Breath",
+      "artistAliases": [
+        "Baby's Breath"
+      ],
+      "type": "OP",
+      "season": "2017-07",
+      "anilistId": 97683,
+      "bangumiId": 194261,
+      "releaseYear": 2017,
+      "themeId": 7604,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tenshi_no_3p"
+    },
+    {
+      "title": "Kusabi",
+      "titleCN": "Kusabi",
+      "anime": "Tenshi no 3P!",
+      "animeCN": "天使的3P!",
+      "animeNative": "天使の3P！〈スリーピース〉",
+      "artist": "Baby's Breath",
+      "artistAliases": [
+        "Baby's Breath"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97683,
+      "bangumiId": 194261,
+      "releaseYear": 2017,
+      "themeId": 7605,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tenshi_no_3p"
+    },
+    {
+      "title": "HOWLING",
+      "titleCN": "HOWLING",
+      "anime": "Tenshi no 3P!",
+      "animeCN": "天使的3P!",
+      "animeNative": "天使の3P！〈スリーピース〉",
+      "artist": "Aoi Koga, Yurika Endou, Yuuko Oono",
+      "artistAliases": [
+        "Aoi Koga",
+        "Yurika Endou",
+        "Yuuko Oono"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97683,
+      "bangumiId": 194261,
+      "releaseYear": 2017,
+      "themeId": 7606,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tenshi_no_3p"
+    },
+    {
+      "title": "Taisetsu ga Kikoeru",
+      "titleCN": "Taisetsu ga Kikoeru",
+      "anime": "Tenshi no 3P!",
+      "animeCN": "天使的3P!",
+      "animeNative": "天使の3P！〈スリーピース〉",
+      "artist": "Aoi Koga, Yurika Endou, Yuuko Oono",
+      "artistAliases": [
+        "Aoi Koga",
+        "Yurika Endou",
+        "Yuuko Oono"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97683,
+      "bangumiId": 194261,
+      "releaseYear": 2017,
+      "themeId": 7607,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/tenshi_no_3p"
+    },
+    {
+      "title": "INNOCENT BLUE",
+      "titleCN": "INNOCENT BLUE",
+      "anime": "Tenshi no 3P!",
+      "animeCN": "天使的3P!",
+      "animeNative": "天使の3P！〈スリーピース〉",
+      "artist": "Aoi Koga, Yurika Endou, Yuuko Oono",
+      "artistAliases": [
+        "Aoi Koga",
+        "Yurika Endou",
+        "Yuuko Oono"
+      ],
+      "type": "ED",
+      "season": "2017-07",
+      "anilistId": 97683,
+      "bangumiId": 194261,
+      "releaseYear": 2017,
+      "themeId": 7608,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/tenshi_no_3p"
     }
   ],
   "2017-10": [
@@ -47516,6 +63276,393 @@ export const SEASONAL_POOLS = {
       "themeId": 7304,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/himouto_umaru_chan_r"
+    },
+    {
+      "title": "Bon Appétit♡S",
+      "titleCN": "Bon Appétit♡S",
+      "anime": "Blend S",
+      "animeCN": "调教咖啡厅",
+      "animeNative": "ブレンド・S",
+      "artist": "Akari Kitou, Azumi Waki",
+      "artistAliases": [
+        "Akari Kitou",
+        "Azumi Waki"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 97994,
+      "bangumiId": 204145,
+      "releaseYear": 2017,
+      "themeId": 7239,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blend_s"
+    },
+    {
+      "title": "Detarame na Minus to Plus ni Okeru Blend Kou",
+      "titleCN": "Detarame na Minus to Plus ni Okeru Blend Kou",
+      "anime": "Blend S",
+      "animeCN": "调教咖啡厅",
+      "animeNative": "ブレンド・S",
+      "artist": "Akari Kitou, Azumi Waki",
+      "artistAliases": [
+        "Akari Kitou",
+        "Azumi Waki"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 97994,
+      "bangumiId": 204145,
+      "releaseYear": 2017,
+      "themeId": 7240,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/blend_s"
+    },
+    {
+      "title": "over and over",
+      "titleCN": "over and over",
+      "anime": "Just Because!",
+      "animeCN": "Just Because!",
+      "animeNative": "Just Because!",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 98820,
+      "bangumiId": 212278,
+      "releaseYear": 2017,
+      "themeId": 7324,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/just_because"
+    },
+    {
+      "title": "behind",
+      "titleCN": "behind",
+      "anime": "Just Because!",
+      "animeCN": "Just Because!",
+      "animeNative": "Just Because!",
+      "artist": "Lynn, Karin Isobe",
+      "artistAliases": [
+        "Lynn",
+        "Karin Isobe"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98820,
+      "bangumiId": 212278,
+      "releaseYear": 2017,
+      "themeId": 7325,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/just_because"
+    },
+    {
+      "title": "Ashita no Kimi sae Ireba Ii.",
+      "titleCN": "Ashita no Kimi sae Ireba Ii.",
+      "anime": "Imouto sae Ireba Ii.",
+      "animeCN": "如果有妹妹就好了。",
+      "animeNative": "妹さえいればいい。",
+      "artist": "ChouCho",
+      "artistAliases": [
+        "ChouCho"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 98596,
+      "bangumiId": 213076,
+      "releaseYear": 2017,
+      "themeId": 7312,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/imouto_sae_ireba_ii"
+    },
+    {
+      "title": "Donna Hoshizora yori mo, Donna Omoide yori mo",
+      "titleCN": "Donna Hoshizora yori mo, Donna Omoide yori mo",
+      "anime": "Imouto sae Ireba Ii.",
+      "animeCN": "如果有妹妹就好了。",
+      "animeNative": "妹さえいればいい。",
+      "artist": "Aira Yuuki",
+      "artistAliases": [
+        "Aira Yuuki"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98596,
+      "bangumiId": 213076,
+      "releaseYear": 2017,
+      "themeId": 7313,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/imouto_sae_ireba_ii"
+    },
+    {
+      "title": "Dairokkan no Mistress",
+      "titleCN": "Dairokkan no Mistress",
+      "anime": "Imouto sae Ireba Ii.",
+      "animeCN": "如果有妹妹就好了。",
+      "animeNative": "妹さえいればいい。",
+      "artist": "Manami Numakura",
+      "artistAliases": [
+        "Manami Numakura"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98596,
+      "bangumiId": 213076,
+      "releaseYear": 2017,
+      "themeId": 7314,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/imouto_sae_ireba_ii"
+    },
+    {
+      "title": "fake town baby",
+      "titleCN": "fake town baby",
+      "anime": "Kekkai Sensen & Beyond",
+      "animeCN": "血界战线 & BEYOND",
+      "animeNative": "血界戦線 & BEYOND",
+      "artist": "UNISON SQUARE GARDEN",
+      "artistAliases": [
+        "UNISON SQUARE GARDEN"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 97886,
+      "bangumiId": 199392,
+      "releaseYear": 2017,
+      "themeId": 7328,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kekkai_sensen_beyond"
+    },
+    {
+      "title": "Step Up LOVE",
+      "titleCN": "Step Up LOVE",
+      "anime": "Kekkai Sensen & Beyond",
+      "animeCN": "血界战线 & BEYOND",
+      "animeNative": "血界戦線 & BEYOND",
+      "artist": "Daoko, Yasuyuki Okamura",
+      "artistAliases": [
+        "Daoko",
+        "Yasuyuki Okamura"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 97886,
+      "bangumiId": 199392,
+      "releaseYear": 2017,
+      "themeId": 7329,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kekkai_sensen_beyond"
+    },
+    {
+      "title": "Kokoro ni Tsubomi",
+      "titleCN": "Kokoro ni Tsubomi",
+      "anime": "Konohana Kitan",
+      "animeCN": "此花绮谭",
+      "animeNative": "このはな綺譚",
+      "artist": "eufonius",
+      "artistAliases": [
+        "eufonius"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 98506,
+      "bangumiId": 211934,
+      "releaseYear": 2017,
+      "themeId": 7334,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/konohana_kitan"
+    },
+    {
+      "title": "Haru Urara, Kimi to Sakihokoru",
+      "titleCN": "Haru Urara, Kimi to Sakihokoru",
+      "anime": "Konohana Kitan",
+      "animeCN": "此花绮谭",
+      "animeNative": "このはな綺譚",
+      "artist": "Ai Kakuma, Manami Numakura, Yuuko Oono",
+      "artistAliases": [
+        "Ai Kakuma",
+        "Manami Numakura",
+        "Yuuko Oono"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98506,
+      "bangumiId": 211934,
+      "releaseYear": 2017,
+      "themeId": 7335,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/konohana_kitan"
+    },
+    {
+      "title": "Akanezora, Kimi Mau Kouyou no Sanpomichi",
+      "titleCN": "Akanezora, Kimi Mau Kouyou no Sanpomichi",
+      "anime": "Konohana Kitan",
+      "animeCN": "此花绮谭",
+      "animeNative": "このはな綺譚",
+      "artist": "Ai Kakuma, Manami Numakura",
+      "artistAliases": [
+        "Ai Kakuma",
+        "Manami Numakura"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98506,
+      "bangumiId": 211934,
+      "releaseYear": 2017,
+      "themeId": 7337,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/konohana_kitan"
+    },
+    {
+      "title": "Yukihana Kirameku Ieji nite",
+      "titleCN": "Yukihana Kirameku Ieji nite",
+      "anime": "Konohana Kitan",
+      "animeCN": "此花绮谭",
+      "animeNative": "このはな綺譚",
+      "artist": "Yuuko Oono",
+      "artistAliases": [
+        "Yuuko Oono"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98506,
+      "bangumiId": 211934,
+      "releaseYear": 2017,
+      "themeId": 7338,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/konohana_kitan"
+    },
+    {
+      "title": "Shiji: Kusa no Yukari",
+      "titleCN": "Shiji: Kusa no Yukari",
+      "anime": "Konohana Kitan",
+      "animeCN": "此花绮谭",
+      "animeNative": "このはな綺譚",
+      "artist": "Yuuko Oono",
+      "artistAliases": [
+        "Yuuko Oono"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98506,
+      "bangumiId": 211934,
+      "releaseYear": 2017,
+      "themeId": 7339,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/konohana_kitan"
+    },
+    {
+      "title": "You",
+      "titleCN": "You",
+      "anime": "Mahoutsukai no Yome",
+      "animeCN": "魔法使的新娘",
+      "animeNative": "魔法使いの嫁",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 98436,
+      "bangumiId": 210864,
+      "releaseYear": 2017,
+      "themeId": 7358,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/mahoutsukai_no_yome"
+    },
+    {
+      "title": "here and there",
+      "titleCN": "here and there",
+      "anime": "Kino no Tabi: The Beautiful World - The Animated Series",
+      "animeCN": "奇诺之旅",
+      "animeNative": "キノの旅 -the Beautiful World- the Animated Series",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 98448,
+      "bangumiId": 211068,
+      "releaseYear": 2017,
+      "themeId": 7330,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kino_no_tabi_the_beautiful_world_the_animated_series"
+    },
+    {
+      "title": "Satoutama no Tsuki",
+      "titleCN": "Satoutama no Tsuki",
+      "anime": "Kino no Tabi: The Beautiful World - The Animated Series",
+      "animeCN": "奇诺之旅",
+      "animeNative": "キノの旅 -the Beautiful World- the Animated Series",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 98448,
+      "bangumiId": 211068,
+      "releaseYear": 2017,
+      "themeId": 7331,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kino_no_tabi_the_beautiful_world_the_animated_series"
+    },
+    {
+      "title": "BRAVER",
+      "titleCN": "BRAVER",
+      "anime": "Shokugeki no Souma: San no Sara",
+      "animeCN": "食戟之灵 餐之皿",
+      "animeNative": "食戟のソーマ 餐ノ皿",
+      "artist": "ZAQ",
+      "artistAliases": [
+        "ZAQ"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 99255,
+      "bangumiId": 217632,
+      "releaseYear": 2017,
+      "themeId": 7390,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shokugeki_no_souma_san_no_sara"
+    },
+    {
+      "title": "Kyokyojitsujitsu",
+      "titleCN": "Kyokyojitsujitsu",
+      "anime": "Shokugeki no Souma: San no Sara",
+      "animeCN": "食戟之灵 餐之皿",
+      "animeNative": "食戟のソーマ 餐ノ皿",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2017-10",
+      "anilistId": 99255,
+      "bangumiId": 217632,
+      "releaseYear": 2017,
+      "themeId": 7391,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shokugeki_no_souma_san_no_sara"
+    },
+    {
+      "title": "Eien Labyrinth",
+      "titleCN": "Eien Labyrinth",
+      "anime": "Boku no Kanojo ga Majimesugiru Sho-bitch na Ken",
+      "animeCN": "关于我女友是个一本正经的碧池这件事",
+      "animeNative": "僕の彼女がマジメ過ぎる処女ビッチな件",
+      "artist": "Aoi Yuuki",
+      "artistAliases": [
+        "Aoi Yuuki"
+      ],
+      "type": "OP",
+      "season": "2017-10",
+      "anilistId": 98951,
+      "bangumiId": 216570,
+      "releaseYear": 2017,
+      "themeId": 7242,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_kanojo_ga_majimesugiru_sho_bitch_na_ken"
     }
   ],
   "2018-01": [
@@ -47892,6 +64039,588 @@ export const SEASONAL_POOLS = {
       "themeId": 8636,
       "themeSequence": 7,
       "animethemesUrl": "https://animethemes.moe/anime/karakai_jouzu_no_takagi_san"
+    },
+    {
+      "title": "Ψlent Prisoner",
+      "titleCN": "Ψlent Prisoner",
+      "anime": "Saiki Kusuo no Ψ-nan 2",
+      "animeCN": "齐木楠雄的灾难 第二季",
+      "animeNative": "斉木楠雄のΨ難 2",
+      "artist": "Hiroshi Kamiya, Daisuke Ono, Nobunaga Shimazaki",
+      "artistAliases": [
+        "Hiroshi Kamiya",
+        "Daisuke Ono",
+        "Nobunaga Shimazaki"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 98034,
+      "bangumiId": 204027,
+      "releaseYear": 2018,
+      "themeId": 8687,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saiki_kusuo_no_ps_nan_2"
+    },
+    {
+      "title": "Ψ Hakkenden!",
+      "titleCN": "Ψ Hakkenden!",
+      "anime": "Saiki Kusuo no Ψ-nan 2",
+      "animeCN": "齐木楠雄的灾难 第二季",
+      "animeNative": "斉木楠雄のΨ難 2",
+      "artist": "Hiroshi Kamiya",
+      "artistAliases": [
+        "Hiroshi Kamiya"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 98034,
+      "bangumiId": 204027,
+      "releaseYear": 2018,
+      "themeId": 8689,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/saiki_kusuo_no_ps_nan_2"
+    },
+    {
+      "title": "Duet♡ShitekudaΨ",
+      "titleCN": "Duet♡ShitekudaΨ",
+      "anime": "Saiki Kusuo no Ψ-nan 2",
+      "animeCN": "齐木楠雄的灾难 第二季",
+      "animeNative": "斉木楠雄のΨ難 2",
+      "artist": "Ai Kayano, Eri Kitamura",
+      "artistAliases": [
+        "Ai Kayano",
+        "Eri Kitamura"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 98034,
+      "bangumiId": 204027,
+      "releaseYear": 2018,
+      "themeId": 8690,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/saiki_kusuo_no_ps_nan_2"
+    },
+    {
+      "title": "Korekara",
+      "titleCN": "Korekara",
+      "anime": "Ryuuou no Oshigoto!",
+      "animeCN": "龙王的工作！",
+      "animeNative": "りゅうおうのおしごと!",
+      "artist": "Machico",
+      "artistAliases": [
+        "Machico"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 99507,
+      "bangumiId": 219658,
+      "releaseYear": 2018,
+      "themeId": 8684,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ryuuou_no_oshigoto"
+    },
+    {
+      "title": "Mamoritai Mono no Tame ni",
+      "titleCN": "Mamoritai Mono no Tame ni",
+      "anime": "Ryuuou no Oshigoto!",
+      "animeCN": "龙王的工作！",
+      "animeNative": "りゅうおうのおしごと!",
+      "artist": "Miku Itou",
+      "artistAliases": [
+        "Miku Itou"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 99507,
+      "bangumiId": 219658,
+      "releaseYear": 2018,
+      "themeId": 8685,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ryuuou_no_oshigoto"
+    },
+    {
+      "title": "Ano Hi no Yume",
+      "titleCN": "Ano Hi no Yume",
+      "anime": "Ryuuou no Oshigoto!",
+      "animeCN": "龙王的工作！",
+      "animeNative": "りゅうおうのおしごと!",
+      "artist": "Miku Itou",
+      "artistAliases": [
+        "Miku Itou"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 99507,
+      "bangumiId": 219658,
+      "releaseYear": 2018,
+      "themeId": 8686,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ryuuou_no_oshigoto"
+    },
+    {
+      "title": "GO CRY GO",
+      "titleCN": "GO CRY GO",
+      "anime": "Overlord II",
+      "animeCN": "OVERLORD 第二季",
+      "animeNative": "オーバーロードⅡ",
+      "artist": "OxT",
+      "artistAliases": [
+        "OxT"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 98437,
+      "bangumiId": 211027,
+      "releaseYear": 2018,
+      "themeId": 8656,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/overlord_ii"
+    },
+    {
+      "title": "Azalea",
+      "titleCN": "Azalea",
+      "anime": "Citrus",
+      "animeCN": "citrus～柑橘味香气～",
+      "animeNative": "citrus",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 97832,
+      "bangumiId": 198098,
+      "releaseYear": 2018,
+      "themeId": 8556,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/citrus"
+    },
+    {
+      "title": "Dear Teardrop",
+      "titleCN": "Dear Teardrop",
+      "anime": "Citrus",
+      "animeCN": "citrus～柑橘味香气～",
+      "animeNative": "citrus",
+      "artist": "Mia REGINA",
+      "artistAliases": [
+        "Mia REGINA"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 97832,
+      "bangumiId": 198098,
+      "releaseYear": 2018,
+      "themeId": 8557,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/citrus"
+    },
+    {
+      "title": "Nostalgic Rainfall",
+      "titleCN": "Nostalgic Rainfall",
+      "anime": "Koi wa Ameagari no You ni",
+      "animeCN": "恋如雨止",
+      "animeNative": "恋は雨上がりのように",
+      "artist": "CHiCO, HoneyWorks",
+      "artistAliases": [
+        "CHiCO",
+        "HoneyWorks"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 98385,
+      "bangumiId": 210458,
+      "releaseYear": 2018,
+      "themeId": 8639,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/koi_wa_ameagari_no_you_ni"
+    },
+    {
+      "title": "Twinkling star",
+      "titleCN": "Twinkling star",
+      "anime": "Poputepipikku",
+      "animeCN": "pop子和pipi美的日常",
+      "animeNative": "ポプテピピック",
+      "artist": "Inori Minase, Sumire Uesaka, Yui Ogura",
+      "artistAliases": [
+        "Inori Minase",
+        "Sumire Uesaka",
+        "Yui Ogura"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 98549,
+      "bangumiId": 212279,
+      "releaseYear": 2018,
+      "themeId": 8663,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/poputepipikku"
+    },
+    {
+      "title": "POP TEAM EPIC",
+      "titleCN": "POP TEAM EPIC",
+      "anime": "Poputepipikku",
+      "animeCN": "pop子和pipi美的日常",
+      "animeNative": "ポプテピピック",
+      "artist": "Sumire Uesaka",
+      "artistAliases": [
+        "Sumire Uesaka"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 98549,
+      "bangumiId": 212279,
+      "releaseYear": 2018,
+      "themeId": 8664,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/poputepipikku"
+    },
+    {
+      "title": "POPPY PAPPY DAY",
+      "titleCN": "POPPY PAPPY DAY",
+      "anime": "Poputepipikku",
+      "animeCN": "pop子和pipi美的日常",
+      "animeNative": "ポプテピピック",
+      "artist": "Yui Makino, Yui Watanabe",
+      "artistAliases": [
+        "Yui Makino",
+        "Yui Watanabe"
+      ],
+      "type": "ED",
+      "recordingId": "animethemes:8666",
+      "season": "2018-01",
+      "anilistId": 98549,
+      "bangumiId": 212279,
+      "releaseYear": 2018,
+      "themeId": 8666,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/poputepipikku"
+    },
+    {
+      "title": "POPPY PAPPY DAY (Route66 Mix)",
+      "titleCN": "POPPY PAPPY DAY (Route66 Mix)",
+      "anime": "Poputepipikku",
+      "animeCN": "pop子和pipi美的日常",
+      "animeNative": "ポプテピピック",
+      "artist": "Yui Makino, Yui Watanabe",
+      "artistAliases": [
+        "Yui Makino",
+        "Yui Watanabe"
+      ],
+      "type": "ED",
+      "recordingId": "animethemes:8667",
+      "season": "2018-01",
+      "anilistId": 98549,
+      "bangumiId": 212279,
+      "releaseYear": 2018,
+      "themeId": 8667,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/poputepipikku"
+    },
+    {
+      "title": "Jinsei",
+      "titleCN": "Jinsei",
+      "anime": "Poputepipikku",
+      "animeCN": "pop子和pipi美的日常",
+      "animeNative": "ポプテピピック",
+      "artist": "Rei Matsuzaki",
+      "artistAliases": [
+        "Rei Matsuzaki"
+      ],
+      "type": "ED",
+      "recordingId": "animethemes:8672",
+      "season": "2018-01",
+      "anilistId": 98549,
+      "bangumiId": 212279,
+      "releaseYear": 2018,
+      "themeId": 8672,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/poputepipikku"
+    },
+    {
+      "title": "Bright Burning Shout",
+      "titleCN": "Bright Burning Shout",
+      "anime": "Fate/Extra Last Encore",
+      "animeCN": "Fate/EXTRA Last Encore",
+      "animeNative": "Fate/EXTRA Last Encore",
+      "artist": "Takanori Nishikawa",
+      "artistAliases": [
+        "Takanori Nishikawa"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 21717,
+      "bangumiId": 175601,
+      "releaseYear": 2018,
+      "themeId": 8581,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fateextra_last_encore"
+    },
+    {
+      "title": "Tsuki to Hanataba",
+      "titleCN": "Tsuki to Hanataba",
+      "anime": "Fate/Extra Last Encore",
+      "animeCN": "Fate/EXTRA Last Encore",
+      "animeNative": "Fate/EXTRA Last Encore",
+      "artist": "Sayuri",
+      "artistAliases": [
+        "Sayuri"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 21717,
+      "bangumiId": 175601,
+      "releaseYear": 2018,
+      "themeId": 8582,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fateextra_last_encore"
+    },
+    {
+      "title": "Harvest Moon Night",
+      "titleCN": "Harvest Moon Night",
+      "anime": "Hakumei to Mikochi",
+      "animeCN": "妖精森林的小不点",
+      "animeNative": "ハクメイとミコチ",
+      "artist": "Aoi Yuuki, Shino Shimoji",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Shino Shimoji"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 99748,
+      "bangumiId": 221726,
+      "releaseYear": 2018,
+      "themeId": 8598,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hakumei_to_mikochi"
+    },
+    {
+      "title": "Suitei no Rhythm",
+      "titleCN": "Suitei no Rhythm",
+      "anime": "Hakumei to Mikochi",
+      "animeCN": "妖精森林的小不点",
+      "animeNative": "ハクメイとミコチ",
+      "artist": "Aoi Yuuki",
+      "artistAliases": [
+        "Aoi Yuuki"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 99748,
+      "bangumiId": 221726,
+      "releaseYear": 2018,
+      "themeId": 8599,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hakumei_to_mikochi"
+    },
+    {
+      "title": "Flashback",
+      "titleCN": "Flashback",
+      "anime": "Kokkoku",
+      "animeCN": "刻刻",
+      "animeNative": "刻刻",
+      "artist": "MIYAVI",
+      "artistAliases": [
+        "MIYAVI"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 100332,
+      "bangumiId": 228026,
+      "releaseYear": 2018,
+      "themeId": 8641,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kokkoku"
+    },
+    {
+      "title": "CLEAR",
+      "titleCN": "CLEAR",
+      "anime": "Cardcaptor Sakura: Clear Card-hen",
+      "animeCN": "魔卡少女樱 透明牌篇",
+      "animeNative": "カードキャプターさくら クリアカード編",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 97881,
+      "bangumiId": 183891,
+      "releaseYear": 2018,
+      "themeId": 8550,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/cardcaptor_sakura_clear_card_hen"
+    },
+    {
+      "title": "Rocket Beat",
+      "titleCN": "Rocket Beat",
+      "anime": "Cardcaptor Sakura: Clear Card-hen",
+      "animeCN": "魔卡少女樱 透明牌篇",
+      "animeNative": "カードキャプターさくら クリアカード編",
+      "artist": "Kiyono Yasuno",
+      "artistAliases": [
+        "Kiyono Yasuno"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 97881,
+      "bangumiId": 183891,
+      "releaseYear": 2018,
+      "themeId": 8551,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/cardcaptor_sakura_clear_card_hen"
+    },
+    {
+      "title": "Jewelry",
+      "titleCN": "Jewelry",
+      "anime": "Cardcaptor Sakura: Clear Card-hen",
+      "animeCN": "魔卡少女樱 透明牌篇",
+      "animeNative": "カードキャプターさくら クリアカード編",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 97881,
+      "bangumiId": 183891,
+      "releaseYear": 2018,
+      "themeId": 8552,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/cardcaptor_sakura_clear_card_hen"
+    },
+    {
+      "title": "Rewind",
+      "titleCN": "Rewind",
+      "anime": "Cardcaptor Sakura: Clear Card-hen",
+      "animeCN": "魔卡少女樱 透明牌篇",
+      "animeNative": "カードキャプターさくら クリアカード編",
+      "artist": "Minori Suzuki",
+      "artistAliases": [
+        "Minori Suzuki"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 97881,
+      "bangumiId": 183891,
+      "releaseYear": 2018,
+      "themeId": 8553,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/cardcaptor_sakura_clear_card_hen"
+    },
+    {
+      "title": "Slide Ride",
+      "titleCN": "Slide Ride",
+      "anime": "Death March kara Hajimaru Isekai Kyousoukyoku",
+      "animeCN": "爆肝工程师的异世界狂想曲",
+      "animeNative": "デスマーチからはじまる異世界狂想曲",
+      "artist": "Run Girls, Run!",
+      "artistAliases": [
+        "Run Girls, Run!"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 97907,
+      "bangumiId": 200589,
+      "releaseYear": 2018,
+      "themeId": 8574,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/death_march_kara_hajimaru_isekai_kyousoukyoku"
+    },
+    {
+      "title": "Suki no Skill",
+      "titleCN": "Suki no Skill",
+      "anime": "Death March kara Hajimaru Isekai Kyousoukyoku",
+      "animeCN": "爆肝工程师的异世界狂想曲",
+      "animeNative": "デスマーチからはじまる異世界狂想曲",
+      "artist": "Wake Up, Girls!",
+      "artistAliases": [
+        "Wake Up, Girls!"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 97907,
+      "bangumiId": 200589,
+      "releaseYear": 2018,
+      "themeId": 8575,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/death_march_kara_hajimaru_isekai_kyousoukyoku"
+    },
+    {
+      "title": "ne! ne! ne!",
+      "titleCN": "ne! ne! ne!",
+      "anime": "Slow Start",
+      "animeCN": "Slow Start",
+      "animeNative": "スロウスタート",
+      "artist": "STARTails☆",
+      "artistAliases": [
+        "STARTails☆"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 98693,
+      "bangumiId": 214671,
+      "releaseYear": 2018,
+      "themeId": 8702,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/slow_start"
+    },
+    {
+      "title": "Kaze no Koe wo Kikinagara",
+      "titleCN": "Kaze no Koe wo Kikinagara",
+      "anime": "Slow Start",
+      "animeCN": "Slow Start",
+      "animeNative": "スロウスタート",
+      "artist": "Sangatsu no Phantasia",
+      "artistAliases": [
+        "Sangatsu no Phantasia"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 98693,
+      "bangumiId": 214671,
+      "releaseYear": 2018,
+      "themeId": 8703,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/slow_start"
+    },
+    {
+      "title": "Yuuyake to Issho ni",
+      "titleCN": "Yuuyake to Issho ni",
+      "anime": "Slow Start",
+      "animeCN": "Slow Start",
+      "animeNative": "スロウスタート",
+      "artist": "STARTails☆",
+      "artistAliases": [
+        "STARTails☆"
+      ],
+      "type": "ED",
+      "season": "2018-01",
+      "anilistId": 98693,
+      "bangumiId": 214671,
+      "releaseYear": 2018,
+      "themeId": 8704,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/slow_start"
+    },
+    {
+      "title": "Stray",
+      "titleCN": "Stray",
+      "anime": "Hakata Tonkotsu Ramens",
+      "animeCN": "博多豚骨拉面",
+      "animeNative": "博多豚骨ラーメンズ",
+      "artist": "Kishida Kyoudan & The Akeboshi Rockets",
+      "artistAliases": [
+        "Kishida Kyoudan & The Akeboshi Rockets"
+      ],
+      "type": "OP",
+      "season": "2018-01",
+      "anilistId": 99483,
+      "bangumiId": 219568,
+      "releaseYear": 2018,
+      "themeId": 8595,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hakata_tonkotsu_ramens"
     }
   ],
   "2018-07": [
@@ -47994,6 +64723,470 @@ export const SEASONAL_POOLS = {
       "themeId": 8267,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/shoujokageki_revue_starlight"
+    },
+    {
+      "title": "VORACITY",
+      "titleCN": "VORACITY",
+      "anime": "Overlord III",
+      "animeCN": "OVERLORD 第三季",
+      "animeNative": "オーバーロードⅢ",
+      "artist": "MYTH & ROID",
+      "artistAliases": [
+        "MYTH & ROID"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 101474,
+      "bangumiId": 242170,
+      "releaseYear": 2018,
+      "themeId": 8245,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/overlord_iii"
+    },
+    {
+      "title": "Silent Solitude",
+      "titleCN": "Silent Solitude",
+      "anime": "Overlord III",
+      "animeCN": "OVERLORD 第三季",
+      "animeNative": "オーバーロードⅢ",
+      "artist": "OxT",
+      "artistAliases": [
+        "OxT"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 101474,
+      "bangumiId": 242170,
+      "releaseYear": 2018,
+      "themeId": 8246,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/overlord_iii"
+    },
+    {
+      "title": "Vital",
+      "titleCN": "Vital",
+      "anime": "Satsuriku no Tenshi",
+      "animeCN": "杀戮天使",
+      "animeNative": "殺戮の天使",
+      "artist": "Masaaki Endou",
+      "artistAliases": [
+        "Masaaki Endou"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 99629,
+      "bangumiId": 220566,
+      "releaseYear": 2018,
+      "themeId": 8253,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/satsuriku_no_tenshi"
+    },
+    {
+      "title": "Anoko ni Drop Kick",
+      "titleCN": "Anoko ni Drop Kick",
+      "anime": "Jashin-chan Dropkick",
+      "animeCN": "邪神与厨二病少女",
+      "animeNative": "邪神ちゃんドロップキック",
+      "artist": "Jashin Girls",
+      "artistAliases": [
+        "Jashin Girls"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 100714,
+      "bangumiId": 231722,
+      "releaseYear": 2018,
+      "themeId": 8201,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jashin_chan_dropkick"
+    },
+    {
+      "title": "Houkago Distraction",
+      "titleCN": "Houkago Distraction",
+      "anime": "High Score Girl",
+      "animeCN": "高分少女",
+      "animeNative": "ハイスコアガール",
+      "artist": "Etsuko Yakushimaru",
+      "artistAliases": [
+        "Etsuko Yakushimaru"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 20574,
+      "bangumiId": 91205,
+      "releaseYear": 2018,
+      "themeId": 8191,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/high_score_girl"
+    },
+    {
+      "title": "Suripisu",
+      "titleCN": "Suripisu",
+      "anime": "Asobi Asobase",
+      "animeCN": "来玩游戏吧",
+      "animeNative": "あそびあそばせ",
+      "artist": "Hina Kino, Konomi Kohara, Rika Nagae",
+      "artistAliases": [
+        "Hina Kino",
+        "Konomi Kohara",
+        "Rika Nagae"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 101001,
+      "bangumiId": 236020,
+      "releaseYear": 2018,
+      "themeId": 8142,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/asobi_asobase"
+    },
+    {
+      "title": "Inkya Impulse",
+      "titleCN": "Inkya Impulse",
+      "anime": "Asobi Asobase",
+      "animeCN": "来玩游戏吧",
+      "animeNative": "あそびあそばせ",
+      "artist": "Hina Kino, Konomi Kohara, Rika Nagae",
+      "artistAliases": [
+        "Hina Kino",
+        "Konomi Kohara",
+        "Rika Nagae"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 101001,
+      "bangumiId": 236020,
+      "releaseYear": 2018,
+      "themeId": 8143,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/asobi_asobase"
+    },
+    {
+      "title": "Gokudoll Music",
+      "titleCN": "Gokudoll Music",
+      "anime": "Back Street Girls: Gokudolls",
+      "animeCN": "后街女孩",
+      "animeNative": "Back Street Girls -ゴクドルズ-",
+      "artist": "Gokudols Nijigumi",
+      "artistAliases": [
+        "Gokudols Nijigumi"
+      ],
+      "type": "OP",
+      "recordingId": "animethemes:8144",
+      "season": "2018-07",
+      "anilistId": 100665,
+      "bangumiId": 231278,
+      "releaseYear": 2018,
+      "themeId": 8144,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/back_street_girls_gokudolls"
+    },
+    {
+      "title": "Hoshi no Katachi",
+      "titleCN": "Hoshi no Katachi",
+      "anime": "Back Street Girls: Gokudolls",
+      "animeCN": "后街女孩",
+      "animeNative": "Back Street Girls -ゴクドルズ-",
+      "artist": "Gokudols Nijigumi",
+      "artistAliases": [
+        "Gokudols Nijigumi"
+      ],
+      "type": "ED",
+      "recordingId": "animethemes:8146",
+      "season": "2018-07",
+      "anilistId": 100665,
+      "bangumiId": 231278,
+      "releaseYear": 2018,
+      "themeId": 8146,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/back_street_girls_gokudolls"
+    },
+    {
+      "title": "One Room Sugar Life",
+      "titleCN": "One Room Sugar Life",
+      "anime": "Happy Sugar Life",
+      "animeCN": "Happy Sugar Life",
+      "animeNative": "ハッピーシュガーライフ",
+      "artist": "Akari Nanawo",
+      "artistAliases": [
+        "Akari Nanawo"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 101351,
+      "bangumiId": 240828,
+      "releaseYear": 2018,
+      "themeId": 8180,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/happy_sugar_life"
+    },
+    {
+      "title": "SWEET HURT",
+      "titleCN": "SWEET HURT",
+      "anime": "Happy Sugar Life",
+      "animeCN": "Happy Sugar Life",
+      "animeNative": "ハッピーシュガーライフ",
+      "artist": "ReoNa",
+      "artistAliases": [
+        "ReoNa"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 101351,
+      "bangumiId": 240828,
+      "releaseYear": 2018,
+      "themeId": 8181,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/happy_sugar_life"
+    },
+    {
+      "title": "Canary",
+      "titleCN": "Canary",
+      "anime": "Happy Sugar Life",
+      "animeCN": "Happy Sugar Life",
+      "animeNative": "ハッピーシュガーライフ",
+      "artist": "ReoNa",
+      "artistAliases": [
+        "ReoNa"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 101351,
+      "bangumiId": 240828,
+      "releaseYear": 2018,
+      "themeId": 8182,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/happy_sugar_life"
+    },
+    {
+      "title": "Aozora Morning Glory",
+      "titleCN": "Aozora Morning Glory",
+      "anime": "One Room 2nd Season",
+      "animeCN": "One Room 第二季",
+      "animeNative": "One Room セカンドシーズン",
+      "artist": "Mao Ichimichi",
+      "artistAliases": [
+        "Mao Ichimichi"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 100133,
+      "bangumiId": 226507,
+      "releaseYear": 2018,
+      "themeId": 8236,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/one_room_2nd_season"
+    },
+    {
+      "title": "Poplar to Bokura no History",
+      "titleCN": "Poplar to Bokura no History",
+      "anime": "One Room 2nd Season",
+      "animeCN": "One Room 第二季",
+      "animeNative": "One Room セカンドシーズン",
+      "artist": "Rie Takahashi",
+      "artistAliases": [
+        "Rie Takahashi"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 100133,
+      "bangumiId": 226507,
+      "releaseYear": 2018,
+      "themeId": 8237,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/one_room_2nd_season"
+    },
+    {
+      "title": "Searchlight to Tsuki Akari",
+      "titleCN": "Searchlight to Tsuki Akari",
+      "anime": "One Room 2nd Season",
+      "animeCN": "One Room 第二季",
+      "animeNative": "One Room セカンドシーズン",
+      "artist": "Inori Minase",
+      "artistAliases": [
+        "Inori Minase"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 100133,
+      "bangumiId": 226507,
+      "releaseYear": 2018,
+      "themeId": 8238,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/one_room_2nd_season"
+    },
+    {
+      "title": "DeCIDE",
+      "titleCN": "DeCIDE",
+      "anime": "Isekai Maou to Shoukan Shoujo no Dorei Majutsu",
+      "animeCN": "异世界魔王与召唤少女的奴隶魔术",
+      "animeNative": "異世界魔王と召喚少女の奴隷魔術",
+      "artist": "SUMMONERS 2+",
+      "artistAliases": [
+        "SUMMONERS 2+"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 101004,
+      "bangumiId": 236224,
+      "releaseYear": 2018,
+      "themeId": 8194,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_maou_to_shoukan_shoujo_no_dorei_majutsu"
+    },
+    {
+      "title": "Saiaku na hi demo Anata ga Suki",
+      "titleCN": "Saiaku na hi demo Anata ga Suki",
+      "anime": "Isekai Maou to Shoukan Shoujo no Dorei Majutsu",
+      "animeCN": "异世界魔王与召唤少女的奴隶魔术",
+      "animeNative": "異世界魔王と召喚少女の奴隷魔術",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 101004,
+      "bangumiId": 236224,
+      "releaseYear": 2018,
+      "themeId": 8195,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_maou_to_shoukan_shoujo_no_dorei_majutsu"
+    },
+    {
+      "title": "Eien no Hitotsu",
+      "titleCN": "Eien no Hitotsu",
+      "anime": "Island",
+      "animeCN": "ISLAND",
+      "animeNative": "ISLAND",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 21712,
+      "bangumiId": 175404,
+      "releaseYear": 2018,
+      "themeId": 8196,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/island"
+    },
+    {
+      "title": "Closing tears",
+      "titleCN": "Closing tears",
+      "anime": "Island",
+      "animeCN": "ISLAND",
+      "animeNative": "ISLAND",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 21712,
+      "bangumiId": 175404,
+      "releaseYear": 2018,
+      "themeId": 8197,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/island"
+    },
+    {
+      "title": "Eternal Star",
+      "titleCN": "Eternal Star",
+      "anime": "Island",
+      "animeCN": "ISLAND",
+      "animeNative": "ISLAND",
+      "artist": "Asaka",
+      "artistAliases": [
+        "Asaka"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 21712,
+      "bangumiId": 175404,
+      "releaseYear": 2018,
+      "themeId": 8198,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/island"
+    },
+    {
+      "title": "Marine SNOW",
+      "titleCN": "Marine SNOW",
+      "anime": "Island",
+      "animeCN": "ISLAND",
+      "animeNative": "ISLAND",
+      "artist": "Asaka",
+      "artistAliases": [
+        "Asaka"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 21712,
+      "bangumiId": 175404,
+      "releaseYear": 2018,
+      "themeId": 8199,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/island"
+    },
+    {
+      "title": "Chiheisen Stride",
+      "titleCN": "Chiheisen Stride",
+      "anime": "Yama no Susume Third Season",
+      "animeCN": "向山进发 第三季",
+      "animeNative": "ヤマノススメ サードシーズン",
+      "artist": "Youko Hikasa, Yui Ogura",
+      "artistAliases": [
+        "Youko Hikasa",
+        "Yui Ogura"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 98866,
+      "bangumiId": 216310,
+      "releaseYear": 2018,
+      "themeId": 8285,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yama_no_susume_third_season"
+    },
+    {
+      "title": "Danger in my Tsuugakuro",
+      "titleCN": "Danger in my Tsuugakuro",
+      "anime": "Chio-chan no Tsuugakuro",
+      "animeCN": "千绪的通学路",
+      "animeNative": "ちおちゃんの通学路",
+      "artist": "Kaede Hondo, Naomi Oozora",
+      "artistAliases": [
+        "Kaede Hondo",
+        "Naomi Oozora"
+      ],
+      "type": "OP",
+      "season": "2018-07",
+      "anilistId": 99366,
+      "bangumiId": 218226,
+      "releaseYear": 2018,
+      "themeId": 8155,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/chio_chan_no_tsuugakuro"
+    },
+    {
+      "title": "Nanairoad",
+      "titleCN": "Nanairoad",
+      "anime": "Chio-chan no Tsuugakuro",
+      "animeCN": "千绪的通学路",
+      "animeNative": "ちおちゃんの通学路",
+      "artist": "Naomi Oozora",
+      "artistAliases": [
+        "Naomi Oozora"
+      ],
+      "type": "ED",
+      "season": "2018-07",
+      "anilistId": 99366,
+      "bangumiId": 218226,
+      "releaseYear": 2018,
+      "themeId": 8156,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/chio_chan_no_tsuugakuro"
     }
   ],
   "2018-04": [
@@ -48074,6 +65267,566 @@ export const SEASONAL_POOLS = {
       "themeId": 8510,
       "themeSequence": 6,
       "animethemesUrl": "https://animethemes.moe/anime/steinsgate_0"
+    },
+    {
+      "title": "Make Debut!",
+      "titleCN": "Make Debut!",
+      "anime": "Uma Musume: Pretty Derby",
+      "animeCN": "赛马娘 Pretty Derby",
+      "animeNative": "ウマ娘 プリティーダービー",
+      "artist": "Ayaka Oohashi, Azumi Waki, Machico, Marika Kouno, Saori Oonishi, Chisa Kimura, Hitomi Ueda",
+      "artistAliases": [
+        "Ayaka Oohashi",
+        "Azumi Waki",
+        "Machico",
+        "Marika Kouno",
+        "Saori Oonishi",
+        "Chisa Kimura",
+        "Hitomi Ueda"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 98514,
+      "bangumiId": 212003,
+      "releaseYear": 2018,
+      "themeId": 8522,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uma_musume_pretty_derby"
+    },
+    {
+      "title": "Grow Up Shine!",
+      "titleCN": "Grow Up Shine!",
+      "anime": "Uma Musume: Pretty Derby",
+      "animeCN": "赛马娘 Pretty Derby",
+      "animeNative": "ウマ娘 プリティーダービー",
+      "artist": "Ayaka Oohashi, Azumi Waki, Machico, Marika Kouno, Saori Oonishi, Chisa Kimura, Hitomi Ueda",
+      "artistAliases": [
+        "Ayaka Oohashi",
+        "Azumi Waki",
+        "Machico",
+        "Marika Kouno",
+        "Saori Oonishi",
+        "Chisa Kimura",
+        "Hitomi Ueda"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 98514,
+      "bangumiId": 212003,
+      "releaseYear": 2018,
+      "themeId": 8523,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uma_musume_pretty_derby"
+    },
+    {
+      "title": "Arigatou, Kamisama",
+      "titleCN": "Arigatou, Kamisama",
+      "anime": "Uma Musume: Pretty Derby",
+      "animeCN": "赛马娘 Pretty Derby",
+      "animeNative": "ウマ娘 プリティーダービー",
+      "artist": "Azumi Waki",
+      "artistAliases": [
+        "Azumi Waki"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 98514,
+      "bangumiId": 212003,
+      "releaseYear": 2018,
+      "themeId": 8524,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/uma_musume_pretty_derby"
+    },
+    {
+      "title": "Silent Star",
+      "titleCN": "Silent Star",
+      "anime": "Uma Musume: Pretty Derby",
+      "animeCN": "赛马娘 Pretty Derby",
+      "animeNative": "ウマ娘 プリティーダービー",
+      "artist": "Marika Kouno",
+      "artistAliases": [
+        "Marika Kouno"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 98514,
+      "bangumiId": 212003,
+      "releaseYear": 2018,
+      "themeId": 8525,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/uma_musume_pretty_derby"
+    },
+    {
+      "title": "Find My Only Way",
+      "titleCN": "Find My Only Way",
+      "anime": "Uma Musume: Pretty Derby",
+      "animeCN": "赛马娘 Pretty Derby",
+      "animeNative": "ウマ娘 プリティーダービー",
+      "artist": "Ayaka Oohashi, Azumi Waki, Machico, Marika Kouno, Saori Oonishi, Chisa Kimura, Hitomi Ueda",
+      "artistAliases": [
+        "Ayaka Oohashi",
+        "Azumi Waki",
+        "Machico",
+        "Marika Kouno",
+        "Saori Oonishi",
+        "Chisa Kimura",
+        "Hitomi Ueda"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 98514,
+      "bangumiId": 212003,
+      "releaseYear": 2018,
+      "themeId": 8526,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/uma_musume_pretty_derby"
+    },
+    {
+      "title": "Umapyoi Densetsu",
+      "titleCN": "Umapyoi Densetsu",
+      "anime": "Uma Musume: Pretty Derby",
+      "animeCN": "赛马娘 Pretty Derby",
+      "animeNative": "ウマ娘 プリティーダービー",
+      "artist": "Akari Kitou, Ayaka Oohashi, Azumi Waki, Azusa Tadokoro, Lynn, Machico, Marika Kouno, Saori Oonishi, Sora Tokui, Yuka Ootsubo, Minami Takahashi, Tomoyo Takayanagi, Chisa Kimura, Hitomi Ueda, Misaki Watada, Yui Watanabe, Ruriko Aoki, Yui Kondou, Hiyori Nitta, Rena Maeda, Afumi Hashi, Hikari Kubota, Eriko Matsui, Kana Yuuki, Naomi Oozora, Yuuka Aisaka, Haruno Inoue, Yukina Shutou, Iori Saeki",
+      "artistAliases": [
+        "Akari Kitou",
+        "Ayaka Oohashi",
+        "Azumi Waki",
+        "Azusa Tadokoro",
+        "Lynn",
+        "Machico",
+        "Marika Kouno",
+        "Saori Oonishi",
+        "Sora Tokui",
+        "Yuka Ootsubo",
+        "Minami Takahashi",
+        "Tomoyo Takayanagi",
+        "Chisa Kimura",
+        "Hitomi Ueda",
+        "Misaki Watada",
+        "Yui Watanabe",
+        "Ruriko Aoki",
+        "Yui Kondou",
+        "Hiyori Nitta",
+        "Rena Maeda",
+        "Afumi Hashi",
+        "Hikari Kubota",
+        "Eriko Matsui",
+        "Kana Yuuki",
+        "Naomi Oozora",
+        "Yuuka Aisaka",
+        "Haruno Inoue",
+        "Yukina Shutou",
+        "Iori Saeki"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 98514,
+      "bangumiId": 212003,
+      "releaseYear": 2018,
+      "themeId": 8527,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/uma_musume_pretty_derby"
+    },
+    {
+      "title": "Bite",
+      "titleCN": "Bite",
+      "anime": "Megalo Box",
+      "animeCN": "MEGALO BOX",
+      "animeNative": "メガロボクス",
+      "artist": "LEO今井",
+      "artistAliases": [
+        "LEO今井",
+        "LEO IMAI"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 100298,
+      "bangumiId": 227718,
+      "releaseYear": 2018,
+      "themeId": 8471,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/megalo_box"
+    },
+    {
+      "title": "Kakatte koi yo",
+      "titleCN": "かかってこいよ",
+      "anime": "Megalo Box",
+      "animeCN": "MEGALO BOX",
+      "animeNative": "メガロボクス",
+      "artist": "NakamuraEmi",
+      "artistAliases": [
+        "NakamuraEmi"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100298,
+      "bangumiId": 227718,
+      "releaseYear": 2018,
+      "themeId": 8472,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/megalo_box"
+    },
+    {
+      "title": "Distance",
+      "titleCN": "Distance",
+      "anime": "Hinamatsuri",
+      "animeCN": "黑社会的超能力女儿",
+      "animeNative": "ヒナまつり",
+      "artist": "Rie Murakawa",
+      "artistAliases": [
+        "Rie Murakawa"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 100077,
+      "bangumiId": 225631,
+      "releaseYear": 2018,
+      "themeId": 8403,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hinamatsuri"
+    },
+    {
+      "title": "Sake to Ikura to 893 to Musume",
+      "titleCN": "Sake to Ikura to 893 to Musume",
+      "anime": "Hinamatsuri",
+      "animeCN": "黑社会的超能力女儿",
+      "animeNative": "ヒナまつり",
+      "artist": "Yoshiki Nakajima",
+      "artistAliases": [
+        "Yoshiki Nakajima"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100077,
+      "bangumiId": 225631,
+      "releaseYear": 2018,
+      "themeId": 8404,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hinamatsuri"
+    },
+    {
+      "title": "Shashin Jou",
+      "titleCN": "Shashin Jou",
+      "anime": "Hinamatsuri",
+      "animeCN": "黑社会的超能力女儿",
+      "animeNative": "ヒナまつり",
+      "artist": "Yoko Ishida",
+      "artistAliases": [
+        "Yoko Ishida"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100077,
+      "bangumiId": 225631,
+      "releaseYear": 2018,
+      "themeId": 8405,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hinamatsuri"
+    },
+    {
+      "title": "Hajimete no Kimochi",
+      "titleCN": "Hajimete no Kimochi",
+      "anime": "Hinamatsuri",
+      "animeCN": "黑社会的超能力女儿",
+      "animeNative": "ヒナまつり",
+      "artist": "Ari Ozawa",
+      "artistAliases": [
+        "Ari Ozawa"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100077,
+      "bangumiId": 225631,
+      "releaseYear": 2018,
+      "themeId": 8406,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/hinamatsuri"
+    },
+    {
+      "title": "Fiction",
+      "titleCN": "Fiction",
+      "anime": "Wotaku ni Koi wa Muzukashii",
+      "animeCN": "宅男腐女恋爱真难",
+      "animeNative": "ヲタクに恋は難しい",
+      "artist": "sumika",
+      "artistAliases": [
+        "sumika"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 99578,
+      "bangumiId": 220312,
+      "releaseYear": 2018,
+      "themeId": 8530,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/wotaku_ni_koi_wa_muzukashii"
+    },
+    {
+      "title": "Kimi no Tonari",
+      "titleCN": "Kimi no Tonari",
+      "anime": "Wotaku ni Koi wa Muzukashii",
+      "animeCN": "宅男腐女恋爱真难",
+      "animeNative": "ヲタクに恋は難しい",
+      "artist": "halca",
+      "artistAliases": [
+        "halca"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 99578,
+      "bangumiId": 220312,
+      "releaseYear": 2018,
+      "themeId": 8531,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/wotaku_ni_koi_wa_muzukashii"
+    },
+    {
+      "title": "Ashita mo Mata",
+      "titleCN": "Ashita mo Mata",
+      "anime": "Wotaku ni Koi wa Muzukashii",
+      "animeCN": "宅男腐女恋爱真难",
+      "animeNative": "ヲタクに恋は難しい",
+      "artist": "halca",
+      "artistAliases": [
+        "halca"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 99578,
+      "bangumiId": 220312,
+      "releaseYear": 2018,
+      "themeId": 8532,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/wotaku_ni_koi_wa_muzukashii"
+    },
+    {
+      "title": "Winding Road",
+      "titleCN": "Winding Road",
+      "anime": "Golden Kamuy",
+      "animeCN": "黄金神威",
+      "animeNative": "ゴールデンカムイ",
+      "artist": "MAN WITH A MISSION",
+      "artistAliases": [
+        "MAN WITH A MISSION"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 99699,
+      "bangumiId": 221127,
+      "releaseYear": 2018,
+      "themeId": 8393,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/golden_kamuy"
+    },
+    {
+      "title": "Hibana",
+      "titleCN": "Hibana",
+      "anime": "Golden Kamuy",
+      "animeCN": "黄金神威",
+      "animeNative": "ゴールデンカムイ",
+      "artist": "THE SIXTH LIE",
+      "artistAliases": [
+        "THE SIXTH LIE"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 99699,
+      "bangumiId": 221127,
+      "releaseYear": 2018,
+      "themeId": 8394,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/golden_kamuy"
+    },
+    {
+      "title": "asphyxia",
+      "titleCN": "asphyxia",
+      "anime": "Tokyo Ghoul:re",
+      "animeCN": "东京喰种:re",
+      "animeNative": "東京喰種トーキョーグール：re",
+      "artist": "Cö shu Nie",
+      "artistAliases": [
+        "Cö shu Nie"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 100240,
+      "bangumiId": 148481,
+      "releaseYear": 2018,
+      "themeId": 8518,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ghoulre"
+    },
+    {
+      "title": "HALF",
+      "titleCN": "HALF",
+      "anime": "Tokyo Ghoul:re",
+      "animeCN": "东京喰种:re",
+      "animeNative": "東京喰種トーキョーグール：re",
+      "artist": "Ziyoou-vachi",
+      "artistAliases": [
+        "Ziyoou-vachi"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100240,
+      "bangumiId": 148481,
+      "releaseYear": 2018,
+      "themeId": 8519,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ghoulre"
+    },
+    {
+      "title": "Ryuusei",
+      "titleCN": "Ryuusei",
+      "anime": "Sword Art Online Alternative: Gun Gale Online",
+      "animeCN": "刀剑神域外传 Gun Gale Online",
+      "animeNative": "ソードアート・オンライン オルタナティブ ガンゲイル・オンライン",
+      "artist": "Eir Aoi",
+      "artistAliases": [
+        "Eir Aoi"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 100183,
+      "bangumiId": 226750,
+      "releaseYear": 2018,
+      "themeId": 8511,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alternative_gun_gale_online"
+    },
+    {
+      "title": "To see the future",
+      "titleCN": "To see the future",
+      "anime": "Sword Art Online Alternative: Gun Gale Online",
+      "animeCN": "刀剑神域外传 Gun Gale Online",
+      "animeNative": "ソードアート・オンライン オルタナティブ ガンゲイル・オンライン",
+      "artist": "Tomori Kusunoki",
+      "artistAliases": [
+        "Tomori Kusunoki"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100183,
+      "bangumiId": 226750,
+      "releaseYear": 2018,
+      "themeId": 8512,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alternative_gun_gale_online"
+    },
+    {
+      "title": "Memories",
+      "titleCN": "Memories",
+      "anime": "Comic Girls",
+      "animeCN": "漫画女孩",
+      "animeNative": "こみっくがーるず",
+      "artist": "Comic Girls",
+      "artistAliases": [
+        "Comic Girls"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 99131,
+      "bangumiId": 217249,
+      "releaseYear": 2018,
+      "themeId": 8361,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/comic_girls"
+    },
+    {
+      "title": "Namida wa Misenai",
+      "titleCN": "Namida wa Misenai",
+      "anime": "Comic Girls",
+      "animeCN": "漫画女孩",
+      "animeNative": "こみっくがーるず",
+      "artist": "Comic Girls",
+      "artistAliases": [
+        "Comic Girls"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 99131,
+      "bangumiId": 217249,
+      "releaseYear": 2018,
+      "themeId": 8362,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/comic_girls"
+    },
+    {
+      "title": "ODD FUTURE",
+      "titleCN": "ODD FUTURE",
+      "anime": "Boku no Hero Academia 3rd Season",
+      "animeCN": "我的英雄学院 第三季",
+      "animeNative": "僕のヒーローアカデミア３",
+      "artist": "UVERworld",
+      "artistAliases": [
+        "UVERworld"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 100166,
+      "bangumiId": 226677,
+      "releaseYear": 2018,
+      "themeId": 8325,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_3rd_season"
+    },
+    {
+      "title": "Make My Story",
+      "titleCN": "Make My Story",
+      "anime": "Boku no Hero Academia 3rd Season",
+      "animeCN": "我的英雄学院 第三季",
+      "animeNative": "僕のヒーローアカデミア３",
+      "artist": "Lenny code fiction",
+      "artistAliases": [
+        "Lenny code fiction"
+      ],
+      "type": "OP",
+      "season": "2018-04",
+      "anilistId": 100166,
+      "bangumiId": 226677,
+      "releaseYear": 2018,
+      "themeId": 8326,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_3rd_season"
+    },
+    {
+      "title": "Update",
+      "titleCN": "Update",
+      "anime": "Boku no Hero Academia 3rd Season",
+      "animeCN": "我的英雄学院 第三季",
+      "animeNative": "僕のヒーローアカデミア３",
+      "artist": "miwa",
+      "artistAliases": [
+        "miwa"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100166,
+      "bangumiId": 226677,
+      "releaseYear": 2018,
+      "themeId": 8327,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_3rd_season"
+    },
+    {
+      "title": "Long Hope Philia <TV Limited.>",
+      "titleCN": "Long Hope Philia <TV Limited.>",
+      "anime": "Boku no Hero Academia 3rd Season",
+      "animeCN": "我的英雄学院 第三季",
+      "animeNative": "僕のヒーローアカデミア３",
+      "artist": "Masaki Suda",
+      "artistAliases": [
+        "Masaki Suda"
+      ],
+      "type": "ED",
+      "season": "2018-04",
+      "anilistId": 100166,
+      "bangumiId": 226677,
+      "releaseYear": 2018,
+      "themeId": 8328,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/boku_no_hero_academia_3rd_season"
     }
   ],
   "2018-10": [
@@ -48373,6 +66126,392 @@ export const SEASONAL_POOLS = {
       "themeId": 8034,
       "themeSequence": 2,
       "animethemesUrl": "https://animethemes.moe/anime/kaze_ga_tsuyoku_fuiteiru"
+    },
+    {
+      "title": "UNION",
+      "titleCN": "UNION",
+      "anime": "SSSS.Gridman",
+      "animeCN": "SSSS.古立特",
+      "animeNative": "SSSS.GRIDMAN",
+      "artist": "OxT",
+      "artistAliases": [
+        "OxT"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 99424,
+      "bangumiId": 218712,
+      "releaseYear": 2018,
+      "themeId": 8078,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ssssgridman"
+    },
+    {
+      "title": "youthful beautiful",
+      "titleCN": "youthful beautiful",
+      "anime": "SSSS.Gridman",
+      "animeCN": "SSSS.古立特",
+      "animeNative": "SSSS.GRIDMAN",
+      "artist": "Maaya Uchida",
+      "artistAliases": [
+        "Maaya Uchida"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 99424,
+      "bangumiId": 218712,
+      "releaseYear": 2018,
+      "themeId": 8079,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ssssgridman"
+    },
+    {
+      "title": "ADAMAS",
+      "titleCN": "ADAMAS",
+      "anime": "Sword Art Online: Alicization",
+      "animeCN": "刀剑神域 爱丽丝篇",
+      "animeNative": "ソードアート・オンライン アリシゼーション",
+      "artist": "LiSA",
+      "artistAliases": [
+        "LiSA"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 100182,
+      "bangumiId": 225604,
+      "releaseYear": 2018,
+      "themeId": 8082,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alicization"
+    },
+    {
+      "title": "RESISTER",
+      "titleCN": "RESISTER",
+      "anime": "Sword Art Online: Alicization",
+      "animeCN": "刀剑神域 爱丽丝篇",
+      "animeNative": "ソードアート・オンライン アリシゼーション",
+      "artist": "ASCA",
+      "artistAliases": [
+        "ASCA"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 100182,
+      "bangumiId": 225604,
+      "releaseYear": 2018,
+      "themeId": 8083,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alicization"
+    },
+    {
+      "title": "Iris",
+      "titleCN": "Iris",
+      "anime": "Sword Art Online: Alicization",
+      "animeCN": "刀剑神域 爱丽丝篇",
+      "animeNative": "ソードアート・オンライン アリシゼーション",
+      "artist": "Eir Aoi",
+      "artistAliases": [
+        "Eir Aoi"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 100182,
+      "bangumiId": 225604,
+      "releaseYear": 2018,
+      "themeId": 8084,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alicization"
+    },
+    {
+      "title": "forget-me-not",
+      "titleCN": "forget-me-not",
+      "anime": "Sword Art Online: Alicization",
+      "animeCN": "刀剑神域 爱丽丝篇",
+      "animeNative": "ソードアート・オンライン アリシゼーション",
+      "artist": "ReoNa",
+      "artistAliases": [
+        "ReoNa"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 100182,
+      "bangumiId": 225604,
+      "releaseYear": 2018,
+      "themeId": 8085,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alicization"
+    },
+    {
+      "title": "Niji no Kanata ni",
+      "titleCN": "Niji no Kanata ni",
+      "anime": "Sword Art Online: Alicization",
+      "animeCN": "刀剑神域 爱丽丝篇",
+      "animeNative": "ソードアート・オンライン アリシゼーション",
+      "artist": "ReoNa",
+      "artistAliases": [
+        "ReoNa"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 100182,
+      "bangumiId": 225604,
+      "releaseYear": 2018,
+      "themeId": 8086,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alicization"
+    },
+    {
+      "title": "Rightfully",
+      "titleCN": "Rightfully",
+      "anime": "Goblin Slayer",
+      "animeCN": "哥布林杀手",
+      "animeNative": "ゴブリンスレイヤー",
+      "artist": "Mili",
+      "artistAliases": [
+        "Mili"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 101165,
+      "bangumiId": 238006,
+      "releaseYear": 2018,
+      "themeId": 7980,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/goblin_slayer"
+    },
+    {
+      "title": "Gin no Kisei",
+      "titleCN": "Gin no Kisei",
+      "anime": "Goblin Slayer",
+      "animeCN": "哥布林杀手",
+      "animeNative": "ゴブリンスレイヤー",
+      "artist": "Soraru",
+      "artistAliases": [
+        "Soraru"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 101165,
+      "bangumiId": 238006,
+      "releaseYear": 2018,
+      "themeId": 7981,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/goblin_slayer"
+    },
+    {
+      "title": "Though Our Paths May Diverge",
+      "titleCN": "Though Our Paths May Diverge",
+      "anime": "Goblin Slayer",
+      "animeCN": "哥布林杀手",
+      "animeNative": "ゴブリンスレイヤー",
+      "artist": "Mili",
+      "artistAliases": [
+        "Mili"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 101165,
+      "bangumiId": 238006,
+      "releaseYear": 2018,
+      "themeId": 7982,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/goblin_slayer"
+    },
+    {
+      "title": "Within",
+      "titleCN": "Within",
+      "anime": "Goblin Slayer",
+      "animeCN": "哥布林杀手",
+      "animeNative": "ゴブリンスレイヤー",
+      "artist": "Mili",
+      "artistAliases": [
+        "Mili"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 101165,
+      "bangumiId": 238006,
+      "releaseYear": 2018,
+      "themeId": 7983,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/goblin_slayer"
+    },
+    {
+      "title": "Gravitation",
+      "titleCN": "Gravitation",
+      "anime": "Toaru Majutsu no Index III",
+      "animeCN": "魔法禁书目录 第三季",
+      "animeNative": "とある魔術の禁書目録III",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 100185,
+      "bangumiId": 226540,
+      "releaseYear": 2018,
+      "themeId": 8096,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_iii"
+    },
+    {
+      "title": "ROAR",
+      "titleCN": "ROAR",
+      "anime": "Toaru Majutsu no Index III",
+      "animeCN": "魔法禁书目录 第三季",
+      "animeNative": "とある魔術の禁書目録III",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 100185,
+      "bangumiId": 226540,
+      "releaseYear": 2018,
+      "themeId": 8097,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_iii"
+    },
+    {
+      "title": "Kakumei Zenya",
+      "titleCN": "Kakumei Zenya",
+      "anime": "Toaru Majutsu no Index III",
+      "animeCN": "魔法禁书目录 第三季",
+      "animeNative": "とある魔術の禁書目録III",
+      "artist": "Yuka Iguchi",
+      "artistAliases": [
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 100185,
+      "bangumiId": 226540,
+      "releaseYear": 2018,
+      "themeId": 8098,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_iii"
+    },
+    {
+      "title": "Owaranai Uta",
+      "titleCN": "Owaranai Uta",
+      "anime": "Toaru Majutsu no Index III",
+      "animeCN": "魔法禁书目录 第三季",
+      "animeNative": "とある魔術の禁書目録III",
+      "artist": "Yuka Iguchi",
+      "artistAliases": [
+        "Yuka Iguchi"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 100185,
+      "bangumiId": 226540,
+      "releaseYear": 2018,
+      "themeId": 8099,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_iii"
+    },
+    {
+      "title": "†Kyuutie Ladies†",
+      "titleCN": "†Kyuutie Ladies†",
+      "anime": "Tonari no Kyuuketsuki-san",
+      "animeCN": "邻家的吸血鬼小妹",
+      "animeNative": "となりの吸血鬼さん",
+      "artist": "Azumi Waki, Lynn, Miyu Tomita, Yuu Sasahara",
+      "artistAliases": [
+        "Azumi Waki",
+        "Lynn",
+        "Miyu Tomita",
+        "Yuu Sasahara"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 101371,
+      "bangumiId": 241158,
+      "releaseYear": 2018,
+      "themeId": 8102,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tonari_no_kyuuketsuki_san"
+    },
+    {
+      "title": "Happy!! Strange Friends",
+      "titleCN": "Happy!! Strange Friends",
+      "anime": "Tonari no Kyuuketsuki-san",
+      "animeCN": "邻家的吸血鬼小妹",
+      "animeNative": "となりの吸血鬼さん",
+      "artist": "Azumi Waki, Lynn, Miyu Tomita, Yuu Sasahara",
+      "artistAliases": [
+        "Azumi Waki",
+        "Lynn",
+        "Miyu Tomita",
+        "Yuu Sasahara"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 101371,
+      "bangumiId": 241158,
+      "releaseYear": 2018,
+      "themeId": 8103,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tonari_no_kyuuketsuki_san"
+    },
+    {
+      "title": "katharsis",
+      "titleCN": "katharsis",
+      "anime": "Tokyo Ghoul:re 2nd Season",
+      "animeCN": "东京喰种:re 第二季",
+      "animeNative": "東京喰種-トーキョーグール-:re 2",
+      "artist": "TK from Ling tosite sigure",
+      "artistAliases": [
+        "TK from Ling tosite sigure"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 102351,
+      "bangumiId": 244878,
+      "releaseYear": 2018,
+      "themeId": 8100,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tokyo_ghoulre_2nd_season"
+    },
+    {
+      "title": "Mimei no Kimi to Hakumei no Mahou",
+      "titleCN": "Mimei no Kimi to Hakumei no Mahou",
+      "anime": "Irozuku Sekai no Ashita kara",
+      "animeCN": "来自多彩世界的明天",
+      "animeNative": "色づく世界の明日から",
+      "artist": "Nagi Yanagi",
+      "artistAliases": [
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2018-10",
+      "anilistId": 101316,
+      "bangumiId": 240562,
+      "releaseYear": 2018,
+      "themeId": 8013,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/irozuku_sekai_no_ashita_kara"
+    },
+    {
+      "title": "Love with You",
+      "titleCN": "Love with You",
+      "anime": "Kishuku Gakkou no Juliet",
+      "animeCN": "寄宿学校的朱丽叶",
+      "animeNative": "寄宿学校のジュリエット",
+      "artist": "fripSide",
+      "artistAliases": [
+        "fripSide"
+      ],
+      "type": "OP",
+      "season": "2018-10",
+      "anilistId": 101310,
+      "bangumiId": 240346,
+      "releaseYear": 2018,
+      "themeId": 8037,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kishuku_gakkou_no_juliet"
     }
   ],
   "2019-01": [
@@ -48699,6 +66838,501 @@ export const SEASONAL_POOLS = {
       "themeId": 9376,
       "themeSequence": 3,
       "animethemesUrl": "https://animethemes.moe/anime/tate_no_yuusha_no_nariagari"
+    },
+    {
+      "title": "I swear",
+      "titleCN": "I swear",
+      "anime": "Date A Live III",
+      "animeCN": "约会大作战 第三季",
+      "animeNative": "デート・ア・ライブⅢ",
+      "artist": "sweet ARMS",
+      "artistAliases": [
+        "sweet ARMS"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 100722,
+      "bangumiId": 228254,
+      "releaseYear": 2019,
+      "themeId": 9274,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/date_a_live_iii"
+    },
+    {
+      "title": "Last Promise",
+      "titleCN": "Last Promise",
+      "anime": "Date A Live III",
+      "animeCN": "约会大作战 第三季",
+      "animeNative": "デート・ア・ライブⅢ",
+      "artist": "Erii Yamazaki",
+      "artistAliases": [
+        "Erii Yamazaki"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 100722,
+      "bangumiId": 228254,
+      "releaseYear": 2019,
+      "themeId": 9275,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/date_a_live_iii"
+    },
+    {
+      "title": "shadowgraph",
+      "titleCN": "shadowgraph",
+      "anime": "Boogiepop wa Warawanai",
+      "animeCN": "不吉波普不笑",
+      "animeNative": "ブギーポップは笑わない",
+      "artist": "MYTH & ROID",
+      "artistAliases": [
+        "MYTH & ROID"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101283,
+      "bangumiId": 240039,
+      "releaseYear": 2019,
+      "themeId": 9264,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boogiepop_wa_warawanai"
+    },
+    {
+      "title": "Whiteout",
+      "titleCN": "Whiteout",
+      "anime": "Boogiepop wa Warawanai",
+      "animeCN": "不吉波普不笑",
+      "animeNative": "ブギーポップは笑わない",
+      "artist": "Riko Azuna",
+      "artistAliases": [
+        "Riko Azuna"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101283,
+      "bangumiId": 240039,
+      "releaseYear": 2019,
+      "themeId": 9265,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/boogiepop_wa_warawanai"
+    },
+    {
+      "title": "Sayonara",
+      "titleCN": "Sayonara",
+      "anime": "Boogiepop wa Warawanai",
+      "animeCN": "不吉波普不笑",
+      "animeNative": "ブギーポップは笑わない",
+      "artist": "Riko Azuna",
+      "artistAliases": [
+        "Riko Azuna"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101283,
+      "bangumiId": 240039,
+      "releaseYear": 2019,
+      "themeId": 9266,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/boogiepop_wa_warawanai"
+    },
+    {
+      "title": "Kaen",
+      "titleCN": "Kaen",
+      "anime": "Dororo",
+      "animeCN": "多罗罗",
+      "animeNative": "どろろ",
+      "artist": "Ziyoou-vachi",
+      "artistAliases": [
+        "Ziyoou-vachi"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101347,
+      "bangumiId": 240838,
+      "releaseYear": 2019,
+      "themeId": 9281,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dororo"
+    },
+    {
+      "title": "Dororo",
+      "titleCN": "Dororo",
+      "anime": "Dororo",
+      "animeCN": "多罗罗",
+      "animeNative": "どろろ",
+      "artist": "Asian Kung-Fu Generation",
+      "artistAliases": [
+        "Asian Kung-Fu Generation"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101347,
+      "bangumiId": 240838,
+      "releaseYear": 2019,
+      "themeId": 9282,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/dororo"
+    },
+    {
+      "title": "Sayonara Gokko",
+      "titleCN": "Sayonara Gokko",
+      "anime": "Dororo",
+      "animeCN": "多罗罗",
+      "animeNative": "どろろ",
+      "artist": "amazarashi",
+      "artistAliases": [
+        "amazarashi"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101347,
+      "bangumiId": 240838,
+      "releaseYear": 2019,
+      "themeId": 9283,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dororo"
+    },
+    {
+      "title": "Yamiyo",
+      "titleCN": "Yamiyo",
+      "anime": "Dororo",
+      "animeCN": "多罗罗",
+      "animeNative": "どろろ",
+      "artist": "Eve",
+      "artistAliases": [
+        "Eve"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101347,
+      "bangumiId": 240838,
+      "releaseYear": 2019,
+      "themeId": 9284,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/dororo"
+    },
+    {
+      "title": "Wagamama",
+      "titleCN": "Wagamama",
+      "anime": "Domestic na Kanojo",
+      "animeCN": "家有女友",
+      "animeNative": "ドメスティックな彼女",
+      "artist": "Alisa Takigawa",
+      "artistAliases": [
+        "Alisa Takigawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 103139,
+      "bangumiId": 253628,
+      "releaseYear": 2019,
+      "themeId": 9279,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/domestic_na_kanojo"
+    },
+    {
+      "title": "Always",
+      "titleCN": "Always",
+      "anime": "Domestic na Kanojo",
+      "animeCN": "家有女友",
+      "animeNative": "ドメスティックな彼女",
+      "artist": "Alisa Takigawa",
+      "artistAliases": [
+        "Alisa Takigawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 103139,
+      "bangumiId": 253628,
+      "releaseYear": 2019,
+      "themeId": 9280,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/domestic_na_kanojo"
+    },
+    {
+      "title": "Kono Yubi Tomare",
+      "titleCN": "Kono Yubi Tomare",
+      "anime": "Kakegurui××",
+      "animeCN": "狂赌之渊××",
+      "animeNative": "賭ケグルイ××",
+      "artist": "JUNNA",
+      "artistAliases": [
+        "JUNNA"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 100876,
+      "bangumiId": 234778,
+      "releaseYear": 2019,
+      "themeId": 9314,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kakegurui_2019"
+    },
+    {
+      "title": "Hirameki Heartbeat",
+      "titleCN": "Hirameki Heartbeat",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Miku Itou",
+      "artistAliases": [
+        "Miku Itou"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9378,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "My Pace Science",
+      "titleCN": "My Pace Science",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Aimi Tanaka, Yuu Serizawa",
+      "artistAliases": [
+        "Aimi Tanaka",
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9379,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "Love Me Science",
+      "titleCN": "Love Me Science",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9380,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "Houkago Traveler",
+      "titleCN": "Houkago Traveler",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9381,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "Cosmo Lumina",
+      "titleCN": "Cosmo Lumina",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9382,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "Bukiyou Sensation",
+      "titleCN": "Bukiyou Sensation",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9383,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "Kokoro no Furiko",
+      "titleCN": "Kokoro no Furiko",
+      "anime": "Ueno-san wa Bukiyou",
+      "animeCN": "笨拙之极的上野",
+      "animeNative": "上野さんは不器用",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101773,
+      "bangumiId": 247417,
+      "releaseYear": 2019,
+      "themeId": 9384,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/ueno_san_wa_bukiyou"
+    },
+    {
+      "title": "Kizuna Music♪",
+      "titleCN": "Kizuna Music♪",
+      "anime": "BanG Dream! 2nd Season",
+      "animeCN": "BanG Dream! 第二季",
+      "animeNative": "BanG Dream! 2nd Season",
+      "artist": "Poppin'Party",
+      "artistAliases": [
+        "Poppin'Party"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101633,
+      "bangumiId": 246429,
+      "releaseYear": 2019,
+      "themeId": 9252,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream_2nd_season"
+    },
+    {
+      "title": "BRAVE JEWEL",
+      "titleCN": "BRAVE JEWEL",
+      "anime": "BanG Dream! 2nd Season",
+      "animeCN": "BanG Dream! 第二季",
+      "animeNative": "BanG Dream! 2nd Season",
+      "artist": "Roselia",
+      "artistAliases": [
+        "Roselia"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101633,
+      "bangumiId": 246429,
+      "releaseYear": 2019,
+      "themeId": 9253,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream_2nd_season"
+    },
+    {
+      "title": "Safe and Sound",
+      "titleCN": "Safe and Sound",
+      "anime": "BanG Dream! 2nd Season",
+      "animeCN": "BanG Dream! 第二季",
+      "animeNative": "BanG Dream! 2nd Season",
+      "artist": "Roselia",
+      "artistAliases": [
+        "Roselia"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101633,
+      "bangumiId": 246429,
+      "releaseYear": 2019,
+      "themeId": 9254,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream_2nd_season"
+    },
+    {
+      "title": "Jumpin'",
+      "titleCN": "Jumpin'",
+      "anime": "BanG Dream! 2nd Season",
+      "animeCN": "BanG Dream! 第二季",
+      "animeNative": "BanG Dream! 2nd Season",
+      "artist": "Poppin'Party",
+      "artistAliases": [
+        "Poppin'Party"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 101633,
+      "bangumiId": 246429,
+      "releaseYear": 2019,
+      "themeId": 9255,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bang_dream_2nd_season"
+    },
+    {
+      "title": "KEMURIKUSA",
+      "titleCN": "KEMURIKUSA",
+      "anime": "Kemurikusa",
+      "animeCN": "烟草",
+      "animeNative": "ケムリクサ",
+      "artist": "nano",
+      "artistAliases": [
+        "nano"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 101123,
+      "bangumiId": 237423,
+      "releaseYear": 2019,
+      "themeId": 9320,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kemurikusa"
+    },
+    {
+      "title": "Endoro~ru!",
+      "titleCN": "Endoro~ru!",
+      "anime": "Endro~!",
+      "animeCN": "Endro~！",
+      "animeNative": "えんどろ〜！",
+      "artist": "Yuusha Party",
+      "artistAliases": [
+        "Yuusha Party"
+      ],
+      "type": "OP",
+      "season": "2019-01",
+      "anilistId": 103301,
+      "bangumiId": 254895,
+      "releaseYear": 2019,
+      "themeId": 9290,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/endro"
+    },
+    {
+      "title": "Wonder Caravan!",
+      "titleCN": "Wonder Caravan!",
+      "anime": "Endro~!",
+      "animeCN": "Endro~！",
+      "animeNative": "えんどろ〜！",
+      "artist": "Inori Minase",
+      "artistAliases": [
+        "Inori Minase"
+      ],
+      "type": "ED",
+      "season": "2019-01",
+      "anilistId": 103301,
+      "bangumiId": 254895,
+      "releaseYear": 2019,
+      "themeId": 9291,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/endro"
     }
   ],
   "2019-04": [
@@ -48816,6 +67450,415 @@ export const SEASONAL_POOLS = {
       "themeId": 9198,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/one_punch_man_2nd_season"
+    },
+    {
+      "title": "Seishun Seminar",
+      "titleCN": "Seishun Seminar",
+      "anime": "Bokutachi wa Benkyou ga Dekinai",
+      "animeCN": "我们真的学不来",
+      "animeNative": "ぼくたちは勉強ができない",
+      "artist": "Study",
+      "artistAliases": [
+        "Study"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 103900,
+      "bangumiId": 257369,
+      "releaseYear": 2019,
+      "themeId": 9073,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bokutachi_wa_benkyou_ga_dekinai"
+    },
+    {
+      "title": "Never Give It Up!!",
+      "titleCN": "Never Give It Up!!",
+      "anime": "Bokutachi wa Benkyou ga Dekinai",
+      "animeCN": "我们真的学不来",
+      "animeNative": "ぼくたちは勉強ができない",
+      "artist": "Study",
+      "artistAliases": [
+        "Study"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 103900,
+      "bangumiId": 257369,
+      "releaseYear": 2019,
+      "themeId": 9074,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bokutachi_wa_benkyou_ga_dekinai"
+    },
+    {
+      "title": "Not Afraid",
+      "titleCN": "Not Afraid",
+      "anime": "Carole & Tuesday",
+      "animeCN": "CAROLE & TUESDAY",
+      "animeNative": "キャロル＆チューズデイ",
+      "artist": "Alisa",
+      "artistAliases": [
+        "Alisa"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 101281,
+      "bangumiId": 239912,
+      "releaseYear": 2019,
+      "themeId": 9083,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/carole_tuesday"
+    },
+    {
+      "title": "Endless",
+      "titleCN": "Endless",
+      "anime": "Carole & Tuesday",
+      "animeCN": "CAROLE & TUESDAY",
+      "animeNative": "キャロル＆チューズデイ",
+      "artist": "Alisa",
+      "artistAliases": [
+        "Alisa"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 101281,
+      "bangumiId": 239912,
+      "releaseYear": 2019,
+      "themeId": 9084,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/carole_tuesday"
+    },
+    {
+      "title": "The Tower",
+      "titleCN": "The Tower",
+      "anime": "Carole & Tuesday",
+      "animeCN": "CAROLE & TUESDAY",
+      "animeNative": "キャロル＆チューズデイ",
+      "artist": "Alisa",
+      "artistAliases": [
+        "Alisa"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 101281,
+      "bangumiId": 239912,
+      "releaseYear": 2019,
+      "themeId": 9085,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/carole_tuesday"
+    },
+    {
+      "title": "Mother",
+      "titleCN": "Mother",
+      "anime": "Carole & Tuesday",
+      "animeCN": "CAROLE & TUESDAY",
+      "animeNative": "キャロル＆チューズデイ",
+      "artist": "Alisa",
+      "artistAliases": [
+        "Alisa"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 101281,
+      "bangumiId": 239912,
+      "releaseYear": 2019,
+      "themeId": 9086,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/carole_tuesday"
+    },
+    {
+      "title": "ORDINARY LOVE",
+      "titleCN": "ORDINARY LOVE",
+      "anime": "Senryuu Shoujo",
+      "animeCN": "川柳少女",
+      "animeNative": "川柳少女",
+      "artist": "Rikako Aida",
+      "artistAliases": [
+        "Rikako Aida"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 106051,
+      "bangumiId": 268510,
+      "releaseYear": 2019,
+      "themeId": 9211,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/senryuu_shoujo"
+    },
+    {
+      "title": "Koi wa Miracle",
+      "titleCN": "Koi wa Miracle",
+      "anime": "Midara na Ao-chan wa Benkyou ga Dekinai",
+      "animeCN": "淫乱的青酱不能学习",
+      "animeNative": "淫らな青ちゃんは勉強ができない",
+      "artist": "Spira Spica",
+      "artistAliases": [
+        "Spira Spica"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 105989,
+      "bangumiId": 268412,
+      "releaseYear": 2019,
+      "themeId": 9171,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/midara_na_ao_chan_wa_benkyou_ga_dekinai"
+    },
+    {
+      "title": "Isekai Quartet",
+      "titleCN": "Isekai Quartet",
+      "anime": "Isekai Quartet",
+      "animeCN": "异世界四重奏",
+      "animeNative": "異世界かるてっと",
+      "artist": "Aoi Yuuki, Satoshi Hino, Yuusuke Kobayashi, Jun Fukushima",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Satoshi Hino",
+        "Yuusuke Kobayashi",
+        "Jun Fukushima"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 104454,
+      "bangumiId": 262865,
+      "releaseYear": 2019,
+      "themeId": 9129,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_quartet"
+    },
+    {
+      "title": "Isekai Girls♡Talk",
+      "titleCN": "Isekai Girls♡Talk",
+      "anime": "Isekai Quartet",
+      "animeCN": "异世界四重奏",
+      "animeNative": "異世界かるてっと",
+      "artist": "Aoi Yuuki, Rie Takahashi, Sora Amamiya, Yumi Hara",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Rie Takahashi",
+        "Sora Amamiya",
+        "Yumi Hara"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 104454,
+      "bangumiId": 262865,
+      "releaseYear": 2019,
+      "themeId": 9130,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_quartet"
+    },
+    {
+      "title": "Hollow Veil",
+      "titleCN": "Hollow Veil",
+      "anime": "Isekai Quartet",
+      "animeCN": "异世界四重奏",
+      "animeNative": "異世界かるてっと",
+      "artist": "nonoc",
+      "artistAliases": [
+        "nonoc"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 104454,
+      "bangumiId": 262865,
+      "releaseYear": 2019,
+      "themeId": 9131,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/isekai_quartet"
+    },
+    {
+      "title": "Bon♡Kyu♡Bon wa Kare no Mono♡",
+      "titleCN": "Bon♡Kyu♡Bon wa Kare no Mono♡",
+      "anime": "Nande Koko ni Sensei ga!?",
+      "animeCN": "为什么老师会在这里！？",
+      "animeNative": "なんでここに先生が!?",
+      "artist": "Sumire Uesaka",
+      "artistAliases": [
+        "Sumire Uesaka"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 104325,
+      "bangumiId": 262111,
+      "releaseYear": 2019,
+      "themeId": 9189,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nande_koko_ni_sensei_ga"
+    },
+    {
+      "title": "Ringo-iro Memories",
+      "titleCN": "Ringo-iro Memories",
+      "anime": "Nande Koko ni Sensei ga!?",
+      "animeCN": "为什么老师会在这里！？",
+      "animeNative": "なんでここに先生が!?",
+      "artist": "Sumire Uesaka",
+      "artistAliases": [
+        "Sumire Uesaka"
+      ],
+      "type": "ED",
+      "recordingId": "animethemes:9190",
+      "season": "2019-04",
+      "anilistId": 104325,
+      "bangumiId": 262111,
+      "releaseYear": 2019,
+      "themeId": 9190,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nande_koko_ni_sensei_ga"
+    },
+    {
+      "title": "Ultimate☆MAGIC",
+      "titleCN": "Ultimate☆MAGIC",
+      "anime": "Kenja no Mago",
+      "animeCN": "贤者之孙",
+      "animeNative": "賢者の孫",
+      "artist": "i☆Ris",
+      "artistAliases": [
+        "i☆Ris"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 100112,
+      "bangumiId": 226256,
+      "releaseYear": 2019,
+      "themeId": 9137,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kenja_no_mago"
+    },
+    {
+      "title": "Massara",
+      "titleCN": "Massara",
+      "anime": "Sarazanmai",
+      "animeCN": "皿三昧",
+      "animeNative": "さらざんまい",
+      "artist": "KANA-BOON",
+      "artistAliases": [
+        "KANA-BOON"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 101261,
+      "bangumiId": 239646,
+      "releaseYear": 2019,
+      "themeId": 9207,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sarazanmai"
+    },
+    {
+      "title": "Setsuna no Ai",
+      "titleCN": "Setsuna no Ai",
+      "anime": "Bungou Stray Dogs 3rd Season",
+      "animeCN": "文豪野犬 第三季",
+      "animeNative": "文豪ストレイドッグス 第3シーズン",
+      "artist": "GRANRODEO",
+      "artistAliases": [
+        "GRANRODEO"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 103223,
+      "bangumiId": 254762,
+      "releaseYear": 2019,
+      "themeId": 9075,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bungou_stray_dogs_3rd_season"
+    },
+    {
+      "title": "Lily",
+      "titleCN": "Lily",
+      "anime": "Bungou Stray Dogs 3rd Season",
+      "animeCN": "文豪野犬 第三季",
+      "animeNative": "文豪ストレイドッグス 第3シーズン",
+      "artist": "Luck Life",
+      "artistAliases": [
+        "Luck Life"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 103223,
+      "bangumiId": 254762,
+      "releaseYear": 2019,
+      "themeId": 9076,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bungou_stray_dogs_3rd_season"
+    },
+    {
+      "title": "Hitoribocchi no Monologue",
+      "titleCN": "Hitoribocchi no Monologue",
+      "anime": "Hitoribocchi no Marumaru Seikatsu",
+      "animeCN": "一个人的○○小日子",
+      "animeNative": "ひとりぼっちの○○生活",
+      "artist": "Akari Kitou, Minami Tanaka",
+      "artistAliases": [
+        "Akari Kitou",
+        "Minami Tanaka"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 101386,
+      "bangumiId": 241335,
+      "releaseYear": 2019,
+      "themeId": 9126,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hitoribocchi_no_marumaru_seikatsu"
+    },
+    {
+      "title": "Bakushou Bocchi Juku Kouka",
+      "titleCN": "Bakushou Bocchi Juku Kouka",
+      "anime": "Hitoribocchi no Marumaru Seikatsu",
+      "animeCN": "一个人的○○小日子",
+      "animeNative": "ひとりぼっちの○○生活",
+      "artist": "Akari Kitou, Minami Tanaka",
+      "artistAliases": [
+        "Akari Kitou",
+        "Minami Tanaka"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 101386,
+      "bangumiId": 241335,
+      "releaseYear": 2019,
+      "themeId": 9128,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/hitoribocchi_no_marumaru_seikatsu"
+    },
+    {
+      "title": "Koyoi mofumofu!!",
+      "titleCN": "Koyoi mofumofu!!",
+      "anime": "Sewayaki Kitsune no Senko-san",
+      "animeCN": "贤惠幼妻仙狐小姐",
+      "animeNative": "世話やきキツネの仙狐さん",
+      "artist": "Azumi Waki, Maaya Uchida",
+      "artistAliases": [
+        "Azumi Waki",
+        "Maaya Uchida"
+      ],
+      "type": "OP",
+      "season": "2019-04",
+      "anilistId": 105914,
+      "bangumiId": 268165,
+      "releaseYear": 2019,
+      "themeId": 9212,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sewayaki_kitsune_no_senko_san"
+    },
+    {
+      "title": "Moffumoffu DE Yoi no Ja yo",
+      "titleCN": "Moffumoffu DE Yoi no Ja yo",
+      "anime": "Sewayaki Kitsune no Senko-san",
+      "animeCN": "贤惠幼妻仙狐小姐",
+      "animeNative": "世話やきキツネの仙狐さん",
+      "artist": "Azumi Waki",
+      "artistAliases": [
+        "Azumi Waki"
+      ],
+      "type": "ED",
+      "season": "2019-04",
+      "anilistId": 105914,
+      "bangumiId": 268165,
+      "releaseYear": 2019,
+      "themeId": 9213,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sewayaki_kitsune_no_senko_san"
     }
   ],
   "2019-07": [
@@ -49192,6 +68235,524 @@ export const SEASONAL_POOLS = {
       "themeId": 8994,
       "themeSequence": 8,
       "animethemesUrl": "https://animethemes.moe/anime/karakai_jouzu_no_takagi_san_2"
+    },
+    {
+      "title": "FLARE",
+      "titleCN": "FLARE",
+      "anime": "Arifureta Shokugyou de Sekai Saikyou",
+      "animeCN": "平凡职业造就世界最强",
+      "animeNative": "ありふれた職業で世界最強",
+      "artist": "Void_Chords",
+      "artistAliases": [
+        "Void_Chords"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 100668,
+      "bangumiId": 231414,
+      "releaseYear": 2019,
+      "themeId": 8924,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/arifureta_shokugyou_de_sekai_saikyou"
+    },
+    {
+      "title": "HELLO to DREAM",
+      "titleCN": "HELLO to DREAM",
+      "anime": "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka II",
+      "animeCN": "在地下城寻求邂逅是否搞错了什么 第二季",
+      "animeNative": "ダンジョンに出会いを求めるのは間違っているだろうかⅡ",
+      "artist": "Yuka Iguchi",
+      "artistAliases": [
+        "Yuka Iguchi"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 101167,
+      "bangumiId": 238004,
+      "releaseYear": 2019,
+      "themeId": 8946,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dungeon_ni_deai_wo_motomeru_no_wa_machigatteiru_darou_ka_ii"
+    },
+    {
+      "title": "Shadow is the Light",
+      "titleCN": "Shadow is the Light",
+      "anime": "Toaru Kagaku no Accelerator",
+      "animeCN": "某科学的一方通行",
+      "animeNative": "とある科学の一方通行【アクセラレータ】",
+      "artist": "THE SIXTH LIE",
+      "artistAliases": [
+        "THE SIXTH LIE"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 104463,
+      "bangumiId": 262939,
+      "releaseYear": 2019,
+      "themeId": 9044,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_kagaku_no_accelerator"
+    },
+    {
+      "title": "Parole",
+      "titleCN": "Parole",
+      "anime": "Toaru Kagaku no Accelerator",
+      "animeCN": "某科学的一方通行",
+      "animeNative": "とある科学の一方通行【アクセラレータ】",
+      "artist": "sajou no hana",
+      "artistAliases": [
+        "sajou no hana"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 104463,
+      "bangumiId": 262939,
+      "releaseYear": 2019,
+      "themeId": 9045,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_kagaku_no_accelerator"
+    },
+    {
+      "title": "Hibari",
+      "titleCN": "Hibari",
+      "anime": "Lord El-Melloi II Sei no Jikenbo: Rail Zeppelin Grace Note",
+      "animeCN": "君主·埃尔梅罗二世事件簿 魔眼收集列车 Grace note",
+      "animeNative": "ロード・エルメロイⅡ世の事件簿 {魔眼蒐集列車} Grace note",
+      "artist": "ASCA",
+      "artistAliases": [
+        "ASCA"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 106918,
+      "bangumiId": 267732,
+      "releaseYear": 2019,
+      "themeId": 9009,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/lord_el_melloi_ii_sei_no_jikenbo_rail_zeppelin_grace_note"
+    },
+    {
+      "title": "Daisuki.",
+      "titleCN": "Daisuki.",
+      "anime": "Kawaikereba Hentai demo Suki ni Natte Kuremasu ka?",
+      "animeCN": "只要可爱即使是变态你也会喜欢我吧？",
+      "animeNative": "可愛ければ変態でも好きになってくれますか？",
+      "artist": "Ayaka Oohashi",
+      "artistAliases": [
+        "Ayaka Oohashi"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 107961,
+      "bangumiId": 275371,
+      "releaseYear": 2019,
+      "themeId": 8997,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kawaikereba_hentai_demo_suki_ni_natte_kuremasu_ka"
+    },
+    {
+      "title": "Mubyuu no Hana",
+      "titleCN": "Mubyuu no Hana",
+      "anime": "Kawaikereba Hentai demo Suki ni Natte Kuremasu ka?",
+      "animeCN": "只要可爱即使是变态你也会喜欢我吧？",
+      "animeNative": "可愛ければ変態でも好きになってくれますか？",
+      "artist": "Mia REGINA",
+      "artistAliases": [
+        "Mia REGINA"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 107961,
+      "bangumiId": 275371,
+      "releaseYear": 2019,
+      "themeId": 8998,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kawaikereba_hentai_demo_suki_ni_natte_kuremasu_ka"
+    },
+    {
+      "title": "Stella",
+      "titleCN": "Stella",
+      "anime": "Kawaikereba Hentai demo Suki ni Natte Kuremasu ka?",
+      "animeCN": "只要可爱即使是变态你也会喜欢我吧？",
+      "animeNative": "可愛ければ変態でも好きになってくれますか？",
+      "artist": "TRUE",
+      "artistAliases": [
+        "TRUE"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 107961,
+      "bangumiId": 275371,
+      "releaseYear": 2019,
+      "themeId": 8999,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kawaikereba_hentai_demo_suki_ni_natte_kuremasu_ka"
+    },
+    {
+      "title": "Otome-domo yo",
+      "titleCN": "Otome-domo yo",
+      "anime": "Araburu Kisetsu no Otome-domo yo.",
+      "animeCN": "骚动时节的少女们啊",
+      "animeNative": "荒ぶる季節の乙女どもよ。",
+      "artist": "CHiCO, HoneyWorks",
+      "artistAliases": [
+        "CHiCO",
+        "HoneyWorks"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 105932,
+      "bangumiId": 268070,
+      "releaseYear": 2019,
+      "themeId": 8922,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/araburu_kisetsu_no_otome_domo_yo"
+    },
+    {
+      "title": "Yume Cinderella",
+      "titleCN": "Yume Cinderella",
+      "anime": "Araburu Kisetsu no Otome-domo yo.",
+      "animeCN": "骚动时节的少女们啊",
+      "animeNative": "荒ぶる季節の乙女どもよ。",
+      "artist": "Momo Asakura",
+      "artistAliases": [
+        "Momo Asakura"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 105932,
+      "bangumiId": 268070,
+      "releaseYear": 2019,
+      "themeId": 8923,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/araburu_kisetsu_no_otome_domo_yo"
+    },
+    {
+      "title": "Inferno",
+      "titleCN": "Inferno",
+      "anime": "Enen no Shouboutai",
+      "animeCN": "炎炎消防队",
+      "animeNative": "炎炎ノ消防隊",
+      "artist": "Mrs. GREEN APPLE",
+      "artistAliases": [
+        "Mrs. GREEN APPLE"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 105310,
+      "bangumiId": 266372,
+      "releaseYear": 2019,
+      "themeId": 8948,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/enen_no_shouboutai"
+    },
+    {
+      "title": "MAYDAY feat. Ryo from CRYSTAL LAKE",
+      "titleCN": "MAYDAY feat. Ryo from CRYSTAL LAKE",
+      "anime": "Enen no Shouboutai",
+      "animeCN": "炎炎消防队",
+      "animeNative": "炎炎ノ消防隊",
+      "artist": "coldrain",
+      "artistAliases": [
+        "coldrain"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 105310,
+      "bangumiId": 266372,
+      "releaseYear": 2019,
+      "themeId": 8949,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/enen_no_shouboutai"
+    },
+    {
+      "title": "veil",
+      "titleCN": "veil",
+      "anime": "Enen no Shouboutai",
+      "animeCN": "炎炎消防队",
+      "animeNative": "炎炎ノ消防隊",
+      "artist": "Keina Suda",
+      "artistAliases": [
+        "Keina Suda"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 105310,
+      "bangumiId": 266372,
+      "releaseYear": 2019,
+      "themeId": 8950,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/enen_no_shouboutai"
+    },
+    {
+      "title": "Nounai",
+      "titleCN": "Nounai",
+      "anime": "Enen no Shouboutai",
+      "animeCN": "炎炎消防队",
+      "animeNative": "炎炎ノ消防隊",
+      "artist": "Lenny code fiction",
+      "artistAliases": [
+        "Lenny code fiction"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 105310,
+      "bangumiId": 266372,
+      "releaseYear": 2019,
+      "themeId": 8951,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/enen_no_shouboutai"
+    },
+    {
+      "title": "Koko wa Doko",
+      "titleCN": "Koko wa Doko",
+      "anime": "Sounan Desu ka?",
+      "animeCN": "你遭难了吗？",
+      "animeNative": "ソウナンですか？",
+      "artist": "Azumi Waki, Kiyono Yasuno, Mao Ichimichi, Hiyori Kouno",
+      "artistAliases": [
+        "Azumi Waki",
+        "Kiyono Yasuno",
+        "Mao Ichimichi",
+        "Hiyori Kouno"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 108111,
+      "bangumiId": 276187,
+      "releaseYear": 2019,
+      "themeId": 9035,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sounan_desu_ka"
+    },
+    {
+      "title": "Ikiru",
+      "titleCN": "Ikiru",
+      "anime": "Sounan Desu ka?",
+      "animeCN": "你遭难了吗？",
+      "animeNative": "ソウナンですか？",
+      "artist": "Kiyono Yasuno",
+      "artistAliases": [
+        "Kiyono Yasuno"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 108111,
+      "bangumiId": 276187,
+      "releaseYear": 2019,
+      "themeId": 9036,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sounan_desu_ka"
+    },
+    {
+      "title": "Onegai Muscle",
+      "titleCN": "Onegai Muscle",
+      "anime": "Dumbbell Nan Kilo Moteru?",
+      "animeCN": "流汗吧！健身少女",
+      "animeNative": "ダンベル何キロ持てる？",
+      "artist": "Fairouz Ai, Kaito Ishikawa",
+      "artistAliases": [
+        "Fairouz Ai",
+        "Kaito Ishikawa"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 107226,
+      "bangumiId": 271724,
+      "releaseYear": 2019,
+      "themeId": 8943,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dumbbell_nan_kilo_moteru"
+    },
+    {
+      "title": "Macho a Name?",
+      "titleCN": "Macho a Name?",
+      "anime": "Dumbbell Nan Kilo Moteru?",
+      "animeCN": "流汗吧！健身少女",
+      "animeNative": "ダンベル何キロ持てる？",
+      "artist": "Kaito Ishikawa",
+      "artistAliases": [
+        "Kaito Ishikawa"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 107226,
+      "bangumiId": 271724,
+      "releaseYear": 2019,
+      "themeId": 8944,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/dumbbell_nan_kilo_moteru"
+    },
+    {
+      "title": "star*frost",
+      "titleCN": "star*frost",
+      "anime": "Kanata no Astra",
+      "animeCN": "彼方的阿斯特拉",
+      "animeNative": "彼方のアストラ",
+      "artist": "nonoc",
+      "artistAliases": [
+        "nonoc"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 107663,
+      "bangumiId": 273877,
+      "releaseYear": 2019,
+      "themeId": 8983,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kanata_no_astra"
+    },
+    {
+      "title": "Glow at the Velocity of Light",
+      "titleCN": "Glow at the Velocity of Light",
+      "anime": "Kanata no Astra",
+      "animeCN": "彼方的阿斯特拉",
+      "animeNative": "彼方のアストラ",
+      "artist": "Riko Azuna",
+      "artistAliases": [
+        "Riko Azuna"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 107663,
+      "bangumiId": 273877,
+      "releaseYear": 2019,
+      "themeId": 8984,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kanata_no_astra"
+    },
+    {
+      "title": "Star of Hope",
+      "titleCN": "Star of Hope",
+      "anime": "Kanata no Astra",
+      "animeCN": "彼方的阿斯特拉",
+      "animeNative": "彼方のアストラ",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 107663,
+      "bangumiId": 273877,
+      "releaseYear": 2019,
+      "themeId": 8985,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kanata_no_astra"
+    },
+    {
+      "title": "Iyayo Iyayo mo Suki no Uchi!",
+      "titleCN": "Iyayo Iyayo mo Suki no Uchi!",
+      "anime": "Tsuujou Kougeki ga Zentai Kougeki de Ni-kai Kougeki no Okaasan wa Suki Desu ka?",
+      "animeCN": "普通攻击是全体攻击而且能二次攻击的妈妈你喜欢吗？",
+      "animeNative": "通常攻撃が全体攻撃で二回攻撃のお母さんは好きですか？",
+      "artist": "Spira Spica",
+      "artistAliases": [
+        "Spira Spica"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 104723,
+      "bangumiId": 264355,
+      "releaseYear": 2019,
+      "themeId": 9048,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tsuujou_kougeki_ga_zentai_kougeki_de_ni_kai_kougeki_no_okaasan_wa_suki_desu_ka"
+    },
+    {
+      "title": "Tsuujou Kougeki ga Zentai Kougeki de Ni-kai Kougeki Mama",
+      "titleCN": "Tsuujou Kougeki ga Zentai Kougeki de Ni-kai Kougeki Mama",
+      "anime": "Tsuujou Kougeki ga Zentai Kougeki de Ni-kai Kougeki no Okaasan wa Suki Desu ka?",
+      "animeCN": "普通攻击是全体攻击而且能二次攻击的妈妈你喜欢吗？",
+      "animeNative": "通常攻撃が全体攻撃で二回攻撃のお母さんは好きですか？",
+      "artist": "Ai Kayano",
+      "artistAliases": [
+        "Ai Kayano"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 104723,
+      "bangumiId": 264355,
+      "releaseYear": 2019,
+      "themeId": 9049,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tsuujou_kougeki_ga_zentai_kougeki_de_ni_kai_kougeki_no_okaasan_wa_suki_desu_ka"
+    },
+    {
+      "title": "Rakuen Toshi",
+      "titleCN": "Rakuen Toshi",
+      "anime": "Cop Craft",
+      "animeCN": "COP CRAFT",
+      "animeNative": "コップクラフト",
+      "artist": "Masayoshi Ooishi",
+      "artistAliases": [
+        "Masayoshi Ooishi"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 106893,
+      "bangumiId": 270422,
+      "releaseYear": 2019,
+      "themeId": 8935,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/cop_craft"
+    },
+    {
+      "title": "TEMPEST",
+      "titleCN": "TEMPEST",
+      "anime": "Maou-sama, Retry!",
+      "animeCN": "重来吧、魔王大人！",
+      "animeNative": "魔王様、リトライ!",
+      "artist": "Kaori Ishihara",
+      "artistAliases": [
+        "Kaori Ishihara"
+      ],
+      "type": "OP",
+      "season": "2019-07",
+      "anilistId": 104252,
+      "bangumiId": 260407,
+      "releaseYear": 2019,
+      "themeId": 9012,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/maou_sama_retry"
+    },
+    {
+      "title": "NEW",
+      "titleCN": "NEW",
+      "anime": "Maou-sama, Retry!",
+      "animeCN": "重来吧、魔王大人！",
+      "animeNative": "魔王様、リトライ!",
+      "artist": "Haruka Toujou",
+      "artistAliases": [
+        "Haruka Toujou"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 104252,
+      "bangumiId": 260407,
+      "releaseYear": 2019,
+      "themeId": 9013,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/maou_sama_retry"
+    },
+    {
+      "title": "This is Yuusha, but Zannen!?",
+      "titleCN": "This is Yuusha, but Zannen!?",
+      "anime": "Uchi no Ko no Tame naraba, Ore wa Moshikashitara Maou mo Taoseru kamo Shirenai.",
+      "animeCN": "为了女儿，我说不定连魔王都能干掉。",
+      "animeNative": "うちの娘の為ならば、俺はもしかしたら魔王も倒せるかもしれない。",
+      "artist": "Nobuhiko Okamoto",
+      "artistAliases": [
+        "Nobuhiko Okamoto"
+      ],
+      "type": "ED",
+      "season": "2019-07",
+      "anilistId": 107956,
+      "bangumiId": 275352,
+      "releaseYear": 2019,
+      "themeId": 9051,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/uchi_no_ko_no_tame_naraba_ore_wa_moshikashitara_maou_mo_taoseru_kamo_shirenai"
     }
   ],
   "2019-10": [
@@ -49346,6 +68907,8700 @@ export const SEASONAL_POOLS = {
       "themeId": 8898,
       "themeSequence": 1,
       "animethemesUrl": "https://animethemes.moe/anime/sword_art_online_alicization_war_of_underworld"
+    },
+    {
+      "title": "Phantom Joke",
+      "titleCN": "Phantom Joke",
+      "anime": "Fate/Grand Order: Zettai Majuu Sensen Babylonia",
+      "animeCN": "Fate/Grand Order -绝对魔兽战线巴比伦尼亚-",
+      "animeNative": "Fate/Grand Order -絶対魔獣戦線バビロニア-",
+      "artist": "UNISON SQUARE GARDEN",
+      "artistAliases": [
+        "UNISON SQUARE GARDEN"
+      ],
+      "type": "OP",
+      "season": "2019-10",
+      "anilistId": 103275,
+      "bangumiId": 255526,
+      "releaseYear": 2019,
+      "themeId": 8805,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fategrand_order_zettai_majuu_sensen_babylonia"
+    },
+    {
+      "title": "Hoshi ga Furu Yume",
+      "titleCN": "Hoshi ga Furu Yume",
+      "anime": "Fate/Grand Order: Zettai Majuu Sensen Babylonia",
+      "animeCN": "Fate/Grand Order -绝对魔兽战线巴比伦尼亚-",
+      "animeNative": "Fate/Grand Order -絶対魔獣戦線バビロニア-",
+      "artist": "Eir Aoi",
+      "artistAliases": [
+        "Eir Aoi"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 103275,
+      "bangumiId": 255526,
+      "releaseYear": 2019,
+      "themeId": 8806,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fategrand_order_zettai_majuu_sensen_babylonia"
+    },
+    {
+      "title": "Prover",
+      "titleCN": "Prover",
+      "anime": "Fate/Grand Order: Zettai Majuu Sensen Babylonia",
+      "animeCN": "Fate/Grand Order -绝对魔兽战线巴比伦尼亚-",
+      "animeNative": "Fate/Grand Order -絶対魔獣戦線バビロニア-",
+      "artist": "milet",
+      "artistAliases": [
+        "milet"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 103275,
+      "bangumiId": 255526,
+      "releaseYear": 2019,
+      "themeId": 8807,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fategrand_order_zettai_majuu_sensen_babylonia"
+    },
+    {
+      "title": "Unknown World Map",
+      "titleCN": "Unknown World Map",
+      "anime": "High Score Girl II",
+      "animeCN": "高分少女 第二季",
+      "animeNative": "ハイスコアガール II",
+      "artist": "Etsuko Yakushimaru",
+      "artistAliases": [
+        "Etsuko Yakushimaru"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 108581,
+      "bangumiId": 278569,
+      "releaseYear": 2019,
+      "themeId": 8819,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/high_score_girl_ii"
+    },
+    {
+      "title": "Papapa",
+      "titleCN": "Papapa",
+      "anime": "Ore wo Suki nano wa Omae dake ka yo",
+      "animeCN": "喜欢本大爷的竟然就你一个？",
+      "animeNative": "俺を好きなのはお前だけかよ",
+      "artist": "Shuka Saitou",
+      "artistAliases": [
+        "Shuka Saitou"
+      ],
+      "type": "OP",
+      "season": "2019-10",
+      "anilistId": 104464,
+      "bangumiId": 262943,
+      "releaseYear": 2019,
+      "themeId": 8858,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_wo_suki_nano_wa_omae_dake_ka_yo"
+    },
+    {
+      "title": "Hanakotoba",
+      "titleCN": "Hanakotoba",
+      "anime": "Ore wo Suki nano wa Omae dake ka yo",
+      "animeCN": "喜欢本大爷的竟然就你一个？",
+      "animeNative": "俺を好きなのはお前だけかよ",
+      "artist": "Haruka Shiraishi, Haruka Tomatsu, Sachika Misawa",
+      "artistAliases": [
+        "Haruka Shiraishi",
+        "Haruka Tomatsu",
+        "Sachika Misawa"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 104464,
+      "bangumiId": 262943,
+      "releaseYear": 2019,
+      "themeId": 8859,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_wo_suki_nano_wa_omae_dake_ka_yo"
+    },
+    {
+      "title": "Smile Skill = Suki Skill",
+      "titleCN": "Smile Skill = Suki Skill",
+      "anime": "Watashi, Nouryoku wa Heikinchi de tte Itta yo ne!",
+      "animeCN": "我，不是说了能力要平均值么！",
+      "animeNative": "私、能力は平均値でって言ったよね！",
+      "artist": "Azumi Waki, Sora Tokui, Masumi Tazawa",
+      "artistAliases": [
+        "Azumi Waki",
+        "Sora Tokui",
+        "Masumi Tazawa"
+      ],
+      "type": "OP",
+      "season": "2019-10",
+      "anilistId": 101227,
+      "bangumiId": 238962,
+      "releaseYear": 2019,
+      "themeId": 8907,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/watashi_nouryoku_wa_heikinchi_de_tte_itta_yo_ne"
+    },
+    {
+      "title": "Genzai↑ Banzai↑",
+      "titleCN": "Genzai↑ Banzai↑",
+      "anime": "Watashi, Nouryoku wa Heikinchi de tte Itta yo ne!",
+      "animeCN": "我，不是说了能力要平均值么！",
+      "animeNative": "私、能力は平均値でって言ったよね！",
+      "artist": "Azumi Waki",
+      "artistAliases": [
+        "Azumi Waki"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 101227,
+      "bangumiId": 238962,
+      "releaseYear": 2019,
+      "themeId": 8908,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/watashi_nouryoku_wa_heikinchi_de_tte_itta_yo_ne"
+    },
+    {
+      "title": "Devi-kyuu",
+      "titleCN": "Devi-kyuu",
+      "anime": "Mairimashita! Iruma-kun",
+      "animeCN": "入间同学入魔了",
+      "animeNative": "魔入りました！入間くん",
+      "artist": "Yuu Serizawa",
+      "artistAliases": [
+        "Yuu Serizawa"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 107693,
+      "bangumiId": 273844,
+      "releaseYear": 2019,
+      "themeId": 8843,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mairimashita_iruma_kun"
+    },
+    {
+      "title": "Akuma Gakkou Babyls Kouka",
+      "titleCN": "Akuma Gakkou Babyls Kouka",
+      "anime": "Mairimashita! Iruma-kun",
+      "animeCN": "入间同学入魔了",
+      "animeNative": "魔入りました！入間くん",
+      "artist": "Akuma Gakkou Babyls Seito no Mina-san",
+      "artistAliases": [
+        "Akuma Gakkou Babyls Seito no Mina-san"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 107693,
+      "bangumiId": 273844,
+      "releaseYear": 2019,
+      "themeId": 8844,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/mairimashita_iruma_kun"
+    },
+    {
+      "title": "Can now, Can now",
+      "titleCN": "Can now, Can now",
+      "anime": "Bokutachi wa Benkyou ga Dekinai 2",
+      "animeCN": "我们真的学不来！",
+      "animeNative": "ぼくたちは勉強ができない！",
+      "artist": "Study",
+      "artistAliases": [
+        "Study"
+      ],
+      "type": "OP",
+      "season": "2019-10",
+      "anilistId": 110229,
+      "bangumiId": 285130,
+      "releaseYear": 2019,
+      "themeId": 8794,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bokutachi_wa_benkyou_ga_dekinai_2"
+    },
+    {
+      "title": "Houkago no Liberty",
+      "titleCN": "Houkago no Liberty",
+      "anime": "Bokutachi wa Benkyou ga Dekinai 2",
+      "animeCN": "我们真的学不来！",
+      "animeNative": "ぼくたちは勉強ができない！",
+      "artist": "halca",
+      "artistAliases": [
+        "halca"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 110229,
+      "bangumiId": 285130,
+      "releaseYear": 2019,
+      "themeId": 8795,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bokutachi_wa_benkyou_ga_dekinai_2"
+    },
+    {
+      "title": "Kankei ≧ Houteishiki",
+      "titleCN": "Kankei ≧ Houteishiki",
+      "anime": "Bokutachi wa Benkyou ga Dekinai 2",
+      "animeCN": "我们真的学不来！",
+      "animeNative": "ぼくたちは勉強ができない！",
+      "artist": "Study",
+      "artistAliases": [
+        "Study"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 110229,
+      "bangumiId": 285130,
+      "releaseYear": 2019,
+      "themeId": 8796,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bokutachi_wa_benkyou_ga_dekinai_2"
+    },
+    {
+      "title": "Q-vism",
+      "titleCN": "Q-vism",
+      "anime": "Psycho-Pass 3",
+      "animeCN": "心理测量者3",
+      "animeNative": "PSYCHO-PASS サイコパス3",
+      "artist": "Who-ya Extended",
+      "artistAliases": [
+        "Who-ya Extended"
+      ],
+      "type": "OP",
+      "season": "2019-10",
+      "anilistId": 108307,
+      "bangumiId": 277105,
+      "releaseYear": 2019,
+      "themeId": 8872,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/psycho_pass_3"
+    },
+    {
+      "title": "bullet",
+      "titleCN": "bullet",
+      "anime": "Psycho-Pass 3",
+      "animeCN": "心理测量者3",
+      "animeNative": "PSYCHO-PASS サイコパス3",
+      "artist": "Cö shu Nie",
+      "artistAliases": [
+        "Cö shu Nie"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 108307,
+      "bangumiId": 277105,
+      "releaseYear": 2019,
+      "themeId": 8873,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/psycho_pass_3"
+    },
+    {
+      "title": "Chronos",
+      "titleCN": "Chronos",
+      "anime": "Shokugeki no Souma: Shin no Sara",
+      "animeCN": "食戟之灵  神之皿",
+      "animeNative": "食戟のソーマ 神ノ皿",
+      "artist": "STEREO DIVE FOUNDATION",
+      "artistAliases": [
+        "STEREO DIVE FOUNDATION"
+      ],
+      "type": "OP",
+      "season": "2019-10",
+      "anilistId": 109963,
+      "bangumiId": 284546,
+      "releaseYear": 2019,
+      "themeId": 8887,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shokugeki_no_souma_shin_no_sara"
+    },
+    {
+      "title": "Emblem",
+      "titleCN": "Emblem",
+      "anime": "Shokugeki no Souma: Shin no Sara",
+      "animeCN": "食戟之灵  神之皿",
+      "animeNative": "食戟のソーマ 神ノ皿",
+      "artist": "nano.RIPE",
+      "artistAliases": [
+        "nano.RIPE"
+      ],
+      "type": "ED",
+      "season": "2019-10",
+      "anilistId": 109963,
+      "bangumiId": 284546,
+      "releaseYear": 2019,
+      "themeId": 8888,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shokugeki_no_souma_shin_no_sara"
+    }
+  ],
+  "2009-07": [
+    {
+      "title": "staple stable",
+      "titleCN": "staple stable",
+      "anime": "Bakemonogatari",
+      "animeCN": "化物语",
+      "animeNative": "化物語",
+      "artist": "Chiwa Saitou",
+      "artistAliases": [
+        "Chiwa Saitou"
+      ],
+      "type": "OP",
+      "season": "2009-07",
+      "anilistId": 5081,
+      "bangumiId": 1671,
+      "releaseYear": 2009,
+      "themeId": 3373,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bakemonogatari"
+    },
+    {
+      "title": "Kaerimichi",
+      "titleCN": "Kaerimichi",
+      "anime": "Bakemonogatari",
+      "animeCN": "化物语",
+      "animeNative": "化物語",
+      "artist": "Emiri Katou",
+      "artistAliases": [
+        "Emiri Katou"
+      ],
+      "type": "OP",
+      "season": "2009-07",
+      "anilistId": 5081,
+      "bangumiId": 1671,
+      "releaseYear": 2009,
+      "themeId": 3374,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bakemonogatari"
+    },
+    {
+      "title": "Ambivalent World",
+      "titleCN": "Ambivalent World",
+      "anime": "Bakemonogatari",
+      "animeCN": "化物语",
+      "animeNative": "化物語",
+      "artist": "Miyuki Sawashiro",
+      "artistAliases": [
+        "Miyuki Sawashiro"
+      ],
+      "type": "OP",
+      "season": "2009-07",
+      "anilistId": 5081,
+      "bangumiId": 1671,
+      "releaseYear": 2009,
+      "themeId": 3375,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/bakemonogatari"
+    },
+    {
+      "title": "Sugar Sweet Nightmare",
+      "titleCN": "Sugar Sweet Nightmare",
+      "anime": "Bakemonogatari",
+      "animeCN": "化物语",
+      "animeNative": "化物語",
+      "artist": "Yui Horie",
+      "artistAliases": [
+        "Yui Horie"
+      ],
+      "type": "OP",
+      "season": "2009-07",
+      "anilistId": 5081,
+      "bangumiId": 1671,
+      "releaseYear": 2009,
+      "themeId": 3377,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/bakemonogatari"
+    },
+    {
+      "title": "Mitsu no Yoake",
+      "titleCN": "Mitsu no Yoake",
+      "anime": "Ookami to Koushinryou II",
+      "animeCN": "狼与香辛料 第二季",
+      "animeNative": "狼と香辛料II",
+      "artist": "AKINO Arai",
+      "artistAliases": [
+        "AKINO Arai"
+      ],
+      "type": "OP",
+      "season": "2009-07",
+      "anilistId": 5341,
+      "bangumiId": 1512,
+      "releaseYear": 2009,
+      "themeId": 3392,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ookami_to_koushinryou_ii"
+    },
+    {
+      "title": "Perfect World",
+      "titleCN": "Perfect World",
+      "anime": "Ookami to Koushinryou II",
+      "animeCN": "狼与香辛料 第二季",
+      "animeNative": "狼と香辛料II",
+      "artist": "Rocky Chack",
+      "artistAliases": [
+        "Rocky Chack"
+      ],
+      "type": "ED",
+      "season": "2009-07",
+      "anilistId": 5341,
+      "bangumiId": 1512,
+      "releaseYear": 2009,
+      "themeId": 3393,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ookami_to_koushinryou_ii"
+    }
+  ],
+  "2009-10": [
+    {
+      "title": "Dear My Friend -Mada Minu Mirai he-",
+      "titleCN": "Dear My Friend -Mada Minu Mirai he-",
+      "anime": "Toaru Kagaku no Railgun",
+      "animeCN": "某科学的超电磁炮",
+      "animeNative": "とある科学の超電磁砲",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 6213,
+      "bangumiId": 2585,
+      "releaseYear": 2009,
+      "themeId": 3363,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_kagaku_no_railgun"
+    },
+    {
+      "title": "Smile -You and Me-",
+      "titleCN": "Smile -You and Me-",
+      "anime": "Toaru Kagaku no Railgun",
+      "animeCN": "某科学的超电磁炮",
+      "animeNative": "とある科学の超電磁砲",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 6213,
+      "bangumiId": 2585,
+      "releaseYear": 2009,
+      "themeId": 3364,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_kagaku_no_railgun"
+    },
+    {
+      "title": "Real Force",
+      "titleCN": "Real Force",
+      "anime": "Toaru Kagaku no Railgun",
+      "animeCN": "某科学的超电磁炮",
+      "animeNative": "とある科学の超電磁砲",
+      "artist": "ELISA",
+      "artistAliases": [
+        "ELISA"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 6213,
+      "bangumiId": 2585,
+      "releaseYear": 2009,
+      "themeId": 3365,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_kagaku_no_railgun"
+    },
+    {
+      "title": "Ring My Bell (Main Vocal Hitomi)",
+      "titleCN": "Ring My Bell (Main Vocal Hitomi)",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "OP",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3339,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Ring My Bell (Main Vocal Saori)",
+      "titleCN": "Ring My Bell (Main Vocal Saori)",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "OP",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3340,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Soba ni Irareru Dake de",
+      "titleCN": "Soba ni Irareru Dake de",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3341,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Taiyou ga Kureta Kisetsu",
+      "titleCN": "Taiyou ga Kureta Kisetsu",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Ayahi Takagaki, Saori Hayami",
+      "artistAliases": [
+        "Ayahi Takagaki",
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3343,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Natsu-iro no Nancy",
+      "titleCN": "Natsu-iro no Nancy",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Iori Nomizu",
+      "artistAliases": [
+        "Iori Nomizu"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3346,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Furimuku na Kimi wa Utsukushii",
+      "titleCN": "Furimuku na Kimi wa Utsukushii",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Ayahi Takagaki, Iori Nomizu, Saori Hayami",
+      "artistAliases": [
+        "Ayahi Takagaki",
+        "Iori Nomizu",
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3347,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Hatsukoi",
+      "titleCN": "Hatsukoi",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Ayahi Takagaki, Saori Hayami",
+      "artistAliases": [
+        "Ayahi Takagaki",
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3349,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Bokura no Diary",
+      "titleCN": "Bokura no Diary",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Ayahi Takagaki",
+      "artistAliases": [
+        "Ayahi Takagaki"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3350,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Champion",
+      "titleCN": "Champion",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Saki Fujita",
+      "artistAliases": [
+        "Saki Fujita"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3351,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "Akai Hana Shiroi Hana",
+      "titleCN": "Akai Hana Shiroi Hana",
+      "anime": "Sora no Otoshimono",
+      "animeCN": "天降之物",
+      "animeNative": "そらのおとしもの",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 5958,
+      "bangumiId": 2617,
+      "releaseYear": 2009,
+      "themeId": 3352,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/sora_no_otoshimono"
+    },
+    {
+      "title": "From Dusk Till Dawn",
+      "titleCN": "From Dusk Till Dawn",
+      "anime": "Darker than Black: Ryuusei no Gemini",
+      "animeCN": "黑之契约者 流星的双子",
+      "animeNative": "DARKER THAN BLACK -流星の双子-",
+      "artist": "abingdon boys school",
+      "artistAliases": [
+        "abingdon boys school"
+      ],
+      "type": "ED",
+      "season": "2009-10",
+      "anilistId": 6573,
+      "bangumiId": 2354,
+      "releaseYear": 2009,
+      "themeId": 3264,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/darker_than_black_ryuusei_no_gemini"
+    }
+  ],
+  "2007-04": [
+    {
+      "title": "Motteke! Sailor Fuku",
+      "titleCN": "Motteke! Sailor Fuku",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano, Emiri Katou, Kaori Fukuhara, Aya Endou",
+      "artistAliases": [
+        "Aya Hirano",
+        "Emiri Katou",
+        "Kaori Fukuhara",
+        "Aya Endou"
+      ],
+      "type": "OP",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2783,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Uchuu Tetsujin Kyoodain",
+      "titleCN": "Uchuu Tetsujin Kyoodain",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2784,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Shouri da! Akumaizer 3",
+      "titleCN": "Shouri da! Akumaizer 3",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2785,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Sore ga, Ai Deshou",
+      "titleCN": "Sore ga, Ai Deshou",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2786,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Sailor Fuku to Kikanjuu",
+      "titleCN": "Sailor Fuku to Kikanjuu",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Emiri Katou",
+      "artistAliases": [
+        "Emiri Katou"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2787,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Cha-La Head-Cha-La",
+      "titleCN": "Cha-La Head-Cha-La",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2788,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Valentine Kiss",
+      "titleCN": "Valentine Kiss",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano, Kaori Fukuhara",
+      "artistAliases": [
+        "Aya Hirano",
+        "Kaori Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2789,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Chijou no Hoshi",
+      "titleCN": "Chijou no Hoshi",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Endou",
+      "artistAliases": [
+        "Aya Endou"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2790,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Monkey Magic",
+      "titleCN": "Monkey Magic",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2791,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Kogarashi ni Dakarete",
+      "titleCN": "Kogarashi ni Dakarete",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2792,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "I'm Proud",
+      "titleCN": "I'm Proud",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Emiri Katou",
+      "artistAliases": [
+        "Emiri Katou"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2793,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Doraemon no Uta",
+      "titleCN": "Doraemon no Uta",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano, Emiri Katou, Kaori Fukuhara",
+      "artistAliases": [
+        "Aya Hirano",
+        "Emiri Katou",
+        "Kaori Fukuhara"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2794,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Ike! Godman / Makenaide",
+      "titleCN": "Ike! Godman / Makenaide",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Aya Hirano, Emiri Katou, Kaori Fukuhara, Aya Endou",
+      "artistAliases": [
+        "Aya Hirano",
+        "Emiri Katou",
+        "Kaori Fukuhara",
+        "Aya Endou"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2795,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Ore no Wasuremono",
+      "titleCN": "Ore no Wasuremono",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2796,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Hare Hare Yukai",
+      "titleCN": "Hare Hare Yukai",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minori Chihara, Minoru Shiraishi",
+      "artistAliases": [
+        "Minori Chihara",
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2797,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Koi no Minoru Densetsu",
+      "titleCN": "Koi no Minoru Densetsu",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2798,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Misoji Misaki",
+      "titleCN": "Misoji Misaki",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Hiromi Konno",
+      "artistAliases": [
+        "Hiromi Konno"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2799,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Kaorin no Theme",
+      "titleCN": "Kaorin no Theme",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2801,
+      "themeSequence": 18,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Otoko no Iki-sama",
+      "titleCN": "Otoko no Iki-sama",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2802,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Omuko Rumba",
+      "titleCN": "Omuko Rumba",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2803,
+      "themeSequence": 20,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Shikaidaa no Uta",
+      "titleCN": "Shikaidaa no Uta",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2804,
+      "themeSequence": 21,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Shiraishi Medley",
+      "titleCN": "Shiraishi Medley",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2805,
+      "themeSequence": 22,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Mikuru Henshin! Soshite Sentou!",
+      "titleCN": "Mikuru Henshin! Soshite Sentou!",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2806,
+      "themeSequence": 23,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "Ai wa Boomerang",
+      "titleCN": "Ai wa Boomerang",
+      "anime": "Lucky☆Star",
+      "animeCN": "幸运星",
+      "animeNative": "らき☆すた",
+      "artist": "Minoru Shiraishi",
+      "artistAliases": [
+        "Minoru Shiraishi"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 1887,
+      "bangumiId": 276,
+      "releaseYear": 2007,
+      "themeId": 2807,
+      "themeSequence": 24,
+      "animethemesUrl": "https://animethemes.moe/anime/luckystar"
+    },
+    {
+      "title": "UNDERGROUND",
+      "titleCN": "UNDERGROUND",
+      "anime": "Tengen Toppa Gurren Lagann",
+      "animeCN": "天元突破 红莲螺岩",
+      "animeNative": "天元突破グレンラガン",
+      "artist": "HIGH VOLTAGE",
+      "artistAliases": [
+        "HIGH VOLTAGE"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 2001,
+      "bangumiId": 770,
+      "releaseYear": 2007,
+      "themeId": 2841,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tengen_toppa_gurren_lagann"
+    },
+    {
+      "title": "happily ever after",
+      "titleCN": "happily ever after",
+      "anime": "Tengen Toppa Gurren Lagann",
+      "animeCN": "天元突破 红莲螺岩",
+      "animeNative": "天元突破グレンラガン",
+      "artist": "Shouko Nakagawa",
+      "artistAliases": [
+        "Shouko Nakagawa"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 2001,
+      "bangumiId": 770,
+      "releaseYear": 2007,
+      "themeId": 2842,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tengen_toppa_gurren_lagann"
+    },
+    {
+      "title": "Minna no Peace",
+      "titleCN": "Minna no Peace",
+      "anime": "Tengen Toppa Gurren Lagann",
+      "animeCN": "天元突破 红莲螺岩",
+      "animeNative": "天元突破グレンラガン",
+      "artist": "Afromania",
+      "artistAliases": [
+        "Afromania"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 2001,
+      "bangumiId": 770,
+      "releaseYear": 2007,
+      "themeId": 2843,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/tengen_toppa_gurren_lagann"
+    },
+    {
+      "title": "Howling",
+      "titleCN": "Howling",
+      "anime": "Darker than Black: Kuro no Keiyakusha",
+      "animeCN": "DARKER THAN BLACK -黑之契约者-",
+      "animeNative": "DARKER THAN BLACK -黒の契約者-",
+      "artist": "abingdon boys school",
+      "artistAliases": [
+        "abingdon boys school"
+      ],
+      "type": "OP",
+      "season": "2007-04",
+      "anilistId": 2025,
+      "bangumiId": 292,
+      "releaseYear": 2007,
+      "themeId": 2748,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/darker_than_black_kuro_no_keiyakusha"
+    },
+    {
+      "title": "Tsuki Akari",
+      "titleCN": "Tsuki Akari",
+      "anime": "Darker than Black: Kuro no Keiyakusha",
+      "animeCN": "DARKER THAN BLACK -黑之契约者-",
+      "animeNative": "DARKER THAN BLACK -黒の契約者-",
+      "artist": "Rie fu",
+      "artistAliases": [
+        "Rie fu"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 2025,
+      "bangumiId": 292,
+      "releaseYear": 2007,
+      "themeId": 2750,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/darker_than_black_kuro_no_keiyakusha"
+    },
+    {
+      "title": "Dreams",
+      "titleCN": "Dreams",
+      "anime": "Darker than Black: Kuro no Keiyakusha",
+      "animeCN": "DARKER THAN BLACK -黑之契约者-",
+      "animeNative": "DARKER THAN BLACK -黒の契約者-",
+      "artist": "HIGH and MIGHTY COLOR",
+      "artistAliases": [
+        "HIGH and MIGHTY COLOR"
+      ],
+      "type": "ED",
+      "season": "2007-04",
+      "anilistId": 2025,
+      "bangumiId": 292,
+      "releaseYear": 2007,
+      "themeId": 2751,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/darker_than_black_kuro_no_keiyakusha"
+    }
+  ],
+  "2006-04": [
+    {
+      "title": "Koi no Mikuru Densetsu",
+      "titleCN": "Koi no Mikuru Densetsu",
+      "anime": "Suzumiya Haruhi no Yuuutsu",
+      "animeCN": "凉宫春日的忧郁",
+      "animeNative": "涼宮ハルヒの憂鬱",
+      "artist": "Yuuko Gotou",
+      "artistAliases": [
+        "Yuuko Gotou"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 849,
+      "bangumiId": 485,
+      "releaseYear": 2006,
+      "themeId": 2530,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/suzumiya_haruhi_no_yuuutsu"
+    },
+    {
+      "title": "Bouken Desho Desho?",
+      "titleCN": "Bouken Desho Desho?",
+      "anime": "Suzumiya Haruhi no Yuuutsu",
+      "animeCN": "凉宫春日的忧郁",
+      "animeNative": "涼宮ハルヒの憂鬱",
+      "artist": "Aya Hirano",
+      "artistAliases": [
+        "Aya Hirano"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 849,
+      "bangumiId": 485,
+      "releaseYear": 2006,
+      "themeId": 2531,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/suzumiya_haruhi_no_yuuutsu"
+    },
+    {
+      "title": "Higurashi no Naku Koro ni",
+      "titleCN": "Higurashi no Naku Koro ni",
+      "anime": "Higurashi no Naku Koro ni",
+      "animeCN": "寒蝉鸣泣之时",
+      "animeNative": "ひぐらしのなく頃に",
+      "artist": "Eiko Shimamiya",
+      "artistAliases": [
+        "Eiko Shimamiya"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 934,
+      "bangumiId": 289,
+      "releaseYear": 2006,
+      "themeId": 2478,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/higurashi_no_naku_koro_ni"
+    },
+    {
+      "title": "Why, or why not",
+      "titleCN": "Why, or why not",
+      "anime": "Higurashi no Naku Koro ni",
+      "animeCN": "寒蝉鸣泣之时",
+      "animeNative": "ひぐらしのなく頃に",
+      "artist": "Rekka Katakiri",
+      "artistAliases": [
+        "Rekka Katakiri"
+      ],
+      "type": "ED",
+      "season": "2006-04",
+      "anilistId": 934,
+      "bangumiId": 289,
+      "releaseYear": 2006,
+      "themeId": 2479,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/higurashi_no_naku_koro_ni"
+    },
+    {
+      "title": "Pray",
+      "titleCN": "Pray",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "Tommy heavenly⁶",
+      "artistAliases": [
+        "Tommy heavenly⁶"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2446,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Tooi Nioi",
+      "titleCN": "Tooi Nioi",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "YO-KING",
+      "artistAliases": [
+        "YO-KING"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2447,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Giniro no Sora",
+      "titleCN": "Giniro no Sora",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "redballoon",
+      "artistAliases": [
+        "redballoon"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2448,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Kasanaru Kage",
+      "titleCN": "Kasanaru Kage",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "Hearts Grow",
+      "artistAliases": [
+        "Hearts Grow"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2449,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Anata MAGIC",
+      "titleCN": "Anata MAGIC",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "MONOBRIGHT",
+      "artistAliases": [
+        "MONOBRIGHT"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2451,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Stairway Generation",
+      "titleCN": "Stairway Generation",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "Base Ball Bear",
+      "artistAliases": [
+        "Base Ball Bear"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2452,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Light Infection",
+      "titleCN": "Light Infection",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "Prague",
+      "artistAliases": [
+        "Prague"
+      ],
+      "type": "OP",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2453,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Yuki no Tsubasa",
+      "titleCN": "Yuki no Tsubasa",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "redballoon",
+      "artistAliases": [
+        "redballoon"
+      ],
+      "type": "ED",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2456,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Candy Line",
+      "titleCN": "Candy Line",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "Hitomi Takahashi",
+      "artistAliases": [
+        "Hitomi Takahashi"
+      ],
+      "type": "ED",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2457,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Shura",
+      "titleCN": "Shura",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "DOES",
+      "artistAliases": [
+        "DOES"
+      ],
+      "type": "ED",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2458,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "SIGNAL",
+      "titleCN": "SIGNAL",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "KELUN",
+      "artistAliases": [
+        "KELUN"
+      ],
+      "type": "ED",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2460,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    },
+    {
+      "title": "Wo Ai Ni",
+      "titleCN": "Wo Ai Ni",
+      "anime": "Gintama",
+      "animeCN": "银魂",
+      "animeNative": "銀魂",
+      "artist": "BEAT CRUSADERS, Hitomi Takahashi",
+      "artistAliases": [
+        "BEAT CRUSADERS",
+        "Hitomi Takahashi"
+      ],
+      "type": "ED",
+      "season": "2006-04",
+      "anilistId": 918,
+      "bangumiId": 247,
+      "releaseYear": 2006,
+      "themeId": 2467,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/gintama"
+    }
+  ],
+  "2010-10": [
+    {
+      "title": "Theme for Panty & Stocking",
+      "titleCN": "Theme for Panty & Stocking",
+      "anime": "Panty & Stocking with Garterbelt",
+      "animeCN": "吊带袜天使",
+      "animeNative": "Panty & Stocking with Garterbelt",
+      "artist": "Hoshina Anniversary",
+      "artistAliases": [
+        "Hoshina Anniversary"
+      ],
+      "type": "OP",
+      "season": "2010-10",
+      "anilistId": 8795,
+      "bangumiId": 8402,
+      "releaseYear": 2010,
+      "themeId": 3650,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/panty_stocking_with_garterbelt"
+    },
+    {
+      "title": "Imouto Please!",
+      "titleCN": "Imouto Please!",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3634,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Horaizumu",
+      "titleCN": "Horaizumu",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3636,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Shiroi Kokoro",
+      "titleCN": "Shiroi Kokoro",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Saori Hayami",
+      "artistAliases": [
+        "Saori Hayami"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3637,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Orange",
+      "titleCN": "Orange",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3638,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Maegami☆",
+      "titleCN": "Maegami☆",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Satomi Satou",
+      "artistAliases": [
+        "Satomi Satou"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3639,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Masquerade!",
+      "titleCN": "Masquerade!",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Kana Hanazawa",
+      "artistAliases": [
+        "Kana Hanazawa"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3640,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Chameleon Daughter",
+      "titleCN": "Chameleon Daughter",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Hitomi Nabatame",
+      "artistAliases": [
+        "Hitomi Nabatame"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3641,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Suki nanda mon!",
+      "titleCN": "Suki nanda mon!",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3642,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Iie, Tom wa Imouto ni Taishite Seiteki na Koufun wo Oboete imasu",
+      "titleCN": "Iie, Tom wa Imouto ni Taishite Seiteki na Koufun wo Oboete imasu",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3643,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Akihabara☆Dance☆Now!!",
+      "titleCN": "Akihabara☆Dance☆Now!!",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Ayana Taketatsu, Kana Hanazawa, Hitomi Nabatame",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Kana Hanazawa",
+        "Hitomi Nabatame"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3644,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Tadaima.",
+      "titleCN": "Tadaima.",
+      "anime": "Ore no Imouto ga Konnani Kawaii Wake ga Nai",
+      "animeCN": "我的妹妹哪有这么可爱！",
+      "animeNative": "俺の妹がこんなに可愛いわけがない",
+      "artist": "Ayana Taketatsu",
+      "artistAliases": [
+        "Ayana Taketatsu"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8769,
+      "bangumiId": 5436,
+      "releaseYear": 2010,
+      "themeId": 3645,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/ore_no_imouto_ga_konnani_kawaii_wake_ga_nai"
+    },
+    {
+      "title": "Hiyoku no Hane",
+      "titleCN": "Hiyoku no Hane",
+      "anime": "Yosuga no Sora: In Solitude, Where We Are Least Alone.",
+      "animeCN": "缘之空",
+      "animeNative": "ヨスガノソラ",
+      "artist": "eufonius",
+      "artistAliases": [
+        "eufonius"
+      ],
+      "type": "OP",
+      "season": "2010-10",
+      "anilistId": 8861,
+      "bangumiId": 7157,
+      "releaseYear": 2010,
+      "themeId": 3701,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yosuga_no_sora_in_solitude_where_we_are_least_alone"
+    },
+    {
+      "title": "Pinky Jones",
+      "titleCN": "Pinky Jones",
+      "anime": "Yosuga no Sora: In Solitude, Where We Are Least Alone.",
+      "animeCN": "缘之空",
+      "animeNative": "ヨスガノソラ",
+      "artist": "Momoiro Clover Z",
+      "artistAliases": [
+        "Momoiro Clover Z"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8861,
+      "bangumiId": 7157,
+      "releaseYear": 2010,
+      "themeId": 3703,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/yosuga_no_sora_in_solitude_where_we_are_least_alone"
+    },
+    {
+      "title": "No buts!",
+      "titleCN": "No buts!",
+      "anime": "Toaru Majutsu no Index II",
+      "animeCN": "魔法禁书目录 第二季",
+      "animeNative": "とある魔術の禁書目録II",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "OP",
+      "season": "2010-10",
+      "anilistId": 8937,
+      "bangumiId": 7843,
+      "releaseYear": 2010,
+      "themeId": 3695,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_ii"
+    },
+    {
+      "title": "See visionS",
+      "titleCN": "See visionS",
+      "anime": "Toaru Majutsu no Index II",
+      "animeCN": "魔法禁书目录 第二季",
+      "animeNative": "とある魔術の禁書目録II",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "OP",
+      "season": "2010-10",
+      "anilistId": 8937,
+      "bangumiId": 7843,
+      "releaseYear": 2010,
+      "themeId": 3696,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_ii"
+    },
+    {
+      "title": "Magic8world",
+      "titleCN": "Magic8world",
+      "anime": "Toaru Majutsu no Index II",
+      "animeCN": "魔法禁书目录 第二季",
+      "animeNative": "とある魔術の禁書目録II",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8937,
+      "bangumiId": 7843,
+      "releaseYear": 2010,
+      "themeId": 3697,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_ii"
+    },
+    {
+      "title": "Memories Last",
+      "titleCN": "Memories Last",
+      "anime": "Toaru Majutsu no Index II",
+      "animeCN": "魔法禁书目录 第二季",
+      "animeNative": "とある魔術の禁書目録II",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8937,
+      "bangumiId": 7843,
+      "releaseYear": 2010,
+      "themeId": 3698,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/toaru_majutsu_no_index_ii"
+    },
+    {
+      "title": "Koi no Shirushi feat. Ayumi Takahara",
+      "titleCN": "Koi no Shirushi feat. Ayumi Takahara",
+      "anime": "Kami nomi zo Shiru Sekai",
+      "animeCN": "只有神知道的世界",
+      "animeNative": "神のみぞ知るセカイ",
+      "artist": "Ayana Taketatsu, Kanae Itou, Nao Touyama",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Kanae Itou",
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8525,
+      "bangumiId": 5976,
+      "releaseYear": 2010,
+      "themeId": 3614,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai"
+    },
+    {
+      "title": "Koi no Shirushi feat. Mio Aoyama",
+      "titleCN": "Koi no Shirushi feat. Mio Aoyama",
+      "anime": "Kami nomi zo Shiru Sekai",
+      "animeCN": "只有神知道的世界",
+      "animeNative": "神のみぞ知るセカイ",
+      "artist": "Aoi Yuuki, Ayana Taketatsu, Kanae Itou, Nao Touyama",
+      "artistAliases": [
+        "Aoi Yuuki",
+        "Ayana Taketatsu",
+        "Kanae Itou",
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8525,
+      "bangumiId": 5976,
+      "releaseYear": 2010,
+      "themeId": 3615,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai"
+    },
+    {
+      "title": "Koi no Shirushi from Elsie",
+      "titleCN": "Koi no Shirushi from Elsie",
+      "anime": "Kami nomi zo Shiru Sekai",
+      "animeCN": "只有神知道的世界",
+      "animeNative": "神のみぞ知るセカイ",
+      "artist": "Kanae Itou",
+      "artistAliases": [
+        "Kanae Itou"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8525,
+      "bangumiId": 5976,
+      "releaseYear": 2010,
+      "themeId": 3617,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai"
+    },
+    {
+      "title": "Koi no Shirushi feat. Kanon Nakagawa",
+      "titleCN": "Koi no Shirushi feat. Kanon Nakagawa",
+      "anime": "Kami nomi zo Shiru Sekai",
+      "animeCN": "只有神知道的世界",
+      "animeNative": "神のみぞ知るセカイ",
+      "artist": "Ayana Taketatsu, Kanae Itou, Nao Touyama",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Kanae Itou",
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8525,
+      "bangumiId": 5976,
+      "releaseYear": 2010,
+      "themeId": 3618,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai"
+    },
+    {
+      "title": "Koi no Shirushi feat. Shiori Shiomiya",
+      "titleCN": "Koi no Shirushi feat. Shiori Shiomiya",
+      "anime": "Kami nomi zo Shiru Sekai",
+      "animeCN": "只有神知道的世界",
+      "animeNative": "神のみぞ知るセカイ",
+      "artist": "Ayana Taketatsu, Kana Hanazawa, Kanae Itou, Nao Touyama",
+      "artistAliases": [
+        "Ayana Taketatsu",
+        "Kana Hanazawa",
+        "Kanae Itou",
+        "Nao Touyama"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8525,
+      "bangumiId": 5976,
+      "releaseYear": 2010,
+      "themeId": 3619,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai"
+    },
+    {
+      "title": "Shuuseki Kairo no Yume Tabibito",
+      "titleCN": "Shuuseki Kairo no Yume Tabibito",
+      "anime": "Kami nomi zo Shiru Sekai",
+      "animeCN": "只有神知道的世界",
+      "animeNative": "神のみぞ知るセカイ",
+      "artist": "Oratorio The World God Only Knows, Hiro Shimono",
+      "artistAliases": [
+        "Oratorio The World God Only Knows",
+        "Hiro Shimono"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 8525,
+      "bangumiId": 5976,
+      "releaseYear": 2010,
+      "themeId": 3620,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/kami_nomi_zo_shiru_sekai"
+    },
+    {
+      "title": "Genjitsu to Iu Na no Kaibutsu to Tatakau Mono-tachi",
+      "titleCN": "Genjitsu to Iu Na no Kaibutsu to Tatakau Mono-tachi",
+      "anime": "Bakuman.",
+      "animeCN": "爆漫王。",
+      "animeNative": "バクマン。",
+      "artist": "Yu Takahashi",
+      "artistAliases": [
+        "Yu Takahashi"
+      ],
+      "type": "ED",
+      "season": "2010-10",
+      "anilistId": 7674,
+      "bangumiId": 3428,
+      "releaseYear": 2010,
+      "themeId": 3597,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bakuman"
+    }
+  ],
+  "1999-10": [
+    {
+      "title": "Believe",
+      "titleCN": "Believe",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Folder5",
+      "artistAliases": [
+        "Folder5"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 951,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Hikari E",
+      "titleCN": "ヒカリヘ",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "ザ・ベイビースターズ",
+      "artistAliases": [
+        "ザ・ベイビースターズ"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 952,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Bon Voyage!",
+      "titleCN": "BON VOYAGE!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "BON-BON BLANCO",
+      "artistAliases": [
+        "BON-BON BLANCO"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 953,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Kokoro no Chizu",
+      "titleCN": "ココロのちず",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "BOYSTYLE",
+      "artistAliases": [
+        "BOYSTYLE"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 954,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Brand New World",
+      "titleCN": "BRAND NEW WORLD",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "D-51",
+      "artistAliases": [
+        "D-51"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 955,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Crazy Rainbow",
+      "titleCN": "Crazy Rainbow",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "タッキー&翼",
+      "artistAliases": [
+        "タッキー&翼"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 957,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Jungle P",
+      "titleCN": "Jungle P",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "5050",
+      "artistAliases": [
+        "5050"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 958,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Share the World",
+      "titleCN": "Share The World",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "東方神起",
+      "artistAliases": [
+        "東方神起",
+        "TOHOSHINKI",
+        "TVXQ"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 960,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Kaze wo Sagashite",
+      "titleCN": "風をさがして",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "矢口真里とストローハット",
+      "artistAliases": [
+        "矢口真里とストローハット"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 961,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Fight Together",
+      "titleCN": "Fight Together",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "安室奈美恵",
+      "artistAliases": [
+        "安室奈美恵",
+        "Namie Amuro"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 963,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "We go!",
+      "titleCN": "We go!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Hiroshi Kitadani",
+      "artistAliases": [
+        "Hiroshi Kitadani"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 964,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Hands Up!",
+      "titleCN": "HANDS UP!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "新里宏太",
+      "artistAliases": [
+        "新里宏太"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 965,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Wake up!",
+      "titleCN": "Wake up!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "AAA",
+      "artistAliases": [
+        "AAA"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 966,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Hard Knock Days",
+      "titleCN": "Hard Knock Days",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "GENERATIONS from EXILE TRIBE",
+      "artistAliases": [
+        "GENERATIONS from EXILE TRIBE"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 967,
+      "themeSequence": 18,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "We Can!",
+      "titleCN": "ウィーキャン!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "氣志團ときただにひろし",
+      "artistAliases": [
+        "氣志團ときただにひろし",
+        "Hiroshi Kitadani"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 968,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Hope",
+      "titleCN": "Hope",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "安室奈美恵",
+      "artistAliases": [
+        "安室奈美恵",
+        "Namie Amuro"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 969,
+      "themeSequence": 20,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Super Powers",
+      "titleCN": "Super powers",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "V6",
+      "artistAliases": [
+        "V6"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 970,
+      "themeSequence": 21,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "OVER THE TOP",
+      "titleCN": "OVER THE TOP",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Hiroshi Kitadani",
+      "artistAliases": [
+        "Hiroshi Kitadani"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 971,
+      "themeSequence": 22,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "DREAMIN' ON",
+      "titleCN": "DREAMIN’ ON",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Da-iCE",
+      "artistAliases": [
+        "Da-iCE"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 972,
+      "themeSequence": 23,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "PAINT",
+      "titleCN": "PAINT",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "I Don't Like Mondays.",
+      "artistAliases": [
+        "I Don't Like Mondays."
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 11062,
+      "themeSequence": 24,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Saikou Toutatsuten",
+      "titleCN": "Saikou Toutatsuten",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "SEKAI NO OWARI",
+      "artistAliases": [
+        "SEKAI NO OWARI"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 12465,
+      "themeSequence": 25,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Assu!",
+      "titleCN": "Assu!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Hiroshi Kitadani",
+      "artistAliases": [
+        "Hiroshi Kitadani"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 12680,
+      "themeSequence": 26,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Tenshi to Akuma",
+      "titleCN": "Tenshi to Akuma",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "GRe4N BOYZ",
+      "artistAliases": [
+        "GRe4N BOYZ"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 13589,
+      "themeSequence": 27,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Carmine",
+      "titleCN": "Carmine",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "ELLEGARDEN",
+      "artistAliases": [
+        "ELLEGARDEN"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 13902,
+      "themeSequence": 28,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Luminous",
+      "titleCN": "Luminous",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "AiNA THE END",
+      "artistAliases": [
+        "AiNA THE END"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 14398,
+      "themeSequence": 29,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "memories",
+      "titleCN": "memories",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Maki Ootsuki",
+      "artistAliases": [
+        "Maki Ootsuki"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 973,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "RUN! RUN! RUN!",
+      "titleCN": "RUN! RUN! RUN!",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "大槻真希",
+      "artistAliases": [
+        "大槻真希"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 974,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Watashi ga iru Yo",
+      "titleCN": "私がいるよ",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "TOMATO CUBE",
+      "artistAliases": [
+        "TOMATO CUBE"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 975,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Souchinosuke",
+      "titleCN": "しょうちのすけ",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "推定少女",
+      "artistAliases": [
+        "推定少女"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 976,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "BEFORE DAWN",
+      "titleCN": "BEFORE DAWN",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "AI-SACHI",
+      "artistAliases": [
+        "AI-SACHI"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 977,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "fish",
+      "titleCN": "fish",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "The Kaleidoscope",
+      "artistAliases": [
+        "The Kaleidoscope"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 978,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "GLORY -Kimi ga iru Kara-",
+      "titleCN": "GLORY -君がいるから-",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "上原多香子",
+      "artistAliases": [
+        "上原多香子"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 979,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Shining ray",
+      "titleCN": "Shining ray",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Janne Da Arc",
+      "artistAliases": [
+        "Janne Da Arc"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 980,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Free Will",
+      "titleCN": "Free Will",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Ruppina",
+      "artistAliases": [
+        "Ruppina"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 982,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "FAITH",
+      "titleCN": "FAITH",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Ruppina",
+      "artistAliases": [
+        "Ruppina"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 983,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "A to Z ~One Piece Edition~",
+      "titleCN": "A to Z ～ ONE PIECE Edition ～",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "ZZ",
+      "artistAliases": [
+        "ZZ"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 984,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Tsuki to Taiyou",
+      "titleCN": "月と太陽",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "shela",
+      "artistAliases": [
+        "shela"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 985,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "DREAMSHIP",
+      "titleCN": "DREAMSHIP",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "イクタ☆アイコ",
+      "artistAliases": [
+        "イクタ☆アイコ"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 986,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Mirai Koukai",
+      "titleCN": "未来航海",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "タッキー&翼",
+      "artistAliases": [
+        "タッキー&翼"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 987,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Eternal Pose",
+      "titleCN": "エターナルポーズ",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "エイジアエンジニア",
+      "artistAliases": [
+        "エイジアエンジニア"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 988,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Dear friends",
+      "titleCN": "Dear friends",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "TRIPLANE",
+      "artistAliases": [
+        "TRIPLANE"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 989,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "ADVENTURE WORLD",
+      "titleCN": "ADVENTURE WORLD",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "デリカテッセン",
+      "artistAliases": [
+        "デリカテッセン"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 991,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Raise",
+      "titleCN": "Raise",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Chilli Beans.",
+      "artistAliases": [
+        "Chilli Beans."
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 12445,
+      "themeSequence": 22,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Dear sunrise",
+      "titleCN": "Dear sunrise",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Maki Ootsuki",
+      "artistAliases": [
+        "Maki Ootsuki"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 12681,
+      "themeSequence": 23,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "The 1",
+      "titleCN": "The 1",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "muque",
+      "artistAliases": [
+        "muque"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 13590,
+      "themeSequence": 24,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "PUNKS",
+      "titleCN": "PUNKS",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "CHAMELEON LIME WHOOPIEPIE",
+      "artistAliases": [
+        "CHAMELEON LIME WHOOPIEPIE"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 13903,
+      "themeSequence": 25,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Sono Mirai",
+      "titleCN": "Sono Mirai",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "36km/h",
+      "artistAliases": [
+        "36km/h"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 14399,
+      "themeSequence": 26,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Sekai wa Hitori ja Nakatta",
+      "titleCN": "Sekai wa Hitori ja Nakatta",
+      "anime": "One Piece",
+      "animeCN": "航海王",
+      "animeNative": "ONE PIECE",
+      "artist": "Maki Ootsuki",
+      "artistAliases": [
+        "Maki Ootsuki"
+      ],
+      "type": "ED",
+      "season": "1999-10",
+      "anilistId": 21,
+      "bangumiId": 975,
+      "releaseYear": 1999,
+      "themeId": 14613,
+      "themeSequence": 27,
+      "animethemesUrl": "https://animethemes.moe/anime/one_piece"
+    },
+    {
+      "title": "Blazin' Beat",
+      "titleCN": "Blazin' Beat",
+      "anime": "Initial D Second Stage",
+      "animeCN": "头文字D Second Stage",
+      "animeNative": "頭文字〈イニシャル〉D SECOND STAGE",
+      "artist": "m.o.v.e",
+      "artistAliases": [
+        "m.o.v.e"
+      ],
+      "type": "OP",
+      "season": "1999-10",
+      "anilistId": 186,
+      "bangumiId": 9568,
+      "releaseYear": 1999,
+      "themeId": 769,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/initial_d_second_stage"
+    }
+  ],
+  "2008-04": [
+    {
+      "title": "02~O-Two~",
+      "titleCN": "02~O-Two~",
+      "anime": "Code Geass: Hangyaku no Lelouch R2",
+      "animeCN": "Code Geass 反叛的鲁路修R2",
+      "animeNative": "コードギアス 反逆のルルーシュ R2",
+      "artist": "Orange Range",
+      "artistAliases": [
+        "Orange Range"
+      ],
+      "type": "OP",
+      "season": "2008-04",
+      "anilistId": 2904,
+      "bangumiId": 8,
+      "releaseYear": 2008,
+      "themeId": 3110,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch_r2"
+    },
+    {
+      "title": "WORLD END",
+      "titleCN": "WORLD END",
+      "anime": "Code Geass: Hangyaku no Lelouch R2",
+      "animeCN": "Code Geass 反叛的鲁路修R2",
+      "animeNative": "コードギアス 反逆のルルーシュ R2",
+      "artist": "FLOW",
+      "artistAliases": [
+        "FLOW"
+      ],
+      "type": "OP",
+      "season": "2008-04",
+      "anilistId": 2904,
+      "bangumiId": 8,
+      "releaseYear": 2008,
+      "themeId": 3111,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch_r2"
+    },
+    {
+      "title": "Shiawase Neiro",
+      "titleCN": "Shiawase Neiro",
+      "anime": "Code Geass: Hangyaku no Lelouch R2",
+      "animeCN": "Code Geass 反叛的鲁路修R2",
+      "animeNative": "コードギアス 反逆のルルーシュ R2",
+      "artist": "Orange Range",
+      "artistAliases": [
+        "Orange Range"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 2904,
+      "bangumiId": 8,
+      "releaseYear": 2008,
+      "themeId": 3112,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch_r2"
+    },
+    {
+      "title": "Waga Routashi Aku no Hana",
+      "titleCN": "Waga Routashi Aku no Hana",
+      "anime": "Code Geass: Hangyaku no Lelouch R2",
+      "animeCN": "Code Geass 反叛的鲁路修R2",
+      "animeNative": "コードギアス 反逆のルルーシュ R2",
+      "artist": "ALI PROJECT",
+      "artistAliases": [
+        "ALI PROJECT"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 2904,
+      "bangumiId": 8,
+      "releaseYear": 2008,
+      "themeId": 3113,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/code_geass_hangyaku_no_lelouch_r2"
+    },
+    {
+      "title": "forever we can make it!",
+      "titleCN": "forever we can make it!",
+      "anime": "To LOVE-Ru",
+      "animeCN": "出包王女",
+      "animeNative": "To LOVEる -とらぶる-",
+      "artist": "THYME",
+      "artistAliases": [
+        "THYME"
+      ],
+      "type": "OP",
+      "season": "2008-04",
+      "anilistId": 3455,
+      "bangumiId": 849,
+      "releaseYear": 2008,
+      "themeId": 3179,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/to_love_ru"
+    },
+    {
+      "title": "Triangler",
+      "titleCN": "Triangler",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "OP",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3137,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Seikan Hikou",
+      "titleCN": "Seikan Hikou",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "OP",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3138,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Diamond Crevasse",
+      "titleCN": "Diamond Crevasse",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3141,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Aimo",
+      "titleCN": "Aimo",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3142,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Aimo~Tori no Hito",
+      "titleCN": "Aimo~Tori no Hito",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3143,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Neko Nikki",
+      "titleCN": "Neko Nikki",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3144,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Ai Oboete Imasu Ka (Deculture Edition)",
+      "titleCN": "Ai Oboete Imasu Ka (Deculture Edition)",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3145,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Diamond Crevasse 50/50",
+      "titleCN": "Diamond Crevasse 50/50",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "May'n, Megumi Nakajima",
+      "artistAliases": [
+        "May'n",
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3146,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Northern Cross",
+      "titleCN": "Northern Cross",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3147,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Empty Diamond Crevasse",
+      "titleCN": "Empty Diamond Crevasse",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "May'n",
+      "artistAliases": [
+        "May'n"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3149,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Azure Ether",
+      "titleCN": "Azure Ether",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3150,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Triangler (fight on stage)",
+      "titleCN": "Triangler (fight on stage)",
+      "anime": "Macross F",
+      "animeCN": "超时空要塞Frontier",
+      "animeNative": "マクロスF",
+      "artist": "Megumi Nakajima",
+      "artistAliases": [
+        "Megumi Nakajima"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3572,
+      "bangumiId": 236,
+      "releaseYear": 2008,
+      "themeId": 3151,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/macross_f"
+    },
+    {
+      "title": "Bakusou Yumeuta",
+      "titleCN": "Bakusou Yumeuta",
+      "anime": "Soul Eater",
+      "animeCN": "噬魂师",
+      "animeNative": "ソウルイーター",
+      "artist": "Diggy-MO`",
+      "artistAliases": [
+        "Diggy-MO`"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3588,
+      "bangumiId": 866,
+      "releaseYear": 2008,
+      "themeId": 3167,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/soul_eater"
+    },
+    {
+      "title": "Strength",
+      "titleCN": "Strength",
+      "anime": "Soul Eater",
+      "animeCN": "噬魂师",
+      "animeNative": "ソウルイーター",
+      "artist": "abingdon boys school",
+      "artistAliases": [
+        "abingdon boys school"
+      ],
+      "type": "ED",
+      "season": "2008-04",
+      "anilistId": 3588,
+      "bangumiId": 866,
+      "releaseYear": 2008,
+      "themeId": 3168,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/soul_eater"
+    }
+  ],
+  "2010-01": [
+    {
+      "title": "Complication",
+      "titleCN": "Complication",
+      "anime": "Durarara!!",
+      "animeCN": "无头骑士异闻录",
+      "animeNative": "デュラララ!!",
+      "artist": "ROOKiEZ is PUNK'D",
+      "artistAliases": [
+        "ROOKiEZ is PUNK'D"
+      ],
+      "type": "OP",
+      "season": "2010-01",
+      "anilistId": 6746,
+      "bangumiId": 2463,
+      "releaseYear": 2010,
+      "themeId": 3888,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/durarara"
+    },
+    {
+      "title": "Baka Go Home",
+      "titleCN": "Baka Go Home",
+      "anime": "Baka to Test to Shoukanjuu",
+      "animeCN": "笨蛋，测验，召唤兽",
+      "animeNative": "バカとテストと召喚獣",
+      "artist": "milktub",
+      "artistAliases": [
+        "milktub"
+      ],
+      "type": "ED",
+      "season": "2010-01",
+      "anilistId": 6347,
+      "bangumiId": 3326,
+      "releaseYear": 2010,
+      "themeId": 3878,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/baka_to_test_to_shoukanjuu"
+    },
+    {
+      "title": "Hare Tokidoki Egao",
+      "titleCN": "Hare Tokidoki Egao",
+      "anime": "Baka to Test to Shoukanjuu",
+      "animeCN": "笨蛋，测验，召唤兽",
+      "animeNative": "バカとテストと召喚獣",
+      "artist": "Hitomi Harada, Emiri Katou",
+      "artistAliases": [
+        "Hitomi Harada",
+        "Emiri Katou"
+      ],
+      "type": "ED",
+      "season": "2010-01",
+      "anilistId": 6347,
+      "bangumiId": 3326,
+      "releaseYear": 2010,
+      "themeId": 3879,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/baka_to_test_to_shoukanjuu"
+    }
+  ],
+  "2005-01": [
+    {
+      "title": "Farewell Song",
+      "titleCN": "Farewell Song",
+      "anime": "Air",
+      "animeCN": "AIR",
+      "animeNative": "AIR",
+      "artist": "Lia",
+      "artistAliases": [
+        "Lia"
+      ],
+      "type": "ED",
+      "season": "2005-01",
+      "anilistId": 101,
+      "bangumiId": 234,
+      "releaseYear": 2005,
+      "themeId": 2220,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/air"
+    },
+    {
+      "title": "Kagayaku Kimi e",
+      "titleCN": "Kagayaku Kimi e",
+      "anime": "Mahou Sensei Negima!",
+      "animeCN": "魔法老师涅吉！",
+      "animeNative": "魔法先生 ネギま！",
+      "artist": "Yuu Kobayashi, Mamiko Noto, Ai Nonaka",
+      "artistAliases": [
+        "Yuu Kobayashi",
+        "Mamiko Noto",
+        "Ai Nonaka"
+      ],
+      "type": "ED",
+      "season": "2005-01",
+      "anilistId": 157,
+      "bangumiId": 17119,
+      "releaseYear": 2005,
+      "themeId": 10653,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mahou_sensei_negima"
+    }
+  ],
+  "2008-01": [
+    {
+      "title": "Tabi no Tochuu",
+      "titleCN": "Tabi no Tochuu",
+      "anime": "Ookami to Koushinryou",
+      "animeCN": "狼与香辛料",
+      "animeNative": "狼と香辛料",
+      "artist": "Natsumi Kiyoura",
+      "artistAliases": [
+        "Natsumi Kiyoura"
+      ],
+      "type": "OP",
+      "season": "2008-01",
+      "anilistId": 2966,
+      "bangumiId": 282,
+      "releaseYear": 2008,
+      "themeId": 3229,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ookami_to_koushinryou"
+    },
+    {
+      "title": "Ringo Biyori",
+      "titleCN": "Ringo Biyori",
+      "anime": "Ookami to Koushinryou",
+      "animeCN": "狼与香辛料",
+      "animeNative": "狼と香辛料",
+      "artist": "Rocky Chack",
+      "artistAliases": [
+        "Rocky Chack"
+      ],
+      "type": "ED",
+      "season": "2008-01",
+      "anilistId": 2966,
+      "bangumiId": 282,
+      "releaseYear": 2008,
+      "themeId": 3230,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ookami_to_koushinryou"
+    },
+    {
+      "title": "Sekai no Namida",
+      "titleCN": "Sekai no Namida",
+      "anime": "True Tears",
+      "animeCN": "真实之泪",
+      "animeNative": "true tears",
+      "artist": "Aira Yuuki",
+      "artistAliases": [
+        "Aira Yuuki"
+      ],
+      "type": "ED",
+      "season": "2008-01",
+      "anilistId": 2129,
+      "bangumiId": 309,
+      "releaseYear": 2008,
+      "themeId": 3242,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/true_tears"
+    }
+  ],
+  "2004-04": [
+    {
+      "title": "Battlecry",
+      "titleCN": "Battlecry",
+      "anime": "Samurai Champloo",
+      "animeCN": "混沌武士",
+      "animeNative": "サムライチャンプルー",
+      "artist": "Shing02",
+      "artistAliases": [
+        "Shing02"
+      ],
+      "type": "OP",
+      "season": "2004-04",
+      "anilistId": 205,
+      "bangumiId": 254,
+      "releaseYear": 2004,
+      "themeId": 2021,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/samurai_champloo"
+    },
+    {
+      "title": "Shiki no Uta",
+      "titleCN": "Shiki no Uta",
+      "anime": "Samurai Champloo",
+      "animeCN": "混沌武士",
+      "animeNative": "サムライチャンプルー",
+      "artist": "MINMI",
+      "artistAliases": [
+        "MINMI"
+      ],
+      "type": "ED",
+      "season": "2004-04",
+      "anilistId": 205,
+      "bangumiId": 254,
+      "releaseYear": 2004,
+      "themeId": 2022,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/samurai_champloo"
+    },
+    {
+      "title": "Who's Theme",
+      "titleCN": "Who's Theme",
+      "anime": "Samurai Champloo",
+      "animeCN": "混沌武士",
+      "animeNative": "サムライチャンプルー",
+      "artist": "MINMI",
+      "artistAliases": [
+        "MINMI"
+      ],
+      "type": "ED",
+      "season": "2004-04",
+      "anilistId": 205,
+      "bangumiId": 254,
+      "releaseYear": 2004,
+      "themeId": 2023,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/samurai_champloo"
+    },
+    {
+      "title": "YOU",
+      "titleCN": "YOU",
+      "anime": "Samurai Champloo",
+      "animeCN": "混沌武士",
+      "animeNative": "サムライチャンプルー",
+      "artist": "kazami",
+      "artistAliases": [
+        "kazami"
+      ],
+      "type": "ED",
+      "season": "2004-04",
+      "anilistId": 205,
+      "bangumiId": 254,
+      "releaseYear": 2004,
+      "themeId": 2024,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/samurai_champloo"
+    }
+  ],
+  "1996-01": [
+    {
+      "title": "Girigiri Chop",
+      "titleCN": "Girigiri Chop",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "B'z",
+      "artistAliases": [
+        "B'z"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 622,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Winter Bells",
+      "titleCN": "Winter Bells",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 626,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Kaze no Lalala",
+      "titleCN": "Kaze no Lalala",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 628,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Growing of My heart",
+      "titleCN": "Growing of My heart",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 632,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Shoudou",
+      "titleCN": "Shoudou",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "B'z",
+      "artistAliases": [
+        "B'z"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 633,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Ichibyou goto ni Love for you",
+      "titleCN": "Ichibyou goto ni Love for you",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 639,
+      "themeSequence": 23,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Revive",
+      "titleCN": "Revive",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 641,
+      "themeSequence": 25,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Everlasting Luv",
+      "titleCN": "Everlasting Luv",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Breakerz",
+      "artistAliases": [
+        "Breakerz"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 642,
+      "themeSequence": 26,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "SUMMER TIME GONE",
+      "titleCN": "SUMMER TIME GONE",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 645,
+      "themeSequence": 29,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Don't Wanna Lie",
+      "titleCN": "Don't Wanna Lie",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "B'z",
+      "artistAliases": [
+        "B'z"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 647,
+      "themeSequence": 31,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Miss Mystery",
+      "titleCN": "Miss Mystery",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Breakerz",
+      "artistAliases": [
+        "Breakerz"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 649,
+      "themeSequence": 33,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "TRY AGAIN",
+      "titleCN": "TRY AGAIN",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 651,
+      "themeSequence": 35,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Q&A",
+      "titleCN": "Q&A",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "B'z",
+      "artistAliases": [
+        "B'z"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 652,
+      "themeSequence": 36,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Dynamite",
+      "titleCN": "Dynamite",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 655,
+      "themeSequence": 39,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Barairo no Jinsei",
+      "titleCN": "Barairo no Jinsei",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 660,
+      "themeSequence": 49,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Makka na Lip",
+      "titleCN": "Makka na Lip",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "WANDS",
+      "artistAliases": [
+        "WANDS"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 662,
+      "themeSequence": 51,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "JUST BELIEVE YOU",
+      "titleCN": "JUST BELIEVE YOU",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "all at once",
+      "artistAliases": [
+        "all at once"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 663,
+      "themeSequence": 52,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "YURA YURA",
+      "titleCN": "YURA YURA",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "WANDS",
+      "artistAliases": [
+        "WANDS"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 10751,
+      "themeSequence": 54,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "SLEEPLESS",
+      "titleCN": "SLEEPLESS",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "B'z",
+      "artistAliases": [
+        "B'z"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 11061,
+      "themeSequence": 55,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "SPARKLE",
+      "titleCN": "SPARKLE",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Maki Ohguro",
+      "artistAliases": [
+        "Maki Ohguro"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 11646,
+      "themeSequence": 56,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "RAISE INSIGHT",
+      "titleCN": "RAISE INSIGHT",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "WANDS",
+      "artistAliases": [
+        "WANDS"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 12192,
+      "themeSequence": 57,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Unraveling Love ~Sukoshi no Yuuki~",
+      "titleCN": "Unraveling Love ~Sukoshi no Yuuki~",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 12623,
+      "themeSequence": 58,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "But No Love",
+      "titleCN": "But No Love",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Rainy.",
+      "artistAliases": [
+        "Rainy."
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 13391,
+      "themeSequence": 59,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Poker Face",
+      "titleCN": "Poker Face",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Amyuri",
+      "artistAliases": [
+        "Amyuri"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 14589,
+      "themeSequence": 60,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Heaven Knows",
+      "titleCN": "Heaven Knows",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "B'z",
+      "artistAliases": [
+        "B'z"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 14590,
+      "themeSequence": 61,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Ai no FIRE",
+      "titleCN": "Ai no FIRE",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Leon Niihama",
+      "artistAliases": [
+        "Leon Niihama"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 14692,
+      "themeSequence": 62,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Kimi to Koi no mama de Owarenai Itsumo Yume no mama ja Irarenai",
+      "titleCN": "Kimi to Koi no mama de Owarenai Itsumo Yume no mama ja Irarenai",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 668,
+      "themeSequence": 59,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Sissy Sky",
+      "titleCN": "Sissy Sky",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Airi Miyakawa",
+      "artistAliases": [
+        "Airi Miyakawa"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 669,
+      "themeSequence": 60,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Sukoshizutsu Sukoshizutsu",
+      "titleCN": "Sukoshizutsu Sukoshizutsu",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "SARD UNDERGROUND",
+      "artistAliases": [
+        "SARD UNDERGROUND"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 670,
+      "themeSequence": 61,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Hoshiai",
+      "titleCN": "Hoshiai",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "all at once",
+      "artistAliases": [
+        "all at once"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 671,
+      "themeSequence": 62,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Reboot",
+      "titleCN": "Reboot",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Airi Miyakawa",
+      "artistAliases": [
+        "Airi Miyakawa"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 672,
+      "themeSequence": 63,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Veronica",
+      "titleCN": "Veronica",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 10620,
+      "themeSequence": 64,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "SWEET MOONLIGHT",
+      "titleCN": "SWEET MOONLIGHT",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Breakerz",
+      "artistAliases": [
+        "Breakerz"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 10965,
+      "themeSequence": 65,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Karappo no Kokoro",
+      "titleCN": "Karappo no Kokoro",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "SARD UNDERGROUND",
+      "artistAliases": [
+        "SARD UNDERGROUND"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 11449,
+      "themeSequence": 66,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Playmaker feat. Yudai Ohno (from Da-iCE)",
+      "titleCN": "Playmaker feat. Yudai Ohno (from Da-iCE)",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "all at once, Yudai Ohno",
+      "artistAliases": [
+        "all at once",
+        "Yudai Ohno"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 11773,
+      "themeSequence": 67,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Kuufuku (starring VALSHE)",
+      "titleCN": "Kuufuku (starring VALSHE)",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Konya, Anomachikara",
+      "artistAliases": [
+        "Konya, Anomachikara"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 12166,
+      "themeSequence": 68,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "...and Rescue Me",
+      "titleCN": "...and Rescue Me",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Rainy.",
+      "artistAliases": [
+        "Rainy."
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 12342,
+      "themeSequence": 69,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "YOU & I",
+      "titleCN": "YOU & I",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 13385,
+      "themeSequence": 70,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Yume de Aimashou",
+      "titleCN": "Yume de Aimashou",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "SARD UNDERGROUND",
+      "artistAliases": [
+        "SARD UNDERGROUND"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 13386,
+      "themeSequence": 71,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Shooting star",
+      "titleCN": "Shooting star",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "WANDS",
+      "artistAliases": [
+        "WANDS"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 13441,
+      "themeSequence": 72,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "Fun! Fun! Fun!",
+      "titleCN": "Fun! Fun! Fun!",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Leon Niihama",
+      "artistAliases": [
+        "Leon Niihama"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 14588,
+      "themeSequence": 73,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "TOWA ~Towa ni Kaze no Noru~",
+      "titleCN": "TOWA ~Towa ni Kaze no Noru~",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Mai Kuraki",
+      "artistAliases": [
+        "Mai Kuraki"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 14591,
+      "themeSequence": 74,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "7 DAYS",
+      "titleCN": "7 DAYS",
+      "anime": "Detective Conan",
+      "animeCN": "名侦探柯南",
+      "animeNative": "名探偵コナン",
+      "artist": "Rainy.",
+      "artistAliases": [
+        "Rainy."
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 235,
+      "bangumiId": 899,
+      "releaseYear": 1996,
+      "themeId": 14592,
+      "themeSequence": 75,
+      "animethemesUrl": "https://animethemes.moe/anime/detective_conan"
+    },
+    {
+      "title": "1/2",
+      "titleCN": "1/2",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "Makoto Kawamoto",
+      "artistAliases": [
+        "Makoto Kawamoto"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1049,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "Kimi ni Fureru Dake de",
+      "titleCN": "Kimi ni Fureru Dake de",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "CURIO",
+      "artistAliases": [
+        "CURIO"
+      ],
+      "type": "OP",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1050,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "Tactics",
+      "titleCN": "Tactics",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "THE YELLOW MONKEY",
+      "artistAliases": [
+        "THE YELLOW MONKEY"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1051,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "Namida wa Shitteiru",
+      "titleCN": "Namida wa Shitteiru",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "Mayo Suzukaze",
+      "artistAliases": [
+        "Mayo Suzukaze"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1052,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "HEART OF SWORD ~Yoake Mae~",
+      "titleCN": "HEART OF SWORD ~Yoake Mae~",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "T.M.Revolution",
+      "artistAliases": [
+        "T.M.Revolution"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1053,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "the Fourth Avenue Café",
+      "titleCN": "the Fourth Avenue Café",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "L'Arc~en~Ciel",
+      "artistAliases": [
+        "L'Arc~en~Ciel"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1054,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "It's gonna rain!",
+      "titleCN": "It's gonna rain!",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "BONNIE PINK",
+      "artistAliases": [
+        "BONNIE PINK"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1055,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    },
+    {
+      "title": "Dame!",
+      "titleCN": "Dame!",
+      "anime": "Rurouni Kenshin: Meiji Kenkaku Romantan",
+      "animeCN": "浪客剑心",
+      "animeNative": "るろうに剣心 -明治剣客浪漫譚-",
+      "artist": "You Izumi",
+      "artistAliases": [
+        "You Izumi"
+      ],
+      "type": "ED",
+      "season": "1996-01",
+      "anilistId": 45,
+      "bangumiId": 2712,
+      "releaseYear": 1996,
+      "themeId": 1057,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/rurouni_kenshin_meiji_kenkaku_romantan"
+    }
+  ],
+  "2007-07": [
+    {
+      "title": "Gun's & Roses",
+      "titleCN": "Gun's & Roses",
+      "anime": "Baccano!",
+      "animeCN": "永生之酒",
+      "animeNative": "BACCANO! -バッカーノ!-",
+      "artist": "Paradise Lunch",
+      "artistAliases": [
+        "Paradise Lunch"
+      ],
+      "type": "OP",
+      "season": "2007-07",
+      "anilistId": 2251,
+      "bangumiId": 965,
+      "releaseYear": 2007,
+      "themeId": 2692,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/baccano"
+    },
+    {
+      "title": "Calling",
+      "titleCN": "Calling",
+      "anime": "Baccano!",
+      "animeCN": "永生之酒",
+      "animeNative": "BACCANO! -バッカーノ!-",
+      "artist": "Kaori Oda",
+      "artistAliases": [
+        "Kaori Oda"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2251,
+      "bangumiId": 965,
+      "releaseYear": 2007,
+      "themeId": 2693,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/baccano"
+    },
+    {
+      "title": "Naraku no Hana",
+      "titleCN": "Naraku no Hana",
+      "anime": "Higurashi no Naku Koro ni Kai",
+      "animeCN": "寒蝉鸣泣之时 解",
+      "animeNative": "ひぐらしのなく頃に解",
+      "artist": "Eiko Shimamiya",
+      "artistAliases": [
+        "Eiko Shimamiya"
+      ],
+      "type": "OP",
+      "season": "2007-07",
+      "anilistId": 1889,
+      "bangumiId": 288,
+      "releaseYear": 2007,
+      "themeId": 2701,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/higurashi_no_naku_koro_ni_kai"
+    },
+    {
+      "title": "Usotsuki",
+      "titleCN": "Usotsuki",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "CooRie",
+      "artistAliases": [
+        "CooRie"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2719,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    },
+    {
+      "title": "Ai no kakera",
+      "titleCN": "Ai no kakera",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "Miyuki Hashimoto",
+      "artistAliases": [
+        "Miyuki Hashimoto"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2720,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    },
+    {
+      "title": "Waltz",
+      "titleCN": "Waltz",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "Kanako Itou",
+      "artistAliases": [
+        "Kanako Itou"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2721,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    },
+    {
+      "title": "Kioku no Umi",
+      "titleCN": "Kioku no Umi",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "yozuca*",
+      "artistAliases": [
+        "yozuca*"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2722,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    },
+    {
+      "title": "Look at Me",
+      "titleCN": "Look at Me",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "Yuria",
+      "artistAliases": [
+        "Yuria"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2723,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    },
+    {
+      "title": "Namida no Riyuu",
+      "titleCN": "Namida no Riyuu",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "Minami Kuribayashi",
+      "artistAliases": [
+        "Minami Kuribayashi"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2724,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    },
+    {
+      "title": "Anata ga... Inai",
+      "titleCN": "Anata ga... Inai",
+      "anime": "School Days",
+      "animeCN": "日在校园",
+      "animeNative": "School Days",
+      "artist": "Minami Kuribayashi",
+      "artistAliases": [
+        "Minami Kuribayashi"
+      ],
+      "type": "ED",
+      "season": "2007-07",
+      "anilistId": 2476,
+      "bangumiId": 827,
+      "releaseYear": 2007,
+      "themeId": 2725,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/school_days"
+    }
+  ],
+  "2006-01": [
+    {
+      "title": "disillusion",
+      "titleCN": "disillusion",
+      "anime": "Fate/stay night",
+      "animeCN": "Fate/stay night",
+      "animeNative": "Fate/stay night",
+      "artist": "Sachi Tainaka",
+      "artistAliases": [
+        "Sachi Tainaka"
+      ],
+      "type": "OP",
+      "season": "2006-01",
+      "anilistId": 356,
+      "bangumiId": 290,
+      "releaseYear": 2006,
+      "themeId": 2564,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fatestay_night"
+    },
+    {
+      "title": "Kirameku Namida wa Hoshi ni",
+      "titleCN": "Kirameku Namida wa Hoshi ni",
+      "anime": "Fate/stay night",
+      "animeCN": "Fate/stay night",
+      "animeNative": "Fate/stay night",
+      "artist": "Sachi Tainaka",
+      "artistAliases": [
+        "Sachi Tainaka"
+      ],
+      "type": "OP",
+      "season": "2006-01",
+      "anilistId": 356,
+      "bangumiId": 290,
+      "releaseYear": 2006,
+      "themeId": 2565,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fatestay_night"
+    },
+    {
+      "title": "Kimi to no Ashita",
+      "titleCN": "Kimi to no Ashita",
+      "anime": "Fate/stay night",
+      "animeCN": "Fate/stay night",
+      "animeNative": "Fate/stay night",
+      "artist": "Sachi Tainaka",
+      "artistAliases": [
+        "Sachi Tainaka"
+      ],
+      "type": "ED",
+      "season": "2006-01",
+      "anilistId": 356,
+      "bangumiId": 290,
+      "releaseYear": 2006,
+      "themeId": 2568,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/fatestay_night"
+    }
+  ],
+  "2008-07": [
+    {
+      "title": "Issei no Sei",
+      "titleCN": "Issei no Sei",
+      "anime": "Natsume Yuujinchou",
+      "animeCN": "夏目友人帐",
+      "animeNative": "夏目友人帳",
+      "artist": "Shuhei Kita",
+      "artistAliases": [
+        "Shuhei Kita"
+      ],
+      "type": "OP",
+      "season": "2008-07",
+      "anilistId": 4081,
+      "bangumiId": 259,
+      "releaseYear": 2008,
+      "themeId": 3074,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/natsume_yuujinchou"
+    }
+  ],
+  "2002-10": [
+    {
+      "title": "Lithium Flower",
+      "titleCN": "Lithium Flower",
+      "anime": "Ghost in the Shell: Stand Alone Complex",
+      "animeCN": "攻壳机动队 STAND ALONE COMPLEX",
+      "animeNative": "攻殻機動隊 STAND ALONE COMPLEX",
+      "artist": "Scott Matthew",
+      "artistAliases": [
+        "Scott Matthew"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 467,
+      "bangumiId": 324,
+      "releaseYear": 2002,
+      "themeId": 1438,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ghost_in_the_shell_stand_alone_complex"
+    },
+    {
+      "title": "R★O★C★K★S",
+      "titleCN": "R★O★C★K★S",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "HOUND DOG",
+      "artistAliases": [
+        "HOUND DOG"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1476,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Haruka Kanata",
+      "titleCN": "遥か彼方",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "ASIAN KUNG-FU GENERATION",
+      "artistAliases": [
+        "ASIAN KUNG-FU GENERATION",
+        "Asian Kung-Fu Generation"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1477,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Kanashimi wo Yasashisa ni",
+      "titleCN": "悲しみをやさしさに",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "little by little",
+      "artistAliases": [
+        "little by little"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1478,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "GO!!!",
+      "titleCN": "GO!!!",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "FLOW",
+      "artistAliases": [
+        "FLOW"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1479,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Seishun Kyosokyoku",
+      "titleCN": "青春狂騒曲",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "サンボマスター",
+      "artistAliases": [
+        "サンボマスター"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1480,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "No Boy, No Cry",
+      "titleCN": "ノーボーイ・ノークライ",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "STANCE PUNKS",
+      "artistAliases": [
+        "STANCE PUNKS"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1481,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Namikaze Satellite",
+      "titleCN": "波風サテライト",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "シュノーケル",
+      "artistAliases": [
+        "シュノーケル"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1482,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Re:member",
+      "titleCN": "Re:member",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "FLOW",
+      "artistAliases": [
+        "FLOW"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1483,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "YURA YURA",
+      "titleCN": "ユラユラ",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "Hearts Grow",
+      "artistAliases": [
+        "Hearts Grow"
+      ],
+      "type": "OP",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1484,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Wind",
+      "titleCN": "Wind",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "Akeboshi",
+      "artistAliases": [
+        "Akeboshi"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1485,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Harmonia",
+      "titleCN": "ハルモニア",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "RYTHEM",
+      "artistAliases": [
+        "RYTHEM"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1486,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Viva Rock ~Japanese Side~",
+      "titleCN": "ビバ★ロック ～japanese side～",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "ORANGE RANGE",
+      "artistAliases": [
+        "ORANGE RANGE",
+        "Orange Range"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1487,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "ALIVE",
+      "titleCN": "ALIVE",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "雷鼓",
+      "artistAliases": [
+        "雷鼓"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1488,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Ima made Nando mo",
+      "titleCN": "今まで何度も",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "ザ・マスミサイル",
+      "artistAliases": [
+        "ザ・マスミサイル"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1489,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Ryusei",
+      "titleCN": "流星",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "TiA",
+      "artistAliases": [
+        "TiA"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1490,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Mountain A Go Go Too",
+      "titleCN": "マウンテン・ア・ゴーゴー・ツー",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "キャプテンストライダム",
+      "artistAliases": [
+        "キャプテンストライダム"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1491,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Hajimete Kimi to Shabetta",
+      "titleCN": "はじめて君としゃべった",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "ガガガSP",
+      "artistAliases": [
+        "ガガガSP"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1492,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Nakushita Kotoba",
+      "titleCN": "失くした言葉",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "No Regret Life",
+      "artistAliases": [
+        "No Regret Life"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1493,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Speed",
+      "titleCN": "スピード",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "アナログフィッシュ",
+      "artistAliases": [
+        "アナログフィッシュ"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1494,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Soba ni Iru Kara",
+      "titleCN": "そばにいるから",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "アマドリ",
+      "artistAliases": [
+        "アマドリ"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1495,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Parade",
+      "titleCN": "パレード",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "CHABA",
+      "artistAliases": [
+        "CHABA"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1496,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Yellow Moon",
+      "titleCN": "Yellow moon",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "Akeboshi",
+      "artistAliases": [
+        "Akeboshi"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1497,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Pinocchio",
+      "titleCN": "ピノキオ",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "オレスカバンド",
+      "artistAliases": [
+        "オレスカバンド"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1498,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "Scenario",
+      "titleCN": "シナリオ",
+      "anime": "Naruto",
+      "animeCN": "火影忍者",
+      "animeNative": "NARUTO -ナルト-",
+      "artist": "SABOTEN",
+      "artistAliases": [
+        "SABOTEN"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 20,
+      "bangumiId": 3425,
+      "releaseYear": 2002,
+      "themeId": 1499,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto"
+    },
+    {
+      "title": "FIND THE WAY",
+      "titleCN": "FIND THE WAY",
+      "anime": "Mobile Suit Gundam Seed",
+      "animeCN": "机动战士高达SEED",
+      "animeNative": "機動戦士ガンダムSEED",
+      "artist": "Mika Nakashima",
+      "artistAliases": [
+        "Mika Nakashima"
+      ],
+      "type": "ED",
+      "season": "2002-10",
+      "anilistId": 93,
+      "bangumiId": 1860,
+      "releaseYear": 2002,
+      "themeId": 1468,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/mobile_suit_gundam_seed"
+    }
+  ],
+  "2004-01": [
+    {
+      "title": "Rise",
+      "titleCN": "Rise",
+      "anime": "Ghost in the Shell: Stand Alone Complex 2nd GIG",
+      "animeCN": "攻壳机动队 S.A.C. 2nd GIG",
+      "animeNative": "攻殻機動隊 S.A.C. 2nd GIG",
+      "artist": "Origa",
+      "artistAliases": [
+        "Origa"
+      ],
+      "type": "OP",
+      "season": "2004-01",
+      "anilistId": 801,
+      "bangumiId": 326,
+      "releaseYear": 2004,
+      "themeId": 2043,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/ghost_in_the_shell_stand_alone_complex_2nd_gig"
+    }
+  ],
+  "2010-07": [
+    {
+      "title": "Yamato Nadeshiko Education",
+      "titleCN": "Yamato Nadeshiko Education",
+      "anime": "Seitokai Yakuindomo",
+      "animeCN": "妄想学生会",
+      "animeNative": "生徒会役員共",
+      "artist": "Triple Booking",
+      "artistAliases": [
+        "Triple Booking"
+      ],
+      "type": "OP",
+      "season": "2010-07",
+      "anilistId": 8675,
+      "bangumiId": 5649,
+      "releaseYear": 2010,
+      "themeId": 3764,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seitokai_yakuindomo"
+    },
+    {
+      "title": "Aoi Haru",
+      "titleCN": "Aoi Haru",
+      "anime": "Seitokai Yakuindomo",
+      "animeCN": "妄想学生会",
+      "animeNative": "生徒会役員共",
+      "artist": "angela",
+      "artistAliases": [
+        "angela"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8675,
+      "bangumiId": 5649,
+      "releaseYear": 2010,
+      "themeId": 3765,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/seitokai_yakuindomo"
+    },
+    {
+      "title": "HIGHSCHOOL OF THE DEAD",
+      "titleCN": "HIGHSCHOOL OF THE DEAD",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Kishida Kyoudan & The Akeboshi Rockets",
+      "artistAliases": [
+        "Kishida Kyoudan & The Akeboshi Rockets"
+      ],
+      "type": "OP",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3730,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Kimi to Taiyou ga Shinda hi",
+      "titleCN": "Kimi to Taiyou ga Shinda hi",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3731,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Color Me Dark",
+      "titleCN": "Color Me Dark",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3732,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Return to Destiny",
+      "titleCN": "Return to Destiny",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3733,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Cold Bullet Blues",
+      "titleCN": "Cold Bullet Blues",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3734,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Memories of Days Gone By",
+      "titleCN": "Memories of Days Gone By",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3735,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Under The Honey Shine",
+      "titleCN": "Under The Honey Shine",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3736,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "fuss fuzz",
+      "titleCN": "fuss fuzz",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3737,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "The place of hope",
+      "titleCN": "The place of hope",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3738,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Houseki no Spy",
+      "titleCN": "Houseki no Spy",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3739,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "THE last pain",
+      "titleCN": "THE last pain",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3740,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "Hollow Men",
+      "titleCN": "Hollow Men",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3741,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    },
+    {
+      "title": "The Eternal Song",
+      "titleCN": "The Eternal Song",
+      "anime": "Highschool of the Dead",
+      "animeCN": "学园默示录 HIGHSCHOOL OF THE DEAD",
+      "animeNative": "学園黙示録HIGHSCHOOL OF THE DEAD",
+      "artist": "Maon Kurosaki",
+      "artistAliases": [
+        "Maon Kurosaki"
+      ],
+      "type": "ED",
+      "season": "2010-07",
+      "anilistId": 8074,
+      "bangumiId": 5647,
+      "releaseYear": 2010,
+      "themeId": 3742,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/highschool_of_the_dead"
+    }
+  ],
+  "1998-04": [
+    {
+      "title": "Platinum",
+      "titleCN": "Platinum",
+      "anime": "Cardcaptor Sakura",
+      "animeCN": "魔卡少女樱",
+      "animeNative": "カードキャプターさくら",
+      "artist": "Maaya Sakamoto",
+      "artistAliases": [
+        "Maaya Sakamoto"
+      ],
+      "type": "OP",
+      "season": "1998-04",
+      "anilistId": 232,
+      "bangumiId": 1940,
+      "releaseYear": 1998,
+      "themeId": 554,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/cardcaptor_sakura"
+    },
+    {
+      "title": "Groovy!",
+      "titleCN": "Groovy!",
+      "anime": "Cardcaptor Sakura",
+      "animeCN": "魔卡少女樱",
+      "animeNative": "カードキャプターさくら",
+      "artist": "Koumi Hirose",
+      "artistAliases": [
+        "Koumi Hirose"
+      ],
+      "type": "ED",
+      "season": "1998-04",
+      "anilistId": 232,
+      "bangumiId": 1940,
+      "releaseYear": 1998,
+      "themeId": 555,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/cardcaptor_sakura"
+    },
+    {
+      "title": "Around the World",
+      "titleCN": "Around the World",
+      "anime": "Initial D First Stage",
+      "animeCN": "头文字D",
+      "animeNative": "頭文字D",
+      "artist": "m.o.v.e",
+      "artistAliases": [
+        "m.o.v.e"
+      ],
+      "type": "OP",
+      "season": "1998-04",
+      "anilistId": 185,
+      "bangumiId": 8290,
+      "releaseYear": 1998,
+      "themeId": 765,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/initial_d_first_stage"
+    },
+    {
+      "title": "Break in 2 the Nite",
+      "titleCN": "Break in 2 the Nite",
+      "anime": "Initial D First Stage",
+      "animeCN": "头文字D",
+      "animeNative": "頭文字D",
+      "artist": "m.o.v.e",
+      "artistAliases": [
+        "m.o.v.e"
+      ],
+      "type": "OP",
+      "season": "1998-04",
+      "anilistId": 185,
+      "bangumiId": 8290,
+      "releaseYear": 1998,
+      "themeId": 766,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/initial_d_first_stage"
+    }
+  ],
+  "2006-07": [
+    {
+      "title": "Puzzle",
+      "titleCN": "Puzzle",
+      "anime": "NHK ni Youkoso!",
+      "animeCN": "欢迎加入NHK！",
+      "animeNative": "N・H・Kにようこそ！",
+      "artist": "ROUND TABLE feat. Nino",
+      "artistAliases": [
+        "ROUND TABLE feat. Nino"
+      ],
+      "type": "OP",
+      "season": "2006-07",
+      "anilistId": 1210,
+      "bangumiId": 995,
+      "releaseYear": 2006,
+      "themeId": 2409,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/nhk_ni_youkoso"
+    },
+    {
+      "title": "Puzzle -extra hot mix-",
+      "titleCN": "Puzzle -extra hot mix-",
+      "anime": "NHK ni Youkoso!",
+      "animeCN": "欢迎加入NHK！",
+      "animeNative": "N・H・Kにようこそ！",
+      "artist": "ROUND TABLE feat. Nino",
+      "artistAliases": [
+        "ROUND TABLE feat. Nino"
+      ],
+      "type": "OP",
+      "season": "2006-07",
+      "anilistId": 1210,
+      "bangumiId": 995,
+      "releaseYear": 2006,
+      "themeId": 2410,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nhk_ni_youkoso"
+    },
+    {
+      "title": "Modokashii Sekai no Ue de",
+      "titleCN": "Modokashii Sekai no Ue de",
+      "anime": "NHK ni Youkoso!",
+      "animeCN": "欢迎加入NHK！",
+      "animeNative": "N・H・Kにようこそ！",
+      "artist": "Yui Makino",
+      "artistAliases": [
+        "Yui Makino"
+      ],
+      "type": "ED",
+      "season": "2006-07",
+      "anilistId": 1210,
+      "bangumiId": 995,
+      "releaseYear": 2006,
+      "themeId": 2412,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/nhk_ni_youkoso"
+    },
+    {
+      "title": "First kiss",
+      "titleCN": "First kiss",
+      "anime": "Zero no Tsukaima",
+      "animeCN": "零之使魔",
+      "animeNative": "ゼロの使い魔",
+      "artist": "Ichiko",
+      "artistAliases": [
+        "Ichiko"
+      ],
+      "type": "OP",
+      "season": "2006-07",
+      "anilistId": 1195,
+      "bangumiId": 1880,
+      "releaseYear": 2006,
+      "themeId": 2420,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zero_no_tsukaima"
+    },
+    {
+      "title": "Honto no Kimochi",
+      "titleCN": "Honto no Kimochi",
+      "anime": "Zero no Tsukaima",
+      "animeCN": "零之使魔",
+      "animeNative": "ゼロの使い魔",
+      "artist": "Rie Kugimiya",
+      "artistAliases": [
+        "Rie Kugimiya"
+      ],
+      "type": "ED",
+      "season": "2006-07",
+      "anilistId": 1195,
+      "bangumiId": 1880,
+      "releaseYear": 2006,
+      "themeId": 2421,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/zero_no_tsukaima"
+    }
+  ],
+  "2003-10": [
+    {
+      "title": "Melissa",
+      "titleCN": "Melissa",
+      "anime": "Fullmetal Alchemist",
+      "animeCN": "钢之炼金术师",
+      "animeNative": "鋼の錬金術師",
+      "artist": "Porno Graffitti",
+      "artistAliases": [
+        "Porno Graffitti"
+      ],
+      "type": "OP",
+      "season": "2003-10",
+      "anilistId": 121,
+      "bangumiId": 315,
+      "releaseYear": 2003,
+      "themeId": 1653,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist"
+    },
+    {
+      "title": "Rewrite",
+      "titleCN": "Rewrite",
+      "anime": "Fullmetal Alchemist",
+      "animeCN": "钢之炼金术师",
+      "animeNative": "鋼の錬金術師",
+      "artist": "Asian Kung-Fu Generation",
+      "artistAliases": [
+        "Asian Kung-Fu Generation"
+      ],
+      "type": "OP",
+      "season": "2003-10",
+      "anilistId": 121,
+      "bangumiId": 315,
+      "releaseYear": 2003,
+      "themeId": 1656,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/fullmetal_alchemist"
+    }
+  ],
+  "2005-10": [
+    {
+      "title": "Hishoku no Sora",
+      "titleCN": "Hishoku no Sora",
+      "anime": "Shakugan no Shana",
+      "animeCN": "灼眼的夏娜",
+      "animeNative": "灼眼のシャナ",
+      "artist": "Mami Kawada",
+      "artistAliases": [
+        "Mami Kawada"
+      ],
+      "type": "OP",
+      "season": "2005-10",
+      "anilistId": 355,
+      "bangumiId": 490,
+      "releaseYear": 2005,
+      "themeId": 2104,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana"
+    },
+    {
+      "title": "being",
+      "titleCN": "being",
+      "anime": "Shakugan no Shana",
+      "animeCN": "灼眼的夏娜",
+      "animeNative": "灼眼のシャナ",
+      "artist": "KOTOKO",
+      "artistAliases": [
+        "KOTOKO"
+      ],
+      "type": "OP",
+      "season": "2005-10",
+      "anilistId": 355,
+      "bangumiId": 490,
+      "releaseYear": 2005,
+      "themeId": 2105,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana"
+    },
+    {
+      "title": "Yoake Umare Kuru Shoujo",
+      "titleCN": "Yoake Umare Kuru Shoujo",
+      "anime": "Shakugan no Shana",
+      "animeCN": "灼眼的夏娜",
+      "animeNative": "灼眼のシャナ",
+      "artist": "Youko Takahashi",
+      "artistAliases": [
+        "Youko Takahashi"
+      ],
+      "type": "ED",
+      "season": "2005-10",
+      "anilistId": 355,
+      "bangumiId": 490,
+      "releaseYear": 2005,
+      "themeId": 2106,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana"
+    },
+    {
+      "title": "Aka no Seijaku",
+      "titleCN": "Aka no Seijaku",
+      "anime": "Shakugan no Shana",
+      "animeCN": "灼眼的夏娜",
+      "animeNative": "灼眼のシャナ",
+      "artist": "Yoko Ishida",
+      "artistAliases": [
+        "Yoko Ishida"
+      ],
+      "type": "ED",
+      "season": "2005-10",
+      "anilistId": 355,
+      "bangumiId": 490,
+      "releaseYear": 2005,
+      "themeId": 2107,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/shakugan_no_shana"
+    },
+    {
+      "title": "Undine",
+      "titleCN": "Undine",
+      "anime": "Aria The Animation",
+      "animeCN": "水星领航员",
+      "animeNative": "ARIA The ANIMATION",
+      "artist": "Yui Makino",
+      "artistAliases": [
+        "Yui Makino"
+      ],
+      "type": "OP",
+      "season": "2005-10",
+      "anilistId": 477,
+      "bangumiId": 531,
+      "releaseYear": 2005,
+      "themeId": 2063,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aria_the_animation"
+    },
+    {
+      "title": "Undine -forest mix-",
+      "titleCN": "Undine -forest mix-",
+      "anime": "Aria The Animation",
+      "animeCN": "水星领航员",
+      "animeNative": "ARIA The ANIMATION",
+      "artist": "Yui Makino",
+      "artistAliases": [
+        "Yui Makino"
+      ],
+      "type": "OP",
+      "season": "2005-10",
+      "anilistId": 477,
+      "bangumiId": 531,
+      "releaseYear": 2005,
+      "themeId": 2064,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/aria_the_animation"
+    },
+    {
+      "title": "Rainbow",
+      "titleCN": "Rainbow",
+      "anime": "Aria The Animation",
+      "animeCN": "水星领航员",
+      "animeNative": "ARIA The ANIMATION",
+      "artist": "ROUND TABLE feat. Nino",
+      "artistAliases": [
+        "ROUND TABLE feat. Nino"
+      ],
+      "type": "ED",
+      "season": "2005-10",
+      "anilistId": 477,
+      "bangumiId": 531,
+      "releaseYear": 2005,
+      "themeId": 2065,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/aria_the_animation"
+    },
+    {
+      "title": "Karinui",
+      "titleCN": "Karinui",
+      "anime": "Jigoku Shoujo",
+      "animeCN": "地狱少女",
+      "animeNative": "地獄少女",
+      "artist": "Mamiko Noto",
+      "artistAliases": [
+        "Mamiko Noto"
+      ],
+      "type": "ED",
+      "season": "2005-10",
+      "anilistId": 228,
+      "bangumiId": 1260,
+      "releaseYear": 2005,
+      "themeId": 2085,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/jigoku_shoujo"
+    },
+    {
+      "title": "Spiritual Garden",
+      "titleCN": "Spiritual Garden",
+      "anime": "Mahou Shoujo Lyrical Nanoha A's",
+      "animeCN": "魔法少女奈叶A's",
+      "animeNative": "魔法少女リリカルなのはＡ’ｓ",
+      "artist": "Yukari Tamura",
+      "artistAliases": [
+        "Yukari Tamura"
+      ],
+      "type": "ED",
+      "season": "2005-10",
+      "anilistId": 77,
+      "bangumiId": 1263,
+      "releaseYear": 2005,
+      "themeId": 2089,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/mahou_shoujo_lyrical_nanoha_as"
+    }
+  ],
+  "1997-04": [
+    {
+      "title": "Rinbu - revolution",
+      "titleCN": "Rinbu - revolution",
+      "anime": "Shoujo Kakumei Utena",
+      "animeCN": "少女革命",
+      "animeNative": "少女革命ウテナ",
+      "artist": "Masami Okui",
+      "artistAliases": [
+        "Masami Okui"
+      ],
+      "type": "OP",
+      "season": "1997-04",
+      "anilistId": 440,
+      "bangumiId": 1453,
+      "releaseYear": 1997,
+      "themeId": 1079,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/shoujo_kakumei_utena"
+    },
+    {
+      "title": "Rose & release",
+      "titleCN": "Rose & release",
+      "anime": "Shoujo Kakumei Utena",
+      "animeCN": "少女革命",
+      "animeNative": "少女革命ウテナ",
+      "artist": "Masami Okui",
+      "artistAliases": [
+        "Masami Okui"
+      ],
+      "type": "ED",
+      "season": "1997-04",
+      "anilistId": 440,
+      "bangumiId": 1453,
+      "releaseYear": 1997,
+      "themeId": 1082,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/shoujo_kakumei_utena"
+    },
+    {
+      "title": "Rival!",
+      "titleCN": "Rival!",
+      "anime": "Pokemon",
+      "animeCN": "精灵宝可梦",
+      "animeNative": "ポケットモンスター",
+      "artist": "Rika Matsumoto",
+      "artistAliases": [
+        "Rika Matsumoto"
+      ],
+      "type": "OP",
+      "season": "1997-04",
+      "anilistId": 527,
+      "bangumiId": 3019,
+      "releaseYear": 1997,
+      "themeId": 1018,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/pokemon"
+    },
+    {
+      "title": "OK!",
+      "titleCN": "OK!",
+      "anime": "Pokemon",
+      "animeCN": "精灵宝可梦",
+      "animeNative": "ポケットモンスター",
+      "artist": "Rika Matsumoto",
+      "artistAliases": [
+        "Rika Matsumoto"
+      ],
+      "type": "OP",
+      "season": "1997-04",
+      "anilistId": 527,
+      "bangumiId": 3019,
+      "releaseYear": 1997,
+      "themeId": 1019,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/pokemon"
+    },
+    {
+      "title": "Ready Go!",
+      "titleCN": "Ready Go!",
+      "anime": "Pokemon",
+      "animeCN": "精灵宝可梦",
+      "animeNative": "ポケットモンスター",
+      "artist": "Naomi Tamura",
+      "artistAliases": [
+        "Naomi Tamura"
+      ],
+      "type": "OP",
+      "season": "1997-04",
+      "anilistId": 527,
+      "bangumiId": 3019,
+      "releaseYear": 1997,
+      "themeId": 1021,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/pokemon"
+    },
+    {
+      "title": "Hyakugojuuichi",
+      "titleCN": "Hyakugojuuichi",
+      "anime": "Pokemon",
+      "animeCN": "精灵宝可梦",
+      "animeNative": "ポケットモンスター",
+      "artist": "Unshou Ishizuka",
+      "artistAliases": [
+        "Unshou Ishizuka"
+      ],
+      "type": "ED",
+      "season": "1997-04",
+      "anilistId": 527,
+      "bangumiId": 3019,
+      "releaseYear": 1997,
+      "themeId": 1022,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/pokemon"
+    },
+    {
+      "title": "Type: Wild",
+      "titleCN": "Type: Wild",
+      "anime": "Pokemon",
+      "animeCN": "精灵宝可梦",
+      "animeNative": "ポケットモンスター",
+      "artist": "Rika Matsumoto",
+      "artistAliases": [
+        "Rika Matsumoto"
+      ],
+      "type": "ED",
+      "season": "1997-04",
+      "anilistId": 527,
+      "bangumiId": 3019,
+      "releaseYear": 1997,
+      "themeId": 1026,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/pokemon"
+    },
+    {
+      "title": "Takeshi no Paradise",
+      "titleCN": "Takeshi no Paradise",
+      "anime": "Pokemon",
+      "animeCN": "精灵宝可梦",
+      "animeNative": "ポケットモンスター",
+      "artist": "Yuuji Ueda",
+      "artistAliases": [
+        "Yuuji Ueda"
+      ],
+      "type": "ED",
+      "season": "1997-04",
+      "anilistId": 527,
+      "bangumiId": 3019,
+      "releaseYear": 1997,
+      "themeId": 1030,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/pokemon"
+    }
+  ],
+  "2007-01": [
+    {
+      "title": "Hero's Come Back",
+      "titleCN": "Hero's Come Back!!",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "nobodyknows+",
+      "artistAliases": [
+        "nobodyknows+"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2868,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "distance",
+      "titleCN": "distance",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "LONG SHOT PARTY",
+      "artistAliases": [
+        "LONG SHOT PARTY"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2869,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "CLOSER",
+      "titleCN": "CLOSER",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "井上ジョー",
+      "artistAliases": [
+        "井上ジョー"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2871,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Hotaru no Hikari",
+      "titleCN": "ホタルノヒカリ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "いきものがかり",
+      "artistAliases": [
+        "いきものがかり",
+        "Ikimonogakari"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2872,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Toumei Datta Sekai",
+      "titleCN": "透明だった世界",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "秦基博",
+      "artistAliases": [
+        "秦基博"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2874,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Diver",
+      "titleCN": "Diver",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2875,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "newsong",
+      "titleCN": "newsong",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "tacica",
+      "artistAliases": [
+        "tacica"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2877,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Totsugeki Rock",
+      "titleCN": "突撃ロック",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "ザ・クロマニヨンズ",
+      "artistAliases": [
+        "ザ・クロマニヨンズ"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2878,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Moshimo",
+      "titleCN": "Moshimo",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "ダイスケ",
+      "artistAliases": [
+        "ダイスケ"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2879,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Niwaka Ame Nimo Makezu",
+      "titleCN": "ニワカ雨ニモ負ケズ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2880,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Tsuki no Ookisa",
+      "titleCN": "月の大きさ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "乃木坂46",
+      "artistAliases": [
+        "乃木坂46",
+        "Nogizaka46"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2881,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Guren",
+      "titleCN": "紅蓮",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "DOES",
+      "artistAliases": [
+        "DOES"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2882,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Silhouette",
+      "titleCN": "シルエット",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "KANA-BOON",
+      "artistAliases": [
+        "KANA-BOON"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2883,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Kaze",
+      "titleCN": "風",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "山猿",
+      "artistAliases": [
+        "山猿",
+        "Yamazaru"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2884,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "LINE",
+      "titleCN": "LINE",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "スキマスイッチ",
+      "artistAliases": [
+        "スキマスイッチ",
+        "Sukima Switch"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2885,
+      "themeSequence": 18,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Blood Circulator",
+      "titleCN": "ブラッドサーキュレーター",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "ASIAN KUNG-FU GENERATION",
+      "artistAliases": [
+        "ASIAN KUNG-FU GENERATION",
+        "Asian Kung-Fu Generation"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2886,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Kara no Kokoro",
+      "titleCN": "カラノココロ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "Anly",
+      "artistAliases": [
+        "Anly"
+      ],
+      "type": "OP",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2887,
+      "themeSequence": 20,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Nagareboshi ~Shooting Star~",
+      "titleCN": "流れ星～Shooting Star～",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "HOME MADE 家族",
+      "artistAliases": [
+        "HOME MADE 家族"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2888,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Michi ~ To You All",
+      "titleCN": "道 ～to you all",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "aluto",
+      "artistAliases": [
+        "aluto"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2889,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Kimi Monogatari",
+      "titleCN": "キミモノガタリ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "little by little",
+      "artistAliases": [
+        "little by little"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2890,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Mezamero! Yasei",
+      "titleCN": "目覚めろ!野性",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "MATCHY with QUESTION?",
+      "artistAliases": [
+        "MATCHY with QUESTION?"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2891,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Sunao Na Niji",
+      "titleCN": "素直な虹",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "SURFACE",
+      "artistAliases": [
+        "SURFACE"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2892,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Broken Youth",
+      "titleCN": "Broken Youth",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "NICO Touches the Walls",
+      "artistAliases": [
+        "NICO Touches the Walls"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2893,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Long Kiss Good Bye",
+      "titleCN": "Long Kiss Good Bye",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "HALCALI",
+      "artistAliases": [
+        "HALCALI"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2894,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Bacchikoi!!!",
+      "titleCN": "バッチコイ!!!",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "デブパレード",
+      "artistAliases": [
+        "デブパレード"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2895,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Shinkokyuu",
+      "titleCN": "深呼吸",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "SUPER BEAVER",
+      "artistAliases": [
+        "SUPER BEAVER"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2896,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "My Answer",
+      "titleCN": "My ANSWER",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "SEAMO",
+      "artistAliases": [
+        "SEAMO"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2897,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Omae Dattanda",
+      "titleCN": "おまえだったんだ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "氣志團",
+      "artistAliases": [
+        "氣志團"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2898,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "For You",
+      "titleCN": "For You",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "AZU",
+      "artistAliases": [
+        "AZU"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2899,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Jitensha",
+      "titleCN": "自転車",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "オレスカバンド",
+      "artistAliases": [
+        "オレスカバンド"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2900,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Utakata Hanabi",
+      "titleCN": "うたかた花火",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "supercell",
+      "artistAliases": [
+        "supercell",
+        "Nagi Yanagi"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2901,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "U Can Do It!",
+      "titleCN": "U can do it!",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "DOMINO",
+      "artistAliases": [
+        "DOMINO"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2902,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Mayonaka No Orchestra",
+      "titleCN": "真夜中のオーケストラ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "Aqua Timez",
+      "artistAliases": [
+        "Aqua Timez"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2903,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "FREEDOM",
+      "titleCN": "FREEDOM",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "HOME MADE 家族",
+      "artistAliases": [
+        "HOME MADE 家族"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2904,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Yokubou o Sakebe!!!",
+      "titleCN": "欲望を叫べ!!!!",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "OKAMOTO'S",
+      "artistAliases": [
+        "OKAMOTO'S"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2905,
+      "themeSequence": 18,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Place to Try",
+      "titleCN": "Place to Try",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "TOTALFAT",
+      "artistAliases": [
+        "TOTALFAT"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2906,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "By My Side",
+      "titleCN": "バイマイサイド",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "Hemenway",
+      "artistAliases": [
+        "Hemenway"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2907,
+      "themeSequence": 20,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Cascade",
+      "titleCN": "カスケード",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "UNLIMITS",
+      "artistAliases": [
+        "UNLIMITS"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2908,
+      "themeSequence": 21,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Kono Koe Karashite",
+      "titleCN": "この声枯らして feat. CHEHON",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "AISHA feat. CHEHON",
+      "artistAliases": [
+        "AISHA feat. CHEHON",
+        "AISHA",
+        "CHEHON"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2909,
+      "themeSequence": 22,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Mother",
+      "titleCN": "MOTHER",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "MUCC",
+      "artistAliases": [
+        "MUCC"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2910,
+      "themeSequence": 23,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Sayonara Memory",
+      "titleCN": "さよならメモリー",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "7!!",
+      "artistAliases": [
+        "7!!"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2911,
+      "themeSequence": 24,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "I Can Hear",
+      "titleCN": "I Can Hear",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "DISH//",
+      "artistAliases": [
+        "DISH//"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2912,
+      "themeSequence": 25,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Yume o Daite ~Hajimari no Kurisoroodo~",
+      "titleCN": "夢を抱いて～はじまりのクリスロード～",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "Rake",
+      "artistAliases": [
+        "Rake"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2913,
+      "themeSequence": 26,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Black Night Town",
+      "titleCN": "ブラックナイトタウン",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "近藤晃央",
+      "artistAliases": [
+        "近藤晃央"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2914,
+      "themeSequence": 27,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Niji",
+      "titleCN": "虹",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "真空ホロウ",
+      "artistAliases": [
+        "真空ホロウ"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2915,
+      "themeSequence": 28,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "FLAME",
+      "titleCN": "FLAME",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "DISH//",
+      "artistAliases": [
+        "DISH//"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2916,
+      "themeSequence": 29,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Never Change feat.Lyu:Lyu",
+      "titleCN": "Never Change feat.Lyu:Lyu",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "SHUN feat.Lyu:Lyu",
+      "artistAliases": [
+        "SHUN feat.Lyu:Lyu",
+        "SHUN",
+        "Lyu:Lyu"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2917,
+      "themeSequence": 30,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Dame Dame da",
+      "titleCN": "だめだめだ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "トミタ栞",
+      "artistAliases": [
+        "トミタ栞"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2918,
+      "themeSequence": 31,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Spinning World",
+      "titleCN": "Spinning World",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "ダイアナガーネット",
+      "artistAliases": [
+        "ダイアナガーネット"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2919,
+      "themeSequence": 32,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Kotoba no Iranai Yakusoku",
+      "titleCN": "言葉のいらない約束",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "sana/HoneyWorks",
+      "artistAliases": [
+        "sana/HoneyWorks"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2920,
+      "themeSequence": 33,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Niji no Sora",
+      "titleCN": "虹の空",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "FLOW",
+      "artistAliases": [
+        "FLOW"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2921,
+      "themeSequence": 34,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Trouble Maker",
+      "titleCN": "トラブルメイカー",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "KANIKAPILA",
+      "artistAliases": [
+        "KANIKAPILA"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2922,
+      "themeSequence": 35,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Sonna Kimi, Konna Boku",
+      "titleCN": "そんな君、こんな僕",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "Thinking Dogs",
+      "artistAliases": [
+        "Thinking Dogs"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2923,
+      "themeSequence": 36,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Ao no Lullaby",
+      "titleCN": "青のララバイ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "黒猫チェルシー",
+      "artistAliases": [
+        "黒猫チェルシー"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2924,
+      "themeSequence": 37,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Pino to Ameri",
+      "titleCN": "ピノとアメリ",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "石崎ひゅーい",
+      "artistAliases": [
+        "石崎ひゅーい",
+        "Huwie Ishizaki"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2925,
+      "themeSequence": 38,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Tabidachi no Uta",
+      "titleCN": "旅立ちの唄",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "あゆみくりかまき",
+      "artistAliases": [
+        "あゆみくりかまき"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2926,
+      "themeSequence": 39,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    },
+    {
+      "title": "Zetsu Zetsu",
+      "titleCN": "絶絶",
+      "anime": "Naruto: Shippuuden",
+      "animeCN": "火影忍者疾风传",
+      "animeNative": "NARUTO -ナルト- 疾風伝",
+      "artist": "Swimy",
+      "artistAliases": [
+        "Swimy"
+      ],
+      "type": "ED",
+      "season": "2007-01",
+      "anilistId": 1735,
+      "bangumiId": 2782,
+      "releaseYear": 2007,
+      "themeId": 2927,
+      "themeSequence": 40,
+      "animethemesUrl": "https://animethemes.moe/anime/naruto_shippuuden"
+    }
+  ],
+  "2005-04": [
+    {
+      "title": "Dramatic",
+      "titleCN": "Dramatic",
+      "anime": "Hachimitsu to Clover",
+      "animeCN": "蜂蜜与四叶草",
+      "animeNative": "ハチミツとクローバー",
+      "artist": "YUKI",
+      "artistAliases": [
+        "YUKI"
+      ],
+      "type": "OP",
+      "season": "2005-04",
+      "anilistId": 16,
+      "bangumiId": 847,
+      "releaseYear": 2005,
+      "themeId": 2186,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hachimitsu_to_clover"
+    },
+    {
+      "title": "Waltz",
+      "titleCN": "Waltz",
+      "anime": "Hachimitsu to Clover",
+      "animeCN": "蜂蜜与四叶草",
+      "animeNative": "ハチミツとクローバー",
+      "artist": "Suneohair",
+      "artistAliases": [
+        "Suneohair"
+      ],
+      "type": "ED",
+      "season": "2005-04",
+      "anilistId": 16,
+      "bangumiId": 847,
+      "releaseYear": 2005,
+      "themeId": 2187,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/hachimitsu_to_clover"
+    }
+  ],
+  "1999-04": [
+    {
+      "title": "I wish",
+      "titleCN": "I wish",
+      "anime": "Digimon Adventure",
+      "animeCN": "数码宝贝大冒险",
+      "animeNative": "デジモンアドベンチャー",
+      "artist": "Ai Maeda",
+      "artistAliases": [
+        "Ai Maeda"
+      ],
+      "type": "ED",
+      "season": "1999-04",
+      "anilistId": 552,
+      "bangumiId": 3128,
+      "releaseYear": 1999,
+      "themeId": 674,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/digimon_adventure"
+    },
+    {
+      "title": "keep on",
+      "titleCN": "keep on",
+      "anime": "Digimon Adventure",
+      "animeCN": "数码宝贝大冒险",
+      "animeNative": "デジモンアドベンチャー",
+      "artist": "Ai Maeda",
+      "artistAliases": [
+        "Ai Maeda"
+      ],
+      "type": "ED",
+      "season": "1999-04",
+      "anilistId": 552,
+      "bangumiId": 3128,
+      "releaseYear": 1999,
+      "themeId": 675,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/digimon_adventure"
+    }
+  ],
+  "2004-10": [
+    {
+      "title": "*~Asterisk",
+      "titleCN": "*~Asterisk",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Orange Range",
+      "artistAliases": [
+        "Orange Range"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1790,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "D-tecnolife",
+      "titleCN": "D-tecnolife",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "UVERworld",
+      "artistAliases": [
+        "UVERworld"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1791,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Ichirin no Hana",
+      "titleCN": "Ichirin no Hana",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "HIGH and MIGHTY COLOR",
+      "artistAliases": [
+        "HIGH and MIGHTY COLOR"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1792,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Tonight, Tonight, Tonight",
+      "titleCN": "Tonight, Tonight, Tonight",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "BEAT CRUSADERS",
+      "artistAliases": [
+        "BEAT CRUSADERS"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1793,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "ALONES",
+      "titleCN": "ALONES",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Aqua Timez",
+      "artistAliases": [
+        "Aqua Timez"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1795,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "After Dark",
+      "titleCN": "After Dark",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Asian Kung-Fu Generation",
+      "artistAliases": [
+        "Asian Kung-Fu Generation"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1796,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "CHU-BURA",
+      "titleCN": "CHU-BURA",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "KELUN",
+      "artistAliases": [
+        "KELUN"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1797,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Velonica",
+      "titleCN": "Velonica",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Aqua Timez",
+      "artistAliases": [
+        "Aqua Timez"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1798,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Shoujo S",
+      "titleCN": "Shoujo S",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "SCANDAL",
+      "artistAliases": [
+        "SCANDAL"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1799,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Anima Rossa",
+      "titleCN": "Anima Rossa",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Porno Graffitti",
+      "artistAliases": [
+        "Porno Graffitti"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1800,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "chAngE",
+      "titleCN": "chAngE",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "miwa",
+      "artistAliases": [
+        "miwa"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1801,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Ranbu no Melody",
+      "titleCN": "Ranbu no Melody",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "SID",
+      "artistAliases": [
+        "SID"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1802,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "BLUE",
+      "titleCN": "BLUE",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "ViViD",
+      "artistAliases": [
+        "ViViD"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1803,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "HARUKAZE",
+      "titleCN": "HARUKAZE",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "SCANDAL",
+      "artistAliases": [
+        "SCANDAL"
+      ],
+      "type": "OP",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1804,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Thank You!!",
+      "titleCN": "サンキュー!!",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "HOME MADE 家族",
+      "artistAliases": [
+        "HOME MADE 家族"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1806,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Houkiboshi",
+      "titleCN": "ほうき星",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "ユンナ",
+      "artistAliases": [
+        "ユンナ"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1807,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Happy People",
+      "titleCN": "happypeople",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Skoop On Somebody",
+      "artistAliases": [
+        "Skoop On Somebody"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1808,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Life",
+      "titleCN": "Life",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Yui",
+      "artistAliases": [
+        "Yui"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1809,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "My Pace",
+      "titleCN": "My Pace",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "SunSet Swish",
+      "artistAliases": [
+        "SunSet Swish"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1810,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Hanabi",
+      "titleCN": "Hanabi",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Ikimonogakari",
+      "artistAliases": [
+        "Ikimonogakari"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1811,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "MOVIN!!",
+      "titleCN": "MOVIN!!",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "タカチャ",
+      "artistAliases": [
+        "タカチャ"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1812,
+      "themeSequence": 8,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Baby It's You",
+      "titleCN": "Baby It's You",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "JUNE",
+      "artistAliases": [
+        "JUNE"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1813,
+      "themeSequence": 9,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Sakura Biyori",
+      "titleCN": "桜日和",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "星村麻衣",
+      "artistAliases": [
+        "星村麻衣"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1814,
+      "themeSequence": 10,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Tsumasaki",
+      "titleCN": "爪先",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "オレスカバンド",
+      "artistAliases": [
+        "オレスカバンド"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1815,
+      "themeSequence": 11,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Daidai",
+      "titleCN": "橙",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "チャットモンチー",
+      "artistAliases": [
+        "チャットモンチー"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1816,
+      "themeSequence": 12,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Tane wo Maku Hibi",
+      "titleCN": "種をまく日々",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "中 孝介",
+      "artistAliases": [
+        "中 孝介"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1817,
+      "themeSequence": 13,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Kansha",
+      "titleCN": "感謝。",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "RSP",
+      "artistAliases": [
+        "RSP"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1818,
+      "themeSequence": 14,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Orange",
+      "titleCN": "Orange",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Lil`B",
+      "artistAliases": [
+        "Lil`B"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1819,
+      "themeSequence": 15,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Gallop",
+      "titleCN": "ギャロップ",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "pe'zmoku",
+      "artistAliases": [
+        "pe'zmoku"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1820,
+      "themeSequence": 16,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Hitohira no Hanabira",
+      "titleCN": "Hitohira no Hanabira",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "STEREOPONY",
+      "artistAliases": [
+        "STEREOPONY"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1821,
+      "themeSequence": 17,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Sky Chord ~Otona ni Naru Kimi he~",
+      "titleCN": "Sky chord ～大人になる君へ～",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "辻詩音",
+      "artistAliases": [
+        "辻詩音"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1822,
+      "themeSequence": 18,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Kimi wo Mamotte, Kimi wo Aishite",
+      "titleCN": "Kimi wo Mamotte, Kimi wo Aishite",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Sambomaster",
+      "artistAliases": [
+        "Sambomaster"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1823,
+      "themeSequence": 19,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Mad Surfer",
+      "titleCN": "Mad Surfer",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "浅井健一",
+      "artistAliases": [
+        "浅井健一"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1824,
+      "themeSequence": 20,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Sakurabito",
+      "titleCN": "さくらびと",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "SunSet Swish",
+      "artistAliases": [
+        "SunSet Swish"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1825,
+      "themeSequence": 21,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Tabidatsu Kimi e",
+      "titleCN": "旅立つキミへ",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "RSP",
+      "artistAliases": [
+        "RSP"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1826,
+      "themeSequence": 22,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Stay Beautiful",
+      "titleCN": "Stay Beautiful",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Diggy-MO`",
+      "artistAliases": [
+        "Diggy-MO`"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1827,
+      "themeSequence": 23,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Echoes",
+      "titleCN": "echoes",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "universe",
+      "artistAliases": [
+        "universe"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1828,
+      "themeSequence": 24,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Last Moment",
+      "titleCN": "Last Moment",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "SPYAIR",
+      "artistAliases": [
+        "SPYAIR"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1829,
+      "themeSequence": 25,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Song for...",
+      "titleCN": "Song for...",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "ROOKiEZ is PUNK'D",
+      "artistAliases": [
+        "ROOKiEZ is PUNK'D"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1830,
+      "themeSequence": 26,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Aoi Tori",
+      "titleCN": "アオイトリ",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "fumika",
+      "artistAliases": [
+        "fumika"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1831,
+      "themeSequence": 27,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Haruka Kanata",
+      "titleCN": "ハルカカナタ",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "UNLIMITS",
+      "artistAliases": [
+        "UNLIMITS"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1832,
+      "themeSequence": 28,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Re:pray",
+      "titleCN": "Re:pray",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Aimer",
+      "artistAliases": [
+        "Aimer"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1833,
+      "themeSequence": 29,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    },
+    {
+      "title": "Mask",
+      "titleCN": "Mask",
+      "anime": "BLEACH",
+      "animeCN": "死神",
+      "animeNative": "BLEACH",
+      "artist": "Aqua Timez",
+      "artistAliases": [
+        "Aqua Timez"
+      ],
+      "type": "ED",
+      "season": "2004-10",
+      "anilistId": 269,
+      "bangumiId": 1600,
+      "releaseYear": 2004,
+      "themeId": 1834,
+      "themeSequence": 30,
+      "animethemesUrl": "https://animethemes.moe/anime/bleach"
+    }
+  ],
+  "2000-10": [
+    {
+      "title": "Owarinai Yume",
+      "titleCN": "Owarinai Yume",
+      "anime": "InuYasha",
+      "animeCN": "犬夜叉",
+      "animeNative": "犬夜叉",
+      "artist": "Aikawa Nanase",
+      "artistAliases": [
+        "Aikawa Nanase"
+      ],
+      "type": "OP",
+      "season": "2000-10",
+      "anilistId": 249,
+      "bangumiId": 2784,
+      "releaseYear": 2000,
+      "themeId": 1186,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/inuyasha"
+    },
+    {
+      "title": "Angelus",
+      "titleCN": "Angelus",
+      "anime": "InuYasha",
+      "animeCN": "犬夜叉",
+      "animeNative": "犬夜叉",
+      "artist": "Hitomi Shimatani",
+      "artistAliases": [
+        "Hitomi Shimatani"
+      ],
+      "type": "OP",
+      "season": "2000-10",
+      "anilistId": 249,
+      "bangumiId": 2784,
+      "releaseYear": 2000,
+      "themeId": 1189,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/inuyasha"
+    },
+    {
+      "title": "Fukai Mori",
+      "titleCN": "Fukai Mori",
+      "anime": "InuYasha",
+      "animeCN": "犬夜叉",
+      "animeNative": "犬夜叉",
+      "artist": "Do As Infinity",
+      "artistAliases": [
+        "Do As Infinity"
+      ],
+      "type": "ED",
+      "season": "2000-10",
+      "anilistId": 249,
+      "bangumiId": 2784,
+      "releaseYear": 2000,
+      "themeId": 1191,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/inuyasha"
+    },
+    {
+      "title": "Every Heart - Minna no Kimochi",
+      "titleCN": "Every Heart - Minna no Kimochi",
+      "anime": "InuYasha",
+      "animeCN": "犬夜叉",
+      "animeNative": "犬夜叉",
+      "artist": "BoA",
+      "artistAliases": [
+        "BoA"
+      ],
+      "type": "ED",
+      "season": "2000-10",
+      "anilistId": 249,
+      "bangumiId": 2784,
+      "releaseYear": 2000,
+      "themeId": 1193,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/inuyasha"
+    },
+    {
+      "title": "Shinjitsu no Uta",
+      "titleCN": "Shinjitsu no Uta",
+      "anime": "InuYasha",
+      "animeCN": "犬夜叉",
+      "animeNative": "犬夜叉",
+      "artist": "Do As Infinity",
+      "artistAliases": [
+        "Do As Infinity"
+      ],
+      "type": "ED",
+      "season": "2000-10",
+      "anilistId": 249,
+      "bangumiId": 2784,
+      "releaseYear": 2000,
+      "themeId": 1194,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/inuyasha"
+    }
+  ],
+  "1986-10": [
+    {
+      "title": "Saint Shinwa",
+      "titleCN": "Saint Shinwa",
+      "anime": "Saint Seiya",
+      "animeCN": "圣斗士星矢",
+      "animeNative": "聖闘士星矢",
+      "artist": "Hironobu Kageyama",
+      "artistAliases": [
+        "Hironobu Kageyama"
+      ],
+      "type": "OP",
+      "season": "1986-10",
+      "anilistId": 1254,
+      "bangumiId": 4843,
+      "releaseYear": 1986,
+      "themeId": 409,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/saint_seiya"
+    },
+    {
+      "title": "Yume Tabibito",
+      "titleCN": "Yume Tabibito",
+      "anime": "Saint Seiya",
+      "animeCN": "圣斗士星矢",
+      "animeNative": "聖闘士星矢",
+      "artist": "Hironobu Kageyama",
+      "artistAliases": [
+        "Hironobu Kageyama"
+      ],
+      "type": "ED",
+      "season": "1986-10",
+      "anilistId": 1254,
+      "bangumiId": 4843,
+      "releaseYear": 1986,
+      "themeId": 411,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/saint_seiya"
+    }
+  ],
+  "1997-10": [
+    {
+      "title": "Tell Me Why",
+      "titleCN": "Tell Me Why",
+      "anime": "Berserk",
+      "animeCN": "剑风传奇（1997）",
+      "animeNative": "剣風伝奇ベルセルク",
+      "artist": "PENPALS",
+      "artistAliases": [
+        "PENPALS"
+      ],
+      "type": "OP",
+      "season": "1997-10",
+      "anilistId": 33,
+      "bangumiId": 696,
+      "releaseYear": 1997,
+      "themeId": 523,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/berserk"
+    },
+    {
+      "title": "Waiting So Long",
+      "titleCN": "Waiting So Long",
+      "anime": "Berserk",
+      "animeCN": "剑风传奇（1997）",
+      "animeNative": "剣風伝奇ベルセルク",
+      "artist": "Silver Fins",
+      "artistAliases": [
+        "Silver Fins"
+      ],
+      "type": "ED",
+      "season": "1997-10",
+      "anilistId": 33,
+      "bangumiId": 696,
+      "releaseYear": 1997,
+      "themeId": 524,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/berserk"
+    }
+  ],
+  "2000-04": [
+    {
+      "title": "OVERLAP",
+      "titleCN": "OVERLAP",
+      "anime": "Yu☆Gi☆Oh! Duel Monsters",
+      "animeCN": "游戏王 怪兽之决斗",
+      "animeNative": "遊☆戯☆王　デュエルモンスターズ",
+      "artist": "Kimeru",
+      "artistAliases": [
+        "Kimeru"
+      ],
+      "type": "OP",
+      "season": "2000-04",
+      "anilistId": 481,
+      "bangumiId": 6390,
+      "releaseYear": 2000,
+      "themeId": 1235,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/yugioh_duel_monsters"
+    },
+    {
+      "title": "Genki no Shower",
+      "titleCN": "Genki no Shower",
+      "anime": "Yu☆Gi☆Oh! Duel Monsters",
+      "animeCN": "游戏王 怪兽之决斗",
+      "animeNative": "遊☆戯☆王　デュエルモンスターズ",
+      "artist": "Aki Maeda",
+      "artistAliases": [
+        "Aki Maeda"
+      ],
+      "type": "ED",
+      "season": "2000-04",
+      "anilistId": 481,
+      "bangumiId": 6390,
+      "releaseYear": 2000,
+      "themeId": 1236,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/yugioh_duel_monsters"
+    },
+    {
+      "title": "Ano Hi no Gogo",
+      "titleCN": "Ano Hi no Gogo",
+      "anime": "Yu☆Gi☆Oh! Duel Monsters",
+      "animeCN": "游戏王 怪兽之决斗",
+      "animeNative": "遊☆戯☆王　デュエルモンスターズ",
+      "artist": "Masami Okui",
+      "artistAliases": [
+        "Masami Okui"
+      ],
+      "type": "ED",
+      "season": "2000-04",
+      "anilistId": 481,
+      "bangumiId": 6390,
+      "releaseYear": 2000,
+      "themeId": 1237,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/yugioh_duel_monsters"
+    }
+  ],
+  "2001-10": [
+    {
+      "title": "Make You Free",
+      "titleCN": "Make You Free",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Kimeru",
+      "artistAliases": [
+        "Kimeru"
+      ],
+      "type": "OP",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1296,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "Shining",
+      "titleCN": "Shining",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Yuhki Shirai",
+      "artistAliases": [
+        "Yuhki Shirai"
+      ],
+      "type": "OP",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1299,
+      "themeSequence": 6,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "Paradise",
+      "titleCN": "Paradise",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Yuhki Shirai",
+      "artistAliases": [
+        "Yuhki Shirai"
+      ],
+      "type": "OP",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1300,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "You got game?",
+      "titleCN": "You got game?",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Kimeru",
+      "artistAliases": [
+        "Kimeru"
+      ],
+      "type": "ED",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1302,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "KEEP YOUR STYLE",
+      "titleCN": "KEEP YOUR STYLE",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Masataka Fujishige",
+      "artistAliases": [
+        "Masataka Fujishige"
+      ],
+      "type": "ED",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1303,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "walk on",
+      "titleCN": "walk on",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Masataka Fujishige, Yasushi Ishii",
+      "artistAliases": [
+        "Masataka Fujishige",
+        "Yasushi Ishii"
+      ],
+      "type": "ED",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1304,
+      "themeSequence": 3,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "WHITE LINE",
+      "titleCN": "WHITE LINE",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Aozu",
+      "artistAliases": [
+        "Aozu"
+      ],
+      "type": "ED",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1305,
+      "themeSequence": 4,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "Kaze no Tabibito",
+      "titleCN": "Kaze no Tabibito",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Yasushi Ishii",
+      "artistAliases": [
+        "Yasushi Ishii"
+      ],
+      "type": "ED",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1306,
+      "themeSequence": 5,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    },
+    {
+      "title": "Wonderful Days",
+      "titleCN": "Wonderful Days",
+      "anime": "Tennis no Ouji-sama",
+      "animeCN": "网球王子",
+      "animeNative": "テニスの王子様",
+      "artist": "Junichi Suwabe, Shoutarou Morikubo",
+      "artistAliases": [
+        "Junichi Suwabe",
+        "Shoutarou Morikubo"
+      ],
+      "type": "ED",
+      "season": "2001-10",
+      "anilistId": 22,
+      "bangumiId": 1939,
+      "releaseYear": 2001,
+      "themeId": 1308,
+      "themeSequence": 7,
+      "animethemesUrl": "https://animethemes.moe/anime/tennis_no_ouji_sama"
+    }
+  ],
+  "2001-07": [
+    {
+      "title": "Chiisana Inori",
+      "titleCN": "Chiisana Inori",
+      "anime": "Fruits Basket",
+      "animeCN": "水果篮子",
+      "animeNative": "フルーツバスケット",
+      "artist": "Ritsuko Okazaki",
+      "artistAliases": [
+        "Ritsuko Okazaki"
+      ],
+      "type": "ED",
+      "season": "2001-07",
+      "anilistId": 120,
+      "bangumiId": 880,
+      "releaseYear": 2001,
+      "themeId": 1313,
+      "themeSequence": 1,
+      "animethemesUrl": "https://animethemes.moe/anime/fruits_basket"
+    },
+    {
+      "title": "Serenade",
+      "titleCN": "Serenade",
+      "anime": "Fruits Basket",
+      "animeCN": "水果篮子",
+      "animeNative": "フルーツバスケット",
+      "artist": "Ritsuko Okazaki",
+      "artistAliases": [
+        "Ritsuko Okazaki"
+      ],
+      "type": "ED",
+      "season": "2001-07",
+      "anilistId": 120,
+      "bangumiId": 880,
+      "releaseYear": 2001,
+      "themeId": 1314,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/fruits_basket"
+    }
+  ],
+  "1999-07": [
+    {
+      "title": "Hitori no Yoru",
+      "titleCN": "Hitori no Yoru",
+      "anime": "Great Teacher Onizuka",
+      "animeCN": "麻辣教师GTO",
+      "animeNative": "GTO",
+      "artist": "Porno Graffitti",
+      "artistAliases": [
+        "Porno Graffitti"
+      ],
+      "type": "OP",
+      "season": "1999-07",
+      "anilistId": 245,
+      "bangumiId": 2045,
+      "releaseYear": 1999,
+      "themeId": 728,
+      "themeSequence": 2,
+      "animethemesUrl": "https://animethemes.moe/anime/great_teacher_onizuka"
     }
   ]
 };

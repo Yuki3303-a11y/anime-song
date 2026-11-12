@@ -2,7 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { buildQuarterCatalog, sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, mixForAddedSong } from '../library-navigation.mjs';
+import { buildQuarterCatalog, sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, mixForAddedSong, sortAnimeByHeat } from '../library-navigation.mjs';
+
+test('historical browsing follows Bangumi heat while retaining unranked works', () => {
+  const groups = [90, 3, 1, 91, 2].map(bangumiId => ({ song: { bangumiId } }));
+  assert.deepEqual(sortAnimeByHeat(groups, [1, 2, 3]).map(group => group.song.bangumiId), [1, 2, 3, 90, 91]);
+  assert.deepEqual(groups.map(group => group.song.bangumiId), [90, 3, 1, 91, 2]);
+  assert.deepEqual(sortAnimeByHeat(groups), groups);
+});
 
 test('all six source meanings map to an intuitive group and back', () => {
   for (const source of [null, 'builtin', 'legacy', 'custom', 'season:2026-04', 'season:2026-07']) {

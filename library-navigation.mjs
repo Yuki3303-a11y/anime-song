@@ -54,6 +54,12 @@ export function groupLibrarySongs(songs, getAnimeKey) {
     return [...groups.values()];
 }
 
+export function sortAnimeByHeat(groups, rankedBangumiIds = []) {
+    const positions = new Map(rankedBangumiIds.map((id, index) => [Number(id), index]));
+    const rank = group => positions.get(Number(group.song?.bangumiId)) ?? Number.MAX_SAFE_INTEGER;
+    return [...groups].sort((a, b) => rank(a) - rank(b));
+}
+
 export function selectMixedSongs({ legacy, seasons, imported, watchedKeys, animeKey, trackKey, selectedKeys = [], mix }) {
     const watched = new Set(watchedKeys);
     const chosenSeasons = new Set(mix.seasons || []);

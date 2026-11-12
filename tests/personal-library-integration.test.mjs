@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { animeKey, trackKey, filterWatchedSongs } from '../library-tools.mjs';
-import { buildQuarterCatalog, groupLibrarySongs, searchLibraryTracks, selectMixedSongs } from '../library-navigation.mjs';
+import { buildQuarterCatalog, groupLibrarySongs, searchLibraryTracks, selectMixedSongs, sortAnimeByHeat } from '../library-navigation.mjs';
 import { uniqueChallengePool } from '../audio-selection.mjs';
 
 const app = fs.readFileSync(fileURLToPath(new URL('../app.js', import.meta.url)), 'utf8').replace(/\r\n/g, '\n');
@@ -23,6 +23,7 @@ test('historical quarter browser shows years, all four months and every theme', 
   let groups;
   const context = {
     QUARTER_CATALOG: catalog, publishedSeasons: Object.keys(catalog).sort().reverse(), selectedLibrarySeason: '1995-10', selectedLibraryYear: '1995',
+    HISTORICAL_ANIME_RANKS: {}, sortAnimeByHeat,
     $: element, document: { querySelector: () => startButton }, groupLibrarySongs, searchLibraryTracks, animeKey, trackKey,
     filterWatchedSongs, uniqueChallengePool, filterState: { types: new Set(), watchedOnly: false }, watchedAnimeKeys: [], audioChecks: [],
     seasonLabel: key => key, renderLibraryCoverGrid: (_id, values) => { groups = values; },
