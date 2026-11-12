@@ -1,6 +1,6 @@
 # 萌豚挑战 · 二次元听歌猜番剧
 
-听一段约 30 秒的动画歌曲，猜番剧、歌名或歌手。混合模式会逐题切换题型。统一曲库目前有 2345 个曲目条目，按 105 个非空季度归档。原有曲库经人工筛选后保留 315 首，并补充 2020 年 1 月至 2026 年 10 月全部 28 个季度的 Bangumi 热度候选。音频由第三方平台实时提供。
+听一段约 30 秒的动画歌曲，猜番剧、歌名或歌手。混合模式会逐题切换题型。统一曲库目前有 2775 个曲目条目，按 107 个非空季度归档。原有曲库经人工筛选后保留 315 首；2011—2019 年各约60首，2010 年及以前合计103首，2020 年1月至2026 年10月全部28个季度继续保留。音频由第三方平台实时提供。
 
 ## 本地运行
 
@@ -35,7 +35,8 @@ node bili-proxy.mjs
 | `personal-backup.mjs` | 个人备份格式、白名单校验、歌曲导入元数据与存储恢复 |
 | `library-navigation.mjs` | 合并原有及季度数据为统一目录、来源组合、搜索、分组及试听会话标记 |
 | `library-tools.mjs`、`catalog-key-history.mjs` | 曲目与番剧身份、旧曲库记录兼容、追番过滤、本地错题、音源状态与反馈 |
-| `songs.js`、`seasonal-pools.js`、`seasonal-covers.js` | 原有歌曲、已发布季度曲库和封面地址 |
+| `songs.js`、`seasonal-pools.js` | 原有歌曲与已发布季度曲库 |
+| `seasonal-covers.js`、`legacy-covers.js` | 精确作品 ID 对应的季度及原有232部番剧静态封面，避免逐卡请求限流 |
 | `index_75323.json` | Bangumi 目录 75323 的本地索引 |
 | `bili-proxy.mjs`、`api/search.js` | Node.js 本地代理、Vercel B 站代理 |
 | `scripts/`、`candidates/` | 季度发现、更新、校验和审计，以及候选与核查记录 |
@@ -47,7 +48,7 @@ node bili-proxy.mjs
 
 自带曲库补录了 [小小佐仓千代的 2026 年动漫歌曲 Top 150](https://www.bilibili.com/video/BV1bHZLBiEQx) 中原来缺少的 27 首。按具体作品和录音版本去重，原有歌曲的索引保留。
 
-历次曲目均保留。当前历史归档、候选缺口和数量见 [季度归档复核](candidates/season-archive-review.md)。同名不同演唱版本有独立记录，追番、选歌与旧组合设置通过键迁移继续有效。自由组合可将追番、多个季度、Bangumi 导入及单曲选歌取并集。
+除用户确认移除的曲目外，历次歌曲均保留。历史扩充数量、候选缺口和来源见 [2020年前扩充复核](candidates/pre2020-expansion-review.md) 与 [季度归档复核](candidates/season-archive-review.md)。同名不同演唱版本有独立记录，追番、选歌与旧组合设置通过键迁移继续有效。自由组合可将追番、多个季度、Bangumi 导入及单曲选歌取并集。
 
 ## 核心数据流
 

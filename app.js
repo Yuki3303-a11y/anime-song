@@ -1,6 +1,7 @@
-import { SONGS, PK_SONGS } from './songs.js?v=69';
-import { SEASONAL_POOLS } from './seasonal-pools.js?v=44';
-import { SEASONAL_COVERS } from './seasonal-covers.js?v=4';
+import { SONGS, PK_SONGS } from './songs.js?v=70';
+import { SEASONAL_POOLS } from './seasonal-pools.js?v=45';
+import { SEASONAL_COVERS } from './seasonal-covers.js?v=5';
+import { LEGACY_COVERS } from './legacy-covers.js?v=1';
 import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=3';
 import { buildQuarterCatalog, sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=7';
 import { animeKey, trackKey, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=4';
@@ -2255,7 +2256,7 @@ function showAnimeDetail(song, { auto = false } = {}) {
     `;
 
     // Reset cover state - show placeholder
-    const localCover = song.anilistId ? SEASONAL_COVERS[song.anilistId] : '';
+    const localCover = staticAnimeCover(song);
     cover.src = localCover || '';
     cover.style.display = localCover ? 'block' : 'none';
     let placeholder = coverWrap.querySelector('.detail-cover-placeholder');
@@ -2276,8 +2277,9 @@ function showAnimeDetail(song, { auto = false } = {}) {
 
     if (!auto || !localCover) fetchAnimeDetail(song.anime).then(detail => {
         if (!detail || requestId !== detailRequestId || !modal.classList.contains('show')) return;
-        if (detail.image) {
-            cover.src = detail.image;
+        const detailCover = localCover || detail.image;
+        if (detailCover) {
+            cover.src = detailCover;
             cover.style.display = 'block';
             cover.onerror = () => {
                 cover.style.display = 'none';
@@ -2288,7 +2290,7 @@ function showAnimeDetail(song, { auto = false } = {}) {
             const fpCover = $('fpCover');
             const fpFallback = $('fpIconBox')?.querySelector('.fp-cover-fallback');
             if (fpCover && $('fullPlayer')?.style.display !== 'none') {
-                fpCover.src = detail.image;
+                fpCover.src = detailCover;
                 fpCover.style.display = '';
                 if (fpFallback) fpFallback.style.display = 'none';
             }
@@ -4355,8 +4357,10 @@ function libraryCoverCard(anime, showSource) {
             const key = trackKey(song);
             const status = trackPlaybackStatus(song);
             const selected = selectedSongKeys.includes(key);
+            const source = showSource ? libraryTrackSource(song) : '';
+            const showTrackSource = source && source !== (anime.song.season ? seasonLabel(anime.song.season) : '');
             return `<div class="library-cover-track">
-                <div class="library-cover-track-name"><span class="library-track-type">${escapeHTML((song.type || '曲目') + (song.themeSequence > 1 ? song.themeSequence : ''))}</span><strong>${escapeHTML(song.titleCN || song.title)}</strong><small>${escapeHTML(song.artist || '')}</small>${showSource ? `<span class="library-track-source">${escapeHTML(libraryTrackSource(song))}</span>` : ''}<span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>
+                <div class="library-cover-track-name"><div class="library-cover-track-title"><span class="library-track-type">${escapeHTML((song.type || '曲目') + (song.themeSequence > 1 ? song.themeSequence : ''))}</span><strong title="${escapeHTML(song.titleCN || song.title)}">${escapeHTML(song.titleCN || song.title)}</strong></div><div class="library-cover-track-meta"><small title="${escapeHTML(song.artist || '')}">${escapeHTML(song.artist || '')}</small><span class="library-track-status ${status.className}" title="${escapeHTML(status.detail || '')}" data-track-status-key="${escapeHTML(key)}">${escapeHTML(status.label)}</span></div>${showTrackSource ? `<span class="library-track-source">${escapeHTML(source)}</span>` : ''}</div>
                 <div class="library-cover-actions"><button type="button" class="library-mini-btn library-preview-btn" data-action="previewSong" data-song-key="${escapeHTML(key)}" aria-label="试听 ${escapeHTML(song.titleCN || song.title)}">试听</button>
                     <button type="button" class="library-mini-btn library-add-btn${selected ? ' active' : ''}" data-action="toggleSelectedSong" data-song-key="${escapeHTML(key)}" aria-pressed="${selected}" aria-label="${selected ? '移出我的选歌' : '添加到我的选歌'}：${escapeHTML(song.titleCN || song.title)}">${selected ? '✓ 已添加' : '+ 添加'}</button>
                     <button type="button" class="library-mini-btn" data-action="reportSong" data-song-key="${escapeHTML(key)}" aria-label="反馈 ${escapeHTML(song.titleCN || song.title)}">反馈</button></div>
@@ -4398,19 +4402,27 @@ async function loadLibraryCover(poster) {
     const song = findCatalogSong(poster.dataset.coverSongKey);
     if (!song) return;
     const key = animeKey(song);
-    if (!libraryCoverRequests.has(key)) libraryCoverRequests.set(key, findLibraryCover(song));
+    if (!libraryCoverRequests.has(key)) {
+        libraryCoverRequests.set(key, findLibraryCover(song).finally(() => libraryCoverRequests.delete(key)));
+    }
     const url = await libraryCoverRequests.get(key);
     if (!poster.isConnected || !url) return;
     const image = poster.querySelector('img');
     image.onload = () => { poster.classList.add('has-image'); };
-    image.onerror = () => { poster.classList.remove('has-image'); };
+    image.onerror = () => {
+        poster.classList.remove('has-image');
+        libraryCoverCache.delete(key);
+    };
     image.src = url;
+}
+function staticAnimeCover(song) {
+    return /^https:\/\//i.test(song.coverImage || '') ? song.coverImage
+        : SEASONAL_COVERS[song.anilistId] || LEGACY_COVERS[song.anilistId] || '';
 }
 async function findLibraryCover(song) {
     const key = animeKey(song);
     if (libraryCoverCache.has(key)) return libraryCoverCache.get(key);
-    let image = /^https:\/\//i.test(song.coverImage || '') ? song.coverImage : '';
-    if (!image && song.anilistId) image = SEASONAL_COVERS[song.anilistId] || '';
+    let image = staticAnimeCover(song);
     if (!image && song.anilistId) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), ANILIST_TIMEOUT);
@@ -4421,14 +4433,24 @@ async function findLibraryCover(song) {
             if (response.ok) image = (await response.json()).data?.Media?.coverImage?.large || '';
         } catch {} finally { clearTimeout(timer); }
     }
-    if (!image) image = (await searchAniList(song.animeNative || song.anime))?.coverImage?.large || '';
-    if (!image) {
+    if (!image && song.bangumiId) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), BANGUMI_TIMEOUT);
+        try {
+            const response = await fetch(`https://api.bgm.tv/v0/subjects/${Number(song.bangumiId)}`, { signal: controller.signal });
+            if (response.ok) image = (await response.json()).images?.large || '';
+        } catch {} finally { clearTimeout(timer); }
+    }
+    // Known work IDs must never fall through to a fuzzy title match.
+    if (!image && !song.anilistId && !song.bangumiId) image = (await searchAniList(song.animeNative || song.anime))?.coverImage?.large || '';
+    if (!image && !song.anilistId && !song.bangumiId) {
         const matches = await searchBangumi(animeLabel(song));
         const match = pickBestBGMResult(matches, animeLabel(song));
         if (isHighConfidenceMatch(match, animeLabel(song))) image = match.images?.large || '';
     }
     image = /^https:\/\//i.test(image) ? image : '';
-    libraryCoverCache.set(key, image);
+    // Failed lookups are retried when the library is rendered again.
+    if (image) libraryCoverCache.set(key, image);
     return image;
 }
 function renderCurrentLibrary() {

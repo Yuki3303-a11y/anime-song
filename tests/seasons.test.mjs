@@ -6,6 +6,7 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { selectSeasonSongs } from '../scripts/fetch-season.mjs';
 import { filterWatchedSongs } from '../library-tools.mjs';
+import { buildQuarterCatalog } from '../library-navigation.mjs';
 import { challengeTrackKey, uniqueChallengePool } from '../audio-selection.mjs';
 import { ANIME_PREMIERE_YEARS, ANIME_QUESTION_CONTEXT } from '../anime-question-context.mjs';
 
@@ -35,8 +36,10 @@ test('every published seasonal anime has a cached HTTPS cover', () => {
   assert.equal(Object.keys(covers).length, ids.size);
 });
 
-test('every quarter since 2020 contains verified themes without a fixed track count', () => {
-  assert.equal(Object.keys(pools).length, 28);
+test('historical and recent quarters contain verified themes without a fixed track count', () => {
+  for (let year = 2020; year <= 2026; year++) {
+    for (const month of ['01', '04', '07', '10']) assert.ok(pools[`${year}-${month}`]?.length);
+  }
   for (const key of Object.keys(pools)) {
     const songs = pools[key];
     assert.ok(songs.length > 0);
@@ -44,6 +47,26 @@ test('every quarter since 2020 contains verified themes without a fixed track co
     assert.ok(ids.size > 0);
     assert.ok(songs.every(song => ['OP', 'ED'].includes(song.type) && song.artist && song.animethemesUrl));
     assert.equal(new Set(songs.map(song => `${song.anilistId}|${song.type}|${song.title}|${song.artist}`)).size, songs.length);
+  }
+});
+
+test('pre-2020 expansion reaches annual targets with exact work and theme references', async () => {
+  const { SONGS } = await import(`data:text/javascript;base64,${fs.readFileSync(path.join(root, 'songs.js')).toString('base64')}`);
+  const catalog = buildQuarterCatalog(SONGS, pools);
+  const songsForYear = year => uniqueChallengePool(Object.entries(catalog)
+    .filter(([key]) => Number(key.slice(0, 4)) === year).flatMap(([, songs]) => songs));
+  for (let year = 2011; year <= 2019; year++) {
+    assert.ok(songsForYear(year).length >= 55, `${year} has too few songs`);
+    assert.ok(songsForYear(year).length <= 80, `${year} exceeds the reviewed annual range`);
+  }
+  const early = uniqueChallengePool(Object.entries(catalog).filter(([key]) => Number(key.slice(0, 4)) <= 2010).flatMap(([, songs]) => songs));
+  assert.ok(early.length >= 100 && early.length <= 120);
+  for (const [season, songs] of Object.entries(pools).filter(([key]) => Number(key.slice(0, 4)) < 2020)) {
+    for (const song of songs) {
+      assert.equal(song.season, season);
+      assert.ok(song.bangumiId > 0 && song.anilistId > 0 && song.themeId > 0);
+      assert.match(song.animethemesUrl, /^https:\/\/animethemes\.moe\/anime\/[\w-]+$/);
+    }
   }
 });
 
