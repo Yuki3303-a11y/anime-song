@@ -16,6 +16,19 @@ const pools = JSON.parse(poolSource.match(/export const SEASONAL_POOLS = (\{[\s\
 const coverSource = fs.readFileSync(path.join(root, 'seasonal-covers.js'), 'utf8');
 const covers = JSON.parse(coverSource.match(/export const SEASONAL_COVERS = (\{[\s\S]*\});/)[1]);
 
+test('removed classics are absent while Bleach and published PK indices remain intact', async () => {
+  const source = fs.readFileSync(path.join(root, 'songs.js'), 'utf8');
+  const { SONGS, PK_SONGS } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  const removed = new Set(['银河铁道999', '机动战士高达', '机动战士Z高达', '魔神英雄传', '樱桃小丸子', '灌篮高手']);
+  assert.ok([...SONGS, ...Object.values(pools).flat()].every(song => !removed.has(song.animeCN || song.anime)));
+  assert.deepEqual(SONGS.filter(song => song.anime === '死神').map(song => song.title), ['Rolling star', 'Life is Like a Boat']);
+  assert.deepEqual(PK_SONGS.filter(Boolean), SONGS);
+  assert.deepEqual(PK_SONGS.flatMap((song, i) => song ? [] : [i]), [1, 2, 3, 4, 12, 13, 190, 191, 244]);
+  for (const [index, title] of [[5, 'Makafushigi Adventure!'], [14, 'Zankoku na Tenshi no Thesis'], [192, 'Hohoemi no Bakudan'], [245, 'Resuscitated Hope']]) {
+    assert.equal(PK_SONGS[index].title, title);
+  }
+});
+
 test('every published seasonal anime has a cached HTTPS cover', () => {
   const ids = new Set(Object.values(pools).flat().map(song => song.anilistId));
   for (const id of ids) assert.match(covers[id] || '', /^https:\/\//);
@@ -91,8 +104,8 @@ test('single-player filters include old, seasonal and custom pools without chang
   }
   context.filterState.types = new Set(['OP']);
   assert.deepEqual(titles(), []);
-  assert.match(app, /buildPlaylist\(SONGS, 10\)\.map\(s => SONGS\.indexOf\(s\)\)/);
-  assert.match(app, /d\.questions\.map\(i => SONGS\[i\]\)/);
+  assert.match(app, /buildPlaylist\(SONGS, 10\)\.map\(s => PK_SONGS\.indexOf\(s\)\)/);
+  assert.match(app, /d\.questions\.map\(i => Number\.isInteger\(i\) \? PK_SONGS\[i\] : null\)/);
 });
 
 test('seasonal wrong answers come from the active question pool', () => {

@@ -11,28 +11,6 @@
       "premiereDate": "2021-04-11",
       "verifiedTitle": "86－エイティシックス－"
     },
-    "银河铁道999": {
-      "season": "1978-10",
-      "releaseYear": 1978,
-      "anilistId": 1491,
-      "bangumiId": 10392,
-      "source": "https://anilist.co/anime/1491",
-      "confidence": "verified",
-      "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
-      "premiereDate": "1978-09-14",
-      "verifiedTitle": "銀河鉄道９９９"
-    },
-    "机动战士高达": {
-      "season": "1979-04",
-      "releaseYear": 1979,
-      "anilistId": 80,
-      "bangumiId": 50,
-      "source": "https://anilist.co/anime/80",
-      "confidence": "verified",
-      "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
-      "premiereDate": "1979-04-07",
-      "verifiedTitle": "機動戦士ガンダム"
-    },
     "龙珠": {
       "season": "1986-01",
       "releaseYear": 1986,
@@ -87,17 +65,6 @@
       "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
       "premiereDate": "1992-03-07",
       "verifiedTitle": "美少女戦士セーラームーン"
-    },
-    "灌篮高手": {
-      "season": "1993-10",
-      "releaseYear": 1993,
-      "anilistId": 170,
-      "bangumiId": 1608,
-      "source": "https://anilist.co/anime/170",
-      "confidence": "verified",
-      "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
-      "premiereDate": "1993-10-16",
-      "verifiedTitle": "SLAM DUNK"
     },
     "新世纪福音战士": {
       "season": "1995-10",
@@ -1518,28 +1485,6 @@
       "premiereDate": "1984-07-07",
       "verifiedTitle": "超時空要塞マクロス -愛・おぼえていますか-"
     },
-    "机动战士Z高达": {
-      "season": "1985-04",
-      "releaseYear": 1985,
-      "anilistId": 85,
-      "bangumiId": 9622,
-      "source": "https://anilist.co/anime/85",
-      "confidence": "verified",
-      "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
-      "premiereDate": "1985-03-02",
-      "verifiedTitle": "機動戦士Ζガンダム"
-    },
-    "魔神英雄传": {
-      "season": "1988-04",
-      "releaseYear": 1988,
-      "anilistId": 3837,
-      "bangumiId": 1972,
-      "source": "https://anilist.co/anime/3837",
-      "confidence": "verified",
-      "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
-      "premiereDate": "1988-04-15",
-      "verifiedTitle": "魔神英雄伝ワタル"
-    },
     "幽游白书": {
       "season": "1992-10",
       "releaseYear": 1992,
@@ -1968,17 +1913,6 @@
       "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
       "premiereDate": "2017-04-09",
       "verifiedTitle": "エロマンガ先生"
-    },
-    "樱桃小丸子": {
-      "season": "1990-01",
-      "releaseYear": 1990,
-      "anilistId": 951,
-      "bangumiId": 28165,
-      "source": "https://anilist.co/anime/951",
-      "confidence": "verified",
-      "sourceRationale": "AniList season/seasonYear; releaseYear from startDate.year",
-      "premiereDate": "1990-01-07",
-      "verifiedTitle": "ちびまる子ちゃん"
     },
     "GOSICK": {
       "season": "2011-01",

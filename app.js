@@ -1,10 +1,10 @@
-import { SONGS } from './songs.js?v=68';
+import { SONGS, PK_SONGS } from './songs.js?v=69';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=44';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=4';
-import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=2';
+import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-context.mjs?v=3';
 import { buildQuarterCatalog, sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, mixForAddedSong } from './library-navigation.mjs?v=7';
 import { animeKey, trackKey, filterWatchedSongs, putMistake, putAudioCheck, putFeedback, createCatalogHistory } from './library-tools.mjs?v=4';
-import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=1';
+import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=2';
 import { rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=9';
 import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=2';
 import { createAudioPrefetch } from './audio-prefetch.mjs?v=1';
@@ -2645,7 +2645,7 @@ async function pkCreate() {
     if (!navigator.onLine) { notify('呜喵~ 当前没有网络连接呢...请检查一下网络吧'); return; }
     pkBusy = true;
     try {
-        const questions = buildPlaylist(SONGS, 10).map(s => SONGS.indexOf(s));
+        const questions = buildPlaylist(SONGS, 10).map(s => PK_SONGS.indexOf(s));
         let created = false;
         for (let attempt = 0; attempt < 10 && !created; attempt++) {
             const rid = String(Math.floor(1000 + Math.random() * 9000));
@@ -2766,6 +2766,13 @@ function enterRoom(rid) {
             }
         }
         if (d.status === 'playing' && gameState.mode !== 'pk') {
+            const playlist = Array.isArray(d.questions)
+                ? d.questions.map(i => Number.isInteger(i) ? PK_SONGS[i] : null) : [];
+            if (!playlist.length || playlist.some(song => !song)) {
+                notify('房间题库已更新，请重新创建房间');
+                showView('lobby');
+                return;
+            }
             gameState.mode = 'pk';
             gameState.score = 0;
             gameState.opponentScore = 0;
@@ -2775,7 +2782,7 @@ function enterRoom(rid) {
             gameState.correctCount = 0;
             gameState.answerHistory = [];
             gameState.viewingHistory = false;
-            gameState.playlist = d.questions.map(i => SONGS[i]);
+            gameState.playlist = playlist;
             $('singleHeader').classList.add('hidden');
             $('pkHeader').classList.remove('hidden');
             $('songInfo').classList.remove('show');

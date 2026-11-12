@@ -2,14 +2,6 @@ export const SONGS = [
     // ===== 86 =====
     { titleCN: "Avid", title: "Avid", anime: "86 -不存在的战区-", artist: "SawanoHiroyuki[nZk]:mizuki", type: "ED", animeNative: "86-エイティシックス-", artistAliases: ["SawanoHiroyuki[nZk]","mizuki","泽野弘之"] , season: "2021-04", releaseYear: 2021, anilistId: 116589, bangumiId: 302189 },
 
-    // ===== 银河铁道999 =====
-    { titleCN: "银河铁道999", title: "Ginga Tetsudou 999", anime: "银河铁道999", artist: "佐佐木功、杉并儿童合唱团", type: "OP", artistAliases: ["佐佐木功","佐々木功","ささきいさお","Isao Sasaki"] , season: "1978-10", releaseYear: 1978, anilistId: 1491, bangumiId: 10392 },
-    { titleCN: "青い地球", title: "Aoi Chikyuu", anime: "银河铁道999", artist: "佐佐木功、杉并儿童合唱团", type: "ED", artistAliases: ["佐佐木功","佐々木功","ささきいさお","Isao Sasaki"] , season: "1978-10", releaseYear: 1978, anilistId: 1491, bangumiId: 10392 },
-
-    // ===== 机动战士高达 =====
-    { titleCN: "翔べ！ガンダム", title: "Tobe! Gundam", anime: "机动战士高达", artist: "池田鸿（合唱：フィーリング・フリー、ミュージッククリエイション）", type: "OP", artistAliases: ["池田鸿","池田鴻","Koh Ikeda"] , season: "1979-04", releaseYear: 1979, anilistId: 80, bangumiId: 50 },
-    { titleCN: "永遠にアムロ", title: "Eien ni Amuro", anime: "机动战士高达", artist: "池田鸿（合唱：フィーリング・フリー）", type: "ED", artistAliases: ["池田鸿","池田鴻","Koh Ikeda"] , season: "1979-04", releaseYear: 1979, anilistId: 80, bangumiId: 50 },
-
     // ===== 龙珠 =====
     { titleCN: "魔訶不思議アドベンチャー！", title: "Makafushigi Adventure!", anime: "龙珠", artist: "高桥洋树", type: "OP" , season: "1986-01", releaseYear: 1986, anilistId: 223, bangumiId: 9565 },
     { titleCN: "渐渐被你吸引", title: "DAN DAN Kokoro Hikareteku", anime: "龙珠GT", artist: "FIELD OF VIEW", type: "OP", animeNative: "ドラゴンボールGT" , season: "1996-01", releaseYear: 1996, anilistId: 225, bangumiId: 9566 },
@@ -24,10 +16,6 @@ export const SONGS = [
     // ===== 美少女战士 =====
     { titleCN: "月光传说", title: "Moonlight Densetsu", anime: "美少女战士", artist: "DALI", type: "OP" , season: "1992-01", releaseYear: 1992, anilistId: 530, bangumiId: 1510 },
     { titleCN: "HEART MOVING", title: "HEART MOVING", anime: "美少女战士", artist: "高松美砂绘", type: "ED", artistAliases: ["高松美砂絵","Misae Takamatsu"] , season: "1992-01", releaseYear: 1992, anilistId: 530, bangumiId: 1510 },
-
-    // ===== 灌篮高手 =====
-    { titleCN: "直到世界尽头", title: "Sekai ga Owaru made wa...", anime: "灌篮高手", artist: "WANDS", type: "ED" , season: "1993-10", releaseYear: 1993, anilistId: 170, bangumiId: 1608 },
-    { titleCN: "好想大声说爱你", title: "Kimi ga Suki da to Sakebitai", anime: "灌篮高手", artist: "BAAD", type: "OP" , season: "1993-10", releaseYear: 1993, anilistId: 170, bangumiId: 1608 },
 
     // ===== EVA =====
     { titleCN: "残酷天使的行动纲领", title: "Zankoku na Tenshi no Thesis", anime: "新世纪福音战士", artist: "高桥洋子", type: "OP", animeNative: "新世紀エヴァンゲリオン" , season: "1995-10", releaseYear: 1995, anilistId: 30, bangumiId: 265 },
@@ -411,12 +399,6 @@ export const SONGS = [
     // ===== 超时空要塞 =====
     { titleCN: "爱，还记得吗？", title: "Ai Oboete Imasu ka", anime: "超时空要塞：可曾记得爱", artist: "饭岛真理", type: "IN" , season: "1984-07", releaseYear: 1984, anilistId: 1089, bangumiId: 3172 },
 
-    // ===== 机动战士Z高达 =====
-    { titleCN: "水の星へ愛をこめて", title: "Mizu no Hoshi e Ai wo Komete", anime: "机动战士Z高达", artist: "森口博子", type: "OP", artistAliases: ["Hiroko Moriguchi"] , season: "1985-04", releaseYear: 1985, anilistId: 85, bangumiId: 9622 },
-
-    // ===== 魔神英雄传 =====
-    { titleCN: "STEP", title: "STEP", anime: "魔神英雄传", artist: "a・chi-a・chi", type: "OP" , season: "1988-04", releaseYear: 1988, anilistId: 3837, bangumiId: 1972 },
-
     // ===== 幽游白书 =====
     { titleCN: "微笑的爆弹", title: "Hohoemi no Bakudan", anime: "幽游白书", artist: "马渡松子", type: "OP", artistAliases: ["馬渡松子","Matsuko Mawatari"] , season: "1992-10", releaseYear: 1992, anilistId: 392, bangumiId: 8803 },
 
@@ -540,9 +522,6 @@ export const SONGS = [
 
     // ===== 埃罗芒阿老师 =====
     { titleCN: "自言自语", title: "Hitorigoto", anime: "埃罗芒阿老师", artist: "ClariS", type: "OP" , season: "2017-04", releaseYear: 2017, anilistId: 21685, bangumiId: 172498 },
-
-    // ===== 樱桃小丸子 =====
-    { titleCN: "大家来跳舞", title: "Odoru Ponpokorin", anime: "樱桃小丸子", artist: "B.B.クィーンズ", type: "ED", artistAliases: ["B.B.QUEENS"] , season: "1990-01", releaseYear: 1990, anilistId: 951, bangumiId: 28165 },
 
     // ===== GOSICK =====
     { titleCN: "Resuscitated Hope", title: "Resuscitated Hope", anime: "GOSICK", artist: "コミネリサ", type: "ED" , season: "2011-01", releaseYear: 2011, anilistId: 8425, bangumiId: 9781 },
@@ -705,3 +684,8 @@ export const SONGS = [
 
 export const ALL_ANIME = [...new Set(SONGS.map(s => s.anime))];
 export const AVAILABLE_TYPES = ["OP", "ED", "IN"];
+
+// Keep published Firebase question indices stable after removing songs.
+// Never reuse these retired slots; append new songs to SONGS.
+export const PK_SONGS = SONGS.slice();
+for (const index of [1, 2, 3, 4, 12, 13, 190, 191, 244]) PK_SONGS.splice(index, 0, null);

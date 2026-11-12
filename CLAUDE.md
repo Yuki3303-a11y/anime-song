@@ -24,7 +24,7 @@ Then open `http://localhost:8080`. Always test locally before pushing to GitHub 
 
 - `index.html` — All views in one HTML (menu, lobby, room, game, leaderboard). Views toggled via `.hidden` class on direct children of `main.content`. Event delegation on `[data-action]` attributes. Bangumi import UI is in a `position:fixed` bottom bar, **outside** the view system — do NOT put interactive elements (inputs) inside `.container` or `.content`.
 - `app.js` — ES module. All game logic, Firebase multiplayer, AniList API, iTunes API, YouTube API, sakura canvas, audio playback, custom songs CRUD, Bangumi index import.
-- `songs.js` — Exports `SONGS` array (324 entries / 238 anime), `ALL_ANIME`, `AVAILABLE_TYPES`. Each song: `{ titleCN, title, anime, artist, type }`. `title` field is the iTunes search term and cache key.
+- `songs.js` — Exports active `SONGS` array (315 entries / 232 anime), `ALL_ANIME`, `AVAILABLE_TYPES`, and `PK_SONGS`. Each song: `{ titleCN, title, anime, artist, type }`. `title` field is the iTunes search term and cache key. PK_SONGS preserves published room indices with null retired slots; never reuse slots or reorder SONGS, append new songs only.
 - `style.css` — All styles. CSS custom properties for theming. Note: `.container` must NOT use `overflow: hidden` (causes invisible text in inputs).
 - `index_75323.json` — Pre-fetched Bangumi index #75323 (108 anime). Format: `{ total, items: [{ id, name, name_cn, date }] }`. The import flow checks for `index_{id}.json` first before trying proxy.
 

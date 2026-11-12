@@ -237,11 +237,12 @@ test('PK room creation does not overwrite an existing four-digit room', async ()
   const rooms = new Map([['rooms/1000', { host: 'another-player', status: 'waiting' }]]);
   let entered;
   let nextRandom = 0;
+  const songs = [{ title: 'song' }];
   const context = {
     user: { uid: 'new-player' }, db: {}, roomId: null,
     navigator: { onLine: true },
     Math: { floor: Math.floor, random: () => nextRandom++ / 10 },
-    SONGS: [{ title: 'song' }],
+    SONGS: songs, PK_SONGS: [null, ...songs],
     buildPlaylist: songs => songs,
     serverTimestamp: () => 123,
     ref: (_db, key) => key,
@@ -262,6 +263,7 @@ test('PK room creation does not overwrite an existing four-digit room', async ()
   assert.equal(rooms.get('rooms/1000').host, 'another-player');
   assert.equal(entered, '1900');
   assert.equal(rooms.get('rooms/1900').host, 'new-player');
+  assert.deepEqual(Array.from(rooms.get('rooms/1900').questions), [1]);
 });
 
 test('PK joining cannot replace a guest who joined concurrently', async () => {
