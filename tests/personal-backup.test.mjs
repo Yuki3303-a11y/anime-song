@@ -38,7 +38,9 @@ test('personal backup round-trips records while excluding caches and authenticat
     const target = memoryStore();
     backup.restorePersonalBackup(target, parsed);
     assert.equal(target.getItem('custom_songs_v1'), store.getItem('custom_songs_v1'));
-    assert.equal(target.getItem('song_source_mix_v1'), store.getItem('song_source_mix_v1'));
+    assert.deepEqual(JSON.parse(target.getItem('song_source_mix_v1')),
+        { legacy: false, seasons: ['2026-01'], imported: true, watched: false });
+    assert.equal(target.getItem('selected_song_keys_v1'), null);
     assert.equal(target.getItem('player_volume_v1'), '43');
     assert.equal(target.getItem('audio_cache_v3'), null);
     assert.equal(target.getItem('firebaseLocalStorage'), null);

@@ -1,6 +1,8 @@
 import { trackKey as catalogTrackKey } from './library-tools.mjs';
 
 export function sourceSelection(source) {
+    const preset = /^preset:(beginner|regular|expert)$/.exec(source || '')?.[1];
+    if (preset) return { group: 'preset', official: 'all', season: null, preset };
     if (source === 'mix') return { group: 'mix', official: 'all', season: null };
     if (source === 'custom') return { group: 'custom', official: 'all', season: null };
     if (source?.startsWith('season:')) return { group: 'official', official: 'season', season: source.slice(7) };
@@ -9,24 +11,14 @@ export function sourceSelection(source) {
     return { group: 'all', official: 'all', season: null };
 }
 
-export function sourceFromSelection({ group, official = 'all', season = null }) {
+export function sourceFromSelection({ group, official = 'all', season = null, preset = null }) {
+    if (group === 'preset') return ['beginner', 'regular', 'expert'].includes(preset) ? `preset:${preset}` : null;
     if (group === 'mix') return 'mix';
     if (group === 'custom') return 'custom';
     if (group !== 'official') return null;
     if (official === 'legacy') return 'legacy';
     if (official === 'season' && season) return `season:${season}`;
     return 'builtin';
-}
-
-export function mixForAddedSong(source, seasons) {
-    const season = source?.startsWith('season:') ? source.slice(7) : null;
-    return {
-        legacy: source === 'legacy',
-        seasons: season ? [season] : source === null || source === 'builtin' ? [...seasons] : [],
-        imported: source === null || source === 'custom',
-        watched: false,
-        selected: true
-    };
 }
 
 export function searchLibraryTracks(songs, query = '') {
@@ -60,10 +52,9 @@ export function sortAnimeByHeat(groups, rankedBangumiIds = []) {
     return [...groups].sort((a, b) => rank(a) - rank(b));
 }
 
-export function selectMixedSongs({ legacy, seasons, imported, watchedKeys, animeKey, trackKey, selectedKeys = [], mix }) {
+export function selectMixedSongs({ legacy, seasons, imported, watchedKeys, animeKey, mix }) {
     const watched = new Set(watchedKeys);
     const chosenSeasons = new Set(mix.seasons || []);
-    const chosenTracks = new Set(selectedKeys);
     const seen = new Set();
     const seasonalSongs = Object.values(seasons).flat();
     const selectedSeasonalSongs = new Set([...chosenSeasons].flatMap(season => seasons[season] || []));
@@ -71,8 +62,7 @@ export function selectMixedSongs({ legacy, seasons, imported, watchedKeys, anime
         const included = (mix.legacy && legacy.includes(song)) ||
             selectedSeasonalSongs.has(song) ||
             (mix.imported && imported.includes(song)) ||
-            (mix.watched && watched.has(animeKey(song))) ||
-            (mix.selected && trackKey && chosenTracks.has(trackKey(song)));
+            (mix.watched && watched.has(animeKey(song)));
         if (!included) return false;
         const key = catalogTrackKey(song);
         if (seen.has(key)) return false;

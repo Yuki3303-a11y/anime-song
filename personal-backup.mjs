@@ -3,12 +3,13 @@ const FORMAT = 'anime-song-personal-backup';
 const MAX_BYTES = 5 * 1024 * 1024;
 const listLimits = {
     custom_songs_v1: 3000, fav_songs_v1: 3000, watched_anime_v1: 3000,
-    selected_song_keys_v1: 6000, mistake_book_v1: 200, local_audio_checks_v1: 500,
+    local_audio_checks_v1: 500,
     song_feedback_v1: 100, played_games_v1: 5, aq_rec: 50
 };
 const otherKeys = ['song_source_mix_v1', 'song_source_mode_v1', 'watched_only_v1',
     'audio_source_pref_v1', 'player_volume_v1', 'game_settings_v1'];
 const keys = [...Object.keys(listLimits), ...otherKeys];
+const legacyListLimits = { selected_song_keys_v1: 6000, mistake_book_v1: 200 };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = value => typeof value === 'string' && value.length <= 2000;
 const validSong = value => object(value) && text(value.title) && value.title.trim() && text(value.anime) && value.anime.trim();
@@ -46,7 +47,7 @@ function validSetting(key, value) {
         (data.selected === undefined || typeof data.selected === 'boolean');
     return [10, 20, 30].includes(data.questionCount) && Array.isArray(data.types) &&
         data.types.every(type => ['OP', 'ED', 'IN'].includes(type)) &&
-        (data.source === null || ['builtin', 'legacy', 'custom', 'mix'].includes(data.source) ||
+        (data.source === null || ['builtin', 'legacy', 'custom', 'mix', 'preset:beginner', 'preset:regular', 'preset:expert'].includes(data.source) ||
             typeof data.source === 'string' && /^season:\d{4}-(01|04|07|10)$/.test(data.source));
 }
 
@@ -64,7 +65,6 @@ function validListItem(key, value) {
     if (key === 'aq_rec') return ['s', 'c', 'r', 'n'].every(field => value[field] === undefined || Number.isFinite(value[field])) &&
         text(value.m) && text(value.t);
     if (!text(value.key) || !text(value.title) || !text(value.anime) || !Number.isFinite(value.at)) return false;
-    if (key === 'mistake_book_v1') return Number.isInteger(value.count) && value.count > 0 && text(value.selected);
     if (key === 'local_audio_checks_v1') return ['played', 'failed'].includes(value.status) && text(value.source) && (value.reason === undefined || text(value.reason));
     return ['unplayable', 'wrong-match', 'metadata'].includes(value.reason) && text(value.note);
 }
@@ -76,11 +76,12 @@ export function parsePersonalBackup(input) {
         throw new Error('不是受支持的个人数据备份（需要版本 1）');
     }
     for (const [key, value] of Object.entries(document.data)) {
-        if (!keys.includes(key) || value !== null && typeof value !== 'string') throw new Error(`备份包含不支持的数据项：${key}`);
+        if ((!keys.includes(key) && !Object.hasOwn(legacyListLimits, key)) || value !== null && typeof value !== 'string') throw new Error(`备份包含不支持的数据项：${key}`);
         if (value === null) continue; // Explicitly restore an unset preference or empty profile section.
-        const valid = Object.hasOwn(listLimits, key) ? (() => {
+        const valid = Object.hasOwn(listLimits, key) || Object.hasOwn(legacyListLimits, key) ? (() => {
             const list = JSON.parse(value);
-            return Array.isArray(list) && list.length <= listLimits[key] && list.every(item => validListItem(key, item));
+            return Array.isArray(list) && list.length <= (listLimits[key] || legacyListLimits[key]) &&
+                (key === 'mistake_book_v1' || list.every(item => validListItem(key, item)));
         })() : validSetting(key, value);
         if (!valid) throw new Error(`备份数据格式不正确：${key}`);
     }
@@ -93,15 +94,22 @@ export function createPersonalBackup(storage) {
     for (const key of keys) {
         data[key] = storage.getItem(key);
     }
+    if (data.song_source_mix_v1 !== null) {
+        const { selected, ...mix } = JSON.parse(data.song_source_mix_v1);
+        data.song_source_mix_v1 = JSON.stringify(mix);
+    }
     return parsePersonalBackup(JSON.stringify({ format: FORMAT, version: 1, exportedAt: new Date().toISOString(), data }));
 }
 
 export function restorePersonalBackup(storage, document) {
     const validated = parsePersonalBackup(JSON.stringify(document));
-    const previous = new Map(Object.keys(validated.data).map(key => [key, storage.getItem(key)]));
+    // A new snapshot must not replay retired selections left on the destination.
+    const data = { selected_song_keys_v1: null, ...validated.data };
+    const previous = new Map(Object.keys(data).map(key => [key, storage.getItem(key)]));
     const written = [];
     try {
-        for (const [key, value] of Object.entries(validated.data)) {
+        for (const [key, value] of Object.entries(data)) {
+            if (key === 'mistake_book_v1') continue; // Retired data is accepted from old backups but never restored.
             if (value === null) storage.removeItem(key);
             else storage.setItem(key, value);
             written.push(key);
@@ -118,5 +126,5 @@ export function restorePersonalBackup(storage, document) {
 
 export function describePersonalBackup(document) {
     const count = key => JSON.parse(document.data[key] || '[]').length;
-    return `导入歌曲 ${count('custom_songs_v1')} 首 · 收藏 ${count('fav_songs_v1')} 首 · 追番 ${count('watched_anime_v1')} 部 · 错题 ${count('mistake_book_v1')} 首 · 自选 ${count('selected_song_keys_v1')} 首`;
+    return `导入歌曲 ${count('custom_songs_v1')} 首 · 收藏 ${count('fav_songs_v1')} 首 · 追番 ${count('watched_anime_v1')} 部`;
 }

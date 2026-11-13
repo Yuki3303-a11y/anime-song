@@ -89,12 +89,24 @@ export function createCatalogHistory(legacy, seasonal, previousKeys) {
     };
 }
 
-export function putMistake(entries, song, selected, at = Date.now()) {
-    const current = Array.isArray(entries) ? entries : [];
-    const key = trackKey(song);
-    const previous = current.find(entry => entry.key === key);
-    return [{ ...trackDetails(song), count: (previous?.count || 0) + 1,
-        selected: String(selected || ''), at }, ...current.filter(entry => entry.key !== key)].slice(0, 200);
+// Read retired per-song selections once, preserving their shows as follows.
+export function migrateLegacySongSelection({ songs, history, watchedKeys, selectedKeys, mix, defaultMix }) {
+    const tracks = new Map();
+    for (const song of songs) if (!tracks.has(trackKey(song))) tracks.set(trackKey(song), animeKey(song));
+    const migrated = history.selected(selectedKeys).map(key => tracks.get(key)).filter(Boolean);
+    const watched = history.watched([...new Set([...watchedKeys, ...migrated])]);
+    const availableAnime = new Set(tracks.values());
+    const hasAvailableFollow = watched.some(key => availableAnime.has(key));
+    let resetWatchedOnly = false;
+    let nextMix = { legacy: !!mix.legacy, seasons: [...(mix.seasons || [])], imported: !!mix.imported, watched: !!mix.watched };
+    if (mix.selected) {
+        if (migrated.length) nextMix.watched = true;
+        else if (!nextMix.legacy && !nextMix.seasons.length && !nextMix.imported && !(nextMix.watched && hasAvailableFollow)) {
+            nextMix = { ...defaultMix, seasons: [...defaultMix.seasons] };
+            resetWatchedOnly = !hasAvailableFollow;
+        }
+    }
+    return { watchedKeys: watched, mix: nextMix, resetWatchedOnly };
 }
 
 export function putAudioCheck(entries, song, status, source = '', at = Date.now(), reason = '') {

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   animeKey, trackKey, groupSeasonSongs, filterWatchedSongs,
-  putMistake, putAudioCheck, putFeedback, createCatalogHistory
+  putAudioCheck, putFeedback, createCatalogHistory
 } from '../library-tools.mjs';
 
 const poolSource = fs.readFileSync(fileURLToPath(new URL('../seasonal-pools.js', import.meta.url)), 'utf8');
@@ -58,15 +58,6 @@ test('catalog corrections carry old selections and records to the same songs, in
   const unrelated = { key: 'old-replacement', count: 1 };
   assert.equal(history.record(unrelated), unrelated);
   assert.deepEqual(history.favorite({ ...original, videoId: 'saved' }), { ...first, animeCN: '', videoId: 'saved' });
-});
-
-test('mistake book counts repeats and keeps the latest selected answer', () => {
-  const first = putMistake([], song, '错误答案', 100);
-  const second = putMistake(first, song, '另一个答案', 200);
-  assert.equal(second.length, 1);
-  assert.equal(second[0].count, 2);
-  assert.equal(second[0].selected, '另一个答案');
-  assert.equal(second[0].at, 200);
 });
 
 test('assigning exact anime IDs migrates old follows and canonical recording selections', () => {

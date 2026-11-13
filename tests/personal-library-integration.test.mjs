@@ -62,7 +62,7 @@ test('early anime can start a challenge using the grouped range and current type
     startMode: (...args) => { started = args; } };
   vm.createContext(context);
   const start = app.indexOf('function startSelectedSeason() {');
-  vm.runInContext(app.slice(start, app.indexOf('function startMistakePractice()', start)), context);
+  vm.runInContext(app.slice(start, app.indexOf('let feedbackReturnFocus', start)), context);
   context.startSelectedSeason();
   assert.equal(started[0], 'anime');
   assert.deepEqual(Array.from(started[1]), [old]);
@@ -80,7 +80,7 @@ test('legacy-only saved settings migrate to an exact compatible mix', () => {
   vm.createContext(context);
   vm.runInContext(app.slice(start, end) + '\nglobalThis.loadedState = filterState;', context);
   assert.equal(context.loadedState.source, 'mix');
-  assert.deepEqual(JSON.parse(JSON.stringify(context.loadedState.mix)), { legacy: true, seasons: [], imported: false, watched: false, selected: false });
+  assert.deepEqual(JSON.parse(JSON.stringify(context.loadedState.mix)), { legacy: true, seasons: [], imported: false, watched: false });
   assert.equal(context.gameState.questionCount, 20);
   assert.deepEqual(Array.from(context.loadedState.types), ['IN']);
   assert.equal(JSON.parse(storage.get('song_source_mix_v1')).legacy, true);
@@ -113,7 +113,7 @@ test('current challenge pool combines imported songs, one quarter and followed a
     SONGS: [old], QUARTER_CATALOG: { '2026-04': [spring], '2026-07': [summer] },
     builtinSongs: [old, spring, summer],
     getCustomSongs: () => [imported], getWatchedAnimeKeys: () => [animeKey(old)],
-    filterWatchedSongs, selectMixedSongs, animeKey, trackKey, selectedSongKeys: [],
+    filterWatchedSongs, selectMixedSongs, animeKey,
     filterState: { types: new Set(['OP']), source: 'mix', watchedOnly: false,
       mix: { legacy: false, seasons: ['2026-07'], imported: true, watched: true } },
   };
@@ -124,7 +124,7 @@ test('current challenge pool combines imported songs, one quarter and followed a
   assert.deepEqual(Array.from(context.getFilteredSongs()), [old, summer, imported]);
 });
 
-test('one-song mistake practice can still offer three other anime answers', () => {
+test('a small source pool can still offer three other anime answers', () => {
   const start = app.indexOf('function buildWrongOptions(song, guessType) {');
   const end = app.indexOf('function renderOptions(song) {', start);
   const question = { title: 'Q', anime: 'Question' };
@@ -139,7 +139,7 @@ test('one-song mistake practice can still offer three other anime answers', () =
 });
 
 test('watched-only season questions keep answer choices in that season', () => {
-  const start = app.indexOf("function startMode(mode, practiceSongs = null, poolName = '') {"), end = app.indexOf('let pkBusy = false;', start);
+  const start = app.indexOf("function startMode(mode, sourceSongs = null, poolName = '') {"), end = app.indexOf('let pkBusy = false;', start);
   const season = ['A', 'B', 'C', 'D'].map((anime, i) => ({ title: `Song ${i}`, anime, artist: `Artist ${i}` }));
   const elements = new Map();
   const element = id => {
@@ -159,10 +159,9 @@ test('watched-only season questions keep answer choices in that season', () => {
   assert.equal(element('totalQ').textContent, 1);
 });
 
-test('wrong single-player answers enter the mistake book but PK answers do not', () => {
+test('wrong answers retain the answer review without accumulating a mistake book', () => {
   const start = app.indexOf('function markAnswerOption(button, correctValue, selected) {');
   const end = app.indexOf('function showSongInfo(', start);
-  let recorded = 0;
   const song = { title: 'Q', anime: 'Correct', artist: 'Singer' };
   const makeContext = mode => {
     const state = {
@@ -176,13 +175,15 @@ test('wrong single-player answers enter the mistake book but PK answers do not',
       beep() {}, flashScreen() {}, showSongInfo() {}, animateScore() {},
       updateNavButtons() {}, getGuessValue: s => s.anime,
       document: { querySelectorAll: selector => selector === '.opt-btn' ? [{ textContent: 'Correct', dataset: {}, classList: { add() {} }, setAttribute() {} }] : [] },
-      setTimeout() {}, recordMistake() { recorded++; },
+      setTimeout() {},
     };
     vm.createContext(context);
     vm.runInContext(app.slice(start, end), context);
     context.handleAnswer({ classList: { add() {} } }, 'Wrong');
+    assert.equal(state.answerHistory.length, 1);
+    assert.equal(state.answerHistory[0].selected, 'Wrong');
+    assert.equal(state.answerHistory[0].isCorrect, false);
   };
   makeContext('single');
   makeContext('pk');
-  assert.equal(recorded, 1);
 });

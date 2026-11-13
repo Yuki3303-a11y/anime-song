@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=71">
+    <link rel="stylesheet" href="style.css?v=72">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -77,91 +77,67 @@
 
                 <!-- Menu -->
                 <div id="v-menu" class="menu">
-                    <div class="hero">
-                        <span class="hero-kicker">ANIME / MUSIC / QUIZ</span>
-                        <img id="heroFeaturedCover" class="hero-featured-cover" alt="" decoding="async">
-                        <div class="hero-cover-nav" aria-label="切换首页番剧封面">
-                            <button type="button" data-action="shiftHomeHero" data-value="-1" aria-label="上一部首页番剧">‹</button>
-                            <span id="heroFeaturedCount">01 / 15</span>
-                            <button type="button" data-action="shiftHomeHero" data-value="1" aria-label="下一部首页番剧">›</button>
+                    <section class="hero" aria-labelledby="homeTitle">
+                        <div class="hero-copy">
+                            <h1 id="homeTitle" class="hero-title">萌豚挑战</h1>
+                            <p class="hero-line">熟悉的前奏，记忆里的番剧。</p>
                         </div>
-                        <span id="heroFeaturedTitle" class="hero-featured-title"></span>
-                        <div class="hero-icon">
-                            <img src="assets/anime-frame/brand.svg" alt="" width="88" height="88" decoding="async">
-                        </div>
-                        <h1 class="hero-title">萌豚挑战</h1>
-                        <div class="hero-sub">二次元听歌猜番剧 · <strong id="songCount">150+</strong> 首曲库</div>
-                        <p class="hero-line">熟悉的前奏响起，<br>你能认出哪一部番？</p>
-                        <span class="hero-edition">
-                            <span>VOL. 01　♪　听歌 · 猜番 · 追番</span>
-                            <span class="hero-edition-mark" lang="ja" aria-hidden="true">アニメ音楽帖</span>
-                        </span>
-                    </div>
+                        <figure class="hero-featured">
+                            <img id="heroFeaturedCover" class="hero-featured-cover" alt="" width="174" height="236" decoding="async" fetchpriority="high">
+                            <figcaption id="heroFeaturedTitle" class="hero-featured-title"></figcaption>
+                            <div class="hero-cover-nav" aria-label="切换首页番剧封面">
+                                <button type="button" data-action="shiftHomeHero" data-value="-1" aria-label="上一部首页番剧">‹</button>
+                                <span id="heroFeaturedCount">1 / 15</span>
+                                <button type="button" data-action="shiftHomeHero" data-value="1" aria-label="下一部首页番剧">›</button>
+                            </div>
+                        </figure>
+                    </section>
 
-                    <div class="menu-library-card">
-                        <span class="menu-library-kicker">02 / YOUR POOL</span>
-                        <div class="menu-library-info"><strong>当前曲库</strong><span id="menuSourceSummary">全部歌曲</span></div>
-                        <p class="menu-library-hint">先确定本局会出的歌曲，再选择挑战方式。</p>
-                        <div class="menu-library-actions">
-                            <button type="button" class="menu-library-link" data-action="showLibrary">查看当前歌曲</button>
-                            <button type="button" class="menu-library-link" data-action="showLibrary" data-value="catalog">更换曲库</button>
-                        </div>
-                    </div>
-
-                    <div class="mode-heading"><span>选择挑战</span><small>CHOOSE YOUR PANEL</small></div>
-                    <div class="btn-group">
-                        <button class="btn btn-primary" data-action="startMode" data-value="anime">
-                            <img class="mode-art" src="assets/anime-frame/anime.svg" alt="" width="44" height="44" decoding="async">
+                    <div class="btn-group" role="group" aria-label="开始挑战">
+                        <button type="button" class="btn btn-primary" data-action="startMode" data-value="anime">
+                            <img class="mode-art" src="assets/anime-frame/anime.svg" alt="" width="28" height="28" decoding="async">
                             猜番剧
                         </button>
-                        <button class="btn btn-secondary" data-action="startMode" data-value="song">
-                            <img class="mode-art" src="assets/anime-frame/song.svg" alt="" width="44" height="44" decoding="async">
+                        <button type="button" class="btn btn-secondary" data-action="startMode" data-value="song">
+                            <img class="mode-art" src="assets/anime-frame/song.svg" alt="" width="18" height="18" decoding="async">
                             猜歌名
                         </button>
-                        <button class="btn btn-secondary" data-action="startMode" data-value="artist">
-                            <img class="mode-art" src="assets/anime-frame/artist.svg" alt="" width="44" height="44" decoding="async">
+                        <button type="button" class="btn btn-secondary" data-action="startMode" data-value="artist">
+                            <img class="mode-art" src="assets/anime-frame/artist.svg" alt="" width="18" height="18" decoding="async">
                             猜歌手
                         </button>
-                        <button class="btn btn-secondary" data-action="startMode" data-value="mixed">
-                            <img class="mode-art" src="assets/anime-frame/mixed.svg" alt="" width="44" height="44" decoding="async">
-                            混合模式
+                        <button type="button" class="btn btn-secondary" data-action="startMode" data-value="mixed" aria-label="混合模式">
+                            <img class="mode-art" src="assets/anime-frame/mixed.svg" alt="" width="18" height="18" decoding="async">
+                            混合
                         </button>
                     </div>
 
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <div class="feature-icon feature-icon-song">♪</div>
-                            <div class="feature-text">
-                                <div class="feature-title">听歌猜番</div>
-                                <div class="feature-desc">播放30秒歌曲片段，从四个选项中猜出所属动漫</div>
+                    <aside class="menu-library-card" aria-label="曲库与挑战范围">
+                        <div class="menu-library-info"><strong>当前曲库</strong><span id="menuSourceSummary">全部歌曲</span></div>
+                        <div class="menu-library-actions">
+                            <button type="button" class="menu-library-link" data-action="showLibrary">当前曲目</button>
+                            <button type="button" class="menu-library-link" data-action="showLibrary" data-value="catalog">更换曲库</button>
+                        </div>
+                        <div class="home-presets">
+                            <div class="home-preset-heading"><h2>挑战范围</h2><span id="homePresetSummary" role="status" aria-live="polite"></span></div>
+                            <div id="homePresetOptions" class="home-preset-options" role="group" aria-label="选择热度范围">
+                                <button type="button" data-action="applyPreset" data-value="beginner" aria-pressed="false"><span>入门精选</span><small>热门 OP</small></button>
+                                <button type="button" data-action="applyPreset" data-value="regular" aria-pressed="false"><span>进阶挑战</span><small>热门 OP · ED</small></button>
+                                <button type="button" data-action="applyPreset" data-value="expert" aria-pressed="false"><span>动漫高手</span><small>人气番全主题</small></button>
                             </div>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon feature-icon-pk">⚔</div>
-                            <div class="feature-text">
-                                <div class="feature-title">联机PK</div>
-                                <div class="feature-desc">创建房间邀请好友，实时对战比拼动漫曲库知识</div>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon feature-icon-custom">+</div>
-                            <div class="feature-text">
-                                <div class="feature-title">自定义曲库</div>
-                                <div class="feature-desc">通过 Bangumi 目录批量导入，支持导出与分享歌曲列表</div>
-                            </div>
-                        </div>
-                    </div>
+                    </aside>
 
                     <section class="home-anime-gallery" aria-labelledby="homeAnimeTitle">
                         <div class="home-gallery-heading">
-                            <div><span id="homeAnimeSeasonLabel">2026 / SUMMER ANIME</span><h2 id="homeAnimeTitle">从封面认出这个夏天</h2></div>
+                            <div><span id="homeAnimeSeasonLabel">2026 · 10月</span><h2 id="homeAnimeTitle">当季新番</h2></div>
                             <div class="home-gallery-actions">
                                 <div class="home-gallery-nav" aria-label="切换季度番剧封面">
                                     <button type="button" data-action="shiftHomeGallery" data-value="-1" aria-label="上一组季度番剧">‹</button>
                                     <span id="homeGalleryCount">1 / 4</span>
                                     <button type="button" data-action="shiftHomeGallery" data-value="1" aria-label="下一组季度番剧">›</button>
                                 </div>
-                                <button type="button" data-action="showSeasonLibrary">查看本季曲库 →</button>
+                                <button type="button" data-action="showSeasonLibrary">本季曲库 →</button>
                             </div>
                         </div>
                         <div id="homeAnimePosters" class="home-anime-posters"></div>
@@ -179,16 +155,16 @@
                         </button>
                     </div>
 
-                    <div id="favSection" class="fav-section" style="display:none;">
-                        <div class="fav-header">
+                    <details id="favSection" class="fav-section" style="display:none;">
+                        <summary class="fav-header">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            我的歌单
+                            我的收藏
                             <span class="fav-count" id="favCount">0</span>
+                        </summary>
+                        <div class="fav-controls">
                             <button class="fav-clear-btn" data-action="clearFavorites" title="清空收藏" aria-label="清空收藏">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                             </button>
-                        </div>
-                        <div class="fav-controls">
                             <button class="fav-ctrl-btn" data-action="playAllFavs">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                                 全部播放
@@ -203,7 +179,7 @@
                             </button>
                         </div>
                         <div id="favList" class="fav-list"></div>
-                    </div>
+                    </details>
 
                 </div>
 
@@ -212,7 +188,7 @@
                     <button class="back-btn" data-action="showView" data-value="menu">← 返回主页</button>
                     <div class="library-heading">
                         <h1>我的曲库</h1>
-                        <p>按季度选歌、整理追番与复习错题</p>
+                        <p>浏览季度曲库，记录追番偏好</p>
                     </div>
                     <div class="library-tabs library-main-tabs" role="group" aria-label="我的曲库">
                         <button type="button" class="library-tab active" aria-pressed="true" aria-controls="libraryCurrentPanel" data-action="libraryTab" data-value="current">当前曲库</button>
@@ -226,13 +202,11 @@
                             <button type="button" class="library-mini-btn" aria-controls="librarySeasonPanel" data-action="libraryTab" data-value="season">季度番剧</button>
                             <button type="button" class="library-mini-btn" aria-controls="libraryBangumiPanel" data-action="libraryTab" data-value="bangumi">Bangumi 导入</button>
                         </div>
-                        <button type="button" class="library-mini-btn" data-action="useSelectedSongs">只用我的选歌</button>
                     </div>
                     <details id="libraryTools" class="library-tools-menu">
                         <summary>曲库工具</summary>
                         <div class="library-section-links" role="group" aria-label="曲库工具">
                             <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="watch">我的追番</button>
-                            <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="mistakes">错题本</button>
                             <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="feedback">音源反馈</button>
                         </div>
                     </details>
@@ -279,11 +253,6 @@
                         <input id="libraryAnimeSearch" class="settings-input library-search" type="search" autocomplete="off" placeholder="输入中文或原名…">
                         <div id="libraryWatchSummary" class="library-summary"></div>
                         <div id="libraryWatchResults" class="library-cover-grid"></div>
-                    </section>
-                    <section id="libraryMistakesPanel" class="library-panel hidden" role="tabpanel">
-                        <div id="libraryMistakeSummary" class="library-summary"></div>
-                        <button type="button" class="btn btn-primary library-start-btn" data-action="practiceMistakes">练习这些错题</button>
-                        <div id="libraryMistakeList" class="library-record-list"></div>
                     </section>
                     <section id="libraryFeedbackPanel" class="library-panel hidden" role="tabpanel">
                         <p class="library-help">反馈仅保存在本机，不会自动发送。复制反馈后可发给曲库维护者。</p>
@@ -406,7 +375,7 @@
                     </div>
 
                     <div class="player-assist">
-                        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.93 4.93a10 10 0 0 1 14.14 0M7.76 7.76a6 6 0 0 1 8.48 0M10.59 10.59a2 2 0 0 1 2.82 0"/><circle cx="12" cy="15" r="1"/></svg>失败时自动换源，不计错题</span>
+                        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.93 4.93a10 10 0 0 1 14.14 0M7.76 7.76a6 6 0 0 1 8.48 0M10.59 10.59a2 2 0 0 1 2.82 0"/><circle cx="12" cy="15" r="1"/></svg>播放失败时自动换源</span>
                         <button id="retryAudioBtn" type="button" data-action="retryQuestionAudio" hidden>重新加载</button>
                         <button id="skipAudioBtn" type="button" data-action="skipQuestionAudio" hidden>换一首</button>
                     </div>
@@ -526,7 +495,7 @@
                 <div class="settings-count" id="filterCount"></div>
                 <div class="settings-group personal-backup-section">
                     <div class="settings-label">个人数据备份</div>
-                    <p class="library-filter-hint">备份导入歌曲、收藏、追番、错题、选歌组合、成绩与设置。换浏览器或网址时可恢复。</p>
+                    <p class="library-filter-hint">备份导入歌曲、收藏、追番、曲库组合、成绩与设置。换浏览器或网址时可恢复。</p>
                     <div class="personal-backup-buttons">
                         <button type="button" class="settings-chip" data-action="exportPersonalData">导出完整备份</button>
                         <button type="button" class="settings-chip" data-action="choosePersonalBackup">选择备份恢复</button>
@@ -675,6 +644,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=71"></script>
+    <script type="module" src="app.js?v=72"></script>
 </body>
 </html>

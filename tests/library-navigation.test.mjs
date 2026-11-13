@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { buildQuarterCatalog, sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, mixForAddedSong, sortAnimeByHeat } from '../library-navigation.mjs';
+import { buildQuarterCatalog, sourceSelection, sourceFromSelection, createPreviewSession, searchLibraryTracks, selectMixedSongs, groupLibrarySongs, sortAnimeByHeat } from '../library-navigation.mjs';
 
 test('historical browsing follows Bangumi heat while retaining unranked works', () => {
   const groups = [90, 3, 1, 91, 2].map(bangumiId => ({ song: { bangumiId } }));
@@ -53,7 +53,7 @@ test('all catalog sources share one query and can search across releases and imp
   const context = {
     $: id => id === 'libraryCatalogSearch' ? input : {}, getAllSongs: () => [legacy, quarter, imported],
     SONGS: [legacy], searchLibraryTracks, groupLibrarySongs, animeKey: song => song.anime,
-    selectedSongKeys: [], renderLibraryCoverGrid: (_id, matches) => { groups = matches; },
+    renderLibraryCoverGrid: (_id, matches) => { groups = matches; },
   };
   const start = app.indexOf('function renderCatalogLibrary() {');
   const end = app.indexOf('function renderSeasonLibrary()', start);
@@ -107,20 +107,4 @@ test('cover browsing groups songs under one anime and preserves track actions', 
   assert.equal(groups.length, 2);
   assert.deepEqual(groups[0].tracks, [first, second]);
   assert.equal(groups[0].title, '番剧');
-});
-
-test('hand-picked songs can join a quarter without including the whole original library', () => {
-  const old = { title: 'Picked', anime: 'A', type: 'OP' };
-  const unwanted = { title: 'Unwanted', anime: 'B', type: 'ED' };
-  const summer = { title: 'Summer', anime: 'C', type: 'OP', season: '2026-07' };
-  const selected = selectMixedSongs({ legacy: [old, unwanted], seasons: { '2026-07': [summer] }, imported: [],
-    watchedKeys: [], animeKey: song => song.anime, trackKey: song => `${song.title}|${song.anime}|${song.type}`,
-    selectedKeys: ['Picked|A|OP'],
-    mix: { legacy: false, seasons: ['2026-07'], imported: false, watched: false, selected: true } });
-  assert.deepEqual(selected, [old, summer]);
-});
-
-test('adding one song while browsing a quarter preserves that quarter in the new mix', () => {
-  assert.deepEqual(mixForAddedSong('season:2026-07', ['2026-04', '2026-07']),
-    { legacy: false, seasons: ['2026-07'], imported: false, watched: false, selected: true });
 });

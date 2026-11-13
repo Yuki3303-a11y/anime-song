@@ -488,8 +488,8 @@ test('homepage seasonal gallery follows the newest published quarter', () => {
   vm.runInContext(appSource.slice(start, end), context);
   context.renderHomeAnimeGallery();
   assert.equal($('homeGalleryCount').textContent, '1 / 1');
-  assert.equal($('homeAnimeSeasonLabel').textContent, '2026 / AUTUMN ANIME');
-  assert.equal($('homeAnimeTitle').textContent, '从封面认出这个秋天');
+  assert.equal($('homeAnimeSeasonLabel').textContent, '2026 · 10 月');
+  assert.equal($('homeAnimeTitle').textContent, '当季新番');
   assert.match($('homeAnimePosters').innerHTML, /秋番/);
   assert.doesNotMatch($('homeAnimePosters').innerHTML, /夏番/);
 });
