@@ -445,7 +445,7 @@ test('the next button exists outside the answer reveal and unlocks only after an
   assert.equal(primary.textContent, '查看结果 →');
 });
 
-test('home cover controls rotate hero and page through all seasonal posters', () => {
+test('home cover controls page through all seasonal posters', () => {
   const start = appSource.indexOf('const homeGallerySeason =');
   const end = appSource.indexOf("$('inlineDetailHost').appendChild", start);
   assert.ok(start >= 0 && end > start);
@@ -457,15 +457,13 @@ test('home cover controls rotate hero and page through all seasonal posters', ()
     if (!elements.has(id)) elements.set(id, { src: '', textContent: '', innerHTML: '' });
     return elements.get(id);
   };
-  const context = { $, SEASONAL_POOLS: { '2026-07': songs, '2026-04': [springSong] }, SEASONAL_COVERS: covers, escapeHTML: value => value };
+  const context = { $, SEASONAL_POOLS: { '2026-07': songs, '2026-04': [springSong] }, SEASONAL_COVERS: covers,
+    document: { querySelectorAll: () => [] }, escapeHTML: value => value };
   vm.createContext(context);
   vm.runInContext(appSource.slice(start, end), context);
   context.renderHomeAnimeGallery();
-  assert.equal($('heroFeaturedCover').src, 'cover-1.jpg');
   assert.match($('homeAnimePosters').innerHTML, /番剧4/);
   assert.doesNotMatch($('homeAnimePosters').innerHTML, /番剧5/);
-  context.shiftHomeAnime('hero', -1);
-  assert.equal($('heroFeaturedCover').src, 'cover-7.jpg');
   context.shiftHomeAnime('gallery', 1);
   assert.match($('homeAnimePosters').innerHTML, /番剧5/);
   assert.doesNotMatch($('homeAnimePosters').innerHTML, /番剧1/);
@@ -483,7 +481,7 @@ test('homepage seasonal gallery follows the newest published quarter', () => {
   };
   const fall = { anilistId: 8, animeCN: '秋番', anime: 'Autumn Anime' };
   const context = { $, SEASONAL_POOLS: { '2026-07': [{ anilistId: 1, animeCN: '夏番' }], '2026-10': [fall] },
-    SEASONAL_COVERS: { 1: 'summer.jpg', 8: 'autumn.jpg' }, escapeHTML: value => value };
+    SEASONAL_COVERS: { 1: 'summer.jpg', 8: 'autumn.jpg' }, document: { querySelectorAll: () => [] }, escapeHTML: value => value };
   vm.createContext(context);
   vm.runInContext(appSource.slice(start, end), context);
   context.renderHomeAnimeGallery();

@@ -1,4 +1,4 @@
-import { SONGS, PK_SONGS } from './songs.js?v=72';
+import { SONGS, PK_SONGS } from './songs.js?v=73';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=46';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=6';
 import { LEGACY_COVERS } from './legacy-covers.js?v=1';
@@ -281,6 +281,7 @@ function updateFilterCount() {
         button.disabled = !PRESET_POOLS[button.dataset.value]?.length;
     });
     $('homePresetSummary').textContent = preset ? '已应用' : '';
+    updateHomeHero(pool);
     if (typeof selectedLibraryTab !== 'undefined' && selectedLibraryTab === 'current' &&
         !$('v-library').classList.contains('hidden')) renderCurrentLibrary();
 }
@@ -2629,6 +2630,7 @@ function showView(viewName) {
     if (viewName === 'leaderboard') renderLeaderboard();
     if (viewName === 'library') renderLibrary();
     if (viewName === 'lobby') connectFirebase();
+    if (viewName === 'menu') updateHomeHero(undefined, true);
 }
 
 // =====================================================================
@@ -5054,23 +5056,91 @@ window.addEventListener('pagehide', () => gameState.audioPrefetch.cancel(true));
 const homeGallerySeason = Object.keys(SEASONAL_POOLS).sort().reverse()[0] || '2026-07';
 const homeAnimePool = [...new Map((SEASONAL_POOLS[homeGallerySeason] || []).map(song => [song.anilistId, song])).values()]
     .filter(song => SEASONAL_COVERS[song.anilistId]);
-const homeHeroPool = [...new Map(Object.keys(SEASONAL_POOLS).sort().reverse()
-    .flatMap(season => SEASONAL_POOLS[season]).map(song => [song.anilistId, song])).values()]
-    .filter(song => SEASONAL_COVERS[song.anilistId]);
+let homeHeroPool = [];
 const HOME_GALLERY_SIZE = 4;
-let homeHeroIndex = 0;
+const HOME_HERO_LAST_KEY = 'home_featured_anime_v1';
+let homeHeroIndex = -1;
+let homeHeroSignature = '';
+let homeHeroGeneration = 0;
 let homeGalleryPage = 0;
+
+function randomHomeHeroIndex(pool, previousKey, random = Math.random) {
+    if (!pool.length) return -1;
+    const previous = pool.length > 1 ? pool.findIndex(anime => anime.key === previousKey) : -1;
+    const index = Math.floor(random() * (pool.length - (previous >= 0 ? 1 : 0)));
+    return previous >= 0 && index >= previous ? index + 1 : index;
+}
+
+function updateHomeHero(songs = uniqueChallengePool(getFilteredSongs()), randomize = false) {
+    let previousKey = homeHeroPool[homeHeroIndex]?.key;
+    if (!previousKey) {
+        try { previousKey = sessionStorage.getItem(HOME_HERO_LAST_KEY); } catch {}
+    }
+    const next = groupLibrarySongs(songs, animeKey);
+    const signature = next.map(anime => anime.key).join('|');
+    const changed = signature !== homeHeroSignature;
+    homeHeroPool = next;
+    if (randomize || changed || homeHeroIndex < 0 || homeHeroIndex >= next.length) {
+        homeHeroIndex = randomHomeHeroIndex(next, previousKey);
+    }
+    homeHeroSignature = signature;
+    renderHomeHero();
+}
+
+function renderHomeHero() {
+    const generation = ++homeHeroGeneration;
+    const image = $('heroFeaturedCover');
+    const placeholder = $('heroEmptyState');
+    const anime = homeHeroPool[homeHeroIndex];
+    image.onload = null;
+    image.onerror = null;
+    image.hidden = true;
+    image.removeAttribute('src');
+    placeholder.hidden = false;
+    document.querySelectorAll('[data-action="shiftHomeHero"]').forEach(button => {
+        button.disabled = homeHeroPool.length <= 1;
+    });
+    $('heroFeaturedCount').textContent = `${anime ? homeHeroIndex + 1 : 0} / ${homeHeroPool.length}`;
+    $('heroFeaturedTitle').textContent = anime?.title || '当前筛选暂无番剧';
+    const season = anime?.tracks.find(track => /^\d{4}-(01|04|07|10)$/.test(track.season || ''))?.season;
+    $('heroFeaturedMeta').textContent = season ? `${season.slice(0, 4)} · ${Number(season.slice(5))} 月` : '';
+    if (!anime) { placeholder.textContent = '先选一个曲库'; return; }
+    try { sessionStorage.setItem(HOME_HERO_LAST_KEY, anime.key); } catch {}
+    placeholder.textContent = '封面加载中…';
+    const song = anime.tracks.find(track => staticAnimeCover(track)) || anime.song;
+    const showCover = url => {
+        if (generation !== homeHeroGeneration) return;
+        if (!url) { placeholder.textContent = '暂无封面'; return; }
+        const reveal = () => {
+            if (generation !== homeHeroGeneration) return;
+            image.hidden = false;
+            placeholder.hidden = true;
+        };
+        image.onload = reveal;
+        image.onerror = () => {
+            if (generation !== homeHeroGeneration) return;
+            image.hidden = true;
+            placeholder.hidden = false;
+            placeholder.textContent = '暂无封面';
+            libraryCoverCache.delete(anime.key);
+        };
+        image.src = url;
+        if (image.complete && image.naturalWidth) reveal();
+    };
+    const localCover = staticAnimeCover(song);
+    if (localCover) showCover(localCover);
+    else findLibraryCover(song).then(showCover).catch(() => showCover(''));
+}
+
 function renderHomeAnimeGallery() {
-    if (!homeAnimePool.length) return;
     const [year, month] = homeGallerySeason.split('-');
     $('homeAnimeSeasonLabel').textContent = `${year} · ${Number(month)} 月`;
     $('homeAnimeTitle').textContent = '当季新番';
-    const hero = homeHeroPool[homeHeroIndex];
-    $('heroFeaturedCover').src = SEASONAL_COVERS[hero.anilistId];
-    $('heroFeaturedTitle').textContent = hero.animeCN || hero.anime;
-    $('heroFeaturedCount').textContent = `${String(homeHeroIndex + 1).padStart(2, '0')} / ${homeHeroPool.length}`;
     const pageCount = Math.ceil(homeAnimePool.length / HOME_GALLERY_SIZE);
-    $('homeGalleryCount').textContent = `${homeGalleryPage + 1} / ${pageCount}`;
+    $('homeGalleryCount').textContent = `${pageCount ? homeGalleryPage + 1 : 0} / ${pageCount}`;
+    document.querySelectorAll('[data-action="shiftHomeGallery"]').forEach(button => {
+        button.disabled = pageCount <= 1;
+    });
     const start = homeGalleryPage * HOME_GALLERY_SIZE;
     $('homeAnimePosters').innerHTML = homeAnimePool.slice(start, start + HOME_GALLERY_SIZE).map(song => {
         const name = escapeHTML(song.animeCN || song.anime);
@@ -5081,13 +5151,18 @@ function renderHomeAnimeGallery() {
     }).join('');
 }
 function shiftHomeAnime(group, delta) {
-    if (!homeAnimePool.length || !Number.isInteger(delta) || Math.abs(delta) !== 1) return;
-    if (group === 'hero') homeHeroIndex = (homeHeroIndex + delta + homeHeroPool.length) % homeHeroPool.length;
+    if (!Number.isInteger(delta) || Math.abs(delta) !== 1) return;
+    if (group === 'hero') {
+        if (homeHeroPool.length < 2) return;
+        homeHeroIndex = (homeHeroIndex + delta + homeHeroPool.length) % homeHeroPool.length;
+        renderHomeHero();
+    }
     else if (group === 'gallery') {
+        if (!homeAnimePool.length) return;
         const pages = Math.ceil(homeAnimePool.length / HOME_GALLERY_SIZE);
         homeGalleryPage = (homeGalleryPage + delta + pages) % pages;
+        renderHomeAnimeGallery();
     } else return;
-    renderHomeAnimeGallery();
 }
 
 $('inlineDetailHost').appendChild($('animeDetailModal'));
