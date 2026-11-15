@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=74">
+    <link rel="stylesheet" href="style.css?v=75">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -90,24 +90,6 @@
                         <div class="hero-info">
                             <h1 id="heroFeaturedTitle" class="hero-featured-title"></h1>
                             <p id="heroFeaturedMeta" class="hero-featured-meta"></p>
-                            <div class="btn-group" role="group" aria-label="开始挑战">
-                                <button type="button" class="btn btn-primary" data-action="startMode" data-value="anime">
-                                    <img class="mode-art" src="assets/anime-frame/anime.svg" alt="" width="28" height="28" decoding="async">
-                                    猜番剧
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-action="startMode" data-value="song">
-                                    <img class="mode-art" src="assets/anime-frame/song.svg" alt="" width="18" height="18" decoding="async">
-                                    猜歌名
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-action="startMode" data-value="artist">
-                                    <img class="mode-art" src="assets/anime-frame/artist.svg" alt="" width="18" height="18" decoding="async">
-                                    猜歌手
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-action="startMode" data-value="mixed" aria-label="混合模式">
-                                    <img class="mode-art" src="assets/anime-frame/mixed.svg" alt="" width="18" height="18" decoding="async">
-                                    混合
-                                </button>
-                            </div>
                         </div>
                     </section>
 
@@ -124,6 +106,15 @@
                                 <button type="button" data-action="applyPreset" data-value="regular" aria-pressed="false"><span>进阶挑战</span><small>热门 OP · ED</small></button>
                                 <button type="button" data-action="applyPreset" data-value="expert" aria-pressed="false"><span>动漫高手</span><small>人气番全主题</small></button>
                             </div>
+                        </div>
+                        <div class="home-game-controls">
+                            <div id="homeModeOptions" class="home-mode-options" role="group" aria-label="选择玩法">
+                                <button type="button" data-action="selectHomeMode" data-value="anime" aria-pressed="true">猜番剧</button>
+                                <button type="button" data-action="selectHomeMode" data-value="song" aria-pressed="false">猜歌名</button>
+                                <button type="button" data-action="selectHomeMode" data-value="artist" aria-pressed="false">猜歌手</button>
+                                <button type="button" data-action="selectHomeMode" data-value="mixed" aria-pressed="false">混合</button>
+                            </div>
+                            <button type="button" id="homeStartButton" class="home-start-button" data-action="startMode" data-value="anime" aria-label="开始挑战：猜番剧">开始挑战 <span aria-hidden="true">→</span></button>
                         </div>
                     </aside>
 
@@ -643,6 +634,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=74"></script>
+    <script type="module" src="app.js?v=75"></script>
 </body>
 </html>

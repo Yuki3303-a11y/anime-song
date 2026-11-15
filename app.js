@@ -1,4 +1,4 @@
-import { SONGS, PK_SONGS } from './songs.js?v=74';
+import { SONGS, PK_SONGS } from './songs.js?v=75';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=46';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=6';
 import { LEGACY_COVERS } from './legacy-covers.js?v=1';
@@ -4974,6 +4974,16 @@ document.addEventListener('click', (e) => {
             $('personalBackupActions').classList.add('hidden');
             $('personalBackupStatus').textContent = '已取消恢复，本机数据未改变。';
             break;
+        case 'selectHomeMode': {
+            const labels = { anime: '猜番剧', song: '猜歌名', artist: '猜歌手', mixed: '混合' };
+            if (!Object.hasOwn(labels, value)) break;
+            $('homeModeOptions').querySelectorAll('button').forEach(button => {
+                button.setAttribute('aria-pressed', String(button.dataset.value === value));
+            });
+            $('homeStartButton').dataset.value = value;
+            $('homeStartButton').setAttribute('aria-label', `开始挑战：${labels[value]}`);
+            break;
+        }
         case 'startMode': startMode(value); break;
         case 'showView': showView(value); break;
         case 'pkCreate': pkCreate(); break;
