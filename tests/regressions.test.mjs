@@ -449,8 +449,8 @@ test('home cover controls page through all seasonal posters', () => {
   const start = appSource.indexOf('const homeGallerySeason =');
   const end = appSource.indexOf("$('inlineDetailHost').appendChild", start);
   assert.ok(start >= 0 && end > start);
-  const songs = Array.from({ length: 6 }, (_, index) => ({ anilistId: index + 1, animeCN: `番剧${index + 1}`, anime: `Anime${index + 1}` }));
-  const springSong = { anilistId: 7, animeCN: '春番', anime: 'Spring Anime' };
+  const songs = Array.from({ length: 7 }, (_, index) => ({ anilistId: index + 1, animeCN: `番剧${index + 1}`, anime: `Anime${index + 1}` }));
+  const springSong = { anilistId: 8, animeCN: '春番', anime: 'Spring Anime' };
   const covers = Object.fromEntries([...songs, springSong].map(song => [song.anilistId, `cover-${song.anilistId}.jpg`]));
   const elements = new Map();
   const $ = id => {
@@ -462,11 +462,13 @@ test('home cover controls page through all seasonal posters', () => {
   vm.createContext(context);
   vm.runInContext(appSource.slice(start, end), context);
   context.renderHomeAnimeGallery();
-  assert.match($('homeAnimePosters').innerHTML, /番剧4/);
-  assert.doesNotMatch($('homeAnimePosters').innerHTML, /番剧5/);
+  assert.match($('homeAnimePosters').innerHTML, /番剧6/);
+  assert.doesNotMatch($('homeAnimePosters').innerHTML, /番剧7/);
+  assert.equal($('homeGalleryCount').textContent, '1 / 2');
   context.shiftHomeAnime('gallery', 1);
-  assert.match($('homeAnimePosters').innerHTML, /番剧5/);
+  assert.match($('homeAnimePosters').innerHTML, /番剧7/);
   assert.doesNotMatch($('homeAnimePosters').innerHTML, /番剧1/);
+  assert.equal($('homeGalleryCount').textContent, '2 / 2');
   context.shiftHomeAnime('gallery', 1);
   assert.match($('homeAnimePosters').innerHTML, /番剧1/);
 });

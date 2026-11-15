@@ -3231,11 +3231,10 @@ body {
 .home-preset-options button small { color: var(--text-secondary); font-size: 10px; }
 .home-preset-options button:hover { border-color: var(--pink); }
 .home-preset-options button[aria-pressed="true"] { border-color: var(--pink); background: var(--pink-light); box-shadow: inset 2px 0 0 var(--pink); }
-.btn-group { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 24px; padding-top: 0; }
-.btn-group > .btn-primary { grid-column: 1 / -1; font-size: 17px; }
+.btn-group { width: min(100%, 360px); grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); grid-template-rows: repeat(3, 40px); gap: 8px 10px; margin-top: 24px; padding-top: 0; }
 .btn-group > .btn { min-height: 38px; padding: 6px 10px; border: 1px solid var(--text-primary); border-radius: 0; box-shadow: 1px 1px 0 #c9a3b3; }
-.btn-group > .btn-primary { min-height: 52px; }
-.btn-group > .btn-secondary { font-size: 12px; font-weight: 600; }
+.btn-group > .btn-primary { grid-column: 1; grid-row: 1 / 4; min-height: 136px; flex-direction: column; font-size: 18px; }
+.btn-group > .btn-secondary { grid-column: 2; font-size: 12px; font-weight: 600; }
 .btn-group > .btn:hover { transform: translateY(-1px); box-shadow: 2px 2px 0 #c9a3b3; filter: none; }
 .btn-primary { background: var(--pink); border: 2px solid var(--text-primary); box-shadow: 3px 3px 0 var(--text-primary); backdrop-filter: none; }
 .btn-primary:hover { box-shadow: 5px 5px 0 var(--text-primary); filter: none; }
@@ -3261,8 +3260,8 @@ body {
 .home-gallery-actions > button { flex: none; min-height: 34px; padding: 4px 0; border: 0; background: none; color: var(--text-primary); font-weight: 600; font-size: 11px; cursor: pointer; }
 .home-gallery-actions > button:hover { color: var(--pink); }
 .home-gallery-count { min-width: 36px; font-variant-numeric: tabular-nums; text-align: center; }
-.home-gallery-stage { display: grid; grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: center; gap: 10px; width: min(100%, 900px); margin-inline: auto; }
-.home-anime-posters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.home-gallery-stage { display: grid; grid-template-columns: 34px minmax(0, 1fr) 34px; align-items: center; gap: 10px; width: 100%; margin-inline: auto; }
+.home-anime-posters { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
 .home-poster-card { min-width: 0; padding: 0 0 9px; border: 1px solid var(--text-primary); background: var(--bg-card); color: var(--text-primary); text-align: left; cursor: pointer; box-shadow: 2px 2px 0 #e8ced8; transition: transform .18s ease, box-shadow .18s ease; }
 .home-poster-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--pink); }
 .home-poster-card:focus-visible { outline: 3px solid var(--pink); outline-offset: 5px; }
@@ -3470,6 +3469,7 @@ body {
     .home-preset-options button { min-height: 54px; display: grid; justify-content: center; gap: 4px; padding: 8px 5px; text-align: center; }
     .menu-footer { margin-top: 0; }
     .home-anime-gallery { margin-top: 4px; }
+    .home-anime-posters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .library-cover-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 680px) {
@@ -3481,6 +3481,7 @@ body {
     .hero-info { flex: none; width: 100%; padding: 0; text-align: center; }
     .hero-featured-title { font-size: 24px; line-height: 1.45; }
     .hero-featured-meta { margin-top: 6px; font-size: 11px; }
+    .btn-group { margin-inline: auto; }
     .menu-library-card { padding: 14px; }
     .home-preset-options button span { font-size: 11px; }
     .home-preset-options button small { font-size: 9px; white-space: nowrap; }
@@ -3561,7 +3562,7 @@ body {
     display: block; width: 18px; height: 18px; flex: 0 0 18px;
     object-fit: contain; pointer-events: none;
 }
-.btn-primary .mode-art { width: 28px; height: 28px; flex-basis: 28px; }
+.btn-primary .mode-art { width: 34px; height: 34px; flex-basis: 34px; }
 .home-poster-image::after {
     content: ''; position: absolute; inset: 5px;
     border: 1px solid #ffffff75; pointer-events: none;

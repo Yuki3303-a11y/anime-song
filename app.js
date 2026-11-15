@@ -1,4 +1,4 @@
-import { SONGS, PK_SONGS } from './songs.js?v=73';
+import { SONGS, PK_SONGS } from './songs.js?v=74';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=46';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=6';
 import { LEGACY_COVERS } from './legacy-covers.js?v=1';
@@ -5057,7 +5057,7 @@ const homeGallerySeason = Object.keys(SEASONAL_POOLS).sort().reverse()[0] || '20
 const homeAnimePool = [...new Map((SEASONAL_POOLS[homeGallerySeason] || []).map(song => [song.anilistId, song])).values()]
     .filter(song => SEASONAL_COVERS[song.anilistId]);
 let homeHeroPool = [];
-const HOME_GALLERY_SIZE = 4;
+const HOME_GALLERY_SIZE = 6;
 const HOME_HERO_LAST_KEY = 'home_featured_anime_v1';
 let homeHeroIndex = -1;
 let homeHeroSignature = '';
