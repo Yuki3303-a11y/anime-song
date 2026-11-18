@@ -1,4 +1,4 @@
-import { SONGS, PK_SONGS } from './songs.js?v=75';
+import { SONGS, PK_SONGS } from './songs.js?v=76';
 import { SEASONAL_POOLS } from './seasonal-pools.js?v=46';
 import { SEASONAL_COVERS } from './seasonal-covers.js?v=6';
 import { LEGACY_COVERS } from './legacy-covers.js?v=1';
@@ -9,7 +9,7 @@ import { ANIME_QUESTION_CONTEXT, ANIME_PREMIERE_YEARS } from './anime-question-c
 import { buildQuarterCatalog, sourceSelection, sourceFromSelection, selectMixedSongs, createPreviewSession, searchLibraryTracks, groupLibrarySongs, sortAnimeByHeat } from './library-navigation.mjs?v=9';
 import { animeKey, trackKey, filterWatchedSongs, putAudioCheck, putFeedback, createCatalogHistory, migrateLegacySongSelection } from './library-tools.mjs?v=5';
 import { PREVIOUS_CATALOG_KEYS } from './catalog-key-history.mjs?v=2';
-import { rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=9';
+import { rankAudioCandidates, uniqueChallengePool, challengeTrackKey, audioSearchQueries, pickReplacementSong } from './audio-selection.mjs?v=10';
 import { normalizeImportedSong, createPersonalBackup, parsePersonalBackup, restorePersonalBackup, describePersonalBackup } from './personal-backup.mjs?v=3';
 import { createAudioPrefetch } from './audio-prefetch.mjs?v=1';
 
@@ -274,6 +274,7 @@ function updateFilterCount() {
     const sourceName = preset?.label || (selected.group === 'mix' ? '自由组合' : selected.group === 'all' ? '全部歌曲' : selected.group === 'custom' ? '我的导入' :
         selected.official === 'season' ? `${selected.season.slice(0, 4)} 年 ${Number(selected.season.slice(5))} 月番剧` : '全部季度番剧');
     $('menuSourceSummary').textContent = `${sourceName}${filterState.watchedOnly ? ' · 仅追番' : ''} · ${new Set(pool.map(animeKey)).size} 部 / ${count} 首`;
+    $('librarySourceStatus').textContent = $('menuSourceSummary').textContent;
     document.querySelectorAll('[data-action="applyPreset"]').forEach(button => {
         const active = button.dataset.value === presetId;
         button.classList.toggle('active', active);
@@ -365,7 +366,7 @@ class MemCache {
 const audioCache = new MemCache('audio_cache_v3', 500, 24 * 60 * 60 * 1000);
 const animeDetailCache = new MemCache('anime_detail_cache_v1', 300);
 const youtubeCache = new MemCache('youtube_cache_v1', 200);
-const bilibiliCache = new MemCache('bilibili_cache_v2', 200, 24 * 60 * 60 * 1000);
+const bilibiliCache = new MemCache('bilibili_cache_v3', 200, 24 * 60 * 60 * 1000);
 const bilibiliAudioCache = new MemCache('bilibili_audio_cache_v1', 200, 30 * 60 * 1000);
 
 // =====================================================================
@@ -696,8 +697,8 @@ function formatTime(s) {
     return m + ':' + (sec < 10 ? '0' : '') + sec;
 }
 
-async function searchYouTube(query) {
-    const cacheKey = query;
+async function searchYouTube(query, song) {
+    const cacheKey = JSON.stringify([query, song.title, song.anime, song.artist, song.type]);
     const cached = youtubeCache.get(cacheKey);
     if (cached) return cached;
 
@@ -720,7 +721,7 @@ async function searchYouTube(query) {
         const timeoutId = setTimeout(() => controller.abort(), YT_TIMEOUT);
         try {
             const res = await fetch(
-                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=1&q=${encodeURIComponent(query)}&key=${key}`,
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=10&videoEmbeddable=true&videoSyndicated=true&maxResults=5&q=${encodeURIComponent(query)}&key=${key}`,
                 { signal: controller.signal }
             );
             clearTimeout(timeoutId);
@@ -731,7 +732,11 @@ async function searchYouTube(query) {
                 continue;
             }
             const data = await res.json();
-            const videoId = data.items?.[0]?.id?.videoId || null;
+            const candidates = (data.items || []).filter(item => item.id?.videoId).map(item => ({
+                source: 'youtube', videoId: item.id.videoId, title: item.snippet?.title || '',
+                artist: item.snippet?.channelTitle || ''
+            }));
+            const videoId = rankAudioCandidates(song, candidates, { requireRelation: true })[0]?.videoId || null;
             if (videoId) youtubeCache.set(cacheKey, videoId);
             return videoId;
         } catch (e) {
@@ -1019,7 +1024,7 @@ async function searchAndLoadFullSong(song) {
             query = `${romaji || song.title} ${song.anime} ${song.type}`;
         }
         $('fpTitle').textContent = '正在搜索...';
-        videoId = await searchYouTube(query);
+        videoId = await searchYouTube(query, song);
     }
 
     if (videoId) {
@@ -1386,7 +1391,7 @@ async function playFavSongAtIndex(index) {
     if (!videoId) {
         notify('正在搜索歌曲...');
         const query = `${song.title} ${song.anime} ${song.type || ''}`;
-        videoId = await searchYouTube(query);
+        videoId = await searchYouTube(query, song);
         if (!videoId) {
             notify('未找到完整版歌曲，试试下一首吧');
             return;
@@ -4081,6 +4086,7 @@ function setSourceFilter(source) {
     }
     renderSourceFilter();
     updateFilterCount();
+    if (selectedLibraryTab === 'season' && !$('v-library').classList.contains('hidden')) renderSeasonLibrary();
 }
 function renderSourceFilter() {
     const selected = sourceSelection(filterState.source);
@@ -4519,6 +4525,10 @@ function renderCatalogLibrary() {
 function renderSeasonLibrary() {
     const tabs = $('librarySeasonTabs');
     const startButton = document.querySelector('[data-action="startSelectedSeason"]');
+    const applyButton = $('applyBrowsedSeason');
+    applyButton.hidden = !selectedLibrarySeason;
+    applyButton.disabled = filterState.source === `season:${selectedLibrarySeason}`;
+    applyButton.textContent = applyButton.disabled ? '已设为当前曲库' : '设为当前曲库';
     if (!publishedSeasons.length) {
         startButton.disabled = true;
         tabs.innerHTML = '';
@@ -4770,6 +4780,7 @@ function initAudioSourceFilter() {
 // =====================================================================
 let settingsReturnFocus = null;
 function openSettings() {
+    $('settingsSourceHost').appendChild($('sourceControls'));
     // 打开设置时把当前生效的代理地址同步到输入框（自动探测可能已切换）
     const proxyInput = $('biliProxyInput');
     if (proxyInput && !localStorage.getItem('bili_proxy_url_v1')) {
@@ -4780,6 +4791,7 @@ function openSettings() {
     $('settingsModal').querySelector('.card-modal-close')?.focus();
 }
 function closeSettings() {
+    $('librarySourceHost').appendChild($('sourceControls'));
     $('settingsModal').classList.remove('show');
     settingsReturnFocus?.focus();
     settingsReturnFocus = null;
@@ -4896,6 +4908,7 @@ document.addEventListener('click', (e) => {
     switch (action) {
         case 'applyPreset': applyLibraryPreset(value); break;
         case 'showLibrary':
+            $('librarySourceEditor').open = value === 'change';
             selectedLibraryTab = value === 'catalog' ? 'catalog' : 'current';
             if (selectedLibraryTab === 'catalog') selectedLibrarySeason = null;
             showView('library');
@@ -4909,7 +4922,6 @@ document.addEventListener('click', (e) => {
             break;
         case 'shiftHomeHero': shiftHomeAnime('hero', Number(value)); break;
         case 'shiftHomeGallery': shiftHomeAnime('gallery', Number(value)); break;
-        case 'openSourceSettings': openSettings(); $('sourceChips').scrollIntoView({ block: 'center' }); break;
         case 'libraryTab':
             selectedLibraryTab = value === 'all' ? 'catalog' : value;
             if (!['watch', 'feedback'].includes(selectedLibraryTab)) $('libraryTools').open = false;
@@ -4939,6 +4951,12 @@ document.addEventListener('click', (e) => {
         case 'startBangumiSongs': startBangumiSongs(); break;
         case 'openBangumi': openBangumiPanel(actionEl); break;
         case 'toggleWatchedAnime': toggleWatchedAnime(value); break;
+        case 'applyBrowsedSeason':
+            if (publishedSeasons.includes(selectedLibrarySeason)) {
+                setSourceFilter(`season:${selectedLibrarySeason}`);
+                notify(`已切换到${seasonLabel(selectedLibrarySeason)}`);
+            }
+            break;
         case 'startSelectedSeason': startSelectedSeason(); break;
         case 'setMixQuarters':
             filterState.mix.seasons = value === 'all' ? [...publishedSeasons] : [];

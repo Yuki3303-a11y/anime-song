@@ -3,13 +3,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { rankAudioCandidates } from '../audio-selection.mjs';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const appSource = fs.readFileSync(path.join(root, 'app.js'), 'utf8').replace(/\r\n/g, '\n');
 
 test('YouTube search returns when every API key is exhausted', () => {
-  const start = appSource.indexOf('async function searchYouTube(query) {');
+  const start = appSource.indexOf('async function searchYouTube(query, song) {');
   const end = appSource.indexOf('// =====================================================================', start);
   const fn = appSource.slice(start, end);
   assert.ok(start >= 0 && end > start);
@@ -21,8 +22,22 @@ test('YouTube search returns when every API key is exhausted', () => {
     console: { error() {} },
   };
   vm.createContext(context);
-  const result = vm.runInContext(`${fn}\nsearchYouTube('song')`, context, { timeout: 100 });
+  const result = vm.runInContext(`${fn}\nsearchYouTube('song', { title: 'song' })`, context, { timeout: 100 });
   return assert.doesNotReject(async () => assert.equal(await result, null));
+});
+
+test('full song YouTube lookup skips an unrelated first result', async () => {
+  const start = appSource.indexOf('async function searchYouTube(query, song) {');
+  const fn = appSource.slice(start, appSource.indexOf('// =====================================================================', start));
+  const items = ['Wrong song | official', 'GO GHOST | THE GHOST IN THE SHELL OP'].map((title, i) => ({
+    id: { videoId: String(i) }, snippet: { title, channelTitle: 'music' }
+  }));
+  const context = { youtubeCache: new Map(), YT_API_KEYS: ['key'], ytKeyIndex: 0, ytKeyExhausted: new Set(),
+    AbortController, setTimeout, clearTimeout, YT_TIMEOUT: 1000, rankAudioCandidates,
+    fetch: async () => ({ status: 200, json: async () => ({ items }) }) };
+  vm.createContext(context);
+  const lookup = vm.runInContext(fn + '\nsearchYouTube', context);
+  assert.equal(await lookup('GO GHOST', { title: 'GO GHOST', anime: 'THE GHOST IN THE SHELL', type: 'OP' }), '1');
 });
 
 test('quiz audio error recovery remains installed after loading a question', () => {

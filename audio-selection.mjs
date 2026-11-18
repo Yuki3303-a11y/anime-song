@@ -10,7 +10,7 @@ function artistAliases(song) {
     return [...new Set([...supplied, ...knownArtistAliases.filter(group => group.some(name => names.has(normalize(name)))).flat()])];
 }
 
-function hasBadVersion(song, description) {
+function withoutCatalogNames(song, description) {
     const aliases = [song.title, song.titleCN, song.anime, song.animeCN, song.animeNative]
         .filter(Boolean).sort((a, b) => b.length - a.length);
     let residual = description;
@@ -18,7 +18,25 @@ function hasBadVersion(song, description) {
         const literal = String(alias).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         residual = residual.replace(new RegExp(literal, 'gi'), ' ');
     }
-    return badVersion.test(residual);
+    return residual;
+}
+
+const themeLabels = {
+    __proto__: null,
+    OP: /\b(?:ncop|op|opening)\d*\b|片[头頭]|オープニング/i,
+    ED: /\b(?:nced|ed|ending)\d*\b|片尾|エンディング/i,
+    IN: /\bIN\d*\b/i
+};
+
+// Apple supplies a track name separately from artist and album. Only discard
+// common credit and broadcast-length suffixes when comparing that field.
+function matchesItunesTitle(title, aliases) {
+    const stripped = title.normalize('NFKC')
+        .replace(/[\s([~「【–—-]+(?:feat(?:uring)?[.\s]+[^)\]]+|tv[\s-]*(?:size|edit|ver(?:sion)?\.?|サイズ)(?:\s*ver\.?)?)[\s)\]~」】–—-]*$/i, '');
+    const name = normalize(stripped);
+    if (aliases.includes(name)) return true;
+    const [first, second] = aliases;
+    return Boolean(second && first !== second && (name === first + second || name === second + first));
 }
 
 export function audioSearchQueries(song) {
@@ -65,25 +83,28 @@ export function scoreAudioCandidate(song, candidate, { requireRelation = false }
     const title = candidate.title || '';
     const artist = candidate.artist || '';
     const album = candidate.album || '';
-    const haystack = `${title} ${artist} ${album}`;
+    const labels = withoutCatalogNames(song, title);
 
     // ===== Layer A — identity (hard gates): is this candidate the right song? =====
-    if (hasBadVersion(song, haystack)) return -1;                  // wrong version: cover/piano/instrumental/karaoke/remix/live …
+    if (badVersion.test(labels) || badVersion.test(withoutCatalogNames(song, `${artist} ${album}`))) return -1;
+    if (candidate.source !== 'itunes' && /\b(?:medley|mashup|reaction)\b|合集|串烧|串燒|メドレー/i.test(labels)) return -1;
     const songAliases = [song.title, song.titleCN].filter(Boolean);
-    if (!containsAlias(title, songAliases)) return -1;             // title has no song-name alias at all
+    const normalizedAliases = songAliases.map(normalize).filter(Boolean);
+    const exactTitle = normalizedAliases.includes(normalize(title));
+    if (candidate.source === 'itunes') {
+        if (!exactTitle && !matchesItunesTitle(title, normalizedAliases)) return -1;
+    } else if (!exactTitle && !containsAlias(title, songAliases)) return -1;
 
     // Video uploads need song identity plus anime or artist evidence.
     const animeAliases = [song.anime, song.animeCN, song.animeNative].filter(Boolean);
     const animeMatch = containsAlias(`${title} ${album}`, animeAliases);
-    const artistMatch = containsAlias(`${title} ${artist}`, artistAliases(song));
+    const artistMatch = containsAlias(candidate.source === 'itunes' ? artist : `${title} ${artist}`, artistAliases(song));
     if ((requireRelation || candidate.source !== 'itunes') && !animeMatch && !artistMatch) return -1;
 
     // OP/ED type conflict stays a hard rejection — unless the title also contains the wanted type.
-    const opposite = song.type === 'OP' ? /\bED\d*\b|片尾|エンディング/i : song.type === 'ED' ? /\bOP\d*\b|片头|オープニング/i : null;
-    if (opposite?.test(title) && !new RegExp(`\\b${song.type}\\d*\\b`, 'i').test(title)) return -1;
-
-    const typeMatch = Boolean(song.type) && new RegExp(`\\b${song.type}\\d*\\b`, 'i').test(title);
-    const exactTitle = normalize(title) === normalize(song.title);
+    const opposite = song.type === 'OP' ? themeLabels.ED : song.type === 'ED' ? themeLabels.OP : null;
+    const typeMatch = themeLabels[song.type]?.test(labels);
+    if (opposite?.test(labels) && !typeMatch) return -1;
 
     // ===== Layer C — source / playability =====
     if (candidate.source === 'youtube' && candidate.embeddable === false) return -1; // explicitly unplayable

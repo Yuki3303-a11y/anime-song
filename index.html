@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
     <link rel="preconnect" href="https://graphql.anilist.co" crossorigin>
     <link rel="dns-prefetch" href="https://api.bgm.tv">
-    <link rel="stylesheet" href="style.css?v=75">
+    <link rel="stylesheet" href="style.css?v=76">
 </head>
 <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -97,7 +97,7 @@
                         <div class="menu-library-info"><strong>当前曲库</strong><span id="menuSourceSummary">全部歌曲</span></div>
                         <div class="menu-library-actions">
                             <button type="button" class="menu-library-link" data-action="showLibrary">当前曲目</button>
-                            <button type="button" class="menu-library-link" data-action="showLibrary" data-value="catalog">更换曲库</button>
+                            <button type="button" class="menu-library-link" data-action="showLibrary" data-value="change">更换曲库</button>
                         </div>
                         <div class="home-presets">
                             <div class="home-preset-heading"><h2>挑战范围</h2><span id="homePresetSummary" role="status" aria-live="polite"></span></div>
@@ -180,6 +180,21 @@
                         <h1>我的曲库</h1>
                         <p>浏览季度曲库，记录追番偏好</p>
                     </div>
+                    <details class="library-tools-menu" id="librarySourceEditor">
+                        <summary>更换出题曲库</summary>
+                        <p class="library-summary" id="librarySourceStatus" role="status"></p>
+                        <div id="librarySourceHost">
+                            <div id="sourceControls">
+                                <div class="settings-chips settings-chips-wrap" id="sourceChips" aria-label="曲库大类"></div>
+                                <div id="officialSourceGroup" class="source-subgroup hidden">
+                                    <div class="settings-label">官方曲库范围</div>
+                                    <div class="settings-chips settings-chips-wrap" id="officialSourceChips"></div>
+                                    <div class="settings-chips settings-chips-wrap source-season-chips hidden" id="seasonSourceChips"></div>
+                                </div>
+                                <div id="mixSourceGroup" class="source-subgroup mix-source-group hidden" aria-label="自由组合来源"></div>
+                            </div>
+                        </div>
+                    </details>
                     <div class="library-tabs library-main-tabs" role="group" aria-label="我的曲库">
                         <button type="button" class="library-tab active" aria-pressed="true" aria-controls="libraryCurrentPanel" data-action="libraryTab" data-value="current">当前曲库</button>
                         <button type="button" class="library-tab" aria-pressed="false" aria-controls="libraryCatalogTabs" data-action="libraryTab" data-value="all">全部曲库</button>
@@ -206,11 +221,10 @@
                         <label>音量 <input id="libraryVolRange" type="range" min="0" max="100" value="50" aria-label="曲库试听音量"></label>
                     </div>
                     <section id="libraryCurrentPanel" class="library-panel" role="tabpanel">
-                        <p class="library-help">这里按番剧展示当前可能出题的歌曲。可试听、收藏单曲，也可到“更换曲库”组合更多来源。</p>
+                        <p class="library-help">这里按番剧展示当前可能出题的歌曲。可试听、收藏单曲，也可在上方更换出题曲库。</p>
                         <div class="library-quick-tools">
                             <input id="libraryCurrentSearch" class="settings-input" type="search" autocomplete="off" aria-label="搜索当前曲库" placeholder="搜索当前曲库的番剧、歌名或歌手…">
                             <button type="button" class="library-mini-btn" data-action="libraryTab" data-value="all">浏览曲库</button>
-                            <button type="button" class="library-mini-btn" data-action="openSourceSettings">组合筛选</button>
                         </div>
                         <div id="libraryCurrentSummary" class="library-summary"></div>
                         <div id="libraryCurrentResults" class="library-cover-grid"></div>
@@ -224,6 +238,7 @@
                         <div id="librarySeasonSummary" class="library-summary"></div>
                         <div class="library-quick-tools">
                             <label class="library-watch-filter" for="libraryOnlyWatched"><input type="checkbox" id="libraryOnlyWatched">只猜我追的番</label>
+                            <button type="button" id="applyBrowsedSeason" class="library-mini-btn" data-action="applyBrowsedSeason" hidden>设为当前曲库</button>
                         </div>
                         <button type="button" class="btn btn-primary library-start-btn" data-action="startSelectedSeason">用这个季度开始猜番剧</button>
                         <div id="librarySeasonAnime" class="library-cover-grid"></div>
@@ -456,13 +471,7 @@
                 </div>
                 <div class="settings-group">
                     <div class="settings-label">曲库来源</div>
-                    <div class="settings-chips settings-chips-wrap" id="sourceChips" aria-label="曲库大类"></div>
-                    <div id="officialSourceGroup" class="source-subgroup hidden">
-                        <div class="settings-label">官方曲库范围</div>
-                        <div class="settings-chips settings-chips-wrap" id="officialSourceChips"></div>
-                        <div class="settings-chips settings-chips-wrap source-season-chips hidden" id="seasonSourceChips"></div>
-                    </div>
-                    <div id="mixSourceGroup" class="source-subgroup mix-source-group hidden" aria-label="自由组合来源"></div>
+                    <div id="settingsSourceHost"></div>
                     <button id="bangumiToggle" type="button" class="settings-chip library-import-action">导入 Bangumi 曲库</button>
                 </div>
                 <div class="settings-group">
@@ -634,6 +643,6 @@
     <div id="notif" class="notif" role="status" aria-live="polite"></div>
 
     <div id="ytPlayerContainer" style="position:fixed;top:0;left:0;width:360px;height:200px;transform:scale(0.001);transform-origin:top left;pointer-events:none;"><div id="ytPlayerEl"></div></div>
-    <script type="module" src="app.js?v=75"></script>
+    <script type="module" src="app.js?v=76"></script>
 </body>
 </html>

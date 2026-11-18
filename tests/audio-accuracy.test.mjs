@@ -6,6 +6,36 @@ import { scoreAudioCandidate, audioSearchQueries, rankAudioCandidates } from '..
 const app = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 const song = { title: 'GO GHOST', artist: 'King Gnu', anime: 'Koukaku Kidoutai: THE GHOST IN THE SHELL', animeCN: '攻壳机动队 THE GHOST IN THE SHELL', type: 'OP' };
 
+test('iTunes distinguishes catalog recordings by the same artist while accepting official title annotations', () => {
+    const theme = { title: 'Koi no Uta', titleCN: '恋の歌', artist: 'Sumire Uesaka', type: 'OP' };
+    const itunes = (title, artist = theme.artist) => ({ source: 'itunes', title, artist });
+    for (const title of ['Chiisana Koi no Uta', 'Koi no Uta (Dance Rock MIX)']) {
+        assert.equal(scoreAudioCandidate(theme, itunes(title)), -1, title);
+    }
+    for (const title of ['Koi no Uta', '恋の歌', '恋の歌（TVサイズ）', 'Koi no Uta -TV Size-', 'Koi no Uta (feat. Guest)', '恋の歌 (Koi no Uta)']) {
+        assert.ok(scoreAudioCandidate(theme, itunes(title)) >= 0, title);
+    }
+    const namedMix = { ...theme, title: 'Koi no Uta (Dance Rock MIX)', titleCN: '' };
+    assert.ok(scoreAudioCandidate(namedMix, itunes(namedMix.title)) >= 0);
+    assert.equal(scoreAudioCandidate({ ...theme, titleCN: theme.title }, itunes('Koi no Uta Koi no Uta')), -1);
+    assert.equal(scoreAudioCandidate(theme, itunes('Koi no Uta (feat. Sumire Uesaka)', 'Different Singer')), -1);
+});
+
+test('video matching distinguishes theme labels and rejects compilations containing the requested song', () => {
+    for (const source of ['youtube', 'bilibili']) {
+        const score = title => scoreAudioCandidate(song, { source, title: `${song.animeCN} ${song.title} ${title}` });
+        for (const suffix of ['Ending 2', 'NCED2', 'OP2 piano medley', 'OP reaction', 'OP/ED 主题曲合集']) {
+            assert.equal(score(suffix), -1, `${source} ${suffix}`);
+        }
+        for (const suffix of ['Opening 2', 'NCOP2', '片头曲', 'オープニングテーマ']) {
+            assert.ok(score(suffix) >= 0, `${source} ${suffix}`);
+        }
+        assert.ok(scoreAudioCandidate({ ...song, title: 'Happy Ending' }, {
+            source, title: `${song.animeCN} Opening 2 | Happy Ending`
+        }) >= 0);
+    }
+});
+
 test('rejects vocal-less versions and unrelated same-title videos', () => {
     for (const version of ['纯音乐', '无人声', '人声消除', 'off vocal', 'backing track', 'Inst.']) {
         assert.equal(scoreAudioCandidate(song, { source: 'bilibili', title: `${song.animeCN} OP GO GHOST ${version}` }), -1, version);
